@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="u6g-Be-QKy">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15510"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Web View Controller-->
+        <scene sceneID="xbw-NT-Ck4">
+            <objects>
+                <viewController id="u6g-Be-QKy" customClass="WebViewController" customModule="lampv2" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="sDv-eg-YPM">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kxl-ld-1CT">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                                <subviews>
+                                    <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="LcY-YG-ulr">
+                                        <rect key="frame" x="188.5" y="429.5" width="37" height="37"/>
+                                    </activityIndicatorView>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <constraints>
+                                    <constraint firstItem="LcY-YG-ulr" firstAttribute="centerX" secondItem="kxl-ld-1CT" secondAttribute="centerX" id="hbP-4e-qpa"/>
+                                    <constraint firstItem="LcY-YG-ulr" firstAttribute="centerY" secondItem="kxl-ld-1CT" secondAttribute="centerY" id="tDp-Ty-Cqm"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="kxl-ld-1CT" firstAttribute="leading" secondItem="rBR-wJ-wl3" secondAttribute="leading" id="4gX-NF-4AL"/>
+                            <constraint firstItem="kxl-ld-1CT" firstAttribute="top" secondItem="sDv-eg-YPM" secondAttribute="top" id="5ZI-xw-xvb"/>
+                            <constraint firstAttribute="bottom" secondItem="kxl-ld-1CT" secondAttribute="bottom" id="REC-uV-qGo"/>
+                            <constraint firstItem="kxl-ld-1CT" firstAttribute="trailing" secondItem="rBR-wJ-wl3" secondAttribute="trailing" id="g5r-zh-fA7"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="rBR-wJ-wl3"/>
+                    </view>
+                    <connections>
+                        <outlet property="containerView" destination="kxl-ld-1CT" id="XwD-5b-TxF"/>
+                        <outlet property="indicator" destination="LcY-YG-ulr" id="0Rg-ca-AIN"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="eL7-E7-5bX" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-278.26086956521743" y="135.9375"/>
+        </scene>
+    </scenes>
+</document>
