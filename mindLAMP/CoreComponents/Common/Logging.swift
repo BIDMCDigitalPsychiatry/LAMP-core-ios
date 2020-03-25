@@ -23,7 +23,7 @@ class Logging {
 // MARK: - Global functions for logging
 
 func print(_ items: Any ..., separator: String = " ", terminator: String = "\n") {
-    //#if DEBUG
+    #if DEBUG
         var idx = items.startIndex
         let endIdx = items.endIndex
         repeat {
@@ -31,7 +31,7 @@ func print(_ items: Any ..., separator: String = " ", terminator: String = "\n")
             idx += 1
         }
             while idx < endIdx
-    //#endif
+    #endif
 }
 /**
  Prints the filename, function name, line number and textual representation of `object` and a newline character into
@@ -48,7 +48,7 @@ func print(_ items: Any ..., separator: String = " ", terminator: String = "\n")
  */
 
 func printDebug(_ items: Any ..., separator: String = " ", terminator: String = "\n", file: String = #file, function: String = #function, line: Int = #line) {
-    //#if DEBUG
+    #if DEBUG
         var idx = items.startIndex
         let endIdx = items.endIndex
         var fileName = (file as NSString).pathComponents.last ?? "(unknown)"
@@ -59,7 +59,7 @@ func printDebug(_ items: Any ..., separator: String = " ", terminator: String = 
             idx += 1
         }
             while idx < endIdx
-    //#endif
+    #endif
 }
 
 func printError(_ items: Any ..., separator: String = " ", terminator: String = "\n", file: String = #file, function: String = #function, line: Int = #line, isWriteToFile: Bool = true) {

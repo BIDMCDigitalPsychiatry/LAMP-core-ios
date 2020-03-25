@@ -13,9 +13,9 @@ class WebViewController: UIViewController {
     private var webView: WKWebView!
     @IBOutlet weak var containerView: UIView!
     @IBOutlet weak var indicator: UIActivityIndicatorView!
-    let lampDashboardURL = URL(string: "https://dashboard.lamp.digital")!//http://127.0.0.1:5000/login
+    let lampDashboardURL = URL(string: LampURL.dashboardDigital)!
     var lampDashboardURLwithToken: URL {
-        let urlString = "https://dashboard.lamp.digital/#/?a="
+        let urlString = LampURL.dashboardDigitalWithToken
         let base64UserInfo = Endpoint.getSessionKey() ?? ""
         return URL(string: urlString + base64UserInfo)!
     }
@@ -82,13 +82,13 @@ private extension WebViewController {
     }
     
     func performOnLogin() {
-        SensorManager.shared.startSensors()
+        LMSensorManager.shared.startSensors()
     }
     
     func performOnLogout() {
         Endpoint.setSessionKey(nil)
         UserDefaults.standard.clearAll()
-        SensorManager.shared.stopSensors()
+        LMSensorManager.shared.stopSensors()
     }
 }
 

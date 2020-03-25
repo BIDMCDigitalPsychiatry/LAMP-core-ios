@@ -83,3 +83,16 @@ struct Magnetic: Encodable {
     var z: Double?
 }
 
+enum ScreenState: Int {
+    
+    case screen_on
+    case screen_off
+    case screen_locked
+    case screen_unlocked
+}
+
+struct ScreenStateData {
+    
+    var screenState: ScreenState = .screen_on
+    var timestamp: Double = Date.currentTimeSince1970()
+}

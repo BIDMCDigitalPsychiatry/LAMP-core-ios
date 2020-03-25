@@ -1,0 +1,13 @@
+/* 
+  Localizable.strings
+  mindLAMP
+
+  Created by Zco Engineer on 19/03/20.
+*/
+
+// MARK: - Network
+"error.server.unknown" = "An error occured while retrieving the data from the server. Please try again later.";
+"error.user.unknown" = "Your session has expired. Please login again to continue.";
+"error.server.cancelled" = "Network operation cancelled.";
+"alert.no.connectivity" = "Internet connection appears to be offline.";
+"alert.session.expired" = "Current session has been expired.";

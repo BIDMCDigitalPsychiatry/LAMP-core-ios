@@ -33,6 +33,7 @@ class BackgroundServices {
             let dispatchQueue = OperationQueue()
             self.startBGTask(dispatchQueue)
             self.postSensorData(dispatchQueue)
+            self.putLogsData(dispatchQueue)
 
             dispatchQueue.waitUntilAllOperationsAreFinished()
             
@@ -94,17 +95,29 @@ extension BackgroundServices {
         let operation = BGTaskOperation(opType: .start)
         dispatchQueue.addOperation(operation)
     }
+}
+
+extension BackgroundServices {
     
     func postSensorData(_ dispatchQueue: OperationQueue) {
         
-        let requests = SensorManager.shared.fetchSensorDataRequest()
+        let requests = LMSensorManager.shared.fetchSensorDataRequest()
         guard let userID = UserDefaults.standard.userID else { return }
         let endPoint =  String(format: Endpoint.participantServerEvent.rawValue, userID)
         for requestData in requests {
-            let request = RequestData(endpoint: endPoint, requestTye: .post, data: requestData)
+            let request = RequestData(endpoint: endPoint, requestTye: .post, urlParams: nil, data: requestData)
             let operation = BackgroundOperation(request: request)
             dispatchQueue.addOperation(operation)
         }
-        
+    }
+    
+    func putLogsData(_ dispatchQueue: OperationQueue) {
+        let arrLogsData = LMLogsManager.shared.fetchLogsRequest()
+        let endPoint =  Endpoint.logs.rawValue
+        for logsData in arrLogsData {
+            let request = RequestData(endpoint: endPoint, requestTye: .put, urlParams: logsData.urlParams, data: logsData.dataBody)
+            let operation = BackgroundOperation(request: request, connection: NetworkConfig.logsNetworkingAPI(), opType: .logs)
+            dispatchQueue.addOperation(operation)
+        }
     }
 }

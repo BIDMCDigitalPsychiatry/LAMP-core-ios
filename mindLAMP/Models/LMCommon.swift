@@ -101,4 +101,22 @@ enum HKIdentifiers: String {
     case bloodpressure_diastolic = "HKQuantityTypeIdentifierBloodPressureDiastolic"
     case bloodpressure_systolic = "HKQuantityTypeIdentifierBloodPressureSystolic"
     case respiratory_rate = "HKQuantityTypeIdentifierRespiratoryRate"
+    case heart_rate = "HKQuantityTypeIdentifierHeartRate"
+    case sleep = "HKCategoryTypeIdentifierSleepAnalysis"
+    case workout = "HKWorkoutTypeIdentifier"
+
+}
+
+enum LogsLevel: String {
+    case info
+    case warning
+    case error
+    case fatal
+}
+
+extension LogsLevel: Codable {
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.singleValueContainer()
+        try container.encode(rawValue)
+    }
 }

@@ -9,9 +9,7 @@ import Foundation
 
 enum Endpoint: String {
     
-    case login = ""
-    case postApi = "/postapi"
-    case status = "/status"
+    case logs = "/"
     case participantServerEvent = "/participant/%@/sensor_event"
     
     static func setSessionKey(_ token: String?) {
@@ -42,10 +40,18 @@ class NetworkConfig {
         }
     }
     
+    class var logsURL: String {
+        return LampURL.logsDigital
+    }
+
     static func networkingAPI() -> NetworkingAPI {
         return Networking(baseURL: URL(string: NetworkConfig.baseURL())!, session: URLSession(configuration: URLSessionConfiguration.default))
     }
     
+    static func logsNetworkingAPI() -> NetworkingAPI {
+        return Networking(baseURL: URL(string: NetworkConfig.logsURL)!, session: URLSession(configuration: URLSessionConfiguration.default))
+    }
+
     static func isSessionExpired(_ errorCode: Int) -> ServerError? {
         if errorCode == NetworkConfig.kErrorSessionExpired || errorCode == NetworkConfig.kErrorInvalidSessionKey {
             return ServerError.sessionExpired
@@ -80,24 +86,18 @@ struct RequestData: RequestProtocol {
             requestHeaders["Content-Type"] = contentType.toString()
         }
         
-        if let token = getSessionToken() {
-            //requestHeaders["Authorization"] = "Bearer \(token)"
-            //requestHeaders["sessionToken"] = token
-            requestHeaders["Authorization"] = "Basic \(token)"
-        } else {
-            if !isAuth() {
-                // Fail
+        if isAuth() {
+            if let token = getSessionToken() {
+                requestHeaders["Authorization"] = "Basic \(token)"
+            }
+            if let apikey = getAPIKey() {
+                requestHeaders["API-KEY"] = apikey
             }
         }
-        if let apikey = getAPIKey() {
-            printDebug("API-KEY: \(apikey)")
-            requestHeaders["API-KEY"] = apikey
-        }
-        
         return requestHeaders
     }
     
-    init<T: Encodable>(endpoint: String, requestTye: HTTPMethodType, data: T?, endpointDetails: String = "", multiPartDetails: MultiPartFields? = nil, downloadFileType: String? = nil, downloadFileName: String? = nil) {
+    init<T: Encodable>(endpoint: String, requestTye: HTTPMethodType, urlParams: Encodable?, data: T?, endpointDetails: String = "", multiPartDetails: MultiPartFields? = nil, downloadFileType: String? = nil, downloadFileName: String? = nil) {
         self.requestTye = requestTye
         self.endpoint = endpoint
         self.endpointDetails = endpointDetails
@@ -106,7 +106,10 @@ struct RequestData: RequestProtocol {
         if requestTye == .get {
             self.parameters = (data as? DictionaryEncodable)?.dictionary()
         }
-        if requestTye == .post {
+        if let params = urlParams {
+            self.parameters = (params as? DictionaryEncodable)?.dictionary()
+        }
+        if requestTye == .post || requestTye == .put {
             let encoder = JSONEncoder()
             let formatter = Date.jsonDateEncodeFormatter
             encoder.dateEncodingStrategy = .formatted(formatter)//.millisecondsSince1970
@@ -167,10 +170,7 @@ struct RequestData: RequestProtocol {
         return "\(endpoint)\(buildParameters())\(endpointDetails)"
     }
     func isAuth() -> Bool {
-        if Endpoint.login.rawValue == endpoint {
-            return true
-        }
-        return false
+        return Endpoint.logs.rawValue != endpoint
     }
     func getAPIKey() -> String? {
         return Endpoint.getAPIKey()
