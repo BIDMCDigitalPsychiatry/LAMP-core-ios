@@ -563,9 +563,10 @@
 		B29639C523BDC28100626E1A /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				CLASSPREFIX = LAMP;
 				LastSwiftUpdateCheck = 1120;
 				LastUpgradeCheck = 1120;
-				ORGANIZATIONNAME = lamp;
+				ORGANIZATIONNAME = "Division of Digital Psychiatry";
 				TargetAttributes = {
 					B29639CC23BDC28100626E1A = {
 						CreatedOnToolsVersion = 11.2.1;
@@ -574,7 +575,7 @@
 				};
 			};
 			buildConfigurationList = B29639C823BDC28100626E1A /* Build configuration list for PBXProject "mindLAMP" */;
-			compatibilityVersion = "Xcode 9.3";
+			compatibilityVersion = "Xcode 11.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
