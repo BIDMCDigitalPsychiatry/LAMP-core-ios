@@ -7,6 +7,20 @@
 
 import Foundation
 
+enum LogsLevel: String {
+    case info
+    case warning
+    case error
+    case fatal
+}
+
+extension LogsLevel: Codable {
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.singleValueContainer()
+        try container.encode(rawValue)
+    }
+}
+
 struct LogsData {
     
     struct Request: Codable {

@@ -35,6 +35,7 @@ struct MultiPartFields {
 //typealias NetworkCompletion = (Result<JSONSerializable>) -> Void
 
 protocol RequestProtocol {
+    var jsonBody: [String: Any]? {get}
     func buildEndpoint() -> String
     func isAuth() -> Bool
     func getAPIKey() -> String?

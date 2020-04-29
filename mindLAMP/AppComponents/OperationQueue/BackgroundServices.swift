@@ -17,7 +17,7 @@ class BackgroundServices {
     var completionHandler: ((UIBackgroundFetchResult) -> Void)?
     
     func performTasksInBG(completionHandler: ((UIBackgroundFetchResult) -> Void)?) {
-        if nil == UserDefaults.standard.userID { return }
+        if nil == User.shared.userId { return }
         self.completionHandler = completionHandler
         self.performTasks()
     }
@@ -102,10 +102,10 @@ extension BackgroundServices {
     func postSensorData(_ dispatchQueue: OperationQueue) {
         
         let requests = LMSensorManager.shared.fetchSensorDataRequest()
-        guard let userID = UserDefaults.standard.userID else { return }
+        guard let userID = User.shared.userId else { return }
         let endPoint =  String(format: Endpoint.participantServerEvent.rawValue, userID)
         for requestData in requests {
-            let request = RequestData(endpoint: endPoint, requestTye: .post, urlParams: nil, data: requestData)
+            let request = RequestData(endpoint: endPoint, requestTye: .post, data: requestData)
             let operation = BackgroundOperation(request: request)
             dispatchQueue.addOperation(operation)
         }

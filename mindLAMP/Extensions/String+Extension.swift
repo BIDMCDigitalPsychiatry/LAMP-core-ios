@@ -14,7 +14,7 @@ extension String {
         return self.data(using: String.Encoding.utf8) ?? Data()
     }
 
-    func localized() -> String {
+    var localized: String {
         return NSLocalizedString(self, tableName: nil, bundle: Bundle.main, value: "", comment: "")
     }
 }

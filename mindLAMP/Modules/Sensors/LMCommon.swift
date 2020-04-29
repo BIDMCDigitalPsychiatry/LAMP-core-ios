@@ -90,10 +90,6 @@ extension SensorType: Encodable {
     }
 }
 
-enum ScriptMessageHandler: String {
-    case login = "login"
-    case logout = "logout"
-}
 
 enum HKIdentifiers: String {
     case weight = "HKQuantityTypeIdentifierBodyMass"
@@ -105,18 +101,4 @@ enum HKIdentifiers: String {
     case sleep = "HKCategoryTypeIdentifierSleepAnalysis"
     case workout = "HKWorkoutTypeIdentifier"
 
-}
-
-enum LogsLevel: String {
-    case info
-    case warning
-    case error
-    case fatal
-}
-
-extension LogsLevel: Codable {
-    public func encode(to encoder: Encoder) throws {
-        var container = encoder.singleValueContainer()
-        try container.encode(rawValue)
-    }
 }

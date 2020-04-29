@@ -64,6 +64,7 @@ class NetworkConfig {
 }
 
 struct RequestData: RequestProtocol {
+    var jsonBody: [String : Any]?
     var jsonData: Data?
     var endpoint: String//Endpoint
     var parameters: [String: Any]?
@@ -96,8 +97,34 @@ struct RequestData: RequestProtocol {
         }
         return requestHeaders
     }
+    //only for posting json
+    init(endpoint: String, requestType: HTTPMethodType, endpointDetails: String = "", urlParams: Encodable? = nil, body: [String: Any]? = nil, multiPartDetails: MultiPartFields? = nil) {
+        self.requestTye = requestType
+        self.endpoint = endpoint
+        self.endpointDetails = endpointDetails
+        if let params = urlParams {
+            self.parameters = (params as? DictionaryEncodable)?.dictionary()
+        }
+        
+        self.jsonBody = body //?? [String: Any]()
+        
+        
+        self.multiPartDetails = multiPartDetails
+        if multiPartDetails != nil {
+            self.contentType = .multipart
+        } else {
+            if parameters != nil {
+                self.contentType = .urlEncoded
+            }
+            if jsonBody != nil {
+                self.contentType = .json
+            }
+        }
+
+    }
     
-    init<T: Encodable>(endpoint: String, requestTye: HTTPMethodType, urlParams: Encodable?, data: T?, endpointDetails: String = "", multiPartDetails: MultiPartFields? = nil, downloadFileType: String? = nil, downloadFileName: String? = nil) {
+    
+    init<T: Encodable>(endpoint: String, requestTye: HTTPMethodType, urlParams: Encodable? = nil, data: T?, endpointDetails: String = "", multiPartDetails: MultiPartFields? = nil, downloadFileType: String? = nil, downloadFileName: String? = nil) {
         self.requestTye = requestTye
         self.endpoint = endpoint
         self.endpointDetails = endpointDetails

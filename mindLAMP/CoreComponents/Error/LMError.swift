@@ -12,19 +12,19 @@ enum ServerError {
     func errorMessage() -> String {
         switch self {
         case .webServiceResponseIsNil:
-            return "error.server.unknown".localized()
+            return "error.server.unknown".localized
         case .jsonParsingFailed:
-            return "error.server.unknown".localized()//"JSON parsing failed."
+            return "error.server.unknown".localized//"JSON parsing failed."
         case .invalidJSONDataStructure:
-            return "error.server.unknown".localized()//"JSON Data structure is invalid"
+            return "error.server.unknown".localized//"JSON Data structure is invalid"
         case .keyMissing(let key):
             return "Required key \(key) missing"//"error.server.unknown".localized()//
         case .noReachability:
-            return "alert.no.connectivity".localized()
+            return "alert.no.connectivity".localized
         case .sessionExpired:
-            return "alert.session.expired".localized()
+            return "alert.session.expired".localized
         case .subscribtionExpired:
-            return "error.user.unknown".localized()
+            return "error.user.unknown".localized
         }
     }
 }
@@ -109,19 +109,19 @@ struct LMError: Error {
         let message: String
         switch errorCode {
         case 300...399:
-            message = "error.server.unknown".localized()//"Unexpected redirect from server."
+            message = "error.server.unknown".localized//"Unexpected redirect from server."
         case 401:
-            message = "error.user.unknown".localized()//"Unauthorized."
+            message = "error.user.unknown".localized//"Unauthorized."
         case 403:
-            message = "error.user.unknown".localized()//"Unauthorized."
+            message = "error.user.unknown".localized//"Unauthorized."
         case 400...499:
-            message = "error.server.unknown".localized()//"Bad request."
+            message = "error.server.unknown".localized//"Bad request."
         case 500...599:
-            message = "error.server.unknown".localized()//"Server error."
+            message = "error.server.unknown".localized//"Server error."
         case -999:
-            message = "error.server.cancelled".localized()//"user cancelled error."
+            message = "error.server.cancelled".localized//"user cancelled error."
         default:
-            message = "error.server.unknown".localized()//"Unexpected status code \(errorCode)."
+            message = "error.server.unknown".localized//"Unexpected status code \(errorCode)."
         }
         return message
     }

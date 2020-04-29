@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -27,7 +27,6 @@
 		5F82D55F241230A90040AA41 /* GeofenceData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F82D55C241230A90040AA41 /* GeofenceData.swift */; };
 		5F82D560241230A90040AA41 /* HeadingData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F82D55D241230A90040AA41 /* HeadingData.swift */; };
 		5F82D561241230A90040AA41 /* VisitData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F82D55E241230A90040AA41 /* VisitData.swift */; };
-		5F82D56324124DA40040AA41 /* LMSensorManager+SensorObservers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F82D56224124DA40040AA41 /* LMSensorManager+SensorObservers.swift */; };
 		5F82D5682412541C0040AA41 /* ScreenSensor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F82D5652412541C0040AA41 /* ScreenSensor.swift */; };
 		5F82D5692412541C0040AA41 /* ScreenBrightnessData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F82D5662412541C0040AA41 /* ScreenBrightnessData.swift */; };
 		5F82D56A2412541D0040AA41 /* ScreenData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F82D5672412541C0040AA41 /* ScreenData.swift */; };
@@ -52,9 +51,10 @@
 		5FF2932A24223A6300D0BE09 /* LMConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FF2932924223A6300D0BE09 /* LMConstants.swift */; };
 		5FFF157124209F9100C8A26E /* HKDevice+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FFF157024209F9100C8A26E /* HKDevice+Extension.swift */; };
 		5FFF15732420A1B500C8A26E /* HKWorkoutActivityType+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FFF15722420A1B500C8A26E /* HKWorkoutActivityType+Extension.swift */; };
+		B229D5F3245319380099F646 /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B229D5F2245319380099F646 /* WebViewController.swift */; };
 		B23993BA2440696800E31B06 /* exportOptions.plist in Resources */ = {isa = PBXBuildFile; fileRef = B23993B92440696800E31B06 /* exportOptions.plist */; };
-		B240815A23D8803900845AEE /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B240814223D8803900845AEE /* WebViewController.swift */; };
-		B240815E23D8803900845AEE /* LMSensorManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B240814823D8803900845AEE /* LMSensorManager.swift */; };
+		B23F5279245346E0007A8598 /* PushUserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = B23F5278245346E0007A8598 /* PushUserInfo.swift */; };
+		B240815A23D8803900845AEE /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B240814223D8803900845AEE /* HomeViewController.swift */; };
 		B240815F23D8803900845AEE /* NetworkConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = B240814923D8803900845AEE /* NetworkConfig.swift */; };
 		B240816023D8803900845AEE /* LMCommon.swift in Sources */ = {isa = PBXBuildFile; fileRef = B240814B23D8803900845AEE /* LMCommon.swift */; };
 		B240816123D8803900845AEE /* SensorModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B240814C23D8803900845AEE /* SensorModel.swift */; };
@@ -68,6 +68,13 @@
 		B240816D23D8814300845AEE /* BackgroundServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = B240816A23D8814300845AEE /* BackgroundServices.swift */; };
 		B240816E23D8814300845AEE /* AsynchronousOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = B240816B23D8814300845AEE /* AsynchronousOperation.swift */; };
 		B244A1C223BF4A91007FBDB8 /* FileManager+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B244A1C123BF4A91007FBDB8 /* FileManager+Extension.swift */; };
+		B275F5FD24517FC0007A7340 /* UserNotifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = B275F5FC24517FC0007A7340 /* UserNotifications.swift */; };
+		B275F60224518106007A7340 /* HomeWebViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B275F60124518106007A7340 /* HomeWebViewModel.swift */; };
+		B275F60424518C82007A7340 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = B275F60324518C82007A7340 /* User.swift */; };
+		B275F60724519479007A7340 /* NotificationAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = B275F60624519479007A7340 /* NotificationAPI.swift */; };
+		B275F60A245196AD007A7340 /* PushNotificationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B275F609245196AD007A7340 /* PushNotificationModel.swift */; };
+		B2847FB72450550E0042D43B /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2847FB62450550E0042D43B /* NotificationService.swift */; };
+		B2847FBB2450550E0042D43B /* NotificationService.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = B2847FB42450550E0042D43B /* NotificationService.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		B29639D123BDC28100626E1A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B29639D023BDC28100626E1A /* AppDelegate.swift */; };
 		B29639D723BDC28200626E1A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B29639D623BDC28200626E1A /* Assets.xcassets */; };
 		B29639DA23BDC28200626E1A /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B29639D923BDC28200626E1A /* Preview Assets.xcassets */; };
@@ -77,8 +84,32 @@
 		B2B8935323D0AD6500321C3E /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2B8935123D0AD6500321C3E /* String+Extension.swift */; };
 		B2B8979823D0ADBA00321C3E /* HealthKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B2B8979723D0ADBA00321C3E /* HealthKit.framework */; };
 		B2C786B023D6C77B006BF98A /* UserDefaults+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2C786AF23D6C77B006BF98A /* UserDefaults+Extension.swift */; };
-		B2C786D823D6DF28006BF98A /* NotificationExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2C786D723D6DF28006BF98A /* NotificationExtension.swift */; };
+		B2D930EF2445C9BD0086477D /* LMSensorManager+SensorObservers.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2D930ED2445C9BD0086477D /* LMSensorManager+SensorObservers.swift */; };
+		B2D930F02445C9BD0086477D /* LMSensorManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2D930EE2445C9BD0086477D /* LMSensorManager.swift */; };
+		B2D930F92445D7E90086477D /* UserNotifications.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B2D930F82445D7E90086477D /* UserNotifications.framework */; };
+		B2D930FB2445D7E90086477D /* UserNotificationsUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B2D930FA2445D7E90086477D /* UserNotificationsUI.framework */; };
+		B2D930FE2445D7E90086477D /* NotificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2D930FD2445D7E90086477D /* NotificationViewController.swift */; };
+		B2D931012445D7E90086477D /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B2D930FF2445D7E90086477D /* MainInterface.storyboard */; };
+		B2D931052445D7E90086477D /* CustomNotification.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = B2D930F72445D7E90086477D /* CustomNotification.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		B2F3CDF6245932B200F211A3 /* StoryboardExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2F3CDF5245932B200F211A3 /* StoryboardExtension.swift */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		B2847FB92450550E0042D43B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B29639C523BDC28100626E1A /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = B2847FB32450550E0042D43B;
+			remoteInfo = NotificationService;
+		};
+		B2D931032445D7E90086477D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B29639C523BDC28100626E1A /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = B2D930F62445D7E90086477D;
+			remoteInfo = CustomNotification;
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
 		5F7D0ADD23D8478B00BA0B4F /* Embed Frameworks */ = {
@@ -89,6 +120,18 @@
 			files = (
 			);
 			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B2D931092445D7E90086477D /* Embed App Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				B2D931052445D7E90086477D /* CustomNotification.appex in Embed App Extensions */,
+				B2847FBB2450550E0042D43B /* NotificationService.appex in Embed App Extensions */,
+			);
+			name = "Embed App Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXCopyFilesBuildPhase section */
@@ -114,7 +157,6 @@
 		5F82D55C241230A90040AA41 /* GeofenceData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GeofenceData.swift; sourceTree = "<group>"; };
 		5F82D55D241230A90040AA41 /* HeadingData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeadingData.swift; sourceTree = "<group>"; };
 		5F82D55E241230A90040AA41 /* VisitData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VisitData.swift; sourceTree = "<group>"; };
-		5F82D56224124DA40040AA41 /* LMSensorManager+SensorObservers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LMSensorManager+SensorObservers.swift"; sourceTree = "<group>"; };
 		5F82D5652412541C0040AA41 /* ScreenSensor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScreenSensor.swift; sourceTree = "<group>"; };
 		5F82D5662412541C0040AA41 /* ScreenBrightnessData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScreenBrightnessData.swift; sourceTree = "<group>"; };
 		5F82D5672412541C0040AA41 /* ScreenData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScreenData.swift; sourceTree = "<group>"; };
@@ -140,9 +182,10 @@
 		5FF2932924223A6300D0BE09 /* LMConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LMConstants.swift; sourceTree = "<group>"; };
 		5FFF157024209F9100C8A26E /* HKDevice+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HKDevice+Extension.swift"; sourceTree = "<group>"; };
 		5FFF15722420A1B500C8A26E /* HKWorkoutActivityType+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HKWorkoutActivityType+Extension.swift"; sourceTree = "<group>"; };
+		B229D5F2245319380099F646 /* WebViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
 		B23993B92440696800E31B06 /* exportOptions.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = exportOptions.plist; sourceTree = "<group>"; };
-		B240814223D8803900845AEE /* WebViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
-		B240814823D8803900845AEE /* LMSensorManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LMSensorManager.swift; sourceTree = "<group>"; };
+		B23F5278245346E0007A8598 /* PushUserInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PushUserInfo.swift; sourceTree = "<group>"; };
+		B240814223D8803900845AEE /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		B240814923D8803900845AEE /* NetworkConfig.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkConfig.swift; sourceTree = "<group>"; };
 		B240814B23D8803900845AEE /* LMCommon.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LMCommon.swift; sourceTree = "<group>"; };
 		B240814C23D8803900845AEE /* SensorModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SensorModel.swift; sourceTree = "<group>"; };
@@ -156,6 +199,14 @@
 		B240816A23D8814300845AEE /* BackgroundServices.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BackgroundServices.swift; sourceTree = "<group>"; };
 		B240816B23D8814300845AEE /* AsynchronousOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AsynchronousOperation.swift; sourceTree = "<group>"; };
 		B244A1C123BF4A91007FBDB8 /* FileManager+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FileManager+Extension.swift"; sourceTree = "<group>"; };
+		B275F5FC24517FC0007A7340 /* UserNotifications.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserNotifications.swift; sourceTree = "<group>"; };
+		B275F60124518106007A7340 /* HomeWebViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeWebViewModel.swift; sourceTree = "<group>"; };
+		B275F60324518C82007A7340 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		B275F60624519479007A7340 /* NotificationAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationAPI.swift; sourceTree = "<group>"; };
+		B275F609245196AD007A7340 /* PushNotificationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PushNotificationModel.swift; sourceTree = "<group>"; };
+		B2847FB42450550E0042D43B /* NotificationService.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = NotificationService.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		B2847FB62450550E0042D43B /* NotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationService.swift; sourceTree = "<group>"; };
+		B2847FB82450550E0042D43B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B29639CD23BDC28100626E1A /* mindLAMP 2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "mindLAMP 2.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B29639D023BDC28100626E1A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B29639D623BDC28200626E1A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -168,10 +219,25 @@
 		B2B8979523D0ADBA00321C3E /* mindLAMP.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = mindLAMP.entitlements; sourceTree = "<group>"; };
 		B2B8979723D0ADBA00321C3E /* HealthKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HealthKit.framework; path = System/Library/Frameworks/HealthKit.framework; sourceTree = SDKROOT; };
 		B2C786AF23D6C77B006BF98A /* UserDefaults+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserDefaults+Extension.swift"; sourceTree = "<group>"; };
-		B2C786D723D6DF28006BF98A /* NotificationExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationExtension.swift; sourceTree = "<group>"; };
+		B2D930ED2445C9BD0086477D /* LMSensorManager+SensorObservers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "LMSensorManager+SensorObservers.swift"; sourceTree = "<group>"; };
+		B2D930EE2445C9BD0086477D /* LMSensorManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LMSensorManager.swift; sourceTree = "<group>"; };
+		B2D930F72445D7E90086477D /* CustomNotification.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = CustomNotification.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		B2D930F82445D7E90086477D /* UserNotifications.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UserNotifications.framework; path = System/Library/Frameworks/UserNotifications.framework; sourceTree = SDKROOT; };
+		B2D930FA2445D7E90086477D /* UserNotificationsUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UserNotificationsUI.framework; path = System/Library/Frameworks/UserNotificationsUI.framework; sourceTree = SDKROOT; };
+		B2D930FD2445D7E90086477D /* NotificationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationViewController.swift; sourceTree = "<group>"; };
+		B2D931002445D7E90086477D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainInterface.storyboard; sourceTree = "<group>"; };
+		B2D931022445D7E90086477D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B2F3CDF5245932B200F211A3 /* StoryboardExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoryboardExtension.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		B2847FB12450550E0042D43B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		B29639CA23BDC28100626E1A /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -180,17 +246,18 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		B2D930F42445D7E90086477D /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B2D930FB2445D7E90086477D /* UserNotificationsUI.framework in Frameworks */,
+				B2D930F92445D7E90086477D /* UserNotifications.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		5F34363124210B5E0097EC2F /* Logs */ = {
-			isa = PBXGroup;
-			children = (
-				5F34363224210B8A0097EC2F /* LMLogsManager.swift */,
-			);
-			path = Logs;
-			sourceTree = "<group>";
-		};
 		5F49C3BC241B824D00809A72 /* Lamp Sensors */ = {
 			isa = PBXGroup;
 			children = (
@@ -336,14 +403,6 @@
 			path = Wifi;
 			sourceTree = "<group>";
 		};
-		5F82D58B241278BA0040AA41 /* Dependencies */ = {
-			isa = PBXGroup;
-			children = (
-				5F82D58C241278CC0040AA41 /* ReachabilitySwift */,
-			);
-			path = Dependencies;
-			sourceTree = "<group>";
-		};
 		5F82D58C241278CC0040AA41 /* ReachabilitySwift */ = {
 			isa = PBXGroup;
 			children = (
@@ -361,14 +420,6 @@
 			path = HealthKit;
 			sourceTree = "<group>";
 		};
-		5FF29325242223C200D0BE09 /* Utilities */ = {
-			isa = PBXGroup;
-			children = (
-				5FF29326242223F300D0BE09 /* FileStorage.swift */,
-			);
-			path = Utilities;
-			sourceTree = "<group>";
-		};
 		5FF29328242239DA00D0BE09 /* Common */ = {
 			isa = PBXGroup;
 			children = (
@@ -377,38 +428,20 @@
 			path = Common;
 			sourceTree = "<group>";
 		};
-		B240814123D8803900845AEE /* ViewController */ = {
-			isa = PBXGroup;
-			children = (
-				B240814223D8803900845AEE /* WebViewController.swift */,
-			);
-			path = ViewController;
-			sourceTree = "<group>";
-		};
 		B240814323D8803900845AEE /* AppComponents */ = {
 			isa = PBXGroup;
 			children = (
+				5FF29328242239DA00D0BE09 /* Common */,
 				B240816823D8814300845AEE /* OperationQueue */,
-				B240814823D8803900845AEE /* LMSensorManager.swift */,
-				5F82D56224124DA40040AA41 /* LMSensorManager+SensorObservers.swift */,
 				B240814923D8803900845AEE /* NetworkConfig.swift */,
 			);
 			path = AppComponents;
 			sourceTree = "<group>";
 		};
-		B240814A23D8803900845AEE /* Models */ = {
-			isa = PBXGroup;
-			children = (
-				B240814B23D8803900845AEE /* LMCommon.swift */,
-				B240814C23D8803900845AEE /* SensorModel.swift */,
-				5FF29323242206F100D0BE09 /* LogsModel.swift */,
-			);
-			path = Models;
-			sourceTree = "<group>";
-		};
 		B240814D23D8803900845AEE /* CoreComponents */ = {
 			isa = PBXGroup;
 			children = (
+				5F82D58C241278CC0040AA41 /* ReachabilitySwift */,
 				B240814E23D8803900845AEE /* Result */,
 				B240815023D8803900845AEE /* Network */,
 				B240815423D8803900845AEE /* Common */,
@@ -464,21 +497,104 @@
 		B244A1C023BF4A77007FBDB8 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				B2C786D723D6DF28006BF98A /* NotificationExtension.swift */,
 				B2B8935023D0AD6500321C3E /* DateExtension.swift */,
 				B2B8935123D0AD6500321C3E /* String+Extension.swift */,
 				B244A1C123BF4A91007FBDB8 /* FileManager+Extension.swift */,
 				B2C786AF23D6C77B006BF98A /* UserDefaults+Extension.swift */,
 				5FFF157024209F9100C8A26E /* HKDevice+Extension.swift */,
 				5FFF15722420A1B500C8A26E /* HKWorkoutActivityType+Extension.swift */,
+				B2F3CDF5245932B200F211A3 /* StoryboardExtension.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		B275F5FA24517F74007A7340 /* Modules */ = {
+			isa = PBXGroup;
+			children = (
+				B275F6002451807F007A7340 /* Logging */,
+				B275F5FF2451807F007A7340 /* Sensors */,
+				B275F5FE24518037007A7340 /* Home */,
+				B275F5FB24517FA5007A7340 /* Push Notification */,
+			);
+			path = Modules;
+			sourceTree = "<group>";
+		};
+		B275F5FB24517FA5007A7340 /* Push Notification */ = {
+			isa = PBXGroup;
+			children = (
+				B275F60824519697007A7340 /* Models */,
+				B275F60524519441007A7340 /* Services */,
+				B275F5FC24517FC0007A7340 /* UserNotifications.swift */,
+			);
+			path = "Push Notification";
+			sourceTree = "<group>";
+		};
+		B275F5FE24518037007A7340 /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				B229D5F2245319380099F646 /* WebViewController.swift */,
+				B2B889ED23D0A52C00321C3E /* Home.storyboard */,
+				B240814223D8803900845AEE /* HomeViewController.swift */,
+				B275F60124518106007A7340 /* HomeWebViewModel.swift */,
+				B275F60324518C82007A7340 /* User.swift */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
+		B275F5FF2451807F007A7340 /* Sensors */ = {
+			isa = PBXGroup;
+			children = (
+				5F82D53B24122EFD0040AA41 /* Aware Sensors */,
+				5F49C3BC241B824D00809A72 /* Lamp Sensors */,
+				B2D930EC2445C9BD0086477D /* LMSensorManager */,
+				B240814B23D8803900845AEE /* LMCommon.swift */,
+				B240814C23D8803900845AEE /* SensorModel.swift */,
+			);
+			path = Sensors;
+			sourceTree = "<group>";
+		};
+		B275F6002451807F007A7340 /* Logging */ = {
+			isa = PBXGroup;
+			children = (
+				5FF29326242223F300D0BE09 /* FileStorage.swift */,
+				5F34363224210B8A0097EC2F /* LMLogsManager.swift */,
+				5FF29323242206F100D0BE09 /* LogsModel.swift */,
+			);
+			path = Logging;
+			sourceTree = "<group>";
+		};
+		B275F60524519441007A7340 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				B275F60624519479007A7340 /* NotificationAPI.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		B275F60824519697007A7340 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				B275F609245196AD007A7340 /* PushNotificationModel.swift */,
+				B23F5278245346E0007A8598 /* PushUserInfo.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		B2847FB52450550E0042D43B /* NotificationService */ = {
+			isa = PBXGroup;
+			children = (
+				B2847FB62450550E0042D43B /* NotificationService.swift */,
+				B2847FB82450550E0042D43B /* Info.plist */,
+			);
+			path = NotificationService;
 			sourceTree = "<group>";
 		};
 		B29639C423BDC28100626E1A = {
 			isa = PBXGroup;
 			children = (
 				B29639CF23BDC28100626E1A /* mindLAMP */,
+				B2D930FC2445D7E90086477D /* CustomNotification */,
+				B2847FB52450550E0042D43B /* NotificationService */,
 				B29639CE23BDC28100626E1A /* Products */,
 				B2B8979623D0ADBA00321C3E /* Frameworks */,
 			);
@@ -488,6 +604,8 @@
 			isa = PBXGroup;
 			children = (
 				B29639CD23BDC28100626E1A /* mindLAMP 2.app */,
+				B2D930F72445D7E90086477D /* CustomNotification.appex */,
+				B2847FB42450550E0042D43B /* NotificationService.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -495,23 +613,15 @@
 		B29639CF23BDC28100626E1A /* mindLAMP */ = {
 			isa = PBXGroup;
 			children = (
-				B23993B92440696800E31B06 /* exportOptions.plist */,
-				B240814123D8803900845AEE /* ViewController */,
-				B240814A23D8803900845AEE /* Models */,
+				B275F5FA24517F74007A7340 /* Modules */,
 				B240814323D8803900845AEE /* AppComponents */,
 				B240814D23D8803900845AEE /* CoreComponents */,
-				5F82D53B24122EFD0040AA41 /* Aware Sensors */,
-				5F49C3BC241B824D00809A72 /* Lamp Sensors */,
-				5F34363124210B5E0097EC2F /* Logs */,
-				5F82D58B241278BA0040AA41 /* Dependencies */,
 				B244A1C023BF4A77007FBDB8 /* Extensions */,
-				5FF29325242223C200D0BE09 /* Utilities */,
-				5FF29328242239DA00D0BE09 /* Common */,
 				B29639D023BDC28100626E1A /* AppDelegate.swift */,
 				B29639D623BDC28200626E1A /* Assets.xcassets */,
 				B2B8979523D0ADBA00321C3E /* mindLAMP.entitlements */,
 				B29639DB23BDC28200626E1A /* LaunchScreen.storyboard */,
-				B2B889ED23D0A52C00321C3E /* Home.storyboard */,
+				B23993B92440696800E31B06 /* exportOptions.plist */,
 				B29639DE23BDC28200626E1A /* Info.plist */,
 				B29639D823BDC28200626E1A /* Preview Content */,
 				5FC0151223C5A85300990506 /* mindLAMP-Bridging-Header.h */,
@@ -532,13 +642,51 @@
 			isa = PBXGroup;
 			children = (
 				B2B8979723D0ADBA00321C3E /* HealthKit.framework */,
+				B2D930F82445D7E90086477D /* UserNotifications.framework */,
+				B2D930FA2445D7E90086477D /* UserNotificationsUI.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		B2D930EC2445C9BD0086477D /* LMSensorManager */ = {
+			isa = PBXGroup;
+			children = (
+				B2D930ED2445C9BD0086477D /* LMSensorManager+SensorObservers.swift */,
+				B2D930EE2445C9BD0086477D /* LMSensorManager.swift */,
+			);
+			path = LMSensorManager;
+			sourceTree = "<group>";
+		};
+		B2D930FC2445D7E90086477D /* CustomNotification */ = {
+			isa = PBXGroup;
+			children = (
+				B2D930FD2445D7E90086477D /* NotificationViewController.swift */,
+				B2D930FF2445D7E90086477D /* MainInterface.storyboard */,
+				B2D931022445D7E90086477D /* Info.plist */,
+			);
+			path = CustomNotification;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		B2847FB32450550E0042D43B /* NotificationService */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = B2847FBE2450550E0042D43B /* Build configuration list for PBXNativeTarget "NotificationService" */;
+			buildPhases = (
+				B2847FB02450550E0042D43B /* Sources */,
+				B2847FB12450550E0042D43B /* Frameworks */,
+				B2847FB22450550E0042D43B /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = NotificationService;
+			productName = NotificationService;
+			productReference = B2847FB42450550E0042D43B /* NotificationService.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 		B29639CC23BDC28100626E1A /* mindLAMP */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = B29639E123BDC28200626E1A /* Build configuration list for PBXNativeTarget "mindLAMP" */;
@@ -547,15 +695,35 @@
 				B29639CA23BDC28100626E1A /* Frameworks */,
 				B29639CB23BDC28100626E1A /* Resources */,
 				5F7D0ADD23D8478B00BA0B4F /* Embed Frameworks */,
+				B2D931092445D7E90086477D /* Embed App Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				B2D931042445D7E90086477D /* PBXTargetDependency */,
+				B2847FBA2450550E0042D43B /* PBXTargetDependency */,
 			);
 			name = mindLAMP;
 			productName = lampv2;
 			productReference = B29639CD23BDC28100626E1A /* mindLAMP 2.app */;
 			productType = "com.apple.product-type.application";
+		};
+		B2D930F62445D7E90086477D /* CustomNotification */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = B2D931062445D7E90086477D /* Build configuration list for PBXNativeTarget "CustomNotification" */;
+			buildPhases = (
+				B2D930F32445D7E90086477D /* Sources */,
+				B2D930F42445D7E90086477D /* Frameworks */,
+				B2D930F52445D7E90086477D /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = CustomNotification;
+			productName = CustomNotification;
+			productReference = B2D930F72445D7E90086477D /* CustomNotification.appex */;
+			productType = "com.apple.product-type.app-extension";
 		};
 /* End PBXNativeTarget section */
 
@@ -568,9 +736,15 @@
 				LastUpgradeCheck = 1120;
 				ORGANIZATIONNAME = "Division of Digital Psychiatry";
 				TargetAttributes = {
+					B2847FB32450550E0042D43B = {
+						CreatedOnToolsVersion = 11.2.1;
+					};
 					B29639CC23BDC28100626E1A = {
 						CreatedOnToolsVersion = 11.2.1;
 						LastSwiftMigration = 1130;
+					};
+					B2D930F62445D7E90086477D = {
+						CreatedOnToolsVersion = 11.2.1;
 					};
 				};
 			};
@@ -588,11 +762,20 @@
 			projectRoot = "";
 			targets = (
 				B29639CC23BDC28100626E1A /* mindLAMP */,
+				B2D930F62445D7E90086477D /* CustomNotification */,
+				B2847FB32450550E0042D43B /* NotificationService */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		B2847FB22450550E0042D43B /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		B29639CB23BDC28100626E1A /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -606,9 +789,25 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		B2D930F52445D7E90086477D /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B2D931012445D7E90086477D /* MainInterface.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		B2847FB02450550E0042D43B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B2847FB72450550E0042D43B /* NotificationService.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		B29639C923BDC28100626E1A /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -621,6 +820,7 @@
 				B240816E23D8814300845AEE /* AsynchronousOperation.swift in Sources */,
 				B2B8935223D0AD6500321C3E /* DateExtension.swift in Sources */,
 				B240816323D8803900845AEE /* CodableHelpers.swift in Sources */,
+				B2F3CDF6245932B200F211A3 /* StoryboardExtension.swift in Sources */,
 				B240816723D8803900845AEE /* LMError.swift in Sources */,
 				5F82D579241272E30040AA41 /* MagnetometerSensor.swift in Sources */,
 				5FFF15732420A1B500C8A26E /* HKWorkoutActivityType+Extension.swift in Sources */,
@@ -639,8 +839,10 @@
 				B29639D123BDC28100626E1A /* AppDelegate.swift in Sources */,
 				5F82D55424122EFD0040AA41 /* AwareSensor.swift in Sources */,
 				5FF29327242223F300D0BE09 /* FileStorage.swift in Sources */,
+				B275F60224518106007A7340 /* HomeWebViewModel.swift in Sources */,
 				5FB802B1241B859C00340112 /* LMHealthKitSensor.swift in Sources */,
 				5F82D578241272E30040AA41 /* MagnetometerData.swift in Sources */,
+				B275F60724519479007A7340 /* NotificationAPI.swift in Sources */,
 				5F82D55624122EFD0040AA41 /* AccelerometerData.swift in Sources */,
 				5F82D588241276270040AA41 /* WiFiSensor.swift in Sources */,
 				5F82D55F241230A90040AA41 /* GeofenceData.swift in Sources */,
@@ -652,35 +854,60 @@
 				5F3D223C241A0F0600899DD0 /* LMBluetoothSensor.swift in Sources */,
 				B240816023D8803900845AEE /* LMCommon.swift in Sources */,
 				5F82D57E241274430040AA41 /* PedometerSensor.swift in Sources */,
+				B2D930EF2445C9BD0086477D /* LMSensorManager+SensorObservers.swift in Sources */,
 				B240815F23D8803900845AEE /* NetworkConfig.swift in Sources */,
 				5F82D54E24122EFD0040AA41 /* AwareObject.swift in Sources */,
 				5F82D58A241276270040AA41 /* WiFiScanData.swift in Sources */,
 				5F82D56A2412541D0040AA41 /* ScreenData.swift in Sources */,
+				B275F60424518C82007A7340 /* User.swift in Sources */,
 				5F34363324210B8A0097EC2F /* LMLogsManager.swift in Sources */,
 				5F82D574241271830040AA41 /* GravitySensor.swift in Sources */,
 				5FB802B3241BAFF500340112 /* LMHealthKitSensorData.swift in Sources */,
+				B23F5279245346E0007A8598 /* PushUserInfo.swift in Sources */,
 				5F82D55B24122EFD0040AA41 /* LocationsData.swift in Sources */,
 				B240816223D8803900845AEE /* Result.swift in Sources */,
+				B275F5FD24517FC0007A7340 /* UserNotifications.swift in Sources */,
+				B229D5F3245319380099F646 /* WebViewController.swift in Sources */,
 				5F82D5692412541C0040AA41 /* ScreenBrightnessData.swift in Sources */,
 				5F82D589241276270040AA41 /* WiFiDeviceData.swift in Sources */,
 				B2C786B023D6C77B006BF98A /* UserDefaults+Extension.swift in Sources */,
 				5F82D5832412752F0040AA41 /* RotationData.swift in Sources */,
 				5F82D573241271830040AA41 /* GravityData.swift in Sources */,
-				5F82D56324124DA40040AA41 /* LMSensorManager+SensorObservers.swift in Sources */,
+				B275F60A245196AD007A7340 /* PushNotificationModel.swift in Sources */,
 				5FF29324242206F100D0BE09 /* LogsModel.swift in Sources */,
 				5F82D54F24122EFD0040AA41 /* AwareNotification.swift in Sources */,
-				B240815E23D8803900845AEE /* LMSensorManager.swift in Sources */,
 				5F82D561241230A90040AA41 /* VisitData.swift in Sources */,
 				5F82D56E24126FDD0040AA41 /* CallsData.swift in Sources */,
 				5F82D57D241274430040AA41 /* PedometerData.swift in Sources */,
-				B240815A23D8803900845AEE /* WebViewController.swift in Sources */,
-				B2C786D823D6DF28006BF98A /* NotificationExtension.swift in Sources */,
+				B240815A23D8803900845AEE /* HomeViewController.swift in Sources */,
 				5FFF157124209F9100C8A26E /* HKDevice+Extension.swift in Sources */,
+				B2D930F02445C9BD0086477D /* LMSensorManager.swift in Sources */,
 				5F82D5822412752F0040AA41 /* RotationSensor.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		B2D930F32445D7E90086477D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B2D930FE2445D7E90086477D /* NotificationViewController.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		B2847FBA2450550E0042D43B /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = B2847FB32450550E0042D43B /* NotificationService */;
+			targetProxy = B2847FB92450550E0042D43B /* PBXContainerItemProxy */;
+		};
+		B2D931042445D7E90086477D /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = B2D930F62445D7E90086477D /* CustomNotification */;
+			targetProxy = B2D931032445D7E90086477D /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		B29639DB23BDC28200626E1A /* LaunchScreen.storyboard */ = {
@@ -691,9 +918,61 @@
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
 		};
+		B2D930FF2445D7E90086477D /* MainInterface.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				B2D931002445D7E90086477D /* Base */,
+			);
+			name = MainInterface.storyboard;
+			sourceTree = "<group>";
+		};
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		B2847FBC2450550E0042D43B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = S2Y2D4239K;
+				INFOPLIST_FILE = NotificationService/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = digital.lamp.mindlamp.NotificationService;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "mindLAMP 2 Notification Service AdHoc";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		B2847FBD2450550E0042D43B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = S2Y2D4239K;
+				INFOPLIST_FILE = NotificationService/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = digital.lamp.mindlamp.NotificationService;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "mindLAMP 2 Notification Service AdHoc";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
 		B29639DF23BDC28200626E1A /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -811,12 +1090,13 @@
 		B29639E223BDC28200626E1A /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = mindLAMP/mindLAMP.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 9;
+				CURRENT_PROJECT_VERSION = 10;
 				DEVELOPMENT_ASSET_PATHS = "\"mindLAMP/Preview Content\"";
 				DEVELOPMENT_TEAM = S2Y2D4239K;
 				ENABLE_BITCODE = NO;
@@ -847,12 +1127,13 @@
 		B29639E323BDC28200626E1A /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = mindLAMP/mindLAMP.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 9;
+				CURRENT_PROJECT_VERSION = 10;
 				DEVELOPMENT_ASSET_PATHS = "\"mindLAMP/Preview Content\"";
 				DEVELOPMENT_TEAM = S2Y2D4239K;
 				ENABLE_BITCODE = NO;
@@ -879,9 +1160,62 @@
 			};
 			name = Release;
 		};
+		B2D931072445D7E90086477D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = S2Y2D4239K;
+				INFOPLIST_FILE = CustomNotification/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = digital.lamp.mindlamp.CustomNotification;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "mindLAMP 2 Notification Extension AdHoc";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		B2D931082445D7E90086477D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = S2Y2D4239K;
+				INFOPLIST_FILE = CustomNotification/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = digital.lamp.mindlamp.CustomNotification;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "mindLAMP 2 Notification Extension AdHoc";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		B2847FBE2450550E0042D43B /* Build configuration list for PBXNativeTarget "NotificationService" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B2847FBC2450550E0042D43B /* Debug */,
+				B2847FBD2450550E0042D43B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		B29639C823BDC28100626E1A /* Build configuration list for PBXProject "mindLAMP" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -896,6 +1230,15 @@
 			buildConfigurations = (
 				B29639E223BDC28200626E1A /* Debug */,
 				B29639E323BDC28200626E1A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		B2D931062445D7E90086477D /* Build configuration list for PBXNativeTarget "CustomNotification" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B2D931072445D7E90086477D /* Debug */,
+				B2D931082445D7E90086477D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

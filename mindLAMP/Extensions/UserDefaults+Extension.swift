@@ -12,6 +12,7 @@ extension UserDefaults {
     enum Key: String {
         case userID = "userID"
         case serverAddress = "serverAddress"
+        case deviceToken = "deviceToken"
     }
     
     var userID: String? {
@@ -29,6 +30,15 @@ extension UserDefaults {
         }
         set {
             self.set(newValue, forKey: UserDefaults.Key.serverAddress.rawValue)
+        }
+    }
+    
+    var deviceToken: String? {
+        get {
+            return self.string(forKey: UserDefaults.Key.deviceToken.rawValue)
+        }
+        set {
+            self.set(newValue, forKey: UserDefaults.Key.deviceToken.rawValue)
         }
     }
     

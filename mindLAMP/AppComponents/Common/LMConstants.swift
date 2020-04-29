@@ -19,6 +19,7 @@ struct CurrentDevice {
     static let name = UIDevice.current.name
     static let model = UIDevice.current.model
     static let osVersion = UIDevice.current.systemVersion
+    static let appVersion = Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String ?? ""
 }
 
 struct Logs {

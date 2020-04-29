@@ -98,9 +98,23 @@ extension Networking: NetworkingAPI {
                     urlRequest.httpBody = data
                     printToFile("Parameter Json: \(String(describing: String(data: data, encoding: String.Encoding.utf8)))")
                 } else {
-                    Networking.setNetWorkIndicatorVisible(false)
-                    callback(.failure(LMError(.definedError(.jsonParsingFailed))))
-                    return
+                    //to support JSON request
+                    if let jsonBody = request.jsonBody {
+                        do {
+                            let jsonData = try JSONSerialization.data(withJSONObject: jsonBody, options: JSONSerialization.WritingOptions.prettyPrinted)
+                            urlRequest.httpBody = jsonData
+                            printToFile("Parameter Json: \(String(describing: String(data: jsonData, encoding: String.Encoding.utf8)))")
+                        } catch {
+                            Networking.setNetWorkIndicatorVisible(false)
+                            callback(.failure(LMError(.definedError(.jsonParsingFailed))))
+                            return
+                        }
+                    } else {
+
+                        Networking.setNetWorkIndicatorVisible(false)
+                        callback(.failure(LMError(.definedError(.jsonParsingFailed))))
+                        return
+                    }
                 }
             }
         case .get:
