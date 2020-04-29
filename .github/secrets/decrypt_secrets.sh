@@ -4,8 +4,8 @@ set -eo pipefail
 echo "Start Import"
 
 gpg --quiet --batch --yes --decrypt --passphrase="$IOS_KEYS" --output .github/secrets/Certificates.p12 .github/secrets/Certificates.p12.gpg
-gpg --quiet --batch --yes --decrypt --passphrase="$IOS_KEYS" --output .github/secrets/mindlamp2_AppStore_Profile.mobileprovision .github/secrets/mindlamp2_AppStore_Profile.mobileprovision.gpg
 gpg --quiet --batch --yes --decrypt --passphrase="$IOS_KEYS" --output .github/secrets/PushCertificates.p12 .github/secrets/PushCertificates.p12.gpg
+gpg --quiet --batch --yes --decrypt --passphrase="$IOS_KEYS" --output .github/secrets/mindlamp2_AppStore_Profile.mobileprovision .github/secrets/mindlamp2_AppStore_Profile.mobileprovision.gpg
 gpg --quiet --batch --yes --decrypt --passphrase="$IOS_KEYS" --output .github/secrets/mindLAMP_2_Notification_Extension_AppStore.mobileprovision .github/secrets/mindLAMP_2_Notification_Extension_AppStore.mobileprovision.gpg
 gpg --quiet --batch --yes --decrypt --passphrase="$IOS_KEYS" --output .github/secrets/mindLAMP_2_Notification_Service_AppStore.mobileprovision .github/secrets/mindLAMP_2_Notification_Service_AppStore.mobileprovision.gpg
 
@@ -14,8 +14,8 @@ echo "Imported"
 mkdir -p ~/Library/MobileDevice/Provisioning\ Profiles
 
 cp .github/secrets/mindlamp2_AppStore_Profile.mobileprovision ~/Library/MobileDevice/Provisioning\ Profiles/mindlamp2_AppStore_Profile.mobileprovision
-cp .github/secrets/mindlamp2_AppStore_Profile.mobileprovision ~/Library/MobileDevice/Provisioning\ Profiles/mindLAMP_2_Notification_Extension_AppStore.mobileprovision
-cp .github/secrets/mindlamp2_AppStore_Profile.mobileprovision ~/Library/MobileDevice/Provisioning\ Profiles/mindLAMP_2_Notification_Service_AppStore.mobileprovision
+cp .github/secrets/mindLAMP_2_Notification_Extension_AppStore.mobileprovision ~/Library/MobileDevice/Provisioning\ Profiles/mindLAMP_2_Notification_Extension_AppStore.mobileprovision
+cp .github/secrets/mindLAMP_2_Notification_Service_AppStore.mobileprovision ~/Library/MobileDevice/Provisioning\ Profiles/mindLAMP_2_Notification_Service_AppStore.mobileprovision
 
 echo "Copied"
 
