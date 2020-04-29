@@ -12,6 +12,10 @@
 	<dict>
 		<key>digital.lamp.mindlamp</key>
 		<string>mindlamp2 AppStore Profile</string>
+		<key>digital.lamp.mindlamp.CustomNotification</key>
+		<string>mindLAMP 2 Notification Extension AppStore</string>
+		<key>digital.lamp.mindlamp.NotificationService</key>
+		<string>mindLAMP 2 Notification Service AppStore</string>
 	</dict>
 </dict>
 </plist>
