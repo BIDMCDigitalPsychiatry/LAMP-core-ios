@@ -247,9 +247,9 @@ extension LMSensorManager {
         if let data = fetchDistanceData() {
             arraySensorRequest.append(data)
         }
-        if let data = fetchGPSContextualData() {
-            arraySensorRequest.append(data)
-        }
+//        if let data = fetchGPSContextualData() {
+//            arraySensorRequest.append(data)
+//        }
         if let data = fetchGPSData() {
             arraySensorRequest.append(data)
         }
@@ -405,17 +405,17 @@ extension LMSensorManager {
         return sensorDataRequest(with: Double(data.timestamp), sensor: SensorType.lamp_distance, dataModel: model)
     }
     
-    private func fetchGPSContextualData() -> SensorData.Request? {
-        guard let data = latestLocationsData else {
-            LMLogsManager.shared.addLogs(level: .warning, logs: Logs.Messages.location_null)
-            return nil
-        }
-        var model = SensorDataModel()
-        model.longitude = data.longitude
-        model.latitude = data.latitude
-
-        return sensorDataRequest(with: Double(data.timestamp), sensor: SensorType.lamp_gps_contextual, dataModel: model)
-    }
+//    private func fetchGPSContextualData() -> SensorData.Request? {
+//        guard let data = latestLocationsData else {
+//            LMLogsManager.shared.addLogs(level: .warning, logs: Logs.Messages.location_null)
+//            return nil
+//        }
+//        var model = SensorDataModel()
+//        model.longitude = data.longitude
+//        model.latitude = data.latitude
+//
+//        return sensorDataRequest(with: Double(data.timestamp), sensor: SensorType.lamp_gps_contextual, dataModel: model)
+//    }
     
     private func fetchGPSData() -> SensorData.Request? {
         guard let data = latestLocationsData else {

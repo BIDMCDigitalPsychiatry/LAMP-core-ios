@@ -18,7 +18,7 @@ enum SensorType {
     case lamp_calls
     case lamp_distance
     case lamp_flights
-    case lamp_gps_contextual
+    //case lamp_gps_contextual
     case lamp_gps
     case lamp_gyroscope
     case lamp_heart_rate
@@ -51,8 +51,8 @@ enum SensorType {
             return "lamp.distance"
         case .lamp_flights:
             return "lamp.flights"
-        case .lamp_gps_contextual:
-            return "lamp.gps.contextual"
+//        case .lamp_gps_contextual:
+//            return "lamp.gps.contextual"
         case .lamp_gps:
             return "lamp.gps"
         case .lamp_gyroscope:
