@@ -89,16 +89,3 @@ extension SensorType: Encodable {
         try container.encode(jsonKey)
     }
 }
-
-
-enum HKIdentifiers: String {
-    case weight = "HKQuantityTypeIdentifierBodyMass"
-    case height = "HKQuantityTypeIdentifierHeight"
-    case bloodpressure_diastolic = "HKQuantityTypeIdentifierBloodPressureDiastolic"
-    case bloodpressure_systolic = "HKQuantityTypeIdentifierBloodPressureSystolic"
-    case respiratory_rate = "HKQuantityTypeIdentifierRespiratoryRate"
-    case heart_rate = "HKQuantityTypeIdentifierHeartRate"
-    case sleep = "HKCategoryTypeIdentifierSleepAnalysis"
-    case workout = "HKWorkoutTypeIdentifier"
-
-}

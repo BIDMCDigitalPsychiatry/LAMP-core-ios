@@ -57,6 +57,9 @@ struct SensorDataModel: Encodable {
     var call_duration: Double?
     var call_type: Int?
     var call_trace: String?
+    
+    var startDate: Double?
+    var endDate: Double?
 }
 
 struct Motion: Encodable {

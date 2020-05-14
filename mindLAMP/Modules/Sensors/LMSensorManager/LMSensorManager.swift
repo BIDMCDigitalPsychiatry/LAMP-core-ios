@@ -7,6 +7,7 @@
 
 import Foundation
 import UIKit
+import HealthKit
 
 class LMSensorManager {
     
@@ -364,10 +365,12 @@ extension LMSensorManager {
         
     private func fetchSleepData() -> SensorData.Request? {
         guard let arrData = sensor_healthKit?.latestCategoryData() else { return nil }
-        guard let data = latestData(for: HKIdentifiers.sleep.rawValue, in: arrData) else { return nil }
+        guard let data = latestData(for: HKCategoryTypeIdentifier.sleepAnalysis, in: arrData) else { return nil }
         
         var model = SensorDataModel()
         model.value = data.value
+        model.startDate = data.startDate
+        model.endDate = data.endDate
 
         return sensorDataRequest(with: Double(data.timestamp), sensor: SensorType.lamp_sleep, dataModel: model)
     }
@@ -489,6 +492,8 @@ extension LMSensorManager {
         var model = SensorDataModel()
         model.workout_type = data.type
         model.workout_durtion = data.value
+        model.startDate = data.startDate
+        model.endDate = data.endDate
         
         return sensorDataRequest(with: Double(data.timestamp), sensor: SensorType.lamp_segment, dataModel: model)
     }
@@ -507,7 +512,7 @@ extension LMSensorManager {
         }
         var arrayRequest = [SensorData.Request]()
         //get latest Weight
-        if let data = latestData(for: HKIdentifiers.weight.rawValue, in: arrData) {
+        if let data = latestData(for: HKQuantityTypeIdentifier.bodyMass , in: arrData) {
             var model = SensorDataModel()
             model.unit = data.unit
             model.value = data.value
@@ -517,7 +522,7 @@ extension LMSensorManager {
             LMLogsManager.shared.addLogs(level: .warning, logs: Logs.Messages.weight_null)
         }
         //get latest Height
-        if let data = latestData(for: HKIdentifiers.height.rawValue, in: arrData) {
+        if let data = latestData(for: HKQuantityTypeIdentifier.height, in: arrData) {
             var model = SensorDataModel()
             model.unit = data.unit
             model.value = data.value
@@ -527,7 +532,7 @@ extension LMSensorManager {
             LMLogsManager.shared.addLogs(level: .warning, logs: Logs.Messages.height_null)
         }
         //get latest BloodPressure
-        if let dataDiastolic = latestData(for: HKIdentifiers.bloodpressure_diastolic.rawValue, in: arrData), let dataSystolic = latestData(for: HKIdentifiers.bloodpressure_systolic.rawValue, in: arrData) {
+        if let dataDiastolic = latestData(for: HKQuantityTypeIdentifier.bloodPressureDiastolic, in: arrData), let dataSystolic = latestData(for: HKQuantityTypeIdentifier.bloodPressureSystolic, in: arrData) {
             var model = SensorDataModel()
             model.unit = dataDiastolic.unit
             model.bp_diastolic = Int(dataDiastolic.value)
@@ -538,7 +543,7 @@ extension LMSensorManager {
             LMLogsManager.shared.addLogs(level: .warning, logs: Logs.Messages.blood_pessure_null)
         }
         //get latest Respiratory rate
-        if let data = latestData(for: HKIdentifiers.respiratory_rate.rawValue, in: arrData) {
+        if let data = latestData(for: HKQuantityTypeIdentifier.respiratoryRate, in: arrData) {
             var model = SensorDataModel()
             model.unit = data.unit
             model.value = data.value
@@ -548,7 +553,7 @@ extension LMSensorManager {
             LMLogsManager.shared.addLogs(level: .warning, logs: Logs.Messages.respiratory_rate_null)
         }
         //get latest Heart rate
-        if let data = latestData(for: HKIdentifiers.heart_rate.rawValue, in: arrData) {
+        if let data = latestData(for: HKQuantityTypeIdentifier.heartRate, in: arrData) {
             var model = SensorDataModel()
             model.unit = data.unit
             model.value = data.value
@@ -560,9 +565,13 @@ extension LMSensorManager {
         return arrayRequest
     }
     
-    func latestData(for hkIdentifier: String, in array: [LMHealthKitSensorData]) -> LMHealthKitSensorData? {
-        return array.filter({ $0.type == hkIdentifier }).max(by: {$0.endDate < $1.endDate })
+    func latestData(for hkIdentifier: HKCategoryTypeIdentifier, in array: [LMHealthKitSensorData]) -> LMHealthKitSensorData? {
+        return array.filter({ $0.type == hkIdentifier.rawValue }).max(by: {$0.endDate < $1.endDate })
     }
+    func latestData(for hkIdentifier: HKQuantityTypeIdentifier, in array: [LMHealthKitSensorData]) -> LMHealthKitSensorData? {
+        return array.filter({ $0.type == hkIdentifier.rawValue }).max(by: {$0.endDate < $1.endDate })
+    }
+    
 }
 
 extension LMSensorManager {

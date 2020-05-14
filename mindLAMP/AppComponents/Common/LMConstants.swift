@@ -59,6 +59,7 @@ extension Logs.Messages {
     static let height_null = "Lamp HealthKit error NULL : Height data does not exist."
     static let hkquantity_null = "Lamp HealthKit error NULL : HKQuantity data does not exist."
     static let hk_data_fetch_error = "Lamp HealthKit error NULL : Data could not be retrieved."
+    static let hk_data_fetch_uniterror = "Lamp HealthKit error NULL : Unit could not be retrieved."
 
     static let battery_low = "Battery is low."
     static let app_crash = "The app has crashed."
