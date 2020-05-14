@@ -219,65 +219,65 @@ class LMSensorManager {
 }
 extension LMSensorManager {
         
-    func fetchSensorDataRequest() -> [SensorData.Request] {
-        var arraySensorRequest = [SensorData.Request]()
+    func fetchSensorDataRequest() -> SensorData.Request {
+        var arraySensorData = [SensorDataInfo]()
         
         if let data = fetchAccelerometerData() {
-            arraySensorRequest.append(data)
+            arraySensorData.append(data)
         }
         if let data = fetchAccelerometerMotionData() {
-            arraySensorRequest.append(data)
+            arraySensorData.append(data)
         }
         if let data = fetchGyroscopeData() {
-            arraySensorRequest.append(data)
+            arraySensorData.append(data)
         }
         if let data = fetchMagnetometerData() {
-            arraySensorRequest.append(data)
+            arraySensorData.append(data)
         }
         if let data = fetchSleepData() {
-            arraySensorRequest.append(data)
+            arraySensorData.append(data)
         } else {
             LMLogsManager.shared.addLogs(level: .warning, logs: Logs.Messages.sleep_null)
         }
         if let data = fetchStepsData() {
-            arraySensorRequest.append(data)
+            arraySensorData.append(data)
         }
         if let data = fetchFlightsData() {
-            arraySensorRequest.append(data)
+            arraySensorData.append(data)
         }
         if let data = fetchDistanceData() {
-            arraySensorRequest.append(data)
+            arraySensorData.append(data)
         }
 //        if let data = fetchGPSContextualData() {
 //            arraySensorRequest.append(data)
 //        }
         if let data = fetchGPSData() {
-            arraySensorRequest.append(data)
+            arraySensorData.append(data)
         }
         if let data = fetchBluetoothData() {
-            arraySensorRequest.append(data)
+            arraySensorData.append(data)
         }
         if let data = fetchScreenStateData() {
-            arraySensorRequest.append(data)
+            arraySensorData.append(data)
         }
         if let data = fetchCallsData() {
-            arraySensorRequest.append(data)
+            arraySensorData.append(data)
         }
         if let data = fetchWiFiData() {
-            arraySensorRequest.append(data)
+            arraySensorData.append(data)
         }
         if let data = fetchWorkoutSegmentData() {
-            arraySensorRequest.append(data)
+            arraySensorData.append(data)
         } else {
             LMLogsManager.shared.addLogs(level: .warning, logs: Logs.Messages.workout_null)
         }
         if let data = fetchHealthKitQuantityData() {
-            arraySensorRequest.append(contentsOf: data)
+            arraySensorData.append(contentsOf: data)
         }
-        return arraySensorRequest
+        return SensorData.Request(sensorEvents: arraySensorData)
     }
     
-    private func fetchAccelerometerData() -> SensorData.Request? {
+    private func fetchAccelerometerData() -> SensorDataInfo? {
         guard let data = sensor_accelerometer?.latestData() else {
             LMLogsManager.shared.addLogs(level: .warning, logs: Logs.Messages.accelerometer_null)
             return nil
@@ -287,10 +287,12 @@ extension LMSensorManager {
         model.y = data.y
         model.z = data.z
         
-        return sensorDataRequest(with: Double(data.timestamp), sensor: SensorType.lamp_accelerometer, dataModel: model)
+        return SensorDataInfo(sensor: SensorType.lamp_accelerometer, timestamp: Double(data.timestamp), data: model)
     }
     
-    private func fetchAccelerometerMotionData() -> SensorData.Request? {
+    private func fetchAccelerometerMotionData() -> SensorDataInfo? {
+        
+        let timeStamp = Date().timeInMilliSeconds
         var model = SensorDataModel()
         
         if let data = sensor_accelerometer?.latestData() {
@@ -333,11 +335,11 @@ extension LMSensorManager {
         } else {
             LMLogsManager.shared.addLogs(level: .warning, logs: Logs.Messages.magnetometer_null)
         }
-        let timeStamp = Date.currentTimeSince1970()
-        return SensorData.Request(timestamp: timeStamp, sensor: SensorType.lamp_accelerometer_motion, data: model)
+        
+        return SensorDataInfo(sensor: SensorType.lamp_accelerometer_motion, timestamp: timeStamp, data: model)
     }
     
-    private func fetchGyroscopeData() -> SensorData.Request? {
+    private func fetchGyroscopeData() -> SensorDataInfo? {
         guard let data = sensor_gyro?.latestData() else {
             LMLogsManager.shared.addLogs(level: .warning, logs: Logs.Messages.gyroscope_null)
             return nil
@@ -347,10 +349,10 @@ extension LMSensorManager {
         model.y = data.y
         model.z = data.z
 
-        return sensorDataRequest(with: Double(data.timestamp), sensor: SensorType.lamp_gyroscope, dataModel: model)
+        return SensorDataInfo(sensor: SensorType.lamp_gyroscope, timestamp: Double(data.timestamp), data: model)
     }
     
-    private func fetchMagnetometerData() -> SensorData.Request? {
+    private func fetchMagnetometerData() -> SensorDataInfo? {
         guard let data = sensor_magneto?.latestData() else {
             LMLogsManager.shared.addLogs(level: .warning, logs: Logs.Messages.magnetometer_null)
             return nil
@@ -360,10 +362,10 @@ extension LMSensorManager {
         model.y = data.y
         model.z = data.z
 
-        return sensorDataRequest(with: Double(data.timestamp), sensor: SensorType.lamp_magnetometer, dataModel: model)
+        return SensorDataInfo(sensor: SensorType.lamp_magnetometer, timestamp: Double(data.timestamp), data: model)
     }
         
-    private func fetchSleepData() -> SensorData.Request? {
+    private func fetchSleepData() -> SensorDataInfo? {
         guard let arrData = sensor_healthKit?.latestCategoryData() else { return nil }
         guard let data = latestData(for: HKCategoryTypeIdentifier.sleepAnalysis, in: arrData) else { return nil }
         
@@ -372,10 +374,10 @@ extension LMSensorManager {
         model.startDate = data.startDate
         model.endDate = data.endDate
 
-        return sensorDataRequest(with: Double(data.timestamp), sensor: SensorType.lamp_sleep, dataModel: model)
+        return SensorDataInfo(sensor: SensorType.lamp_sleep, timestamp: Double(data.timestamp), data: model)
     }
     
-    private func fetchStepsData() -> SensorData.Request? {
+    private func fetchStepsData() -> SensorDataInfo? {
         guard let data = latestPedometerData else {
             LMLogsManager.shared.addLogs(level: .warning, logs: Logs.Messages.pedometer_steps_null)
             return nil
@@ -383,10 +385,10 @@ extension LMSensorManager {
         var model = SensorDataModel()
         model.steps = data.numberOfSteps
 
-        return sensorDataRequest(with: Double(data.timestamp), sensor: SensorType.lamp_steps, dataModel: model)
+        return SensorDataInfo(sensor: SensorType.lamp_steps, timestamp: Double(data.timestamp), data: model)
     }
     
-    private func fetchFlightsData() -> SensorData.Request? {
+    private func fetchFlightsData() -> SensorDataInfo? {
         guard let data = latestPedometerData else {
             LMLogsManager.shared.addLogs(level: .warning, logs: Logs.Messages.pedometer_flights_null)
             return nil
@@ -394,10 +396,10 @@ extension LMSensorManager {
         var model = SensorDataModel()
         model.flights_climbed = data.floorsAscended
 
-        return sensorDataRequest(with: Double(data.timestamp), sensor: SensorType.lamp_flights, dataModel: model)
+        return SensorDataInfo(sensor: SensorType.lamp_flights, timestamp: Double(data.timestamp), data: model)
     }
     
-    private func fetchDistanceData() -> SensorData.Request? {
+    private func fetchDistanceData() -> SensorDataInfo? {
         guard let data = latestPedometerData else {
             LMLogsManager.shared.addLogs(level: .warning, logs: Logs.Messages.pedometer_distane_null)
             return nil
@@ -405,10 +407,10 @@ extension LMSensorManager {
         var model = SensorDataModel()
         model.distance = data.distance
 
-        return sensorDataRequest(with: Double(data.timestamp), sensor: SensorType.lamp_distance, dataModel: model)
+        return SensorDataInfo(sensor: SensorType.lamp_distance, timestamp: Double(data.timestamp), data: model)
     }
     
-//    private func fetchGPSContextualData() -> SensorData.Request? {
+//    private func fetchGPSContextualData() -> SensorDataModel? {
 //        guard let data = latestLocationsData else {
 //            LMLogsManager.shared.addLogs(level: .warning, logs: Logs.Messages.location_null)
 //            return nil
@@ -420,7 +422,7 @@ extension LMSensorManager {
 //        return sensorDataRequest(with: Double(data.timestamp), sensor: SensorType.lamp_gps_contextual, dataModel: model)
 //    }
     
-    private func fetchGPSData() -> SensorData.Request? {
+    private func fetchGPSData() -> SensorDataInfo? {
         guard let data = latestLocationsData else {
             LMLogsManager.shared.addLogs(level: .warning, logs: Logs.Messages.location_null)
             return nil
@@ -430,10 +432,10 @@ extension LMSensorManager {
         model.latitude = data.latitude
         model.altitude = data.altitude
 
-        return sensorDataRequest(with: Double(data.timestamp), sensor: SensorType.lamp_gps, dataModel: model)
+        return SensorDataInfo(sensor: SensorType.lamp_gps, timestamp: Double(data.timestamp), data: model)
     }
     
-    private func fetchBluetoothData() -> SensorData.Request? {
+    private func fetchBluetoothData() -> SensorDataInfo? {
         guard let data = sensor_bluetooth?.latestData() else {
             LMLogsManager.shared.addLogs(level: .warning, logs: Logs.Messages.bluetooth_null)
             return nil
@@ -443,10 +445,10 @@ extension LMSensorManager {
         model.bt_name = data.name
         model.bt_rssi = data.rssi
 
-        return sensorDataRequest(with: data.timestamp, sensor: SensorType.lamp_bluetooth, dataModel: model)
+        return SensorDataInfo(sensor: SensorType.lamp_bluetooth, timestamp: data.timestamp, data: model)
     }
     
-    private func fetchWiFiData() -> SensorData.Request? {
+    private func fetchWiFiData() -> SensorDataInfo? {
         guard let data = latestWifiData else {
             LMLogsManager.shared.addLogs(level: .warning, logs: Logs.Messages.wifi_null)
             return nil
@@ -455,10 +457,10 @@ extension LMSensorManager {
         model.bssid = data.bssid
         model.ssid = data.ssid
 
-        return sensorDataRequest(with: Double(data.timestamp), sensor: SensorType.lamp_wifi, dataModel: model)
+        return SensorDataInfo(sensor: SensorType.lamp_wifi, timestamp: Double(data.timestamp), data: model)
     }
     
-    private func fetchScreenStateData() -> SensorData.Request? {
+    private func fetchScreenStateData() -> SensorDataInfo? {
         guard let data = latestScreenStateData else {
             LMLogsManager.shared.addLogs(level: .warning, logs: Logs.Messages.screen_state_null)
             return nil
@@ -466,10 +468,10 @@ extension LMSensorManager {
         var model = SensorDataModel()
         model.state = data.screenState.rawValue
 
-        return sensorDataRequest(with: data.timestamp, sensor: SensorType.lamp_screen_state, dataModel: model)
+        return SensorDataInfo(sensor: SensorType.lamp_screen_state, timestamp: data.timestamp, data: model)
     }
     
-    private func fetchCallsData() -> SensorData.Request? {
+    private func fetchCallsData() -> SensorDataInfo? {
         guard let data = latestCallsData else {
             LMLogsManager.shared.addLogs(level: .warning, logs: Logs.Messages.calls_null)
             return nil
@@ -479,10 +481,10 @@ extension LMSensorManager {
         model.call_duration = Double(data.duration)
         model.call_trace = data.trace
 
-        return sensorDataRequest(with: Double(data.timestamp), sensor: SensorType.lamp_calls, dataModel: model)
+        return SensorDataInfo(sensor: SensorType.lamp_calls, timestamp: Double(data.timestamp), data: model)
     }
     
-    private func fetchWorkoutSegmentData() -> SensorData.Request? {
+    private func fetchWorkoutSegmentData() -> SensorDataInfo? {
         guard let arrData = sensor_healthKit?.latestWorkoutData() else {
             return nil
         }
@@ -495,29 +497,30 @@ extension LMSensorManager {
         model.startDate = data.startDate
         model.endDate = data.endDate
         
-        return sensorDataRequest(with: Double(data.timestamp), sensor: SensorType.lamp_segment, dataModel: model)
+        return SensorDataInfo(sensor: SensorType.lamp_segment, timestamp: Double(data.timestamp), data: model)
     }
 }
 
 extension LMSensorManager {
     
-    func sensorDataRequest(with timestamp: Double = Date.currentTimeSince1970(), sensor: SensorType, dataModel: SensorDataModel) -> SensorData.Request {
-        return SensorData.Request(timestamp: timestamp, sensor: sensor, data: dataModel)
+    func sensorDataRequest(with timestamp: Double = Date.currentTimeSince1970(), sensor: SensorType, dataModel: SensorDataModel) -> SensorDataInfo {
+        
+        return SensorDataInfo(sensor: sensor, timestamp: timestamp, data: dataModel)
     }
     
-    func fetchHealthKitQuantityData() -> [SensorData.Request]? {
+    func fetchHealthKitQuantityData() -> [SensorDataInfo]? {
         guard let arrData = sensor_healthKit?.latestQuantityData() else {
             LMLogsManager.shared.addLogs(level: .warning, logs: Logs.Messages.hkquantity_null)
             return nil
         }
-        var arrayRequest = [SensorData.Request]()
+        var arrayData = [SensorDataInfo]()
         //get latest Weight
         if let data = latestData(for: HKQuantityTypeIdentifier.bodyMass , in: arrData) {
             var model = SensorDataModel()
             model.unit = data.unit
             model.value = data.value
             
-            arrayRequest.append(sensorDataRequest(with: Double(data.timestamp), sensor: SensorType.lamp_weight, dataModel: model))
+            arrayData.append(SensorDataInfo(sensor: SensorType.lamp_weight, timestamp: Double(data.timestamp), data: model))
         } else {
             LMLogsManager.shared.addLogs(level: .warning, logs: Logs.Messages.weight_null)
         }
@@ -527,7 +530,7 @@ extension LMSensorManager {
             model.unit = data.unit
             model.value = data.value
             
-            arrayRequest.append(sensorDataRequest(with: Double(data.timestamp), sensor: SensorType.lamp_height, dataModel: model))
+            arrayData.append(SensorDataInfo(sensor: SensorType.lamp_height, timestamp: Double(data.timestamp), data: model))
         } else {
             LMLogsManager.shared.addLogs(level: .warning, logs: Logs.Messages.height_null)
         }
@@ -538,7 +541,7 @@ extension LMSensorManager {
             model.bp_diastolic = Int(dataDiastolic.value)
             model.bp_systolic = Int(dataSystolic.value)
             
-            arrayRequest.append(sensorDataRequest(with: Double(dataDiastolic.timestamp), sensor: SensorType.lamp_blood_pressure, dataModel: model))
+            arrayData.append(SensorDataInfo(sensor: SensorType.lamp_blood_pressure, timestamp: Double(dataDiastolic.timestamp), data: model))
         } else {
             LMLogsManager.shared.addLogs(level: .warning, logs: Logs.Messages.blood_pessure_null)
         }
@@ -548,7 +551,7 @@ extension LMSensorManager {
             model.unit = data.unit
             model.value = data.value
             
-            arrayRequest.append(sensorDataRequest(with: Double(data.timestamp), sensor: SensorType.lamp_respiratory_rate, dataModel: model))
+            arrayData.append(SensorDataInfo(sensor: SensorType.lamp_respiratory_rate, timestamp: Double(data.timestamp), data: model))
         } else {
             LMLogsManager.shared.addLogs(level: .warning, logs: Logs.Messages.respiratory_rate_null)
         }
@@ -558,11 +561,11 @@ extension LMSensorManager {
             model.unit = data.unit
             model.value = data.value
             
-            arrayRequest.append(sensorDataRequest(with: Double(data.timestamp), sensor: SensorType.lamp_heart_rate, dataModel: model))
+            arrayData.append(SensorDataInfo(sensor: SensorType.lamp_heart_rate, timestamp: Double(data.timestamp), data: model))
         } else {
             LMLogsManager.shared.addLogs(level: .warning, logs: Logs.Messages.heart_rate_null)
         }
-        return arrayRequest
+        return arrayData
     }
     
     func latestData(for hkIdentifier: HKCategoryTypeIdentifier, in array: [LMHealthKitSensorData]) -> LMHealthKitSensorData? {

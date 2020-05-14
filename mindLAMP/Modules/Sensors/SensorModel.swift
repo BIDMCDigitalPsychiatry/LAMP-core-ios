@@ -9,17 +9,31 @@ import Foundation
 
 enum SensorData {
 
-    struct Request: Encodable {
-        var timestamp: Double
-        var sensor: SensorType
-        var data: SensorDataModel
+    struct Request {
+        var sensorEvents: [SensorDataInfo]
     }
     
     struct Response: Decodable {
     }
+
+}
+
+extension SensorData.Request: Encodable {
+
+    func encode(to encoder: Encoder) throws {
+        var container = encoder.singleValueContainer()
+        try container.encode(sensorEvents)
+    }
+}
+
+struct SensorDataInfo: Encodable {
+    var sensor: SensorType
+    var timestamp: Double
+    var data: SensorDataModel
 }
 
 struct SensorDataModel: Encodable {
+    
     //Triaxial Values for: Accelerometer, Magnetometer, Gyroscope
     var x: Double?
     var y: Double?
