@@ -287,7 +287,7 @@ extension LMSensorManager {
         model.y = data.y
         model.z = data.z
         
-        return SensorDataInfo(sensor: SensorType.lamp_accelerometer, timestamp: Double(data.timestamp), data: model)
+        return SensorDataInfo(sensor: SensorType.lamp_accelerometer.jsonKey, timestamp: Double(data.timestamp), data: model)
     }
     
     private func fetchAccelerometerMotionData() -> SensorDataInfo? {
@@ -336,7 +336,7 @@ extension LMSensorManager {
             LMLogsManager.shared.addLogs(level: .warning, logs: Logs.Messages.magnetometer_null)
         }
         
-        return SensorDataInfo(sensor: SensorType.lamp_accelerometer_motion, timestamp: timeStamp, data: model)
+        return SensorDataInfo(sensor: SensorType.lamp_accelerometer_motion.jsonKey, timestamp: timeStamp, data: model)
     }
     
     private func fetchGyroscopeData() -> SensorDataInfo? {
@@ -349,7 +349,7 @@ extension LMSensorManager {
         model.y = data.y
         model.z = data.z
 
-        return SensorDataInfo(sensor: SensorType.lamp_gyroscope, timestamp: Double(data.timestamp), data: model)
+        return SensorDataInfo(sensor: SensorType.lamp_gyroscope.jsonKey, timestamp: Double(data.timestamp), data: model)
     }
     
     private func fetchMagnetometerData() -> SensorDataInfo? {
@@ -362,7 +362,7 @@ extension LMSensorManager {
         model.y = data.y
         model.z = data.z
 
-        return SensorDataInfo(sensor: SensorType.lamp_magnetometer, timestamp: Double(data.timestamp), data: model)
+        return SensorDataInfo(sensor: SensorType.lamp_magnetometer.jsonKey, timestamp: Double(data.timestamp), data: model)
     }
         
     private func fetchSleepData() -> SensorDataInfo? {
@@ -374,7 +374,7 @@ extension LMSensorManager {
         model.startDate = data.startDate
         model.endDate = data.endDate
 
-        return SensorDataInfo(sensor: SensorType.lamp_sleep, timestamp: Double(data.timestamp), data: model)
+        return SensorDataInfo(sensor: SensorType.lamp_sleep.jsonKey, timestamp: Double(data.timestamp), data: model)
     }
     
     private func fetchStepsData() -> SensorDataInfo? {
@@ -385,7 +385,7 @@ extension LMSensorManager {
         var model = SensorDataModel()
         model.steps = data.numberOfSteps
 
-        return SensorDataInfo(sensor: SensorType.lamp_steps, timestamp: Double(data.timestamp), data: model)
+        return SensorDataInfo(sensor: SensorType.lamp_steps.jsonKey, timestamp: Double(data.timestamp), data: model)
     }
     
     private func fetchFlightsData() -> SensorDataInfo? {
@@ -396,7 +396,7 @@ extension LMSensorManager {
         var model = SensorDataModel()
         model.flights_climbed = data.floorsAscended
 
-        return SensorDataInfo(sensor: SensorType.lamp_flights, timestamp: Double(data.timestamp), data: model)
+        return SensorDataInfo(sensor: SensorType.lamp_flights.jsonKey, timestamp: Double(data.timestamp), data: model)
     }
     
     private func fetchDistanceData() -> SensorDataInfo? {
@@ -407,7 +407,7 @@ extension LMSensorManager {
         var model = SensorDataModel()
         model.distance = data.distance
 
-        return SensorDataInfo(sensor: SensorType.lamp_distance, timestamp: Double(data.timestamp), data: model)
+        return SensorDataInfo(sensor: SensorType.lamp_distance.jsonKey, timestamp: Double(data.timestamp), data: model)
     }
     
 //    private func fetchGPSContextualData() -> SensorDataModel? {
@@ -432,7 +432,7 @@ extension LMSensorManager {
         model.latitude = data.latitude
         model.altitude = data.altitude
 
-        return SensorDataInfo(sensor: SensorType.lamp_gps, timestamp: Double(data.timestamp), data: model)
+        return SensorDataInfo(sensor: SensorType.lamp_gps.jsonKey, timestamp: Double(data.timestamp), data: model)
     }
     
     private func fetchBluetoothData() -> SensorDataInfo? {
@@ -445,7 +445,7 @@ extension LMSensorManager {
         model.bt_name = data.name
         model.bt_rssi = data.rssi
 
-        return SensorDataInfo(sensor: SensorType.lamp_bluetooth, timestamp: data.timestamp, data: model)
+        return SensorDataInfo(sensor: SensorType.lamp_bluetooth.jsonKey, timestamp: data.timestamp, data: model)
     }
     
     private func fetchWiFiData() -> SensorDataInfo? {
@@ -457,7 +457,7 @@ extension LMSensorManager {
         model.bssid = data.bssid
         model.ssid = data.ssid
 
-        return SensorDataInfo(sensor: SensorType.lamp_wifi, timestamp: Double(data.timestamp), data: model)
+        return SensorDataInfo(sensor: SensorType.lamp_wifi.jsonKey, timestamp: Double(data.timestamp), data: model)
     }
     
     private func fetchScreenStateData() -> SensorDataInfo? {
@@ -468,7 +468,7 @@ extension LMSensorManager {
         var model = SensorDataModel()
         model.state = data.screenState.rawValue
 
-        return SensorDataInfo(sensor: SensorType.lamp_screen_state, timestamp: data.timestamp, data: model)
+        return SensorDataInfo(sensor: SensorType.lamp_screen_state.jsonKey, timestamp: data.timestamp, data: model)
     }
     
     private func fetchCallsData() -> SensorDataInfo? {
@@ -481,7 +481,7 @@ extension LMSensorManager {
         model.call_duration = Double(data.duration)
         model.call_trace = data.trace
 
-        return SensorDataInfo(sensor: SensorType.lamp_calls, timestamp: Double(data.timestamp), data: model)
+        return SensorDataInfo(sensor: SensorType.lamp_calls.jsonKey, timestamp: Double(data.timestamp), data: model)
     }
     
     private func fetchWorkoutSegmentData() -> SensorDataInfo? {
@@ -497,7 +497,7 @@ extension LMSensorManager {
         model.startDate = data.startDate
         model.endDate = data.endDate
         
-        return SensorDataInfo(sensor: SensorType.lamp_segment, timestamp: Double(data.timestamp), data: model)
+        return SensorDataInfo(sensor: SensorType.lamp_segment.jsonKey, timestamp: Double(data.timestamp), data: model)
     }
 }
 
@@ -505,7 +505,7 @@ extension LMSensorManager {
     
     func sensorDataRequest(with timestamp: Double = Date.currentTimeSince1970(), sensor: SensorType, dataModel: SensorDataModel) -> SensorDataInfo {
         
-        return SensorDataInfo(sensor: sensor, timestamp: timestamp, data: dataModel)
+        return SensorDataInfo(sensor: sensor.jsonKey, timestamp: timestamp, data: dataModel)
     }
     
     func fetchHealthKitQuantityData() -> [SensorDataInfo]? {
@@ -514,56 +514,37 @@ extension LMSensorManager {
             return nil
         }
         var arrayData = [SensorDataInfo]()
-        //get latest Weight
-        if let data = latestData(for: HKQuantityTypeIdentifier.bodyMass , in: arrData) {
-            var model = SensorDataModel()
-            model.unit = data.unit
-            model.value = data.value
-            
-            arrayData.append(SensorDataInfo(sensor: SensorType.lamp_weight, timestamp: Double(data.timestamp), data: model))
-        } else {
-            LMLogsManager.shared.addLogs(level: .warning, logs: Logs.Messages.weight_null)
-        }
-        //get latest Height
-        if let data = latestData(for: HKQuantityTypeIdentifier.height, in: arrData) {
-            var model = SensorDataModel()
-            model.unit = data.unit
-            model.value = data.value
-            
-            arrayData.append(SensorDataInfo(sensor: SensorType.lamp_height, timestamp: Double(data.timestamp), data: model))
-        } else {
-            LMLogsManager.shared.addLogs(level: .warning, logs: Logs.Messages.height_null)
-        }
-        //get latest BloodPressure
-        if let dataDiastolic = latestData(for: HKQuantityTypeIdentifier.bloodPressureDiastolic, in: arrData), let dataSystolic = latestData(for: HKQuantityTypeIdentifier.bloodPressureSystolic, in: arrData) {
-            var model = SensorDataModel()
-            model.unit = dataDiastolic.unit
-            model.bp_diastolic = Int(dataDiastolic.value)
-            model.bp_systolic = Int(dataSystolic.value)
-            
-            arrayData.append(SensorDataInfo(sensor: SensorType.lamp_blood_pressure, timestamp: Double(dataDiastolic.timestamp), data: model))
-        } else {
-            LMLogsManager.shared.addLogs(level: .warning, logs: Logs.Messages.blood_pessure_null)
-        }
-        //get latest Respiratory rate
-        if let data = latestData(for: HKQuantityTypeIdentifier.respiratoryRate, in: arrData) {
-            var model = SensorDataModel()
-            model.unit = data.unit
-            model.value = data.value
-            
-            arrayData.append(SensorDataInfo(sensor: SensorType.lamp_respiratory_rate, timestamp: Double(data.timestamp), data: model))
-        } else {
-            LMLogsManager.shared.addLogs(level: .warning, logs: Logs.Messages.respiratory_rate_null)
-        }
-        //get latest Heart rate
-        if let data = latestData(for: HKQuantityTypeIdentifier.heartRate, in: arrData) {
-            var model = SensorDataModel()
-            model.unit = data.unit
-            model.value = data.value
-            
-            arrayData.append(SensorDataInfo(sensor: SensorType.lamp_heart_rate, timestamp: Double(data.timestamp), data: model))
-        } else {
-            LMLogsManager.shared.addLogs(level: .warning, logs: Logs.Messages.heart_rate_null)
+        
+        guard let quantityTypes: [HKQuantityTypeIdentifier] = sensor_healthKit?.healthQuantityTypes.map( {HKQuantityTypeIdentifier(rawValue: $0.identifier)} ) else { return nil }
+        for quantityType in quantityTypes {
+            switch quantityType {
+                
+            case .bloodPressureSystolic:
+                if let dataDiastolic = latestData(for: HKQuantityTypeIdentifier.bloodPressureDiastolic, in: arrData), let dataSystolic = latestData(for: HKQuantityTypeIdentifier.bloodPressureSystolic, in: arrData) {
+                    var model = SensorDataModel()
+                    model.unit = dataDiastolic.unit
+                    model.bp_diastolic = Int(dataDiastolic.value)
+                    model.bp_systolic = Int(dataSystolic.value)
+                    
+                    arrayData.append(SensorDataInfo(sensor: SensorType.lamp_blood_pressure.jsonKey, timestamp: Double(dataDiastolic.timestamp), data: model))
+                } else {
+                    let msg = String(format: Logs.Messages.quantityType_null, SensorType.lamp_blood_pressure.jsonKey)
+                    LMLogsManager.shared.addLogs(level: .warning, logs: msg)
+                }
+            case .bloodPressureDiastolic:
+                ()//handled with Systolic
+            default://bodyMass, height, respiratoryRate, heartRate
+                if let data = latestData(for: quantityType, in: arrData) {
+                    var model = SensorDataModel()
+                    model.unit = data.unit
+                    model.value = data.value
+                    
+                    arrayData.append(SensorDataInfo(sensor: quantityType.jsonKey, timestamp: Double(data.timestamp), data: model))
+                } else {
+                    let msg = String(format: Logs.Messages.quantityType_null, quantityType.jsonKey)
+                    LMLogsManager.shared.addLogs(level: .warning, logs: msg)
+                }
+            }
         }
         return arrayData
     }

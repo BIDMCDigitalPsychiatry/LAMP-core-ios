@@ -27,7 +27,7 @@ extension SensorData.Request: Encodable {
 }
 
 struct SensorDataInfo: Encodable {
-    var sensor: SensorType
+    var sensor: String
     var timestamp: Double
     var data: SensorDataModel
 }

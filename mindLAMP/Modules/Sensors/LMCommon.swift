@@ -6,9 +6,44 @@
 //
 
 import Foundation
+import HealthKit
+
+protocol LampDataKeysProtocol {
+    var jsonKey: String {get}
+}
+//extension LampDataKeysProtocol {
+//    public func encode(to encoder: Encoder) throws {
+//        var container = encoder.singleValueContainer()
+//        try container.encode(jsonKey)
+//    }
+//}
+
+extension HKQuantityTypeIdentifier: LampDataKeysProtocol {
+    
+    var jsonKey: String {
+        switch self {
+            
+        case .bloodPressureSystolic:
+            return "lamp.blood_pressure"
+        case .bloodPressureDiastolic:
+            return "lamp.blood_pressure"
+        case .heartRate:
+            return "lamp.heart_rate"
+        case .height:
+            return "lamp.height"
+        case .respiratoryRate:
+            return "lamp.respiratory_rate"
+        case .bodyMass:
+            return "lamp.weight"
+        default:
+            printDebug("vvvv" + self.rawValue)
+            return self.rawValue
+        }
+    }
+}
 
 
-enum SensorType {
+enum SensorType: LampDataKeysProtocol {
 
     case lamp_accelerometer
     case lamp_accelerometer_motion
@@ -80,12 +115,5 @@ enum SensorType {
         case .lamp_wifi:
             return "lamp.wifi"
         }
-    }
-}
-
-extension SensorType: Encodable {
-    public func encode(to encoder: Encoder) throws {
-        var container = encoder.singleValueContainer()
-        try container.encode(jsonKey)
     }
 }

@@ -38,6 +38,19 @@ class LMHealthKitSensor: NSObject {
     }
     
     func stop() {}
+    
+    //when ever add new data type, then handle the same in fetchHealthKitQuantityData(), extension HKQuantityTypeIdentifier: LampDataKeysProtocol
+    lazy var healthQuantityTypes: [HKSampleType] = {
+        
+        var quantityTypes = [HKSampleType]()
+        let identifiers: [HKQuantityTypeIdentifier] = [.heartRate, .bodyMass, .height, .bloodPressureDiastolic, .bloodPressureSystolic, .respiratoryRate, .bodyMassIndex, .bodyFatPercentage, .leanBodyMass, .waistCircumference]
+        for identifier in identifiers {
+            if let quantityType = HKQuantityType.quantityType(forIdentifier: identifier) {
+                quantityTypes.append(quantityType)
+            }
+        }
+        return quantityTypes
+    }()
 }
 
 extension LMHealthKitSensor {
@@ -59,7 +72,7 @@ extension LMHealthKitSensor {
     private func lampHealthKitTypes() -> [HKSampleType] {
         var arrSampleTypes = [HKSampleType]()
 
-        arrSampleTypes.append(contentsOf: lampHKQuantityTypes())
+        arrSampleTypes.append(contentsOf: healthQuantityTypes)
         arrSampleTypes.append(contentsOf: lampHKCategoryTypes())
 
         let workout = HKWorkoutType.workoutType()
@@ -67,35 +80,7 @@ extension LMHealthKitSensor {
 
         return arrSampleTypes
     }
-    
-    private func lampHKQuantityTypes() -> [HKSampleType] {
-        
-        var arrTypes = [HKSampleType]()
-        if let heartRate = HKQuantityType.quantityType(forIdentifier:.heartRate) {
-            arrTypes.append(heartRate)
-        }
-        if let bodyMass = HKQuantityType.quantityType(forIdentifier:.bodyMass) {
-            arrTypes.append(bodyMass)
-        }
-        if let height = HKQuantityType.quantityType(forIdentifier:.height) {
-            arrTypes.append(height)
-        }
-        if let bloodpressure_diastolic = HKQuantityType.quantityType(forIdentifier:.bloodPressureDiastolic) {
-            arrTypes.append(bloodpressure_diastolic)
-        }
-        if let bloodpressure_systolic = HKQuantityType.quantityType(forIdentifier:.bloodPressureSystolic) {
-            arrTypes.append(bloodpressure_systolic)
-        }
-        if let respiratory_rate = HKQuantityType.quantityType(forIdentifier:.respiratoryRate) {
-            arrTypes.append(respiratory_rate)
-        }
-        //adding other types
-        if let bodyMassIndex = HKQuantityType.quantityType(forIdentifier:.bodyMassIndex) {
-            arrTypes.append(bodyMassIndex)
-        }
-        return arrTypes
-    }
-    
+   
     private func lampHKCategoryTypes() -> [HKSampleType] {
         var arrTypes = [HKSampleType]()
         if let sleep = HKCategoryType.categoryType(forIdentifier: .sleepAnalysis) {
@@ -159,7 +144,7 @@ extension LMHealthKitSensor {
     public func fetchHealthData() {
         clearDataArrays()
         
-        let quantityTypes = lampHKQuantityTypes()
+        let quantityTypes = healthQuantityTypes
         for type in quantityTypes {
             healthKitData(for: type, from: lastRecordedDate(for: type))
         }
@@ -255,7 +240,7 @@ extension LMHealthKitSensor {
             }
             arrData.append(data)
         }
-        if lampHKQuantityTypes().contains(type) {
+        if healthQuantityTypes.contains(type) {
             arrQuantityData.append(contentsOf: arrData)
         }
     }

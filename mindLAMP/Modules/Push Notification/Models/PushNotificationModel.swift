@@ -117,7 +117,7 @@ enum PushNotification {
 
     struct UpdateTokenRequest: Encodable {
         var timestamp: Double
-        var sensor = SensorType.lamp_analytics
+        var sensor = SensorType.lamp_analytics.jsonKey
         var data: DeviceInfoWithToken
         
         init(deviceInfoWithToken: DeviceInfoWithToken) {
