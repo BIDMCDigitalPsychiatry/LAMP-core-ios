@@ -97,15 +97,15 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
         }
         
         //show device token for testing purpose
-        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 2) {
-            let appdelegate = UIApplication.shared.delegate as! AppDelegate
-            let alert = UIAlertController(title: "mindLAMP 2 - Token", message: deviceTokenStr, preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "Copy", style: .destructive, handler: { action in
-                  let pasteboard = UIPasteboard.general
-                  pasteboard.string = deviceTokenStr
-            }))
-            appdelegate.window?.rootViewController?.present(alert, animated: true, completion: nil)
-        }
+//        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 2) {
+//            let appdelegate = UIApplication.shared.delegate as! AppDelegate
+//            let alert = UIAlertController(title: "mindLAMP 2 - Token", message: deviceTokenStr, preferredStyle: .alert)
+//            alert.addAction(UIAlertAction(title: "Copy", style: .destructive, handler: { action in
+//                  let pasteboard = UIPasteboard.general
+//                  pasteboard.string = deviceTokenStr
+//            }))
+//            appdelegate.window?.rootViewController?.present(alert, animated: true, completion: nil)
+//        }
     }
     
     func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
