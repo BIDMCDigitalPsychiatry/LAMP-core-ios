@@ -46,8 +46,9 @@ struct SensorDataModel: Encodable {
     //Health
     var unit: String?
     var value: Double?
-    var bp_diastolic: Int?
-    var bp_systolic: Int?
+    var valueString: String?
+    var bp_diastolic: Double?
+    var bp_systolic: Double?
     var workout_type: String?
     var workout_durtion: Double?
     //Location
@@ -62,11 +63,11 @@ struct SensorDataModel: Encodable {
     var bssid: String?
     var ssid: String?
     //Pedometer
-    var steps: Int?
-    var flights_climbed: Int?
-    var distance: Double?
+    //var steps: Int?
+    //var flights_climbed: Int?
+    //var distance: Double?
     //Screen State
-    var state: Int?
+    //var state: Int?
     //Calls
     var call_duration: Double?
     var call_type: Int?
@@ -106,6 +107,22 @@ enum ScreenState: Int {
     case screen_off
     case screen_locked
     case screen_unlocked
+}
+
+extension ScreenState: TextPresentation {
+    var stringValue: String? {
+    switch self {
+    
+    case .screen_on:
+        return "Screen On"
+    case .screen_off:
+        return "Screen Off"
+    case .screen_locked:
+        return "Screen Locked"
+    case .screen_unlocked:
+        return "Screen Unlocked"
+        }
+    }
 }
 
 struct ScreenStateData {

@@ -449,7 +449,7 @@ extension LocationsSensor: CLLocationManagerDelegate {
             let data = LocationsData()
             if let uwEventTime = eventTime {
                 data.timestamp = Int64(uwEventTime.timeIntervalSince1970 * 1000)
-            }else{
+            } else {
                 data.timestamp = Int64(location.timestamp.timeIntervalSince1970 * 1000)
             }
             data.altitude  = location.altitude
@@ -497,7 +497,7 @@ extension LocationsSensor: CLLocationManagerDelegate {
                     let placemark = marks[0]
                     let address = "\(placemark.subThoroughfare ?? ""), \(placemark.thoroughfare ?? ""), \(placemark.locality ?? ""), \(placemark.subLocality ?? ""), \(placemark.administrativeArea ?? ""), \(placemark.postalCode ?? ""), \(placemark.country ?? "")"
                     data.address = address
-                    if let name = placemark.name{
+                    if let name = placemark.name {
                         data.name = name
                     }
                 }
@@ -592,6 +592,8 @@ extension LocationsSensor: CLLocationManagerDelegate {
     }
     
     public func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+        let msg = String(format: Logs.Messages.location_error, error.localizedDescription)
+        LMLogsManager.shared.addLogs(level: .warning, logs: msg)
         if self.CONFIG.debug { print(error) }
     }
     

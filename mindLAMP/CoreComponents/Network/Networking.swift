@@ -76,7 +76,7 @@ extension Networking: NetworkingAPI {
         }
         var urlRequest = URLRequest(url: requestURL)
         urlRequest.httpMethod = method.getTypeString()
-        printToFile("Request URL...: \(urlRequest)")
+        printDebug("Request URL...: \(urlRequest)")
         //set header fields according to content type
         urlRequest.allHTTPHeaderFields = request.getRequestHeaders()
         urlRequest.timeoutInterval = 30
@@ -96,14 +96,14 @@ extension Networking: NetworkingAPI {
             } else {
                 if let data = request.jsonData {
                     urlRequest.httpBody = data
-                    printToFile("Parameter Json: \(String(describing: String(data: data, encoding: String.Encoding.utf8)))")
+                    printDebug("body Json: \(String(describing: String(data: data, encoding: String.Encoding.utf8)))")
                 } else {
                     //to support JSON request
                     if let jsonBody = request.jsonBody {
                         do {
                             let jsonData = try JSONSerialization.data(withJSONObject: jsonBody, options: JSONSerialization.WritingOptions.prettyPrinted)
                             urlRequest.httpBody = jsonData
-                            printToFile("Parameter Json: \(String(describing: String(data: jsonData, encoding: String.Encoding.utf8)))")
+                            printDebug("Body Json: \(String(describing: String(data: jsonData, encoding: String.Encoding.utf8)))")
                         } catch {
                             Networking.setNetWorkIndicatorVisible(false)
                             callback(.failure(LMError(.definedError(.jsonParsingFailed))))

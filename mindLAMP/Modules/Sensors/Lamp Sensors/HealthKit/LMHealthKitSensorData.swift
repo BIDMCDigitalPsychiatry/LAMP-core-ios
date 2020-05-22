@@ -9,13 +9,15 @@ import Foundation
 
 class LMHealthKitSensorData: AwareObject {
     
-    @objc dynamic public var device: [String: Any]?
-    @objc dynamic public var startDate: Double = 0.0
-    @objc dynamic public var endDate: Double = 0.0
-    @objc dynamic public var metadata: [String: Any]?
-    @objc dynamic public var type: String = ""  // eg: HKQuantityTypeIdentifier
-    @objc dynamic public var value: Double = 0  // e.g., 60
-    @objc dynamic public var unit: String = "" // e.g., count/min
+    public var device: [String: Any]?
+    public var startDate: Double?
+    public var endDate: Double?
+    public var metadata: [String: Any]?
+    public var type: String = ""  // eg: HKQuantityTypeIdentifier
+    public var value: Double?  // e.g., 60
+    public var valueText: String?  // e.g., 60
+    public var unit: String? // e.g., count/min
+    public var lampIdentifier: String = ""
 
     public override func toDictionary() -> Dictionary<String, Any> {
         var dict = super.toDictionary()
@@ -25,7 +27,9 @@ class LMHealthKitSensorData: AwareObject {
         dict["metadata"] = metadata
         dict["type"] = type
         dict["value"] = value
+        dict["valueText"] = valueText
         dict["unit"] = unit
+        dict["lampIdentifier"] = lampIdentifier
         return dict
     }
 }
