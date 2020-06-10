@@ -11,7 +11,7 @@
 	<key>provisioningProfiles</key>
 	<dict>
 		<key>digital.lamp.mindlamp</key>
-		<string>mindlamp 2</string>
+		<string>mindLAMP 2</string>
 		<key>digital.lamp.mindlamp.CustomNotification</key>
 		<string>mindLAMP 2 Notification Extension AppStore</string>
 		<key>digital.lamp.mindlamp.NotificationService</key>
