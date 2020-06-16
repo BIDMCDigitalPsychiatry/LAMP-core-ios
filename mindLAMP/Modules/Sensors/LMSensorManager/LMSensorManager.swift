@@ -237,12 +237,17 @@ extension LMSensorManager {
         if let data = fetchGPSData() {
             arraySensorData.append(data)
         }
+        printToFile("fetch bluetooth")
         if let data = fetchBluetoothData() {
             arraySensorData.append(data)
         }
+        printToFile("fetch screenstate")
         if let data = fetchScreenStateData() {
             arraySensorData.append(data)
+        } else {
+            printToFile("no screen data")
         }
+        printToFile("fetch calls")
         if let data = fetchCallsData() {
             arraySensorData.append(data)
         }
@@ -467,15 +472,37 @@ extension LMSensorManager {
     }
     
     private func fetchScreenStateData() -> SensorDataInfo? {
-        guard let data = latestScreenStateData else {
-            //LMLogsManager.shared.addLogs(level: .warning, logs: Logs.Messages.screen_state_null)
-            return nil
+        
+        var data: ScreenStateData?
+        
+        let group = DispatchGroup()
+        group.enter()
+        DispatchQueue.main.async {
+            if UIApplication.shared.isProtectedDataAvailable {
+                if let sData = self.latestScreenStateData {
+                    data = sData
+                } else {
+                    data = ScreenStateData(screenState: .screen_unlocked)
+                }
+            } else {
+                data = ScreenStateData(screenState: .screen_locked)
+            }
+            printToFile("fetched sceenstate")
         }
+        group.leave()
+        group.notify(qos: .background, queue: DispatchQueue.global(), execute:{
+        printToFile("All task finished!")
+        })
+        
+        printToFile("fetched sceenstate dataUnwrapped")
+        guard let dataUnwrapped = data else { return nil }
+        
+        printToFile("fetched sceenstate no data")
         var model = SensorDataModel()
-        model.value = Double(data.screenState.rawValue)
-        model.valueString = data.screenState.stringValue
+        model.value = Double(dataUnwrapped.screenState.rawValue)
+        model.valueString = dataUnwrapped.screenState.stringValue
 
-        return SensorDataInfo(sensor: SensorType.lamp_screen_state.jsonKey, timestamp: data.timestamp, data: model)
+        return SensorDataInfo(sensor: SensorType.lamp_screen_state.jsonKey, timestamp: dataUnwrapped.timestamp, data: model)
     }
     
     private func fetchCallsData() -> SensorDataInfo? {

@@ -98,7 +98,7 @@ public class LocationsSensor: AwareSensor{
         public var sensorObserver:LocationsObserver?
         public var geoFences: String? = nil; // TODO: convert the value to CLRegion
         public var statusGps = true;
-        public var statusLocationVisit = true;
+        public var statusLocationVisit = false;
         public var statusHeading = true;
         public var frequencyGps:   Double = 180 {
             didSet{
@@ -307,33 +307,33 @@ public class LocationsSensor: AwareSensor{
     
     func startLocationServices(){
         locationManager.pausesLocationUpdatesAutomatically = false
-        locationManager.desiredAccuracy = kCLLocationAccuracyHundredMeters
+        locationManager.desiredAccuracy = kCLLocationAccuracyBestForNavigation//kCLLocationAccuracyHundredMeters
         locationManager.allowsBackgroundLocationUpdates = true
-        locationManager.distanceFilter = CONFIG.minGpsAccuracy // In meters.
+        //locationManager.distanceFilter = CONFIG.minGpsAccuracy // In meters.
         // Configure and start the service.
         if #available(iOS 11.0, *) {
             locationManager.showsBackgroundLocationIndicator = false
         }
         
-        if let uwAccuracy = CONFIG.accuracy {
-            locationManager.desiredAccuracy = uwAccuracy
-        }else{
-            if CONFIG.minGpsAccuracy == 0 {
-                locationManager.desiredAccuracy = kCLLocationAccuracyBestForNavigation;
-            } else if CONFIG.minGpsAccuracy <= 5.0 {
-                locationManager.desiredAccuracy = kCLLocationAccuracyBest;
-            } else if CONFIG.minGpsAccuracy <= 25.0 {
-                locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters;
-            } else if CONFIG.minGpsAccuracy <= 100.0 {
-                locationManager.desiredAccuracy = kCLLocationAccuracyHundredMeters;
-            } else if CONFIG.minGpsAccuracy <= 1000.0 {
-                locationManager.desiredAccuracy = kCLLocationAccuracyKilometer;
-            } else if CONFIG.minGpsAccuracy <= 3000.0 {
-                locationManager.desiredAccuracy = kCLLocationAccuracyThreeKilometers;
-            } else {
-                locationManager.desiredAccuracy = kCLLocationAccuracyThreeKilometers;
-            }
-        }
+//        if let uwAccuracy = CONFIG.accuracy {
+//            locationManager.desiredAccuracy = uwAccuracy
+//        } else {
+//            if CONFIG.minGpsAccuracy == 0 {
+//                locationManager.desiredAccuracy = kCLLocationAccuracyBestForNavigation;
+//            } else if CONFIG.minGpsAccuracy <= 5.0 {
+//                locationManager.desiredAccuracy = kCLLocationAccuracyBest;
+//            } else if CONFIG.minGpsAccuracy <= 25.0 {
+//                locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters;
+//            } else if CONFIG.minGpsAccuracy <= 100.0 {
+//                locationManager.desiredAccuracy = kCLLocationAccuracyHundredMeters;
+//            } else if CONFIG.minGpsAccuracy <= 1000.0 {
+//                locationManager.desiredAccuracy = kCLLocationAccuracyKilometer;
+//            } else if CONFIG.minGpsAccuracy <= 3000.0 {
+//                locationManager.desiredAccuracy = kCLLocationAccuracyThreeKilometers;
+//            } else {
+//                locationManager.desiredAccuracy = kCLLocationAccuracyThreeKilometers;
+//            }
+//        }
         
         if self.CONFIG.statusGps {
             locationManager.startUpdatingLocation()

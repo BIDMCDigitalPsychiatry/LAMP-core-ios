@@ -16,8 +16,8 @@ extension Notification.Name {
     
     public static let actionAwareScreenOn     = Notification.Name(ScreenSensor.ACTION_AWARE_SCREEN_ON)
     public static let actionAwareScreenOff    = Notification.Name(ScreenSensor.ACTION_AWARE_SCREEN_OFF)
-    public static let actionAwareScreenLocked = Notification.Name(ScreenSensor.ACTION_AWARE_SCREEN_LOCKED)
-    public static let actionAwareScreenUnlocked  = Notification.Name(ScreenSensor.ACTION_AWARE_SCREEN_UNLOCKED)
+    //public static let actionAwareScreenLocked = Notification.Name(ScreenSensor.ACTION_AWARE_SCREEN_LOCKED)
+    //public static let actionAwareScreenUnlocked  = Notification.Name(ScreenSensor.ACTION_AWARE_SCREEN_UNLOCKED)
     
     public static let actionAwareScreenSyncCompletion  = Notification.Name(ScreenSensor.ACTION_AWARE_SCREEN_SYNC_COMPLETION)
 }
@@ -25,8 +25,8 @@ extension Notification.Name {
 public protocol ScreenObserver{
     func onScreenOn()
     func onScreenOff()
-    func onScreenLocked()
-    func onScreenUnlocked()
+    //func onScreenLocked()
+    //func onScreenUnlocked()
     func onScreenBrightnessChanged(data:ScreenBrightnessData)
 }
 
@@ -60,12 +60,12 @@ public class ScreenSensor: AwareSensor {
     /**
      * Broadcasted event: screen is locked
      */
-    public static let ACTION_AWARE_SCREEN_LOCKED = "com.awareframework.ios.sensor.screen.ACTION_AWARE_SCREEN_LOCKED"
+    //public static let ACTION_AWARE_SCREEN_LOCKED = "com.awareframework.ios.sensor.screen.ACTION_AWARE_SCREEN_LOCKED"
     
     /**
      * Broadcasted event: screen is unlocked
      */
-    public static let ACTION_AWARE_SCREEN_UNLOCKED = "com.awareframework.ios.sensor.screen.ACTION_AWARE_SCREEN_UNLOCKED"
+    //public static let ACTION_AWARE_SCREEN_UNLOCKED = "com.awareframework.ios.sensor.screen.ACTION_AWARE_SCREEN_UNLOCKED"
     
     /**
      * NOTE: Does not support on iOS
@@ -100,12 +100,12 @@ public class ScreenSensor: AwareSensor {
     /**
      * Screen status: LOCKED = 2
      */
-    public static let STATUS_SCREEN_LOCKED = 2
+    //public static let STATUS_SCREEN_LOCKED = 2
     
     /**
      * Screen status: UNLOCKED = 3
      */
-    public static let STATUS_SCREEN_UNLOCKED = 3
+    //public static let STATUS_SCREEN_UNLOCKED = 3
     
     var screenBrigthnessObserver:NSObjectProtocol? = nil
     
@@ -148,7 +148,7 @@ public class ScreenSensor: AwareSensor {
     var LAST_SCREEN_STATE = false
     
     public override func start() {
-        setDeviceLockEventbserver()
+        //setDeviceLockEventbserver()
         self.notificationCenter.post(name: .actionAwareScreenStart, object: self)
         self.screenBrigthnessObserver = self.notificationCenter.addObserver(
             forName: UIScreen.brightnessDidChangeNotification, object: nil, queue: .main) { (notification) in
@@ -169,7 +169,7 @@ public class ScreenSensor: AwareSensor {
     }
     
     public override func stop() {
-        removeDeviceLockEventbserver()
+        //removeDeviceLockEventbserver()
         self.notificationCenter.post(name: .actionAwareScreenStop,  object: self)
         if let observer = self.screenBrigthnessObserver {
             self.notificationCenter.removeObserver(observer)
@@ -181,86 +181,86 @@ public class ScreenSensor: AwareSensor {
             self.notificationCenter.post(name: .actionAwareScreenSync, object: self)
     }
     
-    var lastEventTimestamp:Double = 0
+//    var lastEventTimestamp:Double = 0
     
-    func setDeviceLockEventbserver() {
-        CFNotificationCenterAddObserver(CFNotificationCenterGetDarwinNotifyCenter(),
-                                        Unmanaged.passUnretained(self).toOpaque(),
-                                        displayStatusChangedCallback,
-                                        "com.apple"+".springboard.lockcomplete" as CFString,
-                                        nil,
-                                        .deliverImmediately)
-        CFNotificationCenterAddObserver(CFNotificationCenterGetDarwinNotifyCenter(),
-                                        Unmanaged.passUnretained(self).toOpaque(),
-                                        displayStatusChangedCallback,
-                                        "com.apple"+".springboard.lockstate" as CFString,
-                                        nil,
-                                        .deliverImmediately)
-    }
+//    func setDeviceLockEventbserver() {
+//        CFNotificationCenterAddObserver(CFNotificationCenterGetDarwinNotifyCenter(),
+//                                        Unmanaged.passUnretained(self).toOpaque(),
+//                                        displayStatusChangedCallback,
+//                                        "com.apple"+".springboard.lockcomplete" as CFString,
+//                                        nil,
+//                                        .deliverImmediately)
+//        CFNotificationCenterAddObserver(CFNotificationCenterGetDarwinNotifyCenter(),
+//                                        Unmanaged.passUnretained(self).toOpaque(),
+//                                        displayStatusChangedCallback,
+//                                        "com.apple"+".springboard.lockstate" as CFString,
+//                                        nil,
+//                                        .deliverImmediately)
+//    }
     
-    func removeDeviceLockEventbserver(){
-        CFNotificationCenterRemoveObserver(CFNotificationCenterGetDarwinNotifyCenter(), Unmanaged.passUnretained(self).toOpaque(), nil, nil)
-    }
+//    func removeDeviceLockEventbserver(){
+//        CFNotificationCenterRemoveObserver(CFNotificationCenterGetDarwinNotifyCenter(), Unmanaged.passUnretained(self).toOpaque(), nil, nil)
+//    }
     
-    private let displayStatusChangedCallback: CFNotificationCallback = { _, cfObserver, cfName, _, _ in
-        guard let lockState = cfName?.rawValue as String? else {
-            return
-        }
-        let catcher = Unmanaged<ScreenSensor>.fromOpaque(UnsafeRawPointer(OpaquePointer(cfObserver)!)).takeUnretainedValue()
-        catcher.displayStatusChanged(lockState)
-    }
+//    private let displayStatusChangedCallback: CFNotificationCallback = { _, cfObserver, cfName, _, _ in
+//        guard let lockState = cfName?.rawValue as String? else {
+//            return
+//        }
+//        let catcher = Unmanaged<ScreenSensor>.fromOpaque(UnsafeRawPointer(OpaquePointer(cfObserver)!)).takeUnretainedValue()
+//        catcher.displayStatusChanged(lockState)
+//    }
     
-    private func displayStatusChanged(_ lockState: String) {
-        // print(Date().timeIntervalSince1970, "lockState = \(lockState)")
-        if (lockState == "com.apple."+"springboard.lockcomplete") {
-            self.screenLocked()
-        } else {
-            self.screenUnlocked()
-        }
-        self.notificationCenter.post(name: .actionAwareScreen, object: self)
-    }
+//    private func displayStatusChanged(_ lockState: String) {
+//        // print(Date().timeIntervalSince1970, "lockState = \(lockState)")
+//        if (lockState == "com.apple."+"springboard.lockcomplete") {
+//            self.screenLocked()
+//        } else {
+//            self.screenUnlocked()
+//        }
+//        self.notificationCenter.post(name: .actionAwareScreen, object: self)
+//    }
     
-    func screenLocked(){
-        let screenData = ScreenData()
-        screenData.screenStatus = ScreenSensor.STATUS_SCREEN_LOCKED
-        screenData.label = self.CONFIG.label
-        if let engine = self.dbEngine {
-            engine.save(screenData)
-        }
-        if self.CONFIG.debug { print(ScreenSensor.TAG, "locked") }
-        if let observer = self.CONFIG.sensorObserver{
-            observer.onScreenLocked()
-        }
-        self.notificationCenter.post(name: .actionAwareScreenLocked, object: self)
-        // set last event timestamp for ignore a screenUnlock event after a screenLock event
-        lastEventTimestamp = Date().timeIntervalSince1970
-        if let t = self.timer{
-            t.invalidate()
-            self.timer = nil
-        }
-    }
-    
-    func screenUnlocked(){
-        let screenData = ScreenData()
-        screenData.label = self.CONFIG.label
-        if(lastEventTimestamp + 0.1 < Date().timeIntervalSince1970){
-            screenData.screenStatus = ScreenSensor.STATUS_SCREEN_UNLOCKED
-            if let engine = self.dbEngine {
-                engine.save(screenData)
-            }
-            if self.CONFIG.debug { print(ScreenSensor.TAG, "unlocked")}
-            if let observer = self.CONFIG.sensorObserver{
-                observer.onScreenUnlocked()
-            }
-            self.notificationCenter.post(name: .actionAwareScreenUnlocked, object: self)
-            if self.timer == nil {
-                self.timer = Timer.scheduledTimer(withTimeInterval: 60.0, repeats: true, block: { (timer) in
-                    self.screenBrightnessChanged()
-                })
-                self.screenBrightnessChanged()
-            }
-        }
-    }
+//    func screenLocked(){
+//        let screenData = ScreenData()
+//        screenData.screenStatus = ScreenSensor.STATUS_SCREEN_LOCKED
+//        screenData.label = self.CONFIG.label
+//        if let engine = self.dbEngine {
+//            engine.save(screenData)
+//        }
+//        if self.CONFIG.debug { print(ScreenSensor.TAG, "locked") }
+//        if let observer = self.CONFIG.sensorObserver{
+//            observer.onScreenLocked()
+//        }
+//        self.notificationCenter.post(name: .actionAwareScreenLocked, object: self)
+//        // set last event timestamp for ignore a screenUnlock event after a screenLock event
+//        lastEventTimestamp = Date().timeIntervalSince1970
+//        if let t = self.timer{
+//            t.invalidate()
+//            self.timer = nil
+//        }
+//    }
+//
+//    func screenUnlocked(){
+//        let screenData = ScreenData()
+//        screenData.label = self.CONFIG.label
+//        if(lastEventTimestamp + 0.1 < Date().timeIntervalSince1970){
+//            screenData.screenStatus = ScreenSensor.STATUS_SCREEN_UNLOCKED
+//            if let engine = self.dbEngine {
+//                engine.save(screenData)
+//            }
+//            if self.CONFIG.debug { print(ScreenSensor.TAG, "unlocked")}
+//            if let observer = self.CONFIG.sensorObserver{
+//                observer.onScreenUnlocked()
+//            }
+//            self.notificationCenter.post(name: .actionAwareScreenUnlocked, object: self)
+//            if self.timer == nil {
+//                self.timer = Timer.scheduledTimer(withTimeInterval: 60.0, repeats: true, block: { (timer) in
+//                    self.screenBrightnessChanged()
+//                })
+//                self.screenBrightnessChanged()
+//            }
+//        }
+//    }
     
     func screenOn(){
         let screenData = ScreenData()
@@ -309,7 +309,7 @@ public class ScreenSensor: AwareSensor {
         }
     }
     
-    public override func set(label:String){
+    public override func set(label:String) {
         self.CONFIG.label = label
         self.notificationCenter.post(name: .actionAwareScreenSetLabel, object: self, userInfo: [ScreenSensor.EXTRA_LABEL:label])
     }
