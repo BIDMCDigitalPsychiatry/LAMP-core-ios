@@ -10,13 +10,13 @@
 		5F34363324210B8A0097EC2F /* LMLogsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F34363224210B8A0097EC2F /* LMLogsManager.swift */; };
 		5F3D223C241A0F0600899DD0 /* LMBluetoothSensor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F3D223B241A0F0600899DD0 /* LMBluetoothSensor.swift */; };
 		5F763011242386AA00B2DD03 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 5F763010242386AA00B2DD03 /* Localizable.strings */; };
-		5F82D54E24122EFD0040AA41 /* AwareObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F82D53D24122EFD0040AA41 /* AwareObject.swift */; };
+		5F82D54E24122EFD0040AA41 /* LampSensorCoreObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F82D53D24122EFD0040AA41 /* LampSensorCoreObject.swift */; };
 		5F82D54F24122EFD0040AA41 /* AwareNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F82D53E24122EFD0040AA41 /* AwareNotification.swift */; };
 		5F82D55024122EFD0040AA41 /* Engine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F82D53F24122EFD0040AA41 /* Engine.swift */; };
 		5F82D55124122EFD0040AA41 /* DbSyncConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F82D54024122EFD0040AA41 /* DbSyncConfig.swift */; };
-		5F82D55224122EFD0040AA41 /* AwareUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F82D54124122EFD0040AA41 /* AwareUtils.swift */; };
+		5F82D55224122EFD0040AA41 /* LampSensorCoreUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F82D54124122EFD0040AA41 /* LampSensorCoreUtils.swift */; };
 		5F82D55324122EFD0040AA41 /* SensorManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F82D54224122EFD0040AA41 /* SensorManager.swift */; };
-		5F82D55424122EFD0040AA41 /* AwareSensor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F82D54324122EFD0040AA41 /* AwareSensor.swift */; };
+		5F82D55424122EFD0040AA41 /* LampSensorCore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F82D54324122EFD0040AA41 /* LampSensorCore.swift */; };
 		5F82D55524122EFD0040AA41 /* SensorConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F82D54424122EFD0040AA41 /* SensorConfig.swift */; };
 		5F82D55624122EFD0040AA41 /* AccelerometerData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F82D54624122EFD0040AA41 /* AccelerometerData.swift */; };
 		5F82D55724122EFD0040AA41 /* AccelerometerSensor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F82D54724122EFD0040AA41 /* AccelerometerSensor.swift */; };
@@ -141,13 +141,13 @@
 		5F34363224210B8A0097EC2F /* LMLogsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LMLogsManager.swift; sourceTree = "<group>"; };
 		5F3D223B241A0F0600899DD0 /* LMBluetoothSensor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LMBluetoothSensor.swift; sourceTree = "<group>"; };
 		5F763010242386AA00B2DD03 /* Localizable.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
-		5F82D53D24122EFD0040AA41 /* AwareObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AwareObject.swift; sourceTree = "<group>"; };
+		5F82D53D24122EFD0040AA41 /* LampSensorCoreObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LampSensorCoreObject.swift; sourceTree = "<group>"; };
 		5F82D53E24122EFD0040AA41 /* AwareNotification.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AwareNotification.swift; sourceTree = "<group>"; };
 		5F82D53F24122EFD0040AA41 /* Engine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Engine.swift; sourceTree = "<group>"; };
 		5F82D54024122EFD0040AA41 /* DbSyncConfig.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DbSyncConfig.swift; sourceTree = "<group>"; };
-		5F82D54124122EFD0040AA41 /* AwareUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AwareUtils.swift; sourceTree = "<group>"; };
+		5F82D54124122EFD0040AA41 /* LampSensorCoreUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LampSensorCoreUtils.swift; sourceTree = "<group>"; };
 		5F82D54224122EFD0040AA41 /* SensorManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SensorManager.swift; sourceTree = "<group>"; };
-		5F82D54324122EFD0040AA41 /* AwareSensor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AwareSensor.swift; sourceTree = "<group>"; };
+		5F82D54324122EFD0040AA41 /* LampSensorCore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LampSensorCore.swift; sourceTree = "<group>"; };
 		5F82D54424122EFD0040AA41 /* SensorConfig.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SensorConfig.swift; sourceTree = "<group>"; };
 		5F82D54624122EFD0040AA41 /* AccelerometerData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccelerometerData.swift; sourceTree = "<group>"; };
 		5F82D54724122EFD0040AA41 /* AccelerometerSensor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccelerometerSensor.swift; sourceTree = "<group>"; };
@@ -298,13 +298,13 @@
 		5F82D53C24122EFD0040AA41 /* Core */ = {
 			isa = PBXGroup;
 			children = (
-				5F82D53D24122EFD0040AA41 /* AwareObject.swift */,
+				5F82D53D24122EFD0040AA41 /* LampSensorCoreObject.swift */,
 				5F82D53E24122EFD0040AA41 /* AwareNotification.swift */,
 				5F82D53F24122EFD0040AA41 /* Engine.swift */,
 				5F82D54024122EFD0040AA41 /* DbSyncConfig.swift */,
-				5F82D54124122EFD0040AA41 /* AwareUtils.swift */,
+				5F82D54124122EFD0040AA41 /* LampSensorCoreUtils.swift */,
 				5F82D54224122EFD0040AA41 /* SensorManager.swift */,
-				5F82D54324122EFD0040AA41 /* AwareSensor.swift */,
+				5F82D54324122EFD0040AA41 /* LampSensorCore.swift */,
 				5F82D54424122EFD0040AA41 /* SensorConfig.swift */,
 			);
 			path = Core;
@@ -840,7 +840,7 @@
 				B240816123D8803900845AEE /* SensorModel.swift in Sources */,
 				5F82D55824122EFD0040AA41 /* GyroscopeSensor.swift in Sources */,
 				B29639D123BDC28100626E1A /* AppDelegate.swift in Sources */,
-				5F82D55424122EFD0040AA41 /* AwareSensor.swift in Sources */,
+				5F82D55424122EFD0040AA41 /* LampSensorCore.swift in Sources */,
 				B2CD377E2477A2CA004E8B7B /* TextPresentation.swift in Sources */,
 				5FF29327242223F300D0BE09 /* FileStorage.swift in Sources */,
 				B275F60224518106007A7340 /* HomeWebViewModel.swift in Sources */,
@@ -852,7 +852,7 @@
 				5F82D55F241230A90040AA41 /* GeofenceData.swift in Sources */,
 				5F82D56F24126FDD0040AA41 /* CallsSensor.swift in Sources */,
 				B2B8935323D0AD6500321C3E /* String+Extension.swift in Sources */,
-				5F82D55224122EFD0040AA41 /* AwareUtils.swift in Sources */,
+				5F82D55224122EFD0040AA41 /* LampSensorCoreUtils.swift in Sources */,
 				5F82D560241230A90040AA41 /* HeadingData.swift in Sources */,
 				B240816623D8803900845AEE /* Logging.swift in Sources */,
 				5F3D223C241A0F0600899DD0 /* LMBluetoothSensor.swift in Sources */,
@@ -860,7 +860,7 @@
 				5F82D57E241274430040AA41 /* PedometerSensor.swift in Sources */,
 				B2D930EF2445C9BD0086477D /* LMSensorManager+SensorObservers.swift in Sources */,
 				B240815F23D8803900845AEE /* NetworkConfig.swift in Sources */,
-				5F82D54E24122EFD0040AA41 /* AwareObject.swift in Sources */,
+				5F82D54E24122EFD0040AA41 /* LampSensorCoreObject.swift in Sources */,
 				5F82D58A241276270040AA41 /* WiFiScanData.swift in Sources */,
 				5F82D56A2412541D0040AA41 /* ScreenData.swift in Sources */,
 				B275F60424518C82007A7340 /* User.swift in Sources */,
@@ -1111,7 +1111,6 @@
 				ENABLE_PREVIEWS = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PROJECT_DIR)/mindLAMP/Aware/GoogleSignIn/Frameworks",
 					"$(PROJECT_DIR)/mindLAMP/NodeComponents",
 					"$(PROJECT_DIR)/libnode",
 				);
@@ -1148,7 +1147,6 @@
 				ENABLE_PREVIEWS = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PROJECT_DIR)/mindLAMP/Aware/GoogleSignIn/Frameworks",
 					"$(PROJECT_DIR)/mindLAMP/NodeComponents",
 					"$(PROJECT_DIR)/libnode",
 				);
