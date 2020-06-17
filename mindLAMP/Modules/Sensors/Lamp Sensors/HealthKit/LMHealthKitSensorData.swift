@@ -7,7 +7,7 @@
 
 import Foundation
 
-class LMHealthKitSensorData: AwareObject {
+class LMHealthKitSensorData: LampSensorCoreObject {
     
     public var device: [String: Any]?
     public var startDate: Double?

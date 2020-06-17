@@ -8,9 +8,9 @@
 import UIKit
 import CoreMotion
 
-public class PedometerSensor: AwareSensor {
+public class PedometerSensor: LampSensorCore {
     
-    public static let TAG = "AWARE::Pedometer"
+    public static let TAG = "LAMP::Pedometer"
     public var CONFIG:PedometerSensor.Config = Config()
     
     var pedometer:CMPedometer? = nil
@@ -39,7 +39,7 @@ public class PedometerSensor: AwareSensor {
         
         public override init() {
             super.init()
-            dbPath = "aware_pedometer"
+            //dbPath = "aware_pedometer"
         }
         
         public override func set(config: Dictionary<String, Any>) {
@@ -101,7 +101,7 @@ public class PedometerSensor: AwareSensor {
                     }
                 })
                 timer?.fire()
-                self.notificationCenter.post(name: .actionAwarePedometerStart , object: self)
+                self.notificationCenter.post(name: .actionLampPedometerStart , object: self)
             }
         }
     }
@@ -110,17 +110,17 @@ public class PedometerSensor: AwareSensor {
         if let uwTimer = timer {
             uwTimer.invalidate()
             timer = nil
-            self.notificationCenter.post(name: .actionAwarePedometerStop , object: self)
+            self.notificationCenter.post(name: .actionLampPedometerStop , object: self)
         }
     }
     
     override public func sync(force: Bool = false) {
-        self.notificationCenter.post(name: .actionAwarePedometerSync , object: self)
+        self.notificationCenter.post(name: .actionLampPedometerSync , object: self)
     }
     
     public override func set(label:String){
         self.CONFIG.label = label
-        self.notificationCenter.post(name: .actionAwarePedometerSetLabel,
+        self.notificationCenter.post(name: .actionLampPedometerSetLabel,
                                      object: self,
                                      userInfo: [PedometerSensor.EXTRA_LABEL:label])
     }
@@ -177,7 +177,7 @@ public class PedometerSensor: AwareSensor {
                                 engine.save(data) { error in
                                     if error == nil {
                                         DispatchQueue.main.async {
-                                            self.notificationCenter.post(name: .actionAwarePedometer , object: self)
+                                            self.notificationCenter.post(name: .actionLampPedometer , object: self)
                                             self.setLastUpdateDateTime(toDate)
                                             let diffBetweenNowAndToDate = now.minutes(from: toDate)
                                             if diffBetweenNowAndToDate > Int(self.CONFIG.interval){
@@ -226,24 +226,24 @@ extension Date {
 }
 
 extension Notification.Name {
-    public static let actionAwarePedometer = Notification.Name(PedometerSensor.ACTION_AWARE_PEDOMETER)
-    public static let actionAwarePedometerStart    = Notification.Name(PedometerSensor.ACTION_AWARE_PEDOMETER_START)
-    public static let actionAwarePedometerStop     = Notification.Name(PedometerSensor.ACTION_AWARE_PEDOMETER_STOP)
-    public static let actionAwarePedometerSync     = Notification.Name(PedometerSensor.ACTION_AWARE_PEDOMETER_SYNC)
-    public static let actionAwarePedometerSetLabel = Notification.Name(PedometerSensor.ACTION_AWARE_PEDOMETER_SET_LABEL)
-    public static let actionAwarePedometerSyncCompletion  = Notification.Name(PedometerSensor.ACTION_AWARE_PEDOMETER_SYNC_COMPLETION)
+    public static let actionLampPedometer = Notification.Name(PedometerSensor.ACTION_LAMP_PEDOMETER)
+    public static let actionLampPedometerStart    = Notification.Name(PedometerSensor.ACTION_LAMP_PEDOMETER_START)
+    public static let actionLampPedometerStop     = Notification.Name(PedometerSensor.ACTION_LAMP_PEDOMETER_STOP)
+    public static let actionLampPedometerSync     = Notification.Name(PedometerSensor.ACTION_LAMP_PEDOMETER_SYNC)
+    public static let actionLampPedometerSetLabel = Notification.Name(PedometerSensor.ACTION_LAMP_PEDOMETER_SET_LABEL)
+    public static let actionLampPedometerSyncCompletion  = Notification.Name(PedometerSensor.ACTION_LAMP_PEDOMETER_SYNC_COMPLETION)
 }
 
 extension PedometerSensor {
-    public static let ACTION_AWARE_PEDOMETER       = "com.awareframework.ios.sensor.pedometer"
-    public static let ACTION_AWARE_PEDOMETER_START = "com.awareframework.ios.sensor.pedometer.ACTION_AWARE_PEDOMETER_START"
-    public static let ACTION_AWARE_PEDOMETER_STOP  = "com.awareframework.ios.sensor.pedometer.ACTION_AWARE_PEDOMETER_STOP"
-    public static let ACTION_AWARE_PEDOMETER_SET_LABEL = "com.awareframework.ios.sensor.pedometer.ACTION_AWARE_PEDOMETER_SET_LABEL"
-    public static let ACTION_AWARE_PEDOMETER_SYNC  = "com.awareframework.ios.sensor.pedometer.ACTION_AWARE_PEDOMETER_SYNC"
+    public static let ACTION_LAMP_PEDOMETER       = "com.awareframework.ios.sensor.pedometer"
+    public static let ACTION_LAMP_PEDOMETER_START = "com.awareframework.ios.sensor.pedometer.ACTION_AWARE_PEDOMETER_START"
+    public static let ACTION_LAMP_PEDOMETER_STOP  = "com.awareframework.ios.sensor.pedometer.ACTION_AWARE_PEDOMETER_STOP"
+    public static let ACTION_LAMP_PEDOMETER_SET_LABEL = "com.awareframework.ios.sensor.pedometer.ACTION_AWARE_PEDOMETER_SET_LABEL"
+    public static let ACTION_LAMP_PEDOMETER_SYNC  = "com.awareframework.ios.sensor.pedometer.ACTION_AWARE_PEDOMETER_SYNC"
     public static let EXTRA_LABEL = "label"
 
     
-    public static let ACTION_AWARE_PEDOMETER_SYNC_COMPLETION = "com.awareframework.ios.sensor.pedometer.SENSOR_SYNC_COMPLETION"
+    public static let ACTION_LAMP_PEDOMETER_SYNC_COMPLETION = "com.awareframework.ios.sensor.pedometer.SENSOR_SYNC_COMPLETION"
     public static let EXTRA_STATUS = "status"
     public static let EXTRA_ERROR = "error"
 

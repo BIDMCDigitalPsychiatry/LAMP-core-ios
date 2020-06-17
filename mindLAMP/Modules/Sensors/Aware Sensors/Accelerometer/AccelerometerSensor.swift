@@ -10,12 +10,12 @@ import Foundation
 import CoreMotion
 
 extension Notification.Name {
-    public static let actionAwareAccelerometer      = Notification.Name(AccelerometerSensor.ACTION_AWARE_ACCELEROMETER)
-    public static let actionAwareAccelerometerStart = Notification.Name(AccelerometerSensor.ACTION_AWARE_ACCELEROMETER_START)
-    public static let actionAwareAccelerometerStop  = Notification.Name(AccelerometerSensor.ACTION_AWARE_ACCELEROMETER_STOP)
-    public static let actionAwareAccelerometerSetLabel  = Notification.Name(AccelerometerSensor.ACTION_AWARE_ACCELEROMETER_SET_LABEL)
-    public static let actionAwareAccelerometerSync  = Notification.Name(AccelerometerSensor.ACTION_AWARE_ACCELEROMETER_SYNC)
-    public static let actionAwareAccelerometerSyncCompletion  = Notification.Name(AccelerometerSensor.ACTION_AWARE_ACCELEROMETER_SYNC_COMPLETION)
+    public static let actionLampAccelerometer      = Notification.Name(AccelerometerSensor.ACTION_LAMP_ACCELEROMETER)
+    public static let actionLampAccelerometerStart = Notification.Name(AccelerometerSensor.ACTION_LAMP_ACCELEROMETER_START)
+    public static let actionLampAccelerometerStop  = Notification.Name(AccelerometerSensor.ACTION_LAMP_ACCELEROMETER_STOP)
+    public static let actionLampAccelerometerSetLabel  = Notification.Name(AccelerometerSensor.ACTION_LAMP_ACCELEROMETER_SET_LABEL)
+    public static let actionLampAccelerometerSync  = Notification.Name(AccelerometerSensor.ACTION_LAMP_ACCELEROMETER_SYNC)
+    public static let actionLampAccelerometerSyncCompletion  = Notification.Name(AccelerometerSensor.ACTION_LAMP_ACCELEROMETER_SYNC_COMPLETION)
 }
 
 public protocol AccelerometerObserver {
@@ -24,19 +24,19 @@ public protocol AccelerometerObserver {
 
 public extension AccelerometerSensor {
     /// keys ///
-    static let ACTION_AWARE_ACCELEROMETER       = "com.awareframework.ios.sensor.accelerometer"
-    static let ACTION_AWARE_ACCELEROMETER_START = "com.awareframework.ios.sensor.accelerometer.ACTION_AWARE_ACCELEROMETER_START"
-    static let ACTION_AWARE_ACCELEROMETER_STOP  = "com.awareframework.ios.sensor.accelerometer.ACTION_AWARE_ACCELEROMETER_STOP"
-    static let ACTION_AWARE_ACCELEROMETER_SYNC  = "com.awareframework.ios.sensor.accelerometer.ACTION_AWARE_ACCELEROMETER_SYNC"
-    static let ACTION_AWARE_ACCELEROMETER_SYNC_COMPLETION = "com.awareframework.ios.sensor.accelerometer.ACTION_AWARE_ACCELEROMETER_SYNC_SUCCESS_COMPLETION"
-    static let ACTION_AWARE_ACCELEROMETER_SET_LABEL = "com.awareframework.ios.sensor.accelerometer.ACTION_AWARE_ACCELEROMETER_SET_LABEL"
+    static let ACTION_LAMP_ACCELEROMETER       = "com.awareframework.ios.sensor.accelerometer"
+    static let ACTION_LAMP_ACCELEROMETER_START = "com.awareframework.ios.sensor.accelerometer.ACTION_AWARE_ACCELEROMETER_START"
+    static let ACTION_LAMP_ACCELEROMETER_STOP  = "com.awareframework.ios.sensor.accelerometer.ACTION_AWARE_ACCELEROMETER_STOP"
+    static let ACTION_LAMP_ACCELEROMETER_SYNC  = "com.awareframework.ios.sensor.accelerometer.ACTION_AWARE_ACCELEROMETER_SYNC"
+    static let ACTION_LAMP_ACCELEROMETER_SYNC_COMPLETION = "com.awareframework.ios.sensor.accelerometer.ACTION_AWARE_ACCELEROMETER_SYNC_SUCCESS_COMPLETION"
+    static let ACTION_LAMP_ACCELEROMETER_SET_LABEL = "com.awareframework.ios.sensor.accelerometer.ACTION_AWARE_ACCELEROMETER_SET_LABEL"
     static var EXTRA_LABEL  = "label"
     static let TAG = "com.awareframework.ios.sensor.accelerometer"
     static let EXTRA_STATUS = "status"
     static let EXTRA_ERROR = "error"
 }
 
-public class AccelerometerSensor:AwareSensor {
+public class AccelerometerSensor:LampSensorCore {
     
     /// config ///
     public var CONFIG = AccelerometerSensor.Config()
@@ -67,7 +67,7 @@ public class AccelerometerSensor:AwareSensor {
         
         public override init() {
             super.init()
-            self.dbPath = "aware_accelerometer"
+            //self.dbPath = "aware_accelerometer"
         }
         
         public override func set(config: Dictionary<String, Any>) {
@@ -172,7 +172,7 @@ public class AccelerometerSensor:AwareSensor {
                             }
                             // send notification in the main thread
                             DispatchQueue.main.async {
-                                self.notificationCenter.post(name: .actionAwareAccelerometer , object: self)
+                                self.notificationCenter.post(name: .actionLampAccelerometer , object: self)
                             }
                         }
                     })
@@ -188,7 +188,7 @@ public class AccelerometerSensor:AwareSensor {
             RunLoop.current.add(self.timer!, forMode: RunLoop.Mode.default)
             
             if self.CONFIG.debug { print(AccelerometerSensor.TAG, "Accelerometer sensor active: \(self.CONFIG.frequency) hz") }
-            self.notificationCenter.post(name: .actionAwareAccelerometerStart, object: self)
+            self.notificationCenter.post(name: .actionLampAccelerometerStart, object: self)
         }
     }
 
@@ -201,7 +201,7 @@ public class AccelerometerSensor:AwareSensor {
                 self.motion.stopAccelerometerUpdates()
                 timer.invalidate()
                 if CONFIG.debug { print(AccelerometerSensor.TAG, "Accelerometer service is terminated...") }
-                self.notificationCenter.post(name: .actionAwareAccelerometerStop, object: self)
+                self.notificationCenter.post(name: .actionLampAccelerometerStop, object: self)
             }
         }
     }
@@ -210,7 +210,7 @@ public class AccelerometerSensor:AwareSensor {
      * Sync accelerometer sensor module
      */
     public override func sync(force: Bool = false) {
-        self.notificationCenter.post(name: .actionAwareAccelerometerSync, object: self)
+        self.notificationCenter.post(name: .actionLampAccelerometerSync, object: self)
     }
     
     /**
@@ -218,7 +218,7 @@ public class AccelerometerSensor:AwareSensor {
      */
     public override func set(label:String){
         self.CONFIG.label = label
-        self.notificationCenter.post(name: .actionAwareAccelerometerSetLabel, object: self, userInfo: [AccelerometerSensor.EXTRA_LABEL:label])
+        self.notificationCenter.post(name: .actionLampAccelerometerSetLabel, object: self, userInfo: [AccelerometerSensor.EXTRA_LABEL:label])
     }
 }
 

@@ -7,7 +7,7 @@
 
 import UIKit
 
-public class HeadingData: AwareObject {
+public class HeadingData: LampSensorCoreObject {
     
     public static var TABLE_NAME = "headingData"
 

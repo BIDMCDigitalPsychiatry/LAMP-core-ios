@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-public class AwareUtils{
+public class LampSensorCoreUtils{
 
     private static let kDeviceIdKey:String = "com.aware.ios.sensor.core.key.deviceid"
     

@@ -14,13 +14,13 @@ import UIKit
 import CoreMotion
 
 extension Notification.Name{
-    public static let actionAwareRotation = Notification.Name(RotationSensor.ACTION_AWARE_ROTATION)
-    public static let actionAwareRotationStart = Notification.Name(RotationSensor.ACTION_AWARE_ROTATION)
-    public static let actionAwareRotationStop = Notification.Name(RotationSensor.ACTION_AWARE_ROTATION_STOP)
-    public static let actionAwareRotationSetLabel = Notification.Name(RotationSensor.ACTION_AWARE_ROTATION_SET_LABEL)
-    public static let actionAwareRotationSync = Notification.Name(RotationSensor.ACTION_AWARE_ROTATION_SYNC)
+    public static let actionLampRotation = Notification.Name(RotationSensor.ACTION_LAMP_ROTATION)
+    public static let actionLampRotationStart = Notification.Name(RotationSensor.ACTION_LAMP_ROTATION)
+    public static let actionLampRotationStop = Notification.Name(RotationSensor.ACTION_LAMP_ROTATION_STOP)
+    public static let actionLampRotationSetLabel = Notification.Name(RotationSensor.ACTION_LAMP_ROTATION_SET_LABEL)
+    public static let actionLampRotationSync = Notification.Name(RotationSensor.ACTION_LAMP_ROTATION_SYNC)
     
-    public static let actionAwareRotationSyncCompletion  = Notification.Name(RotationSensor.ACTION_AWARE_ROTATION_SYNC_COMPLETION)
+    public static let actionLampRotationSyncCompletion  = Notification.Name(RotationSensor.ACTION_LAMP_ROTATION_SYNC_COMPLETION)
     
 }
 
@@ -29,19 +29,19 @@ public protocol RotationObserver{
 }
 
 extension RotationSensor {
-    public static var TAG = "AWARE::Rotation"
+    public static var TAG = "LAMP::Rotation"
     
-    public static var ACTION_AWARE_ROTATION = "ACTION_AWARE_ROTATION"
+    public static var ACTION_LAMP_ROTATION = "ACTION_AWARE_ROTATION"
     
-    public static var ACTION_AWARE_ROTATION_START = "com.awareframework.android.sensor.rotation.SENSOR_START"
-    public static var ACTION_AWARE_ROTATION_STOP = "com.awareframework.android.sensor.rotation.SENSOR_STOP"
+    public static var ACTION_LAMP_ROTATION_START = "com.awareframework.android.sensor.rotation.SENSOR_START"
+    public static var ACTION_LAMP_ROTATION_STOP = "com.awareframework.android.sensor.rotation.SENSOR_STOP"
     
-    public static var ACTION_AWARE_ROTATION_SET_LABEL = "com.awareframework.android.sensor.rotation.ACTION_AWARE_ROTATION_SET_LABEL"
+    public static var ACTION_LAMP_ROTATION_SET_LABEL = "com.awareframework.android.sensor.rotation.ACTION_AWARE_ROTATION_SET_LABEL"
     public static var EXTRA_LABEL = "label"
     
-    public static var ACTION_AWARE_ROTATION_SYNC = "com.awareframework.android.sensor.rotation.SENSOR_SYNC"
+    public static var ACTION_LAMP_ROTATION_SYNC = "com.awareframework.android.sensor.rotation.SENSOR_SYNC"
     
-    public static let ACTION_AWARE_ROTATION_SYNC_COMPLETION = "com.awareframework.ios.sensor.rotation.SENSOR_SYNC_COMPLETION"
+    public static let ACTION_LAMP_ROTATION_SYNC_COMPLETION = "com.awareframework.ios.sensor.rotation.SENSOR_SYNC_COMPLETION"
     public static let EXTRA_STATUS = "status"
     public static let EXTRA_ERROR = "error"
 }
@@ -51,7 +51,7 @@ extension RotationSensor {
  * https://developer.apple.com/documentation/coremotion/getting_processed_device-motion_data/understanding_reference_frames_and_device_attitude
  */
 
-public class RotationSensor: AwareSensor {
+public class RotationSensor: LampSensorCore {
     
     public var CONFIG = RotationSensor.Config()
     var motion = CMMotionManager()
@@ -89,7 +89,7 @@ public class RotationSensor: AwareSensor {
         
         public override init(){
             super.init()
-            dbPath = "aware_rotation"
+            //dbPath = "aware_rotation"
         }
         
         public override func set(config: Dictionary<String, Any>) {
@@ -201,7 +201,7 @@ public class RotationSensor: AwareSensor {
                                 engine.save(dataArray){ error in
                                     if error == nil {
                                         DispatchQueue.main.async {
-                                            self.notificationCenter.post(name: .actionAwareRotation, object: self)
+                                            self.notificationCenter.post(name: .actionLampRotation, object: self)
                                         }
                                     }else{
                                         if self.CONFIG.debug{ print(error!) }
@@ -216,7 +216,7 @@ public class RotationSensor: AwareSensor {
                         
                     }
                 }
-                self.notificationCenter.post(name: .actionAwareRotationStart, object: self)
+                self.notificationCenter.post(name: .actionLampRotationStart, object: self)
             }
         }
     }
@@ -225,18 +225,18 @@ public class RotationSensor: AwareSensor {
         if motion.isDeviceMotionActive{
             if motion.isDeviceMotionActive{
                 self.motion.stopDeviceMotionUpdates()
-                self.notificationCenter.post(name: .actionAwareRotationStop, object: self)
+                self.notificationCenter.post(name: .actionLampRotationStop, object: self)
             }
         }
     }
     
     public override func sync(force: Bool = false) {
-        self.notificationCenter.post(name: .actionAwareRotationSync, object: self)
+        self.notificationCenter.post(name: .actionLampRotationSync, object: self)
     }
     
     public override func set(label:String) {
         self.CONFIG.label = label
-        self.notificationCenter.post(name: .actionAwareRotationSetLabel,
+        self.notificationCenter.post(name: .actionLampRotationSetLabel,
                                      object: self,
                                      userInfo: [RotationSensor.EXTRA_LABEL:label])
     }

@@ -7,7 +7,7 @@
 
 import UIKit
 
-public class VisitData: AwareObject {
+public class VisitData: LampSensorCoreObject {
     
     public static let TABLE_NAME = "visitData"
     

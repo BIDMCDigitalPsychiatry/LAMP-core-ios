@@ -17,17 +17,17 @@ public class SensorManager: NSObject {
         
     }
     
-    public var sensors:Array<AwareSensor> = []
+    public var sensors:Array<LampSensorCore> = []
     
     ////////////////////////////////////////
     
-    public func addSensors(_ sensors:[AwareSensor]){
+    public func addSensors(_ sensors:[LampSensorCore]){
         for sensor in sensors {
             self.addSensor(sensor)
         }
     }
     
-    public func addSensor(_ sensor:AwareSensor) {
+    public func addSensor(_ sensor:LampSensorCore) {
         sensors.append(sensor)
     }
     
@@ -52,7 +52,7 @@ public class SensorManager: NSObject {
         }
     }
     
-    public func getSensor(with sensor:AwareSensor) -> AwareSensor? {
+    public func getSensor(with sensor:LampSensorCore) -> LampSensorCore? {
         for s in sensors {
             if s == sensor {
                 return s
@@ -61,8 +61,8 @@ public class SensorManager: NSObject {
         return nil
     }
     
-    public func getSensors(with type: AnyClass ) -> [AwareSensor]?{
-        var foundSensors:Array<AwareSensor> = []
+    public func getSensors(with type: AnyClass ) -> [LampSensorCore]?{
+        var foundSensors:Array<LampSensorCore> = []
         for sensor in sensors {
             if type == sensor.classForCoder {
                 foundSensors.append(sensor)
@@ -95,7 +95,7 @@ public class SensorManager: NSObject {
     
     
     /////////////////////////////////////////////
-    public func getSensor(with id: String) -> AwareSensor? {
+    public func getSensor(with id: String) -> LampSensorCore? {
         for sensor in sensors{
             if sensor.id == id {
                 return sensor;

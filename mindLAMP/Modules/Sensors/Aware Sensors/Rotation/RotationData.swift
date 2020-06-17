@@ -7,7 +7,7 @@
 
 import UIKit
 
-public class RotationData: AwareObject {
+public class RotationData: LampSensorCoreObject {
     
     public static var TABLE_NAME = "rotationData"
     

@@ -16,10 +16,10 @@ public enum DatabaseType {
 
 public protocol EngineProtocal {
     
-    func save(_ data:AwareObject)
-    func save(_ data:AwareObject, completion:((Error?)->Void)? )
-    func save(_ data:Array<AwareObject>)
-    func save(_ data:Array<AwareObject>, completion:((Error?)->Void)?)
+    func save(_ data:LampSensorCoreObject)
+    func save(_ data:LampSensorCoreObject, completion:((Error?)->Void)? )
+    func save(_ data:Array<LampSensorCoreObject>)
+    func save(_ data:Array<LampSensorCoreObject>, completion:((Error?)->Void)?)
     /*
     func fetch(_ objectType: Object.Type?, _ filter:String?) -> Any?
     func fetch(_ objectType: Object.Type?, _ filter:String?, completion:((Any?, Error?)->Void)?)
@@ -100,19 +100,19 @@ open class Engine: EngineProtocal {
         return Builder().build()
     }
     
-    public func save(_ data: AwareObject) {
+    public func save(_ data: LampSensorCoreObject) {
         self.save(data, completion:nil)
     }
     
-    public func save(_ data: Array<AwareObject>) {
+    public func save(_ data: Array<LampSensorCoreObject>) {
         self.save(data, completion:nil)
     }
     
-    open func save (_ data:AwareObject,completion:((Error?)->Void)?){
+    open func save (_ data:LampSensorCoreObject,completion:((Error?)->Void)?){
         // print("Please orverwrite -save(objects)")
     }
     
-    open func save (_ data:Array<AwareObject>,completion:((Error?)->Void)?){
+    open func save (_ data:Array<LampSensorCoreObject>,completion:((Error?)->Void)?){
         // print("Please orverwrite -save(objects)")
     }
     

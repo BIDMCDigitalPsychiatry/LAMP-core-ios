@@ -13,10 +13,10 @@ open class SensorConfig{
     public var debug:Bool      = false
     public var label:String    = ""
     public var deviceId:String = ""
-    public var dbEncryptionKey:String? = nil
-    public var dbType = DatabaseType.NONE
-    public var dbPath:String   = "aware"
-    public var dbHost:String?  = nil
+//    public var dbEncryptionKey:String? = nil
+//    public var dbType = DatabaseType.NONE
+//    public var dbPath:String   = "aware"
+//    public var dbHost:String?  = nil
 //    public var realmObjectType:Object.Type? = nil
     
     public init(){
@@ -45,26 +45,27 @@ open class SensorConfig{
             self.deviceId = deviceId
         }
         
-        dbEncryptionKey = config["dbEncryptionKey"] as? String
-
-        if let dbType = config["dbType"] as? Int {
-            if dbType == 0 {
-                self.dbType = DatabaseType.NONE
-            }else if dbType == 1 {
-                self.dbType = DatabaseType.REALM
-            }
-        }
-        
-        if let dbType = config["dbType"] as? DatabaseType {
-            self.dbType = dbType
-        }
-        
-        if let dbPath = config["dbPath"] as? String {
-            self.dbPath = dbPath
-        }
-        
-        if let dbHost = config["dbHost"] as? String {
-            self.dbHost = dbHost
-        }
+//        dbEncryptionKey = config["dbEncryptionKey"] as? String
+//
+//        if let dbType = config["dbType"] as? Int {
+//            if dbType == 0 {
+//                self.dbType = DatabaseType.NONE
+//            }else if dbType == 1 {
+//                self.dbType = DatabaseType.REALM
+//            }
+//        }
+//
+//        if let dbType = config["dbType"] as? DatabaseType {
+//            self.dbType = dbType
+//        }
+//
+//        if let dbPath = config["dbPath"] as? String {
+//            self.dbPath = dbPath
+//        }
+//
+//        if let dbHost = config["dbHost"] as? String {
+//            self.dbHost = dbHost
+//        }
     }
 }
+

@@ -9,12 +9,12 @@ import UIKit
 import CoreMotion
 
 extension Notification.Name{
-    public static let actionAwareGyroscope         = Notification.Name(GyroscopeSensor.ACTION_AWARE_GYROSCOPE)
-    public static let actionAwareGyroscopeStart    = Notification.Name(GyroscopeSensor.ACTION_AWARE_GYROSCOPE_START)
-    public static let actionAwareGyroscopeStop     = Notification.Name(GyroscopeSensor.ACTION_AWARE_GYROSCOPE_STOP)
-    public static let actionAwareGyroscopeSync     = Notification.Name(GyroscopeSensor.ACTION_AWARE_GYROSCOPE_SYNC)
-    public static let actionAwareGyroscopeSyncCompletion  = Notification.Name(GyroscopeSensor.ACTION_AWARE_GYROSCOPE_SYNC_COMPLETION)
-    public static let actionAwareGyroscopeSetLabel = Notification.Name(GyroscopeSensor.ACTION_AWARE_GYROSCOPE_SET_LABEL)
+    public static let actionLampGyroscope         = Notification.Name(GyroscopeSensor.ACTION_LAMP_GYROSCOPE)
+    public static let actionLampGyroscopeStart    = Notification.Name(GyroscopeSensor.ACTION_LAMP_GYROSCOPE_START)
+    public static let actionLampGyroscopeStop     = Notification.Name(GyroscopeSensor.ACTION_LAMP_GYROSCOPE_STOP)
+    public static let actionLampGyroscopeSync     = Notification.Name(GyroscopeSensor.ACTION_LAMP_GYROSCOPE_SYNC)
+    public static let actionLampGyroscopeSyncCompletion  = Notification.Name(GyroscopeSensor.ACTION_LAMP_GYROSCOPE_SYNC_COMPLETION)
+    public static let actionLampGyroscopeSetLabel = Notification.Name(GyroscopeSensor.ACTION_LAMP_GYROSCOPE_SET_LABEL)
 }
 
 public protocol GyroscopeObserver{
@@ -22,23 +22,23 @@ public protocol GyroscopeObserver{
 }
 
 public extension GyroscopeSensor{
-    static let TAG = "AWARE::Gyroscope"
+    static let TAG = "LAMP::Gyroscope"
     
-    static let ACTION_AWARE_GYROSCOPE = "ACTION_AWARE_GYROSCOPE"
+    static let ACTION_LAMP_GYROSCOPE = "ACTION_AWARE_GYROSCOPE"
     
-    static let ACTION_AWARE_GYROSCOPE_START = "com.awareframework.ios.sensor.gyroscope.SENSOR_START"
-    static let ACTION_AWARE_GYROSCOPE_STOP = "com.awareframework.ios.sensor.gyroscope.SENSOR_STOP"
+    static let ACTION_LAMP_GYROSCOPE_START = "com.awareframework.ios.sensor.gyroscope.SENSOR_START"
+    static let ACTION_LAMP_GYROSCOPE_STOP = "com.awareframework.ios.sensor.gyroscope.SENSOR_STOP"
     
-    static let ACTION_AWARE_GYROSCOPE_SET_LABEL = "com.awareframework.ios.sensor.gyroscope.ACTION_AWARE_GYROSCOPE_SET_LABEL"
+    static let ACTION_LAMP_GYROSCOPE_SET_LABEL = "com.awareframework.ios.sensor.gyroscope.ACTION_AWARE_GYROSCOPE_SET_LABEL"
     static let EXTRA_LABEL = "label"
     
-    static let ACTION_AWARE_GYROSCOPE_SYNC = "com.awareframework.ios.sensor.gyroscope.SENSOR_SYNC"
-    static let ACTION_AWARE_GYROSCOPE_SYNC_COMPLETION = "com.awareframework.ios.sensor.gyroscope.SENSOR_SYNC_COMPLETION"
+    static let ACTION_LAMP_GYROSCOPE_SYNC = "com.awareframework.ios.sensor.gyroscope.SENSOR_SYNC"
+    static let ACTION_LAMP_GYROSCOPE_SYNC_COMPLETION = "com.awareframework.ios.sensor.gyroscope.SENSOR_SYNC_COMPLETION"
     static let EXTRA_STATUS = "status"
     static let EXTRA_ERROR = "error"
 }
 
-public class GyroscopeSensor: AwareSensor {
+public class GyroscopeSensor: LampSensorCore {
     
     public var CONFIG = GyroscopeSensor.Config()
     public var motion = CMMotionManager()
@@ -145,7 +145,7 @@ public class GyroscopeSensor: AwareSensor {
                             engine.save(dataArray){ error in
                                 if error == nil {
                                     DispatchQueue.main.async {
-                                        self.notificationCenter.post(name: .actionAwareGyroscope, object: self)
+                                        self.notificationCenter.post(name: .actionLampGyroscope, object: self)
                                     }
                                 }else{
                                     if self.CONFIG.debug { print(error!) }
@@ -161,7 +161,7 @@ public class GyroscopeSensor: AwareSensor {
             }
             
             if self.CONFIG.debug{ print(GyroscopeSensor.TAG, "Gyroscope sensor active: \(self.CONFIG.frequency) hz") }
-            self.notificationCenter.post(name: .actionAwareGyroscopeStart, object: self)
+            self.notificationCenter.post(name: .actionLampGyroscopeStart, object: self)
         }
     }
     
@@ -170,18 +170,18 @@ public class GyroscopeSensor: AwareSensor {
             if self.motion.isGyroActive{
                 self.motion.stopGyroUpdates()
                 if self.CONFIG.debug{ print(GyroscopeSensor.TAG, "Gyroscope sensor terminated") }
-                self.notificationCenter.post(name: .actionAwareGyroscopeStop, object: self)
+                self.notificationCenter.post(name: .actionLampGyroscopeStop, object: self)
             }
         }
     }
     
     public override func sync(force: Bool = false) {
-            self.notificationCenter.post(name: .actionAwareGyroscopeSync, object: self)
+            self.notificationCenter.post(name: .actionLampGyroscopeSync, object: self)
     }
     
     public override func set(label:String) {
         self.CONFIG.label = label
-        self.notificationCenter.post(name: .actionAwareGyroscopeSetLabel, object: self, userInfo:[GyroscopeSensor.EXTRA_LABEL:label])
+        self.notificationCenter.post(name: .actionLampGyroscopeSetLabel, object: self, userInfo:[GyroscopeSensor.EXTRA_LABEL:label])
     }
 }
 

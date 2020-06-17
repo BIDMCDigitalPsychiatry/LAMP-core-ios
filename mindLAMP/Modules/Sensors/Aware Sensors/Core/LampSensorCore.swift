@@ -18,7 +18,7 @@ public protocol ISensorController {
     func set(label:String)
 }
 
-open class AwareSensor: NSObject,ISensorController {
+open class LampSensorCore: NSObject,ISensorController {
 
     public let notificationCenter = NotificationCenter.default
     public var syncState  = false
@@ -33,7 +33,7 @@ open class AwareSensor: NSObject,ISensorController {
     
     deinit {
         notificationCenter.removeObserver(self,
-                                          name: Notification.Name.Aware.dbSyncRequest ,
+                                          name: Notification.Name.LampCore.dbSyncRequest ,
                                           object: nil)
     }
     
@@ -41,10 +41,10 @@ open class AwareSensor: NSObject,ISensorController {
         dbEngine?.close()
         
         dbEngine = Engine.Builder()
-            .setPath(config.dbPath)
-            .setType(config.dbType)
-            .setHost(config.dbHost)
-            .setEncryptionKey(config.dbEncryptionKey)
+            //.setPath(config.dbPath)
+            //.setType(config.dbType)
+            //.setHost(config.dbHost)
+            //.setEncryptionKey(config.dbEncryptionKey)
             .build()
     }
     
@@ -64,7 +64,7 @@ open class AwareSensor: NSObject,ISensorController {
         if !syncState {
             notificationCenter.addObserver(self,
                                            selector: #selector(sync),
-                                           name: Notification.Name.Aware.dbSyncRequest,
+                                           name: Notification.Name.LampCore.dbSyncRequest,
                                            object: nil)
             syncState = true
         }
@@ -73,7 +73,7 @@ open class AwareSensor: NSObject,ISensorController {
     open func disable() {
         if syncState {
             notificationCenter.removeObserver(self,
-                                              name: Notification.Name.Aware.dbSyncRequest ,
+                                              name: Notification.Name.LampCore.dbSyncRequest ,
                                               object: nil)
             syncState = false
         }

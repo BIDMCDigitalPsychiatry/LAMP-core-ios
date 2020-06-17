@@ -7,7 +7,7 @@
 
 import Foundation
 
-public class AccelerometerData: AwareObject {
+public class AccelerometerData: LampSensorCoreObject {
     
     public static var TABLE_NAME = "accelerometerData"
     

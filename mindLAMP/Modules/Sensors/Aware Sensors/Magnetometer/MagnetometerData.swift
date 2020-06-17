@@ -7,7 +7,7 @@
 
 import UIKit
 
-public class MagnetometerData: AwareObject {
+public class MagnetometerData: LampSensorCoreObject {
     
     public static var TABLE_NAME = "magnetometerData"
     

@@ -7,7 +7,7 @@
 
 import UIKit
 
-public class WiFiDeviceData: AwareObject {
+public class WiFiDeviceData: LampSensorCoreObject {
     
     public static var TABLE_NAME = "wifiDeviceData"
     

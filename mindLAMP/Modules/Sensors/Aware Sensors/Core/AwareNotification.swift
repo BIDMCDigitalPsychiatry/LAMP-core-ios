@@ -8,7 +8,7 @@
 import Foundation
 
 public extension Notification.Name{
-    struct Aware {
+    struct LampCore {
         public static let dbSyncRequest = Notification.Name("AwareDBSyncRequest")
     }
 }

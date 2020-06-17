@@ -7,7 +7,7 @@
 
 import UIKit
 
-public class ScreenBrightnessData: AwareObject {
+public class ScreenBrightnessData: LampSensorCoreObject {
     public static var TABLE_NAME = "screenBrightnessData"
     
     /*

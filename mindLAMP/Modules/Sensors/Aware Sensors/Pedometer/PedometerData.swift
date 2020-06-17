@@ -7,7 +7,7 @@
 
 import UIKit
 
-public class PedometerData: AwareObject {
+public class PedometerData: LampSensorCoreObject {
     public static let TABLE_NAME = "pedometerData"
     
     @objc dynamic public var startDate:Int64 = 0;

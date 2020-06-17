@@ -9,18 +9,18 @@ import UIKit
 import CoreLocation
 
 extension Notification.Name {
-    public static let actionAwareLocations      = Notification.Name(LocationsSensor.ACTION_AWARE_LOCATIONS)
-    public static let actionAwareLocationsStart  = Notification.Name(LocationsSensor.ACTION_AWARE_LOCATIONS_START)
-    public static let actionAwareLocationsStop   = Notification.Name(LocationsSensor.ACTION_AWARE_LOCATIONS_STOP)
-    public static let actionAwareLocationsSync   = Notification.Name(LocationsSensor.ACTION_AWARE_LOCATIONS_SYNC)
-    public static let actionAwareLocationsSetLabel  = Notification.Name(LocationsSensor.ACTION_AWARE_LOCATIONS_SET_LABEL)
-    public static let actionAwareLocationsSyncCompletion  = Notification.Name(LocationsSensor.ACTION_AWARE_LOCATIONS_SYNC_COMPLETION)
+    public static let actionLampLocations      = Notification.Name(LocationsSensor.ACTION_LAMP_LOCATIONS)
+    public static let actionLampLocationsStart  = Notification.Name(LocationsSensor.ACTION_LAMP_LOCATIONS_START)
+    public static let actionLampLocationsStop   = Notification.Name(LocationsSensor.ACTION_LAMP_LOCATIONS_STOP)
+    public static let actionLampLocationsSync   = Notification.Name(LocationsSensor.ACTION_LAMP_LOCATIONS_SYNC)
+    public static let actionLampLocationsSetLabel  = Notification.Name(LocationsSensor.ACTION_LAMP_LOCATIONS_SET_LABEL)
+    public static let actionLampLocationsSyncCompletion  = Notification.Name(LocationsSensor.ACTION_LAMP_LOCATIONS_SYNC_COMPLETION)
     
-    public static let actionAwareLocationsEnterRegion = Notification.Name(LocationsSensor.ACTION_AWARE_LOCATIONS_ENTER_REGION)
-    public static let actionAwareLocationsExitRegion = Notification.Name(LocationsSensor.ACTION_AWARE_LOCATIONS_EXIT_REGION)
+    public static let actionLampLocationsEnterRegion = Notification.Name(LocationsSensor.ACTION_LAMP_LOCATIONS_ENTER_REGION)
+    public static let actionLampLocationsExitRegion = Notification.Name(LocationsSensor.ACTION_LAMP_LOCATIONS_EXIT_REGION)
     
-    public static let actionAwareLocationsVisit = Notification.Name(LocationsSensor.ACTION_AWARE_LOCATIONS_VISIT)
-    public static let actionAwareLocationsHeadingChanged = Notification.Name(LocationsSensor.ACTION_AWARE_LOCATIONS_HEADING_CHANGED)
+    public static let actionLampLocationsVisit = Notification.Name(LocationsSensor.ACTION_LAMP_LOCATIONS_VISIT)
+    public static let actionLampLocationsHeadingChanged = Notification.Name(LocationsSensor.ACTION_LAMP_LOCATIONS_HEADING_CHANGED)
 }
 
 public protocol LocationsObserver {
@@ -32,13 +32,13 @@ public protocol LocationsObserver {
 }
 
 
-public class LocationsSensor: AwareSensor{
+public class LocationsSensor: LampSensorCore{
 
     public let locationManager = CLLocationManager()
     
     public var CONFIG:LocationsSensor.Config
     
-    public static let TAG = "AWARE::Locations"
+    public static let TAG = "LAMP::Locations"
     
     var timer:Timer?
     
@@ -49,45 +49,45 @@ public class LocationsSensor: AwareSensor{
     /**
      * Fired event: New location available
      */
-    public static let ACTION_AWARE_LOCATIONS = "com.awareframework.ios.sensor.locations"
+    public static let ACTION_LAMP_LOCATIONS = "com.awareframework.ios.sensor.locations"
     
-    public static let ACTION_AWARE_LOCATIONS_HEADING_CHANGED = "ACTION_AWARE_LOCATIONS_HEADING_CHANGED"
+    public static let ACTION_LAMP_LOCATIONS_HEADING_CHANGED = "ACTION_AWARE_LOCATIONS_HEADING_CHANGED"
     
     /**
      * Fired event: GPS location is active
      */
-    public static let ACTION_AWARE_GPS_LOCATIONS_ENABLED = "ACTION_AWARE_GPS_LOCATIONS_ENABLED"
+    public static let ACTION_LAMP_GPS_LOCATIONS_ENABLED = "ACTION_AWARE_GPS_LOCATIONS_ENABLED"
     
     /**
      * Fired event: Network location is active
      */
-    public static let ACTION_AWARE_NETWORK_LOCATIONS_ENABLED = "ACTION_AWARE_NETWORK_LOCATIONS_ENABLED"
+    public static let ACTION_LAMP_NETWORK_LOCATIONS_ENABLED = "ACTION_AWARE_NETWORK_LOCATIONS_ENABLED"
     
     /**
      * Fired event: GPS location disabled
      */
-    public static let ACTION_AWARE_GPS_LOCATIONS_DISABLED = "ACTION_AWARE_GPS_LOCATIONS_DISABLED"
+    public static let ACTION_LAMP_GPS_LOCATIONS_DISABLED = "ACTION_AWARE_GPS_LOCATIONS_DISABLED"
     
-    public static let ACTION_AWARE_LOCATIONS_ENTER_REGION = "ACTION_AWARE_LOCATION_ENTER_REGION"
+    public static let ACTION_LAMP_LOCATIONS_ENTER_REGION = "ACTION_AWARE_LOCATION_ENTER_REGION"
     
-    public static let ACTION_AWARE_LOCATIONS_EXIT_REGION  = "ACTION_AWARE_LOCATION_EXIT_REGION"
+    public static let ACTION_LAMP_LOCATIONS_EXIT_REGION  = "ACTION_AWARE_LOCATION_EXIT_REGION"
     
-    public static let ACTION_AWARE_LOCATIONS_VISIT  = "ACTION_AWARE_LOCATION_VISIT"
+    public static let ACTION_LAMP_LOCATIONS_VISIT  = "ACTION_AWARE_LOCATION_VISIT"
     
     /**
      * Fired event: Network location disabled
      */
-    public static let ACTION_AWARE_NETWORK_LOCATIONS_DISABLED = "ACTION_AWARE_NETWORK_LOCATIONS_DISABLED"
+    public static let ACTION_LAMP_NETWORK_LOCATIONS_DISABLED = "ACTION_AWARE_NETWORK_LOCATIONS_DISABLED"
     
-    public static let ACTION_AWARE_LOCATIONS_START = "com.awareframework.ios.sensor.locations.SENSOR_START"
-    public static let ACTION_AWARE_LOCATIONS_STOP = "com.awareframework.ios.sensor.locations.SENSOR_STOP"
+    public static let ACTION_LAMP_LOCATIONS_START = "com.awareframework.ios.sensor.locations.SENSOR_START"
+    public static let ACTION_LAMP_LOCATIONS_STOP = "com.awareframework.ios.sensor.locations.SENSOR_STOP"
     
-    public static let ACTION_AWARE_LOCATIONS_SET_LABEL = "com.ios.android.sensor.locations.SET_LABEL"
+    public static let ACTION_LAMP_LOCATIONS_SET_LABEL = "com.ios.android.sensor.locations.SET_LABEL"
     public static var EXTRA_LABEL = "label"
     
-    public static let ACTION_AWARE_LOCATIONS_SYNC = "com.awareframework.ios.sensor.locations.SENSOR_SYNC"
+    public static let ACTION_LAMP_LOCATIONS_SYNC = "com.awareframework.ios.sensor.locations.SENSOR_SYNC"
     
-    public static let ACTION_AWARE_LOCATIONS_SYNC_COMPLETION = "com.awareframework.ios.sensor.locations.SENSOR_SYNC_COMPLETION"
+    public static let ACTION_LAMP_LOCATIONS_SYNC_COMPLETION = "com.awareframework.ios.sensor.locations.SENSOR_SYNC_COMPLETION"
     public static let EXTRA_STATUS = "status"
     public static let EXTRA_ERROR = "error"
     public static let EXTRA_OBJECT_TYPE = "objectType"
@@ -143,7 +143,7 @@ public class LocationsSensor: AwareSensor{
         
         public override init() {
             super.init()
-            dbPath = "aware_locations"
+            //dbPath = "aware_locations"
         }
         
         public override func set(config: Dictionary<String, Any>) {
@@ -278,7 +278,7 @@ public class LocationsSensor: AwareSensor{
             });
         }
         
-        self.notificationCenter.post(name: .actionAwareLocationsStart, object: self)
+        self.notificationCenter.post(name: .actionLampLocationsStart, object: self)
     }
     
     
@@ -289,18 +289,18 @@ public class LocationsSensor: AwareSensor{
             t.invalidate()
             self.timer = nil
         }
-        self.notificationCenter.post(name: .actionAwareLocationsStop, object: self)
+        self.notificationCenter.post(name: .actionLampLocationsStop, object: self)
     }
     
     public override func sync(force: Bool = false) {
         if CONFIG.debug { print(LocationsSensor.TAG,"Start database sync") }
         
-        self.notificationCenter.post(name: .actionAwareLocationsSync, object: self)
+        self.notificationCenter.post(name: .actionLampLocationsSync, object: self)
     }
     
     public override func set(label:String) {
         self.CONFIG.label = label
-        self.notificationCenter.post(name: .actionAwareLocationsSetLabel,
+        self.notificationCenter.post(name: .actionLampLocationsSetLabel,
                                      object: self,
                                      userInfo:[LocationsSensor.EXTRA_LABEL:label])
     }
@@ -471,7 +471,7 @@ extension LocationsSensor: CLLocationManagerDelegate {
         if let enging = self.dbEngine {
             enging.save(dataArray)
         }
-        self.notificationCenter.post(name: .actionAwareLocations, object: self)
+        self.notificationCenter.post(name: .actionLampLocations, object: self)
     }
     
     public func locationManager(_ manager: CLLocationManager, didVisit visit: CLVisit) {
@@ -511,7 +511,7 @@ extension LocationsSensor: CLLocationManagerDelegate {
             if let observer = self.CONFIG.sensorObserver {
                 observer.onVisit(data: data)
             }
-            self.notificationCenter.post(name: .actionAwareLocationsVisit,
+            self.notificationCenter.post(name: .actionLampLocationsVisit,
                                          object: self,
                                          userInfo: [LocationsSensor.EXTRA_LABEL:visit])
         }
@@ -534,7 +534,7 @@ extension LocationsSensor: CLLocationManagerDelegate {
         if let observer = self.CONFIG.sensorObserver{
             observer.onHeadingChanged(data: data)
         }
-        self.notificationCenter.post(name: .actionAwareLocationsHeadingChanged,
+        self.notificationCenter.post(name: .actionLampLocationsHeadingChanged,
                                      object: self,
                                      userInfo: [LocationsSensor.EXTRA_LABEL:newHeading])
         if let engine = self.dbEngine {
@@ -562,7 +562,7 @@ extension LocationsSensor: CLLocationManagerDelegate {
         if let engine = self.dbEngine {
             engine.save(data)
         }
-        self.notificationCenter.post(name: .actionAwareLocationsEnterRegion,
+        self.notificationCenter.post(name: .actionLampLocationsEnterRegion,
                                      object: self,
                                      userInfo: [LocationsSensor.EXTRA_LABEL:region.identifier])
         
@@ -586,7 +586,7 @@ extension LocationsSensor: CLLocationManagerDelegate {
         if let engine = self.dbEngine {
             engine.save(data)
         }
-        self.notificationCenter.post(name: .actionAwareLocationsExitRegion,
+        self.notificationCenter.post(name: .actionLampLocationsExitRegion,
                                      object: self,
                                      userInfo: [LocationsSensor.EXTRA_LABEL:region.identifier])
     }

@@ -9,13 +9,13 @@ import UIKit
 import CoreMotion
 
 extension Notification.Name{
-    public static let actionAwareMagnetometer      = Notification.Name(MagnetometerSensor.ACTION_AWARE_MAGNETOMETER)
-    public static let actionAwareMagnetometerStart = Notification.Name(MagnetometerSensor.ACTION_AWARE_MAGNETOMETER_START)
-    public static let actionAwareMagnetometerStop  = Notification.Name(MagnetometerSensor.ACTION_AWARE_MAGNETOMETER_STOP)
-    public static let actionAwareMagnetometerSetLabel = Notification.Name(MagnetometerSensor.ACTION_AWARE_MAGNETOMETER_SET_LABEL)
-    public static let actionAwareMagnetometerSync  = Notification.Name(MagnetometerSensor.ACTION_AWARE_MAGNETOMETER_SYNC)
+    public static let actionLampMagnetometer      = Notification.Name(MagnetometerSensor.ACTION_LAMP_MAGNETOMETER)
+    public static let actionLampMagnetometerStart = Notification.Name(MagnetometerSensor.ACTION_LAMP_MAGNETOMETER_START)
+    public static let actionLampMagnetometerStop  = Notification.Name(MagnetometerSensor.ACTION_LAMP_MAGNETOMETER_STOP)
+    public static let actionLampMagnetometerSetLabel = Notification.Name(MagnetometerSensor.ACTION_LAMP_MAGNETOMETER_SET_LABEL)
+    public static let actionLampMagnetometerSync  = Notification.Name(MagnetometerSensor.ACTION_LAMP_MAGNETOMETER_SYNC)
     
-    public static let actionAwareMagnetometerSyncCompletion  = Notification.Name(MagnetometerSensor.ACTION_AWARE_MAGNETOMETER_SYNC_COMPLETION)
+    public static let actionLampMagnetometerSyncCompletion  = Notification.Name(MagnetometerSensor.ACTION_LAMP_MAGNETOMETER_SYNC_COMPLETION)
     
 }
 
@@ -24,24 +24,24 @@ public protocol MagnetometerObserver{
 }
 
 extension MagnetometerSensor{
-    public static var TAG = "AWARE::Magnetometer"
+    public static var TAG = "LAMP::Magnetometer"
     
-    public static var ACTION_AWARE_MAGNETOMETER = "ACTION_AWARE_MAGNETOMETER"
+    public static var ACTION_LAMP_MAGNETOMETER = "ACTION_AWARE_MAGNETOMETER"
     
-    public static var ACTION_AWARE_MAGNETOMETER_START = "com.awareframework.android.sensor.magnetometer.SENSOR_START"
-    public static var ACTION_AWARE_MAGNETOMETER_STOP = "com.awareframework.android.sensor.magnetometer.SENSOR_STOP"
+    public static var ACTION_LAMP_MAGNETOMETER_START = "com.awareframework.android.sensor.magnetometer.SENSOR_START"
+    public static var ACTION_LAMP_MAGNETOMETER_STOP = "com.awareframework.android.sensor.magnetometer.SENSOR_STOP"
     
-    public static var ACTION_AWARE_MAGNETOMETER_SET_LABEL = "com.awareframework.android.sensor.magnetometer.ACTION_AWARE_MAGNETOMETER_SET_LABEL"
+    public static var ACTION_LAMP_MAGNETOMETER_SET_LABEL = "com.awareframework.android.sensor.magnetometer.ACTION_AWARE_MAGNETOMETER_SET_LABEL"
     public static var EXTRA_LABEL = "label"
     
-    public static var ACTION_AWARE_MAGNETOMETER_SYNC = "com.awareframework.android.sensor.magnetometer.SENSOR_SYNC"
+    public static var ACTION_LAMP_MAGNETOMETER_SYNC = "com.awareframework.android.sensor.magnetometer.SENSOR_SYNC"
     
-    public static let ACTION_AWARE_MAGNETOMETER_SYNC_COMPLETION = "com.awareframework.ios.sensor.magnetometer.SENSOR_SYNC_COMPLETION"
+    public static let ACTION_LAMP_MAGNETOMETER_SYNC_COMPLETION = "com.awareframework.ios.sensor.magnetometer.SENSOR_SYNC_COMPLETION"
     public static let EXTRA_STATUS = "status"
     public static let EXTRA_ERROR = "error"
 }
 
-public class MagnetometerSensor: AwareSensor {
+public class MagnetometerSensor: LampSensorCore {
     public var CONFIG = Config()
     var motion = CMMotionManager()
     var LAST_DATA:CMMagneticField?
@@ -78,7 +78,7 @@ public class MagnetometerSensor: AwareSensor {
     
         public override init() {
             super.init()
-            dbPath = "aware_magnetometer"
+            //dbPath = "aware_magnetometer"
         }
         
         public override func set(config: Dictionary<String, Any>) {
@@ -161,7 +161,7 @@ public class MagnetometerSensor: AwareSensor {
                             engine.save(dataArray){ error in
                                 if error == nil {
                                     DispatchQueue.main.async {
-                                        self.notificationCenter.post(name: .actionAwareMagnetometer, object: self)
+                                        self.notificationCenter.post(name: .actionLampMagnetometer, object: self)
                                     }
                                 }else{
                                     if self.CONFIG.debug {
@@ -178,24 +178,24 @@ public class MagnetometerSensor: AwareSensor {
                     self.LAST_SAVE = currentTime
                 }
             }
-            self.notificationCenter.post(name: .actionAwareMagnetometerStart, object: self)
+            self.notificationCenter.post(name: .actionLampMagnetometerStart, object: self)
         }
     }
     
     public override func stop() {
         if motion.isMagnetometerAvailable && motion.isMagnetometerActive {
             motion.stopMagnetometerUpdates()
-            self.notificationCenter.post(name: .actionAwareMagnetometerStop, object: self)
+            self.notificationCenter.post(name: .actionLampMagnetometerStop, object: self)
         }
     }
     
     public override func sync(force: Bool = false) {
-        self.notificationCenter.post(name: .actionAwareMagnetometerSync, object: self)
+        self.notificationCenter.post(name: .actionLampMagnetometerSync, object: self)
     }
     
     public override func set(label:String){
         self.CONFIG.label = label
-        self.notificationCenter.post(name: .actionAwareMagnetometerSetLabel,
+        self.notificationCenter.post(name: .actionLampMagnetometerSetLabel,
                                      object: self,
                                      userInfo: [MagnetometerSensor.EXTRA_LABEL:label])
     }

@@ -7,7 +7,7 @@
 
 import UIKit
 
-public class CallsData: AwareObject {
+public class CallsData: LampSensorCoreObject {
     public static var TABLE_NAME = "callsData"
     @objc dynamic public var eventTimestamp: Int64 = 0
     @objc dynamic public var type: Int = -1

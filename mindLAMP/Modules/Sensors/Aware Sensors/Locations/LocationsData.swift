@@ -7,7 +7,7 @@
 
 import UIKit
 
-public class LocationsData: AwareObject {
+public class LocationsData: LampSensorCoreObject {
     public static var TABLE_NAME = "locationsData"
 
     // CLLocationCoordinate2D

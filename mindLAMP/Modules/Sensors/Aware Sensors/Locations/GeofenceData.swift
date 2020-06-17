@@ -7,7 +7,7 @@
 
 import UIKit
 
-public class GeofenceData: AwareObject {
+public class GeofenceData: LampSensorCoreObject {
     
     public static let TABLE_NAME = "geofenceData"
     

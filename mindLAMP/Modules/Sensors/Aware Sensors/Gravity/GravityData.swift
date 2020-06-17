@@ -7,7 +7,7 @@
 
 import UIKit
 
-public class GravityData: AwareObject {
+public class GravityData: LampSensorCoreObject {
     public static var TABLE_NAME = "gravityData"
     
     @objc dynamic public var x:Double = 0.0

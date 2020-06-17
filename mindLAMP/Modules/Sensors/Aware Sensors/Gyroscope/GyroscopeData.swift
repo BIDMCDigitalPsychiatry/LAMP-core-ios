@@ -7,7 +7,7 @@
 
 import UIKit
 
-public class GyroscopeData: AwareObject {
+public class GyroscopeData: LampSensorCoreObject {
     public static var TABLE_NAME = "gyroscopeData"
     
     @objc dynamic public var eventTimestamp : Int64 = 0

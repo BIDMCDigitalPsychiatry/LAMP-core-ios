@@ -7,7 +7,7 @@
 
 import UIKit
 
-public class WiFiScanData: AwareObject {
+public class WiFiScanData: LampSensorCoreObject {
     public static var TABLE_NAME = "wifiScanData"
     
     @objc dynamic public var bssid: String = ""

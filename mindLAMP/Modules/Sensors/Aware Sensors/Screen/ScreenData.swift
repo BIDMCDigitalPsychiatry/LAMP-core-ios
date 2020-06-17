@@ -7,7 +7,7 @@
 
 import UIKit
 
-public class ScreenData: AwareObject {
+public class ScreenData: LampSensorCoreObject {
     public static var TABLE_NAME = "screenData"
     
     @objc dynamic public var screenStatus:Int = -1
