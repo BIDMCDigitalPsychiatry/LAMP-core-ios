@@ -1,6 +1,6 @@
 //
 //  RotationSensor.swift
-//  com.aware.ios.sensor.rotation
+//  com.lamp.ios.sensor.rotation
 //
 //  Created by Yuuki Nishiyama on 2018/10/30.
 //
@@ -31,17 +31,17 @@ public protocol RotationObserver{
 extension RotationSensor {
     public static var TAG = "LAMP::Rotation"
     
-    public static var ACTION_LAMP_ROTATION = "ACTION_AWARE_ROTATION"
+    public static var ACTION_LAMP_ROTATION = "ACTION_LAMP_ROTATION"
     
-    public static var ACTION_LAMP_ROTATION_START = "com.awareframework.android.sensor.rotation.SENSOR_START"
-    public static var ACTION_LAMP_ROTATION_STOP = "com.awareframework.android.sensor.rotation.SENSOR_STOP"
+    public static var ACTION_LAMP_ROTATION_START = "com.lampframework.android.sensor.rotation.SENSOR_START"
+    public static var ACTION_LAMP_ROTATION_STOP = "com.lampframework.android.sensor.rotation.SENSOR_STOP"
     
-    public static var ACTION_LAMP_ROTATION_SET_LABEL = "com.awareframework.android.sensor.rotation.ACTION_AWARE_ROTATION_SET_LABEL"
+    public static var ACTION_LAMP_ROTATION_SET_LABEL = "com.lampframework.android.sensor.rotation.ACTION_LAMP_ROTATION_SET_LABEL"
     public static var EXTRA_LABEL = "label"
     
-    public static var ACTION_LAMP_ROTATION_SYNC = "com.awareframework.android.sensor.rotation.SENSOR_SYNC"
+    public static var ACTION_LAMP_ROTATION_SYNC = "com.lampframework.android.sensor.rotation.SENSOR_SYNC"
     
-    public static let ACTION_LAMP_ROTATION_SYNC_COMPLETION = "com.awareframework.ios.sensor.rotation.SENSOR_SYNC_COMPLETION"
+    public static let ACTION_LAMP_ROTATION_SYNC_COMPLETION = "com.lampframework.ios.sensor.rotation.SENSOR_SYNC_COMPLETION"
     public static let EXTRA_STATUS = "status"
     public static let EXTRA_ERROR = "error"
 }
@@ -196,7 +196,7 @@ public class RotationSensor: LampSensorCore {
                         
                         let dataArray = Array(self.dataBuffer)
                         if let engine = self.dbEngine{
-                            let queue = DispatchQueue(label:"com.awareframework.ios.sensor.rotation.save.queue")
+                            let queue = DispatchQueue(label:"com.lampframework.ios.sensor.rotation.save.queue")
                             queue.async {
                                 engine.save(dataArray){ error in
                                     if error == nil {

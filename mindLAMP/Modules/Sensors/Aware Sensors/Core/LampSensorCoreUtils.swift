@@ -10,7 +10,7 @@ import UIKit
 
 public class LampSensorCoreUtils{
 
-    private static let kDeviceIdKey:String = "com.aware.ios.sensor.core.key.deviceid"
+    private static let kDeviceIdKey:String = "com.lamp.ios.sensor.core.key.deviceid"
     
     public static func getTimeZone() -> Int {
         let secondsFromGMT = TimeZone.current.secondsFromGMT()

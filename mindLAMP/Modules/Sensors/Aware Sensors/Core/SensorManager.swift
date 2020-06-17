@@ -1,6 +1,6 @@
 //
 //  SensorManager.swift
-//  com.awareframework.ios.sensor.core
+//  com.lampframework.ios.sensor.core
 //
 //  Created by Yuuki Nishiyama on 2018/11/23.
 //

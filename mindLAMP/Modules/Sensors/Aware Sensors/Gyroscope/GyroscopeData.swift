@@ -1,6 +1,6 @@
 //
 //  GyroscopeData.swift
-//  com.aware.ios.sensor.gyroscope
+//  com.lamp.ios.sensor.gyroscope
 //
 //  Created by Yuuki Nishiyama on 2018/10/26.
 //

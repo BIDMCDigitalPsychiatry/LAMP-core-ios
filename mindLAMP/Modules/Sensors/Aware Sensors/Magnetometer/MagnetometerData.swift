@@ -1,6 +1,6 @@
 //
 //  MagnetometerData.swift
-//  com.aware.ios.sensor.magnetometer
+//  com.lamp.ios.sensor.magnetometer
 //
 //  Created by Yuuki Nishiyama on 2018/10/30.
 //

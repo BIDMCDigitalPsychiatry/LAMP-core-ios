@@ -1,6 +1,6 @@
 //
 //  ScreenSensor.swift
-//  com.aware.ios.sensor.core
+//  com.lamp.ios.sensor.core
 //
 //  Created by Yuuki Nishiyama on 2018/10/23.
 //
@@ -16,8 +16,8 @@ extension Notification.Name {
     
     public static let actionLampScreenOn     = Notification.Name(ScreenSensor.ACTION_LAMP_SCREEN_ON)
     public static let actionLampScreenOff    = Notification.Name(ScreenSensor.ACTION_LAMP_SCREEN_OFF)
-    //public static let actionAwareScreenLocked = Notification.Name(ScreenSensor.ACTION_AWARE_SCREEN_LOCKED)
-    //public static let actionAwareScreenUnlocked  = Notification.Name(ScreenSensor.ACTION_AWARE_SCREEN_UNLOCKED)
+    //public static let actionAwareScreenLocked = Notification.Name(ScreenSensor.ACTION_LAMP_SCREEN_LOCKED)
+    //public static let actionAwareScreenUnlocked  = Notification.Name(ScreenSensor.ACTION_LAMP_SCREEN_UNLOCKED)
     
     public static let actionLampScreenSyncCompletion  = Notification.Name(ScreenSensor.ACTION_LAMP_SCREEN_SYNC_COMPLETION)
 }
@@ -34,14 +34,14 @@ public class ScreenSensor: LampSensorCore {
     
     public static let TAG = "LAMP::Screen"
     
-    public static let ACTION_LAMP_SCREEN = "com.awareframework.ios.sensor.screen"
-    public static let ACTION_LAMP_SCREEN_START = "com.awareframework.ios.sensor.screen.SENSOR_START"
-    public static let ACTION_LAMP_SCREEN_STOP = "com.awareframework.ios.sensor.screen.SENSOR_STOP"
-    public static let ACTION_LAMP_SCREEN_SET_LABEL = "com.awareframework.ios.sensor.screen.SET_LABEL"
+    public static let ACTION_LAMP_SCREEN = "com.lampframework.ios.sensor.screen"
+    public static let ACTION_LAMP_SCREEN_START = "com.lampframework.ios.sensor.screen.SENSOR_START"
+    public static let ACTION_LAMP_SCREEN_STOP = "com.lampframework.ios.sensor.screen.SENSOR_STOP"
+    public static let ACTION_LAMP_SCREEN_SET_LABEL = "com.lampframework.ios.sensor.screen.SET_LABEL"
     public static let EXTRA_LABEL = "label"
-    public static let ACTION_LAMP_SCREEN_SYNC = "com.awareframework.ios.sensor.screen.SENSOR_SYNC"
+    public static let ACTION_LAMP_SCREEN_SYNC = "com.lampframework.ios.sensor.screen.SENSOR_SYNC"
     
-    public static let ACTION_LAMP_SCREEN_SYNC_COMPLETION = "com.awareframework.ios.sensor.screeen.SENSOR_SYNC_COMPLETION"
+    public static let ACTION_LAMP_SCREEN_SYNC_COMPLETION = "com.lampframework.ios.sensor.screeen.SENSOR_SYNC_COMPLETION"
     public static let EXTRA_STATUS = "status"
     public static let EXTRA_ERROR = "error"
     public static let EXTRA_OBJECT_TYPE = "objectType"
@@ -50,42 +50,42 @@ public class ScreenSensor: LampSensorCore {
     /**
      * Broadcasted event: screen is on
      */
-    public static let ACTION_LAMP_SCREEN_ON = "com.awareframework.ios.sensor.screen.ACTION_AWARE_SCREEN_ON"
+    public static let ACTION_LAMP_SCREEN_ON = "com.lampframework.ios.sensor.screen.ACTION_LAMP_SCREEN_ON"
     
     /**
      * Broadcasted event: screen is off
      */
-    public static let ACTION_LAMP_SCREEN_OFF = "com.awareframework.ios.sensor.screen.ACTION_AWARE_SCREEN_OFF"
+    public static let ACTION_LAMP_SCREEN_OFF = "com.lampframework.ios.sensor.screen.ACTION_LAMP_SCREEN_OFF"
     
     /**
      * Broadcasted event: screen is locked
      */
-    //public static let ACTION_AWARE_SCREEN_LOCKED = "com.awareframework.ios.sensor.screen.ACTION_AWARE_SCREEN_LOCKED"
+    //public static let ACTION_LAMP_SCREEN_LOCKED = "com.lampframework.ios.sensor.screen.ACTION_LAMP_SCREEN_LOCKED"
     
     /**
      * Broadcasted event: screen is unlocked
      */
-    //public static let ACTION_AWARE_SCREEN_UNLOCKED = "com.awareframework.ios.sensor.screen.ACTION_AWARE_SCREEN_UNLOCKED"
+    //public static let ACTION_LAMP_SCREEN_UNLOCKED = "com.lampframework.ios.sensor.screen.ACTION_LAMP_SCREEN_UNLOCKED"
     
     /**
      * NOTE: Does not support on iOS
      */
-    public static let ACTION_LAMP_TOUCH_CLICKED = "com.awareframework.ios.sensor.screen.ACTION_AWARE_TOUCH_CLICKED"
+    public static let ACTION_LAMP_TOUCH_CLICKED = "com.lampframework.ios.sensor.screen.ACTION_LAMP_TOUCH_CLICKED"
 
     /**
      * NOTE: Does not support on iOS
      */
-    public static let ACTION_LAMP_TOUCH_LONG_CLICKED = "com.awareframework.ios.sensor.screen.ACTION_AWARE_TOUCH_LONG_CLICKED"
+    public static let ACTION_LAMP_TOUCH_LONG_CLICKED = "com.lampframework.ios.sensor.screen.ACTION_LAMP_TOUCH_LONG_CLICKED"
     
     /**
      * NOTE: Does not support on iOS
      */
-    public static let ACTION_LAMP_TOUCH_SCROLLED_UP = "com.awareframework.ios.sensor.screen.ACTION_AWARE_TOUCH_SCROLLED_UP"
+    public static let ACTION_LAMP_TOUCH_SCROLLED_UP = "com.lampframework.ios.sensor.screen.ACTION_LAMP_TOUCH_SCROLLED_UP"
     
     /**
      * NOTE: Does not support on iOS
      */
-    public static let ACTION_LAMP_TOUCH_SCROLLED_DOWN = "com.awareframework.ios.sensor.screen.ACTION_AWARE_TOUCH_SCROLLED_DOWN"
+    public static let ACTION_LAMP_TOUCH_SCROLLED_DOWN = "com.lampframework.ios.sensor.screen.ACTION_LAMP_TOUCH_SCROLLED_DOWN"
     
     /**
      * Screen status: OFF = 0

@@ -1,6 +1,6 @@
 //
 //  MagnetometerSensor.swift
-//  com.aware.ios.sensor.magnetometer
+//  com.lamp.ios.sensor.magnetometer
 //
 //  Created by Yuuki Nishiyama on 2018/10/30.
 //
@@ -26,17 +26,17 @@ public protocol MagnetometerObserver{
 extension MagnetometerSensor{
     public static var TAG = "LAMP::Magnetometer"
     
-    public static var ACTION_LAMP_MAGNETOMETER = "ACTION_AWARE_MAGNETOMETER"
+    public static var ACTION_LAMP_MAGNETOMETER = "ACTION_LAMP_MAGNETOMETER"
     
-    public static var ACTION_LAMP_MAGNETOMETER_START = "com.awareframework.android.sensor.magnetometer.SENSOR_START"
-    public static var ACTION_LAMP_MAGNETOMETER_STOP = "com.awareframework.android.sensor.magnetometer.SENSOR_STOP"
+    public static var ACTION_LAMP_MAGNETOMETER_START = "com.lampframework.android.sensor.magnetometer.SENSOR_START"
+    public static var ACTION_LAMP_MAGNETOMETER_STOP = "com.lampframework.android.sensor.magnetometer.SENSOR_STOP"
     
-    public static var ACTION_LAMP_MAGNETOMETER_SET_LABEL = "com.awareframework.android.sensor.magnetometer.ACTION_AWARE_MAGNETOMETER_SET_LABEL"
+    public static var ACTION_LAMP_MAGNETOMETER_SET_LABEL = "com.lampframework.android.sensor.magnetometer.ACTION_LAMP_MAGNETOMETER_SET_LABEL"
     public static var EXTRA_LABEL = "label"
     
-    public static var ACTION_LAMP_MAGNETOMETER_SYNC = "com.awareframework.android.sensor.magnetometer.SENSOR_SYNC"
+    public static var ACTION_LAMP_MAGNETOMETER_SYNC = "com.lampframework.android.sensor.magnetometer.SENSOR_SYNC"
     
-    public static let ACTION_LAMP_MAGNETOMETER_SYNC_COMPLETION = "com.awareframework.ios.sensor.magnetometer.SENSOR_SYNC_COMPLETION"
+    public static let ACTION_LAMP_MAGNETOMETER_SYNC_COMPLETION = "com.lampframework.ios.sensor.magnetometer.SENSOR_SYNC_COMPLETION"
     public static let EXTRA_STATUS = "status"
     public static let EXTRA_ERROR = "error"
 }
@@ -156,7 +156,7 @@ public class MagnetometerSensor: LampSensorCore {
                     let dataArray = Array(self.dataBuffer)
                     
                     if let engine = self.dbEngine{
-                        let queue = DispatchQueue(label:"com.awareframework.ios.sensor.magnetometer.save.queue")
+                        let queue = DispatchQueue(label:"com.lampframework.ios.sensor.magnetometer.save.queue")
                         queue.sync {
                             engine.save(dataArray){ error in
                                 if error == nil {

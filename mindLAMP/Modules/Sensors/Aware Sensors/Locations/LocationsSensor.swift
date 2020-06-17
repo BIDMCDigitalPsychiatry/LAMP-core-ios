@@ -1,6 +1,6 @@
 //
 //  LocationsSensor.swift
-//  com.aware.ios.sensor.core
+//  com.lamp.ios.sensor.core
 //
 //  Created by Yuuki Nishiyama on 2018/10/22.
 //
@@ -49,45 +49,45 @@ public class LocationsSensor: LampSensorCore{
     /**
      * Fired event: New location available
      */
-    public static let ACTION_LAMP_LOCATIONS = "com.awareframework.ios.sensor.locations"
+    public static let ACTION_LAMP_LOCATIONS = "com.lampframework.ios.sensor.locations"
     
-    public static let ACTION_LAMP_LOCATIONS_HEADING_CHANGED = "ACTION_AWARE_LOCATIONS_HEADING_CHANGED"
+    public static let ACTION_LAMP_LOCATIONS_HEADING_CHANGED = "ACTION_LAMP_LOCATIONS_HEADING_CHANGED"
     
     /**
      * Fired event: GPS location is active
      */
-    public static let ACTION_LAMP_GPS_LOCATIONS_ENABLED = "ACTION_AWARE_GPS_LOCATIONS_ENABLED"
+    public static let ACTION_LAMP_GPS_LOCATIONS_ENABLED = "ACTION_LAMP_GPS_LOCATIONS_ENABLED"
     
     /**
      * Fired event: Network location is active
      */
-    public static let ACTION_LAMP_NETWORK_LOCATIONS_ENABLED = "ACTION_AWARE_NETWORK_LOCATIONS_ENABLED"
+    public static let ACTION_LAMP_NETWORK_LOCATIONS_ENABLED = "ACTION_LAMP_NETWORK_LOCATIONS_ENABLED"
     
     /**
      * Fired event: GPS location disabled
      */
-    public static let ACTION_LAMP_GPS_LOCATIONS_DISABLED = "ACTION_AWARE_GPS_LOCATIONS_DISABLED"
+    public static let ACTION_LAMP_GPS_LOCATIONS_DISABLED = "ACTION_LAMP_GPS_LOCATIONS_DISABLED"
     
-    public static let ACTION_LAMP_LOCATIONS_ENTER_REGION = "ACTION_AWARE_LOCATION_ENTER_REGION"
+    public static let ACTION_LAMP_LOCATIONS_ENTER_REGION = "ACTION_LAMP_LOCATION_ENTER_REGION"
     
-    public static let ACTION_LAMP_LOCATIONS_EXIT_REGION  = "ACTION_AWARE_LOCATION_EXIT_REGION"
+    public static let ACTION_LAMP_LOCATIONS_EXIT_REGION  = "ACTION_LAMP_LOCATION_EXIT_REGION"
     
-    public static let ACTION_LAMP_LOCATIONS_VISIT  = "ACTION_AWARE_LOCATION_VISIT"
+    public static let ACTION_LAMP_LOCATIONS_VISIT  = "ACTION_LAMP_LOCATION_VISIT"
     
     /**
      * Fired event: Network location disabled
      */
-    public static let ACTION_LAMP_NETWORK_LOCATIONS_DISABLED = "ACTION_AWARE_NETWORK_LOCATIONS_DISABLED"
+    public static let ACTION_LAMP_NETWORK_LOCATIONS_DISABLED = "ACTION_LAMP_NETWORK_LOCATIONS_DISABLED"
     
-    public static let ACTION_LAMP_LOCATIONS_START = "com.awareframework.ios.sensor.locations.SENSOR_START"
-    public static let ACTION_LAMP_LOCATIONS_STOP = "com.awareframework.ios.sensor.locations.SENSOR_STOP"
+    public static let ACTION_LAMP_LOCATIONS_START = "com.lampframework.ios.sensor.locations.SENSOR_START"
+    public static let ACTION_LAMP_LOCATIONS_STOP = "com.lampframework.ios.sensor.locations.SENSOR_STOP"
     
     public static let ACTION_LAMP_LOCATIONS_SET_LABEL = "com.ios.android.sensor.locations.SET_LABEL"
     public static var EXTRA_LABEL = "label"
     
-    public static let ACTION_LAMP_LOCATIONS_SYNC = "com.awareframework.ios.sensor.locations.SENSOR_SYNC"
+    public static let ACTION_LAMP_LOCATIONS_SYNC = "com.lampframework.ios.sensor.locations.SENSOR_SYNC"
     
-    public static let ACTION_LAMP_LOCATIONS_SYNC_COMPLETION = "com.awareframework.ios.sensor.locations.SENSOR_SYNC_COMPLETION"
+    public static let ACTION_LAMP_LOCATIONS_SYNC_COMPLETION = "com.lampframework.ios.sensor.locations.SENSOR_SYNC_COMPLETION"
     public static let EXTRA_STATUS = "status"
     public static let EXTRA_ERROR = "error"
     public static let EXTRA_OBJECT_TYPE = "objectType"

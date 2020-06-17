@@ -1,6 +1,6 @@
 //
 //  PedometerSensor.swift
-//  com.aware.ios.sensor.core
+//  com.lamp.ios.sensor.core
 //
 //  Created by Yuuki Nishiyama on 2018/11/12.
 //
@@ -172,7 +172,7 @@ public class PedometerSensor: LampSensorCore {
                         
 
                         if let engine = self.dbEngine {
-                            let queue = DispatchQueue(label:"com.awareframework.ios.sensor.pedometer.save.queue")
+                            let queue = DispatchQueue(label:"com.lampframework.ios.sensor.pedometer.save.queue")
                             queue.async {
                                 engine.save(data) { error in
                                     if error == nil {
@@ -235,15 +235,15 @@ extension Notification.Name {
 }
 
 extension PedometerSensor {
-    public static let ACTION_LAMP_PEDOMETER       = "com.awareframework.ios.sensor.pedometer"
-    public static let ACTION_LAMP_PEDOMETER_START = "com.awareframework.ios.sensor.pedometer.ACTION_AWARE_PEDOMETER_START"
-    public static let ACTION_LAMP_PEDOMETER_STOP  = "com.awareframework.ios.sensor.pedometer.ACTION_AWARE_PEDOMETER_STOP"
-    public static let ACTION_LAMP_PEDOMETER_SET_LABEL = "com.awareframework.ios.sensor.pedometer.ACTION_AWARE_PEDOMETER_SET_LABEL"
-    public static let ACTION_LAMP_PEDOMETER_SYNC  = "com.awareframework.ios.sensor.pedometer.ACTION_AWARE_PEDOMETER_SYNC"
+    public static let ACTION_LAMP_PEDOMETER       = "com.lampframework.ios.sensor.pedometer"
+    public static let ACTION_LAMP_PEDOMETER_START = "com.lampframework.ios.sensor.pedometer.ACTION_LAMP_PEDOMETER_START"
+    public static let ACTION_LAMP_PEDOMETER_STOP  = "com.lampframework.ios.sensor.pedometer.ACTION_LAMP_PEDOMETER_STOP"
+    public static let ACTION_LAMP_PEDOMETER_SET_LABEL = "com.lampframework.ios.sensor.pedometer.ACTION_LAMP_PEDOMETER_SET_LABEL"
+    public static let ACTION_LAMP_PEDOMETER_SYNC  = "com.lampframework.ios.sensor.pedometer.ACTION_LAMP_PEDOMETER_SYNC"
     public static let EXTRA_LABEL = "label"
 
     
-    public static let ACTION_LAMP_PEDOMETER_SYNC_COMPLETION = "com.awareframework.ios.sensor.pedometer.SENSOR_SYNC_COMPLETION"
+    public static let ACTION_LAMP_PEDOMETER_SYNC_COMPLETION = "com.lampframework.ios.sensor.pedometer.SENSOR_SYNC_COMPLETION"
     public static let EXTRA_STATUS = "status"
     public static let EXTRA_ERROR = "error"
 
@@ -251,7 +251,7 @@ extension PedometerSensor {
 
 extension PedometerSensor {
     
-    public static let KEY_LAST_UPDATE_DATETIME = "com.awareframework.ios.sensor.pedometer.key.last_update_datetime";
+    public static let KEY_LAST_UPDATE_DATETIME = "com.lampframework.ios.sensor.pedometer.key.last_update_datetime";
     
     public func getFomattedDateTime(_ date:Date) -> Date?{
         let calendar = Calendar.current

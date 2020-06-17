@@ -1,6 +1,6 @@
 //
 //  CallsSensor.swift
-//  com.aware.ios.sensor.calls
+//  com.lamp.ios.sensor.calls
 //
 //  Created by Yuuki Nishiyama on 2018/10/24.
 //
@@ -65,60 +65,60 @@ public class CallsSensor: LampSensorCore {
     /**
      * Fired event: call accepted by the user
      */
-    public static let ACTION_LAMP_CALL_ACCEPTED = "ACTION_AWARE_CALL_ACCEPTED"
+    public static let ACTION_LAMP_CALL_ACCEPTED = "ACTION_LAMP_CALL_ACCEPTED"
     
     /**
      * Fired event: phone is ringing
      */
-    public static let ACTION_LAMP_CALL_RINGING = "ACTION_AWARE_CALL_RINGING"
+    public static let ACTION_LAMP_CALL_RINGING = "ACTION_LAMP_CALL_RINGING"
     
     /**
      * Fired event: call unanswered
      */
-    public static let ACTION_LAMP_CALL_MISSED = "ACTION_AWARE_CALL_MISSED"
+    public static let ACTION_LAMP_CALL_MISSED = "ACTION_LAMP_CALL_MISSED"
     
     /**
      * Fired event: call got voice mailed.
      * Only available after SDK 21
      */
-    public static let ACTION_LAMP_CALL_VOICE_MAILED = "ACTION_AWARE_CALL_VOICE_MAILED"
+    public static let ACTION_LAMP_CALL_VOICE_MAILED = "ACTION_LAMP_CALL_VOICE_MAILED"
     
     /**
      * Fired event: call got rejected by the callee
      * Only available after SDK 24
      */
-    public static let ACTION_LAMP_CALL_REJECTED = "ACTION_AWARE_CALL_REJECTED"
+    public static let ACTION_LAMP_CALL_REJECTED = "ACTION_LAMP_CALL_REJECTED"
     
     /**
      * Fired event: call got blocked.
      * Only available after SDK 24
      */
-    public static let ACTION_LAMP_CALL_BLOCKED = "ACTION_AWARE_CALL_BLOCKED"
+    public static let ACTION_LAMP_CALL_BLOCKED = "ACTION_LAMP_CALL_BLOCKED"
     
     /**
      * Fired event: call attempt by the user
      */
-    public static let ACTION_LAMP_CALL_MADE = "ACTION_AWARE_CALL_MADE"
+    public static let ACTION_LAMP_CALL_MADE = "ACTION_LAMP_CALL_MADE"
     
     /**
      * Fired event: user IS in a call at the moment
      */
-    public static let ACTION_LAMP_USER_IN_CALL = "ACTION_AWARE_USER_IN_CALL"
+    public static let ACTION_LAMP_USER_IN_CALL = "ACTION_LAMP_USER_IN_CALL"
     
     /**
      * Fired event: user is NOT in a call
      */
-    public static let ACTION_LAMP_USER_NOT_IN_CALL = "ACTION_AWARE_USER_NOT_IN_CALL"
+    public static let ACTION_LAMP_USER_NOT_IN_CALL = "ACTION_LAMP_USER_NOT_IN_CALL"
     
-    public static let ACTION_LAMP_CALLS = "com.awareframework.ios.sensor.calls"
-    public static let ACTION_LAMP_CALLS_START = "com.awareframework.ios.sensor.calls.SENSOR_START"
-    public static let ACTION_LAMP_CALLS_STOP = "com.awareframework.ios.sensor.calls.SENSOR_STOP"
+    public static let ACTION_LAMP_CALLS = "com.lampframework.ios.sensor.calls"
+    public static let ACTION_LAMP_CALLS_START = "com.lampframework.ios.sensor.calls.SENSOR_START"
+    public static let ACTION_LAMP_CALLS_STOP = "com.lampframework.ios.sensor.calls.SENSOR_STOP"
     
-    public static let ACTION_LAMP_CALLS_SET_LABEL = "com.awareframework.ios.sensor.calls.SET_LABEL"
+    public static let ACTION_LAMP_CALLS_SET_LABEL = "com.lampframework.ios.sensor.calls.SET_LABEL"
     public static let EXTRA_LABEL = "label"
     
-    public static let ACTION_LAMP_CALLS_SYNC = "com.awareframework.ios.sensor.calls.SENSOR_SYNC"
-    public static let ACTION_LAMP_CALLS_SYNC_COMPLETION = "com.awareframework.ios.sensor.calls.SENSOR_SYNC_COMPLETION"
+    public static let ACTION_LAMP_CALLS_SYNC = "com.lampframework.ios.sensor.calls.SENSOR_SYNC"
+    public static let ACTION_LAMP_CALLS_SYNC_COMPLETION = "com.lampframework.ios.sensor.calls.SENSOR_SYNC_COMPLETION"
     public static let EXTRA_STATUS = "status"
     public static let EXTRA_ERROR = "error"
     

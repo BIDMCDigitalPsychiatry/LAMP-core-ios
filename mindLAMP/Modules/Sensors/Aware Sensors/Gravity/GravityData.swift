@@ -1,6 +1,6 @@
 //
 //  GravityData.swift
-//  com.aware.ios.sensor.gravity
+//  com.lamp.ios.sensor.gravity
 //
 //  Created by Yuuki Nishiyama on 2018/11/01.
 //

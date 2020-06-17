@@ -1,6 +1,6 @@
 //
 //  GravitySensor.swift
-//  com.aware.ios.sensor.gravity
+//  com.lamp.ios.sensor.gravity
 //
 //  Created by Yuuki Nishiyama on 2018/11/01.
 //
@@ -24,16 +24,16 @@ public protocol GravityObserver{
 public extension GravitySensor{
     static let TAG = "LAMP::Gravity"
     
-    static let ACTION_LAMP_GRAVITY = "ACTION_AWARE_GRAVITY"
+    static let ACTION_LAMP_GRAVITY = "ACTION_LAMP_GRAVITY"
     
-    static let ACTION_LAMP_GRAVITY_START = "com.awareframework.ios.sensor.gravity.SENSOR_START"
-    static let ACTION_LAMP_GRAVITY_STOP = "com.awareframework.ios.sensor.gravity.SENSOR_STOP"
+    static let ACTION_LAMP_GRAVITY_START = "com.lampframework.ios.sensor.gravity.SENSOR_START"
+    static let ACTION_LAMP_GRAVITY_STOP = "com.lampframework.ios.sensor.gravity.SENSOR_STOP"
     
-    static let ACTION_LAMP_GRAVITY_SET_LABEL = "com.awareframework.ios.sensor.gravity.ACTION_AWARE_GRAVITY_SET_LABEL"
+    static let ACTION_LAMP_GRAVITY_SET_LABEL = "com.lampframework.ios.sensor.gravity.ACTION_LAMP_GRAVITY_SET_LABEL"
     static let EXTRA_LABEL = "label"
     
-    static let ACTION_LAMP_GRAVITY_SYNC = "com.awareframework.ios.sensor.gravity.SENSOR_SYNC"
-    static let ACTION_LAMP_GRAVITY_SYNC_COMPLETION = "com.awareframework.ios.sensor.gravity.SENSOR_SYNC_COMPLETION"
+    static let ACTION_LAMP_GRAVITY_SYNC = "com.lampframework.ios.sensor.gravity.SENSOR_SYNC"
+    static let ACTION_LAMP_GRAVITY_SYNC_COMPLETION = "com.lampframework.ios.sensor.gravity.SENSOR_SYNC_COMPLETION"
     static let EXTRA_STATUS = "status"
     static let EXTRA_ERROR = "error"
 }
@@ -154,7 +154,7 @@ public class GravitySensor: LampSensorCore {
                     
                     let dataArray = Array(self.dataBuffer)
                     
-                    let queue = DispatchQueue(label:"com.awareframework.ios.sensor.gravity.save.queue")
+                    let queue = DispatchQueue(label:"com.lampframework.ios.sensor.gravity.save.queue")
                     queue.async {
                         if let engine = self.dbEngine {
                             engine.save(dataArray) { error in

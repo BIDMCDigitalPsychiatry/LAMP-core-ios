@@ -1,6 +1,6 @@
 //
 //  GyroscopeSensor.swift
-//  com.aware.ios.sensor.gyroscope
+//  com.lamp.ios.sensor.gyroscope
 //
 //  Created by Yuuki Nishiyama on 2018/10/26.
 //
@@ -24,16 +24,16 @@ public protocol GyroscopeObserver{
 public extension GyroscopeSensor{
     static let TAG = "LAMP::Gyroscope"
     
-    static let ACTION_LAMP_GYROSCOPE = "ACTION_AWARE_GYROSCOPE"
+    static let ACTION_LAMP_GYROSCOPE = "ACTION_LAMP_GYROSCOPE"
     
-    static let ACTION_LAMP_GYROSCOPE_START = "com.awareframework.ios.sensor.gyroscope.SENSOR_START"
-    static let ACTION_LAMP_GYROSCOPE_STOP = "com.awareframework.ios.sensor.gyroscope.SENSOR_STOP"
+    static let ACTION_LAMP_GYROSCOPE_START = "com.lampframework.ios.sensor.gyroscope.SENSOR_START"
+    static let ACTION_LAMP_GYROSCOPE_STOP = "com.lampframework.ios.sensor.gyroscope.SENSOR_STOP"
     
-    static let ACTION_LAMP_GYROSCOPE_SET_LABEL = "com.awareframework.ios.sensor.gyroscope.ACTION_AWARE_GYROSCOPE_SET_LABEL"
+    static let ACTION_LAMP_GYROSCOPE_SET_LABEL = "com.lampframework.ios.sensor.gyroscope.ACTION_LAMP_GYROSCOPE_SET_LABEL"
     static let EXTRA_LABEL = "label"
     
-    static let ACTION_LAMP_GYROSCOPE_SYNC = "com.awareframework.ios.sensor.gyroscope.SENSOR_SYNC"
-    static let ACTION_LAMP_GYROSCOPE_SYNC_COMPLETION = "com.awareframework.ios.sensor.gyroscope.SENSOR_SYNC_COMPLETION"
+    static let ACTION_LAMP_GYROSCOPE_SYNC = "com.lampframework.ios.sensor.gyroscope.SENSOR_SYNC"
+    static let ACTION_LAMP_GYROSCOPE_SYNC_COMPLETION = "com.lampframework.ios.sensor.gyroscope.SENSOR_SYNC_COMPLETION"
     static let EXTRA_STATUS = "status"
     static let EXTRA_ERROR = "error"
 }
@@ -139,7 +139,7 @@ public class GyroscopeSensor: LampSensorCore {
                     
                     let dataArray = Array(self.dataBuffer)
                     
-                    let queue = DispatchQueue(label:"com.awareframework.ios.sensor.gyroscope.save.queue")
+                    let queue = DispatchQueue(label:"com.lampframework.ios.sensor.gyroscope.save.queue")
                     queue.async {
                         if let engine = self.dbEngine{
                             engine.save(dataArray){ error in

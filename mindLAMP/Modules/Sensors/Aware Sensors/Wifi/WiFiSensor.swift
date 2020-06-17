@@ -1,6 +1,6 @@
 //
 //  Wifi.swift
-//  com.aware.ios.sensor.wifi
+//  com.lamp.ios.sensor.wifi
 //
 //  Created by Yuuki Nishiyama on 2018/10/18.
 //
@@ -36,23 +36,23 @@ public class WiFiSensor: LampSensorCore {
     /**
      * Received event: Fire it to start the WiFi sensor.
      */
-    public static let ACTION_LAMP_WIFI_START = "com.aware.sensor.wifi.SENSOR_START"
+    public static let ACTION_LAMP_WIFI_START = "com.lamp.sensor.wifi.SENSOR_START"
     
     /**
      * Received event: Fire it to stop the WiFi sensor.
      */
-    public static let ACTION_LAMP_WIFI_STOP = "com.aware.sensor.wifi.SENSOR_STOP"
+    public static let ACTION_LAMP_WIFI_STOP = "com.lamp.sensor.wifi.SENSOR_STOP"
     
     /**
      * Received event: Fire it to sync the data with the server.
      */
-    public static let ACTION_LAMP_WIFI_SYNC = "com.aware.sensor.wifi.SYNC"
+    public static let ACTION_LAMP_WIFI_SYNC = "com.lamp.sensor.wifi.SYNC"
     
     /**
      * Received event: Fire it to set the data label.
      * Use [EXTRA_LABEL] to send the label string.
      */
-    public static let ACTION_LAMP_WIFI_SET_LABEL = "com.aware.sensor.wifi.SET_LABEL"
+    public static let ACTION_LAMP_WIFI_SET_LABEL = "com.lamp.sensor.wifi.SET_LABEL"
     
     /**
      * Label string sent in the intent extra.
@@ -62,13 +62,13 @@ public class WiFiSensor: LampSensorCore {
     /**
      * Fired event: currently connected to this AP
      */
-    public static let ACTION_LAMP_WIFI_CURRENT_AP = "ACTION_AWARE_WIFI_CURRENT_AP"
+    public static let ACTION_LAMP_WIFI_CURRENT_AP = "ACTION_LAMP_WIFI_CURRENT_AP"
     
     /**
      * Fired event: new WiFi AP device detected.
      * [WiFiSensor.EXTRA_DATA] contains the JSON version of the discovered device.
      */
-    public static let ACTION_LAMP_WIFI_NEW_DEVICE = "ACTION_AWARE_WIFI_NEW_DEVICE"
+    public static let ACTION_LAMP_WIFI_NEW_DEVICE = "ACTION_LAMP_WIFI_NEW_DEVICE"
     
     /**
      * Contains the JSON version of the discovered device.
@@ -78,19 +78,19 @@ public class WiFiSensor: LampSensorCore {
     /**
      * Fired event: WiFi scan started.
      */
-    public static let ACTION_LAMP_WIFI_SCAN_STARTED = "ACTION_AWARE_WIFI_SCAN_STARTED"
+    public static let ACTION_LAMP_WIFI_SCAN_STARTED = "ACTION_LAMP_WIFI_SCAN_STARTED"
     
     /**
      * Fired event: WiFi scan ended.
      */
-    public static let ACTION_LAMP_WIFI_SCAN_ENDED = "ACTION_AWARE_WIFI_SCAN_ENDED"
+    public static let ACTION_LAMP_WIFI_SCAN_ENDED = "ACTION_LAMP_WIFI_SCAN_ENDED"
     
     /**
      * Broadcast receiving event: request a WiFi scan
      */
-    public static let ACTION_LAMP_WIFI_REQUEST_SCAN = "ACTION_AWARE_WIFI_REQUEST_SCAN"
+    public static let ACTION_LAMP_WIFI_REQUEST_SCAN = "ACTION_LAMP_WIFI_REQUEST_SCAN"
     
-    public static let ACTION_LAMP_WIFI_SYNC_COMPLETION = "com.awareframework.ios.sensor.wifi.SENSOR_SYNC_COMPLETION"
+    public static let ACTION_LAMP_WIFI_SYNC_COMPLETION = "com.lampframework.ios.sensor.wifi.SENSOR_SYNC_COMPLETION"
     public static let EXTRA_STATUS = "status"
     public static let EXTRA_ERROR = "error"
     public static let EXTRA_OBJECT_TYPE = "objectType"

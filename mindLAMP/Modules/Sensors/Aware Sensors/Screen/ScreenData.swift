@@ -1,6 +1,6 @@
 //
 //  ScreenData.swift
-//  com.aware.ios.sensor.core
+//  com.lamp.ios.sensor.core
 //
 //  Created by Yuuki Nishiyama on 2018/10/23.
 //

@@ -24,14 +24,14 @@ public protocol AccelerometerObserver {
 
 public extension AccelerometerSensor {
     /// keys ///
-    static let ACTION_LAMP_ACCELEROMETER       = "com.awareframework.ios.sensor.accelerometer"
-    static let ACTION_LAMP_ACCELEROMETER_START = "com.awareframework.ios.sensor.accelerometer.ACTION_AWARE_ACCELEROMETER_START"
-    static let ACTION_LAMP_ACCELEROMETER_STOP  = "com.awareframework.ios.sensor.accelerometer.ACTION_AWARE_ACCELEROMETER_STOP"
-    static let ACTION_LAMP_ACCELEROMETER_SYNC  = "com.awareframework.ios.sensor.accelerometer.ACTION_AWARE_ACCELEROMETER_SYNC"
-    static let ACTION_LAMP_ACCELEROMETER_SYNC_COMPLETION = "com.awareframework.ios.sensor.accelerometer.ACTION_AWARE_ACCELEROMETER_SYNC_SUCCESS_COMPLETION"
-    static let ACTION_LAMP_ACCELEROMETER_SET_LABEL = "com.awareframework.ios.sensor.accelerometer.ACTION_AWARE_ACCELEROMETER_SET_LABEL"
+    static let ACTION_LAMP_ACCELEROMETER       = "com.lampframework.ios.sensor.accelerometer"
+    static let ACTION_LAMP_ACCELEROMETER_START = "com.lampframework.ios.sensor.accelerometer.ACTION_LAMP_ACCELEROMETER_START"
+    static let ACTION_LAMP_ACCELEROMETER_STOP  = "com.lampframework.ios.sensor.accelerometer.ACTION_LAMP_ACCELEROMETER_STOP"
+    static let ACTION_LAMP_ACCELEROMETER_SYNC  = "com.lampframework.ios.sensor.accelerometer.ACTION_LAMP_ACCELEROMETER_SYNC"
+    static let ACTION_LAMP_ACCELEROMETER_SYNC_COMPLETION = "com.lampframework.ios.sensor.accelerometer.ACTION_LAMP_ACCELEROMETER_SYNC_SUCCESS_COMPLETION"
+    static let ACTION_LAMP_ACCELEROMETER_SET_LABEL = "com.lampframework.ios.sensor.accelerometer.ACTION_LAMP_ACCELEROMETER_SET_LABEL"
     static var EXTRA_LABEL  = "label"
-    static let TAG = "com.awareframework.ios.sensor.accelerometer"
+    static let TAG = "com.lampframework.ios.sensor.accelerometer"
     static let EXTRA_STATUS = "status"
     static let EXTRA_ERROR = "error"
 }

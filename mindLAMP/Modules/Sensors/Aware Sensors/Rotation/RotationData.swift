@@ -1,6 +1,6 @@
 //
 //  RotationData.swift
-//  com.aware.ios.sensor.rotation
+//  com.lamp.ios.sensor.rotation
 //
 //  Created by Yuuki Nishiyama on 2018/10/30.
 //
