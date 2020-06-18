@@ -10,39 +10,6 @@
 		5F34363324210B8A0097EC2F /* LMLogsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F34363224210B8A0097EC2F /* LMLogsManager.swift */; };
 		5F3D223C241A0F0600899DD0 /* LMBluetoothSensor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F3D223B241A0F0600899DD0 /* LMBluetoothSensor.swift */; };
 		5F763011242386AA00B2DD03 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 5F763010242386AA00B2DD03 /* Localizable.strings */; };
-		5F82D54E24122EFD0040AA41 /* LampSensorCoreObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F82D53D24122EFD0040AA41 /* LampSensorCoreObject.swift */; };
-		5F82D54F24122EFD0040AA41 /* AwareNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F82D53E24122EFD0040AA41 /* AwareNotification.swift */; };
-		5F82D55024122EFD0040AA41 /* Engine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F82D53F24122EFD0040AA41 /* Engine.swift */; };
-		5F82D55124122EFD0040AA41 /* DbSyncConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F82D54024122EFD0040AA41 /* DbSyncConfig.swift */; };
-		5F82D55224122EFD0040AA41 /* LampSensorCoreUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F82D54124122EFD0040AA41 /* LampSensorCoreUtils.swift */; };
-		5F82D55324122EFD0040AA41 /* SensorManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F82D54224122EFD0040AA41 /* SensorManager.swift */; };
-		5F82D55424122EFD0040AA41 /* LampSensorCore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F82D54324122EFD0040AA41 /* LampSensorCore.swift */; };
-		5F82D55524122EFD0040AA41 /* SensorConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F82D54424122EFD0040AA41 /* SensorConfig.swift */; };
-		5F82D55624122EFD0040AA41 /* AccelerometerData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F82D54624122EFD0040AA41 /* AccelerometerData.swift */; };
-		5F82D55724122EFD0040AA41 /* AccelerometerSensor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F82D54724122EFD0040AA41 /* AccelerometerSensor.swift */; };
-		5F82D55824122EFD0040AA41 /* GyroscopeSensor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F82D54924122EFD0040AA41 /* GyroscopeSensor.swift */; };
-		5F82D55924122EFD0040AA41 /* GyroscopeData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F82D54A24122EFD0040AA41 /* GyroscopeData.swift */; };
-		5F82D55A24122EFD0040AA41 /* LocationsSensor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F82D54C24122EFD0040AA41 /* LocationsSensor.swift */; };
-		5F82D55B24122EFD0040AA41 /* LocationsData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F82D54D24122EFD0040AA41 /* LocationsData.swift */; };
-		5F82D55F241230A90040AA41 /* GeofenceData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F82D55C241230A90040AA41 /* GeofenceData.swift */; };
-		5F82D560241230A90040AA41 /* HeadingData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F82D55D241230A90040AA41 /* HeadingData.swift */; };
-		5F82D561241230A90040AA41 /* VisitData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F82D55E241230A90040AA41 /* VisitData.swift */; };
-		5F82D5682412541C0040AA41 /* ScreenSensor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F82D5652412541C0040AA41 /* ScreenSensor.swift */; };
-		5F82D5692412541C0040AA41 /* ScreenBrightnessData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F82D5662412541C0040AA41 /* ScreenBrightnessData.swift */; };
-		5F82D56A2412541D0040AA41 /* ScreenData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F82D5672412541C0040AA41 /* ScreenData.swift */; };
-		5F82D56E24126FDD0040AA41 /* CallsData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F82D56C24126FDC0040AA41 /* CallsData.swift */; };
-		5F82D56F24126FDD0040AA41 /* CallsSensor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F82D56D24126FDC0040AA41 /* CallsSensor.swift */; };
-		5F82D573241271830040AA41 /* GravityData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F82D571241271830040AA41 /* GravityData.swift */; };
-		5F82D574241271830040AA41 /* GravitySensor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F82D572241271830040AA41 /* GravitySensor.swift */; };
-		5F82D578241272E30040AA41 /* MagnetometerData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F82D576241272E30040AA41 /* MagnetometerData.swift */; };
-		5F82D579241272E30040AA41 /* MagnetometerSensor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F82D577241272E30040AA41 /* MagnetometerSensor.swift */; };
-		5F82D57D241274430040AA41 /* PedometerData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F82D57B241274430040AA41 /* PedometerData.swift */; };
-		5F82D57E241274430040AA41 /* PedometerSensor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F82D57C241274430040AA41 /* PedometerSensor.swift */; };
-		5F82D5822412752F0040AA41 /* RotationSensor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F82D5802412752F0040AA41 /* RotationSensor.swift */; };
-		5F82D5832412752F0040AA41 /* RotationData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F82D5812412752F0040AA41 /* RotationData.swift */; };
-		5F82D588241276270040AA41 /* WiFiSensor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F82D585241276270040AA41 /* WiFiSensor.swift */; };
-		5F82D589241276270040AA41 /* WiFiDeviceData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F82D586241276270040AA41 /* WiFiDeviceData.swift */; };
-		5F82D58A241276270040AA41 /* WiFiScanData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F82D587241276270040AA41 /* WiFiScanData.swift */; };
 		5F82D58E241279040040AA41 /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F82D58D241279040040AA41 /* Reachability.swift */; };
 		5FB802B1241B859C00340112 /* LMHealthKitSensor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FB802B0241B859C00340112 /* LMHealthKitSensor.swift */; };
 		5FB802B3241BAFF500340112 /* LMHealthKitSensorData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FB802B2241BAFF500340112 /* LMHealthKitSensorData.swift */; };
@@ -75,6 +42,39 @@
 		B275F60A245196AD007A7340 /* PushNotificationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B275F609245196AD007A7340 /* PushNotificationModel.swift */; };
 		B2847FB72450550E0042D43B /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2847FB62450550E0042D43B /* NotificationService.swift */; };
 		B2847FBB2450550E0042D43B /* NotificationService.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = B2847FB42450550E0042D43B /* NotificationService.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		B291BC9C249B44770042383E /* GyroscopeSensor.swift in Sources */ = {isa = PBXBuildFile; fileRef = B291BC71249B44770042383E /* GyroscopeSensor.swift */; };
+		B291BC9D249B44770042383E /* GyroscopeData.swift in Sources */ = {isa = PBXBuildFile; fileRef = B291BC72249B44770042383E /* GyroscopeData.swift */; };
+		B291BC9E249B44770042383E /* MagnetometerData.swift in Sources */ = {isa = PBXBuildFile; fileRef = B291BC74249B44770042383E /* MagnetometerData.swift */; };
+		B291BC9F249B44770042383E /* MagnetometerSensor.swift in Sources */ = {isa = PBXBuildFile; fileRef = B291BC75249B44770042383E /* MagnetometerSensor.swift */; };
+		B291BCA0249B44770042383E /* PedometerData.swift in Sources */ = {isa = PBXBuildFile; fileRef = B291BC77249B44770042383E /* PedometerData.swift */; };
+		B291BCA1249B44770042383E /* PedometerSensor.swift in Sources */ = {isa = PBXBuildFile; fileRef = B291BC78249B44770042383E /* PedometerSensor.swift */; };
+		B291BCA2249B44770042383E /* ScreenSensor.swift in Sources */ = {isa = PBXBuildFile; fileRef = B291BC7A249B44770042383E /* ScreenSensor.swift */; };
+		B291BCA3249B44770042383E /* ScreenBrightnessData.swift in Sources */ = {isa = PBXBuildFile; fileRef = B291BC7B249B44770042383E /* ScreenBrightnessData.swift */; };
+		B291BCA4249B44770042383E /* ScreenData.swift in Sources */ = {isa = PBXBuildFile; fileRef = B291BC7C249B44770042383E /* ScreenData.swift */; };
+		B291BCA5249B44770042383E /* RotationSensor.swift in Sources */ = {isa = PBXBuildFile; fileRef = B291BC7E249B44770042383E /* RotationSensor.swift */; };
+		B291BCA6249B44770042383E /* RotationData.swift in Sources */ = {isa = PBXBuildFile; fileRef = B291BC7F249B44770042383E /* RotationData.swift */; };
+		B291BCA7249B44770042383E /* GravityData.swift in Sources */ = {isa = PBXBuildFile; fileRef = B291BC81249B44770042383E /* GravityData.swift */; };
+		B291BCA8249B44770042383E /* GravitySensor.swift in Sources */ = {isa = PBXBuildFile; fileRef = B291BC82249B44770042383E /* GravitySensor.swift */; };
+		B291BCA9249B44770042383E /* HeadingData.swift in Sources */ = {isa = PBXBuildFile; fileRef = B291BC84249B44770042383E /* HeadingData.swift */; };
+		B291BCAA249B44770042383E /* LocationsSensor.swift in Sources */ = {isa = PBXBuildFile; fileRef = B291BC85249B44770042383E /* LocationsSensor.swift */; };
+		B291BCAB249B44770042383E /* LocationsData.swift in Sources */ = {isa = PBXBuildFile; fileRef = B291BC86249B44770042383E /* LocationsData.swift */; };
+		B291BCAC249B44770042383E /* VisitData.swift in Sources */ = {isa = PBXBuildFile; fileRef = B291BC87249B44770042383E /* VisitData.swift */; };
+		B291BCAD249B44770042383E /* GeofenceData.swift in Sources */ = {isa = PBXBuildFile; fileRef = B291BC88249B44770042383E /* GeofenceData.swift */; };
+		B291BCAE249B44770042383E /* WiFiSensor.swift in Sources */ = {isa = PBXBuildFile; fileRef = B291BC8A249B44770042383E /* WiFiSensor.swift */; };
+		B291BCAF249B44770042383E /* WiFiDeviceData.swift in Sources */ = {isa = PBXBuildFile; fileRef = B291BC8B249B44770042383E /* WiFiDeviceData.swift */; };
+		B291BCB0249B44770042383E /* WiFiScanData.swift in Sources */ = {isa = PBXBuildFile; fileRef = B291BC8C249B44770042383E /* WiFiScanData.swift */; };
+		B291BCB1249B44770042383E /* AccelerometerData.swift in Sources */ = {isa = PBXBuildFile; fileRef = B291BC8E249B44770042383E /* AccelerometerData.swift */; };
+		B291BCB2249B44770042383E /* AccelerometerSensor.swift in Sources */ = {isa = PBXBuildFile; fileRef = B291BC8F249B44770042383E /* AccelerometerSensor.swift */; };
+		B291BCB3249B44770042383E /* CallsData.swift in Sources */ = {isa = PBXBuildFile; fileRef = B291BC91249B44770042383E /* CallsData.swift */; };
+		B291BCB4249B44770042383E /* CallsSensor.swift in Sources */ = {isa = PBXBuildFile; fileRef = B291BC92249B44770042383E /* CallsSensor.swift */; };
+		B291BCB5249B44770042383E /* AwareNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = B291BC94249B44770042383E /* AwareNotification.swift */; };
+		B291BCB6249B44770042383E /* Engine.swift in Sources */ = {isa = PBXBuildFile; fileRef = B291BC95249B44770042383E /* Engine.swift */; };
+		B291BCB7249B44770042383E /* LampSensorCoreObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = B291BC96249B44770042383E /* LampSensorCoreObject.swift */; };
+		B291BCB8249B44770042383E /* DbSyncConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = B291BC97249B44770042383E /* DbSyncConfig.swift */; };
+		B291BCB9249B44770042383E /* SensorManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B291BC98249B44770042383E /* SensorManager.swift */; };
+		B291BCBA249B44770042383E /* LampSensorCoreUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = B291BC99249B44770042383E /* LampSensorCoreUtils.swift */; };
+		B291BCBB249B44770042383E /* LampSensorCore.swift in Sources */ = {isa = PBXBuildFile; fileRef = B291BC9A249B44770042383E /* LampSensorCore.swift */; };
+		B291BCBC249B44770042383E /* SensorConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = B291BC9B249B44770042383E /* SensorConfig.swift */; };
 		B29639D123BDC28100626E1A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B29639D023BDC28100626E1A /* AppDelegate.swift */; };
 		B29639D723BDC28200626E1A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B29639D623BDC28200626E1A /* Assets.xcassets */; };
 		B29639DA23BDC28200626E1A /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B29639D923BDC28200626E1A /* Preview Assets.xcassets */; };
@@ -141,39 +141,6 @@
 		5F34363224210B8A0097EC2F /* LMLogsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LMLogsManager.swift; sourceTree = "<group>"; };
 		5F3D223B241A0F0600899DD0 /* LMBluetoothSensor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LMBluetoothSensor.swift; sourceTree = "<group>"; };
 		5F763010242386AA00B2DD03 /* Localizable.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
-		5F82D53D24122EFD0040AA41 /* LampSensorCoreObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LampSensorCoreObject.swift; sourceTree = "<group>"; };
-		5F82D53E24122EFD0040AA41 /* AwareNotification.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AwareNotification.swift; sourceTree = "<group>"; };
-		5F82D53F24122EFD0040AA41 /* Engine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Engine.swift; sourceTree = "<group>"; };
-		5F82D54024122EFD0040AA41 /* DbSyncConfig.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DbSyncConfig.swift; sourceTree = "<group>"; };
-		5F82D54124122EFD0040AA41 /* LampSensorCoreUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LampSensorCoreUtils.swift; sourceTree = "<group>"; };
-		5F82D54224122EFD0040AA41 /* SensorManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SensorManager.swift; sourceTree = "<group>"; };
-		5F82D54324122EFD0040AA41 /* LampSensorCore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LampSensorCore.swift; sourceTree = "<group>"; };
-		5F82D54424122EFD0040AA41 /* SensorConfig.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SensorConfig.swift; sourceTree = "<group>"; };
-		5F82D54624122EFD0040AA41 /* AccelerometerData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccelerometerData.swift; sourceTree = "<group>"; };
-		5F82D54724122EFD0040AA41 /* AccelerometerSensor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccelerometerSensor.swift; sourceTree = "<group>"; };
-		5F82D54924122EFD0040AA41 /* GyroscopeSensor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GyroscopeSensor.swift; sourceTree = "<group>"; };
-		5F82D54A24122EFD0040AA41 /* GyroscopeData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GyroscopeData.swift; sourceTree = "<group>"; };
-		5F82D54C24122EFD0040AA41 /* LocationsSensor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationsSensor.swift; sourceTree = "<group>"; };
-		5F82D54D24122EFD0040AA41 /* LocationsData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationsData.swift; sourceTree = "<group>"; };
-		5F82D55C241230A90040AA41 /* GeofenceData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GeofenceData.swift; sourceTree = "<group>"; };
-		5F82D55D241230A90040AA41 /* HeadingData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeadingData.swift; sourceTree = "<group>"; };
-		5F82D55E241230A90040AA41 /* VisitData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VisitData.swift; sourceTree = "<group>"; };
-		5F82D5652412541C0040AA41 /* ScreenSensor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScreenSensor.swift; sourceTree = "<group>"; };
-		5F82D5662412541C0040AA41 /* ScreenBrightnessData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScreenBrightnessData.swift; sourceTree = "<group>"; };
-		5F82D5672412541C0040AA41 /* ScreenData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScreenData.swift; sourceTree = "<group>"; };
-		5F82D56C24126FDC0040AA41 /* CallsData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CallsData.swift; sourceTree = "<group>"; };
-		5F82D56D24126FDC0040AA41 /* CallsSensor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CallsSensor.swift; sourceTree = "<group>"; };
-		5F82D571241271830040AA41 /* GravityData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GravityData.swift; sourceTree = "<group>"; };
-		5F82D572241271830040AA41 /* GravitySensor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GravitySensor.swift; sourceTree = "<group>"; };
-		5F82D576241272E30040AA41 /* MagnetometerData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MagnetometerData.swift; sourceTree = "<group>"; };
-		5F82D577241272E30040AA41 /* MagnetometerSensor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MagnetometerSensor.swift; sourceTree = "<group>"; };
-		5F82D57B241274430040AA41 /* PedometerData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PedometerData.swift; sourceTree = "<group>"; };
-		5F82D57C241274430040AA41 /* PedometerSensor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PedometerSensor.swift; sourceTree = "<group>"; };
-		5F82D5802412752F0040AA41 /* RotationSensor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RotationSensor.swift; sourceTree = "<group>"; };
-		5F82D5812412752F0040AA41 /* RotationData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RotationData.swift; sourceTree = "<group>"; };
-		5F82D585241276270040AA41 /* WiFiSensor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WiFiSensor.swift; sourceTree = "<group>"; };
-		5F82D586241276270040AA41 /* WiFiDeviceData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WiFiDeviceData.swift; sourceTree = "<group>"; };
-		5F82D587241276270040AA41 /* WiFiScanData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WiFiScanData.swift; sourceTree = "<group>"; };
 		5F82D58D241279040040AA41 /* Reachability.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
 		5FB802B0241B859C00340112 /* LMHealthKitSensor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LMHealthKitSensor.swift; sourceTree = "<group>"; };
 		5FB802B2241BAFF500340112 /* LMHealthKitSensorData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LMHealthKitSensorData.swift; sourceTree = "<group>"; };
@@ -208,6 +175,39 @@
 		B2847FB42450550E0042D43B /* NotificationService.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = NotificationService.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		B2847FB62450550E0042D43B /* NotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationService.swift; sourceTree = "<group>"; };
 		B2847FB82450550E0042D43B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B291BC71249B44770042383E /* GyroscopeSensor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GyroscopeSensor.swift; sourceTree = "<group>"; };
+		B291BC72249B44770042383E /* GyroscopeData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GyroscopeData.swift; sourceTree = "<group>"; };
+		B291BC74249B44770042383E /* MagnetometerData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MagnetometerData.swift; sourceTree = "<group>"; };
+		B291BC75249B44770042383E /* MagnetometerSensor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MagnetometerSensor.swift; sourceTree = "<group>"; };
+		B291BC77249B44770042383E /* PedometerData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PedometerData.swift; sourceTree = "<group>"; };
+		B291BC78249B44770042383E /* PedometerSensor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PedometerSensor.swift; sourceTree = "<group>"; };
+		B291BC7A249B44770042383E /* ScreenSensor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScreenSensor.swift; sourceTree = "<group>"; };
+		B291BC7B249B44770042383E /* ScreenBrightnessData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScreenBrightnessData.swift; sourceTree = "<group>"; };
+		B291BC7C249B44770042383E /* ScreenData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScreenData.swift; sourceTree = "<group>"; };
+		B291BC7E249B44770042383E /* RotationSensor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RotationSensor.swift; sourceTree = "<group>"; };
+		B291BC7F249B44770042383E /* RotationData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RotationData.swift; sourceTree = "<group>"; };
+		B291BC81249B44770042383E /* GravityData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GravityData.swift; sourceTree = "<group>"; };
+		B291BC82249B44770042383E /* GravitySensor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GravitySensor.swift; sourceTree = "<group>"; };
+		B291BC84249B44770042383E /* HeadingData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeadingData.swift; sourceTree = "<group>"; };
+		B291BC85249B44770042383E /* LocationsSensor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationsSensor.swift; sourceTree = "<group>"; };
+		B291BC86249B44770042383E /* LocationsData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationsData.swift; sourceTree = "<group>"; };
+		B291BC87249B44770042383E /* VisitData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VisitData.swift; sourceTree = "<group>"; };
+		B291BC88249B44770042383E /* GeofenceData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GeofenceData.swift; sourceTree = "<group>"; };
+		B291BC8A249B44770042383E /* WiFiSensor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WiFiSensor.swift; sourceTree = "<group>"; };
+		B291BC8B249B44770042383E /* WiFiDeviceData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WiFiDeviceData.swift; sourceTree = "<group>"; };
+		B291BC8C249B44770042383E /* WiFiScanData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WiFiScanData.swift; sourceTree = "<group>"; };
+		B291BC8E249B44770042383E /* AccelerometerData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccelerometerData.swift; sourceTree = "<group>"; };
+		B291BC8F249B44770042383E /* AccelerometerSensor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccelerometerSensor.swift; sourceTree = "<group>"; };
+		B291BC91249B44770042383E /* CallsData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CallsData.swift; sourceTree = "<group>"; };
+		B291BC92249B44770042383E /* CallsSensor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CallsSensor.swift; sourceTree = "<group>"; };
+		B291BC94249B44770042383E /* AwareNotification.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AwareNotification.swift; sourceTree = "<group>"; };
+		B291BC95249B44770042383E /* Engine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Engine.swift; sourceTree = "<group>"; };
+		B291BC96249B44770042383E /* LampSensorCoreObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LampSensorCoreObject.swift; sourceTree = "<group>"; };
+		B291BC97249B44770042383E /* DbSyncConfig.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DbSyncConfig.swift; sourceTree = "<group>"; };
+		B291BC98249B44770042383E /* SensorManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SensorManager.swift; sourceTree = "<group>"; };
+		B291BC99249B44770042383E /* LampSensorCoreUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LampSensorCoreUtils.swift; sourceTree = "<group>"; };
+		B291BC9A249B44770042383E /* LampSensorCore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LampSensorCore.swift; sourceTree = "<group>"; };
+		B291BC9B249B44770042383E /* SensorConfig.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SensorConfig.swift; sourceTree = "<group>"; };
 		B29639CD23BDC28100626E1A /* mindLAMP 2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "mindLAMP 2.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B29639D023BDC28100626E1A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B29639D623BDC28200626E1A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -263,6 +263,17 @@
 		5F49C3BC241B824D00809A72 /* Lamp Sensors */ = {
 			isa = PBXGroup;
 			children = (
+				B291BC8D249B44770042383E /* Accelerometer */,
+				B291BC90249B44770042383E /* Calls */,
+				B291BC93249B44770042383E /* Core */,
+				B291BC80249B44770042383E /* Gravity */,
+				B291BC70249B44770042383E /* Gyroscope */,
+				B291BC83249B44770042383E /* Locations */,
+				B291BC73249B44770042383E /* Magnetometer */,
+				B291BC76249B44770042383E /* Pedometer */,
+				B291BC7D249B44770042383E /* Rotation */,
+				B291BC79249B44770042383E /* Screen */,
+				B291BC89249B44770042383E /* Wifi */,
 				5FB802AF241B857300340112 /* HealthKit */,
 				5F49C3BD241B827500809A72 /* Bluetooth */,
 			);
@@ -275,134 +286,6 @@
 				5F3D223B241A0F0600899DD0 /* LMBluetoothSensor.swift */,
 			);
 			path = Bluetooth;
-			sourceTree = "<group>";
-		};
-		5F82D53B24122EFD0040AA41 /* Aware Sensors */ = {
-			isa = PBXGroup;
-			children = (
-				5F82D56B24126FDC0040AA41 /* Calls */,
-				5F82D53C24122EFD0040AA41 /* Core */,
-				5F82D54524122EFD0040AA41 /* Accelerometer */,
-				5F82D570241271830040AA41 /* Gravity */,
-				5F82D54824122EFD0040AA41 /* Gyroscope */,
-				5F82D54B24122EFD0040AA41 /* Locations */,
-				5F82D575241272E30040AA41 /* Magnetometer */,
-				5F82D57A241274430040AA41 /* Pedometer */,
-				5F82D57F2412752F0040AA41 /* Rotation */,
-				5F82D5642412541C0040AA41 /* Screen */,
-				5F82D584241276270040AA41 /* Wifi */,
-			);
-			path = "Aware Sensors";
-			sourceTree = "<group>";
-		};
-		5F82D53C24122EFD0040AA41 /* Core */ = {
-			isa = PBXGroup;
-			children = (
-				5F82D53D24122EFD0040AA41 /* LampSensorCoreObject.swift */,
-				5F82D53E24122EFD0040AA41 /* AwareNotification.swift */,
-				5F82D53F24122EFD0040AA41 /* Engine.swift */,
-				5F82D54024122EFD0040AA41 /* DbSyncConfig.swift */,
-				5F82D54124122EFD0040AA41 /* LampSensorCoreUtils.swift */,
-				5F82D54224122EFD0040AA41 /* SensorManager.swift */,
-				5F82D54324122EFD0040AA41 /* LampSensorCore.swift */,
-				5F82D54424122EFD0040AA41 /* SensorConfig.swift */,
-			);
-			path = Core;
-			sourceTree = "<group>";
-		};
-		5F82D54524122EFD0040AA41 /* Accelerometer */ = {
-			isa = PBXGroup;
-			children = (
-				5F82D54624122EFD0040AA41 /* AccelerometerData.swift */,
-				5F82D54724122EFD0040AA41 /* AccelerometerSensor.swift */,
-			);
-			path = Accelerometer;
-			sourceTree = "<group>";
-		};
-		5F82D54824122EFD0040AA41 /* Gyroscope */ = {
-			isa = PBXGroup;
-			children = (
-				5F82D54924122EFD0040AA41 /* GyroscopeSensor.swift */,
-				5F82D54A24122EFD0040AA41 /* GyroscopeData.swift */,
-			);
-			path = Gyroscope;
-			sourceTree = "<group>";
-		};
-		5F82D54B24122EFD0040AA41 /* Locations */ = {
-			isa = PBXGroup;
-			children = (
-				5F82D55C241230A90040AA41 /* GeofenceData.swift */,
-				5F82D55D241230A90040AA41 /* HeadingData.swift */,
-				5F82D55E241230A90040AA41 /* VisitData.swift */,
-				5F82D54C24122EFD0040AA41 /* LocationsSensor.swift */,
-				5F82D54D24122EFD0040AA41 /* LocationsData.swift */,
-			);
-			path = Locations;
-			sourceTree = "<group>";
-		};
-		5F82D5642412541C0040AA41 /* Screen */ = {
-			isa = PBXGroup;
-			children = (
-				5F82D5652412541C0040AA41 /* ScreenSensor.swift */,
-				5F82D5662412541C0040AA41 /* ScreenBrightnessData.swift */,
-				5F82D5672412541C0040AA41 /* ScreenData.swift */,
-			);
-			path = Screen;
-			sourceTree = "<group>";
-		};
-		5F82D56B24126FDC0040AA41 /* Calls */ = {
-			isa = PBXGroup;
-			children = (
-				5F82D56C24126FDC0040AA41 /* CallsData.swift */,
-				5F82D56D24126FDC0040AA41 /* CallsSensor.swift */,
-			);
-			path = Calls;
-			sourceTree = "<group>";
-		};
-		5F82D570241271830040AA41 /* Gravity */ = {
-			isa = PBXGroup;
-			children = (
-				5F82D571241271830040AA41 /* GravityData.swift */,
-				5F82D572241271830040AA41 /* GravitySensor.swift */,
-			);
-			path = Gravity;
-			sourceTree = "<group>";
-		};
-		5F82D575241272E30040AA41 /* Magnetometer */ = {
-			isa = PBXGroup;
-			children = (
-				5F82D576241272E30040AA41 /* MagnetometerData.swift */,
-				5F82D577241272E30040AA41 /* MagnetometerSensor.swift */,
-			);
-			path = Magnetometer;
-			sourceTree = "<group>";
-		};
-		5F82D57A241274430040AA41 /* Pedometer */ = {
-			isa = PBXGroup;
-			children = (
-				5F82D57B241274430040AA41 /* PedometerData.swift */,
-				5F82D57C241274430040AA41 /* PedometerSensor.swift */,
-			);
-			path = Pedometer;
-			sourceTree = "<group>";
-		};
-		5F82D57F2412752F0040AA41 /* Rotation */ = {
-			isa = PBXGroup;
-			children = (
-				5F82D5802412752F0040AA41 /* RotationSensor.swift */,
-				5F82D5812412752F0040AA41 /* RotationData.swift */,
-			);
-			path = Rotation;
-			sourceTree = "<group>";
-		};
-		5F82D584241276270040AA41 /* Wifi */ = {
-			isa = PBXGroup;
-			children = (
-				5F82D585241276270040AA41 /* WiFiSensor.swift */,
-				5F82D586241276270040AA41 /* WiFiDeviceData.swift */,
-				5F82D587241276270040AA41 /* WiFiScanData.swift */,
-			);
-			path = Wifi;
 			sourceTree = "<group>";
 		};
 		5F82D58C241278CC0040AA41 /* ReachabilitySwift */ = {
@@ -547,7 +430,6 @@
 		B275F5FF2451807F007A7340 /* Sensors */ = {
 			isa = PBXGroup;
 			children = (
-				5F82D53B24122EFD0040AA41 /* Aware Sensors */,
 				5F49C3BC241B824D00809A72 /* Lamp Sensors */,
 				B2D930EC2445C9BD0086477D /* LMSensorManager */,
 				B240814B23D8803900845AEE /* LMCommon.swift */,
@@ -590,6 +472,116 @@
 				B2847FB82450550E0042D43B /* Info.plist */,
 			);
 			path = NotificationService;
+			sourceTree = "<group>";
+		};
+		B291BC70249B44770042383E /* Gyroscope */ = {
+			isa = PBXGroup;
+			children = (
+				B291BC71249B44770042383E /* GyroscopeSensor.swift */,
+				B291BC72249B44770042383E /* GyroscopeData.swift */,
+			);
+			path = Gyroscope;
+			sourceTree = "<group>";
+		};
+		B291BC73249B44770042383E /* Magnetometer */ = {
+			isa = PBXGroup;
+			children = (
+				B291BC74249B44770042383E /* MagnetometerData.swift */,
+				B291BC75249B44770042383E /* MagnetometerSensor.swift */,
+			);
+			path = Magnetometer;
+			sourceTree = "<group>";
+		};
+		B291BC76249B44770042383E /* Pedometer */ = {
+			isa = PBXGroup;
+			children = (
+				B291BC77249B44770042383E /* PedometerData.swift */,
+				B291BC78249B44770042383E /* PedometerSensor.swift */,
+			);
+			path = Pedometer;
+			sourceTree = "<group>";
+		};
+		B291BC79249B44770042383E /* Screen */ = {
+			isa = PBXGroup;
+			children = (
+				B291BC7A249B44770042383E /* ScreenSensor.swift */,
+				B291BC7B249B44770042383E /* ScreenBrightnessData.swift */,
+				B291BC7C249B44770042383E /* ScreenData.swift */,
+			);
+			path = Screen;
+			sourceTree = "<group>";
+		};
+		B291BC7D249B44770042383E /* Rotation */ = {
+			isa = PBXGroup;
+			children = (
+				B291BC7E249B44770042383E /* RotationSensor.swift */,
+				B291BC7F249B44770042383E /* RotationData.swift */,
+			);
+			path = Rotation;
+			sourceTree = "<group>";
+		};
+		B291BC80249B44770042383E /* Gravity */ = {
+			isa = PBXGroup;
+			children = (
+				B291BC81249B44770042383E /* GravityData.swift */,
+				B291BC82249B44770042383E /* GravitySensor.swift */,
+			);
+			path = Gravity;
+			sourceTree = "<group>";
+		};
+		B291BC83249B44770042383E /* Locations */ = {
+			isa = PBXGroup;
+			children = (
+				B291BC84249B44770042383E /* HeadingData.swift */,
+				B291BC85249B44770042383E /* LocationsSensor.swift */,
+				B291BC86249B44770042383E /* LocationsData.swift */,
+				B291BC87249B44770042383E /* VisitData.swift */,
+				B291BC88249B44770042383E /* GeofenceData.swift */,
+			);
+			path = Locations;
+			sourceTree = "<group>";
+		};
+		B291BC89249B44770042383E /* Wifi */ = {
+			isa = PBXGroup;
+			children = (
+				B291BC8A249B44770042383E /* WiFiSensor.swift */,
+				B291BC8B249B44770042383E /* WiFiDeviceData.swift */,
+				B291BC8C249B44770042383E /* WiFiScanData.swift */,
+			);
+			path = Wifi;
+			sourceTree = "<group>";
+		};
+		B291BC8D249B44770042383E /* Accelerometer */ = {
+			isa = PBXGroup;
+			children = (
+				B291BC8E249B44770042383E /* AccelerometerData.swift */,
+				B291BC8F249B44770042383E /* AccelerometerSensor.swift */,
+			);
+			path = Accelerometer;
+			sourceTree = "<group>";
+		};
+		B291BC90249B44770042383E /* Calls */ = {
+			isa = PBXGroup;
+			children = (
+				B291BC91249B44770042383E /* CallsData.swift */,
+				B291BC92249B44770042383E /* CallsSensor.swift */,
+			);
+			path = Calls;
+			sourceTree = "<group>";
+		};
+		B291BC93249B44770042383E /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				B291BC94249B44770042383E /* AwareNotification.swift */,
+				B291BC95249B44770042383E /* Engine.swift */,
+				B291BC96249B44770042383E /* LampSensorCoreObject.swift */,
+				B291BC97249B44770042383E /* DbSyncConfig.swift */,
+				B291BC98249B44770042383E /* SensorManager.swift */,
+				B291BC99249B44770042383E /* LampSensorCoreUtils.swift */,
+				B291BC9A249B44770042383E /* LampSensorCore.swift */,
+				B291BC9B249B44770042383E /* SensorConfig.swift */,
+			);
+			path = Core;
 			sourceTree = "<group>";
 		};
 		B29639C423BDC28100626E1A = {
@@ -815,78 +807,78 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B291BCA7249B44770042383E /* GravityData.swift in Sources */,
 				B240816C23D8814300845AEE /* BackgroundOperation.swift in Sources */,
-				5F82D55324122EFD0040AA41 /* SensorManager.swift in Sources */,
 				5FF2932A24223A6300D0BE09 /* LMConstants.swift in Sources */,
 				B240816423D8803900845AEE /* Networking.swift in Sources */,
-				5F82D55A24122EFD0040AA41 /* LocationsSensor.swift in Sources */,
+				B291BCA2249B44770042383E /* ScreenSensor.swift in Sources */,
 				B240816E23D8814300845AEE /* AsynchronousOperation.swift in Sources */,
+				B291BCAA249B44770042383E /* LocationsSensor.swift in Sources */,
 				B2B8935223D0AD6500321C3E /* DateExtension.swift in Sources */,
 				B240816323D8803900845AEE /* CodableHelpers.swift in Sources */,
 				B2F3CDF6245932B200F211A3 /* StoryboardExtension.swift in Sources */,
+				B291BCBA249B44770042383E /* LampSensorCoreUtils.swift in Sources */,
 				B240816723D8803900845AEE /* LMError.swift in Sources */,
-				5F82D579241272E30040AA41 /* MagnetometerSensor.swift in Sources */,
+				B291BCB0249B44770042383E /* WiFiScanData.swift in Sources */,
 				5FFF15732420A1B500C8A26E /* HKWorkoutActivityType+Extension.swift in Sources */,
-				5F82D55724122EFD0040AA41 /* AccelerometerSensor.swift in Sources */,
-				5F82D5682412541C0040AA41 /* ScreenSensor.swift in Sources */,
-				5F82D55024122EFD0040AA41 /* Engine.swift in Sources */,
 				B240816523D8803900845AEE /* NetworkingAPI.swift in Sources */,
 				B244A1C223BF4A91007FBDB8 /* FileManager+Extension.swift in Sources */,
-				5F82D55124122EFD0040AA41 /* DbSyncConfig.swift in Sources */,
 				B240816D23D8814300845AEE /* BackgroundServices.swift in Sources */,
-				5F82D55524122EFD0040AA41 /* SensorConfig.swift in Sources */,
-				5F82D55924122EFD0040AA41 /* GyroscopeData.swift in Sources */,
 				5F82D58E241279040040AA41 /* Reachability.swift in Sources */,
+				B291BCB7249B44770042383E /* LampSensorCoreObject.swift in Sources */,
+				B291BC9C249B44770042383E /* GyroscopeSensor.swift in Sources */,
+				B291BCB3249B44770042383E /* CallsData.swift in Sources */,
+				B291BCBC249B44770042383E /* SensorConfig.swift in Sources */,
+				B291BCB6249B44770042383E /* Engine.swift in Sources */,
+				B291BCA1249B44770042383E /* PedometerSensor.swift in Sources */,
 				B240816123D8803900845AEE /* SensorModel.swift in Sources */,
-				5F82D55824122EFD0040AA41 /* GyroscopeSensor.swift in Sources */,
+				B291BCB4249B44770042383E /* CallsSensor.swift in Sources */,
+				B291BC9F249B44770042383E /* MagnetometerSensor.swift in Sources */,
+				B291BCA5249B44770042383E /* RotationSensor.swift in Sources */,
 				B29639D123BDC28100626E1A /* AppDelegate.swift in Sources */,
-				5F82D55424122EFD0040AA41 /* LampSensorCore.swift in Sources */,
 				B2CD377E2477A2CA004E8B7B /* TextPresentation.swift in Sources */,
+				B291BCB9249B44770042383E /* SensorManager.swift in Sources */,
+				B291BCBB249B44770042383E /* LampSensorCore.swift in Sources */,
 				5FF29327242223F300D0BE09 /* FileStorage.swift in Sources */,
+				B291BCA4249B44770042383E /* ScreenData.swift in Sources */,
+				B291BCB5249B44770042383E /* AwareNotification.swift in Sources */,
 				B275F60224518106007A7340 /* HomeWebViewModel.swift in Sources */,
 				5FB802B1241B859C00340112 /* LMHealthKitSensor.swift in Sources */,
-				5F82D578241272E30040AA41 /* MagnetometerData.swift in Sources */,
+				B291BCB1249B44770042383E /* AccelerometerData.swift in Sources */,
+				B291BCAB249B44770042383E /* LocationsData.swift in Sources */,
+				B291BC9D249B44770042383E /* GyroscopeData.swift in Sources */,
+				B291BCB2249B44770042383E /* AccelerometerSensor.swift in Sources */,
 				B275F60724519479007A7340 /* NotificationAPI.swift in Sources */,
-				5F82D55624122EFD0040AA41 /* AccelerometerData.swift in Sources */,
-				5F82D588241276270040AA41 /* WiFiSensor.swift in Sources */,
-				5F82D55F241230A90040AA41 /* GeofenceData.swift in Sources */,
-				5F82D56F24126FDD0040AA41 /* CallsSensor.swift in Sources */,
+				B291BCB8249B44770042383E /* DbSyncConfig.swift in Sources */,
 				B2B8935323D0AD6500321C3E /* String+Extension.swift in Sources */,
-				5F82D55224122EFD0040AA41 /* LampSensorCoreUtils.swift in Sources */,
-				5F82D560241230A90040AA41 /* HeadingData.swift in Sources */,
 				B240816623D8803900845AEE /* Logging.swift in Sources */,
+				B291BCAE249B44770042383E /* WiFiSensor.swift in Sources */,
 				5F3D223C241A0F0600899DD0 /* LMBluetoothSensor.swift in Sources */,
 				B240816023D8803900845AEE /* LMCommon.swift in Sources */,
-				5F82D57E241274430040AA41 /* PedometerSensor.swift in Sources */,
+				B291BCA6249B44770042383E /* RotationData.swift in Sources */,
 				B2D930EF2445C9BD0086477D /* LMSensorManager+SensorObservers.swift in Sources */,
+				B291BCA9249B44770042383E /* HeadingData.swift in Sources */,
 				B240815F23D8803900845AEE /* NetworkConfig.swift in Sources */,
-				5F82D54E24122EFD0040AA41 /* LampSensorCoreObject.swift in Sources */,
-				5F82D58A241276270040AA41 /* WiFiScanData.swift in Sources */,
-				5F82D56A2412541D0040AA41 /* ScreenData.swift in Sources */,
 				B275F60424518C82007A7340 /* User.swift in Sources */,
+				B291BC9E249B44770042383E /* MagnetometerData.swift in Sources */,
 				5F34363324210B8A0097EC2F /* LMLogsManager.swift in Sources */,
-				5F82D574241271830040AA41 /* GravitySensor.swift in Sources */,
+				B291BCA8249B44770042383E /* GravitySensor.swift in Sources */,
 				5FB802B3241BAFF500340112 /* LMHealthKitSensorData.swift in Sources */,
+				B291BCAC249B44770042383E /* VisitData.swift in Sources */,
 				B23F5279245346E0007A8598 /* PushUserInfo.swift in Sources */,
-				5F82D55B24122EFD0040AA41 /* LocationsData.swift in Sources */,
+				B291BCAF249B44770042383E /* WiFiDeviceData.swift in Sources */,
 				B240816223D8803900845AEE /* Result.swift in Sources */,
+				B291BCA3249B44770042383E /* ScreenBrightnessData.swift in Sources */,
 				B275F5FD24517FC0007A7340 /* UserNotifications.swift in Sources */,
 				B229D5F3245319380099F646 /* WebViewController.swift in Sources */,
-				5F82D5692412541C0040AA41 /* ScreenBrightnessData.swift in Sources */,
-				5F82D589241276270040AA41 /* WiFiDeviceData.swift in Sources */,
 				B2C786B023D6C77B006BF98A /* UserDefaults+Extension.swift in Sources */,
-				5F82D5832412752F0040AA41 /* RotationData.swift in Sources */,
-				5F82D573241271830040AA41 /* GravityData.swift in Sources */,
 				B275F60A245196AD007A7340 /* PushNotificationModel.swift in Sources */,
+				B291BCAD249B44770042383E /* GeofenceData.swift in Sources */,
 				5FF29324242206F100D0BE09 /* LogsModel.swift in Sources */,
-				5F82D54F24122EFD0040AA41 /* AwareNotification.swift in Sources */,
-				5F82D561241230A90040AA41 /* VisitData.swift in Sources */,
-				5F82D56E24126FDD0040AA41 /* CallsData.swift in Sources */,
-				5F82D57D241274430040AA41 /* PedometerData.swift in Sources */,
 				B240815A23D8803900845AEE /* HomeViewController.swift in Sources */,
+				B291BCA0249B44770042383E /* PedometerData.swift in Sources */,
 				5FFF157124209F9100C8A26E /* HKDevice+Extension.swift in Sources */,
 				B2D930F02445C9BD0086477D /* LMSensorManager.swift in Sources */,
-				5F82D5822412752F0040AA41 /* RotationSensor.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -938,7 +930,7 @@
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 13;
+				CURRENT_PROJECT_VERSION = 14;
 				DEVELOPMENT_TEAM = S2Y2D4239K;
 				INFOPLIST_FILE = NotificationService/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
@@ -961,7 +953,7 @@
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 13;
+				CURRENT_PROJECT_VERSION = 14;
 				DEVELOPMENT_TEAM = S2Y2D4239K;
 				INFOPLIST_FILE = NotificationService/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
@@ -1104,7 +1096,7 @@
 				CODE_SIGN_ENTITLEMENTS = mindLAMP/mindLAMP.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 13;
+				CURRENT_PROJECT_VERSION = 14;
 				DEVELOPMENT_ASSET_PATHS = "\"mindLAMP/Preview Content\"";
 				DEVELOPMENT_TEAM = S2Y2D4239K;
 				ENABLE_BITCODE = YES;
@@ -1140,7 +1132,7 @@
 				CODE_SIGN_ENTITLEMENTS = mindLAMP/mindLAMP.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 13;
+				CURRENT_PROJECT_VERSION = 14;
 				DEVELOPMENT_ASSET_PATHS = "\"mindLAMP/Preview Content\"";
 				DEVELOPMENT_TEAM = S2Y2D4239K;
 				ENABLE_BITCODE = YES;
@@ -1171,7 +1163,7 @@
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 13;
+				CURRENT_PROJECT_VERSION = 14;
 				DEVELOPMENT_TEAM = S2Y2D4239K;
 				INFOPLIST_FILE = CustomNotification/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
@@ -1194,7 +1186,7 @@
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 13;
+				CURRENT_PROJECT_VERSION = 14;
 				DEVELOPMENT_TEAM = S2Y2D4239K;
 				INFOPLIST_FILE = CustomNotification/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;

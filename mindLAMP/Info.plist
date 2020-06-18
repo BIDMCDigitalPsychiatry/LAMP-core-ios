@@ -27,11 +27,11 @@
 	<key>NSCameraUsageDescription</key>
 	<string></string>
 	<key>NSHealthClinicalHealthRecordsShareUsageDescription</key>
-	<string>Your Health data is rquired for clinical study.</string>
+	<string>Your Health data is required for clinical study.</string>
 	<key>NSHealthShareUsageDescription</key>
-	<string>Your Health data is rquired for clinical study.</string>
+	<string>Your Health data is required for clinical study.</string>
 	<key>NSHealthUpdateUsageDescription</key>
-	<string>Your Health data is rquired for clinical study.</string>
+	<string>Your Health data is required for clinical study.</string>
 	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
 	<string>Your location access required for clinical study.</string>
 	<key>NSLocationAlwaysUsageDescription</key>
