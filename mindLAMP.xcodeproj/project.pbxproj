@@ -35,6 +35,7 @@
 		B240816D23D8814300845AEE /* BackgroundServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = B240816A23D8814300845AEE /* BackgroundServices.swift */; };
 		B240816E23D8814300845AEE /* AsynchronousOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = B240816B23D8814300845AEE /* AsynchronousOperation.swift */; };
 		B244A1C223BF4A91007FBDB8 /* FileManager+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B244A1C123BF4A91007FBDB8 /* FileManager+Extension.swift */; };
+		B2710B2724A1D1D700E37EB6 /* StringHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2710B2624A1D1D700E37EB6 /* StringHelper.swift */; };
 		B275F5FD24517FC0007A7340 /* UserNotifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = B275F5FC24517FC0007A7340 /* UserNotifications.swift */; };
 		B275F60224518106007A7340 /* HomeWebViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B275F60124518106007A7340 /* HomeWebViewModel.swift */; };
 		B275F60424518C82007A7340 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = B275F60324518C82007A7340 /* User.swift */; };
@@ -167,6 +168,7 @@
 		B240816A23D8814300845AEE /* BackgroundServices.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BackgroundServices.swift; sourceTree = "<group>"; };
 		B240816B23D8814300845AEE /* AsynchronousOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AsynchronousOperation.swift; sourceTree = "<group>"; };
 		B244A1C123BF4A91007FBDB8 /* FileManager+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FileManager+Extension.swift"; sourceTree = "<group>"; };
+		B2710B2624A1D1D700E37EB6 /* StringHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringHelper.swift; sourceTree = "<group>"; };
 		B275F5FC24517FC0007A7340 /* UserNotifications.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserNotifications.swift; sourceTree = "<group>"; };
 		B275F60124518106007A7340 /* HomeWebViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeWebViewModel.swift; sourceTree = "<group>"; };
 		B275F60324518C82007A7340 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
@@ -507,6 +509,7 @@
 				B291BC7A249B44770042383E /* ScreenSensor.swift */,
 				B291BC7B249B44770042383E /* ScreenBrightnessData.swift */,
 				B291BC7C249B44770042383E /* ScreenData.swift */,
+				B2710B2624A1D1D700E37EB6 /* StringHelper.swift */,
 			);
 			path = Screen;
 			sourceTree = "<group>";
@@ -834,6 +837,7 @@
 				B240816123D8803900845AEE /* SensorModel.swift in Sources */,
 				B291BCB4249B44770042383E /* CallsSensor.swift in Sources */,
 				B291BC9F249B44770042383E /* MagnetometerSensor.swift in Sources */,
+				B2710B2724A1D1D700E37EB6 /* StringHelper.swift in Sources */,
 				B291BCA5249B44770042383E /* RotationSensor.swift in Sources */,
 				B29639D123BDC28100626E1A /* AppDelegate.swift in Sources */,
 				B2CD377E2477A2CA004E8B7B /* TextPresentation.swift in Sources */,
@@ -930,7 +934,7 @@
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 14;
+				CURRENT_PROJECT_VERSION = 15;
 				DEVELOPMENT_TEAM = S2Y2D4239K;
 				INFOPLIST_FILE = NotificationService/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
@@ -953,7 +957,7 @@
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 14;
+				CURRENT_PROJECT_VERSION = 15;
 				DEVELOPMENT_TEAM = S2Y2D4239K;
 				INFOPLIST_FILE = NotificationService/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
@@ -1096,7 +1100,7 @@
 				CODE_SIGN_ENTITLEMENTS = mindLAMP/mindLAMP.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 14;
+				CURRENT_PROJECT_VERSION = 15;
 				DEVELOPMENT_ASSET_PATHS = "\"mindLAMP/Preview Content\"";
 				DEVELOPMENT_TEAM = S2Y2D4239K;
 				ENABLE_BITCODE = YES;
@@ -1132,7 +1136,7 @@
 				CODE_SIGN_ENTITLEMENTS = mindLAMP/mindLAMP.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 14;
+				CURRENT_PROJECT_VERSION = 15;
 				DEVELOPMENT_ASSET_PATHS = "\"mindLAMP/Preview Content\"";
 				DEVELOPMENT_TEAM = S2Y2D4239K;
 				ENABLE_BITCODE = YES;
@@ -1163,7 +1167,7 @@
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 14;
+				CURRENT_PROJECT_VERSION = 15;
 				DEVELOPMENT_TEAM = S2Y2D4239K;
 				INFOPLIST_FILE = CustomNotification/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
@@ -1186,7 +1190,7 @@
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 14;
+				CURRENT_PROJECT_VERSION = 15;
 				DEVELOPMENT_TEAM = S2Y2D4239K;
 				INFOPLIST_FILE = CustomNotification/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;

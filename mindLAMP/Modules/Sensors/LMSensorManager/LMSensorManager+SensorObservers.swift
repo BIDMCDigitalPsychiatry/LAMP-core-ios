@@ -51,13 +51,13 @@ extension LMSensorManager: ScreenObserver {
         latestScreenStateData = ScreenStateData(screenState: .screen_off)
     }
     
-//    public func onScreenLocked() {
-//        latestScreenStateData = ScreenStateData(screenState: .screen_locked)
-//    }
-//
-//    public func onScreenUnlocked() {
-//        latestScreenStateData = ScreenStateData(screenState: .screen_unlocked)
-//    }
+    public func onScreenLocked() {
+        latestScreenStateData = ScreenStateData(screenState: .screen_locked)
+    }
+    
+    public func onScreenUnlocked() {
+        latestScreenStateData = ScreenStateData(screenState: .screen_unlocked)
+    }
     
     public func onScreenBrightnessChanged(data: ScreenBrightnessData) {
     }
