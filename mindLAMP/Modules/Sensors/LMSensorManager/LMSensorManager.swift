@@ -25,9 +25,10 @@ class LMSensorManager {
     var sensor_location: LocationsSensor?
     var sensor_magneto: MagnetometerSensor?
     var sensor_rotation: RotationSensor?
-    var sensor_screen: ScreenSensor?
+    //var sensor_screen: ScreenSensor?
     var sensor_wifi: WiFiSensor?
     var sensor_pedometer: PedometerSensor?
+    var lampScreenSensor: LampScreenSensor?
 
     var sensorApiTimer: Timer?
     
@@ -36,7 +37,7 @@ class LMSensorManager {
     var latestPedometerData: PedometerData?
     var latestCallsData: CallsData?
     var latestWifiData: WiFiScanData?
-    var latestScreenStateData: ScreenStateData?
+    //var latestScreenStateData: ScreenStateData
     
     private init() { }
     
@@ -66,8 +67,9 @@ class LMSensorManager {
         sensor_magneto = nil
         sensor_pedometer = nil
         sensor_rotation = nil
-        sensor_screen = nil
+        //sensor_screen = nil
         sensor_wifi = nil
+        lampScreenSensor = nil
     }
 
 
@@ -83,8 +85,9 @@ class LMSensorManager {
         sensor_magneto?.start()
         sensor_pedometer?.start()
         sensor_rotation?.start()
-        sensor_screen?.start()
+        //sensor_screen?.start()
         sensor_wifi?.start()
+        lampScreenSensor?.start()
     }
     
     private func stopAllSensors() {
@@ -98,8 +101,9 @@ class LMSensorManager {
         sensor_magneto?.stop()
         sensor_pedometer?.stop()
         sensor_rotation?.stop()
-        sensor_screen?.stop()
+        //sensor_screen?.stop()
         sensor_wifi?.stop()
+        lampScreenSensor?.stop()
     }
     
     private func refreshAllSensors() {
@@ -121,6 +125,7 @@ class LMSensorManager {
     
     @objc func postSensorData() {
         sensor_healthKit?.fetchHealthData()
+        lampScreenSensor?.fetchScreenState()
         batteryLogs()
         //Delay given so as to fetch the HealthKit data.
         DispatchQueue.main.asyncAfter(deadline: .now() + 15) {
@@ -206,9 +211,10 @@ class LMSensorManager {
     }
     
     func setupScreenSensor() {
-        sensor_screen = ScreenSensor.init(ScreenSensor.Config().apply(closure: { config in
-            config.sensorObserver = self
-        }))
+        lampScreenSensor = LampScreenSensor()
+//        sensor_screen = ScreenSensor.init(ScreenSensor.Config().apply(closure: { config in
+//            config.sensorObserver = self
+//        }))
     }
     
     func setupWifiSensor() {
@@ -470,7 +476,8 @@ extension LMSensorManager {
     }
     
     private func fetchScreenStateData() -> SensorDataInfo? {
-        guard let data = latestScreenStateData else {
+        
+        guard let data = lampScreenSensor?.latestScreenStateData else {
             return nil
         }
         var model = SensorDataModel()
