@@ -1,6 +1,6 @@
 //
 //  HomeViewController.swift
-//  lampv2
+//  mindLAMP Consortium
 //
 //  Created by ZCo Engg Dept on 16/01/20.
 //

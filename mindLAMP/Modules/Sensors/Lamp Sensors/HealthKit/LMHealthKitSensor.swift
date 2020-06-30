@@ -1,6 +1,6 @@
 //
 //  LMHealthKitSensor.swift
-//  mindLAMP
+//  mindLAMP Consortium
 //
 //  Created by Zco Engineer on 13/03/20.
 //

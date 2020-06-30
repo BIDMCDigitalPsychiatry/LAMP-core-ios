@@ -1,6 +1,6 @@
 //
 //  NetworkConfig.swift
-//  lampV2
+//  mindLAMP Consortium
 //
 //  Created by ZCo Engg Dept on 25/08/16.
 //

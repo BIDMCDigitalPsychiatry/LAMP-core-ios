@@ -1,6 +1,6 @@
 //
 //  AppDelegate.swift
-//  lampv2
+//  mindLAMP Consortium
 //
 //  Created by ZCo Engg Dept on 02/01/20.
 //

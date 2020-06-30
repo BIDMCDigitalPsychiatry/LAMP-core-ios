@@ -1,6 +1,6 @@
 //
 //  WebViewController.swift
-//  mindLAMP
+//  mindLAMP Consortium
 
 
 import UIKit

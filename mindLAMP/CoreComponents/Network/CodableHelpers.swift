@@ -1,6 +1,6 @@
 //
 //  CodableHelpers.swift
-//  lampv2
+//  mindLAMP Consortium
 //
 //  Created by ZCO Engineer on 22/10/18.
 

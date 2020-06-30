@@ -1,6 +1,6 @@
 //
 //  SensorModel.swift
-//  lampv2
+//  mindLAMP Consortium
 //
 //  Created by ZCO Engineer on 13/01/20.
 //

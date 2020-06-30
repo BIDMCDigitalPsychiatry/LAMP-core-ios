@@ -1,6 +1,6 @@
 //
 //  Logging.swift
-//  lampv2
+//  mindLAMP Consortium
 //
 //  Created by ZCO Engineer on 07/04/16.
 //

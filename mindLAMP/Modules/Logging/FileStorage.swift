@@ -1,6 +1,6 @@
 //
 //  FileStorage.swift
-//  mindLAMP
+//  mindLAMP Consortium
 //
 //  Created by Zco Engineer on 18/03/20.
 //

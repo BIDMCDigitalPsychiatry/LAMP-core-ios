@@ -1,4 +1,4 @@
-// mindLAMP
+//  mindLAMP Consortium
 
 import Foundation
 import UIKit

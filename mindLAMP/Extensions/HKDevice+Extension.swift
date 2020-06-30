@@ -1,6 +1,6 @@
 //
 //  HKDevice+Extension.swift
-//  mindLAMP
+//  mindLAMP Consortium
 //
 //  Created by Zco Engineer on 17/03/20.
 //

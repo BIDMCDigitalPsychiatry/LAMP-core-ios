@@ -1,6 +1,6 @@
 //
 //  Result.swift
-//  lampv2
+//  mindLAMP Consortium
 //
 //  Created by ZCO Engineer on 23/08/16.
 //

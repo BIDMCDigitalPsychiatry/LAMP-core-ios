@@ -1,6 +1,6 @@
 //
 //  LMSensorManager.swift
-//  lampv2
+//  mindLAMP Consortium
 //
 //  Created by ZCo Engineer on 14/01/20.
 //

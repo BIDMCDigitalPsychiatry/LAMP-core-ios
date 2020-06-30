@@ -1,6 +1,6 @@
 //
 //  FileManager+Extension.swift
-//  lampv2
+//  mindLAMP Consortium
 //
 //  Created by ZCo Engg Dept on 03/01/20.
 //

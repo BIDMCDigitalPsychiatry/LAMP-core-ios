@@ -1,6 +1,6 @@
 //
 //  DateExtension.swift
-//  lampv2
+//  mindLAMP Consortium
 //
 //  Created by ZCO Engineer on 11/07/17.
 //

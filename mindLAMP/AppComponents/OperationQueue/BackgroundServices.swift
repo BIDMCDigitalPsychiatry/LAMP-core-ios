@@ -1,6 +1,6 @@
 //
 //  BackgroundServices.swift
-//  lampv2
+//  mindLAMP Consortium
 //
 //  Created by ZCo Engg Dept on 14/01/20.
 

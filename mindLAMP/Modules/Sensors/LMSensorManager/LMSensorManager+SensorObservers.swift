@@ -1,6 +1,6 @@
 //
 //  LMSensorManager+SensorObservers.swift
-//  mindLAMP
+//  mindLAMP Consortium
 //
 //  Created by ZCO Engineer on 06/03/20.
 //

@@ -1,6 +1,6 @@
 //
 //  UserDefaults+Extension.swift
-//  lampv2
+//  mindLAMP Consortium
 //
 //  Created by ZCo Engg Dept on 21/01/20.
 //
