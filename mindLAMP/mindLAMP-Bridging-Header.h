@@ -5,4 +5,6 @@
 #ifndef mindLAMP_Bridging_Header_h
 #define mindLAMP_Bridging_Header_h
 
+#include "Noderunner.h"
+
 #endif

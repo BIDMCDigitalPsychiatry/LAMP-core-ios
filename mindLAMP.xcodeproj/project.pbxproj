@@ -72,6 +72,10 @@
 		B291BCBA249B44770042383E /* LampSensorCoreUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = B291BC99249B44770042383E /* LampSensorCoreUtils.swift */; };
 		B291BCBB249B44770042383E /* LampSensorCore.swift in Sources */ = {isa = PBXBuildFile; fileRef = B291BC9A249B44770042383E /* LampSensorCore.swift */; };
 		B291BCBC249B44770042383E /* SensorConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = B291BC9B249B44770042383E /* SensorConfig.swift */; };
+		B2962FC724ADEAE500C1D598 /* NodeMobile.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B2962FC624ADEAE500C1D598 /* NodeMobile.framework */; };
+		B2962FC824ADEAE500C1D598 /* NodeMobile.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = B2962FC624ADEAE500C1D598 /* NodeMobile.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		B2962FCD24ADECB700C1D598 /* NodeRunner.mm in Sources */ = {isa = PBXBuildFile; fileRef = B2962FCA24ADECB700C1D598 /* NodeRunner.mm */; };
+		B2962FCE24ADECB700C1D598 /* NodeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2962FCC24ADECB700C1D598 /* NodeManager.swift */; };
 		B29639D123BDC28100626E1A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B29639D023BDC28100626E1A /* AppDelegate.swift */; };
 		B29639D723BDC28200626E1A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B29639D623BDC28200626E1A /* Assets.xcassets */; };
 		B29639DA23BDC28200626E1A /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B29639D923BDC28200626E1A /* Preview Assets.xcassets */; };
@@ -117,6 +121,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				B2962FC824ADEAE500C1D598 /* NodeMobile.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -203,6 +208,10 @@
 		B291BC99249B44770042383E /* LampSensorCoreUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LampSensorCoreUtils.swift; sourceTree = "<group>"; };
 		B291BC9A249B44770042383E /* LampSensorCore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LampSensorCore.swift; sourceTree = "<group>"; };
 		B291BC9B249B44770042383E /* SensorConfig.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SensorConfig.swift; sourceTree = "<group>"; };
+		B2962FC624ADEAE500C1D598 /* NodeMobile.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NodeMobile.framework; path = libnode/NodeMobile.framework; sourceTree = "<group>"; };
+		B2962FCA24ADECB700C1D598 /* NodeRunner.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NodeRunner.mm; sourceTree = "<group>"; };
+		B2962FCC24ADECB700C1D598 /* NodeManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NodeManager.swift; sourceTree = "<group>"; };
+		B2962FCF24ADECEC00C1D598 /* NodeRunner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NodeRunner.h; sourceTree = "<group>"; };
 		B29639CD23BDC28100626E1A /* mindLAMP 2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "mindLAMP 2.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B29639D023BDC28100626E1A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B29639D623BDC28200626E1A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -240,6 +249,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B2962FC724ADEAE500C1D598 /* NodeMobile.framework in Frameworks */,
 				B2B8979823D0ADBA00321C3E /* HealthKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -578,6 +588,16 @@
 			path = Core;
 			sourceTree = "<group>";
 		};
+		B2962FC924ADECB700C1D598 /* NodeComponents */ = {
+			isa = PBXGroup;
+			children = (
+				B2962FCF24ADECEC00C1D598 /* NodeRunner.h */,
+				B2962FCA24ADECB700C1D598 /* NodeRunner.mm */,
+				B2962FCC24ADECB700C1D598 /* NodeManager.swift */,
+			);
+			path = NodeComponents;
+			sourceTree = "<group>";
+		};
 		B29639C423BDC28100626E1A = {
 			isa = PBXGroup;
 			children = (
@@ -602,6 +622,7 @@
 		B29639CF23BDC28100626E1A /* mindLAMP */ = {
 			isa = PBXGroup;
 			children = (
+				B2962FC924ADECB700C1D598 /* NodeComponents */,
 				B275F5FA24517F74007A7340 /* Modules */,
 				B240814323D8803900845AEE /* AppComponents */,
 				B240814D23D8803900845AEE /* CoreComponents */,
@@ -630,6 +651,7 @@
 		B2B8979623D0ADBA00321C3E /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				B2962FC624ADEAE500C1D598 /* NodeMobile.framework */,
 				B2B8979723D0ADBA00321C3E /* HealthKit.framework */,
 				B2D930F82445D7E90086477D /* UserNotifications.framework */,
 				B2D930FA2445D7E90086477D /* UserNotificationsUI.framework */,
@@ -814,6 +836,7 @@
 				B240816723D8803900845AEE /* LMError.swift in Sources */,
 				B291BCB0249B44770042383E /* WiFiScanData.swift in Sources */,
 				5FFF15732420A1B500C8A26E /* HKWorkoutActivityType+Extension.swift in Sources */,
+				B2962FCE24ADECB700C1D598 /* NodeManager.swift in Sources */,
 				B240816523D8803900845AEE /* NetworkingAPI.swift in Sources */,
 				B244A1C223BF4A91007FBDB8 /* FileManager+Extension.swift in Sources */,
 				B240816D23D8814300845AEE /* BackgroundServices.swift in Sources */,
@@ -841,6 +864,7 @@
 				B291BC9D249B44770042383E /* GyroscopeData.swift in Sources */,
 				B291BCB2249B44770042383E /* AccelerometerSensor.swift in Sources */,
 				B275F60724519479007A7340 /* NotificationAPI.swift in Sources */,
+				B2962FCD24ADECB700C1D598 /* NodeRunner.mm in Sources */,
 				B2F5671024A48C2400A6CEDD /* LampScreenSensor.swift in Sources */,
 				B291BCB8249B44770042383E /* DbSyncConfig.swift in Sources */,
 				B2B8935323D0AD6500321C3E /* String+Extension.swift in Sources */,
@@ -1091,7 +1115,7 @@
 				CURRENT_PROJECT_VERSION = 17;
 				DEVELOPMENT_ASSET_PATHS = "\"mindLAMP/Preview Content\"";
 				DEVELOPMENT_TEAM = S2Y2D4239K;
-				ENABLE_BITCODE = YES;
+				ENABLE_BITCODE = NO;
 				ENABLE_PREVIEWS = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1127,7 +1151,7 @@
 				CURRENT_PROJECT_VERSION = 17;
 				DEVELOPMENT_ASSET_PATHS = "\"mindLAMP/Preview Content\"";
 				DEVELOPMENT_TEAM = S2Y2D4239K;
-				ENABLE_BITCODE = YES;
+				ENABLE_BITCODE = NO;
 				ENABLE_PREVIEWS = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
