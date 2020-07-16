@@ -8,5 +8,7 @@ enum SharingInfo {
         case userId
         
         case fetchWatchSensorEvents
+        case watchSensorDataArray
     }
 }
+

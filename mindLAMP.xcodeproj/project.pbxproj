@@ -1325,7 +1325,7 @@
 				INFOPLIST_FILE = watchkitapp/Info.plist;
 				PRODUCT_BUNDLE_IDENTIFIER = digital.lamp.mindlamp.watchkitapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "mindLAMP wildcard developer profile";
+				PROVISIONING_PROFILE_SPECIFIER = "mindLAMP watkitapp dev profile";
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 5.0;
@@ -1347,7 +1347,7 @@
 				INFOPLIST_FILE = watchkitapp/Info.plist;
 				PRODUCT_BUNDLE_IDENTIFIER = digital.lamp.mindlamp.watchkitapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "mindLAMP wildcard developer profile";
+				PROVISIONING_PROFILE_SPECIFIER = "mindLAMP watkitapp dev profile";
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 5.0;

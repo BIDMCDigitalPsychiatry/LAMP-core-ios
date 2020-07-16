@@ -39,6 +39,8 @@ class LMSensorManager {
     var latestWifiData: WiFiScanData?
     //var latestScreenStateData: ScreenStateData
     
+    var watchSensorData: [SensorDataInfo]?
+    
     private init() { }
     
     private func initiateSensors() {
@@ -135,7 +137,11 @@ class LMSensorManager {
     }
     
     func startWatchSensors() {
+        //clear all existing data
+        watchSensorData?.removeAll()
+        WatchSessionManager.shared.iOSDelegate = self
         
+        //send a message to watch to collect sensor data
         let messageInfo: [String: Any] = [SharingInfo.Keys.fetchWatchSensorEvents.rawValue : true]
         WatchSessionManager.shared.sendMessage(message: messageInfo) { (error) in
             print("sending message err?: \(error)")
@@ -285,6 +291,12 @@ extension LMSensorManager {
         if let data = fetchHKCharacteristicData() {
             arraySensorData.append(contentsOf: data)
         }
+        
+        //append watch sensor data
+        if let watchData = watchSensorData {
+            arraySensorData.append(contentsOf: watchData)
+        }
+        
         return SensorData.Request(sensorEvents: arraySensorData)
     }
     
@@ -645,5 +657,16 @@ extension LMSensorManager {
     
     private func isBatteryLevelLow(than level: Float = 20) -> Bool {
         return UIDevice.current.batteryLevel < level/100
+    }
+}
+
+extension LMSensorManager: iOSDelegate {
+    
+    func messageReceived(tuple: MessageReceived) {
+        // Handle receiving message
+        print("messageReceived on phone")
+        if let sensorData = tuple.message[SharingInfo.Keys.watchSensorDataArray.rawValue] as? [SensorDataInfo] {
+            watchSensorData = sensorData
+        }
     }
 }

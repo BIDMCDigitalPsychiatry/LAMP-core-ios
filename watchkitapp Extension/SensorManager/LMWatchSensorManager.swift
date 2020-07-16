@@ -5,10 +5,10 @@ import CoreMotion
 import WatchKit
 //import os.log
 
-let kAccelerometerDataIdentifier: String = "AccelerometerData"
-let kGravityDataIdentifier: String = "GravityData"
-let kRotationDataIdentifier: String = "RotationData"
-let kAttitudeDataIdentifier: String = "AttitudeData"
+//let kAccelerometerDataIdentifier: String = "AccelerometerData"
+//let kGravityDataIdentifier: String = "GravityData"
+//let kRotationDataIdentifier: String = "RotationData"
+//let kAttitudeDataIdentifier: String = "AttitudeData"
 
 extension Date {
     var millisecondsSince1970:Int64 {
@@ -144,9 +144,7 @@ class LMWatchSensorManager {
         
     }
     
-
-    func getLatestDataRequest() -> SensorData.Request {
-        
+    private func getSensorDataArrray() -> [SensorDataInfo] {
         var arraySensorData = [SensorDataInfo]()
         
         if let data = fetchAccelerometerData() {
@@ -155,33 +153,41 @@ class LMWatchSensorManager {
         if let data = fetchAccelerometerMotionData() {
             arraySensorData.append(data)
         }
-        return SensorData.Request(sensorEvents: arraySensorData)
+        return arraySensorData
+    }
+
+    func getLatestDataRequest() -> SensorData.Request {
+        
+        return SensorData.Request(sensorEvents: getSensorDataArrray())
     }
     
     public func sendLatestDataToPhone() {
-        var acclDict = accelerometerDataBuffer.last?.toDictionary()
-        acclDict?["Identifier"] = kAccelerometerDataIdentifier
-        if let messageDict = acclDict {
-            WatchSessionManager.shared.sendMessage(message: messageDict)
-        }
         
-        var gravityDict = garvityDataBuffer.last?.toDictionary()
-        gravityDict?["Identifier"] = kGravityDataIdentifier
-        if let messageDict = gravityDict {
-            WatchSessionManager.shared.sendMessage(message: messageDict)
-        }
-        
-        var rotationDict = rotationDataBuffer.last?.toDictionary()
-        rotationDict?["Identifier"] = kRotationDataIdentifier
-        if let messageDict = rotationDict {
-            WatchSessionManager.shared.sendMessage(message: messageDict)
-        }
-        
-        var attitudeDict = attitudeDataBuffer.last?.toDictionary()
-        attitudeDict?["Identifier"] = kAttitudeDataIdentifier
-        if let messageDict = rotationDict {
-            WatchSessionManager.shared.sendMessage(message: messageDict)
-        }
+        let arraySensorData = getSensorDataArrray()
+        WatchSessionManager.shared.sendMessage(message: [SharingInfo.Keys.watchSensorDataArray.rawValue: arraySensorData])
+//        var acclDict = accelerometerDataBuffer.last?.toDictionary()
+//        acclDict?["Identifier"] = kAccelerometerDataIdentifier
+//        if let messageDict = acclDict {
+//            WatchSessionManager.shared.sendMessage(message: messageDict)
+//        }
+//
+//        var gravityDict = garvityDataBuffer.last?.toDictionary()
+//        gravityDict?["Identifier"] = kGravityDataIdentifier
+//        if let messageDict = gravityDict {
+//            WatchSessionManager.shared.sendMessage(message: messageDict)
+//        }
+//
+//        var rotationDict = rotationDataBuffer.last?.toDictionary()
+//        rotationDict?["Identifier"] = kRotationDataIdentifier
+//        if let messageDict = rotationDict {
+//            WatchSessionManager.shared.sendMessage(message: messageDict)
+//        }
+//
+//        var attitudeDict = attitudeDataBuffer.last?.toDictionary()
+//        attitudeDict?["Identifier"] = kAttitudeDataIdentifier
+//        if let messageDict = rotationDict {
+//            WatchSessionManager.shared.sendMessage(message: messageDict)
+//        }
     }
 }
 

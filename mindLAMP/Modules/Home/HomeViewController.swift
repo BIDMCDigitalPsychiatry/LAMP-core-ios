@@ -19,14 +19,10 @@ class HomeViewController: UIViewController {
         let base64UserInfo = Endpoint.getSessionKey() ?? ""
         return URL(string: urlString + base64UserInfo)!
     }
-    //To receive msgs from watch
-    var connectivityHandler = WatchSessionManager.shared
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-        connectivityHandler.iOSDelegate = self
-        
 //        NodeManager.shared.startNodeServer()
 //
 //        let deadlineTime = DispatchTime.now() + .seconds(2)
@@ -151,7 +147,7 @@ extension HomeViewController: WKScriptMessageHandler {
             //Inform watch the login info
             var messageInfo: [String: Any] = [SharingInfo.Keys.userId.rawValue : userID]
             messageInfo[SharingInfo.Keys.sessionToken.rawValue] = base64Token
-            connectivityHandler.sendMessage(message: messageInfo) { (error) in
+            WatchSessionManager.shared.sendMessage(message: messageInfo) { (error) in
                 print("Error sending message: \(error)")
             }
             
@@ -160,27 +156,4 @@ extension HomeViewController: WKScriptMessageHandler {
             performOnLogout()
         }
     }
-}
-
-extension HomeViewController: iOSDelegate {
-    
-    func messageReceived(tuple: MessageReceived) {
-        // Handle receiving message
-        
-        guard let reply = tuple.replyHandler else {
-            return
-        }
-        print("messageReceived on phone")
-//        // Need reply to counterpart
-//        switch tuple.message["request"] as! RequestType.RawValue {
-//        case RequestType.date.rawValue:
-//            reply(["date" : "\(Date())"])
-//        case RequestType.version.rawValue:
-//            let version = ["version" : "\(Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") ?? "No version")"]
-//            reply(["version" : version])
-//        default:
-//            break
-//        }
-    }
-    
 }
