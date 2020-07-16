@@ -88,5 +88,5 @@ struct LMBluetoothData {
     var address: String?
     var name: String?
     var rssi: Int?
-    var timestamp = Date.currentTimeSince1970()
+    var timestamp = Date().timeInMilliSeconds
 }

@@ -75,7 +75,7 @@ private extension BackgroundOperation {
             self.state = .finished
             switch response {
             case .failure(let err):
-                LMLogsManager.shared.addLogs(level: .error, logs: Logs.Messages.network_error + " " + err.errorMessage)
+                LMLogsManager.shared.addLogs(level: .error, logs: Logs.Messages.network_error + " " + err.localizedMessage)
                 break
             case .success(_):
                 
@@ -89,7 +89,7 @@ private extension BackgroundOperation {
             self.state = .finished
             switch response {
             case .failure(let err):
-                LMLogsManager.shared.addLogs(level: .error, logs: Logs.Messages.network_error + " " + err.errorMessage)
+                LMLogsManager.shared.addLogs(level: .error, logs: Logs.Messages.network_error + " " + err.localizedMessage)
                 break
             case .success(_):
                 break

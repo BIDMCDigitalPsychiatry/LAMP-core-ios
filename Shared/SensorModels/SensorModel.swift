@@ -7,6 +7,10 @@
 
 import Foundation
 
+protocol TextPresentation {
+    var stringValue: String? {get}
+}
+
 enum SensorData {
 
     struct Request {
@@ -128,5 +132,5 @@ extension ScreenState: TextPresentation {
 struct ScreenStateData {
     
     var screenState: ScreenState = .screen_on
-    var timestamp: Double = Date.currentTimeSince1970()
+    var timestamp: Double = Date().timeInMilliSeconds
 }

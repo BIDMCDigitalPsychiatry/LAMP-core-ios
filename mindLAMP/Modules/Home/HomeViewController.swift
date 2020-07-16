@@ -19,10 +19,13 @@ class HomeViewController: UIViewController {
         let base64UserInfo = Endpoint.getSessionKey() ?? ""
         return URL(string: urlString + base64UserInfo)!
     }
+    //To receive msgs from watch
+    var connectivityHandler = WatchSessionManager.shared
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        connectivityHandler.iOSDelegate = self
         
 //        NodeManager.shared.startNodeServer()
 //
@@ -84,7 +87,7 @@ private extension HomeViewController {
         configuration.userContentController.add(self, name: ScriptMessageHandler.logout.rawValue)
         let webView = WKWebView(frame: .zero, configuration: configuration)
         webView.allowsBackForwardNavigationGestures = true
-        
+
         webView.navigationDelegate = self
 
         return webView
@@ -140,12 +143,44 @@ extension HomeViewController: WKScriptMessageHandler {
             let serverAddress = dictBody["serverAddress"] as? String
             
             let idObjectDict = dictBody["identityObject"] as? [String: Any]
-            let userID = idObjectDict?["id"] as? String
+            
+            guard let userID = idObjectDict?["id"] as? String else {return}
             
             User.shared.login(userID: userID, serverAddress: serverAddress)
+            
+            //Inform watch the login info
+            var messageInfo: [String: Any] = [SharingInfo.Keys.userId.rawValue : userID]
+            messageInfo[SharingInfo.Keys.sessionToken.rawValue] = base64Token
+            connectivityHandler.sendMessage(message: messageInfo) { (error) in
+                print("Error sending message: \(error)")
+            }
+            
             performOnLogin()
         } else if message.name == ScriptMessageHandler.logout.rawValue {
             performOnLogout()
         }
     }
+}
+
+extension HomeViewController: iOSDelegate {
+    
+    func messageReceived(tuple: MessageReceived) {
+        // Handle receiving message
+        
+        guard let reply = tuple.replyHandler else {
+            return
+        }
+        print("messageReceived on phone")
+//        // Need reply to counterpart
+//        switch tuple.message["request"] as! RequestType.RawValue {
+//        case RequestType.date.rawValue:
+//            reply(["date" : "\(Date())"])
+//        case RequestType.version.rawValue:
+//            let version = ["version" : "\(Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") ?? "No version")"]
+//            reply(["version" : version])
+//        default:
+//            break
+//        }
+    }
+    
 }

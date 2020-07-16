@@ -39,44 +39,26 @@ extension KeyedDecodingContainer {
 //        self.message = message
 //    }
 //}
+
 struct Safe<Base: Decodable>: Decodable {
     enum MyStructKeys: String, CodingKey { // declaring our keys
         case errorCode
-        case errorMessage
+        case error
         //case data
     }
-    
+
     let value: Base
     var errorCode: Int?
-    var message: String?
+    var errorMessage: String?
     init(from decoder: Decoder) throws {
-        do {
-            
-            let container = try decoder.container(keyedBy: MyStructKeys.self) // defining our (keyed) container
-            
-            if let errorCode = try container.decodeIfPresent(Int.self, forKey: .errorCode), errorCode > 0 {
-                if let sessionError = NetworkConfig.isSessionExpired(errorCode) {
-                    Endpoint.setSessionKey(nil)
-                    throw LMError(.definedError(sessionError))
-                } else if let errMsg = try container.decodeIfPresent(String.self, forKey: .errorMessage) {
-                    throw LMError(.customError(errorCode), msg: errMsg)
-                } else {
-                    throw LMError(.customError(errorCode), msg: "Unexpected error code \(errorCode).")
-                }
-            }
-            
-            //value = try container.decode(.data)
-            let container2 = try decoder.singleValueContainer()
-            value = try container2.decode(Base.self)
-        } catch let error {
-            
-            if let handledErr = error as? LMError {
-                throw handledErr
-            } else {
-                let msg = (error as NSError).userInfo[NSDebugDescriptionErrorKey]
-                printDebug("err msg = \(String(describing: msg))")
-                throw LMError(.customError(0), msg: error.localizedDescription)
-            }
+        let container = try decoder.container(keyedBy: MyStructKeys.self) // defining our (keyed) container
+
+        if let error = try container.decodeIfPresent(String.self, forKey: .error) {
+            throw NetworkError.errorResponse(error)
         }
+
+        //value = try container.decode(.data)
+        let container2 = try decoder.singleValueContainer()
+        value = try container2.decode(Base.self)
     }
 }

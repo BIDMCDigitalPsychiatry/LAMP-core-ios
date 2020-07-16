@@ -26,7 +26,7 @@ class LMLogsManager {
         let params = LogsData.Params(origin: Logs.URLParams.origin, level: level)
         let request = LogsData.Request(dataBody: body, urlParams: params)
         
-        let timeStamp = Date.currentTimeSince1970()
+        let timeStamp = Date().timeInMilliSeconds
         let timeStampStr = Int(timeStamp).description
         FileStorage.store(request, to: Logs.Directory.logs, in: .documents, as: timeStampStr + ".json")
     }

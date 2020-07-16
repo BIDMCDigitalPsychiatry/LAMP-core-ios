@@ -18,7 +18,7 @@ extension Notification.Name{
 }
 
 public protocol GravityObserver{
-    func onDataChanged(data:GravityData)
+    func onDataChanged(data: GravityData)
 }
 
 public extension GravitySensor{

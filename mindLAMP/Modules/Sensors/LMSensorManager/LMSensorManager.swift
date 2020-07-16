@@ -127,9 +127,18 @@ class LMSensorManager {
         sensor_healthKit?.fetchHealthData()
         lampScreenSensor?.fetchScreenState()
         batteryLogs()
+        startWatchSensors()
         //Delay given so as to fetch the HealthKit data.
         DispatchQueue.main.asyncAfter(deadline: .now() + 15) {
             BackgroundServices.shared.performTasks()
+        }
+    }
+    
+    func startWatchSensors() {
+        
+        let messageInfo: [String: Any] = [SharingInfo.Keys.fetchWatchSensorEvents.rawValue : true]
+        WatchSessionManager.shared.sendMessage(message: messageInfo) { (error) in
+            print("sending message err?: \(error)")
         }
     }
     
@@ -519,7 +528,7 @@ extension LMSensorManager {
 
 extension LMSensorManager {
     
-    func sensorDataRequest(with timestamp: Double = Date.currentTimeSince1970(), sensor: SensorType, dataModel: SensorDataModel) -> SensorDataInfo {
+    func sensorDataRequest(with timestamp: Double = Date().timeInMilliSeconds, sensor: SensorType, dataModel: SensorDataModel) -> SensorDataInfo {
         
         return SensorDataInfo(sensor: sensor.jsonKey, timestamp: timestamp, data: dataModel)
     }

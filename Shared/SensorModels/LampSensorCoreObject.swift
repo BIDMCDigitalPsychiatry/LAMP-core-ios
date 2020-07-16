@@ -11,7 +11,7 @@ import Foundation
 open class LampSensorCoreObject {
     
     @objc dynamic public var timestamp: Int64 = Int64(Date().timeIntervalSince1970*1000)
-    @objc dynamic public var deviceId: String = LampSensorCoreUtils.getCommonDeviceId()
+    //@objc dynamic public var deviceId: String = LampSensorCoreUtils.getCommonDeviceId()
     @objc dynamic public var label : String = ""
     @objc dynamic public var timezone: Int = LampSensorCoreUtils.getTimeZone()
     @objc dynamic public var os: String = "ios"
@@ -19,7 +19,7 @@ open class LampSensorCoreObject {
     
     open func toDictionary() -> Dictionary<String, Any> {
         let dict = ["timestamp":timestamp,
-                    "deviceId" :deviceId,
+                    //"deviceId" :deviceId,
                     "label"    :label,
                     "timezone" :timezone,
                     "os"       :os,

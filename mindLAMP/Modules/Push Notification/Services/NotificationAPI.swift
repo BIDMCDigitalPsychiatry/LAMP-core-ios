@@ -20,7 +20,7 @@ class NotificationAPI {
             switch response {
             case .failure(let err):
                 completion(false)
-                LMLogsManager.shared.addLogs(level: .error, logs: Logs.Messages.network_error + " " + err.errorMessage)
+                LMLogsManager.shared.addLogs(level: .error, logs: Logs.Messages.network_error + " " + err.localizedMessage)
                 break
             case .success(_):
                 completion(true)
@@ -39,7 +39,7 @@ class NotificationAPI {
         connection.makeWebserviceCall(with: data) { (response: Result<PushNotification.UpdateReadResponse>) in
             switch response {
             case .failure(let err):
-                LMLogsManager.shared.addLogs(level: .error, logs: Logs.Messages.network_error + " " + err.errorMessage)
+                LMLogsManager.shared.addLogs(level: .error, logs: Logs.Messages.network_error + " " + err.localizedMessage)
                 break
             case .success(_):
                 break

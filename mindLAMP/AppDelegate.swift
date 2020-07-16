@@ -22,6 +22,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //        print(bytes2)//[14, 6, 3, 74, 45, 49, 61, 60, 58, 28, 93, 49, 2, 25, 42, 2, 14, 10, 6, 19, 16, 75, 64, 79, 45, 56, 60, 22, 11, 17, 6]
 
         // Override point for customization after application launch.
+        WatchSessionManager.shared.startSession()
+        
         NotificationHelper.shared.registerForPushNotifications(delegate: self)
         NotificationHelper.shared.handleLaunchWithRemoteNotification(launchOptions)
         return true

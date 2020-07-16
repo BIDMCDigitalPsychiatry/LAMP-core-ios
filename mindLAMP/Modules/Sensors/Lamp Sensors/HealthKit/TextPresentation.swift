@@ -3,10 +3,6 @@
 import Foundation
 import HealthKit
 
-protocol TextPresentation {
-    var stringValue: String? {get}
-}
-
 extension HKCategoryValueSleepAnalysis: TextPresentation {
     
     var stringValue: String? {

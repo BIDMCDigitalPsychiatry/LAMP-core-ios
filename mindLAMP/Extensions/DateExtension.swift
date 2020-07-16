@@ -223,14 +223,7 @@ extension Date {
         //calendar.locale = Locale(identifier: "en_US_POSIX")
         return calendar.compare(self, to: date, toGranularity: toGranularity)
     }
-
-    static func currentTimeSince1970() -> Double {
-        return Date().timeIntervalSince1970 * 1000
-    }
     
-    var timeInMilliSeconds: Double {
-        return self.timeIntervalSince1970 * 1000
-    }
 }
 
 struct DateComponentUnitFormatter {

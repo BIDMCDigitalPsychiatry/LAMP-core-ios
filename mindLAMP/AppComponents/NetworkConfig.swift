@@ -7,29 +7,7 @@
 
 import Foundation
 
-enum Endpoint: String {
-    
-    case logs = "/"
-    case participantServerEvent = "/participant/%@/sensor_event"
-    
-    static func setSessionKey(_ token: String?) {
-        UserDefaults.standard.set(token, forKey: "authToken")
-        UserDefaults.standard.synchronize()
-    }
-    static func getSessionKey() -> String? {
-        return UserDefaults.standard.object(forKey: "authToken") as? String
-    }
-   
-    static func getAPIKey() -> String? {
-        return nil
-    }
-}
-
 class NetworkConfig {
-    static let kErrorSessionExpired = 1002
-    static let kErrorInvalidSessionKey = 1003
-    static let kErrorSubscriptionExpied = 1004
-    static let kErrorUnknown = 2037
     
     class func baseURL() -> String {
         
@@ -50,16 +28,6 @@ class NetworkConfig {
     
     static func logsNetworkingAPI() -> NetworkingAPI {
         return Networking(baseURL: URL(string: NetworkConfig.logsURL)!, session: URLSession(configuration: URLSessionConfiguration.default))
-    }
-
-    static func isSessionExpired(_ errorCode: Int) -> ServerError? {
-        if errorCode == NetworkConfig.kErrorSessionExpired || errorCode == NetworkConfig.kErrorInvalidSessionKey {
-            return ServerError.sessionExpired
-        } else if errorCode == NetworkConfig.kErrorSubscriptionExpied {
-            return ServerError.subscribtionExpired
-        } else {
-            return nil
-        }
     }
 }
 
