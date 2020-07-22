@@ -4,8 +4,8 @@ import SwiftUI
 
 struct LoginView: View {
     @ObservedObject var userAuth: UserAuth
-    @State var userName = "U3998365801"
-    @State var password = "12345"
+    @State var userName = ""
+    @State var password = ""
     @State var isAlert: Bool = false
     
     var body: some View {
