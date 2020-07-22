@@ -7,83 +7,133 @@ import WatchConnectivity
 
 class ExtensionDelegate: NSObject, WKExtensionDelegate {
     
-    var connectivityHandler = WatchSessionManager.shared
-    var session : WCSession?
-
+    // An array to keep the background tasks.
+    //
+    private var wcBackgroundTasks = [WKWatchConnectivityRefreshBackgroundTask]()
+    
     func applicationDidFinishLaunching() {
         
-        print("extension launched")
-        connectivityHandler.startSession()
-        connectivityHandler.watchOSDelegate = self
+        WatchSessionManager.shared.startSession()
+        WatchSessionManager.shared.watchOSDelegate = LMWatchSensorManager.shared
+        print("start APNS")
         // Perform any final initialization of your application.
-        UNUserNotificationCenter.current().delegate = self
-        UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge]) {(granted, _ ) in
-            guard granted else { return }
+        let center = UNUserNotificationCenter.current()
+        center.delegate = self
+        center.requestAuthorization(options: [.alert, .sound, .badge]) {(granted, error ) in
+            guard granted else {
+                //print("not granted APNS \(error?.localizedMessage)")
+                self.getNotificationSettings()
+                return }
+            print("granted APNS")
             self.getNotificationSettings()
         }
     }
-
+    
     func applicationDidBecomeActive() {
         // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
     }
-
+    
     func applicationWillResignActive() {
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
         // Use this method to pause ongoing tasks, disable timers, etc.
     }
-
-    func handle(_ backgroundTasks: Set<WKRefreshBackgroundTask>) {
-        // Sent when the system needs to launch the application in the background to process tasks. Tasks arrive in a set, so loop through and process each one.
-        for task in backgroundTasks {
-            // Use a switch statement to check the task type
-            switch task {
-            case let backgroundTask as WKApplicationRefreshBackgroundTask:
-                // Be sure to complete the background task once you’re done.
-                backgroundTask.setTaskCompletedWithSnapshot(false)
-            case let snapshotTask as WKSnapshotRefreshBackgroundTask:
-                // Snapshot tasks have a unique completion call, make sure to set your expiration date
-                snapshotTask.setTaskCompleted(restoredDefaultState: true, estimatedSnapshotExpiration: Date.distantFuture, userInfo: nil)
-            case let connectivityTask as WKWatchConnectivityRefreshBackgroundTask:
-                // Be sure to complete the connectivity task once you’re done.
-                connectivityTask.setTaskCompletedWithSnapshot(false)
-            case let urlSessionTask as WKURLSessionRefreshBackgroundTask:
-                // Be sure to complete the URL session task once you’re done.
-                urlSessionTask.setTaskCompletedWithSnapshot(false)
-            case let relevantShortcutTask as WKRelevantShortcutRefreshBackgroundTask:
-                // Be sure to complete the relevant-shortcut task once you're done.
-                relevantShortcutTask.setTaskCompletedWithSnapshot(false)
-            case let intentDidRunTask as WKIntentDidRunRefreshBackgroundTask:
-                // Be sure to complete the intent-did-run task once you're done.
-                intentDidRunTask.setTaskCompletedWithSnapshot(false)
-            default:
-                // make sure to complete unhandled task types
-                task.setTaskCompletedWithSnapshot(false)
+    
+    // Compelete the background tasks, and schedule a snapshot refresh.
+    //
+    func completeBackgroundTasks() {
+        guard !wcBackgroundTasks.isEmpty else { return }
+        
+        guard WCSession.default.activationState == .activated,
+            WCSession.default.hasContentPending == false else { return }
+        
+        wcBackgroundTasks.forEach { $0.setTaskCompletedWithSnapshot(true) }
+        
+        // Schedule a snapshot refresh if the UI is updated by background tasks.
+        //
+        let date = Date(timeIntervalSinceNow: 1)
+        WKExtension.shared().scheduleSnapshotRefresh(withPreferredDate: date, userInfo: nil) { error in
+            
+            if let error = error {
+                print("scheduleSnapshotRefresh error: \(error)!")
             }
         }
+        wcBackgroundTasks.removeAll()
     }
-
+    
+    // Be sure to complete all the tasks - otherwise they will keep consuming the background executing
+    // time until the time is out of budget and the app is killed.
+    //
+    // WKWatchConnectivityRefreshBackgroundTask should be completed after the pending data is received
+    // so retain the tasks first. The retained tasks will be completed at the following cases:
+    // 1. hasContentPending flips to false, meaning all the pending data is received. Pending data means
+    //    the data received by the device prior to the WCSession getting activated.
+    //    More data might arrive, but it isn't pending when the session activated.
+    // 2. The end of the handle method.
+    //    This happens when hasContentPending can flip to false before the tasks are retained.
+    //
+    // If the tasks are completed before the WCSessionDelegate methods are called, the data will be delivered
+    // the app is running next time, so no data lost.
+    //
+    func handle(_ backgroundTasks: Set<WKRefreshBackgroundTask>) {
+        
+        LMWatchSensorManager.shared.sendSensorEvents()
+        for task in backgroundTasks {
+            // Use Logger to log the tasks for debug purpose. A real app may remove the log
+            // to save the precious background time.
+            //
+            if let wcTask = task as? WKWatchConnectivityRefreshBackgroundTask {
+                wcBackgroundTasks.append(wcTask)
+            } else {
+                task.setTaskCompletedWithSnapshot(true)
+            }
+        }
+        completeBackgroundTasks()
+    }
+    
 }
 
 extension ExtensionDelegate {
     
     private func getNotificationSettings() {
-
+        
+        
         UNUserNotificationCenter.current().getNotificationSettings { settings in
-
-            guard settings.authorizationStatus == .authorized else { return }
-            UNUserNotificationCenter.current().delegate = self
-            DispatchQueue.main.async {
-                WKExtension.shared().registerForRemoteNotifications()
+            
+            switch settings.authorizationStatus {
+                
+            case .notDetermined:
+                print("not determined")
+            case .denied:
+                print("denied")
+            case .authorized:
+                print("authorized")
+            case .provisional:
+                print("provisional")
+            @unknown default:
+                ()
             }
+            print("settings.alertSetting = \(settings.alertSetting.rawValue)")
+        }
+        
+        //guard settings.authorizationStatus == .authorized else { return }
+        UNUserNotificationCenter.current().delegate = self
+        if WKExtension.shared().isRegisteredForRemoteNotifications == true {
+            print("registered")
+        }
+        if User.shared.isLogin() == false {
+            WKExtension.shared().unregisterForRemoteNotifications()
+        } else {
+            print("registering")
+            WKExtension.shared().registerForRemoteNotifications()
         }
     }
     
     func didFailToRegisterForRemoteNotificationsWithError(_ error: Error) {
-        
+        print("error = \(error.localizedMessage)")
     }
     
     func didRegisterForRemoteNotifications(withDeviceToken deviceToken: Data) {
-    
+        
         let deviceTokenStr = deviceToken.map { String(format: "%02.2hhx", $0) }.joined()
         print("deviceTokenStr = \(deviceTokenStr)")
         // Sync to Server and store to userdefault if any change in devicetoken value
@@ -92,7 +142,7 @@ extension ExtensionDelegate {
                 //send to server
                 let tokenInfo = WatchInfoWithToken(deviceToken: deviceTokenStr)
                 let tokenRerquest = WatchNotification.UpdateTokenRequest(deviceInfoWithToken: tokenInfo)
-                let lampAPI = NotificationAPI(NetworkConfig.networkingAPI(isBackgroundSession: true))
+                let lampAPI = NotificationAPI(NetworkConfig.networkingAPI(isBackgroundSession: false))
                 
                 lampAPI.sendDeviceToken(request: tokenRerquest) { (isSuccess) in
                     if isSuccess {
@@ -106,60 +156,28 @@ extension ExtensionDelegate {
     }
     
     /** This delegate method offers an opportunity for applications with the "remote-notification" background mode to fetch appropriate new data in response to an incoming remote notification. You should call the fetchCompletionHandler as soon as you're finished performing that operation, so the system can accurately estimate its power and data cost.
-
+     
      This method will be invoked even if the application was launched or resumed because of the remote background notification.!*/
     func didReceiveRemoteNotification(_ userInfo: [AnyHashable : Any], fetchCompletionHandler completionHandler: @escaping (WKBackgroundFetchResult) -> Void) {
         //check notification payload
-        
+        print("remote APNS")
+        LMWatchSensorManager.shared.sendSensorEvents(completionHandler)
     }
 }
 
 extension ExtensionDelegate: UNUserNotificationCenterDelegate {
     // The method will be called on the delegate only if the application is in the foreground. If the method is not implemented or the handler is not called in a timely manner then the notification will not be presented. The application can choose to have the notification presented as a sound, badge, alert and/or in the notification list. This decision should be based on whether the information in the notification is otherwise visible to the user.
     func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void){
-        let senosrManager = LMWatchSensorManager.shared
-        senosrManager.startUpdates()
-        
-        Timer.scheduledTimer(timeInterval: 10, target: self, selector: #selector(sendSensorEventsToServer), userInfo: nil, repeats: false)
+        print("remote APNS")
+        completionHandler([.alert, .badge, .sound])
     }
-
+    
     
     // The method will be called on the delegate when the user responded to the notification by opening the application, dismissing the notification or choosing a UNNotificationAction. The delegate must be set before the application returns from application:didFinishLaunchingWithOptions:.
     func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void){
-        
-    }
-    
-    @objc func sendSensorEventsToServer() {
-        LMWatchSensorManager.shared.stopUpdates(isSendToPhone: false)
-        SensorEvents().postSensorData()
-    }
-    @objc func sendSensorEventsToPhone() {
-        LMWatchSensorManager.shared.stopUpdates(isSendToPhone: true)
+        print("remote APNS")
+        completionHandler()
     }
 }
 
-extension ExtensionDelegate: WatchOSDelegate {
-    
-    func messageReceived(tuple: MessageReceived) {
-        DispatchQueue.main.async() {
-            //WKInterfaceDevice.current().play(.notification)
-            if let id = tuple.message[SharingInfo.Keys.userId.rawValue] as? String, let sessionToken = tuple.message[SharingInfo.Keys.sessionToken.rawValue] as? String{
-                Endpoint.setSessionKey(sessionToken)
-                UserDefaults.standard.set(true, forKey: "islogged")
-                User.shared.login(userID: id, serverAddress: nil)
-                
-                self.postNotificationOnMainQueueAsync(name: .userLogined)
-            } else if let _ = tuple.message[SharingInfo.Keys.fetchWatchSensorEvents.rawValue] as? Bool {
-                
-                LMWatchSensorManager.shared.startUpdates()
-                Timer.scheduledTimer(timeInterval: 10, target: self, selector: #selector(self.sendSensorEventsToPhone), userInfo: nil, repeats: false)
-            }
-        }
-    }
-    
-    private func postNotificationOnMainQueueAsync(name: NSNotification.Name) {
-        DispatchQueue.main.async {
-            NotificationCenter.default.post(name: name, object: nil)
-        }
-    }
-}
+

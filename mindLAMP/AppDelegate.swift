@@ -23,6 +23,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         // Override point for customization after application launch.
         WatchSessionManager.shared.startSession()
+        WatchSessionManager.shared.iOSDelegate = LMSensorManager.shared
         
         NotificationHelper.shared.registerForPushNotifications(delegate: self)
         NotificationHelper.shared.handleLaunchWithRemoteNotification(launchOptions)

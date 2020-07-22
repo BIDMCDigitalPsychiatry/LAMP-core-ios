@@ -9,26 +9,32 @@ protocol LampDataKeysProtocol {
 
 enum SensorType: LampDataKeysProtocol {
     
-    case lamp_accelerometer
-    case lamp_accelerometer_motion
+    //Other sensor data
     case lamp_analytics
     case lamp_bluetooth
     case lamp_calls
-    case lamp_distance
-    case lamp_flights_up
-    case lamp_flights_down
-    case lamp_currentPace
-    case lamp_currentCadence
-    case lamp_avgActivePace
     case lamp_gps
     case lamp_gyroscope
     case lamp_magnetometer
     case lamp_screen_state
     case lamp_segment
     case lamp_sms
-    case lamp_steps
     case lamp_wifi
     
+    //CMPedometerData
+    case lamp_flights_up
+    case lamp_flights_down
+    case lamp_currentPace
+    case lamp_currentCadence
+    case lamp_avgActivePace
+    case lamp_distance
+    case lamp_steps
+    
+    //Motion data
+    case lamp_accelerometer
+    case lamp_accelerometer_motion
+    
+    //watch motion data
     case lamp_watch_accelerometer
     case lamp_watch_accelerometer_motion
     

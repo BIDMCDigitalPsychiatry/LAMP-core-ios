@@ -4,6 +4,14 @@
 
 import Foundation
 
+struct Utils {
+    static func postNotificationOnMainQueueAsync(name: NSNotification.Name) {
+        DispatchQueue.main.async {
+            NotificationCenter.default.post(name: name, object: nil)
+        }
+    }
+}
+
 enum WatchNotification {
     
     struct UpdateTokenRequest: Encodable {
@@ -25,7 +33,7 @@ enum WatchNotification {
 struct WatchInfoWithToken: Encodable {
     
     var action = "login"
-    var device_type = "WatchOS" //"Android" or "Web"
+    var device_type = "WatchOS" //"iOS", "Android" or "Web"
     var user_agent: String?
     var device_token: String
     

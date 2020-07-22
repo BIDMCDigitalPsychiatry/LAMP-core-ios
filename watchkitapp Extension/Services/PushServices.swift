@@ -18,7 +18,7 @@ class NotificationAPI {
         let data = RequestData(endpoint: endPoint, requestTye: HTTPMethodType.post, data: request)
         connection.makeWebserviceCall(with: data) { (response: Result<WatchNotification.UpdateTokenResponse>) in
             switch response {
-            case .failure(let err):
+            case .failure:
                 completion(false)
                 //LMLogsManager.shared.addLogs(level: .error, logs: Logs.Messages.network_error + " " + err.errorMessage)
                 break

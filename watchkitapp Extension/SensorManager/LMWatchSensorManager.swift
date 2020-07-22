@@ -3,7 +3,6 @@
 import Foundation
 import CoreMotion
 import WatchKit
-//import os.log
 
 //let kAccelerometerDataIdentifier: String = "AccelerometerData"
 //let kGravityDataIdentifier: String = "GravityData"
@@ -36,19 +35,23 @@ class LMWatchSensorManager {
     var rotationDataBuffer:Array<RotationData>  = Array<RotationData>()
     var attitudeDataBuffer:Array<AttitudeData>  = Array<AttitudeData>()
     
+    var completionHandler: ((WKBackgroundFetchResult) -> Void)?
+    
     static let shared = LMWatchSensorManager()
     private init() {
         queue.maxConcurrentOperationCount = 1
         queue.name = "LMWatchSensorManagerQueue"
+        NotificationCenter.default.addObserver(
+            self, selector: #selector(type(of: self).sensorDataPosted(_:)),
+            name: .userLogOut, object: nil
+        )
     }
     
-    func startUpdates() {
+    private func startUpdates() {
         if !motionManager.isDeviceMotionAvailable {
             print("Device Motion is not available.")
             return
         }
-        
-        //os_log("Start Updates");
         
         motionManager.deviceMotionUpdateInterval = sampleInterval
         motionManager.startDeviceMotionUpdates(to: queue) { (deviceMotion: CMDeviceMotion?, error: Error?) in
@@ -61,14 +64,7 @@ class LMWatchSensorManager {
             }
         }
     }
-    
-    func stopUpdates(isSendToPhone: Bool) {
-        if motionManager.isDeviceMotionAvailable {
-            motionManager.stopDeviceMotionUpdates()
-        }
-        self.sendLatestDataToPhone()
-    }
-    
+
     func processDeviceMotion(_ deviceMotion: CMDeviceMotion) {
         
         let currentTime:Double = Date().timeIntervalSince1970
@@ -83,70 +79,32 @@ class LMWatchSensorManager {
         
         let gravityData = GravityData()
         gravityData.timestamp = Int64(currentTime*1000)
-        gravityData.x = deviceMotion.userAcceleration.x
-        gravityData.y = deviceMotion.userAcceleration.y
-        gravityData.z = deviceMotion.userAcceleration.z
+        gravityData.x = deviceMotion.gravity.x
+        gravityData.y = deviceMotion.gravity.y
+        gravityData.z = deviceMotion.gravity.z
         gravityData.eventTimestamp = Int64(currentTime*1000)
         garvityDataBuffer.append(gravityData)
         
         let rotationData = RotationData()
         rotationData.timestamp = Int64(currentTime*1000)
-        rotationData.x = deviceMotion.userAcceleration.x
-        rotationData.y = deviceMotion.userAcceleration.y
-        rotationData.z = deviceMotion.userAcceleration.z
+        rotationData.x = deviceMotion.rotationRate.x
+        rotationData.y = deviceMotion.rotationRate.y
+        rotationData.z = deviceMotion.rotationRate.z
         rotationData.eventTimestamp = Int64(currentTime*1000)
         rotationDataBuffer.append(rotationData)
         
         let attitudeData = AttitudeData()
         attitudeData.timestamp = Int64(currentTime*1000)
-        attitudeData.x = deviceMotion.userAcceleration.x
-        attitudeData.y = deviceMotion.userAcceleration.y
-        attitudeData.z = deviceMotion.userAcceleration.z
+        attitudeData.roll = deviceMotion.attitude.roll
+        attitudeData.pitch = deviceMotion.attitude.pitch
+        attitudeData.yaw = deviceMotion.attitude.yaw
         attitudeData.eventTimestamp = Int64(currentTime*1000)
         attitudeDataBuffer.append(attitudeData)
-        
-        /*
-         gravityStr = String(format: "X: %.1f Y: %.1f Z: %.1f" ,
-         deviceMotion.gravity.x,
-         deviceMotion.gravity.y,
-         deviceMotion.gravity.z)
-         
-         userAccelStr = String(format: "X: %.1f Y: %.1f Z: %.1f" ,
-         deviceMotion.userAcceleration.x,
-         deviceMotion.userAcceleration.y,
-         deviceMotion.userAcceleration.z)
-         
-         rotationRateStr = String(format: "X: %.1f Y: %.1f Z: %.1f" ,
-         deviceMotion.rotationRate.x,
-         deviceMotion.rotationRate.y,
-         deviceMotion.rotationRate.z)
-         
-         attitudeStr = String(format: "r: %.1f p: %.1f y: %.1f" ,
-         deviceMotion.attitude.roll,
-         deviceMotion.attitude.pitch,
-         deviceMotion.attitude.yaw)
-         
-         let timestamp = Date().millisecondsSince1970
-         ( os_log("Motion: %@, %@, %@, %@, %@, %@, %@, %@, %@, %@, %@, %@, %@",
-         String(timestamp),
-         String(deviceMotion.gravity.x),
-         String(deviceMotion.gravity.y),
-         String(deviceMotion.gravity.z),
-         String(deviceMotion.userAcceleration.x),
-         String(deviceMotion.userAcceleration.y),
-         String(deviceMotion.userAcceleration.z),
-         String(deviceMotion.rotationRate.x),
-         String(deviceMotion.rotationRate.y),
-         String(deviceMotion.rotationRate.z),
-         String(deviceMotion.attitude.roll),
-         String(deviceMotion.attitude.pitch),
-         String(deviceMotion.attitude.yaw)) */
-        
     }
     
     private func getSensorDataArrray() -> [SensorDataInfo] {
         var arraySensorData = [SensorDataInfo]()
-        
+
         if let data = fetchAccelerometerData() {
             arraySensorData.append(data)
         }
@@ -159,35 +117,6 @@ class LMWatchSensorManager {
     func getLatestDataRequest() -> SensorData.Request {
         
         return SensorData.Request(sensorEvents: getSensorDataArrray())
-    }
-    
-    public func sendLatestDataToPhone() {
-        
-        let arraySensorData = getSensorDataArrray()
-        WatchSessionManager.shared.sendMessage(message: [SharingInfo.Keys.watchSensorDataArray.rawValue: arraySensorData])
-//        var acclDict = accelerometerDataBuffer.last?.toDictionary()
-//        acclDict?["Identifier"] = kAccelerometerDataIdentifier
-//        if let messageDict = acclDict {
-//            WatchSessionManager.shared.sendMessage(message: messageDict)
-//        }
-//
-//        var gravityDict = garvityDataBuffer.last?.toDictionary()
-//        gravityDict?["Identifier"] = kGravityDataIdentifier
-//        if let messageDict = gravityDict {
-//            WatchSessionManager.shared.sendMessage(message: messageDict)
-//        }
-//
-//        var rotationDict = rotationDataBuffer.last?.toDictionary()
-//        rotationDict?["Identifier"] = kRotationDataIdentifier
-//        if let messageDict = rotationDict {
-//            WatchSessionManager.shared.sendMessage(message: messageDict)
-//        }
-//
-//        var attitudeDict = attitudeDataBuffer.last?.toDictionary()
-//        attitudeDict?["Identifier"] = kAttitudeDataIdentifier
-//        if let messageDict = rotationDict {
-//            WatchSessionManager.shared.sendMessage(message: messageDict)
-//        }
     }
 }
 
@@ -238,7 +167,61 @@ private extension LMWatchSensorManager {
             model.rotation = rotation
         }
         
+        if let data = attitudeDataBuffer.last {
+            var attitude = Attitude()
+            attitude.roll = data.roll
+            attitude.pitch = data.pitch
+            attitude.yaw = data.yaw
+            
+            model.attitude = attitude
+        }
+        
         return SensorDataInfo(sensor: SensorType.lamp_watch_accelerometer_motion.jsonKey, timestamp: timeStamp, data: model)
     }
     
+    @objc
+    func sensorDataPosted(_ notification: Notification) {
+        self.completionHandler?(.newData)
+        self.completionHandler = nil
+    }
+}
+extension LMWatchSensorManager: WatchOSDelegate {
+    
+    func messageReceived(tuple: MessageReceived) {
+    }
+    
+    @objc private func sendSensorEventsNow() {
+        if motionManager.isDeviceMotionAvailable {
+            motionManager.stopDeviceMotionUpdates()
+        }
+        SensorEvents().postSensorData()
+    }
+    
+    func sendSensorEvents(_ completionHandler: ((WKBackgroundFetchResult) -> Void)? = nil) {
+        LMWatchSensorManager.shared.startUpdates()
+        self.completionHandler = completionHandler
+        Timer.scheduledTimer(timeInterval: 5, target: self, selector: #selector(self.sendSensorEventsNow), userInfo: nil, repeats: false)
+    }
+    
+    func applicationContextReceived(tuple: ApplicationContextReceived) {
+        
+        DispatchQueue.main.async() {
+            if let loginDict = tuple.applicationContext[IOSCommands.login] as? [String: Any] {
+                let loginInfo = LoginInfo(loginDict)
+                Endpoint.setSessionKey(loginInfo.sessionToken)
+                User.shared.login(userID: loginInfo.userId, serverAddress: nil)
+                Utils.postNotificationOnMainQueueAsync(name: .userLogined)
+                WKInterfaceDevice.current().play(.notification)
+            } else if let _ = tuple.applicationContext[IOSCommands.sendWatchSensorEvents] as? Bool {
+                LMWatchSensorManager.shared.sendSensorEvents()
+            } else if let _ = tuple.applicationContext[IOSCommands.logout] as? Bool {
+                let isLoginPreviously = User.shared.isLogin()
+                User.shared.logout()
+                Utils.postNotificationOnMainQueueAsync(name: .userLogOut)
+                if isLoginPreviously {
+                    WKExtension.shared().unregisterForRemoteNotifications()
+                }
+            }
+        }
+    }
 }

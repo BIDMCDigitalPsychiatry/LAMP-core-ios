@@ -22,6 +22,7 @@ enum NetworkError: Error {
 
 
 extension Error {
+
     var localizedMessage: String {
         if let err = self as? NetworkError {
             return err.localizedText

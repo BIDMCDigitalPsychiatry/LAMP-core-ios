@@ -2,6 +2,7 @@
 
 import Combine
 import Foundation
+import WatchKit
 //import SwiftUI
 
 class UserAuth: ObservableObject {
@@ -23,13 +24,25 @@ class UserAuth: ObservableObject {
             self, selector: #selector(type(of: self).userLogined(_:)),
             name: .userLogined, object: nil
         )
+        NotificationCenter.default.addObserver(
+            self, selector: #selector(type(of: self).userLogOut(_:)),
+            name: .userLogOut, object: nil
+        )
     }
-    // .dataDidFlow notification handler. Update the UI the notification object.
+    // .login notification handler. Update the UI the notification object.
     //
     @objc
     func userLogined(_ notification: Notification) {
         print("received notification")
         self.isLoggedin = true
+        WKExtension.shared().registerForRemoteNotifications()
+    }
+    // .login notification handler. Update the UI the notification object.
+    //
+    @objc
+    func userLogOut(_ notification: Notification) {
+        print("received notification")
+        self.isLoggedin = false
         
     }
     //let didChange = PassthroughSubject<UserAuth,Never>()
@@ -41,15 +54,13 @@ class UserAuth: ObservableObject {
         
         let base64 = Data("\(userName):\(password)".utf8).base64EncodedString()
         Endpoint.setSessionKey(base64)
-        print("base64Token = \(base64)")
         let lampAPI = ParticipantAPI(NetworkConfig.networkingAPI(isBackgroundSession: false))
         
-        lampAPI.getParticipant(userID: userName) { [weak self] (isSuccess, error) in
+        lampAPI.getParticipant(userID: userName) { [weak self] (isSuccess, userInfo, error) in
             
             self?.errorMsg = error?.localizedMessage
             if isSuccess {
-                UserDefaults.standard.set(true, forKey: "islogged")
-                let userID = userName//idObjectDict?["id"] as? String
+                let userID = userInfo?.id ??  userName//idObjectDict?["id"] as? String
                 User.shared.login(userID: userID, serverAddress: nil)
                 self?.isLoggedin = true
                 self?.sendToken()
@@ -61,15 +72,6 @@ class UserAuth: ObservableObject {
             }
             
         }
-        /*
-         {
-         "data": [
-         {
-         "id": "U3998365801"
-         }
-         ]
-         }
-         */
     }
     
     //    @Published var isLoggedin: Bool {

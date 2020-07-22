@@ -11,7 +11,7 @@ struct User {
     }
     
     func isLogin() -> Bool {
-        return (Endpoint.getSessionKey() != nil) && (UserDefaults.standard.userID != nil)
+        return (Endpoint.getSessionKey() != nil) && (userId != nil)
     }
     
     func login(userID: String?, serverAddress: String?) {
@@ -22,5 +22,12 @@ struct User {
     func logout() {
         Endpoint.setSessionKey(nil)
         UserDefaults.standard.clearAll()
+    }
+    
+    var loginInfo: [String: Any]? {
+        if let sessionToken = Endpoint.getSessionKey(), let userId = userId {
+            return [LoginInfoKey.sessionToken: sessionToken, LoginInfoKey.userId: userId]
+        }
+        return nil
     }
 }

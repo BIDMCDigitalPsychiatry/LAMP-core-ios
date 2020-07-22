@@ -40,11 +40,16 @@ class HomeViewController: UIViewController {
         super.viewWillAppear(animated)
         // Hide the navigation bar on the this view controller
         self.navigationController?.setNavigationBarHidden(true, animated: animated)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(updateWatchOS(_:)),
+        name: UIApplication.didBecomeActiveNotification, object: nil)
+
     }
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         // Show the navigation bar on other view controllers
         self.navigationController?.setNavigationBarHidden(false, animated: animated)
+        NotificationCenter.default.removeObserver(self, name: UIApplication.didBecomeActiveNotification, object: nil)
     }
         
 }
@@ -52,6 +57,17 @@ class HomeViewController: UIViewController {
 // MARK: - private
 
 private extension HomeViewController {
+    
+    @objc func updateWatchOS(_ notification: Notification) {
+        
+        if User.shared.isLogin() == true, let loginInfo = User.shared.loginInfo {
+            let messageInfo: [String: Any] = [IOSCommands.login : loginInfo, "timestamp" : Date().timeInMilliSeconds]
+            WatchSessionManager.shared.updateApplicationContext(applicationContext: messageInfo)
+        } else {
+            let messageInfo: [String: Any] = [IOSCommands.logout : true]
+            WatchSessionManager.shared.updateApplicationContext(applicationContext: messageInfo)
+        }
+    }
       
     func loadWebView(with url: URL) {
         
@@ -145,12 +161,10 @@ extension HomeViewController: WKScriptMessageHandler {
             User.shared.login(userID: userID, serverAddress: serverAddress)
             
             //Inform watch the login info
-            var messageInfo: [String: Any] = [SharingInfo.Keys.userId.rawValue : userID]
-            messageInfo[SharingInfo.Keys.sessionToken.rawValue] = base64Token
-            WatchSessionManager.shared.sendMessage(message: messageInfo) { (error) in
-                print("Error sending message: \(error)")
+            if let dictInfo = User.shared.loginInfo {
+                let messageInfo: [String: Any] = [IOSCommands.login: dictInfo, "timestamp" : Date().timeInMilliSeconds]
+                WatchSessionManager.shared.updateApplicationContext(applicationContext: messageInfo)
             }
-            
             performOnLogin()
         } else if message.name == ScriptMessageHandler.logout.rawValue {
             performOnLogout()

@@ -49,7 +49,7 @@ class Networking: NSObject, NetworkingAPI {
             
         case .get:
             print("requestURL = \(requestURL)")
-            print("headers = \(urlRequest.allHTTPHeaderFields)")
+            //print("headers = \(urlRequest.allHTTPHeaderFields)")
             ()
         case .delete:
             ()

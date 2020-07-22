@@ -139,13 +139,9 @@ class LMSensorManager {
     func startWatchSensors() {
         //clear all existing data
         watchSensorData?.removeAll()
-        WatchSessionManager.shared.iOSDelegate = self
-        
         //send a message to watch to collect sensor data
-        let messageInfo: [String: Any] = [SharingInfo.Keys.fetchWatchSensorEvents.rawValue : true]
-        WatchSessionManager.shared.sendMessage(message: messageInfo) { (error) in
-            print("sending message err?: \(error)")
-        }
+        let messageInfo: [String: Any] = [IOSCommands.sendWatchSensorEvents : true, "timestamp" : Date().timeInMilliSeconds]
+        WatchSessionManager.shared.updateApplicationContext(applicationContext: (messageInfo))
     }
     
     /// To start sensors observing.
@@ -309,7 +305,7 @@ extension LMSensorManager {
         model.x = data.x
         model.y = data.y
         model.z = data.z
-        
+
         return SensorDataInfo(sensor: SensorType.lamp_accelerometer.jsonKey, timestamp: Double(data.timestamp), data: model)
     }
     
@@ -663,10 +659,36 @@ extension LMSensorManager {
 extension LMSensorManager: iOSDelegate {
     
     func messageReceived(tuple: MessageReceived) {
-        // Handle receiving message
-        print("messageReceived on phone")
-        if let sensorData = tuple.message[SharingInfo.Keys.watchSensorDataArray.rawValue] as? [SensorDataInfo] {
-            watchSensorData = sensorData
-        }
+//        // Handle receiving message
+//        printDebug("messageReceived on phone \(tuple.message)")
+//        if let sensorData = tuple.message[SharingInfo.Keys.watchSensorDataArray.rawValue] as? Data {
+//            let decoder = JSONDecoder()
+//            do {
+//                watchSensorData = try decoder.decode([SensorDataInfo].self, from: sensorData)
+//            } catch let error {
+//                printError("messageReceived" + error.localizedDescription)
+//            }
+//        } else if let _ = tuple.message[SharingInfo.Keys.fetchLoginInfoFromPhone.rawValue] as? Bool {
+//            //Inform watch the login info
+//            guard let userID = User.shared.userId else {return}
+//            guard let sessionToken = Endpoint.getSessionKey() else {return}
+//            var messageInfo: [String: Any] = [SharingInfo.Keys.userId.rawValue : userID]
+//            messageInfo[SharingInfo.Keys.sessionToken.rawValue] = sessionToken
+//            tuple.replyHandler?(messageInfo)
+//        }
+    }
+    
+    func applicationContextReceived(tuple: ApplicationContextReceived) {
+//        printDebug("messageReceived on phonef \(tuple.applicationContext)")
+//        if let _ = tuple.applicationContext[SharingInfo.Keys.fetchLoginInfoFromPhone.rawValue] as? Bool {
+//            //Inform watch the login info
+//            guard let userID = User.shared.userId else {return}
+//            guard let sessionToken = Endpoint.getSessionKey() else {return}
+//            var messageInfo: [String: Any] = [SharingInfo.Keys.userId.rawValue : userID]
+//            messageInfo[SharingInfo.Keys.sessionToken.rawValue] = sessionToken
+//
+//            WatchSessionManager.shared.updateApplicationContext(applicationContext: messageInfo)
+//
+//        }
     }
 }
