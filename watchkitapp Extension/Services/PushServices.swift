@@ -20,9 +20,11 @@ class NotificationAPI {
             switch response {
             case .failure:
                 completion(false)
+                //UserDefaults.standard.logData = "sendDeviceToken done"
                 //LMLogsManager.shared.addLogs(level: .error, logs: Logs.Messages.network_error + " " + err.errorMessage)
                 break
             case .success(_):
+                //UserDefaults.standard.logData = "sendDeviceToken failue"
                 completion(true)
                 break
             }

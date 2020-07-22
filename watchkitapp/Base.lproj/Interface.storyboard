@@ -9,7 +9,7 @@
         <!--Hosting Controller-->
         <scene sceneID="RUd-og-cv4">
             <objects>
-                <hostingController id="NBu-mt-KyX" customClass="HostingController" customModule="mindLAMP_2"/>
+                <hostingController id="NBu-mt-KyX" customClass="HostingController" customModule="watchkitextension"/>
             </objects>
             <point key="canvasLocation" x="187" y="141"/>
         </scene>
@@ -32,7 +32,7 @@
         <!--Notification Controller-->
         <scene sceneID="Niz-AI-uX2">
             <objects>
-                <controller id="eXb-UN-Cd0" customClass="NotificationController" customModule="mindLAMP_2"/>
+                <controller id="eXb-UN-Cd0" customClass="NotificationController" customModule="watchkitextension"/>
             </objects>
             <point key="canvasLocation" x="488" y="462"/>
         </scene>

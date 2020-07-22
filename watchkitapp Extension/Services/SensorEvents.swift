@@ -7,10 +7,11 @@ class SensorEvents {
     func postSensorData() {
         
         if let lastUpdatedTime = SensorEvents.lastUpdated, Date().distance(to: lastUpdatedTime) < 60 {
-            print("distance = \(Date().distance(to: lastUpdatedTime))")
-            return }
+            //UserDefaults.standard.logData = "distance = \(Date().distance(to: lastUpdatedTime))"
+            return
+        }
         if let lastUpdatedTime = SensorEvents.lastUpdated {
-            print("distance2 = \(Date().distance(to: lastUpdatedTime))")
+            //UserDefaults.standard.logData = "distance2 = \(Date().distance(to: lastUpdatedTime))"
         }
         SensorEvents.lastUpdated = Date()
         let request = LMWatchSensorManager.shared.getLatestDataRequest()
@@ -22,12 +23,15 @@ class SensorEvents {
         let connection = NetworkConfig.networkingAPI()
         connection.makeWebserviceCall(with: requestData) { (response: Result<SensorData.Response>) in
             
+            
             Utils.postNotificationOnMainQueueAsync(name: .sensorDataPosted)
             switch response {
             case .failure:
+                //UserDefaults.standard.logData = "postSensorData failue"
                 //LMLogsManager.shared.addLogs(level: .error, logs: Logs.Messages.network_error + " " + err.localizedMessage)
                 break
             case .success(_):
+                //UserDefaults.standard.logData = "postSensorData done"
                 break
             }
         }

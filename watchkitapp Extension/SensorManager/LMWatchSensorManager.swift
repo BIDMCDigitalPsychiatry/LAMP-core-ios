@@ -211,7 +211,7 @@ extension LMWatchSensorManager: WatchOSDelegate {
                 Endpoint.setSessionKey(loginInfo.sessionToken)
                 User.shared.login(userID: loginInfo.userId, serverAddress: nil)
                 Utils.postNotificationOnMainQueueAsync(name: .userLogined)
-                WKInterfaceDevice.current().play(.notification)
+                //WKInterfaceDevice.current().play(.notification)
             } else if let _ = tuple.applicationContext[IOSCommands.sendWatchSensorEvents] as? Bool {
                 LMWatchSensorManager.shared.sendSensorEvents()
             } else if let _ = tuple.applicationContext[IOSCommands.logout] as? Bool {

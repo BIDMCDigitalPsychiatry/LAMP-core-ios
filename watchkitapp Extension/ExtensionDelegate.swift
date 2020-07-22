@@ -1,5 +1,4 @@
 // watchkitapp Extension
-//https://stackoverflow.com/questions/58094221/failing-apns-for-independent-watchos6-app
 
 import WatchKit
 import UserNotifications
@@ -113,6 +112,7 @@ extension ExtensionDelegate {
                 ()
             }
             print("settings.alertSetting = \(settings.alertSetting.rawValue)")
+            //UserDefaults.standard.logData = "settings.alertSetting = \(settings.alertSetting.rawValue)"
         }
         
         //guard settings.authorizationStatus == .authorized else { return }
@@ -124,6 +124,7 @@ extension ExtensionDelegate {
             WKExtension.shared().unregisterForRemoteNotifications()
         } else {
             print("registering")
+            //UserDefaults.standard.logData = "registering"
             WKExtension.shared().registerForRemoteNotifications()
         }
     }
@@ -136,6 +137,7 @@ extension ExtensionDelegate {
         
         let deviceTokenStr = deviceToken.map { String(format: "%02.2hhx", $0) }.joined()
         print("deviceTokenStr = \(deviceTokenStr)")
+        //UserDefaults.standard.logData = "deviceTokenStr = \(deviceTokenStr)"
         // Sync to Server and store to userdefault if any change in devicetoken value
         if deviceTokenStr != UserDefaults.standard.watchdeviceToken {
             if User.shared.isLogin() {
