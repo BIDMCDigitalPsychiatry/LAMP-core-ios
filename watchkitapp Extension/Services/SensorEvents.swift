@@ -3,17 +3,9 @@
 import Foundation
 
 class SensorEvents {
-    static var lastUpdated: Date?
+
     func postSensorData() {
         
-        if let lastUpdatedTime = SensorEvents.lastUpdated, Date().distance(to: lastUpdatedTime) < 60 {
-            //UserDefaults.standard.logData = "distance = \(Date().distance(to: lastUpdatedTime))"
-            return
-        }
-        if let lastUpdatedTime = SensorEvents.lastUpdated {
-            //UserDefaults.standard.logData = "distance2 = \(Date().distance(to: lastUpdatedTime))"
-        }
-        SensorEvents.lastUpdated = Date()
         let request = LMWatchSensorManager.shared.getLatestDataRequest()
         guard let userID = User.shared.userId, User.shared.isLogin() == true else {
             return }
