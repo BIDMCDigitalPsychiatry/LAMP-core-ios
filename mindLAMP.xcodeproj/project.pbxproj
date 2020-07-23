@@ -18,6 +18,8 @@
 		5FF2932A24223A6300D0BE09 /* LMConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FF2932924223A6300D0BE09 /* LMConstants.swift */; };
 		5FFF157124209F9100C8A26E /* HKDevice+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FFF157024209F9100C8A26E /* HKDevice+Extension.swift */; };
 		5FFF15732420A1B500C8A26E /* HKWorkoutActivityType+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FFF15722420A1B500C8A26E /* HKWorkoutActivityType+Extension.swift */; };
+		B228661724C9CD5500286D47 /* NodeMobile.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B228661624C9CD5500286D47 /* NodeMobile.framework */; };
+		B228661824C9CD5500286D47 /* NodeMobile.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = B228661624C9CD5500286D47 /* NodeMobile.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		B229D5F3245319380099F646 /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B229D5F2245319380099F646 /* WebViewController.swift */; };
 		B238432824B82D3900E548E2 /* SharingInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = B238432724B82D3900E548E2 /* SharingInfo.swift */; };
 		B238432924B82D3900E548E2 /* SharingInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = B238432724B82D3900E548E2 /* SharingInfo.swift */; };
@@ -128,8 +130,6 @@
 		B2B8935223D0AD6500321C3E /* DateExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2B8935023D0AD6500321C3E /* DateExtension.swift */; };
 		B2B8935323D0AD6500321C3E /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2B8935123D0AD6500321C3E /* String+Extension.swift */; };
 		B2B8979823D0ADBA00321C3E /* HealthKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B2B8979723D0ADBA00321C3E /* HealthKit.framework */; };
-		B2B9679924C9507800FB9D47 /* NodeMobile.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B2B9679824C9507800FB9D47 /* NodeMobile.framework */; };
-		B2B9679A24C9507800FB9D47 /* NodeMobile.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = B2B9679824C9507800FB9D47 /* NodeMobile.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		B2CD377E2477A2CA004E8B7B /* TextPresentation.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2CD377D2477A2CA004E8B7B /* TextPresentation.swift */; };
 		B2D930EF2445C9BD0086477D /* LMSensorManager+SensorObservers.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2D930ED2445C9BD0086477D /* LMSensorManager+SensorObservers.swift */; };
 		B2D930F02445C9BD0086477D /* LMSensorManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2D930EE2445C9BD0086477D /* LMSensorManager.swift */; };
@@ -205,7 +205,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				B2B9679A24C9507800FB9D47 /* NodeMobile.framework in Embed Frameworks */,
+				B228661824C9CD5500286D47 /* NodeMobile.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -237,6 +237,7 @@
 		5FF2932924223A6300D0BE09 /* LMConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LMConstants.swift; sourceTree = "<group>"; };
 		5FFF157024209F9100C8A26E /* HKDevice+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HKDevice+Extension.swift"; sourceTree = "<group>"; };
 		5FFF15722420A1B500C8A26E /* HKWorkoutActivityType+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HKWorkoutActivityType+Extension.swift"; sourceTree = "<group>"; };
+		B228661624C9CD5500286D47 /* NodeMobile.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NodeMobile.framework; path = libnode/NodeMobile.framework; sourceTree = "<group>"; };
 		B229D5F2245319380099F646 /* WebViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
 		B238432724B82D3900E548E2 /* SharingInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SharingInfo.swift; path = Shared/SharingInfo.swift; sourceTree = "<group>"; };
 		B238432B24B8357F00E548E2 /* CodableHelpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CodableHelpers.swift; sourceTree = "<group>"; };
@@ -321,7 +322,6 @@
 		B291BC98249B44770042383E /* SensorManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SensorManager.swift; sourceTree = "<group>"; };
 		B291BC9A249B44770042383E /* LampSensorCore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LampSensorCore.swift; sourceTree = "<group>"; };
 		B291BC9B249B44770042383E /* SensorConfig.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SensorConfig.swift; sourceTree = "<group>"; };
-		B2962FC624ADEAE500C1D598 /* NodeMobile.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NodeMobile.framework; path = libnode/NodeMobile.framework; sourceTree = "<group>"; };
 		B2962FCA24ADECB700C1D598 /* NodeRunner.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NodeRunner.mm; sourceTree = "<group>"; };
 		B2962FCC24ADECB700C1D598 /* NodeManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NodeManager.swift; sourceTree = "<group>"; };
 		B2962FCF24ADECEC00C1D598 /* NodeRunner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NodeRunner.h; sourceTree = "<group>"; };
@@ -336,7 +336,6 @@
 		B2B8935123D0AD6500321C3E /* String+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+Extension.swift"; sourceTree = "<group>"; };
 		B2B8979523D0ADBA00321C3E /* mindLAMP.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = mindLAMP.entitlements; sourceTree = "<group>"; };
 		B2B8979723D0ADBA00321C3E /* HealthKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HealthKit.framework; path = System/Library/Frameworks/HealthKit.framework; sourceTree = SDKROOT; };
-		B2B9679824C9507800FB9D47 /* NodeMobile.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NodeMobile.framework; path = "../../Projects/LAMPV2/nodejs-mobile-v0.3.1/Release-iphoneos/NodeMobile.framework"; sourceTree = "<group>"; };
 		B2CD377D2477A2CA004E8B7B /* TextPresentation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextPresentation.swift; sourceTree = "<group>"; };
 		B2D930ED2445C9BD0086477D /* LMSensorManager+SensorObservers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "LMSensorManager+SensorObservers.swift"; sourceTree = "<group>"; };
 		B2D930EE2445C9BD0086477D /* LMSensorManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LMSensorManager.swift; sourceTree = "<group>"; };
@@ -372,7 +371,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B2B9679924C9507800FB9D47 /* NodeMobile.framework in Frameworks */,
+				B228661724C9CD5500286D47 /* NodeMobile.framework in Frameworks */,
 				B2B8979823D0ADBA00321C3E /* HealthKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -898,8 +897,7 @@
 		B2B8979623D0ADBA00321C3E /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				B2962FC624ADEAE500C1D598 /* NodeMobile.framework */,
-				B2B9679824C9507800FB9D47 /* NodeMobile.framework */,
+				B228661624C9CD5500286D47 /* NodeMobile.framework */,
 				B2B8979723D0ADBA00321C3E /* HealthKit.framework */,
 				B2D930F82445D7E90086477D /* UserNotifications.framework */,
 				B2D930FA2445D7E90086477D /* UserNotificationsUI.framework */,
