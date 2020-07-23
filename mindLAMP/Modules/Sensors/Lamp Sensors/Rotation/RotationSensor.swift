@@ -181,6 +181,8 @@ public class RotationSensor: LampSensorCore {
                         case .high:
                             data.accuracy = 3 // SENSOR_STATUS_ACCURACY_HIGH
                             break
+                        @unknown default:
+                            data.accuracy = 2
                         }
                         data.label = self.CONFIG.label
                         

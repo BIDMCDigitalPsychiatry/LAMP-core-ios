@@ -23,7 +23,7 @@ class Logging {
 // MARK: - Global functions for logging
 
 func print(_ items: Any ..., separator: String = " ", terminator: String = "\n") {
-    //#if DEBUG
+    #if DEBUG
         var idx = items.startIndex
         let endIdx = items.endIndex
         repeat {
@@ -31,7 +31,7 @@ func print(_ items: Any ..., separator: String = " ", terminator: String = "\n")
             idx += 1
         }
             while idx < endIdx
-    //#endif
+    #endif
 }
 /**
  Prints the filename, function name, line number and textual representation of `object` and a newline character into
@@ -48,7 +48,7 @@ func print(_ items: Any ..., separator: String = " ", terminator: String = "\n")
  */
 
 func printDebug(_ items: Any ..., separator: String = " ", terminator: String = "\n", file: String = #file, function: String = #function, line: Int = #line) {
-    //#if DEBUG
+    #if DEBUG
         var idx = items.startIndex
         let endIdx = items.endIndex
         var fileName = (file as NSString).pathComponents.last ?? "(unknown)"
@@ -59,7 +59,7 @@ func printDebug(_ items: Any ..., separator: String = " ", terminator: String = 
             idx += 1
         }
             while idx < endIdx
-    //#endif
+    #endif
 }
 
 func printError(_ items: Any ..., separator: String = " ", terminator: String = "\n", file: String = #file, function: String = #function, line: Int = #line, isWriteToFile: Bool = true) {
@@ -104,7 +104,9 @@ func printToFile(_ items: Any ..., separator: String = " ", terminator: String =
         if let outputStream = OutputStream(toFileAtPath: path, append: true) {
             outputStream.open()
             if let data = mtext.data(using: String.Encoding.utf8) {
-                _ = data.withUnsafeBytes { outputStream.write($0, maxLength: data.count) }
+                
+                _ = try outputStream.write(data: data)
+                
             }
             outputStream.close()
         } else {
@@ -113,5 +115,37 @@ func printToFile(_ items: Any ..., separator: String = " ", terminator: String =
     } catch let err {
         print("file catch")
         print(err.localizedDescription)
+    }
+}
+extension OutputStream {
+
+    func write(buffer: UnsafeRawBufferPointer) throws -> Int {
+        // This check ensures that `baseAddress` will never be `nil`.
+        guard !buffer.isEmpty else { return 0 }
+        let bytesWritten = self.write(buffer.baseAddress!.assumingMemoryBound(to: UInt8.self), maxLength: buffer.count)
+        if bytesWritten < 0 {
+            throw self.guaranteedStreamError
+        }
+        return bytesWritten
+    }
+
+    func write(data: Data) throws -> Int {
+        return try data.withUnsafeBytes { buffer -> Int in
+            try self.write(buffer: buffer)
+        }
+    }
+}
+extension Stream {
+    var guaranteedStreamError: Error {
+        if let error = self.streamError {
+            return error
+        }
+        // If this fires, the stream read or write indicated an error but the
+        // stream didn’t record that error.  This is definitely a bug in the
+        // stream implementation, and we want to know about it in our Debug
+        // build. However, there’s no reason to crash the entire process in a
+        // Release build, so in that case we just return a dummy error.
+        assert(false)
+        return NSError(domain: NSPOSIXErrorDomain, code: Int(ENOTTY), userInfo: nil)
     }
 }
