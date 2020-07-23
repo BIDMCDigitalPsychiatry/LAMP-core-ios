@@ -118,8 +118,6 @@
 		B291BCB9249B44770042383E /* SensorManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B291BC98249B44770042383E /* SensorManager.swift */; };
 		B291BCBB249B44770042383E /* LampSensorCore.swift in Sources */ = {isa = PBXBuildFile; fileRef = B291BC9A249B44770042383E /* LampSensorCore.swift */; };
 		B291BCBC249B44770042383E /* SensorConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = B291BC9B249B44770042383E /* SensorConfig.swift */; };
-		B2962FC724ADEAE500C1D598 /* NodeMobile.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B2962FC624ADEAE500C1D598 /* NodeMobile.framework */; };
-		B2962FC824ADEAE500C1D598 /* NodeMobile.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = B2962FC624ADEAE500C1D598 /* NodeMobile.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		B2962FCD24ADECB700C1D598 /* NodeRunner.mm in Sources */ = {isa = PBXBuildFile; fileRef = B2962FCA24ADECB700C1D598 /* NodeRunner.mm */; };
 		B2962FCE24ADECB700C1D598 /* NodeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2962FCC24ADECB700C1D598 /* NodeManager.swift */; };
 		B29639D123BDC28100626E1A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B29639D023BDC28100626E1A /* AppDelegate.swift */; };
@@ -130,6 +128,8 @@
 		B2B8935223D0AD6500321C3E /* DateExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2B8935023D0AD6500321C3E /* DateExtension.swift */; };
 		B2B8935323D0AD6500321C3E /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2B8935123D0AD6500321C3E /* String+Extension.swift */; };
 		B2B8979823D0ADBA00321C3E /* HealthKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B2B8979723D0ADBA00321C3E /* HealthKit.framework */; };
+		B2B9679924C9507800FB9D47 /* NodeMobile.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B2B9679824C9507800FB9D47 /* NodeMobile.framework */; };
+		B2B9679A24C9507800FB9D47 /* NodeMobile.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = B2B9679824C9507800FB9D47 /* NodeMobile.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		B2CD377E2477A2CA004E8B7B /* TextPresentation.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2CD377D2477A2CA004E8B7B /* TextPresentation.swift */; };
 		B2D930EF2445C9BD0086477D /* LMSensorManager+SensorObservers.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2D930ED2445C9BD0086477D /* LMSensorManager+SensorObservers.swift */; };
 		B2D930F02445C9BD0086477D /* LMSensorManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2D930EE2445C9BD0086477D /* LMSensorManager.swift */; };
@@ -177,17 +177,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		5F7D0ADD23D8478B00BA0B4F /* Embed Frameworks */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 10;
-			files = (
-				B2962FC824ADEAE500C1D598 /* NodeMobile.framework in Embed Frameworks */,
-			);
-			name = "Embed Frameworks";
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		B2704DFD24B4A2AC00DE196B /* Embed Watch Content */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
@@ -208,6 +197,17 @@
 				B2704DE324B4A2AC00DE196B /* watchkitextension.appex in Embed App Extensions */,
 			);
 			name = "Embed App Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B2B9679B24C9507800FB9D47 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				B2B9679A24C9507800FB9D47 /* NodeMobile.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		B2D931092445D7E90086477D /* Embed App Extensions */ = {
@@ -336,6 +336,7 @@
 		B2B8935123D0AD6500321C3E /* String+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+Extension.swift"; sourceTree = "<group>"; };
 		B2B8979523D0ADBA00321C3E /* mindLAMP.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = mindLAMP.entitlements; sourceTree = "<group>"; };
 		B2B8979723D0ADBA00321C3E /* HealthKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HealthKit.framework; path = System/Library/Frameworks/HealthKit.framework; sourceTree = SDKROOT; };
+		B2B9679824C9507800FB9D47 /* NodeMobile.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NodeMobile.framework; path = "../../Projects/LAMPV2/nodejs-mobile-v0.3.1/Release-iphoneos/NodeMobile.framework"; sourceTree = "<group>"; };
 		B2CD377D2477A2CA004E8B7B /* TextPresentation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextPresentation.swift; sourceTree = "<group>"; };
 		B2D930ED2445C9BD0086477D /* LMSensorManager+SensorObservers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "LMSensorManager+SensorObservers.swift"; sourceTree = "<group>"; };
 		B2D930EE2445C9BD0086477D /* LMSensorManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LMSensorManager.swift; sourceTree = "<group>"; };
@@ -371,7 +372,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B2962FC724ADEAE500C1D598 /* NodeMobile.framework in Frameworks */,
+				B2B9679924C9507800FB9D47 /* NodeMobile.framework in Frameworks */,
 				B2B8979823D0ADBA00321C3E /* HealthKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -898,6 +899,7 @@
 			isa = PBXGroup;
 			children = (
 				B2962FC624ADEAE500C1D598 /* NodeMobile.framework */,
+				B2B9679824C9507800FB9D47 /* NodeMobile.framework */,
 				B2B8979723D0ADBA00321C3E /* HealthKit.framework */,
 				B2D930F82445D7E90086477D /* UserNotifications.framework */,
 				B2D930FA2445D7E90086477D /* UserNotificationsUI.framework */,
@@ -993,9 +995,9 @@
 				B29639C923BDC28100626E1A /* Sources */,
 				B29639CA23BDC28100626E1A /* Frameworks */,
 				B29639CB23BDC28100626E1A /* Resources */,
-				5F7D0ADD23D8478B00BA0B4F /* Embed Frameworks */,
 				B2D931092445D7E90086477D /* Embed App Extensions */,
 				B2704DFD24B4A2AC00DE196B /* Embed Watch Content */,
+				B2B9679B24C9507800FB9D47 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -1331,7 +1333,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 18;
+				CURRENT_PROJECT_VERSION = 19;
 				DEVELOPMENT_TEAM = S2Y2D4239K;
 				IBSC_MODULE = "$(PRODUCT_MODULE_NAME)";
 				INFOPLIST_FILE = watchkitapp/Info.plist;
@@ -1354,7 +1356,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 18;
+				CURRENT_PROJECT_VERSION = 19;
 				DEVELOPMENT_TEAM = S2Y2D4239K;
 				IBSC_MODULE = "$(PRODUCT_MODULE_NAME)";
 				INFOPLIST_FILE = watchkitapp/Info.plist;
@@ -1376,7 +1378,7 @@
 				CODE_SIGN_ENTITLEMENTS = "watchkitapp Extension/watchkitapp Extension.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 18;
+				CURRENT_PROJECT_VERSION = 19;
 				DEVELOPMENT_ASSET_PATHS = "\"watchkitapp Extension/Preview Content\"";
 				DEVELOPMENT_TEAM = S2Y2D4239K;
 				ENABLE_PREVIEWS = YES;
@@ -1404,7 +1406,7 @@
 				CODE_SIGN_ENTITLEMENTS = "watchkitapp Extension/watchkitapp Extension.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 18;
+				CURRENT_PROJECT_VERSION = 19;
 				DEVELOPMENT_ASSET_PATHS = "\"watchkitapp Extension/Preview Content\"";
 				DEVELOPMENT_TEAM = S2Y2D4239K;
 				ENABLE_PREVIEWS = YES;
@@ -1431,7 +1433,7 @@
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 18;
+				CURRENT_PROJECT_VERSION = 19;
 				DEVELOPMENT_TEAM = S2Y2D4239K;
 				INFOPLIST_FILE = NotificationService/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
@@ -1455,7 +1457,7 @@
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 18;
+				CURRENT_PROJECT_VERSION = 19;
 				DEVELOPMENT_TEAM = S2Y2D4239K;
 				INFOPLIST_FILE = NotificationService/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
@@ -1599,7 +1601,7 @@
 				CODE_SIGN_ENTITLEMENTS = mindLAMP/mindLAMP.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 18;
+				CURRENT_PROJECT_VERSION = 19;
 				DEVELOPMENT_ASSET_PATHS = "\"mindLAMP/Preview Content\"";
 				DEVELOPMENT_TEAM = S2Y2D4239K;
 				ENABLE_BITCODE = NO;
@@ -1636,7 +1638,7 @@
 				CODE_SIGN_ENTITLEMENTS = mindLAMP/mindLAMP.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 18;
+				CURRENT_PROJECT_VERSION = 19;
 				DEVELOPMENT_ASSET_PATHS = "\"mindLAMP/Preview Content\"";
 				DEVELOPMENT_TEAM = S2Y2D4239K;
 				ENABLE_BITCODE = NO;
@@ -1668,7 +1670,7 @@
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 18;
+				CURRENT_PROJECT_VERSION = 19;
 				DEVELOPMENT_TEAM = S2Y2D4239K;
 				INFOPLIST_FILE = CustomNotification/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
@@ -1692,7 +1694,7 @@
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 18;
+				CURRENT_PROJECT_VERSION = 19;
 				DEVELOPMENT_TEAM = S2Y2D4239K;
 				INFOPLIST_FILE = CustomNotification/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
