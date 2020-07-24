@@ -69,6 +69,7 @@ class UserAuth: ObservableObject {
             }
             DispatchQueue.main.async {
                 completion?(self?.errorMsg == nil)
+                Utils.postNotificationOnMainQueueAsync(name: .userLogined)
             }
             
         }
