@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import Sensors
 
 // MARK:- AccelerometerObserver
 extension LMSensorManager: AccelerometerObserver {
@@ -40,28 +41,6 @@ extension LMSensorManager: LocationsObserver {
     func onHeadingChanged(data: HeadingData) {
     }
 }
-
-// MARK:- ScreenObserver
-//extension LMSensorManager: ScreenObserver {
-//    public func onScreenOn() {
-//        latestScreenStateData = ScreenStateData(screenState: .screen_on)
-//    }
-//    
-//    public func onScreenOff() {
-//        latestScreenStateData = ScreenStateData(screenState: .screen_off)
-//    }
-//    
-//    public func onScreenLocked() {
-//        latestScreenStateData = ScreenStateData(screenState: .screen_locked)
-//    }
-//    
-//    public func onScreenUnlocked() {
-//        latestScreenStateData = ScreenStateData(screenState: .screen_unlocked)
-//    }
-//    
-//    public func onScreenBrightnessChanged(data: ScreenBrightnessData) {
-//    }
-//}
 
 // MARK:- CallsObserver
 extension LMSensorManager: CallsObserver {

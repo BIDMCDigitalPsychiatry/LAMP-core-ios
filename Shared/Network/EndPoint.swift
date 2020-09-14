@@ -5,8 +5,10 @@ import Foundation
 enum Endpoint: String {
     
     case logs = "/"
-    case participantServerEvent = "/participant/%@/sensor_event"
-    case getParticipant = "/participant/%@"
+    case participantSensorEvent = "/participant/%@/sensor_event"
+    case getParticipant = "/participant/me"
+    
+    case getLatestDashboard = "/version/get"
     
     static func setSessionKey(_ token: String?) {
         UserDefaults.standard.set(token, forKey: "authToken")

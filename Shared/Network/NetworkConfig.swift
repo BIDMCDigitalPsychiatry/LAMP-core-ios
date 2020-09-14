@@ -14,12 +14,20 @@ class NetworkConfig {
         if let url = UserDefaults.standard.serverAddress {
             return url
         } else {
-            return "https://api.lamp.digital"
+            return LampURL.lampAPI
         }
     }
     
     class var logsURL: String {
         return LampURL.logsDigital
+    }
+    
+    class var dashboardURL: String {
+        return LampURL.dashboardURL
+    }
+    
+    static func dashboardAPI() -> NetworkingAPI {
+        return Networking(baseURL: URL(string: NetworkConfig.dashboardURL)!, isBackgroundSession: false)
     }
     
     static func logsNetworkingAPI() -> NetworkingAPI {
@@ -28,6 +36,10 @@ class NetworkConfig {
     
     static func networkingAPI(isBackgroundSession: Bool = false) -> NetworkingAPI {
         return Networking(baseURL: URL(string: NetworkConfig.baseURL())!, isBackgroundSession: isBackgroundSession)
+    }
+    
+    static func networkingAPI(urlString: String) -> NetworkingAPI {
+        return Networking(baseURL: URL(string: urlString)!, isBackgroundSession: false)
     }
     
 }
@@ -40,6 +52,7 @@ struct RequestData: RequestProtocol {
     var endpointDetails: String
     var contentType: HTTPContentType = .json
     var requestTye: HTTPMethodType
+    var headers: [String: String]?
     
     func getRequestHeaders() -> [String: String] {
         
@@ -51,7 +64,14 @@ struct RequestData: RequestProtocol {
             requestHeaders["Content-Type"] = contentType.toString()
         }
         
-        if isAuth() {
+        if isDashboard() {
+            if let headerDict = headers {
+                for (key, value) in headerDict {
+                    requestHeaders[key] = value
+                }
+            }
+        }
+        else if isAuth() {
             if let token = getSessionToken() {
                 requestHeaders["Authorization"] = "Basic \(token)"
             }
@@ -112,10 +132,11 @@ struct RequestData: RequestProtocol {
             self.contentType = .json
         }
     }
-    init(endpoint: String, requestTye: HTTPMethodType, urlParams: Encodable? = nil) {
+    init(endpoint: String, requestTye: HTTPMethodType, urlParams: Encodable? = nil, headers: [String: String]? = nil) {
         self.requestTye = requestTye
         self.endpoint = endpoint
         self.endpointDetails = ""
+        self.headers = headers
         
         if let params = urlParams {
             self.parameters = (params as? DictionaryEncodable)?.dictionary()
@@ -160,7 +181,26 @@ struct RequestData: RequestProtocol {
         return "\(endpoint)\(buildParameters())\(endpointDetails)"
     }
     func isAuth() -> Bool {
-        return Endpoint.logs.rawValue != endpoint
+        guard let endURL = Endpoint(rawValue: endpoint) else {
+            if endpoint.hasPrefix("/participant/") {return true}
+            return false }
+        
+        switch endURL {
+        case .logs, .getLatestDashboard:
+            return false
+        case .participantSensorEvent, .getParticipant:
+            return true
+        }
+    }
+    func isDashboard() -> Bool {
+        guard let endURL = Endpoint(rawValue: endpoint) else { return false }
+        
+        switch endURL {
+        case .getLatestDashboard:
+            return true
+        case .logs, .participantSensorEvent, .getParticipant:
+            return false
+        }
     }
     func getAPIKey() -> String? {
         return Endpoint.getAPIKey()

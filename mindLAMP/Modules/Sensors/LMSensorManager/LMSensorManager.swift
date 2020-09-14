@@ -8,6 +8,7 @@
 import Foundation
 import UIKit
 import HealthKit
+import Sensors
 
 class LMSensorManager {
     
@@ -17,14 +18,17 @@ class LMSensorManager {
     
     // MARK: - VARIABLES
     var sensor_accelerometer: AccelerometerSensor?
-    var sensor_bluetooth: LMBluetoothSensor?
-    var sensor_calls: CallsSensor?
     var sensor_gravity: GravitySensor?
     var sensor_gyro: GyroscopeSensor?
-    var sensor_healthKit: LMHealthKitSensor?
-    var sensor_location: LocationsSensor?
     var sensor_magneto: MagnetometerSensor?
     var sensor_rotation: RotationSensor?
+    
+    var sensor_bluetooth: LMBluetoothSensor?
+    var sensor_calls: CallsSensor?
+    
+    var sensor_healthKit: LMHealthKitSensor?
+    var sensor_location: LocationsSensor?
+    
     //var sensor_screen: ScreenSensor?
     var sensor_wifi: WiFiSensor?
     var sensor_pedometer: PedometerSensor?
@@ -45,15 +49,18 @@ class LMSensorManager {
     
     private func initiateSensors() {
         setupAccelerometerSensor()
-        setupBluetoothSensor()
-        setupCallsSensor()
         setuGravitySensor()
         setupGyroscopeSensor()
+        setupRotationSensor()
+        
+        setupBluetoothSensor()
+        setupCallsSensor()
+        
         setupHealthKitSensor()
         setupLocationSensor()
         setupMagnetometerSensor()
         setupPedometerSensor()
-        setupRotationSensor()
+        
         setupScreenSensor()
         setupWifiSensor()
     }
@@ -306,7 +313,7 @@ extension LMSensorManager {
         model.y = data.y
         model.z = data.z
 
-        return SensorDataInfo(sensor: SensorType.lamp_accelerometer.jsonKey, timestamp: Double(data.timestamp), data: model)
+        return SensorDataInfo(sensor: SensorType.lamp_accelerometer.lampIdentifier, timestamp: Double(data.timestamp), data: model)
     }
     
     private func fetchAccelerometerMotionData() -> SensorDataInfo? {
@@ -338,9 +345,9 @@ extension LMSensorManager {
 //        }
         if let data = sensor_rotation?.latestData() {
             var rotation = Rotational()
-            rotation.x = data.x
-            rotation.y = data.y
-            rotation.z = data.z
+            rotation.roll = data.roll
+            rotation.pitch = data.pitch
+            rotation.yaw = data.yaw
             
             model.rotation = rotation
         }
@@ -359,7 +366,7 @@ extension LMSensorManager {
 //            LMLogsManager.shared.addLogs(level: .warning, logs: Logs.Messages.magnetometer_null)
 //        }
         
-        return SensorDataInfo(sensor: SensorType.lamp_accelerometer_motion.jsonKey, timestamp: timeStamp, data: model)
+        return SensorDataInfo(sensor: SensorType.lamp_accelerometer_motion.lampIdentifier, timestamp: timeStamp, data: model)
     }
     
     private func fetchGyroscopeData() -> SensorDataInfo? {
@@ -372,7 +379,7 @@ extension LMSensorManager {
         model.y = data.y
         model.z = data.z
 
-        return SensorDataInfo(sensor: SensorType.lamp_gyroscope.jsonKey, timestamp: Double(data.timestamp), data: model)
+        return SensorDataInfo(sensor: SensorType.lamp_gyroscope.lampIdentifier, timestamp: Double(data.timestamp), data: model)
     }
     
     private func fetchMagnetometerData() -> SensorDataInfo? {
@@ -385,7 +392,7 @@ extension LMSensorManager {
         model.y = data.y
         model.z = data.z
 
-        return SensorDataInfo(sensor: SensorType.lamp_magnetometer.jsonKey, timestamp: Double(data.timestamp), data: model)
+        return SensorDataInfo(sensor: SensorType.lamp_magnetometer.lampIdentifier, timestamp: Double(data.timestamp), data: model)
     }
         
 //    private func fetchSleepData() -> SensorDataInfo? {
@@ -410,32 +417,32 @@ extension LMSensorManager {
         }
         var stepsModel = SensorDataModel()
         stepsModel.value = Double(data.numberOfSteps)
-        let stpsData = SensorDataInfo(sensor: SensorType.lamp_steps.jsonKey, timestamp: Double(data.timestamp), data: stepsModel)
+        let stpsData = SensorDataInfo(sensor: SensorType.lamp_steps.lampIdentifier, timestamp: Double(data.timestamp), data: stepsModel)
         arrayData.append(stpsData)
         
         var flightModel = SensorDataModel()
         flightModel.value = Double(data.floorsAscended)
-        arrayData.append(SensorDataInfo(sensor: SensorType.lamp_flights_up.jsonKey, timestamp: Double(data.timestamp), data: flightModel))
+        arrayData.append(SensorDataInfo(sensor: SensorType.lamp_flights_up.lampIdentifier, timestamp: Double(data.timestamp), data: flightModel))
 
         var distanceModel = SensorDataModel()
         distanceModel.value = data.distance
-        arrayData.append(SensorDataInfo(sensor: SensorType.lamp_distance.jsonKey, timestamp: Double(data.timestamp), data: distanceModel))
+        arrayData.append(SensorDataInfo(sensor: SensorType.lamp_distance.lampIdentifier, timestamp: Double(data.timestamp), data: distanceModel))
         
         var descendedModel = SensorDataModel()
         descendedModel.value = Double(data.floorsDescended)
-        arrayData.append(SensorDataInfo(sensor: SensorType.lamp_flights_down.jsonKey, timestamp: Double(data.timestamp), data: distanceModel))
+        arrayData.append(SensorDataInfo(sensor: SensorType.lamp_flights_down.lampIdentifier, timestamp: Double(data.timestamp), data: distanceModel))
         
         var currentPaceModel = SensorDataModel()
         currentPaceModel.value = data.currentPace
-        arrayData.append(SensorDataInfo(sensor: SensorType.lamp_currentPace.jsonKey, timestamp: Double(data.timestamp), data: currentPaceModel))
+        arrayData.append(SensorDataInfo(sensor: SensorType.lamp_currentPace.lampIdentifier, timestamp: Double(data.timestamp), data: currentPaceModel))
         
         var currentCadenceModel = SensorDataModel()
         currentCadenceModel.value = data.currentCadence
-        arrayData.append(SensorDataInfo(sensor: SensorType.lamp_currentCadence.jsonKey, timestamp: Double(data.timestamp), data: currentCadenceModel))
+        arrayData.append(SensorDataInfo(sensor: SensorType.lamp_currentCadence.lampIdentifier, timestamp: Double(data.timestamp), data: currentCadenceModel))
         
         var averageActivePaceModel = SensorDataModel()
         averageActivePaceModel.value = data.averageActivePace
-        arrayData.append(SensorDataInfo(sensor: SensorType.lamp_avgActivePace.jsonKey, timestamp: Double(data.timestamp), data: averageActivePaceModel))
+        arrayData.append(SensorDataInfo(sensor: SensorType.lamp_avgActivePace.lampIdentifier, timestamp: Double(data.timestamp), data: averageActivePaceModel))
         
         return arrayData
     }
@@ -464,7 +471,7 @@ extension LMSensorManager {
         model.latitude = data.latitude
         model.altitude = data.altitude
 
-        return SensorDataInfo(sensor: SensorType.lamp_gps.jsonKey, timestamp: Double(data.timestamp), data: model)
+        return SensorDataInfo(sensor: SensorType.lamp_gps.lampIdentifier, timestamp: Double(data.timestamp), data: model)
     }
     
     private func fetchBluetoothData() -> SensorDataInfo? {
@@ -477,7 +484,7 @@ extension LMSensorManager {
         model.bt_name = data.name
         model.bt_rssi = data.rssi
 
-        return SensorDataInfo(sensor: SensorType.lamp_bluetooth.jsonKey, timestamp: data.timestamp, data: model)
+        return SensorDataInfo(sensor: SensorType.lamp_bluetooth.lampIdentifier, timestamp: data.timestamp, data: model)
     }
     
     private func fetchWiFiData() -> SensorDataInfo? {
@@ -489,7 +496,7 @@ extension LMSensorManager {
         model.bssid = data.bssid
         model.ssid = data.ssid
 
-        return SensorDataInfo(sensor: SensorType.lamp_wifi.jsonKey, timestamp: Double(data.timestamp), data: model)
+        return SensorDataInfo(sensor: SensorType.lamp_wifi.lampIdentifier, timestamp: Double(data.timestamp), data: model)
     }
     
     private func fetchScreenStateData() -> SensorDataInfo? {
@@ -501,7 +508,7 @@ extension LMSensorManager {
         model.value = Double(data.screenState.rawValue)
         model.valueString = data.screenState.stringValue
 
-        return SensorDataInfo(sensor: SensorType.lamp_screen_state.jsonKey, timestamp: data.timestamp, data: model)
+        return SensorDataInfo(sensor: SensorType.lamp_screen_state.lampIdentifier, timestamp: data.timestamp, data: model)
     }
     
     private func fetchCallsData() -> SensorDataInfo? {
@@ -514,7 +521,7 @@ extension LMSensorManager {
         model.call_duration = Double(data.duration)
         model.call_trace = data.trace
 
-        return SensorDataInfo(sensor: SensorType.lamp_calls.jsonKey, timestamp: Double(data.timestamp), data: model)
+        return SensorDataInfo(sensor: SensorType.lamp_calls.lampIdentifier, timestamp: Double(data.timestamp), data: model)
     }
     
     private func fetchWorkoutSegmentData() -> SensorDataInfo? {
@@ -526,11 +533,11 @@ extension LMSensorManager {
         }
         var model = SensorDataModel()
         model.workout_type = data.type
-        model.workout_durtion = data.value
+        model.workout_duration = data.value
         model.startDate = data.startDate
         model.endDate = data.endDate
         
-        return SensorDataInfo(sensor: SensorType.lamp_segment.jsonKey, timestamp: Double(data.timestamp), data: model)
+        return SensorDataInfo(sensor: SensorType.lamp_segment.lampIdentifier, timestamp: Double(data.timestamp), data: model)
     }
 }
 
@@ -538,7 +545,7 @@ extension LMSensorManager {
     
     func sensorDataRequest(with timestamp: Double = Date().timeInMilliSeconds, sensor: SensorType, dataModel: SensorDataModel) -> SensorDataInfo {
         
-        return SensorDataInfo(sensor: sensor.jsonKey, timestamp: timestamp, data: dataModel)
+        return SensorDataInfo(sensor: sensor.lampIdentifier, timestamp: timestamp, data: dataModel)
     }
     
     func fetchHKCharacteristicData() -> [SensorDataInfo]? {
@@ -554,7 +561,8 @@ extension LMSensorManager {
             data.valueString = healthData.valueText
             data.startDate = healthData.startDate
             data.endDate = healthData.endDate
-            return SensorDataInfo(sensor: healthData.lampIdentifier, timestamp: Double(healthData.timestamp), data: data)
+            let lampIdentifier = healthData.hkIdentifier.lampIdentifier
+            return SensorDataInfo(sensor: lampIdentifier, timestamp: Double(healthData.timestamp), data: data)
         }
         
     }
@@ -577,7 +585,7 @@ extension LMSensorManager {
                     model.valueString = data.valueText
                     model.startDate = data.startDate
                     model.endDate = data.endDate
-                    arrayData.append(SensorDataInfo(sensor: categoryType.jsonKey, timestamp: Double(data.timestamp), data: model))
+                    arrayData.append(SensorDataInfo(sensor: categoryType.lampIdentifier, timestamp: Double(data.timestamp), data: model))
                 }
 //                else {
 //                    let msg = String(format: Logs.Messages.quantityType_null, categoryType.jsonKey)
@@ -611,7 +619,7 @@ extension LMSensorManager {
                     }
                     model.startDate = dataSystolic.startDate
                     model.endDate = dataSystolic.endDate
-                    arrayData.append(SensorDataInfo(sensor: quantityType.jsonKey, timestamp: Double(dataDiastolic.timestamp), data: model))
+                    arrayData.append(SensorDataInfo(sensor: quantityType.lampIdentifier, timestamp: Double(dataDiastolic.timestamp), data: model))
                 } else {
                     //let msg = String(format: Logs.Messages.quantityType_null, quantityType.jsonKey)
                     //LMLogsManager.shared.addLogs(level: .warning, logs: msg)
@@ -625,7 +633,7 @@ extension LMSensorManager {
                     model.value = data.value
                     model.startDate = data.startDate
                     model.endDate = data.endDate
-                    arrayData.append(SensorDataInfo(sensor: quantityType.jsonKey, timestamp: Double(data.timestamp), data: model))
+                    arrayData.append(SensorDataInfo(sensor: quantityType.lampIdentifier, timestamp: Double(data.timestamp), data: model))
                 } else {
                     //let msg = String(format: Logs.Messages.quantityType_null, quantityType.jsonKey)
                     //LMLogsManager.shared.addLogs(level: .warning, logs: msg)
@@ -635,10 +643,10 @@ extension LMSensorManager {
         return arrayData
     }
     
-    func latestData(for hkIdentifier: HKCategoryTypeIdentifier, in array: [LMHealthKitSensorData]) -> LMHealthKitSensorData? {
+    func latestData(for hkIdentifier: HKCategoryTypeIdentifier, in array: [LMHealthKitCategoryData]) -> LMHealthKitCategoryData? {
         return array.filter({ $0.type == hkIdentifier.rawValue }).max(by: {($0.endDate ?? 0) < ($1.endDate ?? 0) })
     }
-    func latestData(for hkIdentifier: HKQuantityTypeIdentifier, in array: [LMHealthKitSensorData]) -> LMHealthKitSensorData? {
+    func latestData(for hkIdentifier: HKQuantityTypeIdentifier, in array: [LMHealthKitQuantityData]) -> LMHealthKitQuantityData? {
         return array.filter({ $0.type == hkIdentifier.rawValue }).max(by: {($0.endDate ?? 0) < ($1.endDate ?? 0) })
     }
     
@@ -680,15 +688,8 @@ extension LMSensorManager: iOSDelegate {
     
     func applicationContextReceived(tuple: ApplicationContextReceived) {
 //        printDebug("messageReceived on phonef \(tuple.applicationContext)")
-//        if let _ = tuple.applicationContext[SharingInfo.Keys.fetchLoginInfoFromPhone.rawValue] as? Bool {
-//            //Inform watch the login info
-//            guard let userID = User.shared.userId else {return}
-//            guard let sessionToken = Endpoint.getSessionKey() else {return}
-//            var messageInfo: [String: Any] = [SharingInfo.Keys.userId.rawValue : userID]
-//            messageInfo[SharingInfo.Keys.sessionToken.rawValue] = sessionToken
-//
-//            WatchSessionManager.shared.updateApplicationContext(applicationContext: messageInfo)
-//
+//        if let dataArray = tuple.applicationContext["sensorData"] as? [SensorDataInfo] {
+//            watchSensorData = dataArray
 //        }
     }
 }

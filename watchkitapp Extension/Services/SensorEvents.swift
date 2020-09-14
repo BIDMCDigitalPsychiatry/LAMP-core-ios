@@ -9,7 +9,7 @@ class SensorEvents {
         let request = LMWatchSensorManager.shared.getLatestDataRequest()
         guard let userID = User.shared.userId, User.shared.isLogin() == true else {
             return }
-        let endPoint =  String(format: Endpoint.participantServerEvent.rawValue, userID)
+        let endPoint =  String(format: Endpoint.participantSensorEvent.rawValue, userID)
         let requestData = RequestData(endpoint: endPoint, requestTye: .post, data: request)
 
         let connection = NetworkConfig.networkingAPI()

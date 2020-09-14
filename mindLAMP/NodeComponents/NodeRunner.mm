@@ -17,6 +17,7 @@
 //node's libUV requires all arguments being on contiguous memory.
 + (void) startEngineWithArguments:(NSArray*)arguments
 {
+    /*
     int c_arguments_size=0;
     
     //Compute byte size need for all arguments in contiguous memory.
@@ -57,5 +58,6 @@
     //Start node, with argc and argv.
     node_start(argument_count,argv);
     free(args_buffer);
+     */
 }
 @end

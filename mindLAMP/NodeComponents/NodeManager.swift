@@ -30,64 +30,64 @@ class NodeManager {
         
     }
     
-    func getServerStatus() {
-        if let localNodeServerURL = URL(string: "http:/127.0.0.1:5000/status") {
-            var request = URLRequest(url: localNodeServerURL)
-            request.httpMethod = "GET"
-            
-            let session = URLSession.shared
-            
-            session.dataTask(with: request) { (data, response, error) in
-                if let response = response {
-                    print(response)
-                }
-                if let data = data {
-                    if let str = String(data: data, encoding: .utf8) {
-                        DispatchQueue.main.async {
-                            if (str == "ok") {
-                                print("Node server is running")
-                                self.canCallApi = true
-                            }
-                        }
-                    }
-                }
-            }.resume()
-        }
-    }
+//    func getServerStatus() {
+//        if let localNodeServerURL = URL(string: "http:/127.0.0.1:5000/status") {
+//            var request = URLRequest(url: localNodeServerURL)
+//            request.httpMethod = "GET"
+//
+//            let session = URLSession.shared
+//
+//            session.dataTask(with: request) { (data, response, error) in
+//                if let response = response {
+//                    print(response)
+//                }
+//                if let data = data {
+//                    if let str = String(data: data, encoding: .utf8) {
+//                        DispatchQueue.main.async {
+//                            if (str == "ok") {
+//                                print("Node server is running")
+//                                self.canCallApi = true
+//                            }
+//                        }
+//                    }
+//                }
+//            }.resume()
+//        }
+//    }
     
-    func callServerAndGetResponse() {
-        
-        if (!canCallApi) {
-            return
-        }
-        
-        if let localNodeServerURL = URL(string: "http:/127.0.0.1:5000/postapi") {
-            let parameterDictionary = ["username" : "Test", "password" : "123456"]
-            var request = URLRequest(url: localNodeServerURL)
-            request.httpMethod = "POST"
-            request.setValue("Application/json", forHTTPHeaderField: "Content-Type")
-            
-            guard let httpBody = try? JSONSerialization.data(withJSONObject: parameterDictionary, options: []) else {
-                return
-            }
-            request.httpBody = httpBody
-            
-            let session = URLSession.shared
-            session.dataTask(with: request) { (data, response, error) in
-                if let response = response {
-                    print(response)
-                }
-                
-                if let data = data {
-                    if let str = String(data: data, encoding: .utf8) {
-                        DispatchQueue.main.async {
-                            print(str)
-                        }
-                    }
-                }
-            }.resume()
-        }
-    }
+//    func callServerAndGetResponse() {
+//
+//        if (!canCallApi) {
+//            return
+//        }
+//
+//        if let localNodeServerURL = URL(string: "http:/127.0.0.1:5000/postapi") {
+//            let parameterDictionary = ["username" : "Test", "password" : "123456"]
+//            var request = URLRequest(url: localNodeServerURL)
+//            request.httpMethod = "POST"
+//            request.setValue("Application/json", forHTTPHeaderField: "Content-Type")
+//
+//            guard let httpBody = try? JSONSerialization.data(withJSONObject: parameterDictionary, options: []) else {
+//                return
+//            }
+//            request.httpBody = httpBody
+//
+//            let session = URLSession.shared
+//            session.dataTask(with: request) { (data, response, error) in
+//                if let response = response {
+//                    print(response)
+//                }
+//
+//                if let data = data {
+//                    if let str = String(data: data, encoding: .utf8) {
+//                        DispatchQueue.main.async {
+//                            print(str)
+//                        }
+//                    }
+//                }
+//            }.resume()
+//        }
+//    }
 
 }
 
@@ -96,8 +96,8 @@ class NodeManager {
 private extension NodeManager {
        
     @objc func startNodeThread() {
-        
-        let srcPath = FileManager.homeURL.path + "/index.js"
+        let srcPath = FileManager.nodeJSPath.path
+        print("startNodeServer srcPath = \(srcPath)")
         let nodeArguments = ["node", srcPath]
         NodeRunner.startEngine(withArguments: nodeArguments as [Any])
     }
@@ -106,6 +106,7 @@ private extension NodeManager {
         
         let nodeFolder = FileManager.nodeFolder
         let destPath = FileManager.homeURL.path
+        print("destPath = \(destPath)")
         if (!FileManager.default.fileExists(atPath: destPath)) {
             copyFileToDocumentsFolder(relativePath: nodeFolder, destPath: destPath)
         } else {

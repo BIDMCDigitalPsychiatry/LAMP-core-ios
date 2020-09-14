@@ -8,10 +8,19 @@
 import Foundation
 
 extension FileManager {
-    static let nodeFolder = "nodejs-project"
+    static var nodeFolder: String {
+        return UserDefaults.standard.nodeRootFolder ?? "nodejs-project"
+    }
     static var documentFolder: String {
         get {
             return NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0]
+        }
+    }
+    
+    static var nodeJSPath: URL {
+        get {
+            let jsFile = UserDefaults.standard.nodeJSPath ?? "\(nodeFolder)/index.js"
+            return URL(fileURLWithPath: documentFolder).appendingPathComponent(jsFile)
         }
     }
     

@@ -10,7 +10,7 @@ import UIKit
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
-
+    var completionHandler: (() -> Void)?
     var window: UIWindow? //for iOS < 13
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
@@ -27,11 +27,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         NotificationHelper.shared.registerForPushNotifications(delegate: self)
         NotificationHelper.shared.handleLaunchWithRemoteNotification(launchOptions)
+        
+        let documentsURL = try! FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: false)
+        print("documentsURL = \(documentsURL)")
+        
         return true
     }
     
     func application(_ application: UIApplication, performFetchWithCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
         BackgroundServices.shared.performTasksInBG(completionHandler: completionHandler)
+    }
+    
+    func application(_ application: UIApplication, handleEventsForBackgroundURLSession identifier: String, completionHandler: @escaping () -> Void) {
+        print("handleEventsForBackgroundURLSession")
+        completionHandler()
+        //self.completionHandler = completionHandler
     }
 }
 

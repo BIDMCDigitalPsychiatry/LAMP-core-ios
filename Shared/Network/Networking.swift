@@ -17,7 +17,6 @@ class Networking: NSObject, NetworkingAPI {
         } else {
             self.session = URLSession.shared
         }
-        
     }
     
     func cancelServiceCall() {
@@ -42,6 +41,8 @@ class Networking: NSObject, NetworkingAPI {
             
         case .post, .put:
             
+            print("requestURL = \(requestURL)")
+            print("headers = \(urlRequest.allHTTPHeaderFields)")
             if let data = request.jsonData {
                 urlRequest.httpBody = data
                 print("body Json: \(String(describing: String(data: data, encoding: String.Encoding.utf8)))")
@@ -49,7 +50,7 @@ class Networking: NSObject, NetworkingAPI {
             
         case .get:
             print("requestURL = \(requestURL)")
-            //print("headers = \(urlRequest.allHTTPHeaderFields)")
+            print("headers = \(urlRequest.allHTTPHeaderFields)")
             ()
         case .delete:
             ()

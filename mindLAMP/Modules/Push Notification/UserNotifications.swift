@@ -82,7 +82,8 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
         if deviceTokenStr != UserDefaults.standard.deviceToken {
             if User.shared.isLogin() {
                 //send to server
-                let tokenInfo = DeviceInfoWithToken(deviceToken: deviceTokenStr)
+                
+                let tokenInfo = DeviceInfoWithToken(deviceToken: deviceTokenStr, userAgent: UserAgent.defaultAgent)
                 let tokenRerquest = PushNotification.UpdateTokenRequest(deviceInfoWithToken: tokenInfo)
                 let lampAPI = NotificationAPI(NetworkConfig.networkingAPI())
                 
@@ -161,7 +162,7 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
         }
         
         //update server
-        let payLoadInfo = PayLoadInfo(action: action, userInfo: userInfo)
+        let payLoadInfo = PayLoadInfo(userAction: action.encodableValue, userInfo: userInfo, userAgent: UserAgent.defaultAgent)
         let acknoledgeRequest = PushNotification.UpdateReadRequest(timeInterval: pushInfo.deliverdTime, payLoadInfo: payLoadInfo)
         let lampAPI = NotificationAPI(NetworkConfig.networkingAPI())
         lampAPI.sendPushAcknowledgement(request: acknoledgeRequest)

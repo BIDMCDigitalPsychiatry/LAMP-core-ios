@@ -7,9 +7,6 @@
 
 import Foundation
 
-protocol TextPresentation {
-    var stringValue: String? {get}
-}
 
 enum SensorData {
 
@@ -47,7 +44,6 @@ struct SensorDataModel: Encodable {
     var gravity: Gravitational?
     var magnetic: Magnetic?
     var rotation: Rotational?
-    var attitude: Attitude?
     //Health
     var unit: String?
     var value: Double?
@@ -55,7 +51,7 @@ struct SensorDataModel: Encodable {
     var bp_diastolic: Double?
     var bp_systolic: Double?
     var workout_type: String?
-    var workout_durtion: Double?
+    var workout_duration: Double?
     //Location
     var latitude: Double?
     var longitude: Double?
@@ -89,9 +85,9 @@ struct Motion: Encodable {
 }
 
 struct Rotational: Encodable {
-    var x: Double?
-    var y: Double?
-    var z: Double?
+    var roll: Double?
+    var pitch: Double?
+    var yaw: Double?
 }
 
 struct Gravitational: Encodable {
@@ -100,44 +96,9 @@ struct Gravitational: Encodable {
     var z: Double?
 }
 
-struct Attitude: Encodable {
-    var roll: Double?
-    var pitch: Double?
-    var yaw: Double?
-}
-
 struct Magnetic: Encodable {
     var x: Double?
     var y: Double?
     var z: Double?
 }
 
-enum ScreenState: Int {
-    
-    case screen_on
-    case screen_off
-    case screen_locked
-    case screen_unlocked
-}
-
-extension ScreenState: TextPresentation {
-    var stringValue: String? {
-    switch self {
-    
-    case .screen_on:
-        return "Screen On"
-    case .screen_off:
-        return "Screen Off"
-    case .screen_locked:
-        return "Screen Locked"
-    case .screen_unlocked:
-        return "Screen Unlocked"
-        }
-    }
-}
-
-struct ScreenStateData {
-    
-    var screenState: ScreenState = .screen_on
-    var timestamp: Double = Date().timeInMilliSeconds
-}

@@ -10,11 +10,19 @@ struct User {
         return UserDefaults.standard.userID
     }
     
+    var serverURL: String? {
+        return UserDefaults.standard.serverAddress
+    }
+    
     func isLogin() -> Bool {
+        print("Endpoint.getSessionKey() = \(Endpoint.getSessionKey())")
+        print("userId = \(userId)")
         return (Endpoint.getSessionKey() != nil) && (userId != nil)
     }
     
     func login(userID: String?, serverAddress: String?) {
+        print("userId = \(userID)")
+        print("serverAddress = \(serverAddress)")
         UserDefaults.standard.serverAddress = serverAddress
         UserDefaults.standard.userID = userID
     }
@@ -25,8 +33,8 @@ struct User {
     }
     
     var loginInfo: [String: Any]? {
-        if let sessionToken = Endpoint.getSessionKey(), let userId = userId {
-            return [LoginInfoKey.sessionToken: sessionToken, LoginInfoKey.userId: userId]
+        if let sessionToken = Endpoint.getSessionKey(), let userId = userId, let address = serverURL {
+            return [LoginInfoKey.sessionToken: sessionToken, LoginInfoKey.userId: userId, LoginInfoKey.serverAddress: address]
         }
         return nil
     }

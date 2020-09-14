@@ -103,7 +103,7 @@ extension BackgroundServices {
         
         let request = LMSensorManager.shared.fetchSensorDataRequest()
         guard let userID = User.shared.userId else { return }
-        let endPoint =  String(format: Endpoint.participantServerEvent.rawValue, userID)
+        let endPoint =  String(format: Endpoint.participantSensorEvent.rawValue, userID)
         let requestData = RequestData(endpoint: endPoint, requestTye: .post, data: request)
         let operation = BackgroundOperation(request: requestData)
         dispatchQueue.addOperation(operation)

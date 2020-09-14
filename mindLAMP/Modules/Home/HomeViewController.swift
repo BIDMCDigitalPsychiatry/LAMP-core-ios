@@ -13,7 +13,7 @@ class HomeViewController: UIViewController {
     private var wkWebView: WKWebView!
     @IBOutlet weak var containerView: UIView!
     @IBOutlet weak var indicator: UIActivityIndicatorView!
-    let lampDashboardURL = URL(string: LampURL.dashboardDigital)!
+
     var lampDashboardURLwithToken: URL {
         let urlString = LampURL.dashboardDigitalWithToken
         let base64UserInfo = Endpoint.getSessionKey() ?? ""
@@ -22,18 +22,24 @@ class HomeViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
-//        NodeManager.shared.startNodeServer()
-//
-//        let deadlineTime = DispatchTime.now() + .seconds(2)
-//        DispatchQueue.main.asyncAfter(deadline: deadlineTime) {
-//            NodeManager.shared.getServerStatus()
-        if User.shared.isLogin() == true {
-            self.loadWebView(with: self.lampDashboardURLwithToken)
+        print("mindLAMP Home")
+        //check dashboard is offline available
+        if UserDefaults.standard.version == nil {
+            if User.shared.isLogin() == true {
+                self.loadWebView(with: self.lampDashboardURLwithToken)
+            } else {
+                self.loadWebView(with: LampURL.dashboardDigital)
+            }
         } else {
-            self.loadWebView(with: self.lampDashboardURL)
+            // Do any additional setup after loading the view.
+            //ToDO: NodeManager.shared.startNodeServer()
+
+            let deadlineTime = DispatchTime.now() + .seconds(5)
+            DispatchQueue.main.asyncAfter(deadline: deadlineTime) {
+                //NodeManager.shared.getServerStatus()
+                self.loadWebView(with: LampURL.dashboardDigital)
+            }
         }
-//        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -110,7 +116,7 @@ private extension HomeViewController {
         
         //update device token after login
         guard let deviceToken = UserDefaults.standard.deviceToken else { return }
-        let tokenInfo = DeviceInfoWithToken(deviceToken: deviceToken)
+        let tokenInfo = DeviceInfoWithToken(deviceToken: deviceToken, userAgent: UserAgent.defaultAgent)
         let tokenRerquest = PushNotification.UpdateTokenRequest(deviceInfoWithToken: tokenInfo)
         let lampAPI = NotificationAPI(NetworkConfig.networkingAPI())
         
@@ -129,11 +135,13 @@ private extension HomeViewController {
 
 extension HomeViewController: WKNavigationDelegate {
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
+        print("didFinish navigation")
         indicator.stopAnimating()
 
     }
     
     func webView(_ webView: WKWebView, didFail navigation: WKNavigation!, withError error: Error) {
+        print("error = \(error.localizedDescription)")
         indicator.stopAnimating()
     }
 }
@@ -147,12 +155,13 @@ extension HomeViewController: WKScriptMessageHandler {
                 printError("Message body not in expected format.")
                 return
             }
+            print("dictBody = \(dictBody)\n")
             //read token
-            let token = dictBody["authorizationToken"] as? String
-            let base64Token = token?.data(using: .utf8)?.base64EncodedString()
+            let token = (dictBody["authorizationToken"] as? String) ?? "U3998365801:12345"
+            let base64Token = token.data(using: .utf8)?.base64EncodedString()
             Endpoint.setSessionKey(base64Token)
             
-            let serverAddress = dictBody["serverAddress"] as? String
+            let serverAddress = dictBody["serverAddress"] as? String//"https://dashboard-staging.lamp.digital"//TODO:
             
             let idObjectDict = dictBody["identityObject"] as? [String: Any]
             
@@ -167,6 +176,8 @@ extension HomeViewController: WKScriptMessageHandler {
             }
             performOnLogin()
         } else if message.name == ScriptMessageHandler.logout.rawValue {
+            let messageInfo: [String: Any] = [IOSCommands.logout: true, "timestamp" : Date().timeInMilliSeconds]
+            WatchSessionManager.shared.updateApplicationContext(applicationContext: messageInfo)
             performOnLogout()
         }
     }

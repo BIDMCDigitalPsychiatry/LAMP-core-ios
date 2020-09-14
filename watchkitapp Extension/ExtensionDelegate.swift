@@ -9,6 +9,7 @@ class ExtensionDelegate: NSObject, WKExtensionDelegate {
     // An array to keep the background tasks.
     //
     private var wcBackgroundTasks = [WKWatchConnectivityRefreshBackgroundTask]()
+    let session = WKExtendedRuntimeSession()
     
     func applicationDidFinishLaunching() {
         
@@ -30,6 +31,8 @@ class ExtensionDelegate: NSObject, WKExtensionDelegate {
     
     func applicationDidBecomeActive() {
         // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+        session.delegate = self   // self as session handler
+        session.start()  // start WKExtendedRuntimeSession
     }
     
     func applicationWillResignActive() {
@@ -139,23 +142,24 @@ extension ExtensionDelegate {
         print("deviceTokenStr = \(deviceTokenStr)")
         //UserDefaults.standard.logData = "deviceTokenStr = \(deviceTokenStr)"
         // Sync to Server and store to userdefault if any change in devicetoken value
-        if deviceTokenStr != UserDefaults.standard.watchdeviceToken {
+        if deviceTokenStr != UserDefaults.standard.deviceToken {
             if User.shared.isLogin() {
                 //send to server
-                let tokenInfo = WatchInfoWithToken(deviceToken: deviceTokenStr)
-                let tokenRerquest = WatchNotification.UpdateTokenRequest(deviceInfoWithToken: tokenInfo)
+                let tokenInfo = DeviceInfoWithToken(deviceToken: deviceTokenStr, userAgent: UserAgent.defaultAgent)
+                let tokenRerquest = PushNotification.UpdateTokenRequest(deviceInfoWithToken: tokenInfo)
                 let lampAPI = NotificationAPI(NetworkConfig.networkingAPI(isBackgroundSession: false))
                 
                 lampAPI.sendDeviceToken(request: tokenRerquest) { (isSuccess) in
                     if isSuccess {
-                        UserDefaults.standard.watchdeviceToken = deviceTokenStr
+                        UserDefaults.standard.deviceToken = deviceTokenStr
                     }
                 }
             } else {
-                UserDefaults.standard.watchdeviceToken = deviceTokenStr
+                UserDefaults.standard.deviceToken = deviceTokenStr
             }
         }
     }
+    
     
     /** This delegate method offers an opportunity for applications with the "remote-notification" background mode to fetch appropriate new data in response to an incoming remote notification. You should call the fetchCompletionHandler as soon as you're finished performing that operation, so the system can accurately estimate its power and data cost.
      
@@ -163,6 +167,13 @@ extension ExtensionDelegate {
     func didReceiveRemoteNotification(_ userInfo: [AnyHashable : Any], fetchCompletionHandler completionHandler: @escaping (WKBackgroundFetchResult) -> Void) {
         //check notification payload
         print("remote APNS")
+        //update server
+        let payLoadInfo = PayLoadInfo(userAction: nil, userInfo: userInfo, userAgent: UserAgent.defaultAgent)
+        let timeStamp = Date().timeIntervalSince1970 * 1000
+        let acknoledgeRequest = PushNotification.UpdateReadRequest(timeInterval: timeStamp, payLoadInfo: payLoadInfo)
+        let lampAPI = NotificationAPI(NetworkConfig.networkingAPI())
+        lampAPI.sendPushAcknowledgement(request: acknoledgeRequest)
+        
         LMWatchSensorManager.shared.sendSensorEvents(completionHandler)
     }
 }
@@ -180,6 +191,22 @@ extension ExtensionDelegate: UNUserNotificationCenterDelegate {
         print("remote APNS")
         completionHandler()
     }
+    
 }
 
+//https://developer.apple.com/documentation/watchkit/using_extended_runtime_sessions
+extension ExtensionDelegate: WKExtendedRuntimeSessionDelegate {
+    // MARK:- Extended Runtime Session Delegate Methods
+    func extendedRuntimeSessionDidStart(_ extendedRuntimeSession: WKExtendedRuntimeSession) {
+        // Track when your session starts.
+    }
 
+    func extendedRuntimeSessionWillExpire(_ extendedRuntimeSession: WKExtendedRuntimeSession) {
+        // Finish and clean up any tasks before the session ends.
+    }
+        
+    func extendedRuntimeSession(_ extendedRuntimeSession: WKExtendedRuntimeSession, didInvalidateWith reason: WKExtendedRuntimeSessionInvalidationReason, error: Error?) {
+        // Track when your session ends.
+        // Also handle errors here.
+    }
+}
