@@ -16,8 +16,6 @@
 		B212B4D024DB1ACD00DD1299 /* LampIdentifiersHealthKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = B212B4CD24DB1ACD00DD1299 /* LampIdentifiersHealthKit.swift */; };
 		B212B4D124DB1ACD00DD1299 /* LampIdentifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = B212B4CE24DB1ACD00DD1299 /* LampIdentifiers.swift */; };
 		B212B4D224DB1ACD00DD1299 /* LampIdentifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = B212B4CE24DB1ACD00DD1299 /* LampIdentifiers.swift */; };
-		B212B4D624DB205100DD1299 /* Sensors in Frameworks */ = {isa = PBXBuildFile; productRef = B212B4D524DB205100DD1299 /* Sensors */; };
-		B212B4D824DB205800DD1299 /* Sensors in Frameworks */ = {isa = PBXBuildFile; productRef = B212B4D724DB205800DD1299 /* Sensors */; };
 		B2260D642505E66E00747A3E /* AppInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2260D632505E66E00747A3E /* AppInfo.swift */; };
 		B2260D652505E66E00747A3E /* AppInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2260D632505E66E00747A3E /* AppInfo.swift */; };
 		B229D5F3245319380099F646 /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B229D5F2245319380099F646 /* WebViewController.swift */; };
@@ -93,6 +91,82 @@
 		B29639D723BDC28200626E1A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B29639D623BDC28200626E1A /* Assets.xcassets */; };
 		B29639DA23BDC28200626E1A /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B29639D923BDC28200626E1A /* Preview Assets.xcassets */; };
 		B29639DD23BDC28200626E1A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B29639DB23BDC28200626E1A /* LaunchScreen.storyboard */; };
+		B2A295FD2510BE380042C6FB /* CallsData.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2A295CC2510BE380042C6FB /* CallsData.swift */; };
+		B2A295FE2510BE380042C6FB /* CallsData.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2A295CC2510BE380042C6FB /* CallsData.swift */; };
+		B2A295FF2510BE380042C6FB /* CallsSensor.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2A295CD2510BE380042C6FB /* CallsSensor.swift */; };
+		B2A296002510BE380042C6FB /* CallsSensor.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2A295CD2510BE380042C6FB /* CallsSensor.swift */; };
+		B2A296012510BE380042C6FB /* WiFiSensor.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2A295CF2510BE380042C6FB /* WiFiSensor.swift */; };
+		B2A296022510BE380042C6FB /* WiFiSensor.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2A295CF2510BE380042C6FB /* WiFiSensor.swift */; };
+		B2A296032510BE380042C6FB /* WiFiDeviceData.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2A295D02510BE380042C6FB /* WiFiDeviceData.swift */; };
+		B2A296042510BE380042C6FB /* WiFiDeviceData.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2A295D02510BE380042C6FB /* WiFiDeviceData.swift */; };
+		B2A296052510BE380042C6FB /* WiFiScanData.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2A295D12510BE380042C6FB /* WiFiScanData.swift */; };
+		B2A296062510BE380042C6FB /* WiFiScanData.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2A295D12510BE380042C6FB /* WiFiScanData.swift */; };
+		B2A296072510BE380042C6FB /* LampSensorCoreObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2A295D32510BE380042C6FB /* LampSensorCoreObject.swift */; };
+		B2A296082510BE380042C6FB /* LampSensorCoreObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2A295D32510BE380042C6FB /* LampSensorCoreObject.swift */; };
+		B2A296092510BE380042C6FB /* SensorManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2A295D42510BE380042C6FB /* SensorManager.swift */; };
+		B2A2960A2510BE380042C6FB /* SensorManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2A295D42510BE380042C6FB /* SensorManager.swift */; };
+		B2A2960B2510BE380042C6FB /* LampSensorCoreUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2A295D52510BE380042C6FB /* LampSensorCoreUtils.swift */; };
+		B2A2960C2510BE380042C6FB /* LampSensorCoreUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2A295D52510BE380042C6FB /* LampSensorCoreUtils.swift */; };
+		B2A2960D2510BE380042C6FB /* LampSensorCore.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2A295D62510BE380042C6FB /* LampSensorCore.swift */; };
+		B2A2960E2510BE380042C6FB /* LampSensorCore.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2A295D62510BE380042C6FB /* LampSensorCore.swift */; };
+		B2A2960F2510BE380042C6FB /* SensorConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2A295D72510BE380042C6FB /* SensorConfig.swift */; };
+		B2A296102510BE380042C6FB /* SensorConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2A295D72510BE380042C6FB /* SensorConfig.swift */; };
+		B2A296112510BE380042C6FB /* LMHealthKitSensor.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2A295D92510BE380042C6FB /* LMHealthKitSensor.swift */; };
+		B2A296122510BE380042C6FB /* LMHealthKitSensor.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2A295D92510BE380042C6FB /* LMHealthKitSensor.swift */; };
+		B2A296132510BE380042C6FB /* HKWorkoutActivityType+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2A295DA2510BE380042C6FB /* HKWorkoutActivityType+Extension.swift */; };
+		B2A296142510BE380042C6FB /* HKWorkoutActivityType+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2A295DA2510BE380042C6FB /* HKWorkoutActivityType+Extension.swift */; };
+		B2A296152510BE380042C6FB /* HKDevice+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2A295DB2510BE380042C6FB /* HKDevice+Extension.swift */; };
+		B2A296162510BE380042C6FB /* HKDevice+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2A295DB2510BE380042C6FB /* HKDevice+Extension.swift */; };
+		B2A296172510BE380042C6FB /* LMHealthKitSensorData.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2A295DC2510BE380042C6FB /* LMHealthKitSensorData.swift */; };
+		B2A296182510BE380042C6FB /* LMHealthKitSensorData.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2A295DC2510BE380042C6FB /* LMHealthKitSensorData.swift */; };
+		B2A296192510BE380042C6FB /* TextPresentation.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2A295DD2510BE380042C6FB /* TextPresentation.swift */; };
+		B2A2961A2510BE380042C6FB /* TextPresentation.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2A295DD2510BE380042C6FB /* TextPresentation.swift */; };
+		B2A2961B2510BE380042C6FB /* AccelerometerData.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2A295DF2510BE380042C6FB /* AccelerometerData.swift */; };
+		B2A2961C2510BE380042C6FB /* AccelerometerData.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2A295DF2510BE380042C6FB /* AccelerometerData.swift */; };
+		B2A2961D2510BE380042C6FB /* AccelerometerSensor.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2A295E02510BE380042C6FB /* AccelerometerSensor.swift */; };
+		B2A2961E2510BE380042C6FB /* AccelerometerSensor.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2A295E02510BE380042C6FB /* AccelerometerSensor.swift */; };
+		B2A2961F2510BE380042C6FB /* RotationSensor.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2A295E22510BE380042C6FB /* RotationSensor.swift */; };
+		B2A296202510BE380042C6FB /* RotationSensor.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2A295E22510BE380042C6FB /* RotationSensor.swift */; };
+		B2A296212510BE380042C6FB /* RotationData.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2A295E32510BE380042C6FB /* RotationData.swift */; };
+		B2A296222510BE380042C6FB /* RotationData.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2A295E32510BE380042C6FB /* RotationData.swift */; };
+		B2A296232510BE380042C6FB /* GravityData.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2A295E42510BE380042C6FB /* GravityData.swift */; };
+		B2A296242510BE380042C6FB /* GravityData.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2A295E42510BE380042C6FB /* GravityData.swift */; };
+		B2A296252510BE380042C6FB /* GravitySensor.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2A295E52510BE380042C6FB /* GravitySensor.swift */; };
+		B2A296262510BE380042C6FB /* GravitySensor.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2A295E52510BE380042C6FB /* GravitySensor.swift */; };
+		B2A296272510BE380042C6FB /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2A295E62510BE380042C6FB /* Reachability.swift */; };
+		B2A296282510BE380042C6FB /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2A295E62510BE380042C6FB /* Reachability.swift */; };
+		B2A296292510BE380042C6FB /* MagnetometerData.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2A295E82510BE380042C6FB /* MagnetometerData.swift */; };
+		B2A2962A2510BE380042C6FB /* MagnetometerData.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2A295E82510BE380042C6FB /* MagnetometerData.swift */; };
+		B2A2962B2510BE380042C6FB /* MagnetometerSensor.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2A295E92510BE380042C6FB /* MagnetometerSensor.swift */; };
+		B2A2962C2510BE380042C6FB /* MagnetometerSensor.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2A295E92510BE380042C6FB /* MagnetometerSensor.swift */; };
+		B2A2962D2510BE380042C6FB /* GyroscopeSensor.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2A295EB2510BE380042C6FB /* GyroscopeSensor.swift */; };
+		B2A2962E2510BE380042C6FB /* GyroscopeSensor.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2A295EB2510BE380042C6FB /* GyroscopeSensor.swift */; };
+		B2A2962F2510BE380042C6FB /* GyroscopeData.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2A295EC2510BE380042C6FB /* GyroscopeData.swift */; };
+		B2A296302510BE380042C6FB /* GyroscopeData.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2A295EC2510BE380042C6FB /* GyroscopeData.swift */; };
+		B2A296312510BE380042C6FB /* PedometerData.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2A295EE2510BE380042C6FB /* PedometerData.swift */; };
+		B2A296322510BE380042C6FB /* PedometerData.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2A295EE2510BE380042C6FB /* PedometerData.swift */; };
+		B2A296332510BE380042C6FB /* PedometerSensor.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2A295EF2510BE380042C6FB /* PedometerSensor.swift */; };
+		B2A296342510BE380042C6FB /* PedometerSensor.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2A295EF2510BE380042C6FB /* PedometerSensor.swift */; };
+		B2A296352510BE380042C6FB /* HeadingData.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2A295F12510BE380042C6FB /* HeadingData.swift */; };
+		B2A296362510BE380042C6FB /* HeadingData.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2A295F12510BE380042C6FB /* HeadingData.swift */; };
+		B2A296372510BE380042C6FB /* LocationsSensor.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2A295F22510BE380042C6FB /* LocationsSensor.swift */; };
+		B2A296382510BE380042C6FB /* LocationsSensor.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2A295F22510BE380042C6FB /* LocationsSensor.swift */; };
+		B2A296392510BE380042C6FB /* LocationsData.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2A295F32510BE380042C6FB /* LocationsData.swift */; };
+		B2A2963A2510BE380042C6FB /* LocationsData.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2A295F32510BE380042C6FB /* LocationsData.swift */; };
+		B2A2963B2510BE380042C6FB /* VisitData.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2A295F42510BE380042C6FB /* VisitData.swift */; };
+		B2A2963C2510BE380042C6FB /* VisitData.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2A295F42510BE380042C6FB /* VisitData.swift */; };
+		B2A2963D2510BE380042C6FB /* GeofenceData.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2A295F52510BE380042C6FB /* GeofenceData.swift */; };
+		B2A2963E2510BE380042C6FB /* GeofenceData.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2A295F52510BE380042C6FB /* GeofenceData.swift */; };
+		B2A2963F2510BE380042C6FB /* LampScreenSensor.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2A295F72510BE380042C6FB /* LampScreenSensor.swift */; };
+		B2A296402510BE380042C6FB /* LampScreenSensor.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2A295F72510BE380042C6FB /* LampScreenSensor.swift */; };
+		B2A296412510BE380042C6FB /* LMBluetoothSensor.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2A295F92510BE380042C6FB /* LMBluetoothSensor.swift */; };
+		B2A296422510BE380042C6FB /* LMBluetoothSensor.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2A295F92510BE380042C6FB /* LMBluetoothSensor.swift */; };
+		B2A296432510BE380042C6FB /* LMBluetoothData.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2A295FA2510BE380042C6FB /* LMBluetoothData.swift */; };
+		B2A296442510BE380042C6FB /* LMBluetoothData.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2A295FA2510BE380042C6FB /* LMBluetoothData.swift */; };
+		B2A296452510BE380042C6FB /* BLEDevice.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2A295FB2510BE380042C6FB /* BLEDevice.swift */; };
+		B2A296462510BE380042C6FB /* BLEDevice.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2A295FB2510BE380042C6FB /* BLEDevice.swift */; };
+		B2A2964A2510BF120042C6FB /* DateHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2A296492510BF120042C6FB /* DateHelper.swift */; };
+		B2A2964B2510BF120042C6FB /* DateHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2A296492510BF120042C6FB /* DateHelper.swift */; };
 		B2A8E61B24ED9FFD00D7C407 /* CryptoSwift in Frameworks */ = {isa = PBXBuildFile; productRef = B2A8E61A24ED9FFD00D7C407 /* CryptoSwift */; };
 		B2B889EE23D0A52C00321C3E /* Home.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B2B889ED23D0A52C00321C3E /* Home.storyboard */; };
 		B2B8935223D0AD6500321C3E /* DateExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2B8935023D0AD6500321C3E /* DateExtension.swift */; };
@@ -279,12 +353,49 @@
 		B29639D923BDC28200626E1A /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		B29639DC23BDC28200626E1A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		B29639DE23BDC28200626E1A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B2A295CC2510BE380042C6FB /* CallsData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CallsData.swift; sourceTree = "<group>"; };
+		B2A295CD2510BE380042C6FB /* CallsSensor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CallsSensor.swift; sourceTree = "<group>"; };
+		B2A295CF2510BE380042C6FB /* WiFiSensor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WiFiSensor.swift; sourceTree = "<group>"; };
+		B2A295D02510BE380042C6FB /* WiFiDeviceData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WiFiDeviceData.swift; sourceTree = "<group>"; };
+		B2A295D12510BE380042C6FB /* WiFiScanData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WiFiScanData.swift; sourceTree = "<group>"; };
+		B2A295D32510BE380042C6FB /* LampSensorCoreObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LampSensorCoreObject.swift; sourceTree = "<group>"; };
+		B2A295D42510BE380042C6FB /* SensorManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SensorManager.swift; sourceTree = "<group>"; };
+		B2A295D52510BE380042C6FB /* LampSensorCoreUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LampSensorCoreUtils.swift; sourceTree = "<group>"; };
+		B2A295D62510BE380042C6FB /* LampSensorCore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LampSensorCore.swift; sourceTree = "<group>"; };
+		B2A295D72510BE380042C6FB /* SensorConfig.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SensorConfig.swift; sourceTree = "<group>"; };
+		B2A295D92510BE380042C6FB /* LMHealthKitSensor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LMHealthKitSensor.swift; sourceTree = "<group>"; };
+		B2A295DA2510BE380042C6FB /* HKWorkoutActivityType+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "HKWorkoutActivityType+Extension.swift"; sourceTree = "<group>"; };
+		B2A295DB2510BE380042C6FB /* HKDevice+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "HKDevice+Extension.swift"; sourceTree = "<group>"; };
+		B2A295DC2510BE380042C6FB /* LMHealthKitSensorData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LMHealthKitSensorData.swift; sourceTree = "<group>"; };
+		B2A295DD2510BE380042C6FB /* TextPresentation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextPresentation.swift; sourceTree = "<group>"; };
+		B2A295DF2510BE380042C6FB /* AccelerometerData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccelerometerData.swift; sourceTree = "<group>"; };
+		B2A295E02510BE380042C6FB /* AccelerometerSensor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccelerometerSensor.swift; sourceTree = "<group>"; };
+		B2A295E22510BE380042C6FB /* RotationSensor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RotationSensor.swift; sourceTree = "<group>"; };
+		B2A295E32510BE380042C6FB /* RotationData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RotationData.swift; sourceTree = "<group>"; };
+		B2A295E42510BE380042C6FB /* GravityData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GravityData.swift; sourceTree = "<group>"; };
+		B2A295E52510BE380042C6FB /* GravitySensor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GravitySensor.swift; sourceTree = "<group>"; };
+		B2A295E62510BE380042C6FB /* Reachability.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
+		B2A295E82510BE380042C6FB /* MagnetometerData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MagnetometerData.swift; sourceTree = "<group>"; };
+		B2A295E92510BE380042C6FB /* MagnetometerSensor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MagnetometerSensor.swift; sourceTree = "<group>"; };
+		B2A295EB2510BE380042C6FB /* GyroscopeSensor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GyroscopeSensor.swift; sourceTree = "<group>"; };
+		B2A295EC2510BE380042C6FB /* GyroscopeData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GyroscopeData.swift; sourceTree = "<group>"; };
+		B2A295EE2510BE380042C6FB /* PedometerData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PedometerData.swift; sourceTree = "<group>"; };
+		B2A295EF2510BE380042C6FB /* PedometerSensor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PedometerSensor.swift; sourceTree = "<group>"; };
+		B2A295F12510BE380042C6FB /* HeadingData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeadingData.swift; sourceTree = "<group>"; };
+		B2A295F22510BE380042C6FB /* LocationsSensor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationsSensor.swift; sourceTree = "<group>"; };
+		B2A295F32510BE380042C6FB /* LocationsData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationsData.swift; sourceTree = "<group>"; };
+		B2A295F42510BE380042C6FB /* VisitData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VisitData.swift; sourceTree = "<group>"; };
+		B2A295F52510BE380042C6FB /* GeofenceData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GeofenceData.swift; sourceTree = "<group>"; };
+		B2A295F72510BE380042C6FB /* LampScreenSensor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LampScreenSensor.swift; sourceTree = "<group>"; };
+		B2A295F92510BE380042C6FB /* LMBluetoothSensor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LMBluetoothSensor.swift; sourceTree = "<group>"; };
+		B2A295FA2510BE380042C6FB /* LMBluetoothData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LMBluetoothData.swift; sourceTree = "<group>"; };
+		B2A295FB2510BE380042C6FB /* BLEDevice.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BLEDevice.swift; sourceTree = "<group>"; };
+		B2A296492510BF120042C6FB /* DateHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateHelper.swift; sourceTree = "<group>"; };
 		B2B889ED23D0A52C00321C3E /* Home.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Home.storyboard; sourceTree = "<group>"; };
 		B2B8935023D0AD6500321C3E /* DateExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateExtension.swift; sourceTree = "<group>"; };
 		B2B8935123D0AD6500321C3E /* String+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+Extension.swift"; sourceTree = "<group>"; };
 		B2B8979523D0ADBA00321C3E /* mindLAMP.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = mindLAMP.entitlements; sourceTree = "<group>"; };
 		B2B8979723D0ADBA00321C3E /* HealthKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HealthKit.framework; path = System/Library/Frameworks/HealthKit.framework; sourceTree = SDKROOT; };
-		B2D651C524CEA5C900907931 /* Sensors */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Sensors; sourceTree = "<group>"; };
 		B2D930ED2445C9BD0086477D /* LMSensorManager+SensorObservers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "LMSensorManager+SensorObservers.swift"; sourceTree = "<group>"; };
 		B2D930F72445D7E90086477D /* CustomNotification.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = CustomNotification.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		B2D930F82445D7E90086477D /* UserNotifications.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UserNotifications.framework; path = System/Library/Frameworks/UserNotifications.framework; sourceTree = SDKROOT; };
@@ -304,7 +415,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B212B4D824DB205800DD1299 /* Sensors in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -319,7 +429,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B212B4D624DB205100DD1299 /* Sensors in Frameworks */,
 				B2A8E61B24ED9FFD00D7C407 /* CryptoSwift in Frameworks */,
 				B2500E3524CEEB5B008A50D7 /* NodeMobile.framework in Frameworks */,
 				B2B8979823D0ADBA00321C3E /* HealthKit.framework in Frameworks */,
@@ -397,8 +506,8 @@
 		B238BA9424B7289500575A7F /* Shared */ = {
 			isa = PBXGroup;
 			children = (
+				B2A295CA2510BE380042C6FB /* Sensors */,
 				B22DA79625054F4600456EE4 /* PushNotificationAPI */,
-				B2D651C524CEA5C900907931 /* Sensors */,
 				B238BA9524B7297F00575A7F /* WatchSessionManager.swift */,
 				B238432724B82D3900E548E2 /* SharingInfo.swift */,
 				B285D0AA24C894760050BD3F /* Models */,
@@ -691,6 +800,147 @@
 			path = "Preview Content";
 			sourceTree = "<group>";
 		};
+		B2A295CA2510BE380042C6FB /* Sensors */ = {
+			isa = PBXGroup;
+			children = (
+				B2A296492510BF120042C6FB /* DateHelper.swift */,
+				B2A295CB2510BE380042C6FB /* Calls */,
+				B2A295CE2510BE380042C6FB /* Wifi */,
+				B2A295D22510BE380042C6FB /* Core */,
+				B2A295D82510BE380042C6FB /* HealthKit */,
+				B2A295DE2510BE380042C6FB /* Accelerometer */,
+				B2A295E12510BE380042C6FB /* Motion */,
+				B2A295E62510BE380042C6FB /* Reachability.swift */,
+				B2A295E72510BE380042C6FB /* Magnetometer */,
+				B2A295EA2510BE380042C6FB /* Gyroscope */,
+				B2A295ED2510BE380042C6FB /* Pedometer */,
+				B2A295F02510BE380042C6FB /* Locations */,
+				B2A295F62510BE380042C6FB /* Screen */,
+				B2A295F82510BE380042C6FB /* Bluetooth */,
+			);
+			path = Sensors;
+			sourceTree = "<group>";
+		};
+		B2A295CB2510BE380042C6FB /* Calls */ = {
+			isa = PBXGroup;
+			children = (
+				B2A295CC2510BE380042C6FB /* CallsData.swift */,
+				B2A295CD2510BE380042C6FB /* CallsSensor.swift */,
+			);
+			path = Calls;
+			sourceTree = "<group>";
+		};
+		B2A295CE2510BE380042C6FB /* Wifi */ = {
+			isa = PBXGroup;
+			children = (
+				B2A295CF2510BE380042C6FB /* WiFiSensor.swift */,
+				B2A295D02510BE380042C6FB /* WiFiDeviceData.swift */,
+				B2A295D12510BE380042C6FB /* WiFiScanData.swift */,
+			);
+			path = Wifi;
+			sourceTree = "<group>";
+		};
+		B2A295D22510BE380042C6FB /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				B2A295D32510BE380042C6FB /* LampSensorCoreObject.swift */,
+				B2A295D42510BE380042C6FB /* SensorManager.swift */,
+				B2A295D52510BE380042C6FB /* LampSensorCoreUtils.swift */,
+				B2A295D62510BE380042C6FB /* LampSensorCore.swift */,
+				B2A295D72510BE380042C6FB /* SensorConfig.swift */,
+			);
+			path = Core;
+			sourceTree = "<group>";
+		};
+		B2A295D82510BE380042C6FB /* HealthKit */ = {
+			isa = PBXGroup;
+			children = (
+				B2A295D92510BE380042C6FB /* LMHealthKitSensor.swift */,
+				B2A295DA2510BE380042C6FB /* HKWorkoutActivityType+Extension.swift */,
+				B2A295DB2510BE380042C6FB /* HKDevice+Extension.swift */,
+				B2A295DC2510BE380042C6FB /* LMHealthKitSensorData.swift */,
+				B2A295DD2510BE380042C6FB /* TextPresentation.swift */,
+			);
+			path = HealthKit;
+			sourceTree = "<group>";
+		};
+		B2A295DE2510BE380042C6FB /* Accelerometer */ = {
+			isa = PBXGroup;
+			children = (
+				B2A295DF2510BE380042C6FB /* AccelerometerData.swift */,
+				B2A295E02510BE380042C6FB /* AccelerometerSensor.swift */,
+			);
+			path = Accelerometer;
+			sourceTree = "<group>";
+		};
+		B2A295E12510BE380042C6FB /* Motion */ = {
+			isa = PBXGroup;
+			children = (
+				B2A295E22510BE380042C6FB /* RotationSensor.swift */,
+				B2A295E32510BE380042C6FB /* RotationData.swift */,
+				B2A295E42510BE380042C6FB /* GravityData.swift */,
+				B2A295E52510BE380042C6FB /* GravitySensor.swift */,
+			);
+			path = Motion;
+			sourceTree = "<group>";
+		};
+		B2A295E72510BE380042C6FB /* Magnetometer */ = {
+			isa = PBXGroup;
+			children = (
+				B2A295E82510BE380042C6FB /* MagnetometerData.swift */,
+				B2A295E92510BE380042C6FB /* MagnetometerSensor.swift */,
+			);
+			path = Magnetometer;
+			sourceTree = "<group>";
+		};
+		B2A295EA2510BE380042C6FB /* Gyroscope */ = {
+			isa = PBXGroup;
+			children = (
+				B2A295EB2510BE380042C6FB /* GyroscopeSensor.swift */,
+				B2A295EC2510BE380042C6FB /* GyroscopeData.swift */,
+			);
+			path = Gyroscope;
+			sourceTree = "<group>";
+		};
+		B2A295ED2510BE380042C6FB /* Pedometer */ = {
+			isa = PBXGroup;
+			children = (
+				B2A295EE2510BE380042C6FB /* PedometerData.swift */,
+				B2A295EF2510BE380042C6FB /* PedometerSensor.swift */,
+			);
+			path = Pedometer;
+			sourceTree = "<group>";
+		};
+		B2A295F02510BE380042C6FB /* Locations */ = {
+			isa = PBXGroup;
+			children = (
+				B2A295F12510BE380042C6FB /* HeadingData.swift */,
+				B2A295F22510BE380042C6FB /* LocationsSensor.swift */,
+				B2A295F32510BE380042C6FB /* LocationsData.swift */,
+				B2A295F42510BE380042C6FB /* VisitData.swift */,
+				B2A295F52510BE380042C6FB /* GeofenceData.swift */,
+			);
+			path = Locations;
+			sourceTree = "<group>";
+		};
+		B2A295F62510BE380042C6FB /* Screen */ = {
+			isa = PBXGroup;
+			children = (
+				B2A295F72510BE380042C6FB /* LampScreenSensor.swift */,
+			);
+			path = Screen;
+			sourceTree = "<group>";
+		};
+		B2A295F82510BE380042C6FB /* Bluetooth */ = {
+			isa = PBXGroup;
+			children = (
+				B2A295F92510BE380042C6FB /* LMBluetoothSensor.swift */,
+				B2A295FA2510BE380042C6FB /* LMBluetoothData.swift */,
+				B2A295FB2510BE380042C6FB /* BLEDevice.swift */,
+			);
+			path = Bluetooth;
+			sourceTree = "<group>";
+		};
 		B2B8979623D0ADBA00321C3E /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -763,7 +1013,6 @@
 			);
 			name = "watchkitapp Extension";
 			packageProductDependencies = (
-				B212B4D724DB205800DD1299 /* Sensors */,
 			);
 			productName = "watchkitapp Extension";
 			productReference = B2704DE224B4A2AC00DE196B /* watchkitextension.appex */;
@@ -807,7 +1056,6 @@
 			);
 			name = mindLAMP;
 			packageProductDependencies = (
-				B212B4D524DB205100DD1299 /* Sensors */,
 				B2A8E61A24ED9FFD00D7C407 /* CryptoSwift */,
 				B247AB3524EE7D0500C2B68D /* ZIPFoundation */,
 			);
@@ -941,37 +1189,75 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B2A296242510BE380042C6FB /* GravityData.swift in Sources */,
 				B238433C24B836A200E548E2 /* Result.swift in Sources */,
 				B238433324B8357F00E548E2 /* NetworkingAPI.swift in Sources */,
+				B2A2963E2510BE380042C6FB /* GeofenceData.swift in Sources */,
 				B2260D652505E66E00747A3E /* AppInfo.swift in Sources */,
+				B2A2963A2510BE380042C6FB /* LocationsData.swift in Sources */,
 				B2704E0724B4AE7800DE196B /* UserAuth.swift in Sources */,
+				B2A296282510BE380042C6FB /* Reachability.swift in Sources */,
 				B238434924B848F300E548E2 /* LMRunningBuffer.swift in Sources */,
+				B2A2960A2510BE380042C6FB /* SensorManager.swift in Sources */,
 				B238433A24B836A200E548E2 /* NetworkConfig.swift in Sources */,
 				B238BA9724B7297F00575A7F /* WatchSessionManager.swift in Sources */,
+				B2A296002510BE380042C6FB /* CallsSensor.swift in Sources */,
+				B2A296462510BE380042C6FB /* BLEDevice.swift in Sources */,
 				B238433124B8357F00E548E2 /* Networking.swift in Sources */,
 				B238432F24B8357F00E548E2 /* CodableHelpers.swift in Sources */,
 				B22DF5F52506526400777D2D /* NotificationAPI.swift in Sources */,
+				B2A296042510BE380042C6FB /* WiFiDeviceData.swift in Sources */,
+				B2A296382510BE380042C6FB /* LocationsSensor.swift in Sources */,
+				B2A2960C2510BE380042C6FB /* LampSensorCoreUtils.swift in Sources */,
 				B238432924B82D3900E548E2 /* SharingInfo.swift in Sources */,
+				B2A2964B2510BF120042C6FB /* DateHelper.swift in Sources */,
+				B2A2962A2510BE380042C6FB /* MagnetometerData.swift in Sources */,
 				B255116524B6202300CDBDD1 /* WatchNotificationModel.swift in Sources */,
+				B2A2961C2510BE380042C6FB /* AccelerometerData.swift in Sources */,
 				B22DA79925054F7600456EE4 /* PushPayload.swift in Sources */,
+				B2A296202510BE380042C6FB /* RotationSensor.swift in Sources */,
 				B285D0AD24C894760050BD3F /* User.swift in Sources */,
 				B285D0A924C8941B0050BD3F /* UserDefaults+Extension.swift in Sources */,
 				B255116924B625CC00CDBDD1 /* WatchDeviceInfo.swift in Sources */,
+				B2A296182510BE380042C6FB /* LMHealthKitSensorData.swift in Sources */,
 				B2FDA83224BF744D000316EE /* ContentView.swift in Sources */,
 				B2704DEA24B4A2AC00DE196B /* HostingController.swift in Sources */,
 				B238436624B8ADD900E548E2 /* SensorModel.swift in Sources */,
+				B2A2961E2510BE380042C6FB /* AccelerometerSensor.swift in Sources */,
+				B2A295FE2510BE380042C6FB /* CallsData.swift in Sources */,
+				B2A2962C2510BE380042C6FB /* MagnetometerSensor.swift in Sources */,
 				B238433F24B8390300E548E2 /* LampURL.swift in Sources */,
+				B2A2961A2510BE380042C6FB /* TextPresentation.swift in Sources */,
+				B2A296022510BE380042C6FB /* WiFiSensor.swift in Sources */,
+				B2A296222510BE380042C6FB /* RotationData.swift in Sources */,
 				B212B4D224DB1ACD00DD1299 /* LampIdentifiers.swift in Sources */,
 				B212B4D024DB1ACD00DD1299 /* LampIdentifiersHealthKit.swift in Sources */,
+				B2A296442510BE380042C6FB /* LMBluetoothData.swift in Sources */,
 				B2FB8E9D24BC4FE5003F653C /* LMWatchSensorManager.swift in Sources */,
 				B239685924B785360031A209 /* EndPoint.swift in Sources */,
+				B2A296142510BE380042C6FB /* HKWorkoutActivityType+Extension.swift in Sources */,
+				B2A296322510BE380042C6FB /* PedometerData.swift in Sources */,
+				B2A296302510BE380042C6FB /* GyroscopeData.swift in Sources */,
+				B2A296262510BE380042C6FB /* GravitySensor.swift in Sources */,
+				B2A296422510BE380042C6FB /* LMBluetoothSensor.swift in Sources */,
 				B234D5FA24D0A011009D70B3 /* MotionData.swift in Sources */,
 				B255116C24B6291900CDBDD1 /* LoginServices.swift in Sources */,
+				B2A296362510BE380042C6FB /* HeadingData.swift in Sources */,
 				B2704DEE24B4A2AC00DE196B /* NotificationController.swift in Sources */,
+				B2A2963C2510BE380042C6FB /* VisitData.swift in Sources */,
+				B2A2962E2510BE380042C6FB /* GyroscopeSensor.swift in Sources */,
+				B2A296402510BE380042C6FB /* LampScreenSensor.swift in Sources */,
+				B2A296162510BE380042C6FB /* HKDevice+Extension.swift in Sources */,
 				B2704DEC24B4A2AC00DE196B /* ExtensionDelegate.swift in Sources */,
+				B2A296082510BE380042C6FB /* LampSensorCoreObject.swift in Sources */,
 				B2704DF024B4A2AC00DE196B /* NotificationView.swift in Sources */,
+				B2A2960E2510BE380042C6FB /* LampSensorCore.swift in Sources */,
+				B2A296342510BE380042C6FB /* PedometerSensor.swift in Sources */,
+				B2A296122510BE380042C6FB /* LMHealthKitSensor.swift in Sources */,
 				B2FB8E9F24BC501B003F653C /* SensorEvents.swift in Sources */,
 				B238434424B83B7700E548E2 /* ErrorExtension.swift in Sources */,
+				B2A296102510BE380042C6FB /* SensorConfig.swift in Sources */,
+				B2A296062510BE380042C6FB /* WiFiScanData.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -987,48 +1273,86 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B2A296072510BE380042C6FB /* LampSensorCoreObject.swift in Sources */,
+				B2A2963B2510BE380042C6FB /* VisitData.swift in Sources */,
 				B240816C23D8814300845AEE /* BackgroundOperation.swift in Sources */,
+				B2A296192510BE380042C6FB /* TextPresentation.swift in Sources */,
+				B2A2962D2510BE380042C6FB /* GyroscopeSensor.swift in Sources */,
 				B238BA9624B7297F00575A7F /* WatchSessionManager.swift in Sources */,
 				B238433024B8357F00E548E2 /* Networking.swift in Sources */,
 				B238432E24B8357F00E548E2 /* CodableHelpers.swift in Sources */,
+				B2A296032510BE380042C6FB /* WiFiDeviceData.swift in Sources */,
+				B2A296012510BE380042C6FB /* WiFiSensor.swift in Sources */,
 				5FF2932A24223A6300D0BE09 /* LMConstants.swift in Sources */,
 				B238433B24B836A200E548E2 /* Result.swift in Sources */,
 				B240816E23D8814300845AEE /* AsynchronousOperation.swift in Sources */,
 				B2B8935223D0AD6500321C3E /* DateExtension.swift in Sources */,
 				B22DF5F2250612E800777D2D /* UserAgentExtension.swift in Sources */,
 				B2F3CDF6245932B200F211A3 /* StoryboardExtension.swift in Sources */,
+				B2A295FF2510BE380042C6FB /* CallsSensor.swift in Sources */,
+				B2A2962B2510BE380042C6FB /* MagnetometerSensor.swift in Sources */,
+				B2A296232510BE380042C6FB /* GravityData.swift in Sources */,
+				B2A2964A2510BF120042C6FB /* DateHelper.swift in Sources */,
 				B238432824B82D3900E548E2 /* SharingInfo.swift in Sources */,
 				B238436524B8ADD900E548E2 /* SensorModel.swift in Sources */,
 				B2962FCE24ADECB700C1D598 /* NodeManager.swift in Sources */,
+				B2A2962F2510BE380042C6FB /* GyroscopeData.swift in Sources */,
+				B2A295FD2510BE380042C6FB /* CallsData.swift in Sources */,
 				B244A1C223BF4A91007FBDB8 /* FileManager+Extension.swift in Sources */,
 				B240816D23D8814300845AEE /* BackgroundServices.swift in Sources */,
 				B239685824B785360031A209 /* EndPoint.swift in Sources */,
 				B285D0A824C8941B0050BD3F /* UserDefaults+Extension.swift in Sources */,
 				B29639D123BDC28100626E1A /* AppDelegate.swift in Sources */,
+				B2A2963F2510BE380042C6FB /* LampScreenSensor.swift in Sources */,
 				B238433E24B8390300E548E2 /* LampURL.swift in Sources */,
+				B2A296332510BE380042C6FB /* PedometerSensor.swift in Sources */,
+				B2A296152510BE380042C6FB /* HKDevice+Extension.swift in Sources */,
 				5FF29327242223F300D0BE09 /* FileStorage.swift in Sources */,
 				B238433924B836A200E548E2 /* NetworkConfig.swift in Sources */,
+				B2A2961B2510BE380042C6FB /* AccelerometerData.swift in Sources */,
 				B285D0AC24C894760050BD3F /* User.swift in Sources */,
+				B2A296452510BE380042C6FB /* BLEDevice.swift in Sources */,
 				B22DA79825054F7600456EE4 /* PushPayload.swift in Sources */,
+				B2A2961D2510BE380042C6FB /* AccelerometerSensor.swift in Sources */,
 				B275F60224518106007A7340 /* HomeWebViewModel.swift in Sources */,
+				B2A2960F2510BE380042C6FB /* SensorConfig.swift in Sources */,
 				B212B4CF24DB1ACD00DD1299 /* LampIdentifiersHealthKit.swift in Sources */,
+				B2A296352510BE380042C6FB /* HeadingData.swift in Sources */,
 				B2260D642505E66E00747A3E /* AppInfo.swift in Sources */,
 				B2962FCD24ADECB700C1D598 /* NodeRunner.mm in Sources */,
+				B2A296052510BE380042C6FB /* WiFiScanData.swift in Sources */,
 				B238433224B8357F00E548E2 /* NetworkingAPI.swift in Sources */,
+				B2A2961F2510BE380042C6FB /* RotationSensor.swift in Sources */,
 				B2B8935323D0AD6500321C3E /* String+Extension.swift in Sources */,
+				B2A296312510BE380042C6FB /* PedometerData.swift in Sources */,
+				B2A296092510BE380042C6FB /* SensorManager.swift in Sources */,
+				B2A296292510BE380042C6FB /* MagnetometerData.swift in Sources */,
 				B212B4D124DB1ACD00DD1299 /* LampIdentifiers.swift in Sources */,
+				B2A296272510BE380042C6FB /* Reachability.swift in Sources */,
 				B26A2A3324EBCCA400BCB043 /* VersionCheckViewModel.swift in Sources */,
 				B240816623D8803900845AEE /* Logging.swift in Sources */,
 				B2EE003024EE43760037DD9C /* FileDownloader.swift in Sources */,
 				B2500E2B24CED14E008A50D7 /* LMSensorManager.swift in Sources */,
+				B2A296392510BE380042C6FB /* LocationsData.swift in Sources */,
 				B2D930EF2445C9BD0086477D /* LMSensorManager+SensorObservers.swift in Sources */,
+				B2A296372510BE380042C6FB /* LocationsSensor.swift in Sources */,
+				B2A2960B2510BE380042C6FB /* LampSensorCoreUtils.swift in Sources */,
+				B2A296432510BE380042C6FB /* LMBluetoothData.swift in Sources */,
+				B2A296252510BE380042C6FB /* GravitySensor.swift in Sources */,
+				B2A296172510BE380042C6FB /* LMHealthKitSensorData.swift in Sources */,
+				B2A2963D2510BE380042C6FB /* GeofenceData.swift in Sources */,
 				5F34363324210B8A0097EC2F /* LMLogsManager.swift in Sources */,
 				B26A2A2B24EBC6E900BCB043 /* VersionCheckViewController.swift in Sources */,
 				B23F5279245346E0007A8598 /* PushUserInfo.swift in Sources */,
 				B275F5FD24517FC0007A7340 /* UserNotifications.swift in Sources */,
+				B2A296132510BE380042C6FB /* HKWorkoutActivityType+Extension.swift in Sources */,
+				B2A296212510BE380042C6FB /* RotationData.swift in Sources */,
 				B238434324B83B7700E548E2 /* ErrorExtension.swift in Sources */,
 				B229D5F3245319380099F646 /* WebViewController.swift in Sources */,
 				B275F60A245196AD007A7340 /* PushNotificationModel.swift in Sources */,
+				B2A296112510BE380042C6FB /* LMHealthKitSensor.swift in Sources */,
+				B2A296412510BE380042C6FB /* LMBluetoothSensor.swift in Sources */,
+				B2A2960D2510BE380042C6FB /* LampSensorCore.swift in Sources */,
 				B22DF5F42506526400777D2D /* NotificationAPI.swift in Sources */,
 				5FF29324242206F100D0BE09 /* LogsModel.swift in Sources */,
 				B240815A23D8803900845AEE /* HomeViewController.swift in Sources */,
@@ -1148,7 +1472,7 @@
 				CODE_SIGN_ENTITLEMENTS = "watchkitapp Extension/watchkitapp Extension.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 22;
+				CURRENT_PROJECT_VERSION = 24;
 				DEVELOPMENT_ASSET_PATHS = "\"watchkitapp Extension/Preview Content\"";
 				DEVELOPMENT_TEAM = S2Y2D4239K;
 				ENABLE_PREVIEWS = YES;
@@ -1176,7 +1500,7 @@
 				CODE_SIGN_ENTITLEMENTS = "watchkitapp Extension/watchkitapp Extension.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 22;
+				CURRENT_PROJECT_VERSION = 24;
 				DEVELOPMENT_ASSET_PATHS = "\"watchkitapp Extension/Preview Content\"";
 				DEVELOPMENT_TEAM = S2Y2D4239K;
 				ENABLE_PREVIEWS = YES;
@@ -1564,14 +1888,6 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		B212B4D524DB205100DD1299 /* Sensors */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = Sensors;
-		};
-		B212B4D724DB205800DD1299 /* Sensors */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = Sensors;
-		};
 		B247AB3524EE7D0500C2B68D /* ZIPFoundation */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = B247AB3424EE7D0500C2B68D /* XCRemoteSwiftPackageReference "ZIPFoundation" */;

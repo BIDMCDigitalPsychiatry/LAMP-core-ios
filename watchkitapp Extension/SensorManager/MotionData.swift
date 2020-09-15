@@ -1,7 +1,7 @@
 // watchkitapp Extension
 
 import Foundation
-import Sensors
+//import Sensors
 
 class MotionData {
     

@@ -6,7 +6,7 @@
 //
 
 import Foundation
-import Sensors
+//import Sensors
 
 // MARK:- AccelerometerObserver
 extension LMSensorManager: AccelerometerObserver {

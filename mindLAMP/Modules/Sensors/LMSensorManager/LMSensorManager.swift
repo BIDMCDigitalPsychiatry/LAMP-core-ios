@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 import HealthKit
-import Sensors
+//import Sensors
 
 class LMSensorManager {
     
