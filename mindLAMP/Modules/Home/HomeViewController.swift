@@ -26,6 +26,7 @@ class HomeViewController: UIViewController {
         //check dashboard is offline available
         if UserDefaults.standard.version == nil {
             if User.shared.isLogin() == true {
+                print("self.lampDashboardURLwithToken = \(self.lampDashboardURLwithToken)")
                 self.loadWebView(with: self.lampDashboardURLwithToken)
             } else {
                 self.loadWebView(with: LampURL.dashboardDigital)
