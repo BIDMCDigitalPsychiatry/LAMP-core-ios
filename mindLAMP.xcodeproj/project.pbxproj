@@ -16,8 +16,6 @@
 		B212B4D024DB1ACD00DD1299 /* LampIdentifiersHealthKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = B212B4CD24DB1ACD00DD1299 /* LampIdentifiersHealthKit.swift */; };
 		B212B4D124DB1ACD00DD1299 /* LampIdentifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = B212B4CE24DB1ACD00DD1299 /* LampIdentifiers.swift */; };
 		B212B4D224DB1ACD00DD1299 /* LampIdentifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = B212B4CE24DB1ACD00DD1299 /* LampIdentifiers.swift */; };
-		B212B4D624DB205100DD1299 /* Sensors in Frameworks */ = {isa = PBXBuildFile; productRef = B212B4D524DB205100DD1299 /* Sensors */; };
-		B212B4D824DB205800DD1299 /* Sensors in Frameworks */ = {isa = PBXBuildFile; productRef = B212B4D724DB205800DD1299 /* Sensors */; };
 		B2260D642505E66E00747A3E /* AppInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2260D632505E66E00747A3E /* AppInfo.swift */; };
 		B2260D652505E66E00747A3E /* AppInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2260D632505E66E00747A3E /* AppInfo.swift */; };
 		B229D5F3245319380099F646 /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B229D5F2245319380099F646 /* WebViewController.swift */; };
@@ -93,6 +91,7 @@
 		B29639D723BDC28200626E1A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B29639D623BDC28200626E1A /* Assets.xcassets */; };
 		B29639DA23BDC28200626E1A /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B29639D923BDC28200626E1A /* Preview Assets.xcassets */; };
 		B29639DD23BDC28200626E1A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B29639DB23BDC28200626E1A /* LaunchScreen.storyboard */; };
+		B2A2953225109CBB0042C6FB /* Sensors in Frameworks */ = {isa = PBXBuildFile; productRef = B2A2953125109CBB0042C6FB /* Sensors */; };
 		B2A8E61B24ED9FFD00D7C407 /* CryptoSwift in Frameworks */ = {isa = PBXBuildFile; productRef = B2A8E61A24ED9FFD00D7C407 /* CryptoSwift */; };
 		B2B889EE23D0A52C00321C3E /* Home.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B2B889ED23D0A52C00321C3E /* Home.storyboard */; };
 		B2B8935223D0AD6500321C3E /* DateExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2B8935023D0AD6500321C3E /* DateExtension.swift */; };
@@ -284,7 +283,6 @@
 		B2B8935123D0AD6500321C3E /* String+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+Extension.swift"; sourceTree = "<group>"; };
 		B2B8979523D0ADBA00321C3E /* mindLAMP.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = mindLAMP.entitlements; sourceTree = "<group>"; };
 		B2B8979723D0ADBA00321C3E /* HealthKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HealthKit.framework; path = System/Library/Frameworks/HealthKit.framework; sourceTree = SDKROOT; };
-		B2D651C524CEA5C900907931 /* Sensors */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Sensors; sourceTree = "<group>"; };
 		B2D930ED2445C9BD0086477D /* LMSensorManager+SensorObservers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "LMSensorManager+SensorObservers.swift"; sourceTree = "<group>"; };
 		B2D930F72445D7E90086477D /* CustomNotification.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = CustomNotification.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		B2D930F82445D7E90086477D /* UserNotifications.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UserNotifications.framework; path = System/Library/Frameworks/UserNotifications.framework; sourceTree = SDKROOT; };
@@ -304,7 +302,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B212B4D824DB205800DD1299 /* Sensors in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -319,11 +316,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B212B4D624DB205100DD1299 /* Sensors in Frameworks */,
 				B2A8E61B24ED9FFD00D7C407 /* CryptoSwift in Frameworks */,
 				B2500E3524CEEB5B008A50D7 /* NodeMobile.framework in Frameworks */,
 				B2B8979823D0ADBA00321C3E /* HealthKit.framework in Frameworks */,
 				B247AB3624EE7D0500C2B68D /* ZIPFoundation in Frameworks */,
+				B2A2953225109CBB0042C6FB /* Sensors in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -398,7 +395,6 @@
 			isa = PBXGroup;
 			children = (
 				B22DA79625054F4600456EE4 /* PushNotificationAPI */,
-				B2D651C524CEA5C900907931 /* Sensors */,
 				B238BA9524B7297F00575A7F /* WatchSessionManager.swift */,
 				B238432724B82D3900E548E2 /* SharingInfo.swift */,
 				B285D0AA24C894760050BD3F /* Models */,
@@ -763,7 +759,6 @@
 			);
 			name = "watchkitapp Extension";
 			packageProductDependencies = (
-				B212B4D724DB205800DD1299 /* Sensors */,
 			);
 			productName = "watchkitapp Extension";
 			productReference = B2704DE224B4A2AC00DE196B /* watchkitextension.appex */;
@@ -807,9 +802,9 @@
 			);
 			name = mindLAMP;
 			packageProductDependencies = (
-				B212B4D524DB205100DD1299 /* Sensors */,
 				B2A8E61A24ED9FFD00D7C407 /* CryptoSwift */,
 				B247AB3524EE7D0500C2B68D /* ZIPFoundation */,
+				B2A2953125109CBB0042C6FB /* Sensors */,
 			);
 			productName = lampv2;
 			productReference = B29639CD23BDC28100626E1A /* mindLAMP 2.app */;
@@ -873,6 +868,7 @@
 			packageReferences = (
 				B2A8E61924ED9FFD00D7C407 /* XCRemoteSwiftPackageReference "CryptoSwift" */,
 				B247AB3424EE7D0500C2B68D /* XCRemoteSwiftPackageReference "ZIPFoundation" */,
+				B2A2953025109CBB0042C6FB /* XCRemoteSwiftPackageReference "LAMP-swift" */,
 			);
 			productRefGroup = B29639CE23BDC28100626E1A /* Products */;
 			projectDirPath = "";
@@ -1148,7 +1144,7 @@
 				CODE_SIGN_ENTITLEMENTS = "watchkitapp Extension/watchkitapp Extension.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 22;
+				CURRENT_PROJECT_VERSION = 23;
 				DEVELOPMENT_ASSET_PATHS = "\"watchkitapp Extension/Preview Content\"";
 				DEVELOPMENT_TEAM = S2Y2D4239K;
 				ENABLE_PREVIEWS = YES;
@@ -1176,7 +1172,7 @@
 				CODE_SIGN_ENTITLEMENTS = "watchkitapp Extension/watchkitapp Extension.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 22;
+				CURRENT_PROJECT_VERSION = 23;
 				DEVELOPMENT_ASSET_PATHS = "\"watchkitapp Extension/Preview Content\"";
 				DEVELOPMENT_TEAM = S2Y2D4239K;
 				ENABLE_PREVIEWS = YES;
@@ -1371,7 +1367,7 @@
 				CODE_SIGN_ENTITLEMENTS = mindLAMP/mindLAMP.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 21;
+				CURRENT_PROJECT_VERSION = 23;
 				DEVELOPMENT_ASSET_PATHS = "\"mindLAMP/Preview Content\"";
 				DEVELOPMENT_TEAM = S2Y2D4239K;
 				ENABLE_BITCODE = NO;
@@ -1409,7 +1405,7 @@
 				CODE_SIGN_ENTITLEMENTS = mindLAMP/mindLAMP.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 21;
+				CURRENT_PROJECT_VERSION = 23;
 				DEVELOPMENT_ASSET_PATHS = "\"mindLAMP/Preview Content\"";
 				DEVELOPMENT_TEAM = S2Y2D4239K;
 				ENABLE_BITCODE = NO;
@@ -1553,6 +1549,14 @@
 				minimumVersion = 0.9.11;
 			};
 		};
+		B2A2953025109CBB0042C6FB /* XCRemoteSwiftPackageReference "LAMP-swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/BIDMCDigitalPsychiatry/LAMP-swift.git";
+			requirement = {
+				branch = Sensors;
+				kind = branch;
+			};
+		};
 		B2A8E61924ED9FFD00D7C407 /* XCRemoteSwiftPackageReference "CryptoSwift" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/krzyzanowskim/CryptoSwift.git";
@@ -1564,18 +1568,15 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		B212B4D524DB205100DD1299 /* Sensors */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = Sensors;
-		};
-		B212B4D724DB205800DD1299 /* Sensors */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = Sensors;
-		};
 		B247AB3524EE7D0500C2B68D /* ZIPFoundation */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = B247AB3424EE7D0500C2B68D /* XCRemoteSwiftPackageReference "ZIPFoundation" */;
 			productName = ZIPFoundation;
+		};
+		B2A2953125109CBB0042C6FB /* Sensors */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = B2A2953025109CBB0042C6FB /* XCRemoteSwiftPackageReference "LAMP-swift" */;
+			productName = Sensors;
 		};
 		B2A8E61A24ED9FFD00D7C407 /* CryptoSwift */ = {
 			isa = XCSwiftPackageProductDependency;
