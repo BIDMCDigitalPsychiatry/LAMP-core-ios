@@ -11,15 +11,6 @@
         }
       },
       {
-        "package": "Sensors",
-        "repositoryURL": "https://github.com/BIDMCDigitalPsychiatry/LAMP-swift.git",
-        "state": {
-          "branch": "Sensors",
-          "revision": "e1cf2f6d0a88291b3c4b331c1aa1ac1444dd3a0c",
-          "version": null
-        }
-      },
-      {
         "package": "ZIPFoundation",
         "repositoryURL": "https://github.com/weichsel/ZIPFoundation.git",
         "state": {

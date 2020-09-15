@@ -58,8 +58,6 @@
 		B244A1C223BF4A91007FBDB8 /* FileManager+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B244A1C123BF4A91007FBDB8 /* FileManager+Extension.swift */; };
 		B247AB3624EE7D0500C2B68D /* ZIPFoundation in Frameworks */ = {isa = PBXBuildFile; productRef = B247AB3524EE7D0500C2B68D /* ZIPFoundation */; };
 		B2500E2B24CED14E008A50D7 /* LMSensorManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2500E2A24CED14E008A50D7 /* LMSensorManager.swift */; };
-		B2500E3524CEEB5B008A50D7 /* NodeMobile.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B2500E3424CEEB5B008A50D7 /* NodeMobile.framework */; };
-		B2500E3624CEEB5B008A50D7 /* NodeMobile.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = B2500E3424CEEB5B008A50D7 /* NodeMobile.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		B255116524B6202300CDBDD1 /* WatchNotificationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B255116424B6202300CDBDD1 /* WatchNotificationModel.swift */; };
 		B255116924B625CC00CDBDD1 /* WatchDeviceInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = B255116824B625CC00CDBDD1 /* WatchDeviceInfo.swift */; };
 		B255116C24B6291900CDBDD1 /* LoginServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = B255116B24B6291900CDBDD1 /* LoginServices.swift */; };
@@ -167,6 +165,8 @@
 		B2A296462510BE380042C6FB /* BLEDevice.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2A295FB2510BE380042C6FB /* BLEDevice.swift */; };
 		B2A2964A2510BF120042C6FB /* DateHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2A296492510BF120042C6FB /* DateHelper.swift */; };
 		B2A2964B2510BF120042C6FB /* DateHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2A296492510BF120042C6FB /* DateHelper.swift */; };
+		B2A2964D2510C30E0042C6FB /* NodeMobile.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B2A2964C2510C30D0042C6FB /* NodeMobile.framework */; };
+		B2A2964E2510C30E0042C6FB /* NodeMobile.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = B2A2964C2510C30D0042C6FB /* NodeMobile.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		B2A8E61B24ED9FFD00D7C407 /* CryptoSwift in Frameworks */ = {isa = PBXBuildFile; productRef = B2A8E61A24ED9FFD00D7C407 /* CryptoSwift */; };
 		B2B889EE23D0A52C00321C3E /* Home.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B2B889ED23D0A52C00321C3E /* Home.storyboard */; };
 		B2B8935223D0AD6500321C3E /* DateExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2B8935023D0AD6500321C3E /* DateExtension.swift */; };
@@ -232,17 +232,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		B2500E3724CEEB5B008A50D7 /* Embed Frameworks */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 10;
-			files = (
-				B2500E3624CEEB5B008A50D7 /* NodeMobile.framework in Embed Frameworks */,
-			);
-			name = "Embed Frameworks";
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		B2704DFD24B4A2AC00DE196B /* Embed Watch Content */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
@@ -263,6 +252,17 @@
 				B2704DE324B4A2AC00DE196B /* watchkitextension.appex in Embed App Extensions */,
 			);
 			name = "Embed App Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B2A2964F2510C30E0042C6FB /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				B2A2964E2510C30E0042C6FB /* NodeMobile.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		B2D931092445D7E90086477D /* Embed App Extensions */ = {
@@ -316,7 +316,6 @@
 		B240816B23D8814300845AEE /* AsynchronousOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AsynchronousOperation.swift; sourceTree = "<group>"; };
 		B244A1C123BF4A91007FBDB8 /* FileManager+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FileManager+Extension.swift"; sourceTree = "<group>"; };
 		B2500E2A24CED14E008A50D7 /* LMSensorManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LMSensorManager.swift; sourceTree = "<group>"; };
-		B2500E3424CEEB5B008A50D7 /* NodeMobile.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NodeMobile.framework; path = "../../Projects/LAMPV2/nodejs-mobile-v0/Release-universal/NodeMobile.framework"; sourceTree = "<group>"; };
 		B255116424B6202300CDBDD1 /* WatchNotificationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchNotificationModel.swift; sourceTree = "<group>"; };
 		B255116824B625CC00CDBDD1 /* WatchDeviceInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchDeviceInfo.swift; sourceTree = "<group>"; };
 		B255116B24B6291900CDBDD1 /* LoginServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginServices.swift; sourceTree = "<group>"; };
@@ -391,6 +390,7 @@
 		B2A295FA2510BE380042C6FB /* LMBluetoothData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LMBluetoothData.swift; sourceTree = "<group>"; };
 		B2A295FB2510BE380042C6FB /* BLEDevice.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BLEDevice.swift; sourceTree = "<group>"; };
 		B2A296492510BF120042C6FB /* DateHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateHelper.swift; sourceTree = "<group>"; };
+		B2A2964C2510C30D0042C6FB /* NodeMobile.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NodeMobile.framework; path = "Release-universal/NodeMobile.framework"; sourceTree = "<group>"; };
 		B2B889ED23D0A52C00321C3E /* Home.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Home.storyboard; sourceTree = "<group>"; };
 		B2B8935023D0AD6500321C3E /* DateExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateExtension.swift; sourceTree = "<group>"; };
 		B2B8935123D0AD6500321C3E /* String+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+Extension.swift"; sourceTree = "<group>"; };
@@ -430,8 +430,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				B2A8E61B24ED9FFD00D7C407 /* CryptoSwift in Frameworks */,
-				B2500E3524CEEB5B008A50D7 /* NodeMobile.framework in Frameworks */,
 				B2B8979823D0ADBA00321C3E /* HealthKit.framework in Frameworks */,
+				B2A2964D2510C30E0042C6FB /* NodeMobile.framework in Frameworks */,
 				B247AB3624EE7D0500C2B68D /* ZIPFoundation in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -944,7 +944,7 @@
 		B2B8979623D0ADBA00321C3E /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				B2500E3424CEEB5B008A50D7 /* NodeMobile.framework */,
+				B2A2964C2510C30D0042C6FB /* NodeMobile.framework */,
 				B2B8979723D0ADBA00321C3E /* HealthKit.framework */,
 				B2D930F82445D7E90086477D /* UserNotifications.framework */,
 				B2D930FA2445D7E90086477D /* UserNotificationsUI.framework */,
@@ -1044,7 +1044,7 @@
 				B29639CB23BDC28100626E1A /* Resources */,
 				B2D931092445D7E90086477D /* Embed App Extensions */,
 				B2704DFD24B4A2AC00DE196B /* Embed Watch Content */,
-				B2500E3724CEEB5B008A50D7 /* Embed Frameworks */,
+				B2A2964F2510C30E0042C6FB /* Embed Frameworks */,
 			);
 			buildRules = (
 				B2FD520024F4148400142448 /* PBXBuildRule */,
@@ -1695,7 +1695,7 @@
 				CODE_SIGN_ENTITLEMENTS = mindLAMP/mindLAMP.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 21;
+				CURRENT_PROJECT_VERSION = 26;
 				DEVELOPMENT_ASSET_PATHS = "\"mindLAMP/Preview Content\"";
 				DEVELOPMENT_TEAM = S2Y2D4239K;
 				ENABLE_BITCODE = NO;
@@ -1704,6 +1704,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/mindLAMP/NodeComponents",
 					"$(PROJECT_DIR)/libnode",
+					"$(PROJECT_DIR)/Release-universal",
 				);
 				INFOPLIST_FILE = mindLAMP/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
@@ -1733,7 +1734,7 @@
 				CODE_SIGN_ENTITLEMENTS = mindLAMP/mindLAMP.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 21;
+				CURRENT_PROJECT_VERSION = 26;
 				DEVELOPMENT_ASSET_PATHS = "\"mindLAMP/Preview Content\"";
 				DEVELOPMENT_TEAM = S2Y2D4239K;
 				ENABLE_BITCODE = NO;
@@ -1742,6 +1743,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/mindLAMP/NodeComponents",
 					"$(PROJECT_DIR)/libnode",
+					"$(PROJECT_DIR)/Release-universal",
 				);
 				INFOPLIST_FILE = mindLAMP/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
