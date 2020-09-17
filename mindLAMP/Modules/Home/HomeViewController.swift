@@ -15,14 +15,18 @@ class HomeViewController: UIViewController {
     @IBOutlet weak var indicator: UIActivityIndicatorView!
 
     var lampDashboardURLwithToken: URL {
-        let urlString = LampURL.dashboardDigitalWithToken
-        let base64UserInfo = Endpoint.getSessionKey() ?? ""
-        return URL(string: urlString + base64UserInfo)!
+        let urlString = LampURL.dashboardDigitalURLText
+        if let base64token = Endpoint.getSessionKey() {
+            return URL(string: urlString + "?a=" + base64token)!
+        }
+        return LampURL.dashboardDigital
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         print("mindLAMP Home")
+        
+        clean()
         //check dashboard is offline available
         if UserDefaults.standard.version == nil {
             if User.shared.isLogin() == true {
@@ -64,6 +68,25 @@ class HomeViewController: UIViewController {
 // MARK: - private
 
 private extension HomeViewController {
+    
+    func clean() {
+        HTTPCookieStorage.shared.removeCookies(since: Date.distantPast)
+        print("[WebCacheCleaner] All cookies deleted")
+
+        WKWebsiteDataStore.default().fetchDataRecords(ofTypes: WKWebsiteDataStore.allWebsiteDataTypes()) { records in
+            records.forEach { record in
+                WKWebsiteDataStore.default().removeData(ofTypes: record.dataTypes, for: [record], completionHandler: {})
+                print("[WebCacheCleaner] Record \(record) deleted")
+            }
+        }
+        
+        let websiteDataTypes = NSSet(array: [WKWebsiteDataTypeDiskCache, WKWebsiteDataTypeMemoryCache])
+        let date = Date(timeIntervalSince1970: 0)
+        if let webData = websiteDataTypes as? Set<String> {
+            WKWebsiteDataStore.default().removeData(ofTypes: webData, modifiedSince: date, completionHandler:{ })
+        }
+        
+    }
     
     @objc func updateWatchOS(_ notification: Notification) {
         

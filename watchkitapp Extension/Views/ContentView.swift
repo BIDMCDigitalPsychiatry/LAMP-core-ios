@@ -33,7 +33,7 @@ struct LoginView: View {
                 }.textContentType(.password)
                 .multilineTextAlignment(.center)
                 .foregroundColor(.white)
-
+                Spacer()
                 Spacer()
                 HStack(alignment: .bottom) {
                     Button(action: {
