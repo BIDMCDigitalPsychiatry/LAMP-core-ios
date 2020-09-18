@@ -17,9 +17,9 @@
 		<key>digital.lamp.mindlamp.NotificationService</key>
 		<string>mindLAMP 2 Notification Service AppStore</string>
 		<key>digital.lamp.mindlamp.watchkitapp</key>
-		<string>mindLamp 2 watchkitapp</string>
+		<string>mindLAMP2 WatchApp</string>
 		<key>digital.lamp.mindlamp.watchkitapp.watchkitextension</key>
-		<string>mindLamp 2 watchkitapp extension</string>
+		<string>mindLAMP2 WatchApp Extension</string>
 	</dict>
 </dict>
 </plist>
