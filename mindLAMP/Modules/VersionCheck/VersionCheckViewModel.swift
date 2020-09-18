@@ -51,7 +51,7 @@ class VersionCheckViewModel {
     }
     
     func getDownloadURL(completion: @escaping (Dashboard.Response?, Error?) -> Void) {
-        let deviceid = "jijo"
+        let deviceid = ""//TODO: get device id
         let iv = randomString(length: 16)// ?? "ggGGHUiDD0Qjhuvv" // length == 16
         guard let encrypted = encryptText(deviceid, iv: iv) else {
             return

@@ -15,14 +15,14 @@ struct User {
     }
     
     func isLogin() -> Bool {
-        print("Endpoint.getSessionKey() = \(Endpoint.getSessionKey())")
-        print("userId = \(userId)")
+        print("Endpoint.getSessionKey() = \(String(describing: Endpoint.getSessionKey()))")
+        print("userId = \(String(describing: userId))")
         return (Endpoint.getSessionKey() != nil) && (userId != nil)
     }
     
     func login(userID: String?, serverAddress: String?) {
-        print("userId = \(userID)")
-        print("serverAddress = \(serverAddress)")
+        print("userId = \(String(describing: userID))")
+        print("serverAddress = \(String(describing: serverAddress))")
         UserDefaults.standard.serverAddress = serverAddress
         UserDefaults.standard.userID = userID
     }

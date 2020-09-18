@@ -42,7 +42,7 @@ class Networking: NSObject, NetworkingAPI {
         case .post, .put:
             
             print("requestURL = \(requestURL)")
-            print("headers = \(urlRequest.allHTTPHeaderFields)")
+            print("headers = \(String(describing: urlRequest.allHTTPHeaderFields))")
             if let data = request.jsonData {
                 urlRequest.httpBody = data
                 print("body Json: \(String(describing: String(data: data, encoding: String.Encoding.utf8)))")
@@ -50,7 +50,7 @@ class Networking: NSObject, NetworkingAPI {
             
         case .get:
             print("requestURL = \(requestURL)")
-            print("headers = \(urlRequest.allHTTPHeaderFields)")
+            print("headers = \(String(describing: urlRequest.allHTTPHeaderFields))")
             ()
         case .delete:
             ()

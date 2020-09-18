@@ -19,7 +19,7 @@ class NotificationAPI {
         let data = RequestData(endpoint: endPoint, requestTye: HTTPMethodType.post, data: request)
         connection.makeWebserviceCall(with: data) { (response: Result<PushNotification.UpdateTokenResponse>) in
             switch response {
-            case .failure(let err):
+            case .failure( _):
                 completion(false)
                 //LMLogsManager.shared.addLogs(level: .error, logs: Logs.Messages.network_error + " " + err.localizedMessage)
                 break
@@ -39,7 +39,7 @@ class NotificationAPI {
         let data = RequestData(endpoint: endPoint, requestType: HTTPMethodType.post, body: request.toJSON())
         connection.makeWebserviceCall(with: data) { (response: Result<PushNotification.UpdateReadResponse>) in
             switch response {
-            case .failure(let err):
+            case .failure( _):
                 //LMLogsManager.shared.addLogs(level: .error, logs: Logs.Messages.network_error + " " + err.localizedMessage)
                 break
             case .success(_):

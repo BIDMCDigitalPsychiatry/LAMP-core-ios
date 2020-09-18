@@ -2,7 +2,7 @@
 
 import Foundation
 import UserNotifications
-//import Sensors
+import Sensors
 
 struct RemoteNotification {
 
