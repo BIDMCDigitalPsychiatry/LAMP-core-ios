@@ -31,6 +31,7 @@
       "size" : "29x29"
     },
     {
+      "filename" : "Icon-80.png",
       "idiom" : "watch",
       "role" : "appLauncher",
       "scale" : "2x",
