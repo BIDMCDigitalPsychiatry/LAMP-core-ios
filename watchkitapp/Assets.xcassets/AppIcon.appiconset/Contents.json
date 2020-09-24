@@ -1,7 +1,7 @@
 {
   "images" : [
     {
-      "filename" : "lamp_watch_48.png",
+      "filename" : "Icon-48.png",
       "idiom" : "watch",
       "role" : "notificationCenter",
       "scale" : "2x",
@@ -9,7 +9,7 @@
       "subtype" : "38mm"
     },
     {
-      "filename" : "lamp_watch_58.png",
+      "filename" : "Icon-55.png",
       "idiom" : "watch",
       "role" : "notificationCenter",
       "scale" : "2x",
@@ -17,21 +17,20 @@
       "subtype" : "42mm"
     },
     {
-      "filename" : "lamp_watch_58-1.png",
+      "filename" : "Icon-58.png",
       "idiom" : "watch",
       "role" : "companionSettings",
       "scale" : "2x",
       "size" : "29x29"
     },
     {
-      "filename" : "lamp_watch_87.png",
+      "filename" : "Icon-87.png",
       "idiom" : "watch",
       "role" : "companionSettings",
       "scale" : "3x",
       "size" : "29x29"
     },
     {
-      "filename" : "lamp_watch_80.png",
       "idiom" : "watch",
       "role" : "appLauncher",
       "scale" : "2x",
@@ -39,7 +38,7 @@
       "subtype" : "38mm"
     },
     {
-      "filename" : "lamp_watch_88.png",
+      "filename" : "Icon-88.png",
       "idiom" : "watch",
       "role" : "appLauncher",
       "scale" : "2x",
@@ -47,7 +46,7 @@
       "subtype" : "40mm"
     },
     {
-      "filename" : "lamp_watch_100.png",
+      "filename" : "Icon-100.png",
       "idiom" : "watch",
       "role" : "appLauncher",
       "scale" : "2x",
@@ -55,7 +54,7 @@
       "subtype" : "44mm"
     },
     {
-      "filename" : "lamp_watch_172.png",
+      "filename" : "Icon-172.png",
       "idiom" : "watch",
       "role" : "quickLook",
       "scale" : "2x",
@@ -63,7 +62,7 @@
       "subtype" : "38mm"
     },
     {
-      "filename" : "lamp_watch_196.png",
+      "filename" : "Icon-196.png",
       "idiom" : "watch",
       "role" : "quickLook",
       "scale" : "2x",
@@ -71,7 +70,7 @@
       "subtype" : "42mm"
     },
     {
-      "filename" : "lamp_watch_216.png",
+      "filename" : "Icon-256.png",
       "idiom" : "watch",
       "role" : "quickLook",
       "scale" : "2x",
@@ -79,7 +78,7 @@
       "subtype" : "44mm"
     },
     {
-      "filename" : "iTunesConnect.png",
+      "filename" : "Icon-1024.png",
       "idiom" : "watch-marketing",
       "scale" : "1x",
       "size" : "1024x1024"
