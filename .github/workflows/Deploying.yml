@@ -10,7 +10,7 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
-        with:
+        env:
           token: ${{ secrets.GITHUB_TOKENN }}
       - uses: yanamura/ios-bump-version@v1
         with:
