@@ -11,6 +11,8 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v2
       - name: Updating build number And commit
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: .github/scripts/buildnumber.sh
       - name: Install gpg 
         run: brew install gpg
