@@ -9,7 +9,11 @@ jobs:
     runs-on: macOS-latest
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v1
+        uses: actions/checkout@v2
+	with:
+    	  token: ${{ secrets.GITHUB_TOKENN }}
+      - name: Updating build number
+	run: .github/scripts/buildnumber.sh
       - name: Install gpg 
         run: brew install gpg
       - name: Setup provisioning profile
