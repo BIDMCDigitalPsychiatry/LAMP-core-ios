@@ -2,9 +2,24 @@
 
 import Foundation
 
+//struct LampURL {
+//    //static let test = "http://127.0.0.1:5000/login"
+//    static let dashboardlive = "https://dashboard.lamp.digital/#/"//"https://dashboard-staging.lamp.digital" ////TODO:
+//    static var dashboardDigital: URL {
+//        return URL(string: dashboardDigitalURLText)!
+//    }
+//    static let dashboardDigitalURLText = (UserDefaults.standard.launchURL ?? dashboardlive)// + "?a="
+//    //static let loginLocalHost = "http://127.0.0.1:5000/login"
+//    static let logsDigital = "https://logs.lamp.digital"
+//    static let dashboardURL = "http://52.66.237.209:9092"
+//    static let lampAPI = "https://api.lamp.digital"
+//
+//}
+
+//+Roll
 struct LampURL {
-    //static let test = "http://127.0.0.1:5000/login"
-    static let dashboardlive = "https://dashboard.lamp.digital/#/"//"https://dashboard-staging.lamp.digital" ////TODO:
+
+    static let dashboardlive = "http://52.66.237.209:9094/#/"//"https://dashboard-staging.lamp.digital" ////TODO:
     static var dashboardDigital: URL {
         return URL(string: dashboardDigitalURLText)!
     }
@@ -12,6 +27,6 @@ struct LampURL {
     //static let loginLocalHost = "http://127.0.0.1:5000/login"
     static let logsDigital = "https://logs.lamp.digital"
     static let dashboardURL = "http://52.66.237.209:9092"
-    static let lampAPI = "https://api.lamp.digital"
+    static let lampAPI = "http://52.66.237.209:9093"
     
 }

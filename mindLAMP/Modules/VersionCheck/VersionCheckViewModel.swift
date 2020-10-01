@@ -25,7 +25,7 @@ enum Dashboard {
 class VersionCheckViewModel {
     
     let connection: NetworkingAPI = NetworkConfig.dashboardAPI()
-    let key = "ccC2H19lDDbQDfakxcrtNMQdd0FloLGG" // length == 32
+    let key = "TODO: obfuscate the key and set here" // length == 32
     
     weak var delegate: DownloadStatus?
     
@@ -52,7 +52,7 @@ class VersionCheckViewModel {
     
     func getDownloadURL(completion: @escaping (Dashboard.Response?, Error?) -> Void) {
         let deviceid = ""//TODO: get device id
-        let iv = randomString(length: 16)// ?? "ggGGHUiDD0Qjhuvv" // length == 16
+        let iv = randomString(length: 16)//length == 16
         guard let encrypted = encryptText(deviceid, iv: iv) else {
             return
         }

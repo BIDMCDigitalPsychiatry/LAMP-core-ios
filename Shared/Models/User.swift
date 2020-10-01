@@ -14,6 +14,10 @@ struct User {
         return UserDefaults.standard.serverAddress
     }
     
+//    func getURLToken() -> String {
+//        
+//    }
+//    
     func isLogin() -> Bool {
         print("Endpoint.getSessionKey() = \(String(describing: Endpoint.getSessionKey()))")
         print("userId = \(String(describing: userId))")

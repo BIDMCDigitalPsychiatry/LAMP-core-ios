@@ -181,11 +181,15 @@ extension HomeViewController: WKScriptMessageHandler {
             }
             print("dictBody = \(dictBody)\n")
             //read token
-            let token = (dictBody["authorizationToken"] as? String) ?? "U3998365801:12345"
+            guard let token = (dictBody["authorizationToken"] as? String) else { return }
+            
             let base64Token = token.data(using: .utf8)?.base64EncodedString()
             Endpoint.setSessionKey(base64Token)
             
-            let serverAddress = dictBody["serverAddress"] as? String//"https://dashboard-staging.lamp.digital"//TODO:
+            let serverAddress = dictBody["serverAddress"] as? String
+//            if let serverAddres = serverAddress {
+//                let URLToken =
+//            }
             
             let idObjectDict = dictBody["identityObject"] as? [String: Any]
             

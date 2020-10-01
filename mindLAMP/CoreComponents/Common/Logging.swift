@@ -31,7 +31,7 @@ func print(_ items: Any ..., separator: String = " ", terminator: String = "\n")
             idx += 1
         }
             while idx < endIdx
-   // #endif
+    //#endif
 }
 /**
  Prints the filename, function name, line number and textual representation of `object` and a newline character into
@@ -82,12 +82,12 @@ func printToFile(_ items: Any ..., separator: String = " ", terminator: String =
         printDebug(items, file: file, function: function, line: line)
         return
     }
-    #if DEBUG
+    //#if DEBUG
         if forceToWrite {
             printError(items, file: file, function: function, line: line, isWriteToFile: false)
             return
         }
-    #endif
+    //#endif
     var idx = items.startIndex
     let endIdx = items.endIndex
     var fileName = (file as NSString).pathComponents.last ?? "(unknown)"
