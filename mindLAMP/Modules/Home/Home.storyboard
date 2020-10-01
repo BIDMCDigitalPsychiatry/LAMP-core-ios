@@ -78,36 +78,10 @@
                     <view key="view" contentMode="scaleToFill" id="sDv-eg-YPM">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kxl-ld-1CT">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                                <subviews>
-                                    <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="LcY-YG-ulr">
-                                        <rect key="frame" x="188.5" y="429.5" width="37" height="37"/>
-                                        <color key="color" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                    </activityIndicatorView>
-                                </subviews>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                                <constraints>
-                                    <constraint firstItem="LcY-YG-ulr" firstAttribute="centerX" secondItem="kxl-ld-1CT" secondAttribute="centerX" id="hbP-4e-qpa"/>
-                                    <constraint firstItem="LcY-YG-ulr" firstAttribute="centerY" secondItem="kxl-ld-1CT" secondAttribute="centerY" id="tDp-Ty-Cqm"/>
-                                </constraints>
-                            </view>
-                        </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                        <constraints>
-                            <constraint firstItem="kxl-ld-1CT" firstAttribute="leading" secondItem="rBR-wJ-wl3" secondAttribute="leading" id="4gX-NF-4AL"/>
-                            <constraint firstItem="kxl-ld-1CT" firstAttribute="top" secondItem="sDv-eg-YPM" secondAttribute="top" id="5ZI-xw-xvb"/>
-                            <constraint firstAttribute="bottom" secondItem="kxl-ld-1CT" secondAttribute="bottom" id="REC-uV-qGo"/>
-                            <constraint firstItem="kxl-ld-1CT" firstAttribute="trailing" secondItem="rBR-wJ-wl3" secondAttribute="trailing" id="g5r-zh-fA7"/>
-                        </constraints>
                         <viewLayoutGuide key="safeArea" id="rBR-wJ-wl3"/>
                     </view>
                     <navigationItem key="navigationItem" id="jIM-Ht-T9I"/>
-                    <connections>
-                        <outlet property="containerView" destination="kxl-ld-1CT" id="XwD-5b-TxF"/>
-                        <outlet property="indicator" destination="LcY-YG-ulr" id="0Rg-ca-AIN"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eL7-E7-5bX" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -156,6 +130,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="SplashImage" width="562.5" height="1218"/>
+        <image name="SplashImage" width="621" height="1104"/>
     </resources>
 </document>

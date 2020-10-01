@@ -12,6 +12,8 @@
 		5FF29324242206F100D0BE09 /* LogsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FF29323242206F100D0BE09 /* LogsModel.swift */; };
 		5FF29327242223F300D0BE09 /* FileStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FF29326242223F300D0BE09 /* FileStorage.swift */; };
 		5FF2932A24223A6300D0BE09 /* LMConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FF2932924223A6300D0BE09 /* LMConstants.swift */; };
+		B2010FA12525F4A90075D0F8 /* AppColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2010FA02525F4A90075D0F8 /* AppColors.swift */; };
+		B2010FA22525F4A90075D0F8 /* AppColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2010FA02525F4A90075D0F8 /* AppColors.swift */; };
 		B212B4CF24DB1ACD00DD1299 /* LampIdentifiersHealthKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = B212B4CD24DB1ACD00DD1299 /* LampIdentifiersHealthKit.swift */; };
 		B212B4D024DB1ACD00DD1299 /* LampIdentifiersHealthKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = B212B4CD24DB1ACD00DD1299 /* LampIdentifiersHealthKit.swift */; };
 		B212B4D124DB1ACD00DD1299 /* LampIdentifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = B212B4CE24DB1ACD00DD1299 /* LampIdentifiers.swift */; };
@@ -199,6 +201,7 @@
 		5FF29323242206F100D0BE09 /* LogsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogsModel.swift; sourceTree = "<group>"; };
 		5FF29326242223F300D0BE09 /* FileStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileStorage.swift; sourceTree = "<group>"; };
 		5FF2932924223A6300D0BE09 /* LMConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LMConstants.swift; sourceTree = "<group>"; };
+		B2010FA02525F4A90075D0F8 /* AppColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppColors.swift; sourceTree = "<group>"; };
 		B212B4CD24DB1ACD00DD1299 /* LampIdentifiersHealthKit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LampIdentifiersHealthKit.swift; sourceTree = "<group>"; };
 		B212B4CE24DB1ACD00DD1299 /* LampIdentifiers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LampIdentifiers.swift; sourceTree = "<group>"; };
 		B2260D632505E66E00747A3E /* AppInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppInfo.swift; sourceTree = "<group>"; };
@@ -327,6 +330,7 @@
 			isa = PBXGroup;
 			children = (
 				5FF2932924223A6300D0BE09 /* LMConstants.swift */,
+				B2010FA02525F4A90075D0F8 /* AppColors.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -952,6 +956,7 @@
 				B2704DEE24B4A2AC00DE196B /* NotificationController.swift in Sources */,
 				B2704DEC24B4A2AC00DE196B /* ExtensionDelegate.swift in Sources */,
 				B2704DF024B4A2AC00DE196B /* NotificationView.swift in Sources */,
+				B2010FA22525F4A90075D0F8 /* AppColors.swift in Sources */,
 				B2FB8E9F24BC501B003F653C /* SensorEvents.swift in Sources */,
 				B238434424B83B7700E548E2 /* ErrorExtension.swift in Sources */,
 			);
@@ -974,6 +979,7 @@
 				B238433024B8357F00E548E2 /* Networking.swift in Sources */,
 				B238432E24B8357F00E548E2 /* CodableHelpers.swift in Sources */,
 				5FF2932A24223A6300D0BE09 /* LMConstants.swift in Sources */,
+				B2010FA12525F4A90075D0F8 /* AppColors.swift in Sources */,
 				B238433B24B836A200E548E2 /* Result.swift in Sources */,
 				B240816E23D8814300845AEE /* AsynchronousOperation.swift in Sources */,
 				B2B8935223D0AD6500321C3E /* DateExtension.swift in Sources */,

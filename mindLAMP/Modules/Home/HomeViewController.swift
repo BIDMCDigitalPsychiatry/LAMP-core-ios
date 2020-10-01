@@ -11,38 +11,48 @@ import WebKit
 class HomeViewController: UIViewController {
 
     private var wkWebView: WKWebView!
-    @IBOutlet weak var containerView: UIView!
-    @IBOutlet weak var indicator: UIActivityIndicatorView!
+    private var loadingObservation: NSKeyValueObservation?
+    //@IBOutlet weak var containerView: UIView!
+    private lazy var indicator: UIActivityIndicatorView  = {
+        let progressView = UIActivityIndicatorView(style: UIActivityIndicatorView.Style.gray)
+        progressView.hidesWhenStopped = true
+        progressView.translatesAutoresizingMaskIntoConstraints = false
+        return progressView
+    }()
 
     var lampDashboardURLwithToken: URL {
         let urlString = LampURL.dashboardDigitalURLText
-        if let base64token = Endpoint.getSessionKey() {
+        if let base64token = Endpoint.getURLToken() {
             return URL(string: urlString + "?a=" + base64token)!
         }
         return LampURL.dashboardDigital
     }
     
+    override func loadView() {
+        
+        cleanCache()
+        self.loadWebView()
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         print("mindLAMP Home")
-        
-        clean()
+
         //check dashboard is offline available
         if UserDefaults.standard.version == nil {
             if User.shared.isLogin() == true {
                 print("self.lampDashboardURLwithToken = \(self.lampDashboardURLwithToken)")
-                self.loadWebView(with: self.lampDashboardURLwithToken)
+                wkWebView.load(URLRequest(url: self.lampDashboardURLwithToken))
             } else {
-                self.loadWebView(with: LampURL.dashboardDigital)
+                wkWebView.load(URLRequest(url: LampURL.dashboardDigital))
             }
         } else {
             // Do any additional setup after loading the view.
             //ToDO: NodeManager.shared.startNodeServer()
-
             let deadlineTime = DispatchTime.now() + .seconds(5)
             DispatchQueue.main.asyncAfter(deadline: deadlineTime) {
                 //NodeManager.shared.getServerStatus()
-                self.loadWebView(with: LampURL.dashboardDigital)
+                self.wkWebView.load(URLRequest(url: LampURL.dashboardDigital))
             }
         }
     }
@@ -69,7 +79,7 @@ class HomeViewController: UIViewController {
 
 private extension HomeViewController {
     
-    func clean() {
+    func cleanCache() {
         HTTPCookieStorage.shared.removeCookies(since: Date.distantPast)
         print("[WebCacheCleaner] All cookies deleted")
 
@@ -99,23 +109,35 @@ private extension HomeViewController {
         }
     }
       
-    func loadWebView(with url: URL) {
+    func loadWebView() {
         
-        let webView = makeWebView()
-        self.containerView.addSubview(webView)
+        wkWebView = makeWebView()
         
-        webView.translatesAutoresizingMaskIntoConstraints = false
-        containerView.addConstraint(NSLayoutConstraint(item: webView, attribute: .trailing, relatedBy: .equal, toItem: containerView, attribute: .trailing, multiplier: 1, constant: 0))
-        containerView.addConstraint(NSLayoutConstraint(item: webView, attribute: .leading, relatedBy: .equal, toItem: containerView, attribute: .leading, multiplier: 1, constant: 0))
+        wkWebView.navigationDelegate = self
+
+        self.view = wkWebView
+        view.addSubview(indicator)
         
-        containerView.addConstraint(NSLayoutConstraint(item: webView, attribute: .top, relatedBy: .equal, toItem: containerView, attribute: .top, multiplier: 1, constant: 0))
-        containerView.addConstraint(NSLayoutConstraint(item: webView, attribute: .bottom, relatedBy: .equal, toItem: containerView, attribute: .bottom, multiplier: 1, constant: 0))
-        containerView.setNeedsUpdateConstraints()
-        
-        self.containerView.bringSubviewToFront(indicator)
-        
-        webView.load(URLRequest(url: url))
-        wkWebView = webView
+        //To show activity indicator when webview is Loading..
+        loadingObservation = wkWebView.observe(\.isLoading, options: [.new, .old]) { [weak self] (_, change) in
+            guard let strongSelf = self else { return }
+
+            let new = change.newValue!
+            let old = change.oldValue!
+
+            if new && !old {
+                strongSelf.view.addSubview(strongSelf.indicator)
+                strongSelf.indicator.startAnimating()
+                NSLayoutConstraint.activate([strongSelf.indicator.centerXAnchor.constraint(equalTo: strongSelf.view.centerXAnchor),
+                                             strongSelf.indicator.centerYAnchor.constraint(equalTo: strongSelf.view.centerYAnchor)])
+                strongSelf.view.bringSubviewToFront(strongSelf.indicator)
+            }
+            else if !new && old {
+                strongSelf.indicator.stopAnimating()
+                strongSelf.indicator.removeFromSuperview()
+            }
+        }
+
     }
 
     func makeWebView() -> WKWebView {
@@ -129,9 +151,6 @@ private extension HomeViewController {
         configuration.userContentController.add(self, name: ScriptMessageHandler.logout.rawValue)
         let webView = WKWebView(frame: .zero, configuration: configuration)
         webView.allowsBackForwardNavigationGestures = true
-
-        webView.navigationDelegate = self
-
         return webView
     }
     
@@ -160,13 +179,12 @@ private extension HomeViewController {
 extension HomeViewController: WKNavigationDelegate {
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
         print("didFinish navigation")
-        indicator.stopAnimating()
-
+        //indicator.stopAnimating()
     }
     
     func webView(_ webView: WKWebView, didFail navigation: WKNavigation!, withError error: Error) {
         print("error = \(error.localizedDescription)")
-        indicator.stopAnimating()
+        //indicator.stopAnimating()
     }
 }
 
@@ -180,20 +198,21 @@ extension HomeViewController: WKScriptMessageHandler {
                 return
             }
             print("dictBody = \(dictBody)\n")
-            //read token
-            guard let token = (dictBody["authorizationToken"] as? String) else { return }
+            //read token. it will be inthe format of UserName:Password
+            guard let token = (dictBody["authorizationToken"] as? String),
+            let idObjectDict = dictBody["identityObject"] as? [String: Any],
+            let userID = idObjectDict["id"] as? String  else { return }
+            
+            let serverAddress = dictBody["serverAddress"] as? String
             
             let base64Token = token.data(using: .utf8)?.base64EncodedString()
             Endpoint.setSessionKey(base64Token)
-            
-            let serverAddress = dictBody["serverAddress"] as? String
-//            if let serverAddres = serverAddress {
-//                let URLToken =
-//            }
-            
-            let idObjectDict = dictBody["identityObject"] as? [String: Any]
-            
-            guard let userID = idObjectDict?["id"] as? String else {return}
+
+            let serverAddressValue = serverAddress ?? ""
+            //store url token to load dashboarn on next launch
+            let uRLToken = "\(token):\(serverAddressValue)"//UserName:Password:ServerAddressValue
+            let base64URLToken = uRLToken.data(using: .utf8)?.base64EncodedString()
+            Endpoint.setURLToken(base64URLToken)
             
             User.shared.login(userID: userID, serverAddress: serverAddress)
             
@@ -210,3 +229,4 @@ extension HomeViewController: WKScriptMessageHandler {
         }
     }
 }
+

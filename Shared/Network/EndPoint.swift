@@ -18,6 +18,14 @@ enum Endpoint: String {
         return UserDefaults.standard.object(forKey: "authToken") as? String
     }
     
+    static func setURLToken(_ token: String?) {
+        UserDefaults.standard.set(token, forKey: "URLToken")
+        UserDefaults.standard.synchronize()
+    }
+    static func getURLToken() -> String? {
+        return UserDefaults.standard.object(forKey: "URLToken") as? String
+    }
+    
     static func getAPIKey() -> String? {
         return nil
     }
