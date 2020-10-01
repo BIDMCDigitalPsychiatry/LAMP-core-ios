@@ -9,7 +9,7 @@ import UIKit
 import WebKit
 
 class HomeViewController: UIViewController {
-
+    
     private var wkWebView: WKWebView!
     private var loadingObservation: NSKeyValueObservation?
     //@IBOutlet weak var containerView: UIView!
@@ -19,7 +19,7 @@ class HomeViewController: UIViewController {
         progressView.translatesAutoresizingMaskIntoConstraints = false
         return progressView
     }()
-
+    
     var lampDashboardURLwithToken: URL {
         let urlString = LampURL.dashboardDigitalURLText
         if let base64token = Endpoint.getURLToken() {
@@ -37,7 +37,7 @@ class HomeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         print("mindLAMP Home")
-
+        
         //check dashboard is offline available
         if UserDefaults.standard.version == nil {
             if User.shared.isLogin() == true {
@@ -63,8 +63,8 @@ class HomeViewController: UIViewController {
         self.navigationController?.setNavigationBarHidden(true, animated: animated)
         
         NotificationCenter.default.addObserver(self, selector: #selector(updateWatchOS(_:)),
-        name: UIApplication.didBecomeActiveNotification, object: nil)
-
+                                               name: UIApplication.didBecomeActiveNotification, object: nil)
+        
     }
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
@@ -72,7 +72,7 @@ class HomeViewController: UIViewController {
         self.navigationController?.setNavigationBarHidden(false, animated: animated)
         NotificationCenter.default.removeObserver(self, name: UIApplication.didBecomeActiveNotification, object: nil)
     }
-        
+    
 }
 
 // MARK: - private
@@ -82,7 +82,7 @@ private extension HomeViewController {
     func cleanCache() {
         HTTPCookieStorage.shared.removeCookies(since: Date.distantPast)
         print("[WebCacheCleaner] All cookies deleted")
-
+        
         WKWebsiteDataStore.default().fetchDataRecords(ofTypes: WKWebsiteDataStore.allWebsiteDataTypes()) { records in
             records.forEach { record in
                 WKWebsiteDataStore.default().removeData(ofTypes: record.dataTypes, for: [record], completionHandler: {})
@@ -108,23 +108,23 @@ private extension HomeViewController {
             WatchSessionManager.shared.updateApplicationContext(applicationContext: messageInfo)
         }
     }
-      
+    
     func loadWebView() {
         
         wkWebView = makeWebView()
         
         wkWebView.navigationDelegate = self
-
+        
         self.view = wkWebView
         view.addSubview(indicator)
         
         //To show activity indicator when webview is Loading..
         loadingObservation = wkWebView.observe(\.isLoading, options: [.new, .old]) { [weak self] (_, change) in
             guard let strongSelf = self else { return }
-
+            
             let new = change.newValue!
             let old = change.oldValue!
-
+            
             if new && !old {
                 strongSelf.view.addSubview(strongSelf.indicator)
                 strongSelf.indicator.startAnimating()
@@ -137,14 +137,14 @@ private extension HomeViewController {
                 strongSelf.indicator.removeFromSuperview()
             }
         }
-
+        
     }
-
+    
     func makeWebView() -> WKWebView {
         let preferences = WKPreferences()
         preferences.javaScriptEnabled = true
         preferences.javaScriptCanOpenWindowsAutomatically = true
-
+        
         let configuration = WKWebViewConfiguration()
         configuration.preferences = preferences
         configuration.userContentController.add(self, name: ScriptMessageHandler.login.rawValue)
@@ -199,15 +199,15 @@ extension HomeViewController: WKScriptMessageHandler {
             }
             print("dictBody = \(dictBody)\n")
             //read token. it will be inthe format of UserName:Password
-            guard let token = (dictBody["authorizationToken"] as? String),
-            let idObjectDict = dictBody["identityObject"] as? [String: Any],
-            let userID = idObjectDict["id"] as? String  else { return }
+            guard let token = (dictBody[ScriptMessageKey.authorizationToken.rawValue] as? String),
+                let idObjectDict = dictBody[ScriptMessageKey.identityObject.rawValue] as? [String: Any],
+                let userID = idObjectDict["id"] as? String  else { return }
             
-            let serverAddress = dictBody["serverAddress"] as? String
+            let serverAddress = dictBody[ScriptMessageKey.serverAddress.rawValue] as? String
             
             let base64Token = token.data(using: .utf8)?.base64EncodedString()
             Endpoint.setSessionKey(base64Token)
-
+            
             let serverAddressValue = serverAddress ?? ""
             //store url token to load dashboarn on next launch
             let uRLToken = "\(token):\(serverAddressValue)"//UserName:Password:ServerAddressValue
