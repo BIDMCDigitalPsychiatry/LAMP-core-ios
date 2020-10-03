@@ -19,7 +19,11 @@
 	<key>CFBundleShortVersionString</key>
 	<string>$(MARKETING_VERSION)</string>
 	<key>CFBundleVersion</key>
-	<string>44</string>
+	<string>$(CURRENT_PROJECT_VERSION)</string>
+	<key>DASHBOARD_URL</key>
+	<string>$(DASHBOARD_URL)</string>
+	<key>LAMP_API</key>
+	<string>$(LAMP_API)</string>
 	<key>NSAllowsArbitraryLoads</key>
 	<true/>
 	<key>NSExtension</key>
