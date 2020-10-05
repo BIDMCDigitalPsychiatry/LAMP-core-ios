@@ -7,6 +7,7 @@
 
 import UIKit
 import WebKit
+import Sensors
 
 class HomeViewController: UIViewController {
 
@@ -209,12 +210,18 @@ extension HomeViewController: WKScriptMessageHandler {
             Endpoint.setSessionKey(base64Token)
 
             let serverAddressValue = serverAddress ?? ""
+            
+            let withOutHttp = LampSensorCoreUtils.cleanHostName(serverAddressValue)
             //store url token to load dashboarn on next launch
-            let uRLToken = "\(token):\(serverAddressValue)"//UserName:Password:ServerAddressValue
+            let uRLToken = "\(token):\(withOutHttp)"//UserName:Password:ServerAddressValue
             let base64URLToken = uRLToken.data(using: .utf8)?.base64EncodedString()
             Endpoint.setURLToken(base64URLToken)
             
-            User.shared.login(userID: userID, serverAddress: serverAddress)
+            var serverAddressWithHttp = serverAddress
+            if let address = serverAddress, address.starts(with: "http") == false {
+                serverAddressWithHttp = "https://\(address)"
+            }
+            User.shared.login(userID: userID, serverAddress: serverAddressWithHttp)
             
             //Inform watch the login info
             if let dictInfo = User.shared.loginInfo {

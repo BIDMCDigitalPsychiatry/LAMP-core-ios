@@ -52,15 +52,15 @@ struct PushUserInfo {
     private func getPageURLForActionButton(_ action: RemoteNotification.Action) -> URL? {
         if let actionArry = userInfo["actions"] as? [[String: String]],
             let acionObj = actionArry.first(where:{ $0["name"] == action.title}) {
-            if let urlString = acionObj["page"] {
-                return URL(string: urlString)
+            if let page = acionObj["page"] {
+                return URL(string: Endpoint.appendURLTokenTo(urlString: page))
             }
         }
         return nil
     }
 
     private func getDefaultPageURL() -> URL? {
-        if let page = userInfo["page"] as? String, let pageURL = URL(string: page) {
+        if let page = userInfo["page"] as? String, let pageURL = URL(string: Endpoint.appendURLTokenTo(urlString: page)) {
             return pageURL
         }
         return nil

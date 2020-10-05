@@ -29,4 +29,11 @@ enum Endpoint: String {
     static func getAPIKey() -> String? {
         return nil
     }
+    
+    static func appendURLTokenTo(urlString: String) -> String {
+        if let token = getURLToken() {
+            return "\(urlString)?a=\(token)"
+        }
+        return urlString
+    }
 }
