@@ -36,7 +36,7 @@ extension LogsData {
     
     struct Body: Codable {
         let userId: String?
-        let userAgent: UserAgent
+        let userAgent: String
         let message: String?
     }
 
@@ -46,11 +46,11 @@ extension LogsData {
     }
 }
 
-extension LogsData.Body {
-    
-    struct UserAgent: Codable {
-        let name: String?
-        let osVersion: String?
-        let model: String?
-    }
-}
+//extension LogsData.Body {
+//
+//    struct UserAgent: Codable {
+//        let appVersion: String?
+//        let osVersion: String?
+//        let model: String?
+//    }
+//}

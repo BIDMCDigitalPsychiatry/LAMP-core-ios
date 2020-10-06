@@ -21,7 +21,7 @@ class LMLogsManager {
     }
     
     func addLogs(level: LogsLevel, logs: String) {
-        let userAgent = LogsData.Body.UserAgent(name: CurrentDevice.name, osVersion: CurrentDevice.osVersion, model: CurrentDevice.model)
+        let userAgent = UserAgent.defaultAgent.toString()
         let body = LogsData.Body(userId: User.shared.userId, userAgent: userAgent, message: logs)
         let params = LogsData.Params(origin: Logs.URLParams.origin, level: level)
         let request = LogsData.Request(dataBody: body, urlParams: params)
