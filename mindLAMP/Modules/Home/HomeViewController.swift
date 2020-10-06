@@ -44,6 +44,7 @@ class HomeViewController: UIViewController {
                 print("self.lampDashboardURLwithToken = \(self.lampDashboardURLwithToken)")
                 wkWebView.load(URLRequest(url: self.lampDashboardURLwithToken))
             } else {
+                print("LampURL.dashboardDigital = \(LampURL.dashboardDigital)")
                 wkWebView.load(URLRequest(url: LampURL.dashboardDigital))
             }
         } else {
@@ -71,6 +72,12 @@ class HomeViewController: UIViewController {
         // Show the navigation bar on other view controllers
         self.navigationController?.setNavigationBarHidden(false, animated: animated)
         NotificationCenter.default.removeObserver(self, name: UIApplication.didBecomeActiveNotification, object: nil)
+    }
+    
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        printError("Stopping sensors for a while due to memory warning")
+        LMSensorManager.shared.stopSensors()
     }
     
 }
@@ -158,7 +165,9 @@ private extension HomeViewController {
         LMSensorManager.shared.startSensors()
         
         //update device token after login
-        guard let deviceToken = UserDefaults.standard.deviceToken else { return }
+        guard let deviceToken = UserDefaults.standard.deviceToken else {
+            printError("return ..no device token")
+            return }
         let tokenInfo = DeviceInfoWithToken(deviceToken: deviceToken, userAgent: UserAgent.defaultAgent)
         let tokenRerquest = PushNotification.UpdateTokenRequest(deviceInfoWithToken: tokenInfo)
         let lampAPI = NotificationAPI(NetworkConfig.networkingAPI())
@@ -208,12 +217,16 @@ extension HomeViewController: WKScriptMessageHandler {
             let base64Token = token.data(using: .utf8)?.base64EncodedString()
             Endpoint.setSessionKey(base64Token)
             
-            let serverAddressValue = serverAddress ?? ""
+            var serverAddressValue = serverAddress ?? ""
+            if Environment.isTesting {
+                serverAddressValue = serverAddressValue.cleanHostName()
+            }
+
             //store url token to load dashboarn on next launch
             let uRLToken = "\(token):\(serverAddressValue)"//UserName:Password:ServerAddressValue
             let base64URLToken = uRLToken.data(using: .utf8)?.base64EncodedString()
             Endpoint.setURLToken(base64URLToken)
-            
+
             User.shared.login(userID: userID, serverAddress: serverAddress)
             
             //Inform watch the login info

@@ -12,6 +12,7 @@ class NotificationAPI {
     func sendDeviceToken(request: PushNotification.UpdateTokenRequest,  completion: @escaping (Bool) -> Void) {
         
         guard let userID = User.shared.userId else {
+            print("return ..no useid")
             completion(false)
             return
         }

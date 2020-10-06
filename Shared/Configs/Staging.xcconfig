@@ -10,3 +10,5 @@ DASHBOARD_URL = http:/$()/52.66.237.209:9094/#/
 DASHBOARD_API = http:/$()/52.66.237.209:9092
 //LAMP_API = "https:/$()/api.lamp.digital"
 LAMP_API = http:/$()/52.66.237.209:9093
+
+IS_TESTING = YES

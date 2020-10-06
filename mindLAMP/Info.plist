@@ -20,6 +20,8 @@
 	<string>$(CURRENT_PROJECT_VERSION)</string>
 	<key>DASHBOARD_URL</key>
 	<string>$(DASHBOARD_URL)</string>
+	<key>IS_TESTING</key>
+	<string>$(IS_TESTING)</string>
 	<key>LAMP_API</key>
 	<string>$(LAMP_API)</string>
 	<key>LSRequiresIPhoneOS</key>

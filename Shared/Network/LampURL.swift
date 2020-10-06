@@ -11,6 +11,7 @@ public enum Environment {
         static let dashboardURL = "DASHBOARD_URL"
         static let dashboardAPI = "DASHBOARD_API"
         static let lampAPI = "LAMP_API"
+        static let isTesting = "IS_TESTING"
       }
     }
     
@@ -42,6 +43,13 @@ public enum Environment {
             fatalError("API Key not set in plist for this environment")
         }
         return endPoint
+    }()
+    
+    static let isTesting: Bool = {
+        guard let isTesting = Environment.infoDictionary[Keys.Plist.isTesting] as? String else {
+            return false
+        }
+        return true
     }()
 }
 

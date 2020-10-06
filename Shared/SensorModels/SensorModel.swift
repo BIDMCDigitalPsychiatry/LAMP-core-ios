@@ -7,7 +7,6 @@
 
 import Foundation
 
-
 enum SensorData {
 
     struct Request {
@@ -19,21 +18,31 @@ enum SensorData {
 
 }
 
-extension SensorData.Request: Encodable {
+extension SensorData.Request: Codable {
 
     func encode(to encoder: Encoder) throws {
         var container = encoder.singleValueContainer()
         try container.encode(sensorEvents)
     }
+    
+    public init(from decoder: Decoder) throws {
+        do {
+            let container = try decoder.singleValueContainer()
+            sensorEvents = try container.decode([SensorDataInfo].self)
+        } catch {
+            assertionFailure("ERROR: \(error)")
+            sensorEvents = []
+        }
+    }
 }
 
-struct SensorDataInfo: Encodable {
+struct SensorDataInfo: Codable {
     var sensor: String
     var timestamp: Double
     var data: SensorDataModel
 }
 
-struct SensorDataModel: Encodable {
+struct SensorDataModel: Codable {
     
     //Triaxial Values for: Accelerometer, Magnetometer, Gyroscope
     var x: Double?
@@ -44,6 +53,7 @@ struct SensorDataModel: Encodable {
     var gravity: Gravitational?
     var magnetic: Magnetic?
     var rotation: Rotational?
+    var attitude: Attitude?
     //Health
     var unit: String?
     var value: Double?
@@ -78,27 +88,32 @@ struct SensorDataModel: Encodable {
     var endDate: Double?
 }
 
-struct Motion: Encodable {
+struct Motion: Codable {
     var x: Double?
     var y: Double?
     var z: Double?
 }
 
-struct Rotational: Encodable {
+struct Rotational: Codable {
+    var x: Double?
+    var y: Double?
+    var z: Double?
+}
+
+struct Attitude: Codable {
     var roll: Double?
     var pitch: Double?
     var yaw: Double?
 }
 
-struct Gravitational: Encodable {
+struct Gravitational: Codable {
     var x: Double?
     var y: Double?
     var z: Double?
 }
 
-struct Magnetic: Encodable {
+struct Magnetic: Codable {
     var x: Double?
     var y: Double?
     var z: Double?
 }
-

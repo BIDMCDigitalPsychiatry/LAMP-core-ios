@@ -12,6 +12,7 @@ import Sensors
 extension LMSensorManager: AccelerometerObserver {
     
     func onDataChanged(data: AccelerometerData) {
+        accelerometerDataBufffer.append(data)
     }
 }
 
@@ -19,8 +20,27 @@ extension LMSensorManager: AccelerometerObserver {
 extension LMSensorManager: GyroscopeObserver {
     
     func onDataChanged(data: GyroscopeData) {
+        gyroscopeDataBufffer.append(data)
     }
 }
+
+
+// MARK: - GravityObserver
+extension LMSensorManager: MotionObserver {
+    
+    public func onDataChanged(data: MotionData) {
+        motionDataBuffer.append(data)
+    }
+}
+
+// MARK:- MagnetometerObserver
+extension LMSensorManager: MagnetometerObserver {
+    
+    func onDataChanged(data: MagnetometerData) {
+        magnetometerDataBufffer.append(data)
+    }
+}
+
 
 // MARK: - LocationsObserver
 extension LMSensorManager: LocationsObserver {
@@ -61,32 +81,11 @@ extension LMSensorManager: CallsObserver {
     }
 }
 
-// MARK: - GravityObserver
-extension LMSensorManager: GravityObserver {
-    
-    public func onDataChanged(data: GravityData) {
-    }
-}
-
-// MARK:- MagnetometerObserver
-extension LMSensorManager: MagnetometerObserver {
-    
-    func onDataChanged(data: MagnetometerData) {
-    }
-}
-
 // MARK:- PedometerObserver
 extension LMSensorManager: PedometerObserver {
     
     func onPedometerChanged(data: PedometerData) {
         latestPedometerData = data
-    }
-}
-
-// MARK: - RotationObserver
-extension LMSensorManager: RotationObserver {
-    
-    func onDataChanged(data: RotationData) {
     }
 }
 

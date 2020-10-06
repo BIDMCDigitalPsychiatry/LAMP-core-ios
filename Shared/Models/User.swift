@@ -22,8 +22,10 @@ struct User {
     
     func login(userID: String?, serverAddress: String?) {
         print("userId = \(String(describing: userID))")
+
+        let serverAddressWithHttps = serverAddress?.makeURLString()
         print("serverAddress = \(String(describing: serverAddress))")
-        UserDefaults.standard.serverAddress = serverAddress
+        UserDefaults.standard.serverAddress = serverAddressWithHttps
         UserDefaults.standard.userID = userID
     }
     

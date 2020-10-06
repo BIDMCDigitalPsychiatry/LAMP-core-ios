@@ -74,7 +74,11 @@ public enum SensorType: LampDataKeysProtocol {
                 return "lamp.gyroscope"
             #endif
         case .lamp_magnetometer:
-            return "lamp.magnetometer"
+            #if os(watchOS)
+                return "lamp.watch.magnetometer"
+            #else
+                return "lamp.magnetometer"
+            #endif
         case .lamp_screen_state:
             return "lamp.screen_state"
         case .lamp_segment:

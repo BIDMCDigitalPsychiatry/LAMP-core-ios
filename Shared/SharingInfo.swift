@@ -7,6 +7,8 @@ struct IOSCommands {
     static let login = "login"
     static let sendWatchSensorEvents = "sendWatchSensorEvents"
     static let logout = "logout"
+    
+    static let timestamp = "timestamp"
 }
 
 struct LoginInfoKey {
