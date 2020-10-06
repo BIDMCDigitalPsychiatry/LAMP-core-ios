@@ -218,12 +218,11 @@ extension HomeViewController: WKScriptMessageHandler {
             Endpoint.setSessionKey(base64Token)
             
             var serverAddressValue = serverAddress ?? ""
-            if Environment.isTesting {
-                serverAddressValue = serverAddressValue.cleanHostName()
-            }
+            
+            let withOutHttp = serverAddressValue.cleanHostName()
 
             //store url token to load dashboarn on next launch
-            let uRLToken = "\(token):\(serverAddressValue)"//UserName:Password:ServerAddressValue
+            let uRLToken = "\(token):\(withOutHttp)"//UserName:Password:ServerAddress
             let base64URLToken = uRLToken.data(using: .utf8)?.base64EncodedString()
             Endpoint.setURLToken(base64URLToken)
 

@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		5F763011242386AA00B2DD03 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 5F763010242386AA00B2DD03 /* Localizable.strings */; };
-		5FF2932A24223A6300D0BE09 /* LMConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FF2932924223A6300D0BE09 /* LMConstants.swift */; };
 		B2010FA12525F4A90075D0F8 /* AppColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2010FA02525F4A90075D0F8 /* AppColors.swift */; };
 		B2010FA22525F4A90075D0F8 /* AppColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2010FA02525F4A90075D0F8 /* AppColors.swift */; };
 		B212B4CF24DB1ACD00DD1299 /* LampIdentifiersHealthKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = B212B4CD24DB1ACD00DD1299 /* LampIdentifiersHealthKit.swift */; };
@@ -67,6 +66,8 @@
 		B246BD13252C90E700064A82 /* LogsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B246BD0C252C90E700064A82 /* LogsModel.swift */; };
 		B246BD14252C90E700064A82 /* LMLogsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B246BD0D252C90E700064A82 /* LMLogsManager.swift */; };
 		B246BD15252C90E700064A82 /* LMLogsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B246BD0D252C90E700064A82 /* LMLogsManager.swift */; };
+		B246BD17252CA42F00064A82 /* LMConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = B246BD16252CA42F00064A82 /* LMConstants.swift */; };
+		B246BD18252CA42F00064A82 /* LMConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = B246BD16252CA42F00064A82 /* LMConstants.swift */; };
 		B247AB3624EE7D0500C2B68D /* ZIPFoundation in Frameworks */ = {isa = PBXBuildFile; productRef = B247AB3524EE7D0500C2B68D /* ZIPFoundation */; };
 		B2500E2B24CED14E008A50D7 /* LMSensorManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2500E2A24CED14E008A50D7 /* LMSensorManager.swift */; };
 		B250A462252A0A7000FBB780 /* StringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B250A461252A0A7000FBB780 /* StringExtension.swift */; };
@@ -209,7 +210,6 @@
 /* Begin PBXFileReference section */
 		5F763010242386AA00B2DD03 /* Localizable.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
 		5FC0151223C5A85300990506 /* mindLAMP-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "mindLAMP-Bridging-Header.h"; sourceTree = "<group>"; };
-		5FF2932924223A6300D0BE09 /* LMConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LMConstants.swift; sourceTree = "<group>"; };
 		B2010FA02525F4A90075D0F8 /* AppColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppColors.swift; sourceTree = "<group>"; };
 		B2010FA3252603FD0075D0F8 /* LAMP-swift */ = {isa = PBXFileReference; lastKnownFileType = folder; name = "LAMP-swift"; path = "../LAMP-swift"; sourceTree = "<group>"; };
 		B212B4CD24DB1ACD00DD1299 /* LampIdentifiersHealthKit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LampIdentifiersHealthKit.swift; sourceTree = "<group>"; };
@@ -247,6 +247,7 @@
 		B246BD0B252C90E700064A82 /* SensorLogs.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SensorLogs.swift; sourceTree = "<group>"; };
 		B246BD0C252C90E700064A82 /* LogsModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogsModel.swift; sourceTree = "<group>"; };
 		B246BD0D252C90E700064A82 /* LMLogsManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LMLogsManager.swift; sourceTree = "<group>"; };
+		B246BD16252CA42F00064A82 /* LMConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LMConstants.swift; sourceTree = "<group>"; };
 		B2500E2A24CED14E008A50D7 /* LMSensorManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LMSensorManager.swift; sourceTree = "<group>"; };
 		B250A461252A0A7000FBB780 /* StringExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringExtension.swift; sourceTree = "<group>"; };
 		B255116424B6202300CDBDD1 /* WatchNotificationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchNotificationModel.swift; sourceTree = "<group>"; };
@@ -346,7 +347,6 @@
 		5FF29328242239DA00D0BE09 /* Common */ = {
 			isa = PBXGroup;
 			children = (
-				5FF2932924223A6300D0BE09 /* LMConstants.swift */,
 				B2010FA02525F4A90075D0F8 /* AppColors.swift */,
 			);
 			path = Common;
@@ -475,6 +475,7 @@
 		B246BD09252C90E700064A82 /* Logging */ = {
 			isa = PBXGroup;
 			children = (
+				B246BD16252CA42F00064A82 /* LMConstants.swift */,
 				B246BD0A252C90E700064A82 /* FileStorage.swift */,
 				B246BD0B252C90E700064A82 /* SensorLogs.swift */,
 				B246BD0C252C90E700064A82 /* LogsModel.swift */,
@@ -982,6 +983,7 @@
 				B285D0AD24C894760050BD3F /* User.swift in Sources */,
 				B285D0A924C8941B0050BD3F /* UserDefaults+Extension.swift in Sources */,
 				B255116924B625CC00CDBDD1 /* WatchDeviceInfo.swift in Sources */,
+				B246BD18252CA42F00064A82 /* LMConstants.swift in Sources */,
 				B246BD11252C90E700064A82 /* SensorLogs.swift in Sources */,
 				B2FDA83224BF744D000316EE /* ContentView.swift in Sources */,
 				B2704DEA24B4A2AC00DE196B /* HostingController.swift in Sources */,
@@ -1021,7 +1023,6 @@
 				B238433024B8357F00E548E2 /* Networking.swift in Sources */,
 				B238432E24B8357F00E548E2 /* CodableHelpers.swift in Sources */,
 				B276C0E4252B14FD003CC617 /* SensorModel+Constructors.swift in Sources */,
-				5FF2932A24223A6300D0BE09 /* LMConstants.swift in Sources */,
 				B2010FA12525F4A90075D0F8 /* AppColors.swift in Sources */,
 				B238433B24B836A200E548E2 /* Result.swift in Sources */,
 				B240816E23D8814300845AEE /* AsynchronousOperation.swift in Sources */,
@@ -1051,6 +1052,7 @@
 				B26A2A3324EBCCA400BCB043 /* VersionCheckViewModel.swift in Sources */,
 				B240816623D8803900845AEE /* Logging.swift in Sources */,
 				B2EE003024EE43760037DD9C /* FileDownloader.swift in Sources */,
+				B246BD17252CA42F00064A82 /* LMConstants.swift in Sources */,
 				B2500E2B24CED14E008A50D7 /* LMSensorManager.swift in Sources */,
 				B246BD12252C90E700064A82 /* LogsModel.swift in Sources */,
 				B2D930EF2445C9BD0086477D /* LMSensorManager+SensorObservers.swift in Sources */,

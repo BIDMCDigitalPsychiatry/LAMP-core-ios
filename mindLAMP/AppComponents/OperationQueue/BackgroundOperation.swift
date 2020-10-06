@@ -78,7 +78,6 @@ private extension BackgroundOperation {
                 LMLogsManager.shared.addLogs(level: .error, logs: Logs.Messages.network_error + " " + err.localizedMessage)
                 break
             case .success(_):
-                
                 break
             }
         }
@@ -88,10 +87,9 @@ private extension BackgroundOperation {
         connection.makeWebserviceCall(with: request) { (response: Result<LogsData.Response>) in
             self.state = .finished
             switch response {
-            case .failure(let err):
-                LMLogsManager.shared.addLogs(level: .error, logs: Logs.Messages.network_error + " " + err.localizedMessage)
+            case .failure:
                 break
-            case .success(_):
+            case .success:
                 break
             }
         }

@@ -8,12 +8,6 @@
 import Foundation
 import UIKit
 
-struct CurrentDevice {
-    static let name = UIDevice.current.name
-    static let model = UIDevice.current.model
-    static let osVersion = UIDevice.current.systemVersion
-}
-
 struct Logs {
     struct URLParams {
         static let origin = "digital.lamp.app.ios"
