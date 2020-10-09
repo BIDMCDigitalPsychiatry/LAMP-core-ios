@@ -3,62 +3,57 @@
 import Foundation
 import CoreMotion
 import WatchKit
-
-//let kAccelerometerDataIdentifier: String = "AccelerometerData"
-//let kGravityDataIdentifier: String = "GravityData"
-//let kRotationDataIdentifier: String = "RotationData"
-//let kAttitudeDataIdentifier: String = "AttitudeData"
+import Sensors
 
 extension Date {
-    var millisecondsSince1970:Int64 {
+    var millisecondsSince1970: Int64 {
         return Int64((self.timeIntervalSince1970 * 1000.0).rounded())
     }
 }
 
 class LMWatchSensorManager {
     
-    let queue = OperationQueue()
+    private let sensorManager = SensorManager()
+    var sensor_motionManager: MotionManager?
+    
+    // SensorData storage variables.
+    var accelerometerDataBufffer = [AccelerometerData]()
+    var gyroscopeDataBufffer = [GyroscopeData]()
+    var magnetometerDataBufffer = [MagnetometerData]()
+    var motionDataBuffer = [MotionData]()
+    
     let wristLocationIsLeft = WKInterfaceDevice.current().wristLocation == .left
-    let sampleInterval = 1.0 / 50
-    let rateAlongGravityBuffer = RunningBuffer(size: 50)
     
-    var gravityStr = ""
-    var rotationRateStr = ""
-    var userAccelStr = ""
-    var attitudeStr = ""
     
-    var recentDetection = false
-
     var completionHandler: ((WKBackgroundFetchResult) -> Void)?
     
     static let shared = LMWatchSensorManager()
     private init() {
-        queue.maxConcurrentOperationCount = 1
-        queue.name = "LMWatchSensorManagerQueue"
+        //        queue.maxConcurrentOperationCount = 1
+        //        queue.name = "LMWatchSensorManagerQueue"
         NotificationCenter.default.addObserver(
             self, selector: #selector(type(of: self).sensorDataPosted(_:)),
             name: .userLogOut, object: nil
         )
     }
     
-    private func getSensorDataArrray() -> [SensorDataInfo] {
-        var arraySensorData = [SensorDataInfo]()
-
-        if let data = WatchSensorData.shared.fetchAccelerometerData() {
-            arraySensorData.append(contentsOf: data)
-        }
-        if let data = WatchSensorData.shared.fetchGyroscopeData() {
-            arraySensorData.append(contentsOf: data)
-        }
-        if let data = WatchSensorData.shared.fetchMagnetometerData() {
-            arraySensorData.append(contentsOf: data)
-        }
-        if let data = WatchSensorData.shared.fetchAccelerometerMotionData() {
-            arraySensorData.append(contentsOf: data)
-        }
-        return arraySensorData
+    func startSensors() {
+        sensor_motionManager = MotionManager.init(MotionManager.Config().apply(closure: { [weak self] (config) in
+            config.accelerometerObserver = self
+            config.gyroObserver = self
+            config.magnetoObserver = self
+            config.motionObserver = self
+            //config.sensorTimerDelegate = self
+        }))
+        
+        sensorManager.addSensors([sensor_motionManager!])
+        sensorManager.startAllSensors()
     }
-
+    
+    func stop() {
+        sensorManager.stopAllSensors()
+    }
+    
     func getLatestDataRequest() -> SensorData.Request {
         
         return SensorData.Request(sensorEvents: getSensorDataArrray())
@@ -68,30 +63,86 @@ class LMWatchSensorManager {
 //MARK: - Private functions
 private extension LMWatchSensorManager {
     
-
+    func getSensorDataArrray() -> [SensorDataInfo] {
+        var arraySensorData = [SensorDataInfo]()
+        
+        if let data = fetchAccelerometerData() {
+            arraySensorData.append(contentsOf: data)
+        }
+        if let data = fetchGyroscopeData() {
+            arraySensorData.append(contentsOf: data)
+        }
+        if let data = fetchMagnetometerData() {
+            arraySensorData.append(contentsOf: data)
+        }
+        if let data = fetchAccelerometerMotionData() {
+            arraySensorData.append(contentsOf: data)
+        }
+        return arraySensorData
+    }
+    
     @objc
     func sensorDataPosted(_ notification: Notification) {
         self.completionHandler?(.newData)
         self.completionHandler = nil
     }
+    
+    func fetchMagnetometerData() -> [SensorDataInfo]? {
+        
+        let dataArray = motionDataBuffer
+        motionDataBuffer.removeAll(keepingCapacity: true)
+        
+        let sensorArray = dataArray.map {
+            SensorDataInfo(sensor: SensorType.lamp_magnetometer.lampIdentifier, timestamp: $0.timestamp, data: SensorDataModel(magneticField: $0.magneticField))
+        }
+        return sensorArray
+    }
+    
+    func fetchGyroscopeData() -> [SensorDataInfo]? {
+        
+        let dataArray = gyroscopeDataBufffer
+        gyroscopeDataBufffer.removeAll(keepingCapacity: true)
+        
+        let sensorArray = dataArray.map {
+            SensorDataInfo(sensor: SensorType.lamp_gyroscope.lampIdentifier, timestamp: $0.timestamp, data: SensorDataModel(rotationRate: $0.rotationRate))
+        }
+        return sensorArray
+    }
+    
+    func fetchAccelerometerData() -> [SensorDataInfo]? {
+        
+        let dataArray = accelerometerDataBufffer
+        accelerometerDataBufffer.removeAll(keepingCapacity: true)
+        
+        let sensorArray = dataArray.map {
+            SensorDataInfo(sensor: SensorType.lamp_accelerometer.lampIdentifier, timestamp: $0.timestamp, data: SensorDataModel(accelerationRate: $0.acceleration))
+        }
+        return sensorArray
+    }
+
+    func fetchAccelerometerMotionData() -> [SensorDataInfo]? {
+        
+        let dataArray = motionDataBuffer
+        motionDataBuffer.removeAll(keepingCapacity: true)
+        
+        let sensorArray = dataArray.map {
+            SensorDataInfo(sensor: SensorType.lamp_accelerometer_motion.lampIdentifier, timestamp: $0.timestamp, data: SensorDataModel(motionData: $0))
+        }
+        return sensorArray
+    }
 }
+
 extension LMWatchSensorManager: WatchOSDelegate {
     
     func messageReceived(tuple: MessageReceived) {
     }
-    
     @objc private func sendSensorEventsNow() {
-        WatchSensorData.shared.stop()
+        stop()
         SensorEvents().postSensorData()
-//        if self.completionHandler == nil && nil != WatchSessionManager.shared.validSession {
-//            WatchSessionManager.shared.updateApplicationContext(applicationContext: ["sensorData" : getSensorDataArrray()])
-//        } else {
-//            SensorEvents().postSensorData()
-//        }
     }
     
     func sendSensorEvents(_ completionHandler: ((WKBackgroundFetchResult) -> Void)? = nil) {
-        WatchSensorData.shared.start()
+        startSensors()
         self.completionHandler = completionHandler
         Timer.scheduledTimer(timeInterval: 5, target: self, selector: #selector(self.sendSensorEventsNow), userInfo: nil, repeats: false)
     }

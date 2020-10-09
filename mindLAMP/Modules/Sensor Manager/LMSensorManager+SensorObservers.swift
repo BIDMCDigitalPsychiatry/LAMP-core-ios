@@ -8,7 +8,7 @@
 import Foundation
 import Sensors
 
-extension LMSensorManager: SensorCache {
+extension LMSensorManager: SensorStore {
     
     func timeToStore() {
         
