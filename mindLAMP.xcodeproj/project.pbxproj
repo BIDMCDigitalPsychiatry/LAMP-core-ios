@@ -112,6 +112,7 @@
 		B2B8979823D0ADBA00321C3E /* HealthKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B2B8979723D0ADBA00321C3E /* HealthKit.framework */; };
 		B2C8319D253055C000E6A8A2 /* LMSensorManager+SensorObservers.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2C8319B253055C000E6A8A2 /* LMSensorManager+SensorObservers.swift */; };
 		B2C8319E253055C000E6A8A2 /* LMSensorManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2C8319C253055C000E6A8A2 /* LMSensorManager.swift */; };
+		B2C831F025306F6600E6A8A2 /* ComplicationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2C831EF25306F6600E6A8A2 /* ComplicationController.swift */; };
 		B2D930F92445D7E90086477D /* UserNotifications.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B2D930F82445D7E90086477D /* UserNotifications.framework */; };
 		B2D930FB2445D7E90086477D /* UserNotificationsUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B2D930FA2445D7E90086477D /* UserNotificationsUI.framework */; };
 		B2D930FE2445D7E90086477D /* NotificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2D930FD2445D7E90086477D /* NotificationViewController.swift */; };
@@ -292,6 +293,7 @@
 		B2B8979723D0ADBA00321C3E /* HealthKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HealthKit.framework; path = System/Library/Frameworks/HealthKit.framework; sourceTree = SDKROOT; };
 		B2C8319B253055C000E6A8A2 /* LMSensorManager+SensorObservers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "LMSensorManager+SensorObservers.swift"; sourceTree = "<group>"; };
 		B2C8319C253055C000E6A8A2 /* LMSensorManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LMSensorManager.swift; sourceTree = "<group>"; };
+		B2C831EF25306F6600E6A8A2 /* ComplicationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ComplicationController.swift; sourceTree = "<group>"; };
 		B2D930F72445D7E90086477D /* CustomNotification.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = CustomNotification.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		B2D930F82445D7E90086477D /* UserNotifications.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UserNotifications.framework; path = System/Library/Frameworks/UserNotifications.framework; sourceTree = SDKROOT; };
 		B2D930FA2445D7E90086477D /* UserNotificationsUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UserNotificationsUI.framework; path = System/Library/Frameworks/UserNotificationsUI.framework; sourceTree = SDKROOT; };
@@ -542,6 +544,7 @@
 				B2704E0524B4AE6C00DE196B /* Models */,
 				B2704DE924B4A2AC00DE196B /* HostingController.swift */,
 				B2704DEB24B4A2AC00DE196B /* ExtensionDelegate.swift */,
+				B2C831EF25306F6600E6A8A2 /* ComplicationController.swift */,
 				B2704DED24B4A2AC00DE196B /* NotificationController.swift */,
 				B2704DEF24B4A2AC00DE196B /* NotificationView.swift */,
 				B2704DF324B4A2AC00DE196B /* Assets.xcassets */,
@@ -993,6 +996,7 @@
 				B2704DEC24B4A2AC00DE196B /* ExtensionDelegate.swift in Sources */,
 				B2704DF024B4A2AC00DE196B /* NotificationView.swift in Sources */,
 				B2010FA22525F4A90075D0F8 /* AppColors.swift in Sources */,
+				B2C831F025306F6600E6A8A2 /* ComplicationController.swift in Sources */,
 				B2FB8E9F24BC501B003F653C /* SensorEvents.swift in Sources */,
 				B238434424B83B7700E548E2 /* ErrorExtension.swift in Sources */,
 			);
@@ -1305,6 +1309,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = B2464EF325270C9600A8BB65 /* Staging.xcconfig */;
 			buildSettings = {
+				ASSETCATALOG_COMPILER_COMPLICATION_NAME = Complication;
 				CODE_SIGN_ENTITLEMENTS = "watchkitapp Extension/watchkitapp Extension.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
@@ -1507,6 +1512,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = B2464EF325270C9600A8BB65 /* Staging.xcconfig */;
 			buildSettings = {
+				ASSETCATALOG_COMPILER_COMPLICATION_NAME = Complication;
 				CODE_SIGN_ENTITLEMENTS = "watchkitapp Extension/watchkitapp Extension.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
@@ -1587,6 +1593,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = B2464EF625270DD500A8BB65 /* Production.xcconfig */;
 			buildSettings = {
+				ASSETCATALOG_COMPILER_COMPLICATION_NAME = Complication;
 				CODE_SIGN_ENTITLEMENTS = "watchkitapp Extension/watchkitapp Extension.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
@@ -1617,6 +1624,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = B2464EF625270DD500A8BB65 /* Production.xcconfig */;
 			buildSettings = {
+				ASSETCATALOG_COMPILER_COMPLICATION_NAME = Complication;
 				CODE_SIGN_ENTITLEMENTS = "watchkitapp Extension/watchkitapp Extension.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
