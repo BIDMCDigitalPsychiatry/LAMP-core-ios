@@ -77,7 +77,8 @@ class HomeViewController: UIViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         printError("Stopping sensors for a while due to memory warning")
-        LMSensorManager.shared.stopSensors()
+        LMSensorManager.shared.stopSensors(false)
+        LMSensorManager.shared.startSensors()
     }
     
 }
@@ -177,7 +178,7 @@ private extension HomeViewController {
     
     func performOnLogout() {
         User.shared.logout()
-        LMSensorManager.shared.stopSensors()
+        LMSensorManager.shared.stopSensors(true)
     }
 }
 

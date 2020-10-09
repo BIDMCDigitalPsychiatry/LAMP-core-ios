@@ -8,6 +8,25 @@
 import Foundation
 import Sensors
 
+extension LMSensorManager: SensorCache {
+    
+    func timeToStore() {
+        
+        print("\n time to store")
+        sensor_healthKit?.fetchHealthData()
+        lampScreenSensor?.fetchScreenState()
+        batteryLogs()
+        startWatchSensors()
+        DispatchQueue.global().asyncAfter(deadline: .now() + 15) {
+            let request = LMSensorManager.shared.fetchSensorDataRequest()
+            SensorLogs.shared.storeSensorRequest(request)
+            printToFile("\n stored file @ \(Date())")
+            print("\n stored file @ \(Date())")
+            BackgroundServices.shared.performTasks()
+        }
+    }
+}
+
 // MARK:- AccelerometerObserver
 extension LMSensorManager: AccelerometerObserver {
     

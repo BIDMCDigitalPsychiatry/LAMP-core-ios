@@ -48,11 +48,13 @@ class BackgroundOperation: AsyncOperation {
     var request: RequestData
     let connection: NetworkingAPI
     let opType: OperationType
+    let fileName: String?
     
-    init(request: RequestData, connection: NetworkingAPI = NetworkConfig.networkingAPI(), opType: OperationType = .sensorData) {
+    init(request: RequestData, connection: NetworkingAPI = NetworkConfig.networkingAPI(), opType: OperationType = .sensorData, fileName: String? = nil) {
         self.request = request
         self.connection = connection
         self.opType = opType
+        self.fileName = fileName
     }
     override func main() {
         super.main()
@@ -78,6 +80,12 @@ private extension BackgroundOperation {
                 LMLogsManager.shared.addLogs(level: .error, logs: Logs.Messages.network_error + " " + err.localizedMessage)
                 break
             case .success(_):
+                //TODO: remove file from disk
+                if let file = self.fileName {
+                    SensorLogs.shared.deleteFile(file)
+                    printToFile("\n deleted file\(file)")
+                    print("\n deleted file\(file)")
+                }
                 break
             }
         }

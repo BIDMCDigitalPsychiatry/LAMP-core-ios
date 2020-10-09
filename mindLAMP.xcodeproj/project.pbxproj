@@ -16,7 +16,6 @@
 		B212B4D224DB1ACD00DD1299 /* LampIdentifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = B212B4CE24DB1ACD00DD1299 /* LampIdentifiers.swift */; };
 		B2260D642505E66E00747A3E /* AppInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2260D632505E66E00747A3E /* AppInfo.swift */; };
 		B2260D652505E66E00747A3E /* AppInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2260D632505E66E00747A3E /* AppInfo.swift */; };
-		B229D5F3245319380099F646 /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B229D5F2245319380099F646 /* WebViewController.swift */; };
 		B22DA79825054F7600456EE4 /* PushPayload.swift in Sources */ = {isa = PBXBuildFile; fileRef = B22DA79725054F7600456EE4 /* PushPayload.swift */; };
 		B22DA79925054F7600456EE4 /* PushPayload.swift in Sources */ = {isa = PBXBuildFile; fileRef = B22DA79725054F7600456EE4 /* PushPayload.swift */; };
 		B22DF5F2250612E800777D2D /* UserAgentExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B22DF5F1250612E800777D2D /* UserAgentExtension.swift */; };
@@ -68,8 +67,9 @@
 		B246BD15252C90E700064A82 /* LMLogsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B246BD0D252C90E700064A82 /* LMLogsManager.swift */; };
 		B246BD17252CA42F00064A82 /* LMConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = B246BD16252CA42F00064A82 /* LMConstants.swift */; };
 		B246BD18252CA42F00064A82 /* LMConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = B246BD16252CA42F00064A82 /* LMConstants.swift */; };
+		B246BD1A252CA8B300064A82 /* Home.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B246BD19252CA8B300064A82 /* Home.storyboard */; };
+		B246BD1C252CA8F500064A82 /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B246BD1B252CA8F500064A82 /* WebViewController.swift */; };
 		B247AB3624EE7D0500C2B68D /* ZIPFoundation in Frameworks */ = {isa = PBXBuildFile; productRef = B247AB3524EE7D0500C2B68D /* ZIPFoundation */; };
-		B2500E2B24CED14E008A50D7 /* LMSensorManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2500E2A24CED14E008A50D7 /* LMSensorManager.swift */; };
 		B250A462252A0A7000FBB780 /* StringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B250A461252A0A7000FBB780 /* StringExtension.swift */; };
 		B250A463252A0A7000FBB780 /* StringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B250A461252A0A7000FBB780 /* StringExtension.swift */; };
 		B255116524B6202300CDBDD1 /* WatchNotificationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B255116424B6202300CDBDD1 /* WatchNotificationModel.swift */; };
@@ -108,10 +108,10 @@
 		B2A8E61B24ED9FFD00D7C407 /* CryptoSwift in Frameworks */ = {isa = PBXBuildFile; productRef = B2A8E61A24ED9FFD00D7C407 /* CryptoSwift */; };
 		B2B6C7C02514D01100DD4CC8 /* Sensors in Frameworks */ = {isa = PBXBuildFile; productRef = B2B6C7BF2514D01100DD4CC8 /* Sensors */; };
 		B2B6C7C22514D06000DD4CC8 /* Sensors in Frameworks */ = {isa = PBXBuildFile; productRef = B2B6C7C12514D06000DD4CC8 /* Sensors */; };
-		B2B889EE23D0A52C00321C3E /* Home.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B2B889ED23D0A52C00321C3E /* Home.storyboard */; };
 		B2B8935223D0AD6500321C3E /* DateExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2B8935023D0AD6500321C3E /* DateExtension.swift */; };
 		B2B8979823D0ADBA00321C3E /* HealthKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B2B8979723D0ADBA00321C3E /* HealthKit.framework */; };
-		B2D930EF2445C9BD0086477D /* LMSensorManager+SensorObservers.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2D930ED2445C9BD0086477D /* LMSensorManager+SensorObservers.swift */; };
+		B2C8319D253055C000E6A8A2 /* LMSensorManager+SensorObservers.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2C8319B253055C000E6A8A2 /* LMSensorManager+SensorObservers.swift */; };
+		B2C8319E253055C000E6A8A2 /* LMSensorManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2C8319C253055C000E6A8A2 /* LMSensorManager.swift */; };
 		B2D930F92445D7E90086477D /* UserNotifications.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B2D930F82445D7E90086477D /* UserNotifications.framework */; };
 		B2D930FB2445D7E90086477D /* UserNotificationsUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B2D930FA2445D7E90086477D /* UserNotificationsUI.framework */; };
 		B2D930FE2445D7E90086477D /* NotificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2D930FD2445D7E90086477D /* NotificationViewController.swift */; };
@@ -215,7 +215,6 @@
 		B212B4CD24DB1ACD00DD1299 /* LampIdentifiersHealthKit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LampIdentifiersHealthKit.swift; sourceTree = "<group>"; };
 		B212B4CE24DB1ACD00DD1299 /* LampIdentifiers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LampIdentifiers.swift; sourceTree = "<group>"; };
 		B2260D632505E66E00747A3E /* AppInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppInfo.swift; sourceTree = "<group>"; };
-		B229D5F2245319380099F646 /* WebViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
 		B22DA79725054F7600456EE4 /* PushPayload.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PushPayload.swift; sourceTree = "<group>"; };
 		B22DF5F1250612E800777D2D /* UserAgentExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAgentExtension.swift; sourceTree = "<group>"; };
 		B22DF5F32506526400777D2D /* NotificationAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationAPI.swift; sourceTree = "<group>"; };
@@ -248,7 +247,8 @@
 		B246BD0C252C90E700064A82 /* LogsModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogsModel.swift; sourceTree = "<group>"; };
 		B246BD0D252C90E700064A82 /* LMLogsManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LMLogsManager.swift; sourceTree = "<group>"; };
 		B246BD16252CA42F00064A82 /* LMConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LMConstants.swift; sourceTree = "<group>"; };
-		B2500E2A24CED14E008A50D7 /* LMSensorManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LMSensorManager.swift; sourceTree = "<group>"; };
+		B246BD19252CA8B300064A82 /* Home.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Home.storyboard; sourceTree = "<group>"; };
+		B246BD1B252CA8F500064A82 /* WebViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
 		B250A461252A0A7000FBB780 /* StringExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringExtension.swift; sourceTree = "<group>"; };
 		B255116424B6202300CDBDD1 /* WatchNotificationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchNotificationModel.swift; sourceTree = "<group>"; };
 		B255116824B625CC00CDBDD1 /* WatchDeviceInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchDeviceInfo.swift; sourceTree = "<group>"; };
@@ -287,11 +287,11 @@
 		B29639D923BDC28200626E1A /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		B29639DC23BDC28200626E1A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		B29639DE23BDC28200626E1A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		B2B889ED23D0A52C00321C3E /* Home.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Home.storyboard; sourceTree = "<group>"; };
 		B2B8935023D0AD6500321C3E /* DateExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateExtension.swift; sourceTree = "<group>"; };
 		B2B8979523D0ADBA00321C3E /* mindLAMP.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = mindLAMP.entitlements; sourceTree = "<group>"; };
 		B2B8979723D0ADBA00321C3E /* HealthKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HealthKit.framework; path = System/Library/Frameworks/HealthKit.framework; sourceTree = SDKROOT; };
-		B2D930ED2445C9BD0086477D /* LMSensorManager+SensorObservers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "LMSensorManager+SensorObservers.swift"; sourceTree = "<group>"; };
+		B2C8319B253055C000E6A8A2 /* LMSensorManager+SensorObservers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "LMSensorManager+SensorObservers.swift"; sourceTree = "<group>"; };
+		B2C8319C253055C000E6A8A2 /* LMSensorManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LMSensorManager.swift; sourceTree = "<group>"; };
 		B2D930F72445D7E90086477D /* CustomNotification.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = CustomNotification.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		B2D930F82445D7E90086477D /* UserNotifications.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UserNotifications.framework; path = System/Library/Frameworks/UserNotifications.framework; sourceTree = SDKROOT; };
 		B2D930FA2445D7E90086477D /* UserNotificationsUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UserNotificationsUI.framework; path = System/Library/Frameworks/UserNotificationsUI.framework; sourceTree = SDKROOT; };
@@ -571,10 +571,11 @@
 		B275F5FA24517F74007A7340 /* Modules */ = {
 			isa = PBXGroup;
 			children = (
+				B2C8319A253055C000E6A8A2 /* Sensor Manager */,
 				B26A2A1A24EBC6E900BCB043 /* VersionCheck */,
-				B275F5FF2451807F007A7340 /* Sensors */,
 				B275F5FE24518037007A7340 /* Home */,
 				B275F5FB24517FA5007A7340 /* Push Notification */,
+				B246BD19252CA8B300064A82 /* Home.storyboard */,
 			);
 			path = Modules;
 			sourceTree = "<group>";
@@ -583,6 +584,7 @@
 			isa = PBXGroup;
 			children = (
 				B275F60824519697007A7340 /* Models */,
+				B246BD1B252CA8F500064A82 /* WebViewController.swift */,
 				B275F5FC24517FC0007A7340 /* UserNotifications.swift */,
 			);
 			path = "Push Notification";
@@ -591,20 +593,10 @@
 		B275F5FE24518037007A7340 /* Home */ = {
 			isa = PBXGroup;
 			children = (
-				B2B889ED23D0A52C00321C3E /* Home.storyboard */,
-				B229D5F2245319380099F646 /* WebViewController.swift */,
 				B240814223D8803900845AEE /* HomeViewController.swift */,
 				B275F60124518106007A7340 /* HomeWebViewModel.swift */,
 			);
 			path = Home;
-			sourceTree = "<group>";
-		};
-		B275F5FF2451807F007A7340 /* Sensors */ = {
-			isa = PBXGroup;
-			children = (
-				B2D930EC2445C9BD0086477D /* LMSensorManager */,
-			);
-			path = Sensors;
 			sourceTree = "<group>";
 		};
 		B275F60824519697007A7340 /* Models */ = {
@@ -721,13 +713,13 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		B2D930EC2445C9BD0086477D /* LMSensorManager */ = {
+		B2C8319A253055C000E6A8A2 /* Sensor Manager */ = {
 			isa = PBXGroup;
 			children = (
-				B2500E2A24CED14E008A50D7 /* LMSensorManager.swift */,
-				B2D930ED2445C9BD0086477D /* LMSensorManager+SensorObservers.swift */,
+				B2C8319C253055C000E6A8A2 /* LMSensorManager.swift */,
+				B2C8319B253055C000E6A8A2 /* LMSensorManager+SensorObservers.swift */,
 			);
-			path = LMSensorManager;
+			path = "Sensor Manager";
 			sourceTree = "<group>";
 		};
 		B2D930FC2445D7E90086477D /* CustomNotification */ = {
@@ -942,10 +934,10 @@
 				B2464EF725270DD500A8BB65 /* Production.xcconfig in Resources */,
 				B23993BA2440696800E31B06 /* exportOptions.plist in Resources */,
 				B29639DD23BDC28200626E1A /* LaunchScreen.storyboard in Resources */,
-				B2B889EE23D0A52C00321C3E /* Home.storyboard in Resources */,
 				B2464EF425270C9600A8BB65 /* Staging.xcconfig in Resources */,
 				B29639DA23BDC28200626E1A /* Preview Assets.xcassets in Resources */,
 				B29639D723BDC28200626E1A /* Assets.xcassets in Resources */,
+				B246BD1A252CA8B300064A82 /* Home.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1048,23 +1040,23 @@
 				B2260D642505E66E00747A3E /* AppInfo.swift in Sources */,
 				B2962FCD24ADECB700C1D598 /* NodeRunner.mm in Sources */,
 				B238433224B8357F00E548E2 /* NetworkingAPI.swift in Sources */,
+				B2C8319D253055C000E6A8A2 /* LMSensorManager+SensorObservers.swift in Sources */,
 				B212B4D124DB1ACD00DD1299 /* LampIdentifiers.swift in Sources */,
+				B246BD1C252CA8F500064A82 /* WebViewController.swift in Sources */,
 				B26A2A3324EBCCA400BCB043 /* VersionCheckViewModel.swift in Sources */,
 				B240816623D8803900845AEE /* Logging.swift in Sources */,
 				B2EE003024EE43760037DD9C /* FileDownloader.swift in Sources */,
 				B246BD17252CA42F00064A82 /* LMConstants.swift in Sources */,
-				B2500E2B24CED14E008A50D7 /* LMSensorManager.swift in Sources */,
 				B246BD12252C90E700064A82 /* LogsModel.swift in Sources */,
-				B2D930EF2445C9BD0086477D /* LMSensorManager+SensorObservers.swift in Sources */,
 				B26A2A2B24EBC6E900BCB043 /* VersionCheckViewController.swift in Sources */,
 				B23F5279245346E0007A8598 /* PushUserInfo.swift in Sources */,
 				B246BD10252C90E700064A82 /* SensorLogs.swift in Sources */,
 				B250A462252A0A7000FBB780 /* StringExtension.swift in Sources */,
 				B275F5FD24517FC0007A7340 /* UserNotifications.swift in Sources */,
 				B238434324B83B7700E548E2 /* ErrorExtension.swift in Sources */,
-				B229D5F3245319380099F646 /* WebViewController.swift in Sources */,
 				B275F60A245196AD007A7340 /* PushNotificationModel.swift in Sources */,
 				B22DF5F42506526400777D2D /* NotificationAPI.swift in Sources */,
+				B2C8319E253055C000E6A8A2 /* LMSensorManager.swift in Sources */,
 				B240815A23D8803900845AEE /* HomeViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1201,7 +1193,7 @@
 				CODE_SIGN_ENTITLEMENTS = mindLAMP/mindLAMP.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 49;
+				CURRENT_PROJECT_VERSION = 51;
 				DEVELOPMENT_ASSET_PATHS = "\"mindLAMP/Preview Content\"";
 				DEVELOPMENT_TEAM = S2Y2D4239K;
 				ENABLE_BITCODE = NO;
@@ -1238,7 +1230,7 @@
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 49;
+				CURRENT_PROJECT_VERSION = 51;
 				DEVELOPMENT_TEAM = S2Y2D4239K;
 				INFOPLIST_FILE = CustomNotification/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
@@ -1264,7 +1256,7 @@
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 49;
+				CURRENT_PROJECT_VERSION = 51;
 				DEVELOPMENT_TEAM = S2Y2D4239K;
 				INFOPLIST_FILE = NotificationService/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
@@ -1292,7 +1284,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 49;
+				CURRENT_PROJECT_VERSION = 51;
 				DEVELOPMENT_TEAM = S2Y2D4239K;
 				IBSC_MODULE = "$(PRODUCT_MODULE_NAME)";
 				INFOPLIST_FILE = watchkitapp/Info.plist;
@@ -1316,7 +1308,7 @@
 				CODE_SIGN_ENTITLEMENTS = "watchkitapp Extension/watchkitapp Extension.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 49;
+				CURRENT_PROJECT_VERSION = 51;
 				DEVELOPMENT_ASSET_PATHS = "\"watchkitapp Extension/Preview Content\"";
 				DEVELOPMENT_TEAM = S2Y2D4239K;
 				ENABLE_PREVIEWS = YES;
@@ -1404,7 +1396,7 @@
 				CODE_SIGN_ENTITLEMENTS = mindLAMP/mindLAMP.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 49;
+				CURRENT_PROJECT_VERSION = 51;
 				DEVELOPMENT_ASSET_PATHS = "\"mindLAMP/Preview Content\"";
 				DEVELOPMENT_TEAM = S2Y2D4239K;
 				ENABLE_BITCODE = NO;
@@ -1440,7 +1432,7 @@
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 49;
+				CURRENT_PROJECT_VERSION = 51;
 				DEVELOPMENT_TEAM = S2Y2D4239K;
 				INFOPLIST_FILE = CustomNotification/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
@@ -1466,7 +1458,7 @@
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 49;
+				CURRENT_PROJECT_VERSION = 51;
 				DEVELOPMENT_TEAM = S2Y2D4239K;
 				INFOPLIST_FILE = NotificationService/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
@@ -1494,7 +1486,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 49;
+				CURRENT_PROJECT_VERSION = 51;
 				DEVELOPMENT_TEAM = S2Y2D4239K;
 				IBSC_MODULE = "$(PRODUCT_MODULE_NAME)";
 				INFOPLIST_FILE = watchkitapp/Info.plist;
@@ -1518,7 +1510,7 @@
 				CODE_SIGN_ENTITLEMENTS = "watchkitapp Extension/watchkitapp Extension.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 49;
+				CURRENT_PROJECT_VERSION = 51;
 				DEVELOPMENT_ASSET_PATHS = "\"watchkitapp Extension/Preview Content\"";
 				DEVELOPMENT_TEAM = S2Y2D4239K;
 				ENABLE_PREVIEWS = YES;
@@ -1549,7 +1541,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 49;
+				CURRENT_PROJECT_VERSION = 51;
 				DEVELOPMENT_TEAM = S2Y2D4239K;
 				IBSC_MODULE = "$(PRODUCT_MODULE_NAME)";
 				INFOPLIST_FILE = watchkitapp/Info.plist;
@@ -1574,7 +1566,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 49;
+				CURRENT_PROJECT_VERSION = 51;
 				DEVELOPMENT_TEAM = S2Y2D4239K;
 				IBSC_MODULE = "$(PRODUCT_MODULE_NAME)";
 				INFOPLIST_FILE = watchkitapp/Info.plist;
@@ -1598,7 +1590,7 @@
 				CODE_SIGN_ENTITLEMENTS = "watchkitapp Extension/watchkitapp Extension.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 49;
+				CURRENT_PROJECT_VERSION = 51;
 				DEVELOPMENT_ASSET_PATHS = "\"watchkitapp Extension/Preview Content\"";
 				DEVELOPMENT_TEAM = S2Y2D4239K;
 				ENABLE_PREVIEWS = YES;
@@ -1628,7 +1620,7 @@
 				CODE_SIGN_ENTITLEMENTS = "watchkitapp Extension/watchkitapp Extension.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 49;
+				CURRENT_PROJECT_VERSION = 51;
 				DEVELOPMENT_ASSET_PATHS = "\"watchkitapp Extension/Preview Content\"";
 				DEVELOPMENT_TEAM = S2Y2D4239K;
 				ENABLE_PREVIEWS = YES;
@@ -1657,7 +1649,7 @@
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 49;
+				CURRENT_PROJECT_VERSION = 51;
 				DEVELOPMENT_TEAM = S2Y2D4239K;
 				INFOPLIST_FILE = NotificationService/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
@@ -1683,7 +1675,7 @@
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 49;
+				CURRENT_PROJECT_VERSION = 51;
 				DEVELOPMENT_TEAM = S2Y2D4239K;
 				INFOPLIST_FILE = NotificationService/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
@@ -1829,7 +1821,7 @@
 				CODE_SIGN_ENTITLEMENTS = mindLAMP/mindLAMP.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 49;
+				CURRENT_PROJECT_VERSION = 51;
 				DEVELOPMENT_ASSET_PATHS = "\"mindLAMP/Preview Content\"";
 				DEVELOPMENT_TEAM = S2Y2D4239K;
 				ENABLE_BITCODE = NO;
@@ -1870,7 +1862,7 @@
 				CODE_SIGN_ENTITLEMENTS = mindLAMP/mindLAMP.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 49;
+				CURRENT_PROJECT_VERSION = 51;
 				DEVELOPMENT_ASSET_PATHS = "\"mindLAMP/Preview Content\"";
 				DEVELOPMENT_TEAM = S2Y2D4239K;
 				ENABLE_BITCODE = NO;
@@ -1906,7 +1898,7 @@
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 49;
+				CURRENT_PROJECT_VERSION = 51;
 				DEVELOPMENT_TEAM = S2Y2D4239K;
 				INFOPLIST_FILE = CustomNotification/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
@@ -1932,7 +1924,7 @@
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 49;
+				CURRENT_PROJECT_VERSION = 51;
 				DEVELOPMENT_TEAM = S2Y2D4239K;
 				INFOPLIST_FILE = CustomNotification/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;

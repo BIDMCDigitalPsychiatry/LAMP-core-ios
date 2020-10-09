@@ -15,12 +15,7 @@ class LMSensorManager {
     
     static let shared: LMSensorManager = LMSensorManager()
 
-    
-    // MARK: - VARIABLES
-    var sensor_accelerometer: AccelerometerSensor?
-    var sensor_gyro: GyroscopeSensor?
-    var sensor_magneto: MagnetometerSensor?
-    var sensor_motion: MotionSensor?
+    var sensor_motionManager: MotionManager?
     
     var sensor_bluetooth: LMBluetoothSensor?
     var sensor_calls: CallsSensor?
@@ -48,14 +43,62 @@ class LMSensorManager {
     //var latestScreenStateData: ScreenStateData
     
     //var watchSensorData: [SensorDataInfo]?
+    private var isStarted = false
     
-    private init() { }
+    private init() {
+        
+        #if os(iOS)
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(appDidEnterBackground),
+                                               name: UIApplication.didEnterBackgroundNotification,
+                                               object: nil)
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(appDidBecomeActive),
+                                               name: UIApplication.didBecomeActiveNotification,
+                                               object: nil)
+        #elseif os(watchOS)
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(appDidEnterBackground),
+                                               name: NSNotification.Name.NSExtensionHostDidEnterBackground,
+                                               object: nil)
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(appDidBecomeActive),
+                                               name: NSNotification.Name.NSExtensionHostDidBecomeActive,
+                                               object: nil)
+        #endif
+    }
+    
+    deinit {
+        #if os(iOS)
+        NotificationCenter.default.removeObserver(self,
+                                                  name: UIApplication.didEnterBackgroundNotification,
+                                                  object: nil)
+        NotificationCenter.default.removeObserver(self,
+                                                  name: UIApplication.didBecomeActiveNotification,
+                                                  object: nil)
+        #elseif os(watchOS)
+        NotificationCenter.default.removeObserver(self,
+                                                  name: NSNotification.Name.NSExtensionHostDidEnterBackground,
+                                                  object: nil)
+        NotificationCenter.default.removeObserver(self,
+                                                  name: NSNotification.Name.NSExtensionHostDidBecomeActive,
+                                                  object: nil)
+        #endif
+    }
+    
+    @objc private func appDidEnterBackground() {
+        //sensor_motionManager?.restartMotionUpdates()
+        printToFile("restrting location")
+        sensor_location?.locationManager.stopMonitoringSignificantLocationChanges()
+        sensor_location?.locationManager.startMonitoringSignificantLocationChanges()
+    }
+    
+    @objc private func appDidBecomeActive() {
+        //sensor_motionManager?.restartMotionUpdates()
+    }
     
     private func initiateSensors() {
-        setupAccelerometerSensor()
-        setupMagnetometerSensor()
-        setupGyroscopeSensor()
-        setupMotionSensor()
+        setUpSensorMotionManager()
         
         setupBluetoothSensor()
         setupCallsSensor()
@@ -70,17 +113,15 @@ class LMSensorManager {
     }
     
     private func deinitSensors() {
-        sensor_accelerometer = nil
-        sensor_gyro = nil
-        sensor_magneto = nil
-        sensor_motion = nil
+
+        sensor_motionManager = nil
         
         sensor_bluetooth = nil
         sensor_calls = nil
         
         sensor_healthKit = nil
         sensor_location = nil
-        sensor_magneto = nil
+        //sensor_magneto = nil
         sensor_pedometer = nil
 
         //sensor_screen = nil
@@ -91,10 +132,7 @@ class LMSensorManager {
 
     private func startAllSensors() {
 
-        sensor_accelerometer?.start()
-        sensor_gyro?.start()
-        sensor_magneto?.start()
-        sensor_motion?.start()
+        sensor_motionManager?.start()
         
         sensor_bluetooth?.start()
         sensor_calls?.start()
@@ -108,17 +146,13 @@ class LMSensorManager {
     }
     
     private func stopAllSensors() {
-        
-        sensor_accelerometer?.stop()
-        sensor_gyro?.stop()
-        sensor_magneto?.stop()
-        sensor_motion?.stop()
+
+        sensor_motionManager?.stop()
         
         sensor_bluetooth?.stop()
         sensor_calls?.stop()
         sensor_healthKit?.stop()
         sensor_location?.stop()
-        
         sensor_pedometer?.stop()
         //sensor_screen?.stop()
         sensor_wifi?.stop()
@@ -147,8 +181,11 @@ class LMSensorManager {
         lampScreenSensor?.fetchScreenState()
         batteryLogs()
         startWatchSensors()
-        //Delay given so as to fetch the HealthKit data.
-        DispatchQueue.main.asyncAfter(deadline: .now() + 15) {
+        DispatchQueue.global().asyncAfter(deadline: .now() + 15) {
+            let request = LMSensorManager.shared.fetchSensorDataRequest()
+            SensorLogs.shared.storeSensorRequest(request)
+            printToFile("\n stored file @ \(Date())")
+            print("\n stored file @ \(Date())")
             BackgroundServices.shared.performTasks()
         }
     }
@@ -161,28 +198,47 @@ class LMSensorManager {
     
     /// To start sensors observing.
     func startSensors() {
+        
+        self.isStarted = true
+        
         initiateSensors()
         startAllSensors()
-        startTimer()
+        //If motion sensors are configured, then we can use that. If not we can create new timer to store and post sensor data
+        if sensor_motionManager?.CONFIG.sensorTimerDelegate == nil {
+            printToFile("not motion sensor configuerd, so starting another timer")
+            startTimer()
+        }
         UIDevice.current.isBatteryMonitoringEnabled = true
     }
     
     /// To stop sensors observing.
-    func stopSensors() {
+    func stopSensors(_ isLogout: Bool) {
+        printToFile("\nStopping senors")
+        if isLogout {
+            //TODO: clear all log files
+        }
         stopTimer()
         stopAllSensors()
         deinitSensors()
     }
     
+    private func checkIsRunning() {
+        if self.isStarted == false {
+            startSensors()
+        }
+    }
     // MARK: - SENSOR SETUP METHODS
     
-    func setupAccelerometerSensor() {
-        sensor_accelerometer = AccelerometerSensor.init(AccelerometerSensor.Config().apply{ config in
-            config.sensorObserver = self
-            //config.frequency = 1
-        })
+    func setUpSensorMotionManager() {
+        sensor_motionManager = MotionManager.init(MotionManager.Config().apply(closure: { (config) in
+            config.accelerometerObserver = self
+            config.gyroObserver = self
+            config.magnetoObserver = self
+            config.motionObserver = self
+            config.sensorTimerDelegate = self
+        }))
     }
-    
+
     func setupBluetoothSensor() {
         sensor_bluetooth = LMBluetoothSensor()
     }
@@ -190,13 +246,6 @@ class LMSensorManager {
     func setupCallsSensor() {
         sensor_calls = CallsSensor.init(CallsSensor.Config().apply(closure: { config in
             config.sensorObserver = self
-        }))
-    }
-    
-    func setupGyroscopeSensor() {
-        sensor_gyro = GyroscopeSensor.init(GyroscopeSensor.Config().apply(closure: { config in
-            config.sensorObserver = self
-            //config.frequency = 1
         }))
     }
     
@@ -210,26 +259,13 @@ class LMSensorManager {
             config.sensorObserver = self
         }))
     }
-    
-    func setupMagnetometerSensor() {
-        sensor_magneto = MagnetometerSensor.init(MagnetometerSensor.Config().apply(closure: { config in
-            config.sensorObserver = self
-            //config.frequency = 1
-        }))
-    }
-    
+
     func setupPedometerSensor() {
         sensor_pedometer = PedometerSensor.init(PedometerSensor.Config().apply(closure: { config in
             config.sensorObserver = self
         }))
     }
-    
-    func setupMotionSensor() {
-        sensor_motion = MotionSensor.init(MotionSensor.Config().apply(closure: { config in
-            config.sensorObserver = self
-        }))
-    }
-    
+
     func setupScreenSensor() {
         lampScreenSensor = LampScreenSensor()
 //        sensor_screen = ScreenSensor.init(ScreenSensor.Config().apply(closure: { config in
@@ -583,7 +619,7 @@ extension LMSensorManager {
 
 extension LMSensorManager {
     
-    private func batteryLogs() {
+    func batteryLogs() {
         guard isBatteryLevelLow() else { return }
         LMLogsManager.shared.addLogs(level: .info, logs: Logs.Messages.battery_low)
     }
