@@ -50,10 +50,6 @@
 		B23F5279245346E0007A8598 /* PushUserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = B23F5278245346E0007A8598 /* PushUserInfo.swift */; };
 		B240815A23D8803900845AEE /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B240814223D8803900845AEE /* HomeViewController.swift */; };
 		B244A1C223BF4A91007FBDB8 /* FileManager+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B244A1C123BF4A91007FBDB8 /* FileManager+Extension.swift */; };
-		B2464EF425270C9600A8BB65 /* Staging.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = B2464EF325270C9600A8BB65 /* Staging.xcconfig */; };
-		B2464EF525270C9600A8BB65 /* Staging.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = B2464EF325270C9600A8BB65 /* Staging.xcconfig */; };
-		B2464EF725270DD500A8BB65 /* Production.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = B2464EF625270DD500A8BB65 /* Production.xcconfig */; };
-		B2464EF825270DD500A8BB65 /* Production.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = B2464EF625270DD500A8BB65 /* Production.xcconfig */; };
 		B246BD0E252C90E700064A82 /* FileStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = B246BD0A252C90E700064A82 /* FileStorage.swift */; };
 		B246BD0F252C90E700064A82 /* FileStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = B246BD0A252C90E700064A82 /* FileStorage.swift */; };
 		B246BD10252C90E700064A82 /* SensorLogs.swift in Sources */ = {isa = PBXBuildFile; fileRef = B246BD0B252C90E700064A82 /* SensorLogs.swift */; };
@@ -845,7 +841,7 @@
 			attributes = {
 				CLASSPREFIX = LAMP;
 				LastSwiftUpdateCheck = 1120;
-				LastUpgradeCheck = 1120;
+				LastUpgradeCheck = 1150;
 				ORGANIZATIONNAME = "Division of Digital Psychiatry";
 				TargetAttributes = {
 					B2704DD524B4A2A900DE196B = {
@@ -908,8 +904,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				B2704DF724B4A2AC00DE196B /* Preview Assets.xcassets in Resources */,
-				B2464EF825270DD500A8BB65 /* Production.xcconfig in Resources */,
-				B2464EF525270C9600A8BB65 /* Staging.xcconfig in Resources */,
 				B2704DF424B4A2AC00DE196B /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -926,10 +920,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				5F763011242386AA00B2DD03 /* Localizable.strings in Resources */,
-				B2464EF725270DD500A8BB65 /* Production.xcconfig in Resources */,
 				B23993BA2440696800E31B06 /* exportOptions.plist in Resources */,
 				B29639DD23BDC28200626E1A /* LaunchScreen.storyboard in Resources */,
-				B2464EF425270C9600A8BB65 /* Staging.xcconfig in Resources */,
 				B29639DA23BDC28200626E1A /* Preview Assets.xcassets in Resources */,
 				B29639D723BDC28200626E1A /* Assets.xcassets in Resources */,
 				B246BD1A252CA8B300064A82 /* Home.storyboard in Resources */,
