@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		5F763011242386AA00B2DD03 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 5F763010242386AA00B2DD03 /* Localizable.strings */; };
+		B20043B325346BA4002B31F5 /* SensorModel+Constructors.swift in Sources */ = {isa = PBXBuildFile; fileRef = B20043B225346BA4002B31F5 /* SensorModel+Constructors.swift */; };
+		B20043B425346BA4002B31F5 /* SensorModel+Constructors.swift in Sources */ = {isa = PBXBuildFile; fileRef = B20043B225346BA4002B31F5 /* SensorModel+Constructors.swift */; };
 		B2010FA12525F4A90075D0F8 /* AppColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2010FA02525F4A90075D0F8 /* AppColors.swift */; };
 		B2010FA22525F4A90075D0F8 /* AppColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2010FA02525F4A90075D0F8 /* AppColors.swift */; };
 		B212B4CF24DB1ACD00DD1299 /* LampIdentifiersHealthKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = B212B4CD24DB1ACD00DD1299 /* LampIdentifiersHealthKit.swift */; };
@@ -92,8 +94,6 @@
 		B275F5FD24517FC0007A7340 /* UserNotifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = B275F5FC24517FC0007A7340 /* UserNotifications.swift */; };
 		B275F60224518106007A7340 /* HomeWebViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B275F60124518106007A7340 /* HomeWebViewModel.swift */; };
 		B275F60A245196AD007A7340 /* PushNotificationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B275F609245196AD007A7340 /* PushNotificationModel.swift */; };
-		B276C0E4252B14FD003CC617 /* SensorModel+Constructors.swift in Sources */ = {isa = PBXBuildFile; fileRef = B276C0E3252B14FD003CC617 /* SensorModel+Constructors.swift */; };
-		B276C0E5252B14FD003CC617 /* SensorModel+Constructors.swift in Sources */ = {isa = PBXBuildFile; fileRef = B276C0E3252B14FD003CC617 /* SensorModel+Constructors.swift */; };
 		B2847FB72450550E0042D43B /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2847FB62450550E0042D43B /* NotificationService.swift */; };
 		B2847FBB2450550E0042D43B /* NotificationService.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = B2847FB42450550E0042D43B /* NotificationService.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		B285D0A824C8941B0050BD3F /* UserDefaults+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B285D0A524C8941B0050BD3F /* UserDefaults+Extension.swift */; };
@@ -214,6 +214,7 @@
 /* Begin PBXFileReference section */
 		5F763010242386AA00B2DD03 /* Localizable.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
 		5FC0151223C5A85300990506 /* mindLAMP-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "mindLAMP-Bridging-Header.h"; sourceTree = "<group>"; };
+		B20043B225346BA4002B31F5 /* SensorModel+Constructors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SensorModel+Constructors.swift"; sourceTree = "<group>"; };
 		B2010FA02525F4A90075D0F8 /* AppColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppColors.swift; sourceTree = "<group>"; };
 		B212B4CD24DB1ACD00DD1299 /* LampIdentifiersHealthKit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LampIdentifiersHealthKit.swift; sourceTree = "<group>"; };
 		B212B4CE24DB1ACD00DD1299 /* LampIdentifiers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LampIdentifiers.swift; sourceTree = "<group>"; };
@@ -273,7 +274,6 @@
 		B275F5FC24517FC0007A7340 /* UserNotifications.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserNotifications.swift; sourceTree = "<group>"; };
 		B275F60124518106007A7340 /* HomeWebViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeWebViewModel.swift; sourceTree = "<group>"; };
 		B275F609245196AD007A7340 /* PushNotificationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PushNotificationModel.swift; sourceTree = "<group>"; };
-		B276C0E3252B14FD003CC617 /* SensorModel+Constructors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SensorModel+Constructors.swift"; sourceTree = "<group>"; };
 		B2847FB42450550E0042D43B /* NotificationService.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = NotificationService.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		B2847FB62450550E0042D43B /* NotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationService.swift; sourceTree = "<group>"; };
 		B2847FB82450550E0042D43B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -394,10 +394,10 @@
 		B238434C24B849C700E548E2 /* SensorModels */ = {
 			isa = PBXGroup;
 			children = (
+				B20043B225346BA4002B31F5 /* SensorModel+Constructors.swift */,
 				B212B4CE24DB1ACD00DD1299 /* LampIdentifiers.swift */,
 				B212B4CD24DB1ACD00DD1299 /* LampIdentifiersHealthKit.swift */,
 				B238436424B8ADD900E548E2 /* SensorModel.swift */,
-				B276C0E3252B14FD003CC617 /* SensorModel+Constructors.swift */,
 			);
 			name = SensorModels;
 			path = Shared/SensorModels;
@@ -951,7 +951,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B276C0E5252B14FD003CC617 /* SensorModel+Constructors.swift in Sources */,
 				B238433C24B836A200E548E2 /* Result.swift in Sources */,
 				B250A463252A0A7000FBB780 /* StringExtension.swift in Sources */,
 				B238433324B8357F00E548E2 /* NetworkingAPI.swift in Sources */,
@@ -959,6 +958,7 @@
 				B2704E0724B4AE7800DE196B /* UserAuth.swift in Sources */,
 				B238434924B848F300E548E2 /* LMRunningBuffer.swift in Sources */,
 				B238433A24B836A200E548E2 /* NetworkConfig.swift in Sources */,
+				B20043B425346BA4002B31F5 /* SensorModel+Constructors.swift in Sources */,
 				B238BA9724B7297F00575A7F /* WatchSessionManager.swift in Sources */,
 				B238433124B8357F00E548E2 /* Networking.swift in Sources */,
 				B246BD13252C90E700064A82 /* LogsModel.swift in Sources */,
@@ -1012,7 +1012,6 @@
 				B238BA9624B7297F00575A7F /* WatchSessionManager.swift in Sources */,
 				B238433024B8357F00E548E2 /* Networking.swift in Sources */,
 				B238432E24B8357F00E548E2 /* CodableHelpers.swift in Sources */,
-				B276C0E4252B14FD003CC617 /* SensorModel+Constructors.swift in Sources */,
 				B2010FA12525F4A90075D0F8 /* AppColors.swift in Sources */,
 				B238433B24B836A200E548E2 /* Result.swift in Sources */,
 				B2B8935223D0AD6500321C3E /* DateExtension.swift in Sources */,
@@ -1050,6 +1049,7 @@
 				B26A2A2B24EBC6E900BCB043 /* VersionCheckViewController.swift in Sources */,
 				B23F5279245346E0007A8598 /* PushUserInfo.swift in Sources */,
 				B246BD10252C90E700064A82 /* SensorLogs.swift in Sources */,
+				B20043B325346BA4002B31F5 /* SensorModel+Constructors.swift in Sources */,
 				B250A462252A0A7000FBB780 /* StringExtension.swift in Sources */,
 				B275F5FD24517FC0007A7340 /* UserNotifications.swift in Sources */,
 				B238434324B83B7700E548E2 /* ErrorExtension.swift in Sources */,
