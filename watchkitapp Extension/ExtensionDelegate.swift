@@ -78,7 +78,8 @@ class ExtensionDelegate: NSObject, WKExtensionDelegate {
     //
     func handle(_ backgroundTasks: Set<WKRefreshBackgroundTask>) {
         
-        LMWatchSensorManager.shared.sendSensorEvents()
+        LMWatchSensorManager.shared.checkIsRunning()
+        
         for task in backgroundTasks {
             // Use Logger to log the tasks for debug purpose. A real app may remove the log
             // to save the precious background time.
@@ -174,7 +175,7 @@ extension ExtensionDelegate {
         let lampAPI = NotificationAPI(NetworkConfig.networkingAPI())
         lampAPI.sendPushAcknowledgement(request: acknoledgeRequest)
         
-        LMWatchSensorManager.shared.sendSensorEvents(completionHandler)
+        LMWatchSensorManager.shared.checkIsRunning()
     }
 }
 

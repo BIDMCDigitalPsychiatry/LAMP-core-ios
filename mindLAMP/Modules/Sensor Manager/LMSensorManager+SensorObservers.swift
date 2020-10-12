@@ -9,20 +9,30 @@ import Foundation
 import Sensors
 
 extension LMSensorManager: SensorStore {
-    
-    func timeToStore() {
+
+    @objc
+    func timeToStore(_ runCount: Int) {
         
-        print("\n time to store")
-        sensor_healthKit?.fetchHealthData()
-        lampScreenSensor?.fetchScreenState()
-        batteryLogs()
-        startWatchSensors()
+        if lampScreenSensor?.latestScreenState?.rawValue != ScreenState.screen_locked.rawValue {
+            sensor_healthKit?.fetchHealthData()
+        } else {
+            printToFile("\n Screen locked")
+        }
+
         DispatchQueue.global().asyncAfter(deadline: .now() + 15) {
             let request = LMSensorManager.shared.fetchSensorDataRequest()
             SensorLogs.shared.storeSensorRequest(request)
-            printToFile("\n stored file @ \(Date())")
             print("\n stored file @ \(Date())")
-            BackgroundServices.shared.performTasks()
+            if self.isSyncNow {
+                print("sync now")
+                self.isSyncNow = false
+                self.startWatchSensors()
+                self.batteryLogs()
+                printToFile("\n stored file @ \(Date())")
+                BackgroundServices.shared.performTasks()
+            } else {
+                self.isSyncNow = true
+            }
         }
     }
 }
@@ -65,26 +75,15 @@ extension LMSensorManager: MagnetometerObserver {
 extension LMSensorManager: LocationsObserver {
     
     func onLocationChanged(data: LocationsData) {
-        latestLocationsData = data
-    }
-    
-    func onExitRegion(data: GeofenceData) {
-    }
-    
-    func onEnterRegion(data: GeofenceData) {
-    }
-    
-    func onVisit(data: VisitData) {
-    }
-    
-    func onHeadingChanged(data: HeadingData) {
+        print("data = \(data)")
+        locationsDataBuffer.append(data)
     }
 }
 
 // MARK:- CallsObserver
 extension LMSensorManager: CallsObserver {
     func onCall(data: CallsData) {
-        latestCallsData = data
+        callsDataBuffer.append(data)
     }
     
     func onRinging(number: String?) {
@@ -97,6 +96,14 @@ extension LMSensorManager: CallsObserver {
     
     func onFree(number: String?) {
         print("\(#function) \n \(number ?? "nil")")
+    }
+}
+
+// MARK: - ScreenStateObserver
+extension LMSensorManager: ScreenStateObserver {
+    
+    func onDataChanged(data: ScreenStateData) {
+        screenStateDataBuffer.append(data)
     }
 }
 

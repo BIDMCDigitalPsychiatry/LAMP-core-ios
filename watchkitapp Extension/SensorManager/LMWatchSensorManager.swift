@@ -22,6 +22,9 @@ class LMWatchSensorManager {
     var magnetometerDataBufffer = [MagnetometerData]()
     var motionDataBuffer = [MotionData]()
     
+    //check if the sensors are started or not
+    private var isStarted = false
+    
     let wristLocationIsLeft = WKInterfaceDevice.current().wristLocation == .left
     
     
@@ -43,10 +46,12 @@ class LMWatchSensorManager {
             config.gyroObserver = self
             config.magnetoObserver = self
             config.motionObserver = self
-            //config.sensorTimerDelegate = self
+            config.sensorTimerDelegate = self
         }))
         
         sensorManager.addSensors([sensor_motionManager!])
+        
+        isStarted = true
         sensorManager.startAllSensors()
     }
     
@@ -54,9 +59,16 @@ class LMWatchSensorManager {
         sensorManager.stopAllSensors()
     }
     
-    func getLatestDataRequest() -> SensorData.Request {
+    func getSensorDataRequest() -> SensorData.Request {
         
         return SensorData.Request(sensorEvents: getSensorDataArrray())
+    }
+    
+    func checkIsRunning() {
+        if self.isStarted == false {
+            startSensors()
+        }
+        BackgroundServices.shared.performTasks()
     }
 }
 
@@ -66,18 +78,11 @@ private extension LMWatchSensorManager {
     func getSensorDataArrray() -> [SensorDataInfo] {
         var arraySensorData = [SensorDataInfo]()
         
-        if let data = fetchAccelerometerData() {
-            arraySensorData.append(contentsOf: data)
-        }
-        if let data = fetchGyroscopeData() {
-            arraySensorData.append(contentsOf: data)
-        }
-        if let data = fetchMagnetometerData() {
-            arraySensorData.append(contentsOf: data)
-        }
-        if let data = fetchAccelerometerMotionData() {
-            arraySensorData.append(contentsOf: data)
-        }
+        arraySensorData.append(contentsOf: fetchAccelerometerData())
+        arraySensorData.append(contentsOf: fetchGyroscopeData())
+        arraySensorData.append(contentsOf: fetchMagnetometerData())
+        arraySensorData.append(contentsOf: fetchAccelerometerMotionData())
+
         return arraySensorData
     }
     
@@ -87,7 +92,7 @@ private extension LMWatchSensorManager {
         self.completionHandler = nil
     }
     
-    func fetchMagnetometerData() -> [SensorDataInfo]? {
+    func fetchMagnetometerData() -> [SensorDataInfo] {
         
         let dataArray = motionDataBuffer
         motionDataBuffer.removeAll(keepingCapacity: true)
@@ -98,7 +103,7 @@ private extension LMWatchSensorManager {
         return sensorArray
     }
     
-    func fetchGyroscopeData() -> [SensorDataInfo]? {
+    func fetchGyroscopeData() -> [SensorDataInfo] {
         
         let dataArray = gyroscopeDataBufffer
         gyroscopeDataBufffer.removeAll(keepingCapacity: true)
@@ -109,7 +114,7 @@ private extension LMWatchSensorManager {
         return sensorArray
     }
     
-    func fetchAccelerometerData() -> [SensorDataInfo]? {
+    func fetchAccelerometerData() -> [SensorDataInfo] {
         
         let dataArray = accelerometerDataBufffer
         accelerometerDataBufffer.removeAll(keepingCapacity: true)
@@ -120,7 +125,7 @@ private extension LMWatchSensorManager {
         return sensorArray
     }
 
-    func fetchAccelerometerMotionData() -> [SensorDataInfo]? {
+    func fetchAccelerometerMotionData() -> [SensorDataInfo] {
         
         let dataArray = motionDataBuffer
         motionDataBuffer.removeAll(keepingCapacity: true)
@@ -136,16 +141,16 @@ extension LMWatchSensorManager: WatchOSDelegate {
     
     func messageReceived(tuple: MessageReceived) {
     }
-    @objc private func sendSensorEventsNow() {
-        stop()
-        SensorEvents().postSensorData()
-    }
-    
-    func sendSensorEvents(_ completionHandler: ((WKBackgroundFetchResult) -> Void)? = nil) {
-        startSensors()
-        self.completionHandler = completionHandler
-        Timer.scheduledTimer(timeInterval: 5, target: self, selector: #selector(self.sendSensorEventsNow), userInfo: nil, repeats: false)
-    }
+//    @objc private func sendSensorEventsNow() {
+//        stop()
+//        SensorEvents().postSensorData()
+//    }
+//
+//    func sendSensorEvents(_ completionHandler: ((WKBackgroundFetchResult) -> Void)? = nil) {
+//        startSensors()
+//        self.completionHandler = completionHandler
+//        Timer.scheduledTimer(timeInterval: 5, target: self, selector: #selector(self.sendSensorEventsNow), userInfo: nil, repeats: false)
+//    }
     
     func applicationContextReceived(tuple: ApplicationContextReceived) {
         
@@ -156,8 +161,10 @@ extension LMWatchSensorManager: WatchOSDelegate {
                 User.shared.login(userID: loginInfo.userId, serverAddress: loginInfo.serverAddress)
                 Utils.postNotificationOnMainQueueAsync(name: .userLogined)
                 //WKInterfaceDevice.current().play(.notification)
+                LMWatchSensorManager.shared.checkIsRunning()
             } else if let _ = tuple.applicationContext[IOSCommands.sendWatchSensorEvents] as? Bool {
-                LMWatchSensorManager.shared.sendSensorEvents()
+                //LMWatchSensorManager.shared.sendSensorEvents()
+                LMWatchSensorManager.shared.checkIsRunning()
             } else if let _ = tuple.applicationContext[IOSCommands.logout] as? Bool {
                 let isLoginPreviously = User.shared.isLogin()
                 User.shared.logout()

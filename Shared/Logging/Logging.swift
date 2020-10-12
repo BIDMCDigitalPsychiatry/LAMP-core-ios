@@ -94,7 +94,7 @@ func printToFile(_ items: Any ..., separator: String = " ", terminator: String =
     fileName = (fileName as NSString).deletingPathExtension
     var mtext: String = ""
     repeat {
-        mtext += "\n\(Date().toGMTString())<\(fileName)> \(function)[\(line)]: \(items[idx])"
+        mtext += "\n\(Date().description)<\(fileName)> \(function)[\(line)]: \(items[idx])"
         //Swift.print("\n<\(fileName)> \(function)[\(line)]: \(items[idx])")
         idx += 1
     } while idx < endIdx

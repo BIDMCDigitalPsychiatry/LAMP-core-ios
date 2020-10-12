@@ -47,10 +47,6 @@
 		B23993BA2440696800E31B06 /* exportOptions.plist in Resources */ = {isa = PBXBuildFile; fileRef = B23993B92440696800E31B06 /* exportOptions.plist */; };
 		B23F5279245346E0007A8598 /* PushUserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = B23F5278245346E0007A8598 /* PushUserInfo.swift */; };
 		B240815A23D8803900845AEE /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B240814223D8803900845AEE /* HomeViewController.swift */; };
-		B240816623D8803900845AEE /* Logging.swift in Sources */ = {isa = PBXBuildFile; fileRef = B240815523D8803900845AEE /* Logging.swift */; };
-		B240816C23D8814300845AEE /* BackgroundOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = B240816923D8814300845AEE /* BackgroundOperation.swift */; };
-		B240816D23D8814300845AEE /* BackgroundServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = B240816A23D8814300845AEE /* BackgroundServices.swift */; };
-		B240816E23D8814300845AEE /* AsynchronousOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = B240816B23D8814300845AEE /* AsynchronousOperation.swift */; };
 		B244A1C223BF4A91007FBDB8 /* FileManager+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B244A1C123BF4A91007FBDB8 /* FileManager+Extension.swift */; };
 		B2464EF425270C9600A8BB65 /* Staging.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = B2464EF325270C9600A8BB65 /* Staging.xcconfig */; };
 		B2464EF525270C9600A8BB65 /* Staging.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = B2464EF325270C9600A8BB65 /* Staging.xcconfig */; };
@@ -76,6 +72,12 @@
 		B255116C24B6291900CDBDD1 /* LoginServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = B255116B24B6291900CDBDD1 /* LoginServices.swift */; };
 		B26A2A2B24EBC6E900BCB043 /* VersionCheckViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B26A2A1D24EBC6E900BCB043 /* VersionCheckViewController.swift */; };
 		B26A2A3324EBCCA400BCB043 /* VersionCheckViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B26A2A3224EBCCA400BCB043 /* VersionCheckViewModel.swift */; };
+		B26ABEDC2531C890004CF86D /* BackgroundOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = B26ABED92531C890004CF86D /* BackgroundOperation.swift */; };
+		B26ABEDD2531C890004CF86D /* BackgroundOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = B26ABED92531C890004CF86D /* BackgroundOperation.swift */; };
+		B26ABEDE2531C890004CF86D /* BackgroundServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = B26ABEDA2531C890004CF86D /* BackgroundServices.swift */; };
+		B26ABEDF2531C890004CF86D /* BackgroundServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = B26ABEDA2531C890004CF86D /* BackgroundServices.swift */; };
+		B26ABEE02531C890004CF86D /* AsynchronousOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = B26ABEDB2531C890004CF86D /* AsynchronousOperation.swift */; };
+		B26ABEE12531C890004CF86D /* AsynchronousOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = B26ABEDB2531C890004CF86D /* AsynchronousOperation.swift */; };
 		B2704DDA24B4A2A900DE196B /* Interface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B2704DD824B4A2A900DE196B /* Interface.storyboard */; };
 		B2704DDC24B4A2AC00DE196B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B2704DDB24B4A2AC00DE196B /* Assets.xcassets */; };
 		B2704DE324B4A2AC00DE196B /* watchkitextension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = B2704DE224B4A2AC00DE196B /* watchkitextension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
@@ -118,10 +120,11 @@
 		B2D930FE2445D7E90086477D /* NotificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2D930FD2445D7E90086477D /* NotificationViewController.swift */; };
 		B2D931012445D7E90086477D /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B2D930FF2445D7E90086477D /* MainInterface.storyboard */; };
 		B2D931052445D7E90086477D /* CustomNotification.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = B2D930F72445D7E90086477D /* CustomNotification.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		B2E4F9012532A1C100F9080F /* Logging.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2E4F9002532A1C100F9080F /* Logging.swift */; };
+		B2E4F9022532A1C100F9080F /* Logging.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2E4F9002532A1C100F9080F /* Logging.swift */; };
 		B2EE003024EE43760037DD9C /* FileDownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2EE002F24EE43760037DD9C /* FileDownloader.swift */; };
 		B2F3CDF6245932B200F211A3 /* StoryboardExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2F3CDF5245932B200F211A3 /* StoryboardExtension.swift */; };
 		B2FB8E9D24BC4FE5003F653C /* LMWatchSensorManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2FB8E9C24BC4FE5003F653C /* LMWatchSensorManager.swift */; };
-		B2FB8E9F24BC501B003F653C /* SensorEvents.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2FB8E9E24BC501B003F653C /* SensorEvents.swift */; };
 		B2FDA83224BF744D000316EE /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2FDA83124BF744D000316EE /* ContentView.swift */; };
 /* End PBXBuildFile section */
 
@@ -212,7 +215,6 @@
 		5F763010242386AA00B2DD03 /* Localizable.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
 		5FC0151223C5A85300990506 /* mindLAMP-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "mindLAMP-Bridging-Header.h"; sourceTree = "<group>"; };
 		B2010FA02525F4A90075D0F8 /* AppColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppColors.swift; sourceTree = "<group>"; };
-		B2010FA3252603FD0075D0F8 /* LAMP-swift */ = {isa = PBXFileReference; lastKnownFileType = folder; name = "LAMP-swift"; path = "../LAMP-swift"; sourceTree = "<group>"; };
 		B212B4CD24DB1ACD00DD1299 /* LampIdentifiersHealthKit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LampIdentifiersHealthKit.swift; sourceTree = "<group>"; };
 		B212B4CE24DB1ACD00DD1299 /* LampIdentifiers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LampIdentifiers.swift; sourceTree = "<group>"; };
 		B2260D632505E66E00747A3E /* AppInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppInfo.swift; sourceTree = "<group>"; };
@@ -235,10 +237,6 @@
 		B23993B92440696800E31B06 /* exportOptions.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = exportOptions.plist; sourceTree = "<group>"; };
 		B23F5278245346E0007A8598 /* PushUserInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PushUserInfo.swift; sourceTree = "<group>"; };
 		B240814223D8803900845AEE /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
-		B240815523D8803900845AEE /* Logging.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Logging.swift; sourceTree = "<group>"; };
-		B240816923D8814300845AEE /* BackgroundOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BackgroundOperation.swift; sourceTree = "<group>"; };
-		B240816A23D8814300845AEE /* BackgroundServices.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BackgroundServices.swift; sourceTree = "<group>"; };
-		B240816B23D8814300845AEE /* AsynchronousOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AsynchronousOperation.swift; sourceTree = "<group>"; };
 		B244A1C123BF4A91007FBDB8 /* FileManager+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FileManager+Extension.swift"; sourceTree = "<group>"; };
 		B2464EF325270C9600A8BB65 /* Staging.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Staging.xcconfig; sourceTree = "<group>"; };
 		B2464EF625270DD500A8BB65 /* Production.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Production.xcconfig; sourceTree = "<group>"; };
@@ -255,6 +253,9 @@
 		B255116B24B6291900CDBDD1 /* LoginServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginServices.swift; sourceTree = "<group>"; };
 		B26A2A1D24EBC6E900BCB043 /* VersionCheckViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VersionCheckViewController.swift; sourceTree = "<group>"; };
 		B26A2A3224EBCCA400BCB043 /* VersionCheckViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VersionCheckViewModel.swift; sourceTree = "<group>"; };
+		B26ABED92531C890004CF86D /* BackgroundOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BackgroundOperation.swift; sourceTree = "<group>"; };
+		B26ABEDA2531C890004CF86D /* BackgroundServices.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BackgroundServices.swift; sourceTree = "<group>"; };
+		B26ABEDB2531C890004CF86D /* AsynchronousOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AsynchronousOperation.swift; sourceTree = "<group>"; };
 		B2704DD624B4A2A900DE196B /* watchkitapp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = watchkitapp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B2704DD924B4A2A900DE196B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Interface.storyboard; sourceTree = "<group>"; };
 		B2704DDB24B4A2AC00DE196B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -300,10 +301,10 @@
 		B2D930FD2445D7E90086477D /* NotificationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationViewController.swift; sourceTree = "<group>"; };
 		B2D931002445D7E90086477D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainInterface.storyboard; sourceTree = "<group>"; };
 		B2D931022445D7E90086477D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B2E4F9002532A1C100F9080F /* Logging.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Logging.swift; sourceTree = "<group>"; };
 		B2EE002F24EE43760037DD9C /* FileDownloader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileDownloader.swift; sourceTree = "<group>"; };
 		B2F3CDF5245932B200F211A3 /* StoryboardExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoryboardExtension.swift; sourceTree = "<group>"; };
 		B2FB8E9C24BC4FE5003F653C /* LMWatchSensorManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LMWatchSensorManager.swift; sourceTree = "<group>"; };
-		B2FB8E9E24BC501B003F653C /* SensorEvents.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SensorEvents.swift; sourceTree = "<group>"; };
 		B2FDA83124BF744D000316EE /* ContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -405,6 +406,7 @@
 		B238BA9424B7289500575A7F /* Shared */ = {
 			isa = PBXGroup;
 			children = (
+				B26ABED82531C890004CF86D /* OperationQueue */,
 				B246BD09252C90E700064A82 /* Logging */,
 				B2464EF225270C5000A8BB65 /* Configs */,
 				B22DA79625054F4600456EE4 /* PushNotificationAPI */,
@@ -422,7 +424,6 @@
 			isa = PBXGroup;
 			children = (
 				5FF29328242239DA00D0BE09 /* Common */,
-				B240816823D8814300845AEE /* OperationQueue */,
 			);
 			path = AppComponents;
 			sourceTree = "<group>";
@@ -430,27 +431,8 @@
 		B240814D23D8803900845AEE /* CoreComponents */ = {
 			isa = PBXGroup;
 			children = (
-				B240815423D8803900845AEE /* Common */,
 			);
 			path = CoreComponents;
-			sourceTree = "<group>";
-		};
-		B240815423D8803900845AEE /* Common */ = {
-			isa = PBXGroup;
-			children = (
-				B240815523D8803900845AEE /* Logging.swift */,
-			);
-			path = Common;
-			sourceTree = "<group>";
-		};
-		B240816823D8814300845AEE /* OperationQueue */ = {
-			isa = PBXGroup;
-			children = (
-				B240816923D8814300845AEE /* BackgroundOperation.swift */,
-				B240816A23D8814300845AEE /* BackgroundServices.swift */,
-				B240816B23D8814300845AEE /* AsynchronousOperation.swift */,
-			);
-			path = OperationQueue;
 			sourceTree = "<group>";
 		};
 		B244A1C023BF4A77007FBDB8 /* Extensions */ = {
@@ -477,6 +459,7 @@
 		B246BD09252C90E700064A82 /* Logging */ = {
 			isa = PBXGroup;
 			children = (
+				B2E4F9002532A1C100F9080F /* Logging.swift */,
 				B246BD16252CA42F00064A82 /* LMConstants.swift */,
 				B246BD0A252C90E700064A82 /* FileStorage.swift */,
 				B246BD0B252C90E700064A82 /* SensorLogs.swift */,
@@ -498,7 +481,6 @@
 		B255116A24B628FD00CDBDD1 /* Services */ = {
 			isa = PBXGroup;
 			children = (
-				B2FB8E9E24BC501B003F653C /* SensorEvents.swift */,
 				B255116B24B6291900CDBDD1 /* LoginServices.swift */,
 			);
 			path = Services;
@@ -520,6 +502,17 @@
 				B2EE002F24EE43760037DD9C /* FileDownloader.swift */,
 			);
 			path = VersionCheck;
+			sourceTree = "<group>";
+		};
+		B26ABED82531C890004CF86D /* OperationQueue */ = {
+			isa = PBXGroup;
+			children = (
+				B26ABED92531C890004CF86D /* BackgroundOperation.swift */,
+				B26ABEDA2531C890004CF86D /* BackgroundServices.swift */,
+				B26ABEDB2531C890004CF86D /* AsynchronousOperation.swift */,
+			);
+			name = OperationQueue;
+			path = Shared/OperationQueue;
 			sourceTree = "<group>";
 		};
 		B2704DD724B4A2A900DE196B /* watchkitapp */ = {
@@ -653,7 +646,6 @@
 		B29639C423BDC28100626E1A = {
 			isa = PBXGroup;
 			children = (
-				B2010FA3252603FD0075D0F8 /* LAMP-swift */,
 				B238BA9424B7289500575A7F /* Shared */,
 				B29639CF23BDC28100626E1A /* mindLAMP */,
 				B2D930FC2445D7E90086477D /* CustomNotification */,
@@ -971,6 +963,7 @@
 				B238433124B8357F00E548E2 /* Networking.swift in Sources */,
 				B246BD13252C90E700064A82 /* LogsModel.swift in Sources */,
 				B238432F24B8357F00E548E2 /* CodableHelpers.swift in Sources */,
+				B2E4F9022532A1C100F9080F /* Logging.swift in Sources */,
 				B22DF5F52506526400777D2D /* NotificationAPI.swift in Sources */,
 				B238432924B82D3900E548E2 /* SharingInfo.swift in Sources */,
 				B255116524B6202300CDBDD1 /* WatchNotificationModel.swift in Sources */,
@@ -982,6 +975,9 @@
 				B246BD11252C90E700064A82 /* SensorLogs.swift in Sources */,
 				B2FDA83224BF744D000316EE /* ContentView.swift in Sources */,
 				B2704DEA24B4A2AC00DE196B /* HostingController.swift in Sources */,
+				B26ABEDF2531C890004CF86D /* BackgroundServices.swift in Sources */,
+				B26ABEDD2531C890004CF86D /* BackgroundOperation.swift in Sources */,
+				B26ABEE12531C890004CF86D /* AsynchronousOperation.swift in Sources */,
 				B238436624B8ADD900E548E2 /* SensorModel.swift in Sources */,
 				B238433F24B8390300E548E2 /* LampURL.swift in Sources */,
 				B212B4D224DB1ACD00DD1299 /* LampIdentifiers.swift in Sources */,
@@ -997,7 +993,6 @@
 				B2704DF024B4A2AC00DE196B /* NotificationView.swift in Sources */,
 				B2010FA22525F4A90075D0F8 /* AppColors.swift in Sources */,
 				B2C831F025306F6600E6A8A2 /* ComplicationController.swift in Sources */,
-				B2FB8E9F24BC501B003F653C /* SensorEvents.swift in Sources */,
 				B238434424B83B7700E548E2 /* ErrorExtension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1014,14 +1009,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B240816C23D8814300845AEE /* BackgroundOperation.swift in Sources */,
 				B238BA9624B7297F00575A7F /* WatchSessionManager.swift in Sources */,
 				B238433024B8357F00E548E2 /* Networking.swift in Sources */,
 				B238432E24B8357F00E548E2 /* CodableHelpers.swift in Sources */,
 				B276C0E4252B14FD003CC617 /* SensorModel+Constructors.swift in Sources */,
 				B2010FA12525F4A90075D0F8 /* AppColors.swift in Sources */,
 				B238433B24B836A200E548E2 /* Result.swift in Sources */,
-				B240816E23D8814300845AEE /* AsynchronousOperation.swift in Sources */,
 				B2B8935223D0AD6500321C3E /* DateExtension.swift in Sources */,
 				B22DF5F2250612E800777D2D /* UserAgentExtension.swift in Sources */,
 				B246BD0E252C90E700064A82 /* FileStorage.swift in Sources */,
@@ -1030,7 +1023,6 @@
 				B238436524B8ADD900E548E2 /* SensorModel.swift in Sources */,
 				B2962FCE24ADECB700C1D598 /* NodeManager.swift in Sources */,
 				B244A1C223BF4A91007FBDB8 /* FileManager+Extension.swift in Sources */,
-				B240816D23D8814300845AEE /* BackgroundServices.swift in Sources */,
 				B239685824B785360031A209 /* EndPoint.swift in Sources */,
 				B285D0A824C8941B0050BD3F /* UserDefaults+Extension.swift in Sources */,
 				B29639D123BDC28100626E1A /* AppDelegate.swift in Sources */,
@@ -1042,14 +1034,17 @@
 				B275F60224518106007A7340 /* HomeWebViewModel.swift in Sources */,
 				B212B4CF24DB1ACD00DD1299 /* LampIdentifiersHealthKit.swift in Sources */,
 				B2260D642505E66E00747A3E /* AppInfo.swift in Sources */,
+				B26ABEDE2531C890004CF86D /* BackgroundServices.swift in Sources */,
+				B26ABEDC2531C890004CF86D /* BackgroundOperation.swift in Sources */,
 				B2962FCD24ADECB700C1D598 /* NodeRunner.mm in Sources */,
 				B238433224B8357F00E548E2 /* NetworkingAPI.swift in Sources */,
 				B2C8319D253055C000E6A8A2 /* LMSensorManager+SensorObservers.swift in Sources */,
 				B212B4D124DB1ACD00DD1299 /* LampIdentifiers.swift in Sources */,
+				B2E4F9012532A1C100F9080F /* Logging.swift in Sources */,
 				B246BD1C252CA8F500064A82 /* WebViewController.swift in Sources */,
 				B26A2A3324EBCCA400BCB043 /* VersionCheckViewModel.swift in Sources */,
-				B240816623D8803900845AEE /* Logging.swift in Sources */,
 				B2EE003024EE43760037DD9C /* FileDownloader.swift in Sources */,
+				B26ABEE02531C890004CF86D /* AsynchronousOperation.swift in Sources */,
 				B246BD17252CA42F00064A82 /* LMConstants.swift in Sources */,
 				B246BD12252C90E700064A82 /* LogsModel.swift in Sources */,
 				B26A2A2B24EBC6E900BCB043 /* VersionCheckViewController.swift in Sources */,

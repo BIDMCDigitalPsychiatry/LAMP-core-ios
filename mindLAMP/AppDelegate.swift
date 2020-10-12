@@ -14,7 +14,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow? //for iOS < 13
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
-//        Logging.isLogToFile = true//+roll
 //        let o = StringHelper(salt: "\(AppDelegate.self.description()), \(NSObject.self.description()), \(NSString.self.description()), \(NSArray.self.description())")
 //        let bytes = o.bytesByHelpingString(string: "com.apple"+".springboard.lockcomplete")
 //        print(bytes)//[14, 6, 3, 74, 45, 49, 61, 60, 58, 28, 93, 49, 2, 25, 42, 2, 14, 10, 6, 19, 16, 75, 64, 79, 45, 56, 44, 13, 7, 21, 15, 17, 88, 69]
@@ -31,11 +30,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let documentsURL = try! FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: false)
         print("documentsURL = \(documentsURL)")
         
+        if launchOptions?[UIApplication.LaunchOptionsKey.location] != nil {
+            LMSensorManager.shared.checkIsRunning()
+        }
         return true
     }
     
     func application(_ application: UIApplication, performFetchWithCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
-        BackgroundServices.shared.performTasksInBG(completionHandler: completionHandler)
+        //BackgroundServices.shared.performTasksInBG(completionHandler: completionHandler)
+        LMSensorManager.shared.checkIsRunning()
     }
     
     func application(_ application: UIApplication, handleEventsForBackgroundURLSession identifier: String, completionHandler: @escaping () -> Void) {

@@ -38,24 +38,7 @@ class HomeViewController: UIViewController {
         super.viewDidLoad()
         print("mindLAMP Home")
         
-        //check dashboard is offline available
-        if UserDefaults.standard.version == nil {
-            if User.shared.isLogin() == true {
-                print("self.lampDashboardURLwithToken = \(self.lampDashboardURLwithToken)")
-                wkWebView.load(URLRequest(url: self.lampDashboardURLwithToken))
-            } else {
-                print("LampURL.dashboardDigital = \(LampURL.dashboardDigital)")
-                wkWebView.load(URLRequest(url: LampURL.dashboardDigital))
-            }
-        } else {
-            // Do any additional setup after loading the view.
-            //ToDO: NodeManager.shared.startNodeServer()
-            let deadlineTime = DispatchTime.now() + .seconds(5)
-            DispatchQueue.main.asyncAfter(deadline: deadlineTime) {
-                //NodeManager.shared.getServerStatus()
-                self.wkWebView.load(URLRequest(url: LampURL.dashboardDigital))
-            }
-        }
+        loadWebPage()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -78,7 +61,9 @@ class HomeViewController: UIViewController {
         super.didReceiveMemoryWarning()
         printError("Stopping sensors for a while due to memory warning")
         LMSensorManager.shared.stopSensors(false)
-        LMSensorManager.shared.startSensors()
+        DispatchQueue.global().asyncAfter(deadline: .now() + 300) {
+            LMSensorManager.shared.checkIsRunning()
+        }
     }
     
 }
@@ -148,6 +133,27 @@ private extension HomeViewController {
         
     }
     
+    func loadWebPage() {
+        //check dashboard is offline available
+        if UserDefaults.standard.version == nil {
+            if User.shared.isLogin() == true {
+                print("self.lampDashboardURLwithToken = \(self.lampDashboardURLwithToken)")
+                wkWebView.load(URLRequest(url: self.lampDashboardURLwithToken))
+            } else {
+                print("LampURL.dashboardDigital = \(LampURL.dashboardDigital)")
+                wkWebView.load(URLRequest(url: LampURL.dashboardDigital))
+            }
+        } else {
+            // Do any additional setup after loading the view.
+            //ToDO: NodeManager.shared.startNodeServer()
+            let deadlineTime = DispatchTime.now() + .seconds(5)
+            DispatchQueue.main.asyncAfter(deadline: deadlineTime) {
+                //NodeManager.shared.getServerStatus()
+                self.wkWebView.load(URLRequest(url: LampURL.dashboardDigital))
+            }
+        }
+    }
+    
     func makeWebView() -> WKWebView {
         let preferences = WKPreferences()
         preferences.javaScriptEnabled = true
@@ -163,7 +169,7 @@ private extension HomeViewController {
     }
     
     func performOnLogin() {
-        LMSensorManager.shared.startSensors()
+        LMSensorManager.shared.checkIsRunning()
         
         //update device token after login
         guard let deviceToken = UserDefaults.standard.deviceToken else {
@@ -195,6 +201,17 @@ extension HomeViewController: WKNavigationDelegate {
     func webView(_ webView: WKWebView, didFail navigation: WKNavigation!, withError error: Error) {
         print("error = \(error.localizedDescription)")
         //indicator.stopAnimating()
+    }
+    
+    func webView(_ webView: WKWebView, didFailProvisionalNavigation navigation: WKNavigation!, withError error: Error) {
+        
+        let alert = UIAlertController(title: "alert.lamp.title".localized, message: error.localizedDescription, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "alert.button.cancel".localized, style: .cancel, handler: { action in
+           }))
+        alert.addAction(UIAlertAction(title: "alert.button.retry".localized, style: .default, handler: { action in
+            self.loadWebPage()
+        }))
+        self.present(alert, animated: true, completion: nil)
     }
 }
 

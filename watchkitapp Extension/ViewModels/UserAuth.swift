@@ -111,6 +111,7 @@ class UserAuth: ObservableObject {
                 DispatchQueue.main.async {
                     Utils.postNotificationOnMainQueueAsync(name: .userLogined)
                 }
+                LMWatchSensorManager.shared.checkIsRunning()
             } else {
                 self.loginStatus = .loginInput
             }

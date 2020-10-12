@@ -12,36 +12,36 @@ enum OperationType {
     case logs
 }
 
-enum BgTaskOperation {
-    case start
-    case stop
-}
-class BGTaskOperation: AsyncOperation {
-    var opType: BgTaskOperation
-    override func main() {
-        super.main()
-        if !self.isCancelled {
-            switch opType {
-            case .start:
-                state = .executing
-                BackgroundServices.shared.startBGTask {
-                    state = .finished
-                }
-            case .stop:
-                state = .executing
-                BackgroundServices.shared.endBGTask {
-                    state = .finished
-                    
-                    // Clear logs.
-                    LMLogsManager.shared.clearLogsDirectory()
-                }
-            }
-        }
-    }
-    init(opType: BgTaskOperation) {
-        self.opType = opType
-    }
-}
+//enum BgTaskOperation {
+//    case start
+//    case stop
+//}
+//class BGTaskOperation: AsyncOperation {
+//    var opType: BgTaskOperation
+//    override func main() {
+//        super.main()
+//        if !self.isCancelled {
+//            switch opType {
+//            case .start:
+//                state = .executing
+//                BackgroundServices.shared.startBGTask {
+//                    state = .finished
+//                }
+//            case .stop:
+//                state = .executing
+//                BackgroundServices.shared.endBGTask {
+//                    state = .finished
+//
+//                    // Clear logs.
+//                    LMLogsManager.shared.clearLogsDirectory()
+//                }
+//            }
+//        }
+//    }
+//    init(opType: BgTaskOperation) {
+//        self.opType = opType
+//    }
+//}
 
 class BackgroundOperation: AsyncOperation {
 
@@ -98,6 +98,7 @@ private extension BackgroundOperation {
             case .failure:
                 break
             case .success:
+                //TODO: remove file from disk
                 break
             }
         }

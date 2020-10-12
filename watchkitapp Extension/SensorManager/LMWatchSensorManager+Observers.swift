@@ -36,8 +36,12 @@ extension LMWatchSensorManager: MagnetometerObserver {
     }
 }
 extension LMWatchSensorManager: SensorStore {
-    func timeToStore() {
-        let request = getLatestDataRequest()
+    func timeToStore(_ runCount: Int) {
+        let request = getSensorDataRequest()
         SensorLogs.shared.storeSensorRequest(request)
+        //send to server
+        if runCount % 2 == 0 {
+            BackgroundServices.shared.performTasks()
+        }
     }
 }

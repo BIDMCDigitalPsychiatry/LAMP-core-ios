@@ -12,38 +12,44 @@ import Sensors
 
 class LMSensorManager {
     
-    
+    //singleton object
     static let shared: LMSensorManager = LMSensorManager()
-
+    
+    //manager to hold all sensor references
+    private let sensorManager = SensorManager()
+    
     var sensor_motionManager: MotionManager?
+    var sensor_location: LocationsSensor?
+    var sensor_calls: CallsSensor?
+    var lampScreenSensor: ScreenSensor?
     
     var sensor_bluetooth: LMBluetoothSensor?
-    var sensor_calls: CallsSensor?
-    
     var sensor_healthKit: LMHealthKitSensor?
-    var sensor_location: LocationsSensor?
-    
-    //var sensor_screen: ScreenSensor?
     var sensor_wifi: WiFiSensor?
     var sensor_pedometer: PedometerSensor?
-    var lampScreenSensor: LampScreenSensor?
+    
 
+    //TImer to post data to server
     var sensorApiTimer: Timer?
     
-    // SensorData storage variables.
+    // SensorData storage variables for motion sensors.
     var accelerometerDataBufffer = [AccelerometerData]()
     var gyroscopeDataBufffer = [GyroscopeData]()
     var magnetometerDataBufffer = [MagnetometerData]()
     var motionDataBuffer = [MotionData]()
+    // SensorData storage variables for other sensors
+    var locationsDataBuffer = [LocationsData]()
+    var callsDataBuffer = [CallsData]()
+    var screenStateDataBuffer = [ScreenStateData]()
     
-    var latestLocationsData: LocationsData?
     var latestPedometerData: PedometerData?
-    var latestCallsData: CallsData?
     var latestWifiData: WiFiScanData?
-    //var latestScreenStateData: ScreenStateData
-    
-    //var watchSensorData: [SensorDataInfo]?
+
+    //check if the sensors are started or not
     private var isStarted = false
+    
+    //set fetch interval for 5 mins, and to set sync interval as double time of fetch interval
+    var isSyncNow = false
     
     private init() {
         
@@ -52,18 +58,10 @@ class LMSensorManager {
                                                selector: #selector(appDidEnterBackground),
                                                name: UIApplication.didEnterBackgroundNotification,
                                                object: nil)
-        NotificationCenter.default.addObserver(self,
-                                               selector: #selector(appDidBecomeActive),
-                                               name: UIApplication.didBecomeActiveNotification,
-                                               object: nil)
         #elseif os(watchOS)
         NotificationCenter.default.addObserver(self,
                                                selector: #selector(appDidEnterBackground),
                                                name: NSNotification.Name.NSExtensionHostDidEnterBackground,
-                                               object: nil)
-        NotificationCenter.default.addObserver(self,
-                                               selector: #selector(appDidBecomeActive),
-                                               name: NSNotification.Name.NSExtensionHostDidBecomeActive,
                                                object: nil)
         #endif
     }
@@ -73,122 +71,91 @@ class LMSensorManager {
         NotificationCenter.default.removeObserver(self,
                                                   name: UIApplication.didEnterBackgroundNotification,
                                                   object: nil)
-        NotificationCenter.default.removeObserver(self,
-                                                  name: UIApplication.didBecomeActiveNotification,
-                                                  object: nil)
         #elseif os(watchOS)
         NotificationCenter.default.removeObserver(self,
                                                   name: NSNotification.Name.NSExtensionHostDidEnterBackground,
-                                                  object: nil)
-        NotificationCenter.default.removeObserver(self,
-                                                  name: NSNotification.Name.NSExtensionHostDidBecomeActive,
                                                   object: nil)
         #endif
     }
     
     @objc private func appDidEnterBackground() {
-        //sensor_motionManager?.restartMotionUpdates()
+        //sensor_motionManager?.restartMotionUpdates(). this is doing inside the motion sensor class
         printToFile("restrting location")
         sensor_location?.locationManager.stopMonitoringSignificantLocationChanges()
         sensor_location?.locationManager.startMonitoringSignificantLocationChanges()
     }
     
-    @objc private func appDidBecomeActive() {
-        //sensor_motionManager?.restartMotionUpdates()
-    }
-    
     private func initiateSensors() {
+        
+        #if os(iOS)
         setUpSensorMotionManager()
+        setupLocationSensor()
+        setupCallsSensor()
+        setupScreenSensor()
         
         setupBluetoothSensor()
-        setupCallsSensor()
-        
         setupHealthKitSensor()
-        setupLocationSensor()
-        
         setupPedometerSensor()
-        
-        setupScreenSensor()
         setupWifiSensor()
+        #elseif os(watchOS)
+        setUpSensorMotionManager()
+        #endif
+        
     }
     
     private func deinitSensors() {
-
-        sensor_motionManager = nil
         
+        sensor_motionManager = nil
         sensor_bluetooth = nil
         sensor_calls = nil
-        
         sensor_healthKit = nil
         sensor_location = nil
-        //sensor_magneto = nil
         sensor_pedometer = nil
-
         //sensor_screen = nil
         sensor_wifi = nil
         lampScreenSensor = nil
     }
-
-
+    
+    
     private func startAllSensors() {
-
-        sensor_motionManager?.start()
         
-        sensor_bluetooth?.start()
-        sensor_calls?.start()
-        sensor_healthKit?.start()
-        sensor_location?.start()
-        sensor_pedometer?.start()
-        
-        //sensor_screen?.start()
-        sensor_wifi?.start()
-        lampScreenSensor?.start()
+        sensorManager.startAllSensors()
     }
     
     private func stopAllSensors() {
-
-        sensor_motionManager?.stop()
         
-        sensor_bluetooth?.stop()
-        sensor_calls?.stop()
-        sensor_healthKit?.stop()
-        sensor_location?.stop()
-        sensor_pedometer?.stop()
-        //sensor_screen?.stop()
-        sensor_wifi?.stop()
-        lampScreenSensor?.stop()
+        sensorManager.stopAllSensors()
     }
     
     private func refreshAllSensors() {
-        stopAllSensors()
-        startAllSensors()
+        sensorManager.stopAllSensors()
+        sensorManager.startAllSensors()
     }
     
     
     private func startTimer() {
         //Initial timer so as to post first set of sensorData. This timer invalidates after it fires.
-        Timer.scheduledTimer(timeInterval: 30, target: self, selector: #selector(postSensorData), userInfo: nil, repeats: false)
+        Timer.scheduledTimer(timeInterval: 30, target: self, selector: #selector(timeToStore), userInfo: nil, repeats: false)
         //Repeating timer which invokes postSensorData method at given interval of time.
-        sensorApiTimer = Timer.scheduledTimer(timeInterval: 10*60, target: self, selector: #selector(postSensorData), userInfo: nil, repeats: true)
+        sensorApiTimer = Timer.scheduledTimer(timeInterval: 10*60, target: self, selector: #selector(timeToStore(_ :)), userInfo: nil, repeats: true)
     }
-
+    
     private func stopTimer() {
         sensorApiTimer?.invalidate()
     }
     
-    @objc func postSensorData() {
-        sensor_healthKit?.fetchHealthData()
-        lampScreenSensor?.fetchScreenState()
-        batteryLogs()
-        startWatchSensors()
-        DispatchQueue.global().asyncAfter(deadline: .now() + 15) {
-            let request = LMSensorManager.shared.fetchSensorDataRequest()
-            SensorLogs.shared.storeSensorRequest(request)
-            printToFile("\n stored file @ \(Date())")
-            print("\n stored file @ \(Date())")
-            BackgroundServices.shared.performTasks()
-        }
-    }
+//    @objc func postSensorData() {
+//        sensor_healthKit?.fetchHealthData()
+////        batteryLogs()
+//        startWatchSensors()
+//        DispatchQueue.global().asyncAfter(deadline: .now() + 15) {
+//            let request = LMSensorManager.shared.fetchSensorDataRequest()
+//            SensorLogs.shared.storeSensorRequest(request)
+//            printToFile("\n stored file @ \(Date())")
+//            print("\n stored file @ \(Date())")
+//            BackgroundServices.shared.performTasks()
+//        }
+//    }
     
     func startWatchSensors() {
         //send a message to watch to collect sensor data
@@ -197,7 +164,7 @@ class LMSensorManager {
     }
     
     /// To start sensors observing.
-    func startSensors() {
+    private func startSensors() {
         
         self.isStarted = true
         
@@ -222,10 +189,11 @@ class LMSensorManager {
         deinitSensors()
     }
     
-    private func checkIsRunning() {
+    func checkIsRunning() {
         if self.isStarted == false {
             startSensors()
         }
+        BackgroundServices.shared.performTasks()
     }
     // MARK: - SENSOR SETUP METHODS
     
@@ -236,106 +204,104 @@ class LMSensorManager {
             config.magnetoObserver = self
             config.motionObserver = self
             config.sensorTimerDelegate = self
+            
+            config.sensorTimerDataStoreInterval = 5.0 * 60.0//5 miunutes
         }))
+        sensorManager.addSensor(sensor_motionManager!)
     }
-
+    
     func setupBluetoothSensor() {
         sensor_bluetooth = LMBluetoothSensor()
+        sensorManager.addSensor(sensor_bluetooth!)
     }
     
     func setupCallsSensor() {
         sensor_calls = CallsSensor.init(CallsSensor.Config().apply(closure: { config in
             config.sensorObserver = self
         }))
+        sensorManager.addSensor(sensor_calls!)
     }
     
     func setupHealthKitSensor() {
         sensor_healthKit = LMHealthKitSensor()
         sensor_healthKit?.observer = self
+        sensorManager.addSensor(sensor_healthKit!)
     }
-
+    
     func setupLocationSensor() {
         sensor_location = LocationsSensor.init(LocationsSensor.Config().apply(closure: { config in
             config.sensorObserver = self
+            config.minimumInterval = 1.0
         }))
+        sensorManager.addSensor(sensor_location!)
     }
-
+    
     func setupPedometerSensor() {
         sensor_pedometer = PedometerSensor.init(PedometerSensor.Config().apply(closure: { config in
             config.sensorObserver = self
         }))
+        sensorManager.addSensor(sensor_pedometer!)
     }
-
+    
     func setupScreenSensor() {
-        lampScreenSensor = LampScreenSensor()
-//        sensor_screen = ScreenSensor.init(ScreenSensor.Config().apply(closure: { config in
-//            config.sensorObserver = self
-//        }))
+        lampScreenSensor = ScreenSensor.init(ScreenSensor.Config().apply(closure: { config in
+            config.sensorObserver = self
+            config.interval = 1.0 //in seconds
+        }))
+        sensorManager.addSensor(lampScreenSensor!)
     }
     
     func setupWifiSensor() {
         sensor_wifi = WiFiSensor.init(WiFiSensor.Config().apply(closure: { config in
             config.sensorObserver = self
         }))
+        sensorManager.addSensor(sensor_wifi!)
     }
 }
 extension LMSensorManager {
-        
+    
     func fetchSensorDataRequest() -> SensorData.Request {
         var arraySensorData = [SensorDataInfo]()
         
-        if let data = fetchAccelerometerData() {
-            arraySensorData.append(contentsOf: data)
-        }
-        if let data = fetchMotionData() {
-            arraySensorData.append(contentsOf: data)
-        }
-        if let data = fetchGyroscopeData() {
-            arraySensorData.append(contentsOf: data)
-        }
-        if let data = fetchMagnetometerData() {
-            arraySensorData.append(contentsOf: data)
-        }
-        if let data = fetchGPSData() {
-            arraySensorData.append(data)
-        }
+        arraySensorData.append(contentsOf: fetchAccelerometerData())
+        arraySensorData.append(contentsOf: fetchGyroscopeData())
+        arraySensorData.append(contentsOf: fetchMagnetometerData())
+        arraySensorData.append(contentsOf: fetchMotionData())
+
+        arraySensorData.append(contentsOf: fetchGPSData())
+        arraySensorData.append(contentsOf: fetchCallsData())
+        arraySensorData.append(contentsOf: fetchScreenStateData())
+        
         if let data = fetchBluetoothData() {
             arraySensorData.append(data)
         }
-        if let data = fetchScreenStateData() {
-            arraySensorData.append(data)
-        } else {
-            printToFile("no screen data")
-        }
-        if let data = fetchCallsData() {
-            arraySensorData.append(data)
-        }
+        
         if let data = fetchWiFiData() {
             arraySensorData.append(data)
         }
         if let data = fetchWorkoutSegmentData() {
             arraySensorData.append(data)
         }
-
+        
         if let data = fetchPedometerData() {
             arraySensorData.append(contentsOf: data)
         }
-
+        
         if let data = fetchHealthKitQuantityData() {
             arraySensorData.append(contentsOf: data)
         }
         if let data = fetchHKCategoryData() {
             arraySensorData.append(contentsOf: data)
         }
-
+        
         if let data = fetchHKCharacteristicData() {
             arraySensorData.append(contentsOf: data)
         }
         return SensorData.Request(sensorEvents: arraySensorData)
     }
     
-    private func fetchAccelerometerData() -> [SensorDataInfo]? {
-
+    private func fetchAccelerometerData() -> [SensorDataInfo] {
+        
         let dataArray = accelerometerDataBufffer
         accelerometerDataBufffer.removeAll(keepingCapacity: true)
         
@@ -343,7 +309,7 @@ extension LMSensorManager {
         return sensorArray
     }
     
-    private func fetchGyroscopeData() -> [SensorDataInfo]? {
+    private func fetchGyroscopeData() -> [SensorDataInfo] {
         
         let dataArray = gyroscopeDataBufffer
         gyroscopeDataBufffer.removeAll(keepingCapacity: true)
@@ -352,7 +318,7 @@ extension LMSensorManager {
         return sensorArray
     }
     
-    private func fetchMagnetometerData() -> [SensorDataInfo]? {
+    private func fetchMagnetometerData() -> [SensorDataInfo] {
         
         let dataArray = magnetometerDataBufffer
         magnetometerDataBufffer.removeAll(keepingCapacity: true)
@@ -361,7 +327,7 @@ extension LMSensorManager {
         return sensorArray
     }
     
-    private func fetchMotionData() -> [SensorDataInfo]? {
+    private func fetchMotionData() -> [SensorDataInfo] {
         
         let dataArray = motionDataBuffer
         motionDataBuffer.removeAll(keepingCapacity: true)
@@ -372,20 +338,46 @@ extension LMSensorManager {
         return sensorArray
     }
     
-    
+    private func fetchGPSData() -> [SensorDataInfo] {
         
-//    private func fetchSleepData() -> SensorDataInfo? {
-//        guard let arrData = sensor_healthKit?.latestCategoryData() else { return nil }
-//        guard let data = latestData(for: HKCategoryTypeIdentifier.sleepAnalysis, in: arrData) else { return nil }
-//
-//        var model = SensorDataModel()
-//        model.value = data.value
-//        //model.valueString = data.valueText
-//        model.startDate = data.startDate
-//        model.endDate = data.endDate
-//
-//        return SensorDataInfo(sensor: HKCategoryTypeIdentifier.sleepAnalysis.jsonKey, timestamp: Double(data.timestamp), data: model)
-//    }
+        let dataArray = locationsDataBuffer
+        locationsDataBuffer.removeAll(keepingCapacity: true)
+        
+        let sensorArray = dataArray.map { SensorDataInfo(sensor: SensorType.lamp_gps.lampIdentifier, timestamp: $0.timestamp, data: SensorDataModel(locationData: $0)) }
+        return sensorArray
+    }
+    
+    private func fetchCallsData() -> [SensorDataInfo] {
+        
+        let dataArray = callsDataBuffer
+        callsDataBuffer.removeAll(keepingCapacity: true)
+        
+        let sensorArray = dataArray.map { SensorDataInfo(sensor: SensorType.lamp_calls.lampIdentifier, timestamp: $0.timestamp, data: SensorDataModel(callsData: $0)) }
+        return sensorArray
+    }
+    
+    private func fetchScreenStateData() -> [SensorDataInfo] {
+        
+        
+        let dataArray = screenStateDataBuffer
+        screenStateDataBuffer.removeAll(keepingCapacity: true)
+        
+        let sensorArray = dataArray.map { SensorDataInfo(sensor: SensorType.lamp_screen_state.lampIdentifier, timestamp: $0.timestamp, data: SensorDataModel(screenData: $0)) }
+        return sensorArray
+    }
+    
+    //    private func fetchSleepData() -> SensorDataInfo? {
+    //        guard let arrData = sensor_healthKit?.latestCategoryData() else { return nil }
+    //        guard let data = latestData(for: HKCategoryTypeIdentifier.sleepAnalysis, in: arrData) else { return nil }
+    //
+    //        var model = SensorDataModel()
+    //        model.value = data.value
+    //        //model.valueString = data.valueText
+    //        model.startDate = data.startDate
+    //        model.endDate = data.endDate
+    //
+    //        return SensorDataInfo(sensor: HKCategoryTypeIdentifier.sleepAnalysis.jsonKey, timestamp: Double(data.timestamp), data: model)
+    //    }
     
     private func fetchPedometerData() -> [SensorDataInfo]? {
         
@@ -402,7 +394,7 @@ extension LMSensorManager {
         var flightModel = SensorDataModel()
         flightModel.value = Double(data.floorsAscended)
         arrayData.append(SensorDataInfo(sensor: SensorType.lamp_flights_up.lampIdentifier, timestamp: Double(data.timestamp), data: flightModel))
-
+        
         var distanceModel = SensorDataModel()
         distanceModel.value = data.distance
         arrayData.append(SensorDataInfo(sensor: SensorType.lamp_distance.lampIdentifier, timestamp: Double(data.timestamp), data: distanceModel))
@@ -425,20 +417,7 @@ extension LMSensorManager {
         
         return arrayData
     }
-    
-    private func fetchGPSData() -> SensorDataInfo? {
-        guard let data = latestLocationsData else {
-            //LMLogsManager.shared.addLogs(level: .warning, logs: Logs.Messages.location_null)
-            return nil
-        }
-        var model = SensorDataModel()
-        model.longitude = data.longitude
-        model.latitude = data.latitude
-        model.altitude = data.altitude
 
-        return SensorDataInfo(sensor: SensorType.lamp_gps.lampIdentifier, timestamp: Double(data.timestamp), data: model)
-    }
-    
     private func fetchBluetoothData() -> SensorDataInfo? {
         guard let data = sensor_bluetooth?.latestData() else {
             //LMLogsManager.shared.addLogs(level: .warning, logs: Logs.Messages.bluetooth_null)
@@ -448,7 +427,7 @@ extension LMSensorManager {
         model.bt_address = data.address
         model.bt_name = data.name
         model.bt_rssi = data.rssi
-
+        
         return SensorDataInfo(sensor: SensorType.lamp_bluetooth.lampIdentifier, timestamp: data.timestamp, data: model)
     }
     
@@ -460,35 +439,10 @@ extension LMSensorManager {
         var model = SensorDataModel()
         model.bssid = data.bssid
         model.ssid = data.ssid
-
+        
         return SensorDataInfo(sensor: SensorType.lamp_wifi.lampIdentifier, timestamp: Double(data.timestamp), data: model)
     }
-    
-    private func fetchScreenStateData() -> SensorDataInfo? {
-        
-        guard let data = lampScreenSensor?.latestScreenStateData else {
-            return nil
-        }
-        var model = SensorDataModel()
-        model.value = Double(data.screenState.rawValue)
-        model.valueString = data.screenState.stringValue
 
-        return SensorDataInfo(sensor: SensorType.lamp_screen_state.lampIdentifier, timestamp: data.timestamp, data: model)
-    }
-    
-    private func fetchCallsData() -> SensorDataInfo? {
-        guard let data = latestCallsData else {
-            //LMLogsManager.shared.addLogs(level: .warning, logs: Logs.Messages.calls_null)
-            return nil
-        }
-        var model = SensorDataModel()
-        model.call_type = data.type
-        model.call_duration = Double(data.duration)
-        model.call_trace = data.trace
-
-        return SensorDataInfo(sensor: SensorType.lamp_calls.lampIdentifier, timestamp: Double(data.timestamp), data: model)
-    }
-    
     private func fetchWorkoutSegmentData() -> SensorDataInfo? {
         guard let arrData = sensor_healthKit?.latestWorkoutData() else {
             return nil
@@ -508,10 +462,10 @@ extension LMSensorManager {
 
 extension LMSensorManager {
     
-    func sensorDataRequest(with timestamp: Double = Date().timeInMilliSeconds, sensor: SensorType, dataModel: SensorDataModel) -> SensorDataInfo {
-        
-        return SensorDataInfo(sensor: sensor.lampIdentifier, timestamp: timestamp, data: dataModel)
-    }
+//    func sensorDataRequest(with timestamp: Double = Date().timeInMilliSeconds, sensor: SensorType, dataModel: SensorDataModel) -> SensorDataInfo {
+//        
+//        return SensorDataInfo(sensor: sensor.lampIdentifier, timestamp: timestamp, data: dataModel)
+//    }
     
     func fetchHKCharacteristicData() -> [SensorDataInfo]? {
         
@@ -519,7 +473,7 @@ extension LMSensorManager {
             //LMLogsManager.shared.addLogs(level: .warning, logs: Logs.Messages.hkcharacteristic_null)
             return nil
         }
-
+        
         return arrData.map { (healthData) -> SensorDataInfo in
             var data = SensorDataModel()
             data.value = healthData.value
@@ -552,10 +506,10 @@ extension LMSensorManager {
                     model.endDate = data.endDate
                     arrayData.append(SensorDataInfo(sensor: categoryType.lampIdentifier, timestamp: Double(data.timestamp), data: model))
                 }
-//                else {
-//                    let msg = String(format: Logs.Messages.quantityType_null, categoryType.jsonKey)
-//                    LMLogsManager.shared.addLogs(level: .warning, logs: msg)
-//                }
+                //                else {
+                //                    let msg = String(format: Logs.Messages.quantityType_null, categoryType.jsonKey)
+                //                    LMLogsManager.shared.addLogs(level: .warning, logs: msg)
+                //                }
             }
         }
         return arrayData
@@ -618,12 +572,12 @@ extension LMSensorManager {
 }
 
 extension LMSensorManager {
-    
+
     func batteryLogs() {
         guard isBatteryLevelLow() else { return }
         LMLogsManager.shared.addLogs(level: .info, logs: Logs.Messages.battery_low)
     }
-    
+
     private func isBatteryLevelLow(than level: Float = 20) -> Bool {
         return UIDevice.current.batteryLevel < level/100
     }
