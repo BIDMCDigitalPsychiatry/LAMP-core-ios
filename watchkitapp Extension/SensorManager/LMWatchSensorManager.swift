@@ -129,10 +129,33 @@ private extension LMWatchSensorManager {
         
         let dataArray = motionDataBuffer
         motionDataBuffer.removeAll(keepingCapacity: true)
-        
-        let sensorArray = dataArray.map {
-            SensorDataInfo(sensor: SensorType.lamp_accelerometer_motion.lampIdentifier, timestamp: $0.timestamp, data: SensorDataModel(motionData: $0))
+
+        let sensorArray = dataArray.map { (motionData) -> SensorDataInfo in
+            
+            var model = SensorDataModel()
+            //User Acceleration
+            let motion = Motion(x: motionData.acceleration.x, y: motionData.acceleration.y, z: motionData.acceleration.z)
+            model.motion = motion
+            
+            //Gravity
+            let gravity = Gravitational(x: motionData.gravity.x, y: motionData.gravity.y, z: motionData.gravity.z)
+            model.gravity = gravity
+            
+            //Gyro
+            let rotation = Rotational(x: motionData.rotationRate.x, y: motionData.rotationRate.y, z: motionData.rotationRate.z)
+            model.rotation = rotation
+
+            //MageticField
+            let magnetic = Magnetic(x: motionData.magneticField.x, y: motionData.magneticField.y, z: motionData.magneticField.z)
+            model.magnetic = magnetic
+            
+            //Attitude
+            let attitude = Attitude(roll: motionData.deviceAttitude.roll, pitch: motionData.deviceAttitude.pitch, yaw: motionData.deviceAttitude.yaw)
+            model.attitude = attitude
+            
+            return SensorDataInfo(sensor: SensorType.lamp_accelerometer_motion.lampIdentifier, timestamp: motionData.timestamp, data: model)
         }
+        
         return sensorArray
     }
 }
