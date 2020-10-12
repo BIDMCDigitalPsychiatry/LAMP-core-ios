@@ -342,8 +342,15 @@ extension LMSensorManager {
         
         let dataArray = locationsDataBuffer
         locationsDataBuffer.removeAll(keepingCapacity: true)
-        
-        let sensorArray = dataArray.map { SensorDataInfo(sensor: SensorType.lamp_gps.lampIdentifier, timestamp: $0.timestamp, data: SensorDataModel(locationData: $0)) }
+
+        let sensorArray = dataArray.map { (locationData) -> SensorDataInfo in
+            var model = SensorDataModel()
+            model.latitude = locationData.latitude
+            model.longitude = locationData.longitude
+            model.altitude = locationData.longitude
+            return SensorDataInfo(sensor: SensorType.lamp_gps.lampIdentifier, timestamp: locationData.timestamp, data: model)
+        }
+
         return sensorArray
     }
     
@@ -352,7 +359,14 @@ extension LMSensorManager {
         let dataArray = callsDataBuffer
         callsDataBuffer.removeAll(keepingCapacity: true)
         
-        let sensorArray = dataArray.map { SensorDataInfo(sensor: SensorType.lamp_calls.lampIdentifier, timestamp: $0.timestamp, data: SensorDataModel(callsData: $0)) }
+
+        let sensorArray = dataArray.map { (callsData) -> SensorDataInfo in
+            var model = SensorDataModel()
+            model.call_type = callsData.type
+            model.call_duration = Double(callsData.duration)
+            model.call_trace = callsData.trace
+            return SensorDataInfo(sensor: SensorType.lamp_calls.lampIdentifier, timestamp: callsData.timestamp, data: model)
+        }
         return sensorArray
     }
     
@@ -362,7 +376,12 @@ extension LMSensorManager {
         let dataArray = screenStateDataBuffer
         screenStateDataBuffer.removeAll(keepingCapacity: true)
         
-        let sensorArray = dataArray.map { SensorDataInfo(sensor: SensorType.lamp_screen_state.lampIdentifier, timestamp: $0.timestamp, data: SensorDataModel(screenData: $0)) }
+        let sensorArray = dataArray.map { (screenData) -> SensorDataInfo in
+            var model = SensorDataModel()
+            model.value = Double(screenData.screenState.rawValue)
+            model.valueString = screenData.screenState.stringValue
+            return SensorDataInfo(sensor: SensorType.lamp_screen_state.lampIdentifier, timestamp: screenData.timestamp, data: model)
+        }
         return sensorArray
     }
     
