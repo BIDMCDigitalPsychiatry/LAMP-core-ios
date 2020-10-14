@@ -66,13 +66,13 @@ struct PayLoadInfo {
 enum PushNotification {
 
     struct UpdateTokenRequest: Encodable {
-        var timestamp: Double
+        var timestamp: UInt64
         var sensor = SensorType.lamp_analytics.lampIdentifier
         var data: DeviceInfoWithToken
         
         init(deviceInfoWithToken: DeviceInfoWithToken) {
             data = deviceInfoWithToken
-            timestamp = Date().timeIntervalSince1970 * 1000
+            timestamp = UInt64(Date().timeInMilliSeconds)
         }
     }
     
@@ -80,13 +80,13 @@ enum PushNotification {
     }
     
     struct UpdateReadRequest {
-        var timestamp: Double
+        var timestamp: UInt64
         var sensor = SensorType.lamp_analytics
         var data: PayLoadInfo
         
         init(timeInterval: TimeInterval, payLoadInfo: PayLoadInfo) {
             data = payLoadInfo
-            timestamp = timeInterval * 1000
+            timestamp = UInt64(timeInterval * 1000)
         }
         func toJSON() -> [String: Any] {
             return ["timestamp": timestamp,

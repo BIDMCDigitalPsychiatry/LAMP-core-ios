@@ -40,8 +40,13 @@ extension LMWatchSensorManager: SensorStore {
         let request = getSensorDataRequest()
         SensorLogs.shared.storeSensorRequest(request)
         //send to server
-        if runCount % 2 == 0 {
+        if self.isSyncNow {
+            print("sync now")
+            self.isSyncNow = false
+            printToFile("\n stored file @ \(Date())")
             BackgroundServices.shared.performTasks()
+        } else {
+            self.isSyncNow = true
         }
     }
 }

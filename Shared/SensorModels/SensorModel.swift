@@ -38,8 +38,14 @@ extension SensorData.Request: Codable {
 
 struct SensorDataInfo: Codable {
     var sensor: String
-    var timestamp: Double
+    var timestamp: UInt64
     var data: SensorDataModel
+    
+    init(sensor: String, timestamp: Double, data: SensorDataModel) {
+        self.sensor = sensor
+        self.timestamp = UInt64(timestamp)
+        self.data = data
+    }
 }
 
 struct SensorDataModel: Codable {
@@ -86,6 +92,44 @@ struct SensorDataModel: Codable {
     
     var startDate: Double?
     var endDate: Double?
+    
+    enum CodingKeys: String, CodingKey {
+        case x
+        case y
+        case z
+        case motion
+        case gravity
+        case magnetic
+        case rotation
+        case attitude
+        //Health
+//        var unit: String?
+        case value
+        case valueString
+        case bp_diastolic
+        case bp_systolic
+        case workout_type
+        case workout_duration
+        //Location
+        case latitude
+        case longitude
+        case altitude
+        //Bluetooth
+        case bt_rssi
+        case bt_name
+        case bt_address
+        //Wifi
+        case bssid
+        case ssid
+        //Pedometer
+        //Calls
+        case call_duration
+        case call_type
+        case call_trace
+//
+//        var startDate: Double?
+//        var endDate: Double?
+    }
 }
 
 struct Motion: Codable {

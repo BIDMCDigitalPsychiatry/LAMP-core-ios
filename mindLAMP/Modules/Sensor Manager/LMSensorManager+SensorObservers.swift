@@ -75,7 +75,6 @@ extension LMSensorManager: MagnetometerObserver {
 extension LMSensorManager: LocationsObserver {
     
     func onLocationChanged(data: LocationsData) {
-        print("data = \(data)")
         locationsDataBuffer.append(data)
     }
 }

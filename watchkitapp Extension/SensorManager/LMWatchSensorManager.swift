@@ -25,6 +25,9 @@ class LMWatchSensorManager {
     //check if the sensors are started or not
     private var isStarted = false
     
+    //set fetch interval for 5 mins, and to set sync interval as double time of fetch interval
+    var isSyncNow = false
+    
     let wristLocationIsLeft = WKInterfaceDevice.current().wristLocation == .left
     
     
@@ -40,13 +43,15 @@ class LMWatchSensorManager {
         )
     }
     
-    func startSensors() {
+    private func startSensors() {
         sensor_motionManager = MotionManager.init(MotionManager.Config().apply(closure: { [weak self] (config) in
             config.accelerometerObserver = self
             config.gyroObserver = self
             config.magnetoObserver = self
             config.motionObserver = self
             config.sensorTimerDelegate = self
+            
+            config.sensorTimerDataStoreInterval = 5.0 * 60.0//5 miunutes
         }))
         
         sensorManager.addSensors([sensor_motionManager!])
@@ -66,7 +71,9 @@ class LMWatchSensorManager {
     
     func checkIsRunning() {
         if self.isStarted == false {
-            startSensors()
+            if User.shared.isLogin() {
+                startSensors()
+            }
         }
         BackgroundServices.shared.performTasks()
     }

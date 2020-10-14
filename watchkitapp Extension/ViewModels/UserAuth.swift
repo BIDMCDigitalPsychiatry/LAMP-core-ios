@@ -21,8 +21,8 @@ class UserAuth: ObservableObject {
         case loggedIn
     }
     var serverURLDomain: String = LampURL.lampAPI.deletingPrefix("https://")
-    var userName: String?
-    var password: String?
+    var userName: String?//
+    var password: String?//
     
     var serverURLDomainDisplayValue: String {
         return serverURLDomain.isEmpty ? LampURL.lampAPI.deletingPrefix("https://") : serverURLDomain
@@ -58,6 +58,7 @@ class UserAuth: ObservableObject {
     init(_ isLoggedIn: Bool) {
         if isLoggedIn {
             self.loginStatus = .loggedIn
+            LMWatchSensorManager.shared.checkIsRunning()
         } else {
             self.loginStatus = .logout
         }

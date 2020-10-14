@@ -191,7 +191,9 @@ class LMSensorManager {
     
     func checkIsRunning() {
         if self.isStarted == false {
-            startSensors()
+            if User.shared.isLogin() {
+                startSensors()
+            }
         }
         BackgroundServices.shared.performTasks()
     }
@@ -203,6 +205,7 @@ class LMSensorManager {
             config.gyroObserver = self
             config.magnetoObserver = self
             config.motionObserver = self
+            
             config.sensorTimerDelegate = self
             
             config.sensorTimerDataStoreInterval = 5.0 * 60.0//5 miunutes

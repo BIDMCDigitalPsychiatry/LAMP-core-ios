@@ -14,13 +14,13 @@ extension HKQuantityTypeIdentifier: LampDataKeysProtocol {
         
         if #available(iOS 13.0, *) {
             if self == .appleStandTime {
-                return "lamp.appleStandTime"
+                return "lamp.apple_standtime"
             }
             else if self == .environmentalAudioExposure {
-                return "lamp.environmentalAudioExposure"
+                return "lamp.environmental_audioexposure"
             }
             else if self == .headphoneAudioExposure {
-                return "lamp.headphoneAudioExposure"
+                return "lamp.headphone_audioexposure"
             }
         }
         
@@ -44,149 +44,149 @@ extension HKQuantityTypeIdentifier: LampDataKeysProtocol {
         case .bodyFatPercentage:
             return "lamp.body_fat_percentage"
         case .leanBodyMass:
-            return "lamp.leanBodyMass"
+            return "lamp.lean_bodymass"
         case .waistCircumference:
-            return "lamp.waistCircumference"
+            return "lamp.waist_wircumference"
         case .distanceWalkingRunning:
-            return "lamp.distanceWalkingRunning"
+            return "lamp.distance_walkingrunning"
         case .distanceCycling:
-            return "lamp.distanceCycling"
+            return "lamp.distance_cycling"
         case .distanceWheelchair:
-            return "lamp.distanceWheelchair"
+            return "lamp.distance_wheelchair"
         case .basalEnergyBurned:
-            return "lamp.basalEnergyBurned"
+            return "lamp.basal_energyburned"
         case .activeEnergyBurned:
-            return "lamp.activeEnergyBurned"
+            return "lamp.active_energyBurned"
         case .flightsClimbed:
-            return "lamp.flightsClimbed"
+            return "lamp.flights_climbed"
         case .nikeFuel:
-            return "lamp.nikeFuel"
+            return "lamp.nike_fuel"
         case .appleExerciseTime:
-            return "lamp.appleExerciseTime"
+            return "lamp.apple_exercisetime"
         case .pushCount:
-            return "lamp.pushCount"
+            return "lamp.push_count"
         case .distanceSwimming:
-            return "lamp.distanceSwimming"
+            return "lamp.distance_swimming"
         case .swimmingStrokeCount:
-            return "lamp.swimmingStrokeCount"
+            return "lamp.swimming_strokecount"
         case .vo2Max:
             return "lamp.vo2Max"
         case .distanceDownhillSnowSports:
-            return "lamp.distanceDownhillSnowSports"
+            return "lamp.distance_downhillsnowsports"
             
         case .bodyTemperature:
             return "lamp.body_temperature"
         case .basalBodyTemperature:
-            return "lamp.basalBodyTemperature"
+            return "lamp.basal_bodytemperature"
         case .restingHeartRate:
-            return "lamp.restingHeartRate"
+            return "lamp.resting_heartrate"
         case .walkingHeartRateAverage:
-            return "lamp.walkingHeartRateAverage"
+            return "lamp.walking_heartrateaverage"
         case .heartRateVariabilitySDNN:
-            return "lamp.heartRateVariabilitySDNN"
+            return "lamp.heartratevariability_sdnn"
         case .oxygenSaturation:
-            return "lamp.oxygenSaturation"
+            return "lamp.oxygen_saturation"
         case .peripheralPerfusionIndex:
-            return "lamp.peripheralPerfusionIndex"
+            return "lamp.peripheral_perfusionindex"
         case .bloodGlucose:
             return "lamp.blood_glucose"
         case .numberOfTimesFallen:
-            return "lamp.numberOfTimesFallen"
+            return "lamp.numberoftimes_fallen"
         case .electrodermalActivity:
-            return "lamp.electrodermalActivity"
+            return "lamp.electrodermal_activity"
         case .inhalerUsage:
-            return "lamp.inhalerUsage"
+            return "lamp.inhaler_usage"
         case .insulinDelivery:
-            return "lamp.insulinDelivery"
+            return "lamp.insulin_delivery"
         case .bloodAlcoholContent:
-            return "lamp.bloodAlcoholContent"
+            return "lamp.blood_alcoholcontent"
         case .forcedVitalCapacity:
-            return "lamp.forcedVitalCapacity"
+            return "lamp.forced_vitalcapacity"
         case .forcedExpiratoryVolume1:
-            return "lamp.forcedExpiratoryVolume1"
+            return "lamp.forced_expiratoryvolume1"
         case .peakExpiratoryFlowRate:
-            return "lamp.peakExpiratoryFlowRate"
+            return "lamp.peak_expiratoryflowrate"
             
         case .dietaryFatTotal:
-            return "lamp.dietaryFatTotal"
+            return "lamp.dietaryfattotal"
         case .dietaryFatPolyunsaturated:
-            return "lamp.dietaryFatPolyunsaturated"
+            return "lamp.dietaryfatpolyunsaturated"
         case .dietaryFatMonounsaturated:
-            return "lamp.dietaryFatMonounsaturated"
+            return "lamp.dietaryfatmonounsaturated"
         case .dietaryFatSaturated:
-            return "lamp.dietaryFatSaturated"
+            return "lamp.dietaryfatsaturated"
         case .dietaryCholesterol:
-            return "lamp.dietaryCholesterol"
+            return "lamp.dietarycholesterol"
         case .dietarySodium:
-            return "lamp.dietarySodium"
+            return "lamp.dietarysodium"
         case .dietaryCarbohydrates:
-            return "lamp.dietaryCarbohydrates"
+            return "lamp.dietarycarbohydrates"
         case .dietaryFiber:
-            return "lamp.dietaryFiber"
+            return "lamp.dietaryfiber"
         case .dietarySugar:
-            return "lamp.dietarySugar"
+            return "lamp.dietarysugar"
         case .dietaryEnergyConsumed:
-            return "lamp.dietaryEnergyConsumed"
+            return "lamp.dietaryenergyconsumed"
         case .dietaryProtein:
-            return "lamp.dietaryProtein"
+            return "lamp.dietaryprotein"
         case .dietaryVitaminA:
-            return "lamp.dietaryVitaminA"
+            return "lamp.dietaryvitamina"
         case .dietaryVitaminB6:
-            return "lamp.dietaryVitaminB6"
+            return "lamp.dietaryvitaminb6"
         case .dietaryVitaminB12:
-            return "lamp.dietaryVitaminB12"
+            return "lamp.dietaryvitaminb12"
         case .dietaryVitaminC:
-            return "lamp.dietaryVitaminC"
+            return "lamp.dietaryvitaminc"
         case .dietaryVitaminD:
-            return "lamp.dietaryVitaminD"
+            return "lamp.dietaryvitamind"
         case .dietaryVitaminE:
-            return "lamp.dietaryVitaminE"
+            return "lamp.dietaryvitamine"
         case .dietaryVitaminK:
-            return "lamp.dietaryVitaminK"
+            return "lamp.dietaryvitamink"
         case .dietaryCalcium:
-            return "lamp.dietaryCalcium"
+            return "lamp.dietarycalcium"
         case .dietaryIron:
-            return "lamp.dietaryIron"
+            return "lamp.dietaryiron"
         case .dietaryThiamin:
-            return "lamp.dietaryThiamin"
+            return "lamp.dietarythiamin"
         case .dietaryRiboflavin:
-            return "lamp.dietaryRiboflavin"
+            return "lamp.dietaryriboflavin"
         case .dietaryNiacin:
-            return "lamp.dietaryNiacin"
+            return "lamp.dietaryniacin"
         case .dietaryFolate:
-            return "lamp.dietaryFolate"
+            return "lamp.dietaryfolate"
         case .dietaryBiotin:
-            return "lamp.dietaryBiotin"
+            return "lamp.dietarybiotin"
         case .dietaryPantothenicAcid:
-            return "lamp.dietaryPantothenicAcid"
+            return "lamp.dietarypantothenicacid"
         case .dietaryPhosphorus:
-            return "lamp.dietaryPhosphorus"
+            return "lamp.dietaryphosphorus"
         case .dietaryIodine:
-            return "lamp.dietaryIodine"
+            return "lamp.dietaryiodine"
         case .dietaryMagnesium:
-            return "lamp.dietaryMagnesium"
+            return "lamp.dietarymagnesium"
         case .dietaryZinc:
-            return "lamp.dietaryZinc"
+            return "lamp.dietaryzinc"
         case .dietarySelenium:
-            return "lamp.dietarySelenium"
+            return "lamp.dietaryselenium"
         case .dietaryCopper:
-            return "lamp.dietaryCopper"
+            return "lamp.dietarycopper"
         case .dietaryManganese:
-            return "lamp.dietaryManganese"
+            return "lamp.dietarymanganese"
         case .dietaryChromium:
-            return "lamp.dietaryChromium"
+            return "lamp.dietarychromium"
         case .dietaryMolybdenum:
-            return "lamp.dietaryMolybdenum"
+            return "lamp.dietarymolybdenum"
         case .dietaryChloride:
-            return "lamp.dietaryChloride"
+            return "lamp.dietarychloride"
         case .dietaryPotassium:
-            return "lamp.dietaryPotassium"
+            return "lamp.dietarypotassium"
         case .dietaryCaffeine:
-            return "lamp.dietaryCaffeine"
+            return "lamp.dietarycaffeine"
         case .dietaryWater:
-            return "lamp.dietaryWater"
+            return "lamp.dietarywater"
         case .dietaryCopper:
-            return "lamp.uvExposure"
+            return "lamp.uvexposure"
             
         default:
             return "lamp.\(self.rawValue)"
@@ -203,29 +203,29 @@ extension HKCategoryTypeIdentifier: LampDataKeysProtocol {
             case .sleepAnalysis:
                 return "lamp.sleep"
             case .appleStandHour:
-                return "lamp.appleStandHour"
+                return "lamp.apple_standhour"
             case .cervicalMucusQuality:
-                return "lamp.cervicalMucusQuality"
+                return "lamp.cervical_mucusquality"
             case .ovulationTestResult:
-                return "lamp.ovulationTestResult"
+                return "lamp.ovulation_testresult"
             case .menstrualFlow:
-                return "lamp.menstrualFlow"
+                return "lamp.menstrualflow"
             case .intermenstrualBleeding:
-                return "lamp.intermenstrualBleeding"
+                return "lamp.intermenstrual_bleeding"
             case .sexualActivity:
-                return "lamp.sexualActivity"
+                return "lamp.sexual_activity"
             case .mindfulSession:
-                return "lamp.mindfulSession"
+                return "lamp.mindful_session"
             case .highHeartRateEvent:
-                return "lamp.highHeartRateEvent"
+                return "lamp.high_heartrateevent"
             case .lowHeartRateEvent:
-                return "lamp.lowHeartRateEvent"
+                return "lamp.lowheartrate_event"
             case .irregularHeartRhythmEvent:
-                return "lamp.irregularHeartRhythmEvent"
+                return "lamp.irregular_heartrhythmevent"
             case .audioExposureEvent:
-                return "lamp.audioExposureEvent"
+                return "lamp.audio_exposureevent"
             case .toothbrushingEvent:
-                return "lamp.toothbrushingEvent"
+                return "lamp.toothbrushingevent"
             default:
                 return "lamp.\(self.rawValue)"
             }
@@ -235,25 +235,25 @@ extension HKCategoryTypeIdentifier: LampDataKeysProtocol {
                 case .sleepAnalysis:
                     return "lamp.sleep"
                 case .appleStandHour:
-                    return "lamp.appleStandHour"
+                    return "lamp.apple_standhour"
                 case .cervicalMucusQuality:
-                    return "lamp.cervicalMucusQuality"
+                    return "lamp.cervical_mucusquality"
                 case .ovulationTestResult:
-                    return "lamp.ovulationTestResult"
+                    return "lamp.ovulation_testresult"
                 case .menstrualFlow:
-                    return "lamp.menstrualFlow"
+                    return "lamp.menstrualflow"
                 case .intermenstrualBleeding:
-                    return "lamp.intermenstrualBleeding"
+                    return "lamp.intermenstrual_bleeding"
                 case .sexualActivity:
-                    return "lamp.sexualActivity"
+                    return "lamp.sexual_activity"
                 case .mindfulSession:
-                    return "lamp.mindfulSession"
+                    return "lamp.mindful_session"
                 case .highHeartRateEvent:
-                    return "lamp.highHeartRateEvent"
+                    return "lamp.high_heartrateevent"
                 case .lowHeartRateEvent:
-                    return "lamp.lowHeartRateEvent"
+                    return "lamp.lowheartrate_event"
                 case .irregularHeartRhythmEvent:
-                    return "lamp.irregularHeartRhythmEvent"
+                    return "lamp.irregular_heartrhythmevent"
                 default:
                     return "lamp.\(self.rawValue)"
                 }
@@ -262,19 +262,19 @@ extension HKCategoryTypeIdentifier: LampDataKeysProtocol {
                 case .sleepAnalysis:
                     return "lamp.sleep"
                 case .appleStandHour:
-                    return "lamp.appleStandHour"
+                    return "lamp.apple_standhour"
                 case .cervicalMucusQuality:
-                    return "lamp.cervicalMucusQuality"
+                    return "lamp.cervical_mucusquality"
                 case .ovulationTestResult:
-                    return "lamp.ovulationTestResult"
+                    return "lamp.ovulation_testresult"
                 case .menstrualFlow:
-                    return "lamp.menstrualFlow"
+                    return "lamp.menstrualflow"
                 case .intermenstrualBleeding:
-                    return "lamp.intermenstrualBleeding"
+                    return "lamp.intermenstrual_bleeding"
                 case .sexualActivity:
-                    return "lamp.sexualActivity"
+                    return "lamp.sexual_activity"
                 case .mindfulSession:
-                    return "lamp.mindfulSession"
+                    return "lamp.mindful_session"
                 default:
                     return "lamp.\(self.rawValue)"
                 }
@@ -292,15 +292,15 @@ extension HKCharacteristicTypeIdentifier: LampDataKeysProtocol {
     public var lampIdentifier: String {
         switch self {
         case .biologicalSex:
-            return "lamp.biologicalSex"
+            return "lamp.biologicalsex"
         case .bloodType:
-            return "lamp.bloodType"
+            return "lamp.bloodtype"
         case .dateOfBirth:
             return "lamp.dob"
         case .fitzpatrickSkinType:
-            return "lamp.skinType"
+            return "lamp.skintype"
         case .wheelchairUse:
-            return "lamp.wheelchairUse"
+            return "lamp.wheelchairuse"
             
         default:
             return "lamp.\(self.rawValue)"

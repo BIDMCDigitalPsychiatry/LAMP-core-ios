@@ -27,6 +27,8 @@ class ExtensionDelegate: NSObject, WKExtensionDelegate {
             print("granted APNS")
             self.getNotificationSettings()
         }
+        let documentsURL = try! FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: false)
+        print("documentsURL = \(documentsURL)")
     }
     
     func applicationDidBecomeActive() {
