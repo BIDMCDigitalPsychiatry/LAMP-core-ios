@@ -1115,6 +1115,7 @@
 /* Begin XCBuildConfiguration section */
 		B2464EE62527013700A8BB65 /* Debug (Staging) */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = B2464EF325270C9600A8BB65 /* Staging.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -1325,6 +1326,7 @@
 		};
 		B2464EEC2527015100A8BB65 /* Release (Staging) */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = B2464EF325270C9600A8BB65 /* Staging.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -1551,7 +1553,7 @@
 			};
 			name = "Debug (Production)";
 		};
-		B2704DFF24B4A2AC00DE196B /* Release (Production) */ = {
+		B2704DFF24B4A2AC00DE196B /* Release */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = B2464EF625270DD500A8BB65 /* Production.xcconfig */;
 			buildSettings = {
@@ -1574,7 +1576,7 @@
 				VERSIONING_SYSTEM = "apple-generic";
 				WATCHOS_DEPLOYMENT_TARGET = 6.0;
 			};
-			name = "Release (Production)";
+			name = Release;
 		};
 		B2704E0124B4A2AC00DE196B /* Debug (Production) */ = {
 			isa = XCBuildConfiguration;
@@ -1607,7 +1609,7 @@
 			};
 			name = "Debug (Production)";
 		};
-		B2704E0224B4A2AC00DE196B /* Release (Production) */ = {
+		B2704E0224B4A2AC00DE196B /* Release */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = B2464EF625270DD500A8BB65 /* Production.xcconfig */;
 			buildSettings = {
@@ -1636,7 +1638,7 @@
 				VERSIONING_SYSTEM = "apple-generic";
 				WATCHOS_DEPLOYMENT_TARGET = 6.0;
 			};
-			name = "Release (Production)";
+			name = Release;
 		};
 		B2847FBC2450550E0042D43B /* Debug (Production) */ = {
 			isa = XCBuildConfiguration;
@@ -1664,7 +1666,7 @@
 			};
 			name = "Debug (Production)";
 		};
-		B2847FBD2450550E0042D43B /* Release (Production) */ = {
+		B2847FBD2450550E0042D43B /* Release */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = B2464EF625270DD500A8BB65 /* Production.xcconfig */;
 			buildSettings = {
@@ -1688,10 +1690,11 @@
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
 			};
-			name = "Release (Production)";
+			name = Release;
 		};
 		B29639DF23BDC28200626E1A /* Debug (Production) */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = B2464EF625270DD500A8BB65 /* Production.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -1751,8 +1754,9 @@
 			};
 			name = "Debug (Production)";
 		};
-		B29639E023BDC28200626E1A /* Release (Production) */ = {
+		B29639E023BDC28200626E1A /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = B2464EF625270DD500A8BB65 /* Production.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -1804,7 +1808,7 @@
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				VALIDATE_PRODUCT = YES;
 			};
-			name = "Release (Production)";
+			name = Release;
 		};
 		B29639E223BDC28200626E1A /* Debug (Production) */ = {
 			isa = XCBuildConfiguration;
@@ -1847,7 +1851,7 @@
 			};
 			name = "Debug (Production)";
 		};
-		B29639E323BDC28200626E1A /* Release (Production) */ = {
+		B29639E323BDC28200626E1A /* Release */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = B2464EF625270DD500A8BB65 /* Production.xcconfig */;
 			buildSettings = {
@@ -1885,7 +1889,7 @@
 				VALID_ARCHS = "arm64 arm64e armv7 armv7s";
 				VERSIONING_SYSTEM = "apple-generic";
 			};
-			name = "Release (Production)";
+			name = Release;
 		};
 		B2D931072445D7E90086477D /* Debug (Production) */ = {
 			isa = XCBuildConfiguration;
@@ -1913,7 +1917,7 @@
 			};
 			name = "Debug (Production)";
 		};
-		B2D931082445D7E90086477D /* Release (Production) */ = {
+		B2D931082445D7E90086477D /* Release */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = B2464EF625270DD500A8BB65 /* Production.xcconfig */;
 			buildSettings = {
@@ -1937,7 +1941,7 @@
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
 			};
-			name = "Release (Production)";
+			name = Release;
 		};
 /* End XCBuildConfiguration section */
 
@@ -1947,66 +1951,66 @@
 			buildConfigurations = (
 				B2704E0124B4A2AC00DE196B /* Debug (Production) */,
 				B2464EEB2527013700A8BB65 /* Debug (Staging) */,
-				B2704E0224B4A2AC00DE196B /* Release (Production) */,
+				B2704E0224B4A2AC00DE196B /* Release */,
 				B2464EF12527015100A8BB65 /* Release (Staging) */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = "Release (Production)";
+			defaultConfigurationName = Release;
 		};
 		B2704E0424B4A2AC00DE196B /* Build configuration list for PBXNativeTarget "watchkitapp" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				B2704DFE24B4A2AC00DE196B /* Debug (Production) */,
 				B2464EEA2527013700A8BB65 /* Debug (Staging) */,
-				B2704DFF24B4A2AC00DE196B /* Release (Production) */,
+				B2704DFF24B4A2AC00DE196B /* Release */,
 				B2464EF02527015100A8BB65 /* Release (Staging) */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = "Release (Production)";
+			defaultConfigurationName = Release;
 		};
 		B2847FBE2450550E0042D43B /* Build configuration list for PBXNativeTarget "NotificationService" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				B2847FBC2450550E0042D43B /* Debug (Production) */,
 				B2464EE92527013700A8BB65 /* Debug (Staging) */,
-				B2847FBD2450550E0042D43B /* Release (Production) */,
+				B2847FBD2450550E0042D43B /* Release */,
 				B2464EEF2527015100A8BB65 /* Release (Staging) */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = "Release (Production)";
+			defaultConfigurationName = Release;
 		};
 		B29639C823BDC28100626E1A /* Build configuration list for PBXProject "mindLAMP" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				B29639DF23BDC28200626E1A /* Debug (Production) */,
 				B2464EE62527013700A8BB65 /* Debug (Staging) */,
-				B29639E023BDC28200626E1A /* Release (Production) */,
+				B29639E023BDC28200626E1A /* Release */,
 				B2464EEC2527015100A8BB65 /* Release (Staging) */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = "Release (Production)";
+			defaultConfigurationName = Release;
 		};
 		B29639E123BDC28200626E1A /* Build configuration list for PBXNativeTarget "mindLAMP" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				B29639E223BDC28200626E1A /* Debug (Production) */,
 				B2464EE72527013700A8BB65 /* Debug (Staging) */,
-				B29639E323BDC28200626E1A /* Release (Production) */,
+				B29639E323BDC28200626E1A /* Release */,
 				B2464EED2527015100A8BB65 /* Release (Staging) */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = "Release (Production)";
+			defaultConfigurationName = Release;
 		};
 		B2D931062445D7E90086477D /* Build configuration list for PBXNativeTarget "CustomNotification" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				B2D931072445D7E90086477D /* Debug (Production) */,
 				B2464EE82527013700A8BB65 /* Debug (Staging) */,
-				B2D931082445D7E90086477D /* Release (Production) */,
+				B2D931082445D7E90086477D /* Release */,
 				B2464EEE2527015100A8BB65 /* Release (Staging) */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = "Release (Production)";
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 
