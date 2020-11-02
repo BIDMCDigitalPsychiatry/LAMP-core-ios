@@ -34,15 +34,16 @@ extension String {
     /**
      * Remove "http://" and "https://" if the protocol is included in the "host" name.
      */
-    mutating func cleanHostName() -> String {
+    func cleanHostName() -> String {
         
-        if let range = self.range(of: "https://") {
-            self.removeSubrange(range)
+        var newString = self
+        if let range = newString.range(of: "https://") {
+            newString.removeSubrange(range)
         }
-        if let range = self.range(of: "http://") {
-            self.removeSubrange(range)
+        if let range = newString.range(of: "http://") {
+            newString.removeSubrange(range)
         }
-        return self
+        return newString
     }
     
     func makeURLString() -> String? {

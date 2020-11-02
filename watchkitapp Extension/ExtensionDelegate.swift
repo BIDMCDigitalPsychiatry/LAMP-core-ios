@@ -4,12 +4,15 @@ import WatchKit
 import UserNotifications
 import WatchConnectivity
 
+//https://developer.apple.com/documentation/watchkit/wkapplicationrefreshbackgroundtask
+//https://developer.apple.com/documentation/clockkit/creating_and_updating_complications
+//https://developer.apple.com/documentation/watchkit/running_watchos_apps_in_the_background
 class ExtensionDelegate: NSObject, WKExtensionDelegate {
     
     // An array to keep the background tasks.
     //
     private var wcBackgroundTasks = [WKWatchConnectivityRefreshBackgroundTask]()
-    let session = WKExtendedRuntimeSession()
+    //let session = WKExtendedRuntimeSession()//https://developer.apple.com/documentation/watchkit/using_extended_runtime_sessions
     
     func applicationDidFinishLaunching() {
         
@@ -29,12 +32,30 @@ class ExtensionDelegate: NSObject, WKExtensionDelegate {
         }
         let documentsURL = try! FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: false)
         print("documentsURL = \(documentsURL)")
+        
+        //SensorLogs.shared.printAllFiles()//+roll
+        
+        UserDefaults.standard.setInitalSensorRecorderTimestamp()
+        
+        LMWatchSensorManager.shared.checkIsRunning()
+    }
+    
+    // Call when the app goes to the background.
+    func applicationDidEnterBackground() {
+        // Schedule a background refresh task to update the complications.
+        scheduleBackgroundRefreshTasks()
+        LMWatchSensorManager.shared.sensor_motionManager?.restartMotionUpdates()
+        LMWatchSensorManager.shared.sensor_location?.stop()
+        LMWatchSensorManager.shared.sensor_location?.start()
     }
     
     func applicationDidBecomeActive() {
+        
+        LMWatchSensorManager.shared.checkIsRunning()
         // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
-        session.delegate = self   // self as session handler
-        session.start()  // start WKExtendedRuntimeSession
+        //session.invalidate()
+        //session.delegate = self   // self as session handler
+        //session.start()  // start WKExtendedRuntimeSession
     }
     
     func applicationWillResignActive() {
@@ -44,25 +65,25 @@ class ExtensionDelegate: NSObject, WKExtensionDelegate {
     
     // Compelete the background tasks, and schedule a snapshot refresh.
     //
-    func completeBackgroundTasks() {
-        guard !wcBackgroundTasks.isEmpty else { return }
-        
-        guard WCSession.default.activationState == .activated,
-            WCSession.default.hasContentPending == false else { return }
-        
-        wcBackgroundTasks.forEach { $0.setTaskCompletedWithSnapshot(true) }
-        
-        // Schedule a snapshot refresh if the UI is updated by background tasks.
-        //
-        let date = Date(timeIntervalSinceNow: 1)
-        WKExtension.shared().scheduleSnapshotRefresh(withPreferredDate: date, userInfo: nil) { error in
-            
-            if let error = error {
-                print("scheduleSnapshotRefresh error: \(error)!")
-            }
-        }
-        wcBackgroundTasks.removeAll()
-    }
+//    func completeBackgroundTasks() {
+//        guard !wcBackgroundTasks.isEmpty else { return }
+//
+//        guard WCSession.default.activationState == .activated,
+//            WCSession.default.hasContentPending == false else { return }
+//
+//        wcBackgroundTasks.forEach { $0.setTaskCompletedWithSnapshot(true) }
+//
+//        // Schedule a snapshot refresh if the UI is updated by background tasks.
+//        //
+//        let date = Date(timeIntervalSinceNow: 1)
+//        WKExtension.shared().scheduleSnapshotRefresh(withPreferredDate: date, userInfo: nil) { error in
+//
+//            if let error = error {
+//                print("scheduleSnapshotRefresh error: \(error)!")
+//            }
+//        }
+//        wcBackgroundTasks.removeAll()
+//    }
     
     // Be sure to complete all the tasks - otherwise they will keep consuming the background executing
     // time until the time is out of budget and the app is killed.
@@ -78,21 +99,76 @@ class ExtensionDelegate: NSObject, WKExtensionDelegate {
     // If the tasks are completed before the WCSessionDelegate methods are called, the data will be delivered
     // the app is running next time, so no data lost.
     //
+//    func handle(_ backgroundTasks: Set<WKRefreshBackgroundTask>) {
+//
+//        for task in backgroundTasks {
+//            // Use Logger to log the tasks for debug purpose. A real app may remove the log
+//            // to save the precious background time.
+//            //
+//            if let wcTask = task as? WKWatchConnectivityRefreshBackgroundTask {
+//                wcBackgroundTasks.append(wcTask)
+//            } else {
+//                task.setTaskCompletedWithSnapshot(true)
+//            }
+//        }
+//        completeBackgroundTasks()
+//    }
+//
+    // Called when a background task occurs.
     func handle(_ backgroundTasks: Set<WKRefreshBackgroundTask>) {
         
         LMWatchSensorManager.shared.checkIsRunning()
         
         for task in backgroundTasks {
-            // Use Logger to log the tasks for debug purpose. A real app may remove the log
-            // to save the precious background time.
-            //
-            if let wcTask = task as? WKWatchConnectivityRefreshBackgroundTask {
-                wcBackgroundTasks.append(wcTask)
-            } else {
-                task.setTaskCompletedWithSnapshot(true)
+            
+            switch task {
+            // Handle background refresh tasks.
+            case let backgroundTask as WKApplicationRefreshBackgroundTask:
+                
+                //on completion //+TODO
+                
+                // Schedule the next background update.
+                self.scheduleBackgroundRefreshTasks()
+                
+                // Mark the task as ended, and request an updated snapshot.
+                backgroundTask.setTaskCompletedWithSnapshot(true)
+                
+            case let snapshotTask as WKSnapshotRefreshBackgroundTask:
+                snapshotTask.setTaskCompleted(restoredDefaultState: true, estimatedSnapshotExpiration: Date.distantFuture, userInfo: nil)
+            case let connectivityTask as WKWatchConnectivityRefreshBackgroundTask:
+                connectivityTask.setTaskCompletedWithSnapshot(false)
+            case let urlSessionTask as WKURLSessionRefreshBackgroundTask:
+                urlSessionTask.setTaskCompletedWithSnapshot(false)
+            case let relevantShortcutTask as WKRelevantShortcutRefreshBackgroundTask:
+                relevantShortcutTask.setTaskCompletedWithSnapshot(false)
+            case let intentDidRunTask as WKIntentDidRunRefreshBackgroundTask:
+                intentDidRunTask.setTaskCompletedWithSnapshot(false)
+            default:
+                task.setTaskCompletedWithSnapshot(false)
             }
         }
-        completeBackgroundTasks()
+    }
+    
+    // MARK: - Private Methods
+    // Schedule the next background refresh task.
+    func scheduleBackgroundRefreshTasks() {
+        
+        // Get the shared extension object.
+        let watchExtension = WKExtension.shared()
+        
+        // If there is a complication on the watch face, the app should get at least four
+        // updates an hour. So calculate a target date 15 minutes in the future.
+        let targetDate = Date().addingTimeInterval(15.0 * 60.0)
+        
+        // Schedule the background refresh task.
+        watchExtension.scheduleBackgroundRefresh(withPreferredDate: targetDate, userInfo: nil) { (error) in
+            // Check for errors.
+            if let error = error {
+                print("*** An background refresh error occurred: \(error.localizedDescription) ***")
+                return
+            }
+            print("*** Background Task Completed Successfully! ***")
+        }
     }
     
 }

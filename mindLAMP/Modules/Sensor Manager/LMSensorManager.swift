@@ -7,7 +7,9 @@
 
 import Foundation
 import UIKit
+#if os(iOS)
 import HealthKit
+#endif
 import Sensors
 
 class LMSensorManager {
@@ -37,6 +39,7 @@ class LMSensorManager {
     var gyroscopeDataBufffer = [GyroscopeData]()
     var magnetometerDataBufffer = [MagnetometerData]()
     var motionDataBuffer = [MotionData]()
+    
     // SensorData storage variables for other sensors
     var locationsDataBuffer = [LocationsData]()
     var callsDataBuffer = [CallsData]()
@@ -58,11 +61,6 @@ class LMSensorManager {
                                                selector: #selector(appDidEnterBackground),
                                                name: UIApplication.didEnterBackgroundNotification,
                                                object: nil)
-        #elseif os(watchOS)
-        NotificationCenter.default.addObserver(self,
-                                               selector: #selector(appDidEnterBackground),
-                                               name: NSNotification.Name.NSExtensionHostDidEnterBackground,
-                                               object: nil)
         #endif
     }
     
@@ -71,16 +69,11 @@ class LMSensorManager {
         NotificationCenter.default.removeObserver(self,
                                                   name: UIApplication.didEnterBackgroundNotification,
                                                   object: nil)
-        #elseif os(watchOS)
-        NotificationCenter.default.removeObserver(self,
-                                                  name: NSNotification.Name.NSExtensionHostDidEnterBackground,
-                                                  object: nil)
         #endif
     }
     
     @objc private func appDidEnterBackground() {
         //sensor_motionManager?.restartMotionUpdates(). this is doing inside the motion sensor class
-        printToFile("restrting location")
         sensor_location?.locationManager.stopMonitoringSignificantLocationChanges()
         sensor_location?.locationManager.startMonitoringSignificantLocationChanges()
     }
@@ -137,7 +130,7 @@ class LMSensorManager {
         //Initial timer so as to post first set of sensorData. This timer invalidates after it fires.
         Timer.scheduledTimer(timeInterval: 30, target: self, selector: #selector(timeToStore), userInfo: nil, repeats: false)
         //Repeating timer which invokes postSensorData method at given interval of time.
-        sensorApiTimer = Timer.scheduledTimer(timeInterval: 10*60, target: self, selector: #selector(timeToStore(_ :)), userInfo: nil, repeats: true)
+        sensorApiTimer = Timer.scheduledTimer(timeInterval: 10*60, target: self, selector: #selector(timeToStore), userInfo: nil, repeats: true)
     }
     
     private func stopTimer() {
@@ -335,30 +328,8 @@ extension LMSensorManager {
         let dataArray = motionDataBuffer
         motionDataBuffer.removeAll(keepingCapacity: true)
         
-        let sensorArray = dataArray.map { (motionData) -> SensorDataInfo in
-            
-            var model = SensorDataModel()
-            //User Acceleration
-            let motion = Motion(x: motionData.acceleration.x, y: motionData.acceleration.y, z: motionData.acceleration.z)
-            model.motion = motion
-            
-            //Gravity
-            let gravity = Gravitational(x: motionData.gravity.x, y: motionData.gravity.y, z: motionData.gravity.z)
-            model.gravity = gravity
-            
-            //Gyro
-            let rotation = Rotational(x: motionData.rotationRate.x, y: motionData.rotationRate.y, z: motionData.rotationRate.z)
-            model.rotation = rotation
-
-            //MageticField
-            let magnetic = Magnetic(x: motionData.magneticField.x, y: motionData.magneticField.y, z: motionData.magneticField.z)
-            model.magnetic = magnetic
-            
-            //Attitude
-            let attitude = Attitude(roll: motionData.deviceAttitude.roll, pitch: motionData.deviceAttitude.pitch, yaw: motionData.deviceAttitude.yaw)
-            model.attitude = attitude
-            
-            return SensorDataInfo(sensor: SensorType.lamp_accelerometer_motion.lampIdentifier, timestamp: motionData.timestamp, data: model)
+        let sensorArray = dataArray.map {
+            SensorDataInfo(sensor: SensorType.lamp_accelerometer_motion.lampIdentifier, timestamp: $0.timestamp, data: SensorDataModel(motionData: $0))
         }
         return sensorArray
     }
@@ -368,13 +339,7 @@ extension LMSensorManager {
         let dataArray = locationsDataBuffer
         locationsDataBuffer.removeAll(keepingCapacity: true)
 
-        let sensorArray = dataArray.map { (locationData) -> SensorDataInfo in
-            var model = SensorDataModel()
-            model.latitude = locationData.latitude
-            model.longitude = locationData.longitude
-            model.altitude = locationData.longitude
-            return SensorDataInfo(sensor: SensorType.lamp_gps.lampIdentifier, timestamp: locationData.timestamp, data: model)
-        }
+        let sensorArray = dataArray.map { SensorDataInfo(sensor: SensorType.lamp_gps.lampIdentifier, timestamp: $0.timestamp, data: SensorDataModel(locationData: $0)) }
 
         return sensorArray
     }
@@ -384,14 +349,7 @@ extension LMSensorManager {
         let dataArray = callsDataBuffer
         callsDataBuffer.removeAll(keepingCapacity: true)
         
-
-        let sensorArray = dataArray.map { (callsData) -> SensorDataInfo in
-            var model = SensorDataModel()
-            model.call_type = callsData.type
-            model.call_duration = Double(callsData.duration)
-            model.call_trace = callsData.trace
-            return SensorDataInfo(sensor: SensorType.lamp_calls.lampIdentifier, timestamp: callsData.timestamp, data: model)
-        }
+        let sensorArray = dataArray.map { SensorDataInfo(sensor: SensorType.lamp_calls.lampIdentifier, timestamp: $0.timestamp, data: SensorDataModel(callsData: $0)) }
         return sensorArray
     }
     
@@ -401,12 +359,7 @@ extension LMSensorManager {
         let dataArray = screenStateDataBuffer
         screenStateDataBuffer.removeAll(keepingCapacity: true)
         
-        let sensorArray = dataArray.map { (screenData) -> SensorDataInfo in
-            var model = SensorDataModel()
-            model.value = Double(screenData.screenState.rawValue)
-            model.valueString = screenData.screenState.stringValue
-            return SensorDataInfo(sensor: SensorType.lamp_screen_state.lampIdentifier, timestamp: screenData.timestamp, data: model)
-        }
+        let sensorArray = dataArray.map { SensorDataInfo(sensor: SensorType.lamp_screen_state.lampIdentifier, timestamp: $0.timestamp, data: SensorDataModel(screenData: $0)) }
         return sensorArray
     }
     
@@ -536,24 +489,22 @@ extension LMSensorManager {
             //LMLogsManager.shared.addLogs(level: .warning, logs: Logs.Messages.hkquantity_null)
             return nil
         }
-        var arrayData = [SensorDataInfo]()
+        var arrayData: [SensorDataInfo]?
         guard let categoryTypes: [HKCategoryTypeIdentifier] = sensor_healthKit?.healthCategoryTypes.map( {HKCategoryTypeIdentifier(rawValue: $0.identifier)} ) else { return nil }
         for categoryType in categoryTypes {
             switch categoryType {
             default:
-                if let data = latestData(for: categoryType, in: arrData) {
-                    var model = SensorDataModel()
-                    model.unit = data.unit
-                    model.value = data.value
-                    model.valueString = data.valueText
-                    model.startDate = data.startDate
-                    model.endDate = data.endDate
-                    arrayData.append(SensorDataInfo(sensor: categoryType.lampIdentifier, timestamp: Double(data.timestamp), data: model))
+                if let dataArray = allHealthData(for: categoryType, in: arrData) {
+                   arrayData = dataArray.map { (categoryData) -> SensorDataInfo in
+                        var model = SensorDataModel()
+                        model.unit = categoryData.unit
+                        model.value = categoryData.value
+                        model.valueString = categoryData.valueText
+                        model.startDate = categoryData.startDate
+                        model.endDate = categoryData.endDate
+                        return SensorDataInfo(sensor: categoryType.lampIdentifier, timestamp: Double(categoryData.timestamp), data: model)
+                    }
                 }
-                //                else {
-                //                    let msg = String(format: Logs.Messages.quantityType_null, categoryType.jsonKey)
-                //                    LMLogsManager.shared.addLogs(level: .warning, logs: msg)
-                //                }
             }
         }
         return arrayData
@@ -590,13 +541,16 @@ extension LMSensorManager {
             case .bloodPressureDiastolic:
                 ()//handled with Systolic
             default://bodyMass, height, respiratoryRate, heartRate
-                if let data = latestData(for: quantityType, in: arrData) {
-                    var model = SensorDataModel()
-                    model.unit = data.unit
-                    model.value = data.value
-                    model.startDate = data.startDate
-                    model.endDate = data.endDate
-                    arrayData.append(SensorDataInfo(sensor: quantityType.lampIdentifier, timestamp: Double(data.timestamp), data: model))
+                if let dataArray = allHealthData(for: quantityType, in: arrData) {
+                    let sensorDataArray = dataArray.map { (quantityData) -> SensorDataInfo in
+                        var model = SensorDataModel()
+                        model.unit = quantityData.unit
+                        model.value = quantityData.value
+                        model.startDate = quantityData.startDate
+                        model.endDate = quantityData.endDate
+                        return SensorDataInfo(sensor: quantityType.lampIdentifier, timestamp: Double(quantityData.timestamp), data: model)
+                    }
+                    arrayData.append(contentsOf: sensorDataArray)
                 } else {
                     //let msg = String(format: Logs.Messages.quantityType_null, quantityType.jsonKey)
                     //LMLogsManager.shared.addLogs(level: .warning, logs: msg)
@@ -611,6 +565,14 @@ extension LMSensorManager {
     }
     func latestData(for hkIdentifier: HKQuantityTypeIdentifier, in array: [LMHealthKitQuantityData]) -> LMHealthKitQuantityData? {
         return array.filter({ $0.type == hkIdentifier.rawValue }).max(by: {($0.endDate ?? 0) < ($1.endDate ?? 0) })
+    }
+    
+    func allHealthData(for hkIdentifier: HKQuantityTypeIdentifier, in array: [LMHealthKitQuantityData]) -> [LMHealthKitQuantityData]? {
+        return array.filter({ $0.type == hkIdentifier.rawValue })
+    }
+    
+    func allHealthData(for hkIdentifier: HKCategoryTypeIdentifier, in array: [LMHealthKitCategoryData]) -> [LMHealthKitCategoryData]? {
+        return array.filter({ $0.type == hkIdentifier.rawValue })
     }
     
 }

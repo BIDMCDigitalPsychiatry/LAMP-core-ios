@@ -14,12 +14,29 @@ extension UserDefaults {
         case serverAddress = "serverAddress"
         case deviceToken = "deviceToken"
         case watchdeviceToken = "watchdeviceToken"
+        case sensorRecorderTimestamp = "sensorRecorderTimestamp"
         
         //for iOS only
         case launchURL = "launchURL"
         case nodeJSPath = "nodeJSPath"
         case nodeRootFolder = "nodeRootFolder"
         case version = "version"
+        
+    }
+    
+    func setInitalSensorRecorderTimestamp() {
+        if sensorRecorderTimestamp == nil {
+            sensorRecorderTimestamp = Date().timeIntervalSince1970
+        }
+    }
+    
+    var sensorRecorderTimestamp: TimeInterval? {
+        get {
+            return self.double(forKey: UserDefaults.Key.sensorRecorderTimestamp.rawValue)
+        }
+        set {
+            self.set(newValue, forKey: UserDefaults.Key.sensorRecorderTimestamp.rawValue)
+        }
     }
     
     var userID: String? {
@@ -61,6 +78,7 @@ extension UserDefaults {
     func clearAll() {
         UserDefaults.standard.userID = nil
         UserDefaults.standard.serverAddress = nil
+        UserDefaults.standard.sensorRecorderTimestamp = nil
         UserDefaults.standard.synchronize()
     }
     

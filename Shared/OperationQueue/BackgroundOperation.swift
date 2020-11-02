@@ -6,6 +6,7 @@
 //
 
 import Foundation
+//import MONetworking
 
 enum OperationType {
     case sensorData
@@ -77,7 +78,7 @@ private extension BackgroundOperation {
             self.state = .finished
             switch response {
             case .failure(let err):
-                LMLogsManager.shared.addLogs(level: .error, logs: Logs.Messages.network_error + " " + err.localizedMessage)
+                //+rollLMLogsManager.shared.addLogs(level: .error, logs: Logs.Messages.network_error + " " + err.localizedMessage)
                 break
             case .success(_):
                 //TODO: remove file from disk

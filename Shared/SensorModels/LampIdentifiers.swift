@@ -66,7 +66,11 @@ public enum SensorType: LampDataKeysProtocol {
         case .lamp_flights_down:
             return "lamp.floors_descended"
         case .lamp_gps:
-            return "lamp.gps"
+            #if os(watchOS)
+                return "lamp.watch.gps"
+            #else
+                return "lamp.gps"
+            #endif
         case .lamp_gyroscope:
             #if os(watchOS)
                 return "lamp.watch.gyroscope"

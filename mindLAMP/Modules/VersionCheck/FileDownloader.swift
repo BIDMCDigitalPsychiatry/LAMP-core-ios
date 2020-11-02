@@ -2,7 +2,7 @@
 
 import Foundation
 import UIKit
-import ZIPFoundation
+//import ZIPFoundation
 
 protocol DownloadDelegate: class {
     func didComplete(percentage: Int64)
@@ -62,7 +62,7 @@ extension FileDownloader: URLSessionDownloadDelegate {
                 try FileManager.default.removeItem(at: existingFoler)
             }
             
-            try FileManager.default.unzipItem(at: savedURL, to: documentsURL)
+            //+rolltry FileManager.default.unzipItem(at: savedURL, to: documentsURL)
             
             try FileManager.default.removeItem(at: savedURL)
             

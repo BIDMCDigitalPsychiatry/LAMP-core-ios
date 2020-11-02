@@ -6,10 +6,10 @@
 
 import Foundation
 
-protocol DictionaryEncodable: Encodable {}
+public protocol DictionaryEncodable: Encodable {}
 
 extension DictionaryEncodable {
-    func dictionary() -> [String: Any]? {
+    public func dictionary() -> [String: Any]? {
         let encoder = JSONEncoder()
         //let formatter = Date.jsonDateEncodeFormatter
         //encoder.dateEncodingStrategy = .formatted(formatter)//.millisecondsSince1970

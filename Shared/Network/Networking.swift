@@ -2,14 +2,14 @@
 
 import Foundation
 
-class Networking: NSObject, NetworkingAPI {
+public class Networking: NSObject, NetworkingAPI {
     
     let session: URLSession
     let baseURL: URL
     var currentTask: URLSessionTask?
     
     //https://developer.apple.com/documentation/watchkit/keeping_your_watchos_content_up_to_date
-    init(baseURL: URL, isBackgroundSession: Bool) {
+    public init(baseURL: URL, isBackgroundSession: Bool) {
         self.baseURL = baseURL
         if isBackgroundSession {
             let config = URLSessionConfiguration.background(withIdentifier: "MySession")
@@ -19,11 +19,11 @@ class Networking: NSObject, NetworkingAPI {
         }
     }
     
-    func cancelServiceCall() {
+    public func cancelServiceCall() {
         currentTask?.cancel()
     }
     
-    func makeWebserviceCall<T: Decodable>(with request: RequestProtocol, then callback: @escaping (Result<T>) -> Void) {
+    public func makeWebserviceCall<T: Decodable>(with request: RequestProtocol, then callback: @escaping (Result<T>) -> Void) {
         
         let method = request.requestTye
         //create url request
@@ -127,7 +127,7 @@ class Networking: NSObject, NetworkingAPI {
 
 extension Networking: URLSessionDelegate {
     
-    func urlSessionDidFinishEvents(forBackgroundURLSession session: URLSession) {
+    public func urlSessionDidFinishEvents(forBackgroundURLSession session: URLSession) {
         print("finished")
     }
 }

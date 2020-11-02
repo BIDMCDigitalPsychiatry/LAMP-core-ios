@@ -3,14 +3,6 @@
 import Combine
 import Foundation
 import WatchKit
-//import SwiftUI
-
-extension String {
-    func deletingPrefix(_ prefix: String) -> String {
-        guard self.hasPrefix(prefix) else { return self }
-        return String(self.dropFirst(prefix.count))
-    }
-}
 
 class UserAuth: ObservableObject {
     
@@ -20,12 +12,12 @@ class UserAuth: ObservableObject {
         case serverURLInput
         case loggedIn
     }
-    var serverURLDomain: String = LampURL.lampAPI.deletingPrefix("https://")
+    var serverURLDomain: String = LampURL.lampAPI.cleanHostName()
     var userName: String?//
     var password: String?//
     
     var serverURLDomainDisplayValue: String {
-        return serverURLDomain.isEmpty ? LampURL.lampAPI.deletingPrefix("https://") : serverURLDomain
+        return serverURLDomain.isEmpty ? LampURL.lampAPI.cleanHostName() : serverURLDomain
     }
     
     var serverURL: String {

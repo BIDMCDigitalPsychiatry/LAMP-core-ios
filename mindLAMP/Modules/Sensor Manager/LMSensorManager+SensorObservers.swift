@@ -11,7 +11,7 @@ import Sensors
 extension LMSensorManager: SensorStore {
 
     @objc
-    func timeToStore(_ runCount: Int) {
+    func timeToStore() {
         
         if lampScreenSensor?.latestScreenState?.rawValue != ScreenState.screen_locked.rawValue {
             sensor_healthKit?.fetchHealthData()
@@ -21,6 +21,7 @@ extension LMSensorManager: SensorStore {
 
         DispatchQueue.global().asyncAfter(deadline: .now() + 15) {
             let request = LMSensorManager.shared.fetchSensorDataRequest()
+            self.sensor_healthKit?.clearDataArrays()
             SensorLogs.shared.storeSensorRequest(request)
             print("\n stored file @ \(Date())")
             if self.isSyncNow {

@@ -20,9 +20,13 @@ class SensorLogs {
     
     func storeSensorRequest(_ request: SensorData.Request) {
         let timeStamp = Date().timeInMilliSeconds
-        let timeStampStr = Int(timeStamp).description
+        let timeStampStr = UInt64(timeStamp).description
         FileStorage.store(request, to: Logs.Directory.sensorlogs, in: .documents, as: timeStampStr + ".json")
     }
+    
+//    func storeSensorRequest(_ request: SensorData.Request, timestampText: String) {//+roll
+//        FileStorage.store(request, to: Logs.Directory.sensorlogs, in: .documents, as: timestampText + ".json")
+//    }
     
     func fetchSensorRequest() -> [(String, SensorData.Request)] {
         let urls = FileStorage.urls(for: Logs.Directory.sensorlogs, in: .documents)
@@ -31,11 +35,19 @@ class SensorLogs {
         var requests = [(String, SensorData.Request)]()
         for file in files {
             if let request = FileStorage.retrieve(file, from: Logs.Directory.sensorlogs, in: .documents, as: SensorData.Request.self) {
-                
                 requests.append((file, request))
             }
         }
         return requests
+    }
+    
+    func printAllFiles() {
+        let urls = FileStorage.urls(for: Logs.Directory.sensorlogs, in: .documents)
+        var files = [String]()
+        urls?.forEach({ files.append($0.lastPathComponent) })
+        for file in files {
+            print("\nfile = \(file)")
+        }
     }
     
     func deleteFile(_ fileName: String) {

@@ -7,13 +7,13 @@ enum NetworkError: Error {
     case noResponse
     case errorResponse(String)
     
-    var localizedText: String {
+    public var localizedText: String {
         switch self {
 
         case .invalidURL:
-            return "Invalid URL"
+            return NSLocalizedString("networking.invalid.url", comment: "Invalid URL")
         case .noResponse:
-            return "Server is not responding!"
+            return NSLocalizedString("networking.notresponding", comment: "Server is not responding!")
         case .errorResponse(let msg):
             return msg
         }
@@ -23,7 +23,7 @@ enum NetworkError: Error {
 
 extension Error {
 
-    var localizedMessage: String {
+    public var localizedMessage: String {
         if let err = self as? NetworkError {
             return err.localizedText
         } else {

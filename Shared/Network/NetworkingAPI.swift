@@ -16,7 +16,7 @@ struct ContentTypeConstants {
 
 //typealias NetworkCompletion = (Result<JSONSerializable>) -> Void
 
-protocol RequestProtocol {
+public protocol RequestProtocol {
     var jsonBody: [String: Any]? {get}
     func buildEndpoint() -> String
     func isAuth() -> Bool
@@ -27,7 +27,7 @@ protocol RequestProtocol {
     var jsonData: Data? {get}
 }
 
-enum HTTPMethodType {
+public enum HTTPMethodType {
     case post
     case get
     case put
@@ -49,11 +49,11 @@ enum HTTPMethodType {
     }
 }
 
-enum HTTPContentType: String {
+public enum HTTPContentType: String {
     case json
     case urlEncoded
 
-    func toString() -> String {
+    public func toString() -> String {
         switch self {
         case .json:
             return ContentTypeConstants.jSON
@@ -63,7 +63,7 @@ enum HTTPContentType: String {
     }
 }
 
-protocol NetworkingAPI {
+public protocol NetworkingAPI {
 
     /// make web service call using given http method and data
     ///

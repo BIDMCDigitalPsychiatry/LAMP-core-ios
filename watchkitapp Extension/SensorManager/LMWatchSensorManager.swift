@@ -15,12 +15,14 @@ class LMWatchSensorManager {
     
     private let sensorManager = SensorManager()
     var sensor_motionManager: MotionManager?
+    var sensor_location: LocationsSensor?
     
     // SensorData storage variables.
     var accelerometerDataBufffer = [AccelerometerData]()
     var gyroscopeDataBufffer = [GyroscopeData]()
     var magnetometerDataBufffer = [MagnetometerData]()
     var motionDataBuffer = [MotionData]()
+    //var locationsDataBuffer = [LocationsData]()
     
     //check if the sensors are started or not
     private var isStarted = false
@@ -28,55 +30,71 @@ class LMWatchSensorManager {
     //set fetch interval for 5 mins, and to set sync interval as double time of fetch interval
     var isSyncNow = false
     
-    let wristLocationIsLeft = WKInterfaceDevice.current().wristLocation == .left
-    
-    
-    var completionHandler: ((WKBackgroundFetchResult) -> Void)?
+    //var completionHandler: ((WKBackgroundFetchResult) -> Void)?
+    //var accelerometerRecorder: LMSensorRecorder
     
     static let shared = LMWatchSensorManager()
-    private init() {
-        //        queue.maxConcurrentOperationCount = 1
-        //        queue.name = "LMWatchSensorManagerQueue"
-        NotificationCenter.default.addObserver(
-            self, selector: #selector(type(of: self).sensorDataPosted(_:)),
-            name: .userLogOut, object: nil
-        )
-    }
     
-    private func startSensors() {
+    private init() {
+
+        //setup motion manager
         sensor_motionManager = MotionManager.init(MotionManager.Config().apply(closure: { [weak self] (config) in
             config.accelerometerObserver = self
             config.gyroObserver = self
             config.magnetoObserver = self
             config.motionObserver = self
+            
             config.sensorTimerDelegate = self
             
-            config.sensorTimerDataStoreInterval = 5.0 * 60.0//5 miunutes
+            config.sensorTimerDataStoreInterval = 5.0 * 60.0//5 miunutes//
         }))
         
-        sensorManager.addSensors([sensor_motionManager!])
+        //setup location
+        sensor_location = LocationsSensor.init(LocationsSensor.Config().apply(closure: { config in
+            //config.sensorObserver = self
+            //config.minimumInterval = 1.0
+            config.accuracy = kCLLocationAccuracyBestForNavigation
+        }))
         
-        isStarted = true
-        sensorManager.startAllSensors()
+        sensorManager.addSensors([sensor_motionManager!, sensor_location!])
     }
     
+    public func startSensors() {
+
+        isStarted = true
+        print("\nStart Sensors")
+        stop()
+        self.sensorManager.startAllSensors()
+    }
+
     func stop() {
         sensorManager.stopAllSensors()
     }
     
-    func getSensorDataRequest() -> SensorData.Request {
+    func getSensorDataRequest() -> SensorData.Request? {
         
         return SensorData.Request(sensorEvents: getSensorDataArrray())
     }
     
     func checkIsRunning() {
+        print("checkIsRunning")
         if self.isStarted == false {
-            if User.shared.isLogin() {
+            if User.shared.isLogin() {//+roll
                 startSensors()
+                startRecorder()
+                self.isStarted = true
             }
         }
         BackgroundServices.shared.performTasks()
     }
+    
+    func startRecorder() {
+        print("startRecorder")
+        //accelerometerRecorder.startReadingAccelorometerData()
+    }
+    
+    let connection = NetworkConfig.networkingAPI()
+
 }
 
 //MARK: - Private functions
@@ -93,19 +111,19 @@ private extension LMWatchSensorManager {
         return arraySensorData
     }
     
-    @objc
-    func sensorDataPosted(_ notification: Notification) {
-        self.completionHandler?(.newData)
-        self.completionHandler = nil
-    }
+//    @objc
+//    func sensorDataPosted(_ notification: Notification) {
+//        self.completionHandler?(.newData)
+//        self.completionHandler = nil
+//    }
     
     func fetchMagnetometerData() -> [SensorDataInfo] {
-        
-        let dataArray = motionDataBuffer
-        motionDataBuffer.removeAll(keepingCapacity: true)
-        
+
+        let dataArray = magnetometerDataBufffer
+        magnetometerDataBufffer.removeAll(keepingCapacity: true)
+
         let sensorArray = dataArray.map {
-            SensorDataInfo(sensor: SensorType.lamp_magnetometer.lampIdentifier, timestamp: $0.timestamp, data: SensorDataModel(magneticField: $0.magneticField))
+            SensorDataInfo(sensor: SensorType.lamp_magnetometer.lampIdentifier, timestamp: $0.timestamp, data: SensorDataModel(magneticField: $0.magnetoData))
         }
         return sensorArray
     }
@@ -121,11 +139,21 @@ private extension LMWatchSensorManager {
         return sensorArray
     }
     
+//    private func fetchGPSData() -> [SensorDataInfo] {
+//
+//        let dataArray = locationsDataBuffer
+//        locationsDataBuffer.removeAll(keepingCapacity: true)
+//
+//        let sensorArray = dataArray.map { SensorDataInfo(sensor: SensorType.lamp_gps.lampIdentifier, timestamp: $0.timestamp, data: SensorDataModel(locationData: $0)) }
+//
+//        return sensorArray
+//    }
+    
     func fetchAccelerometerData() -> [SensorDataInfo] {
-        
+
         let dataArray = accelerometerDataBufffer
         accelerometerDataBufffer.removeAll(keepingCapacity: true)
-        
+
         let sensorArray = dataArray.map {
             SensorDataInfo(sensor: SensorType.lamp_accelerometer.lampIdentifier, timestamp: $0.timestamp, data: SensorDataModel(accelerationRate: $0.acceleration))
         }
@@ -139,27 +167,7 @@ private extension LMWatchSensorManager {
 
         let sensorArray = dataArray.map { (motionData) -> SensorDataInfo in
             
-            var model = SensorDataModel()
-            //User Acceleration
-            let motion = Motion(x: motionData.acceleration.x, y: motionData.acceleration.y, z: motionData.acceleration.z)
-            model.motion = motion
-            
-            //Gravity
-            let gravity = Gravitational(x: motionData.gravity.x, y: motionData.gravity.y, z: motionData.gravity.z)
-            model.gravity = gravity
-            
-            //Gyro
-            let rotation = Rotational(x: motionData.rotationRate.x, y: motionData.rotationRate.y, z: motionData.rotationRate.z)
-            model.rotation = rotation
-
-            //MageticField
-            let magnetic = Magnetic(x: motionData.magneticField.x, y: motionData.magneticField.y, z: motionData.magneticField.z)
-            model.magnetic = magnetic
-            
-            //Attitude
-            let attitude = Attitude(roll: motionData.deviceAttitude.roll, pitch: motionData.deviceAttitude.pitch, yaw: motionData.deviceAttitude.yaw)
-            model.attitude = attitude
-            
+            let model = SensorDataModel(motionData: motionData)
             return SensorDataInfo(sensor: SensorType.lamp_accelerometer_motion.lampIdentifier, timestamp: motionData.timestamp, data: model)
         }
         
@@ -196,12 +204,12 @@ extension LMWatchSensorManager: WatchOSDelegate {
                 //LMWatchSensorManager.shared.sendSensorEvents()
                 LMWatchSensorManager.shared.checkIsRunning()
             } else if let _ = tuple.applicationContext[IOSCommands.logout] as? Bool {
-                let isLoginPreviously = User.shared.isLogin()
+//                let isLoginPreviously = User.shared.isLogin()
                 User.shared.logout()
                 Utils.postNotificationOnMainQueueAsync(name: .userLogOut)
-                if isLoginPreviously {
-                    WKExtension.shared().unregisterForRemoteNotifications()
-                }
+//                if isLoginPreviously {
+//                    WKExtension.shared().unregisterForRemoteNotifications()
+//                }
             }
         }
     }

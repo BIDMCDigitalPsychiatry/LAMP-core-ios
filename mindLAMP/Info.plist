@@ -20,6 +20,8 @@
 	<string>61</string>
 	<key>DASHBOARD_URL</key>
 	<string>$(DASHBOARD_URL)</string>
+	<key>ITSAppUsesNonExemptEncryption</key>
+	<false/>
 	<key>LAMP_API</key>
 	<string>$(LAMP_API)</string>
 	<key>LSRequiresIPhoneOS</key>

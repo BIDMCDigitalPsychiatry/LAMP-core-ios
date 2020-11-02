@@ -6,6 +6,7 @@
 
 import Foundation
 import UIKit
+//import MONetworking
 
 class BackgroundServices {
     //bgtasks
@@ -30,6 +31,7 @@ class BackgroundServices {
             }
             self.isInProgress = true
             let dispatchQueue = OperationQueue()
+            dispatchQueue.maxConcurrentOperationCount = 1
             //+rollself.startBGTask(dispatchQueue)
             self.postSensorData(dispatchQueue)
             self.putLogsData(dispatchQueue)

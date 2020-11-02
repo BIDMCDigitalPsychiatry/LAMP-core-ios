@@ -1,7 +1,8 @@
 // mindLAMP
 
 import Foundation
-import CryptoSwift
+//import CryptoSwift
+//import MONetworking
 
 protocol DownloadStatus: class {
     func setProgressText(_ text: String)
@@ -106,13 +107,17 @@ extension VersionCheckViewModel: DownloadDelegate {
 
 extension Data {
     func aesEncrypt(key: String, iv: String) throws -> Data{
-        let encypted = try AES(key: key.bytes, blockMode: CBC(iv: iv.bytes), padding: .pkcs7).encrypt(self.bytes)
-        return Data(encypted)
+        //+roll
+//        let encypted = try AES(key: key.bytes, blockMode: CBC(iv: iv.bytes), padding: .pkcs7).encrypt(self.bytes)
+//        return Data(encypted)
+        return Data(base64Encoded: "")!
     }
     
     func aesDecrypt(key: String, iv: String) throws -> Data {
-        let decrypted = try AES(key: key.bytes, blockMode: CBC(iv: iv.bytes), padding: .pkcs7).decrypt(self.bytes)
-        return Data(decrypted)
+        //+roll
+//        let decrypted = try AES(key: key.bytes, blockMode: CBC(iv: iv.bytes), padding: .pkcs7).decrypt(self.bytes)
+//        return Data(decrypted)
+        return Data(base64Encoded: "")!
     }
 }
 
