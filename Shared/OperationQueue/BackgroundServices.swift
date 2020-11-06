@@ -114,7 +114,6 @@ extension BackgroundServices {
     
     func putLogsData(_ dispatchQueue: OperationQueue) {
         //ToDo: add configuration to make it dynamically . only work for production
-        
         let arrLogsData = LMLogsManager.shared.fetchLogsRequest()
         let endPoint =  Endpoint.logs.rawValue
         for logsData in arrLogsData {

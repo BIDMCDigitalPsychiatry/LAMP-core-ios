@@ -17,7 +17,7 @@ class ExtensionDelegate: NSObject, WKExtensionDelegate {
     func applicationDidFinishLaunching() {
         
         WatchSessionManager.shared.startSession()
-        WatchSessionManager.shared.watchOSDelegate = LMWatchSensorManager.shared
+        WatchSessionManager.shared.watchOSDelegate = LMSensorManager.shared
         print("start APNS")
         // Perform any final initialization of your application.
         let center = UNUserNotificationCenter.current()
@@ -33,25 +33,25 @@ class ExtensionDelegate: NSObject, WKExtensionDelegate {
         let documentsURL = try! FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: false)
         print("documentsURL = \(documentsURL)")
         
-        //SensorLogs.shared.printAllFiles()//+roll
+        //SensorLogs.shared.printAllFiles()
         
         UserDefaults.standard.setInitalSensorRecorderTimestamp()
         
-        LMWatchSensorManager.shared.checkIsRunning()
+        LMSensorManager.shared.checkIsRunning()
     }
     
     // Call when the app goes to the background.
     func applicationDidEnterBackground() {
         // Schedule a background refresh task to update the complications.
         scheduleBackgroundRefreshTasks()
-        LMWatchSensorManager.shared.sensor_motionManager?.restartMotionUpdates()
-        LMWatchSensorManager.shared.sensor_location?.stop()
-        LMWatchSensorManager.shared.sensor_location?.start()
+        LMSensorManager.shared.sensor_motionManager?.restartMotionUpdates()
+        LMSensorManager.shared.sensor_location?.stop()
+        LMSensorManager.shared.sensor_location?.start()
     }
     
     func applicationDidBecomeActive() {
         
-        LMWatchSensorManager.shared.checkIsRunning()
+        LMSensorManager.shared.checkIsRunning()
         // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
         //session.invalidate()
         //session.delegate = self   // self as session handler
@@ -117,7 +117,7 @@ class ExtensionDelegate: NSObject, WKExtensionDelegate {
     // Called when a background task occurs.
     func handle(_ backgroundTasks: Set<WKRefreshBackgroundTask>) {
         
-        LMWatchSensorManager.shared.checkIsRunning()
+        LMSensorManager.shared.checkIsRunning()
         
         for task in backgroundTasks {
             
@@ -253,7 +253,7 @@ extension ExtensionDelegate {
         let lampAPI = NotificationAPI(NetworkConfig.networkingAPI())
         lampAPI.sendPushAcknowledgement(request: acknoledgeRequest)
         
-        LMWatchSensorManager.shared.checkIsRunning()
+        LMSensorManager.shared.checkIsRunning()
     }
 }
 

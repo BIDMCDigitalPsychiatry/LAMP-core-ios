@@ -27,7 +27,9 @@ class VersionCheckViewController: UIViewController {
         self.title = "Dashboard update"
         infoLabel.text = "Checking for new dashboard version..."
         
-        viewModel.delegate = self
+        navigateToHome()
+        
+        /*+rollviewModel.delegate = self
         viewModel.getDownloadURL { (response, err) in
             if let downloadURL = response?.url {
                 if response?.version == UserDefaults.standard.version {
@@ -49,7 +51,7 @@ class VersionCheckViewController: UIViewController {
                 }
 
             }
-        }
+        }*/
     }
     
     deinit {
@@ -101,10 +103,14 @@ extension VersionCheckViewController: DownloadStatus {
 private extension VersionCheckViewController {
  
     func navigateToHome() {
-        let appdelegate = UIApplication.shared.delegate as! AppDelegate
+        //+roll
+//        let appdelegate = UIApplication.shared.delegate as! AppDelegate
+//        let homeController = HomeViewController.getController()
+//        let navController = UINavigationController(rootViewController: homeController)
+//        appdelegate.window?.rootViewController = navController
+        
         let homeController = HomeViewController.getController()
-        let navController = UINavigationController(rootViewController: homeController)
-        appdelegate.window?.rootViewController = navController
+        self.navigationController?.pushViewController(homeController, animated: false)
     }
 }
 

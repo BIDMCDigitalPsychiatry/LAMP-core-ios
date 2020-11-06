@@ -78,14 +78,13 @@ private extension BackgroundOperation {
             self.state = .finished
             switch response {
             case .failure(let err):
-                //+rollLMLogsManager.shared.addLogs(level: .error, logs: Logs.Messages.network_error + " " + err.localizedMessage)
+                LMLogsManager.shared.addLogs(level: .error, logs: Logs.Messages.network_error + " " + err.localizedMessage)
                 break
             case .success(_):
                 //TODO: remove file from disk
                 if let file = self.fileName {
                     SensorLogs.shared.deleteFile(file)
-                    printToFile("\n deleted file\(file)")
-                    print("\n deleted file\(file)")
+                    printToFile("\n deleted file \(file)")
                 }
                 break
             }

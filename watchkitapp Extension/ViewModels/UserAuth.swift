@@ -50,7 +50,7 @@ class UserAuth: ObservableObject {
     init(_ isLoggedIn: Bool) {
         if isLoggedIn {
             self.loginStatus = .loggedIn
-            LMWatchSensorManager.shared.checkIsRunning()
+            LMSensorManager.shared.checkIsRunning()
         } else {
             self.loginStatus = .logout
         }
@@ -104,7 +104,7 @@ class UserAuth: ObservableObject {
                 DispatchQueue.main.async {
                     Utils.postNotificationOnMainQueueAsync(name: .userLogined)
                 }
-                LMWatchSensorManager.shared.checkIsRunning()
+                LMSensorManager.shared.checkIsRunning()
             } else {
                 self.loginStatus = .loginInput
             }

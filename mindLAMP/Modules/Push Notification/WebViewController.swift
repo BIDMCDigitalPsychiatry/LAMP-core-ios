@@ -36,6 +36,15 @@ class WebViewController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+//    override func viewDidAppear(_ animated: Bool) {
+//        super.viewDidAppear(animated)
+//        
+//        
+//        let alert = UIAlertController(title: "alert.lamp.title".localized, message: pageURL.absoluteString, preferredStyle: .alert)
+//        alert.addAction(UIAlertAction(title: "alert.button.ok".localized, style: .destructive, handler: { action in
+//           }))
+//        present(alert, animated: true, completion: nil)
+//    }
 
 }
 // MARK: - UIWebViewDelegate

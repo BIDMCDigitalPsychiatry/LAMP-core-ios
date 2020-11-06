@@ -24,7 +24,7 @@ class SensorLogs {
         FileStorage.store(request, to: Logs.Directory.sensorlogs, in: .documents, as: timeStampStr + ".json")
     }
     
-//    func storeSensorRequest(_ request: SensorData.Request, timestampText: String) {//+roll
+//    func storeSensorRequest(_ request: SensorData.Request, timestampText: String) {
 //        FileStorage.store(request, to: Logs.Directory.sensorlogs, in: .documents, as: timestampText + ".json")
 //    }
     

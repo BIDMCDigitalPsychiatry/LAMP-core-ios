@@ -28,16 +28,22 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         NotificationHelper.shared.handleLaunchWithRemoteNotification(launchOptions)
         
         let documentsURL = try! FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: false)
-        print("documentsURL = \(documentsURL)")
+        print("Launched documentsURL = \(documentsURL) \(Date())")
         
         if launchOptions?[UIApplication.LaunchOptionsKey.location] != nil {
+            printToFile("\nLaunch by location")
+            LMSensorManager.shared.checkIsRunning()
+        } else {
+            printToFile("\nLaunched")
             LMSensorManager.shared.checkIsRunning()
         }
+        //Logging.isLogToFile = true
         return true
     }
     
     func application(_ application: UIApplication, performFetchWithCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
         //BackgroundServices.shared.performTasksInBG(completionHandler: completionHandler)
+        printToFile("\nperformFetchWithCompletionHandler")
         LMSensorManager.shared.checkIsRunning()
     }
     
@@ -45,6 +51,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         print("handleEventsForBackgroundURLSession")
         completionHandler()
         //self.completionHandler = completionHandler
+    }
+    
+    func applicationWillTerminate(_ application: UIApplication) {
+        printToFile("applicationWillTerminate")
     }
 }
 

@@ -109,7 +109,7 @@ public class Networking: NSObject, NetworkingAPI {
     ///   - response:
     ///   - error:
     private func logResponse(_ data: Data?, _ response: URLResponse?, _ error: Error?) {
-        //#if DEBUG
+        #if DEBUG
         print("httpResponse = \(String(describing: response))")
         print("error = \(String(describing: error))")
         
@@ -122,6 +122,7 @@ public class Networking: NSObject, NetworkingAPI {
         } catch {
             
         }
+        #endif
     }
 }
 

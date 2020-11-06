@@ -125,6 +125,8 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
     func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable : Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
         
         let pushInfo = PushUserInfo(userInfo: userInfo)
+        printToFile("userInfo = \(userInfo)")
+        print("userInfo = \(userInfo)")
         pushInfo.setDeliveredTime()
         completionHandler(UIBackgroundFetchResult.noData)
         
@@ -136,6 +138,8 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
         
         guard let remoteAction = RemoteNotification.Action.buildFromIdentifier(response.actionIdentifier) else { return }
         respondedToNotification(remoteAction: remoteAction, userInfo: response.notification.request.content.userInfo)
+        printToFile("response.notification.request.content.userInfo = \(response.notification.request.content.userInfo)")
+        print("response.notification.request.content.userInfo = \(response.notification.request.content.userInfo)")
         completionHandler()
     }
     

@@ -18,6 +18,8 @@
 	<string>$(MARKETING_VERSION)</string>
 	<key>CFBundleVersion</key>
 	<string>61</string>
+	<key>DASHBOARD_API</key>
+	<string>$(DASHBOARD_API)</string>
 	<key>DASHBOARD_URL</key>
 	<string>$(DASHBOARD_URL)</string>
 	<key>ITSAppUsesNonExemptEncryption</key>

@@ -52,6 +52,7 @@
 		B23F5279245346E0007A8598 /* PushUserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = B23F5278245346E0007A8598 /* PushUserInfo.swift */; };
 		B240815A23D8803900845AEE /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B240814223D8803900845AEE /* HomeViewController.swift */; };
 		B244A1C223BF4A91007FBDB8 /* FileManager+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B244A1C123BF4A91007FBDB8 /* FileManager+Extension.swift */; };
+		B2458A5E2555128B0078D427 /* LeakAvoider.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2458A5D2555128B0078D427 /* LeakAvoider.swift */; };
 		B246BD0E252C90E700064A82 /* FileStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = B246BD0A252C90E700064A82 /* FileStorage.swift */; };
 		B246BD0F252C90E700064A82 /* FileStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = B246BD0A252C90E700064A82 /* FileStorage.swift */; };
 		B246BD10252C90E700064A82 /* SensorLogs.swift in Sources */ = {isa = PBXBuildFile; fileRef = B246BD0B252C90E700064A82 /* SensorLogs.swift */; };
@@ -104,10 +105,13 @@
 		B29639DD23BDC28200626E1A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B29639DB23BDC28200626E1A /* LaunchScreen.storyboard */; };
 		B2B8935223D0AD6500321C3E /* DateExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2B8935023D0AD6500321C3E /* DateExtension.swift */; };
 		B2B8979823D0ADBA00321C3E /* HealthKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B2B8979723D0ADBA00321C3E /* HealthKit.framework */; };
-		B2C8319D253055C000E6A8A2 /* LMSensorManager+SensorObservers.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2C8319B253055C000E6A8A2 /* LMSensorManager+SensorObservers.swift */; };
-		B2C8319E253055C000E6A8A2 /* LMSensorManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2C8319C253055C000E6A8A2 /* LMSensorManager.swift */; };
 		B2C831F025306F6600E6A8A2 /* ComplicationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2C831EF25306F6600E6A8A2 /* ComplicationController.swift */; };
-		B2C8322A2530978B00E6A8A2 /* LMWatchSensorManager+Observers.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2C832292530978B00E6A8A2 /* LMWatchSensorManager+Observers.swift */; };
+		B2D2CA6625503AAE0086C864 /* WatchOSDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2D2CA6525503AAE0086C864 /* WatchOSDelegate.swift */; };
+		B2D2CA6825503AE20086C864 /* iOSDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2D2CA6725503AE20086C864 /* iOSDelegate.swift */; };
+		B2D2CA6C255045EC0086C864 /* LMSensorManager+SensorObservers.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2D2CA6A255045EC0086C864 /* LMSensorManager+SensorObservers.swift */; };
+		B2D2CA6D255045EC0086C864 /* LMSensorManager+SensorObservers.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2D2CA6A255045EC0086C864 /* LMSensorManager+SensorObservers.swift */; };
+		B2D2CA6E255045EC0086C864 /* LMSensorManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2D2CA6B255045EC0086C864 /* LMSensorManager.swift */; };
+		B2D2CA6F255045EC0086C864 /* LMSensorManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2D2CA6B255045EC0086C864 /* LMSensorManager.swift */; };
 		B2D930F92445D7E90086477D /* UserNotifications.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B2D930F82445D7E90086477D /* UserNotifications.framework */; };
 		B2D930FB2445D7E90086477D /* UserNotificationsUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B2D930FA2445D7E90086477D /* UserNotificationsUI.framework */; };
 		B2D930FE2445D7E90086477D /* NotificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2D930FD2445D7E90086477D /* NotificationViewController.swift */; };
@@ -118,7 +122,6 @@
 		B2EE003024EE43760037DD9C /* FileDownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2EE002F24EE43760037DD9C /* FileDownloader.swift */; };
 		B2F3CDF6245932B200F211A3 /* StoryboardExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2F3CDF5245932B200F211A3 /* StoryboardExtension.swift */; };
 		B2F70D2E253EAA2E00D70091 /* watchkitextension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = B2704DE224B4A2AC00DE196B /* watchkitextension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
-		B2FB8E9D24BC4FE5003F653C /* LMWatchSensorManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2FB8E9C24BC4FE5003F653C /* LMWatchSensorManager.swift */; };
 		B2FDA83224BF744D000316EE /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2FDA83124BF744D000316EE /* ContentView.swift */; };
 /* End PBXBuildFile section */
 
@@ -233,6 +236,7 @@
 		B23F5278245346E0007A8598 /* PushUserInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PushUserInfo.swift; sourceTree = "<group>"; };
 		B240814223D8803900845AEE /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		B244A1C123BF4A91007FBDB8 /* FileManager+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FileManager+Extension.swift"; sourceTree = "<group>"; };
+		B2458A5D2555128B0078D427 /* LeakAvoider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeakAvoider.swift; sourceTree = "<group>"; };
 		B2464EF325270C9600A8BB65 /* Staging.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Staging.xcconfig; sourceTree = "<group>"; };
 		B2464EF625270DD500A8BB65 /* Production.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Production.xcconfig; sourceTree = "<group>"; };
 		B246BD0A252C90E700064A82 /* FileStorage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileStorage.swift; sourceTree = "<group>"; };
@@ -285,11 +289,11 @@
 		B2B8935023D0AD6500321C3E /* DateExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateExtension.swift; sourceTree = "<group>"; };
 		B2B8979523D0ADBA00321C3E /* mindLAMP.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = mindLAMP.entitlements; sourceTree = "<group>"; };
 		B2B8979723D0ADBA00321C3E /* HealthKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HealthKit.framework; path = System/Library/Frameworks/HealthKit.framework; sourceTree = SDKROOT; };
-		B2C8319B253055C000E6A8A2 /* LMSensorManager+SensorObservers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "LMSensorManager+SensorObservers.swift"; sourceTree = "<group>"; };
-		B2C8319C253055C000E6A8A2 /* LMSensorManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LMSensorManager.swift; sourceTree = "<group>"; };
 		B2C831EF25306F6600E6A8A2 /* ComplicationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ComplicationController.swift; sourceTree = "<group>"; };
-		B2C832292530978B00E6A8A2 /* LMWatchSensorManager+Observers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LMWatchSensorManager+Observers.swift"; sourceTree = "<group>"; };
-		B2CA2F8325401930005E4A67 /* LAMP-swift */ = {isa = PBXFileReference; lastKnownFileType = folder; name = "LAMP-swift"; path = "../LAMP-swift"; sourceTree = "<group>"; };
+		B2D2CA6525503AAE0086C864 /* WatchOSDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchOSDelegate.swift; sourceTree = "<group>"; };
+		B2D2CA6725503AE20086C864 /* iOSDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iOSDelegate.swift; sourceTree = "<group>"; };
+		B2D2CA6A255045EC0086C864 /* LMSensorManager+SensorObservers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "LMSensorManager+SensorObservers.swift"; sourceTree = "<group>"; };
+		B2D2CA6B255045EC0086C864 /* LMSensorManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LMSensorManager.swift; sourceTree = "<group>"; };
 		B2D930F72445D7E90086477D /* CustomNotification.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = CustomNotification.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		B2D930F82445D7E90086477D /* UserNotifications.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UserNotifications.framework; path = System/Library/Frameworks/UserNotifications.framework; sourceTree = SDKROOT; };
 		B2D930FA2445D7E90086477D /* UserNotificationsUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UserNotificationsUI.framework; path = System/Library/Frameworks/UserNotificationsUI.framework; sourceTree = SDKROOT; };
@@ -299,7 +303,6 @@
 		B2E4F9002532A1C100F9080F /* Logging.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Logging.swift; sourceTree = "<group>"; };
 		B2EE002F24EE43760037DD9C /* FileDownloader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileDownloader.swift; sourceTree = "<group>"; };
 		B2F3CDF5245932B200F211A3 /* StoryboardExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoryboardExtension.swift; sourceTree = "<group>"; };
-		B2FB8E9C24BC4FE5003F653C /* LMWatchSensorManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LMWatchSensorManager.swift; sourceTree = "<group>"; };
 		B2FDA83124BF744D000316EE /* ContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -378,8 +381,7 @@
 			isa = PBXGroup;
 			children = (
 				B238434624B848F300E548E2 /* LMRunningBuffer.swift */,
-				B2FB8E9C24BC4FE5003F653C /* LMWatchSensorManager.swift */,
-				B2C832292530978B00E6A8A2 /* LMWatchSensorManager+Observers.swift */,
+				B2D2CA6525503AAE0086C864 /* WatchOSDelegate.swift */,
 			);
 			path = SensorManager;
 			sourceTree = "<group>";
@@ -399,6 +401,7 @@
 		B238BA9424B7289500575A7F /* Shared */ = {
 			isa = PBXGroup;
 			children = (
+				B2D2CA69255045EC0086C864 /* SensorManager */,
 				B26ABED82531C890004CF86D /* OperationQueue */,
 				B246BD09252C90E700064A82 /* Logging */,
 				B2464EF225270C5000A8BB65 /* Configs */,
@@ -584,6 +587,7 @@
 			children = (
 				B240814223D8803900845AEE /* HomeViewController.swift */,
 				B275F60124518106007A7340 /* HomeWebViewModel.swift */,
+				B2458A5D2555128B0078D427 /* LeakAvoider.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -639,7 +643,6 @@
 		B29639C423BDC28100626E1A = {
 			isa = PBXGroup;
 			children = (
-				B2CA2F8325401930005E4A67 /* LAMP-swift */,
 				B238BA9424B7289500575A7F /* Shared */,
 				B29639CF23BDC28100626E1A /* mindLAMP */,
 				B2D930FC2445D7E90086477D /* CustomNotification */,
@@ -705,10 +708,19 @@
 		B2C8319A253055C000E6A8A2 /* Sensor Manager */ = {
 			isa = PBXGroup;
 			children = (
-				B2C8319C253055C000E6A8A2 /* LMSensorManager.swift */,
-				B2C8319B253055C000E6A8A2 /* LMSensorManager+SensorObservers.swift */,
+				B2D2CA6725503AE20086C864 /* iOSDelegate.swift */,
 			);
 			path = "Sensor Manager";
+			sourceTree = "<group>";
+		};
+		B2D2CA69255045EC0086C864 /* SensorManager */ = {
+			isa = PBXGroup;
+			children = (
+				B2D2CA6A255045EC0086C864 /* LMSensorManager+SensorObservers.swift */,
+				B2D2CA6B255045EC0086C864 /* LMSensorManager.swift */,
+			);
+			name = SensorManager;
+			path = Shared/SensorManager;
 			sourceTree = "<group>";
 		};
 		B2D930FC2445D7E90086477D /* CustomNotification */ = {
@@ -944,6 +956,7 @@
 				B2704E0724B4AE7800DE196B /* UserAuth.swift in Sources */,
 				B238434924B848F300E548E2 /* LMRunningBuffer.swift in Sources */,
 				B238433A24B836A200E548E2 /* NetworkConfig.swift in Sources */,
+				B2D2CA6D255045EC0086C864 /* LMSensorManager+SensorObservers.swift in Sources */,
 				B20043B425346BA4002B31F5 /* SensorModel+Constructors.swift in Sources */,
 				B238BA9724B7297F00575A7F /* WatchSessionManager.swift in Sources */,
 				B238433124B8357F00E548E2 /* Networking.swift in Sources */,
@@ -962,17 +975,17 @@
 				B2FDA83224BF744D000316EE /* ContentView.swift in Sources */,
 				B2704DEA24B4A2AC00DE196B /* HostingController.swift in Sources */,
 				B26ABEDF2531C890004CF86D /* BackgroundServices.swift in Sources */,
+				B2D2CA6F255045EC0086C864 /* LMSensorManager.swift in Sources */,
 				B26ABEDD2531C890004CF86D /* BackgroundOperation.swift in Sources */,
 				B26ABEE12531C890004CF86D /* AsynchronousOperation.swift in Sources */,
 				B238436624B8ADD900E548E2 /* SensorModel.swift in Sources */,
 				B238433F24B8390300E548E2 /* LampURL.swift in Sources */,
 				B212B4D224DB1ACD00DD1299 /* LampIdentifiers.swift in Sources */,
 				B212B4D024DB1ACD00DD1299 /* LampIdentifiersHealthKit.swift in Sources */,
-				B2C8322A2530978B00E6A8A2 /* LMWatchSensorManager+Observers.swift in Sources */,
-				B2FB8E9D24BC4FE5003F653C /* LMWatchSensorManager.swift in Sources */,
 				B246BD15252C90E700064A82 /* LMLogsManager.swift in Sources */,
 				B239685924B785360031A209 /* EndPoint.swift in Sources */,
 				B246BD0F252C90E700064A82 /* FileStorage.swift in Sources */,
+				B2D2CA6625503AAE0086C864 /* WatchOSDelegate.swift in Sources */,
 				B255116C24B6291900CDBDD1 /* LoginServices.swift in Sources */,
 				B2704DEE24B4A2AC00DE196B /* NotificationController.swift in Sources */,
 				B2704DEC24B4A2AC00DE196B /* ExtensionDelegate.swift in Sources */,
@@ -996,17 +1009,20 @@
 			buildActionMask = 2147483647;
 			files = (
 				B238BA9624B7297F00575A7F /* WatchSessionManager.swift in Sources */,
+				B2458A5E2555128B0078D427 /* LeakAvoider.swift in Sources */,
 				B238433024B8357F00E548E2 /* Networking.swift in Sources */,
 				B238432E24B8357F00E548E2 /* CodableHelpers.swift in Sources */,
 				B2010FA12525F4A90075D0F8 /* AppColors.swift in Sources */,
 				B238433B24B836A200E548E2 /* Result.swift in Sources */,
 				B2B8935223D0AD6500321C3E /* DateExtension.swift in Sources */,
 				B22DF5F2250612E800777D2D /* UserAgentExtension.swift in Sources */,
+				B2D2CA6E255045EC0086C864 /* LMSensorManager.swift in Sources */,
 				B246BD0E252C90E700064A82 /* FileStorage.swift in Sources */,
 				B2F3CDF6245932B200F211A3 /* StoryboardExtension.swift in Sources */,
 				B238432824B82D3900E548E2 /* SharingInfo.swift in Sources */,
 				B238436524B8ADD900E548E2 /* SensorModel.swift in Sources */,
 				B2962FCE24ADECB700C1D598 /* NodeManager.swift in Sources */,
+				B2D2CA6C255045EC0086C864 /* LMSensorManager+SensorObservers.swift in Sources */,
 				B244A1C223BF4A91007FBDB8 /* FileManager+Extension.swift in Sources */,
 				B239685824B785360031A209 /* EndPoint.swift in Sources */,
 				B285D0A824C8941B0050BD3F /* UserDefaults+Extension.swift in Sources */,
@@ -1023,9 +1039,9 @@
 				B26ABEDC2531C890004CF86D /* BackgroundOperation.swift in Sources */,
 				B2962FCD24ADECB700C1D598 /* NodeRunner.mm in Sources */,
 				B238433224B8357F00E548E2 /* NetworkingAPI.swift in Sources */,
-				B2C8319D253055C000E6A8A2 /* LMSensorManager+SensorObservers.swift in Sources */,
 				B212B4D124DB1ACD00DD1299 /* LampIdentifiers.swift in Sources */,
 				B2E4F9012532A1C100F9080F /* Logging.swift in Sources */,
+				B2D2CA6825503AE20086C864 /* iOSDelegate.swift in Sources */,
 				B246BD1C252CA8F500064A82 /* WebViewController.swift in Sources */,
 				B26A2A3324EBCCA400BCB043 /* VersionCheckViewModel.swift in Sources */,
 				B2EE003024EE43760037DD9C /* FileDownloader.swift in Sources */,
@@ -1041,7 +1057,6 @@
 				B238434324B83B7700E548E2 /* ErrorExtension.swift in Sources */,
 				B275F60A245196AD007A7340 /* PushNotificationModel.swift in Sources */,
 				B22DF5F42506526400777D2D /* NotificationAPI.swift in Sources */,
-				B2C8319E253055C000E6A8A2 /* LMSensorManager.swift in Sources */,
 				B240815A23D8803900845AEE /* HomeViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

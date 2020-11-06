@@ -1,0 +1,16 @@
+{
+  "object": {
+    "pins": [
+      {
+        "package": "Sensors",
+        "repositoryURL": "https://github.com/BIDMCDigitalPsychiatry/LAMP-swift.git",
+        "state": {
+          "branch": "Sensors",
+          "revision": "ac2ee70382c47b91dffdc69d514c6161939f4a3f",
+          "version": null
+        }
+      }
+    ]
+  },
+  "version": 1
+}

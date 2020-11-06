@@ -39,6 +39,7 @@ class HomeViewController: UIViewController {
         print("mindLAMP Home")
         
         loadWebPage()
+        //Timer.scheduledTimer(timeInterval: 20, target: self, selector: #selector(unload), userInfo: nil, repeats: false)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -60,12 +61,21 @@ class HomeViewController: UIViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         printError("Stopping sensors for a while due to memory warning")
-        LMSensorManager.shared.stopSensors(false)
-        DispatchQueue.global().asyncAfter(deadline: .now() + 300) {
-            LMSensorManager.shared.checkIsRunning()
-        }
     }
     
+//    @objc
+//    func unload() {
+//        cleanCache()
+//        self.navigationController?.popViewController(animated: false)
+//        //wkWebView.load(URLRequest(url: URL(string:"about:blank")!))
+//
+//    }
+    
+    deinit {
+        wkWebView.stopLoading()
+        wkWebView.configuration.userContentController.removeScriptMessageHandler(forName: ScriptMessageHandler.login.rawValue)
+        wkWebView.configuration.userContentController.removeScriptMessageHandler(forName: ScriptMessageHandler.logout.rawValue)
+    }
 }
 
 // MARK: - private
@@ -138,6 +148,7 @@ private extension HomeViewController {
         if UserDefaults.standard.version == nil {
             if User.shared.isLogin() == true {
                 print("self.lampDashboardURLwithToken = \(self.lampDashboardURLwithToken)")
+                //wkWebView.load(URLRequest(url: URL(string: "https://www.google.com")!))
                 wkWebView.load(URLRequest(url: self.lampDashboardURLwithToken))
             } else {
                 print("LampURL.dashboardDigital = \(LampURL.dashboardDigital)")
@@ -161,14 +172,19 @@ private extension HomeViewController {
         
         let configuration = WKWebViewConfiguration()
         configuration.preferences = preferences
-        configuration.userContentController.add(self, name: ScriptMessageHandler.login.rawValue)
-        configuration.userContentController.add(self, name: ScriptMessageHandler.logout.rawValue)
+        //configuration.userContentController.add(self, name: ScriptMessageHandler.login.rawValue)
+        //configuration.userContentController.add(self, name: ScriptMessageHandler.logout.rawValue)
+        
+        configuration.userContentController.add(LeakAvoider(delegate:self), name: ScriptMessageHandler.login.rawValue)
+        configuration.userContentController.add(LeakAvoider(delegate:self), name: ScriptMessageHandler.logout.rawValue)
+        
         let webView = WKWebView(frame: .zero, configuration: configuration)
         webView.allowsBackForwardNavigationGestures = true
         return webView
     }
     
     func performOnLogin() {
+        printToFile("\nperformOnLogin")
         LMSensorManager.shared.checkIsRunning()
         
         //update device token after login
@@ -235,7 +251,7 @@ extension HomeViewController: WKScriptMessageHandler {
             let base64Token = token.data(using: .utf8)?.base64EncodedString()
             Endpoint.setSessionKey(base64Token)
             
-            var serverAddressValue = serverAddress ?? ""
+            let serverAddressValue = serverAddress ?? ""
             
             let withOutHttp = serverAddressValue.cleanHostName()
 
