@@ -20,8 +20,8 @@
 	<string>$(MARKETING_VERSION)</string>
 	<key>CFBundleVersion</key>
 	<string>61</string>
-	<key>LSApplicationCategoryType</key>
-	<string>App Uses Non-Exempt Encryption</string>
+	<key>ITSAppUsesNonExemptEncryption</key>
+	<false/>
 	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
 	<string>Your location access required for clinical study.</string>
 	<key>NSLocationAlwaysUsageDescription</key>
