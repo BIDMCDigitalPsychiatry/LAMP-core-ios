@@ -2,4 +2,4 @@
 
 set -eo pipefail
 
-xcrun altool --upload-app -t ios -f build/mindLAMP.ipa -u "$APPLEID_USERNAME" -p "$APPLEID_PASSWORD" --verbose
+xcrun altool --upload-app -t ios -f build/mindLAMP\ 2.ipa -u "$APPLEID_USERNAME" -p "$APPLEID_PASSWORD" --verbose

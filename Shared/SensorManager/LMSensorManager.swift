@@ -169,7 +169,8 @@ class LMSensorManager {
     func stopSensors(_ isLogout: Bool) {
         printToFile("\nStopping senors")
         if isLogout {
-            //TODO: clear all log files
+            //clear all log files
+            LMLogsManager.shared.clearLogsDirectory()
         }
         stopTimer()
         sensorManager.stopAllSensors()
@@ -210,9 +211,9 @@ private extension LMSensorManager {
     
     func setUpSensorMotionManager() {
         sensor_motionManager = MotionManager.init(MotionManager.Config().apply(closure: { (config) in
-            //config.accelerometerObserver = self
-            //config.gyroObserver = self
-            //config.magnetoObserver = self
+            config.accelerometerObserver = self
+            config.gyroObserver = self
+            config.magnetoObserver = self
             config.motionObserver = self
             
             config.sensorTimerDelegate = self

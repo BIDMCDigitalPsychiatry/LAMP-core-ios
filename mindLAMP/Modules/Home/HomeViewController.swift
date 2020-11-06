@@ -172,6 +172,7 @@ private extension HomeViewController {
         
         let configuration = WKWebViewConfiguration()
         configuration.preferences = preferences
+        configuration.websiteDataStore = WKWebsiteDataStore.default()
         //configuration.userContentController.add(self, name: ScriptMessageHandler.login.rawValue)
         //configuration.userContentController.add(self, name: ScriptMessageHandler.logout.rawValue)
         
