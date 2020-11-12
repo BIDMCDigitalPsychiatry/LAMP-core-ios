@@ -16,17 +16,27 @@ extension LMSensorManager: SensorStore {
         #if os(iOS)
         if lampScreenSensor?.latestScreenState?.rawValue != ScreenState.screen_locked.rawValue {
             sensor_healthKit?.fetchHealthData()
-            
         } else {
-            printToFile("\n Screen locked")
+            printToFile("\nScreen locked")
         }
+        sensor_wifi?.startScanning()
+//        //we are facing data loass when fetch data within 5 minutes. So fetching every 10 minutes. Recommended to to fetch hourly
+//        if self.isSyncNow {
+//            sensor_pedometer?.getPedometerData()
+//        }
+        
+        //set 15 seconds delay to fetch all healthkit data
         DispatchQueue.global().asyncAfter(deadline: .now() + 15) {
-            let request = LMSensorManager.shared.getSensorDataRequest()
-            self.sensor_healthKit?.clearDataArrays()
-            SensorLogs.shared.storeSensorRequest(request)
+            
+            self.sensor_wifi?.stopScanning()
+            
+            if self.sensor_location == nil { return } //stop syncing if sensors are stopped
+            let request = self.getSensorDataRequest()
+            SensorLogs.shared.storeSensorRequest(request)//store to disk
             print("\n stored file -- @ \(Date())")
+
+            //syncing to server for alternate fetch.
             if self.isSyncNow {
-                print("\n sync now")
                 self.isSyncNow = false
                 self.startWatchSensors()
                 self.batteryLogs()
@@ -34,21 +44,19 @@ extension LMSensorManager: SensorStore {
                 BackgroundServices.shared.performTasks()
             } else {
                 printToFile("\n stored file @ \(Date())")
-                print("\n sync next time")
                 self.isSyncNow = true
             }
         }
         #elseif os(watchOS)
         let request = getSensorDataRequest()
         SensorLogs.shared.storeSensorRequest(request)
-        //send to server
+        
+        //syncing to server for alternate fetch
         if self.isSyncNow {
-            print("sync now")
             self.isSyncNow = false
             printToFile("\n stored file w @ \(Date())")
             BackgroundServices.shared.performTasks()
         } else {
-            print("sync next time")
             self.isSyncNow = true
         }
         #endif

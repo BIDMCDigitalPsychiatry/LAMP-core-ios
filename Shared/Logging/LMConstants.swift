@@ -22,12 +22,9 @@ struct Logs {
 }
 
 extension Logs.Messages {
-    static let hk_characteristicType_fetch_error = "Lamp HealthKit CharacteristicType: %@."
-    static let hk_data_fetch_uniterror = "Lamp HealthKit error NULL : Unit could not be retrieved."
     static let hk_data_fetch_error = "Lamp HealthKit: Data could not be retrieved."
     
     static let battery_low = "Battery is low."
-    static let app_crash = "The app has crashed."
     static let gps_off = "GPS is disabled."
     static let location_error = "GPS Failed: %@"
     

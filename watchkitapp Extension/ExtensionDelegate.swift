@@ -224,7 +224,7 @@ extension ExtensionDelegate {
         if deviceTokenStr != UserDefaults.standard.deviceToken {
             if User.shared.isLogin() {
                 //send to server
-                let tokenInfo = DeviceInfoWithToken(deviceToken: deviceTokenStr, userAgent: UserAgent.defaultAgent)
+                let tokenInfo = DeviceInfoWithToken(deviceToken: deviceTokenStr, userAgent: UserAgent.defaultAgent, action: nil)
                 let tokenRerquest = PushNotification.UpdateTokenRequest(deviceInfoWithToken: tokenInfo)
                 let lampAPI = NotificationAPI(NetworkConfig.networkingAPI(isBackgroundSession: false))
                 
@@ -274,18 +274,18 @@ extension ExtensionDelegate: UNUserNotificationCenterDelegate {
 }
 
 //https://developer.apple.com/documentation/watchkit/using_extended_runtime_sessions
-extension ExtensionDelegate: WKExtendedRuntimeSessionDelegate {
-    // MARK:- Extended Runtime Session Delegate Methods
-    func extendedRuntimeSessionDidStart(_ extendedRuntimeSession: WKExtendedRuntimeSession) {
-        // Track when your session starts.
-    }
-
-    func extendedRuntimeSessionWillExpire(_ extendedRuntimeSession: WKExtendedRuntimeSession) {
-        // Finish and clean up any tasks before the session ends.
-    }
-        
-    func extendedRuntimeSession(_ extendedRuntimeSession: WKExtendedRuntimeSession, didInvalidateWith reason: WKExtendedRuntimeSessionInvalidationReason, error: Error?) {
-        // Track when your session ends.
-        // Also handle errors here.
-    }
-}
+//extension ExtensionDelegate: WKExtendedRuntimeSessionDelegate {
+//    // MARK:- Extended Runtime Session Delegate Methods
+//    func extendedRuntimeSessionDidStart(_ extendedRuntimeSession: WKExtendedRuntimeSession) {
+//        // Track when your session starts.
+//    }
+//
+//    func extendedRuntimeSessionWillExpire(_ extendedRuntimeSession: WKExtendedRuntimeSession) {
+//        // Finish and clean up any tasks before the session ends.
+//    }
+//        
+//    func extendedRuntimeSession(_ extendedRuntimeSession: WKExtendedRuntimeSession, didInvalidateWith reason: WKExtendedRuntimeSessionInvalidationReason, error: Error?) {
+//        // Track when your session ends.
+//        // Also handle errors here.
+//    }
+//}

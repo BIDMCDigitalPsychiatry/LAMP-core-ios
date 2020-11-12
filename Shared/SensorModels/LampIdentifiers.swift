@@ -11,6 +11,7 @@ public enum SensorType: LampDataKeysProtocol {
     enum AnalyticAction: String {
         case login = "login"
         case notification = "notification"
+        case logout = "logout"
     }
 
     

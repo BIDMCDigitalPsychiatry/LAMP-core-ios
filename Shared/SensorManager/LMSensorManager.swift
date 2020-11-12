@@ -23,6 +23,7 @@ class LMSensorManager {
     
     //singleton object
     static let shared: LMSensorManager = LMSensorManager()
+    let storeSensorDataIntervalInMinutes = 5.0 //minutes
     
     //manager to hold all sensor references
     private let sensorManager = SensorManager()
@@ -143,12 +144,7 @@ class LMSensorManager {
         initiateSensors()
         printToFile("\nStarting sensors")
         sensorManager.startAllSensors()
-        
-        //If motion sensors are configured, then we can use that. If not we can create new timer to store and post sensor data
-        if sensor_motionManager?.CONFIG.sensorTimerDelegate == nil {
-            printToFile("not motion sensor configuerd, so starting another timer")
-            startTimer()
-        }
+
         #if os(iOS)
         UIDevice.current.isBatteryMonitoringEnabled = true
         #endif
@@ -166,15 +162,23 @@ class LMSensorManager {
     }
     
     /// To stop sensors observing.
-    func stopSensors(_ isLogout: Bool) {
+    func stopSensors() {
         printToFile("\nStopping senors")
-        if isLogout {
-            //clear all log files
-            LMLogsManager.shared.clearLogsDirectory()
-        }
-        stopTimer()
         sensorManager.stopAllSensors()
+        
+        sensor_pedometer?.removeSavedTimestamps()
+        sensor_healthKit?.removeSavedTimestamps()
+        sensor_healthKit?.clearDataArrays()
+        
         deinitSensors()
+        
+        //clear the bufffers
+        accelerometerDataBufffer.removeAll()
+        callsDataBuffer.removeAll()
+        motionDataBuffer.removeAll()
+        pedometerDataBuffer.removeAll()
+        locationsDataBuffer.removeAll()
+        screenStateDataBuffer.removeAll()
     }
     
     func getSensorDataRequest() -> SensorData.Request {
@@ -192,20 +196,6 @@ class LMSensorManager {
     }
 }
 
-//MARK: - Set timer if no motion sensors
-private extension LMSensorManager {
-    func startTimer() {
-        //Initial timer so as to post first set of sensorData. This timer invalidates after it fires.
-        Timer.scheduledTimer(timeInterval: 30, target: self, selector: #selector(timeToStore), userInfo: nil, repeats: false)
-        //Repeating timer which invokes postSensorData method at given interval of time.
-        sensorApiTimer = Timer.scheduledTimer(timeInterval: 10*60, target: self, selector: #selector(timeToStore), userInfo: nil, repeats: true)
-    }
-    
-    func stopTimer() {
-        sensorApiTimer?.invalidate()
-    }
-}
-
 // MARK: - SENSOR SETUP METHODS
 private extension LMSensorManager {
     
@@ -218,7 +208,7 @@ private extension LMSensorManager {
             
             config.sensorTimerDelegate = self
             
-            config.sensorTimerDataStoreInterval = 5.0 * 60.0//5 miunutes
+            config.sensorTimerDataStoreInterval = storeSensorDataIntervalInMinutes * 60.0
         }))
         sensorManager.addSensor(sensor_motionManager!)
     }
@@ -271,9 +261,9 @@ private extension LMSensorManager {
     }
     
     func setupWifiSensor() {
+        //we start scanning only when using the default timer (i.e when calling timeTostore() )
         sensor_wifi = WiFiSensor.init(WiFiSensor.Config().apply(closure: { config in
             config.sensorObserver = self
-            config.interval = 4 //minutes
         }))
         sensorManager.addSensor(sensor_wifi!)
     }
@@ -296,6 +286,7 @@ private extension LMSensorManager {
         arraySensorData.append(contentsOf: fetchCallsData())
         arraySensorData.append(contentsOf: fetchScreenStateData())
         
+        
         if let data = fetchBluetoothData() {
             arraySensorData.append(data)
         }
@@ -303,14 +294,15 @@ private extension LMSensorManager {
         if let data = fetchWiFiData() {
             arraySensorData.append(data)
         }
-        if let data = fetchWorkoutSegmentData() {
-            arraySensorData.append(data)
-        }
         
         if let data = fetchPedometerData() {
             arraySensorData.append(contentsOf: data)
         }
         
+        //Health Kit
+        if let data = fetchWorkoutSegmentData() {
+            arraySensorData.append(data)
+        }
         if let data = fetchHealthKitQuantityData() {
             arraySensorData.append(contentsOf: data)
         }
@@ -321,6 +313,7 @@ private extension LMSensorManager {
         if let data = fetchHKCharacteristicData() {
             arraySensorData.append(contentsOf: data)
         }
+        sensor_healthKit?.clearDataArrays()//clear all healthkit data fetched
         #endif
         
         return arraySensorData
@@ -507,7 +500,6 @@ private extension LMSensorManager {
     
     func fetchBluetoothData() -> SensorDataInfo? {
         guard let data = sensor_bluetooth?.latestData() else {
-            //LMLogsManager.shared.addLogs(level: .warning, logs: Logs.Messages.bluetooth_null)
             return nil
         }
         var model = SensorDataModel()
@@ -520,12 +512,14 @@ private extension LMSensorManager {
     
     func fetchWiFiData() -> SensorDataInfo? {
         guard let data = latestWifiData else {
-            //LMLogsManager.shared.addLogs(level: .warning, logs: Logs.Messages.wifi_null)
             return nil
         }
         var model = SensorDataModel()
         model.bssid = data.bssid
         model.ssid = data.ssid
+        
+        //clear existing
+        latestWifiData = nil
         
         return SensorDataInfo(sensor: SensorType.lamp_wifi.lampIdentifier, timestamp: Double(data.timestamp), data: model)
     }
@@ -553,7 +547,6 @@ private extension LMSensorManager {
     func fetchHKCharacteristicData() -> [SensorDataInfo]? {
         
         guard let arrData = sensor_healthKit?.latestCharacteristicData() else {
-            //LMLogsManager.shared.addLogs(level: .warning, logs: Logs.Messages.hkcharacteristic_null)
             return nil
         }
         
@@ -572,7 +565,6 @@ private extension LMSensorManager {
     func fetchHKCategoryData() -> [SensorDataInfo]? {
         
         guard let arrData = sensor_healthKit?.latestCategoryData() else {
-            //LMLogsManager.shared.addLogs(level: .warning, logs: Logs.Messages.hkquantity_null)
             return nil
         }
         var arrayData: [SensorDataInfo]?
@@ -598,7 +590,6 @@ private extension LMSensorManager {
     
     func fetchHealthKitQuantityData() -> [SensorDataInfo]? {
         guard let arrData = sensor_healthKit?.latestQuantityData() else {
-            //LMLogsManager.shared.addLogs(level: .warning, logs: Logs.Messages.hkquantity_null)
             return nil
         }
         var arrayData = [SensorDataInfo]()
@@ -620,9 +611,6 @@ private extension LMSensorManager {
                     model.startDate = dataSystolic.startDate
                     model.endDate = dataSystolic.endDate
                     arrayData.append(SensorDataInfo(sensor: quantityType.lampIdentifier, timestamp: Double(dataDiastolic.timestamp), data: model))
-                } else {
-                    //let msg = String(format: Logs.Messages.quantityType_null, quantityType.jsonKey)
-                    //LMLogsManager.shared.addLogs(level: .warning, logs: msg)
                 }
             case .bloodPressureDiastolic:
                 ()//handled with Systolic
@@ -637,9 +625,6 @@ private extension LMSensorManager {
                         return SensorDataInfo(sensor: quantityType.lampIdentifier, timestamp: Double(quantityData.timestamp), data: model)
                     }
                     arrayData.append(contentsOf: sensorDataArray)
-                } else {
-                    //let msg = String(format: Logs.Messages.quantityType_null, quantityType.jsonKey)
-                    //LMLogsManager.shared.addLogs(level: .warning, logs: msg)
                 }
             }
         }
@@ -668,7 +653,7 @@ extension LMSensorManager {
     
     public func batteryLogs() {
         guard isBatteryLevelLow() else { return }
-        LMLogsManager.shared.addLogs(level: .info, logs: Logs.Messages.battery_low)
+        //LMLogsManager.shared.addLogs(level: .info, logs: Logs.Messages.battery_low)
     }
     
     private func isBatteryLevelLow(than level: Float = 20) -> Bool {

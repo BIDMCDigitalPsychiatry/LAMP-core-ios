@@ -77,10 +77,12 @@ class UserAuth: ObservableObject {
     @objc func userLogOut(_ notification: Notification) {
         print("received notification")
         self.loginStatus = .logout
+        User.shared.logout()
     }
     
     func logout() {
         self.loginStatus = .logout
+        //ToDo: call Api
         User.shared.logout()
     }
     
@@ -138,7 +140,7 @@ class UserAuth: ObservableObject {
 //
 //
         let deviceTokenStr = UserDefaults.standard.deviceToken
-        let tokenInfo = DeviceInfoWithToken(deviceToken: deviceTokenStr, userAgent: UserAgent.defaultAgent)
+        let tokenInfo = DeviceInfoWithToken(deviceToken: deviceTokenStr, userAgent: UserAgent.defaultAgent, action: SensorType.AnalyticAction.login.rawValue)
         let tokenRerquest = PushNotification.UpdateTokenRequest(deviceInfoWithToken: tokenInfo)
         let lampAPI = NotificationAPI(NetworkConfig.networkingAPI(isBackgroundSession: false))
         

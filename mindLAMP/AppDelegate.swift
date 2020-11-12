@@ -29,7 +29,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         let documentsURL = try! FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: false)
         print("Launched documentsURL = \(documentsURL) \(Date())")
-        
+
         if launchOptions?[UIApplication.LaunchOptionsKey.location] != nil {
             printToFile("\nLaunch by location")
             LMSensorManager.shared.checkIsRunning()
@@ -37,7 +37,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             printToFile("\nLaunched")
             LMSensorManager.shared.checkIsRunning()
         }
-        //Logging.isLogToFile = true
         return true
     }
     

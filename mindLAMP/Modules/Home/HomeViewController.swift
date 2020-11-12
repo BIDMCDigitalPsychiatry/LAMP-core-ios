@@ -12,6 +12,7 @@ class HomeViewController: UIViewController {
     
     private var wkWebView: WKWebView!
     private var loadingObservation: NSKeyValueObservation?
+    private var isWebpageLoaded = false
     //@IBOutlet weak var containerView: UIView!
     private lazy var indicator: UIActivityIndicatorView  = {
         let progressView = UIActivityIndicatorView(style: UIActivityIndicatorView.Style.gray)
@@ -30,16 +31,17 @@ class HomeViewController: UIViewController {
     
     override func loadView() {
         
-        cleanCache()
+        LeakAvoider.cleanCache()
         self.loadWebView()
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         print("mindLAMP Home")
-        
-        loadWebPage()
-        //Timer.scheduledTimer(timeInterval: 20, target: self, selector: #selector(unload), userInfo: nil, repeats: false)
+        let appState = UIApplication.shared.applicationState
+        if appState != UIApplication.State.background {
+            loadWebPage()
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -62,15 +64,7 @@ class HomeViewController: UIViewController {
         super.didReceiveMemoryWarning()
         printError("Stopping sensors for a while due to memory warning")
     }
-    
-//    @objc
-//    func unload() {
-//        cleanCache()
-//        self.navigationController?.popViewController(animated: false)
-//        //wkWebView.load(URLRequest(url: URL(string:"about:blank")!))
-//
-//    }
-    
+
     deinit {
         wkWebView.stopLoading()
         wkWebView.configuration.userContentController.removeScriptMessageHandler(forName: ScriptMessageHandler.login.rawValue)
@@ -82,26 +76,12 @@ class HomeViewController: UIViewController {
 
 private extension HomeViewController {
     
-    func cleanCache() {
-        HTTPCookieStorage.shared.removeCookies(since: Date.distantPast)
-        print("[WebCacheCleaner] All cookies deleted")
-        
-        WKWebsiteDataStore.default().fetchDataRecords(ofTypes: WKWebsiteDataStore.allWebsiteDataTypes()) { records in
-            records.forEach { record in
-                WKWebsiteDataStore.default().removeData(ofTypes: record.dataTypes, for: [record], completionHandler: {})
-                print("[WebCacheCleaner] Record \(record) deleted")
-            }
-        }
-        
-        let websiteDataTypes = NSSet(array: [WKWebsiteDataTypeDiskCache, WKWebsiteDataTypeMemoryCache])
-        let date = Date(timeIntervalSince1970: 0)
-        if let webData = websiteDataTypes as? Set<String> {
-            WKWebsiteDataStore.default().removeData(ofTypes: webData, modifiedSince: date, completionHandler:{ })
-        }
-        
-    }
-    
     @objc func updateWatchOS(_ notification: Notification) {
+        
+        if isWebpageLoaded == false {
+            printToFile("load page when become active")
+            loadWebPage()
+        }
         
         if User.shared.isLogin() == true, let loginInfo = User.shared.loginInfo {
             let messageInfo: [String: Any] = [IOSCommands.login : loginInfo, "timestamp" : Date().timeInMilliSeconds]
@@ -144,6 +124,7 @@ private extension HomeViewController {
     }
     
     func loadWebPage() {
+        isWebpageLoaded = true
         //check dashboard is offline available
         if UserDefaults.standard.version == nil {
             if User.shared.isLogin() == true {
@@ -188,11 +169,10 @@ private extension HomeViewController {
         printToFile("\nperformOnLogin")
         LMSensorManager.shared.checkIsRunning()
         
-        //update device token after login
-        guard let deviceToken = UserDefaults.standard.deviceToken else {
-            printError("return ..no device token")
-            return }
-        let tokenInfo = DeviceInfoWithToken(deviceToken: deviceToken, userAgent: UserAgent.defaultAgent)
+        //call lamp.analytics for login
+        let deviceToken = UserDefaults.standard.deviceToken
+        
+        let tokenInfo = DeviceInfoWithToken(deviceToken: deviceToken, userAgent: UserAgent.defaultAgent, action: SensorType.AnalyticAction.login.rawValue)
         let tokenRerquest = PushNotification.UpdateTokenRequest(deviceInfoWithToken: tokenInfo)
         let lampAPI = NotificationAPI(NetworkConfig.networkingAPI())
         
@@ -200,8 +180,8 @@ private extension HomeViewController {
     }
     
     func performOnLogout() {
+        //ToDo: call logout API
         User.shared.logout()
-        LMSensorManager.shared.stopSensors(true)
     }
 }
 

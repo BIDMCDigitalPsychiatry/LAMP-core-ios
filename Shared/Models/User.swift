@@ -33,6 +33,12 @@ struct User {
     }
     
     func logout() {
+        //Stop all sensors
+        LMSensorManager.shared.stopSensors()
+        
+        SensorLogs.shared.clearLogsDirectory()
+        LMLogsManager.shared.clearLogsDirectory()
+        
         Endpoint.setSessionKey(nil)
         UserDefaults.standard.clearAll()
     }

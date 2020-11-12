@@ -17,12 +17,12 @@ extension UserAgent {
 
 struct DeviceInfoWithToken: Encodable {
     
-    var action = SensorType.AnalyticAction.login.rawValue
+    var action: String? //SensorType.AnalyticAction.login.rawValue
     var device_type: String// = "iOS" //"Android" or "Web"
     var user_agent: String?
     var device_token: String?
     
-    init(deviceToken: String?, userAgent: UserAgent?) {
+    init(deviceToken: String?, userAgent: UserAgent?, action: String?) {
         self.device_token = deviceToken
         self.user_agent = userAgent?.toString()
         self.device_type = DeviceType.displayName

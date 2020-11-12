@@ -83,7 +83,7 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
             if User.shared.isLogin() {
                 //send to server
                 
-                let tokenInfo = DeviceInfoWithToken(deviceToken: deviceTokenStr, userAgent: UserAgent.defaultAgent)
+                let tokenInfo = DeviceInfoWithToken(deviceToken: deviceTokenStr, userAgent: UserAgent.defaultAgent, action: nil)
                 let tokenRerquest = PushNotification.UpdateTokenRequest(deviceInfoWithToken: tokenInfo)
                 let lampAPI = NotificationAPI(NetworkConfig.networkingAPI())
                 

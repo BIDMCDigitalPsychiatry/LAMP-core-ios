@@ -35,7 +35,14 @@ class LoginAPI {
             switch response {
             case .failure(let err):
                 completion(false, nil, err)
-                //LMLogsManager.shared.addLogs(level: .error, logs: Logs.Messages.network_error + " " + err.errorMessage)
+                if let nsError = err as NSError? {
+                    let errorCode = nsError.code
+                    /// -1009 is the offline error code
+                    /// so log errors other than connection issue
+                    if errorCode != -1009 {
+                        LMLogsManager.shared.addLogs(level: .error, logs: Logs.Messages.network_error + " " + err.localizedMessage)
+                    }
+                }
                 break
             case .success(let responseData):
                 let userInfo = responseData.data.first
@@ -44,24 +51,5 @@ class LoginAPI {
             }
         }
     }
-//    
-//    func login(userID: String, request: PushNotification.UpdateTokenRequest,  completion: @escaping (Bool) -> Void) {
-//
-//        let endPoint = String(format: Endpoint.participantServerEvent.rawValue, userID)
-//        let data = RequestData(endpoint: endPoint, requestTye: HTTPMethodType.post, data: request)
-//        connection.makeWebserviceCall(with: data) { (response: Result<PushNotification.UpdateTokenResponse>) in
-//            switch response {
-//            case .failure:
-//                completion(false)
-//                //UserDefaults.standard.logData = "sendDeviceToken done"
-//                //LMLogsManager.shared.addLogs(level: .error, logs: Logs.Messages.network_error + " " + err.errorMessage)
-//                break
-//            case .success(_):
-//                //UserDefaults.standard.logData = "sendDeviceToken failue"
-//                completion(true)
-//                break
-//            }
-//        }
-//    }
 }
 
