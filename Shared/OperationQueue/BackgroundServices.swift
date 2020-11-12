@@ -47,9 +47,10 @@ extension BackgroundServices {
     func putLogsData(_ dispatchQueue: OperationQueue) {
         let arrLogsData = LMLogsManager.shared.fetchLogsRequest()
         let endPoint =  Endpoint.logs.rawValue
-        for logsData in arrLogsData {
+        for logRequest in arrLogsData {
+            let logsData = logRequest.1
             let request = RequestData(endpoint: endPoint, requestTye: .put, urlParams: logsData.urlParams, data: logsData.dataBody)
-            let operation = BackgroundOperation(request: request, connection: NetworkConfig.logsNetworkingAPI(), opType: .logs)
+            let operation = BackgroundOperation(request: request, connection: NetworkConfig.logsNetworkingAPI(), opType: .logs, fileName: logRequest.0)
             dispatchQueue.addOperation(operation)
         }
          

@@ -55,10 +55,10 @@ private extension BackgroundOperation {
                     }
                 }
             case .success(_):
-                //TODO: remove file from disk
+                //remove file from disk
                 if let file = self.fileName {
                     SensorLogs.shared.deleteFile(file)
-                    printToFile("\n deleted file \(file)")
+                    printToFile("\n deleted data file \(file)")
                 }
             }
         }
@@ -71,8 +71,11 @@ private extension BackgroundOperation {
             case .failure:
                 break
             case .success:
-                //TODO: remove file from disk
-                break
+                //remove file from disk
+                if let file = self.fileName {
+                    LMLogsManager.shared.deleteFile(file)
+                    printToFile("\n deleted log file \(file)")
+                }
             }
         }
     }

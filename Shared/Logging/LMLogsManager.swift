@@ -31,17 +31,21 @@ class LMLogsManager {
         FileStorage.store(request, to: Logs.Directory.logs, in: .documents, as: timeStampStr + ".json")
     }
     
-    func fetchLogsRequest() -> [LogsData.Request] {
+    func fetchLogsRequest() -> [(String, LogsData.Request)] {
         let urls = FileStorage.urls(for: Logs.Directory.logs, in: .documents)
         var files = [String]()
         urls?.forEach({ files.append($0.lastPathComponent) })
-        var requests = [LogsData.Request]()
+        var requests = [(String, LogsData.Request)]()
         for file in files {
             if let request = FileStorage.retrieve(file, from: Logs.Directory.logs, in: .documents, as: LogsData.Request.self) {
-                requests.append(request)
+                requests.append((file, request))
             }
         }
         return requests
+    }
+    
+    func deleteFile(_ fileName: String) {
+        FileStorage.remove(fileName, from: Logs.Directory.logs, in: .documents)
     }
     
     func clearLogsDirectory() {
