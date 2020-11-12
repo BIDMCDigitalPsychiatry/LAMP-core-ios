@@ -82,7 +82,7 @@ class UserAuth: ObservableObject {
     
     func logout() {
         self.loginStatus = .logout
-        //ToDo: call Api
+        sendLogoutInfo()
         User.shared.logout()
     }
     
@@ -102,7 +102,7 @@ class UserAuth: ObservableObject {
                 let userID = userInfo?.id ??  userName//idObjectDict?["id"] as? String
                 User.shared.login(userID: userID, serverAddress: self.serverURL)
                 self.loginStatus = .loggedIn
-                self.sendToken()
+                self.sendLoginInfo()
                 DispatchQueue.main.async {
                     Utils.postNotificationOnMainQueueAsync(name: .userLogined)
                 }
@@ -127,20 +127,20 @@ class UserAuth: ObservableObject {
     //        // }
     //    }
     
-    func sendToken() {
-//
-//        guard let deviceToken = UserDefaults.standard.watchdeviceToken else { return }
-//        let tokenInfo = DeviceInfoWithToken(deviceToken: deviceToken, userAgent: UserAgent.defaultAgent)
-//        let tokenRerquest = PushNotification.UpdateTokenRequest(deviceInfoWithToken: tokenInfo)
-//        let lampAPI = NotificationAPI(NetworkConfig.networkingAPI(isBackgroundSession: true))
-//
-//        lampAPI.sendDeviceToken(request: tokenRerquest) { (isSuccess) in
-//            print("sent device token \(isSuccess)")
-//        }
-//
-//
+    func sendLogoutInfo() {
+        
+        let tokenInfo = DeviceInfoWithToken(deviceToken: nil, userAgent: UserAgent.defaultAgent, action: SensorType.AnalyticAction.logout.rawValue)
+        sendInfoToServer(tokenInfo: tokenInfo)
+    }
+    
+    func sendLoginInfo() {
+        
         let deviceTokenStr = UserDefaults.standard.deviceToken
         let tokenInfo = DeviceInfoWithToken(deviceToken: deviceTokenStr, userAgent: UserAgent.defaultAgent, action: SensorType.AnalyticAction.login.rawValue)
+        sendInfoToServer(tokenInfo: tokenInfo)
+    }
+
+    func sendInfoToServer(tokenInfo: DeviceInfoWithToken) {
         let tokenRerquest = PushNotification.UpdateTokenRequest(deviceInfoWithToken: tokenInfo)
         let lampAPI = NotificationAPI(NetworkConfig.networkingAPI(isBackgroundSession: false))
         

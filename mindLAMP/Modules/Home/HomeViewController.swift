@@ -180,7 +180,14 @@ private extension HomeViewController {
     }
     
     func performOnLogout() {
-        //ToDo: call logout API
+        
+        //send lamp.analytics for logout
+        let tokenInfo = DeviceInfoWithToken(deviceToken: nil, userAgent: UserAgent.defaultAgent, action: SensorType.AnalyticAction.logout.rawValue)
+        let tokenRerquest = PushNotification.UpdateTokenRequest(deviceInfoWithToken: tokenInfo)
+        let lampAPI = NotificationAPI(NetworkConfig.networkingAPI())
+        
+        lampAPI.sendDeviceToken(request: tokenRerquest) {_ in }
+        
         User.shared.logout()
     }
 }
