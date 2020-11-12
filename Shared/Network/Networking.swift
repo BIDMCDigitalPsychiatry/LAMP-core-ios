@@ -41,13 +41,25 @@ public class Networking: NSObject, NetworkingAPI {
             
         case .post, .put:
             
-            print("requestURL = \(requestURL)")
-            print("headers = \(String(describing: urlRequest.allHTTPHeaderFields))")
+            print("\nrequestURL = \(requestURL)")
+            print("\nheaders = \(String(describing: urlRequest.allHTTPHeaderFields))")
             if let data = request.jsonData {
                 urlRequest.httpBody = data
                 print("body Json: \(String(describing: String(data: data, encoding: String.Encoding.utf8)))")
+            } else if let data = request.jsonBody {
+                do {
+                    print("jsonBody = \(data)")
+                    let jsonData = try JSONSerialization.data(withJSONObject: data, options: JSONSerialization.WritingOptions.prettyPrinted)
+                    urlRequest.httpBody = jsonData
+
+                } catch let err {
+                    callback(.failure(err))
+                    return
+                }
+            } else {
+                print("no body?")
             }
-            
+
         case .get:
             print("requestURL = \(requestURL)")
             print("headers = \(String(describing: urlRequest.allHTTPHeaderFields))")

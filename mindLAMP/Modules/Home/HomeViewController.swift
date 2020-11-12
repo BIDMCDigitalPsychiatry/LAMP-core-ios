@@ -186,9 +186,9 @@ private extension HomeViewController {
         let tokenRerquest = PushNotification.UpdateTokenRequest(deviceInfoWithToken: tokenInfo)
         let lampAPI = NotificationAPI(NetworkConfig.networkingAPI())
         
-        lampAPI.sendDeviceToken(request: tokenRerquest) {_ in }
-        
-        User.shared.logout()
+        lampAPI.sendDeviceToken(request: tokenRerquest) {_ in
+            User.shared.logout()
+        }
     }
 }
 

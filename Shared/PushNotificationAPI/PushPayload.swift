@@ -23,6 +23,7 @@ struct DeviceInfoWithToken: Encodable {
     var device_token: String?
     
     init(deviceToken: String?, userAgent: UserAgent?, action: String?) {
+        self.action = action
         self.device_token = deviceToken
         self.user_agent = userAgent?.toString()
         self.device_type = DeviceType.displayName
@@ -35,7 +36,7 @@ struct PayLoadInfo {
     var device_type: String// = "iOS" //"Android" or "Web"
     var user_agent: UserAgent?
     var payload: [String: Any]?
-    init(userAction: String?, userInfo: [AnyHashable: Any], userAgent: UserAgent?) {
+    init(userInfo: [AnyHashable: Any], userAgent: UserAgent?) {
         user_action = action
         self.user_agent = userAgent
         self.device_type = DeviceType.displayName

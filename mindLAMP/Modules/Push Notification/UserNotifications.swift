@@ -118,20 +118,35 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
     
     func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Swift.Void) {
         
+        print("present userInfo = \(notification.request.content.userInfo)")
         //let userInfo = notification.request.content.userInfo
         completionHandler([.alert, .badge, .sound])
+        
+        let pushInfo = PushUserInfo(userInfo: notification.request.content.userInfo)
+        //update server
+        let payLoadInfo = PayLoadInfo(userInfo: notification.request.content.userInfo, userAgent: UserAgent.defaultAgent)
+        let acknoledgeRequest = PushNotification.UpdateReadRequest(timeInterval: pushInfo.deliverdTime, payLoadInfo: payLoadInfo)
+        let lampAPI = NotificationAPI(NetworkConfig.networkingAPI())
+        lampAPI.sendPushAcknowledgement(request: acknoledgeRequest)
     }
+    
     
     func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable : Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
         
         let pushInfo = PushUserInfo(userInfo: userInfo)
         printToFile("userInfo = \(userInfo)")
-        print("userInfo = \(userInfo)")
+        print("remote userInfo = \(userInfo)")
         pushInfo.setDeliveredTime()
         completionHandler(UIBackgroundFetchResult.noData)
         
+        //update server
+        let payLoadInfo = PayLoadInfo(userInfo: userInfo, userAgent: UserAgent.defaultAgent)
+        let acknoledgeRequest = PushNotification.UpdateReadRequest(timeInterval: pushInfo.deliverdTime, payLoadInfo: payLoadInfo)
+        let lampAPI = NotificationAPI(NetworkConfig.networkingAPI())
+        lampAPI.sendPushAcknowledgement(request: acknoledgeRequest)
+        
     }
-    
+
     // The method will be called on the delegate when the user responded to the notification by opening the application, dismissing the notification or choosing a UNNotificationAction.
     //The delegate must be set before the application returns from applicationDidFinishLaunching:.
     func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Swift.Void) {
@@ -157,6 +172,7 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
             appdelegate.window?.rootViewController?.present(alert, animated: true, completion: nil)
         }
 
+        //ToDo: test this expired
         switch action {
         case .openAppNoWebView, .openApp, .defaultTap:
             guard let pageURL = pushInfo.pageURLForAction(action) else { break }
@@ -165,11 +181,6 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
             ()
         }
         
-        //update server
-        let payLoadInfo = PayLoadInfo(userAction: action.encodableValue, userInfo: userInfo, userAgent: UserAgent.defaultAgent)
-        let acknoledgeRequest = PushNotification.UpdateReadRequest(timeInterval: pushInfo.deliverdTime, payLoadInfo: payLoadInfo)
-        let lampAPI = NotificationAPI(NetworkConfig.networkingAPI())
-        lampAPI.sendPushAcknowledgement(request: acknoledgeRequest)
     }
     
     private func openWebPage(_ pageURL: URL, title: String?) -> Bool {

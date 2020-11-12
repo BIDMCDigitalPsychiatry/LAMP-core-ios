@@ -82,8 +82,16 @@ class UserAuth: ObservableObject {
     
     func logout() {
         self.loginStatus = .logout
-        sendLogoutInfo()
-        User.shared.logout()
+        
+        let tokenInfo = DeviceInfoWithToken(deviceToken: nil, userAgent: UserAgent.defaultAgent, action: SensorType.AnalyticAction.logout.rawValue)
+        let tokenRerquest = PushNotification.UpdateTokenRequest(deviceInfoWithToken: tokenInfo)
+        let lampAPI = NotificationAPI(NetworkConfig.networkingAPI(isBackgroundSession: false))
+        
+        lampAPI.sendDeviceToken(request: tokenRerquest) { (_) in
+            User.shared.logout()
+        }
+        
+        
     }
     
     //let didChange = PassthroughSubject<UserAuth,Never>()
@@ -127,12 +135,7 @@ class UserAuth: ObservableObject {
     //        // }
     //    }
     
-    func sendLogoutInfo() {
-        
-        let tokenInfo = DeviceInfoWithToken(deviceToken: nil, userAgent: UserAgent.defaultAgent, action: SensorType.AnalyticAction.logout.rawValue)
-        sendInfoToServer(tokenInfo: tokenInfo)
-    }
-    
+
     func sendLoginInfo() {
         
         let deviceTokenStr = UserDefaults.standard.deviceToken

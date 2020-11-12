@@ -247,7 +247,7 @@ extension ExtensionDelegate {
         //check notification payload
         print("remote APNS")
         //update server
-        let payLoadInfo = PayLoadInfo(userAction: nil, userInfo: userInfo, userAgent: UserAgent.defaultAgent)
+        let payLoadInfo = PayLoadInfo(userInfo: userInfo, userAgent: UserAgent.defaultAgent)
         let timeStamp = Date().timeIntervalSince1970 * 1000
         let acknoledgeRequest = PushNotification.UpdateReadRequest(timeInterval: timeStamp, payLoadInfo: payLoadInfo)
         let lampAPI = NotificationAPI(NetworkConfig.networkingAPI())
