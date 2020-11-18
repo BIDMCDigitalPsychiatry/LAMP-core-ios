@@ -17,7 +17,7 @@
 	<key>CFBundleShortVersionString</key>
 	<string>$(MARKETING_VERSION)</string>
 	<key>CFBundleVersion</key>
-	<string>68</string>
+	<string>$(CURRENT_PROJECT_VERSION)</string>
 	<key>DASHBOARD_API</key>
 	<string>$(DASHBOARD_API)</string>
 	<key>DASHBOARD_URL</key>

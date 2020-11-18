@@ -251,7 +251,7 @@ extension ExtensionDelegate {
         let timeStamp = Date().timeIntervalSince1970 * 1000
         let acknoledgeRequest = PushNotification.UpdateReadRequest(timeInterval: timeStamp, payLoadInfo: payLoadInfo)
         let lampAPI = NotificationAPI(NetworkConfig.networkingAPI())
-        lampAPI.sendPushAcknowledgement(request: acknoledgeRequest)
+        lampAPI.sendPushAcknowledgement(request: acknoledgeRequest){}
         
         LMSensorManager.shared.checkIsRunning()
     }

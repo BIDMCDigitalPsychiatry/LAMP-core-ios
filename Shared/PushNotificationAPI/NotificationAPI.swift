@@ -31,7 +31,7 @@ class NotificationAPI {
         }
     }
     
-    func sendPushAcknowledgement(request: PushNotification.UpdateReadRequest, completion: () -> Void) {
+    func sendPushAcknowledgement(request: PushNotification.UpdateReadRequest, completion: @escaping () -> Void) {
         
         guard let userID = User.shared.userId else {
             return
