@@ -31,9 +31,17 @@ enum Endpoint: String {
     }
     
     static func appendURLTokenTo(urlString: String) -> String {
-        if let token = getURLToken() {
-            return "\(urlString)?a=\(token)"
+        var populatedURLString = urlString
+        if urlString.hasPrefix("http") == false {
+            var baseurl = LampURL.dashboardDigitalURLText
+            if urlString.hasPrefix("/") && baseurl.hasSuffix("/") {
+                baseurl = String(baseurl.dropLast())
+            }
+            populatedURLString = baseurl + urlString
         }
-        return urlString
+        if let token = getURLToken() {
+            return "\(populatedURLString)?a=\(token)"
+        }
+        return populatedURLString
     }
 }

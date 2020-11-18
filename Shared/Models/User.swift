@@ -28,8 +28,6 @@ struct User {
         UserDefaults.standard.serverAddress = serverAddressWithHttps
         UserDefaults.standard.userID = userID
         UserDefaults.standard.setInitalSensorRecorderTimestamp()
-        
-        
     }
     
     func logout() {

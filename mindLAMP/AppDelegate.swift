@@ -39,7 +39,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         return true
     }
-    
+ 
     func application(_ application: UIApplication, performFetchWithCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
         //BackgroundServices.shared.performTasksInBG(completionHandler: completionHandler)
         printToFile("\nperformFetchWithCompletionHandler")

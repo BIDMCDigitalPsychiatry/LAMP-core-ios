@@ -22,6 +22,39 @@ extension UserDefaults {
         case nodeRootFolder = "nodeRootFolder"
         case version = "version"
         
+        case notificationTimestamps = "notificationTimestamps"
+    }
+    
+    var notificationTimestamps: [String: Double]? {
+        get {
+            return self.object(forKey: UserDefaults.Key.notificationTimestamps.rawValue) as? [String: Double]
+        }
+        set {
+            self.set(newValue, forKey: UserDefaults.Key.notificationTimestamps.rawValue)
+        }
+    }
+    
+    func removeTimestampForNotification(nid: String) {
+        var dictTimestamps = notificationTimestamps
+        dictTimestamps?.removeValue(forKey: nid)
+        
+        notificationTimestamps = dictTimestamps
+    }
+    
+    func removeAllNotificationTimestamps() {
+        removeObject(forKey: UserDefaults.Key.notificationTimestamps.rawValue)
+    }
+    
+    func setTimestampForNotificationId(nId: String) {
+        var dictTimestamps = notificationTimestamps ?? [String: Double]()
+        dictTimestamps[nId] = Date().timeIntervalSince1970
+        
+        notificationTimestamps = dictTimestamps
+    }
+    
+    func getTimestampForNotificationId(nId: String) -> Double {
+        let dictTimestamps = notificationTimestamps
+        return dictTimestamps?[nId] ?? 0
     }
     
     func setInitalSensorRecorderTimestamp() {
@@ -79,6 +112,7 @@ extension UserDefaults {
         UserDefaults.standard.userID = nil
         UserDefaults.standard.serverAddress = nil
         UserDefaults.standard.sensorRecorderTimestamp = nil
+        removeAllNotificationTimestamps()
         UserDefaults.standard.synchronize()
     }
     

@@ -28,10 +28,31 @@ class NotificationHelper: NSObject {
             appdelegate.respondedToNotification(remoteAction: RemoteNotification.Action.defaultTap, userInfo: userInfo)
         }
     }
+    
+    func removeNotification(identifier: String) {
+        UNUserNotificationCenter.current().removeDeliveredNotifications(withIdentifiers: [identifier])
+        UserDefaults.standard.removeTimestampForNotification(nid: identifier)
+    }
+    
+    func removeAllNotifications() {
+        UNUserNotificationCenter.current().removeAllDeliveredNotifications()
+    }
+    
+    @objc func fireNotificationExpire(timer: Timer) {
+        printToFile("\n timer fired")
+        print("\n timer fired")
+        guard let userInfo = timer.userInfo as? [AnyHashable : Any] else { return }
+        let pushInfo = PushUserInfo(userInfo: userInfo)
+        if let identifier = pushInfo.identifier {
+            printToFile("\n exe remove noti")
+            print("\n exe remove noti")
+            removeNotification(identifier: identifier)
+        }
+    }
 }
 
 private extension NotificationHelper {
-    
+
     func register() {
         UNUserNotificationCenter.current().getNotificationSettings { (settings) in
             guard settings.authorizationStatus == .authorized else { return }
@@ -121,13 +142,6 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
         print("present userInfo = \(notification.request.content.userInfo)")
         //let userInfo = notification.request.content.userInfo
         completionHandler([.alert, .badge, .sound])
-        
-        let pushInfo = PushUserInfo(userInfo: notification.request.content.userInfo)
-        //update server
-        let payLoadInfo = PayLoadInfo(userInfo: notification.request.content.userInfo, userAgent: UserAgent.defaultAgent)
-        let acknoledgeRequest = PushNotification.UpdateReadRequest(timeInterval: pushInfo.deliverdTime, payLoadInfo: payLoadInfo)
-        let lampAPI = NotificationAPI(NetworkConfig.networkingAPI())
-        lampAPI.sendPushAcknowledgement(request: acknoledgeRequest)
     }
     
     
@@ -137,14 +151,22 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
         printToFile("userInfo = \(userInfo)")
         print("remote userInfo = \(userInfo)")
         pushInfo.setDeliveredTime()
-        completionHandler(UIBackgroundFetchResult.noData)
+        
+        if let livingTime = pushInfo.expireMilliSeconds, pushInfo.identifier != nil {
+            printToFile("\n schedule timer")
+            print("\n schedule timer")
+            Timer.scheduledTimer(timeInterval: livingTime/1000.0, target: NotificationHelper.shared, selector: #selector(NotificationHelper.shared.fireNotificationExpire), userInfo: userInfo, repeats: false)
+            //timer.tolerance = 0.2
+        }
+        
         
         //update server
         let payLoadInfo = PayLoadInfo(userInfo: userInfo, userAgent: UserAgent.defaultAgent)
         let acknoledgeRequest = PushNotification.UpdateReadRequest(timeInterval: pushInfo.deliverdTime, payLoadInfo: payLoadInfo)
         let lampAPI = NotificationAPI(NetworkConfig.networkingAPI())
-        lampAPI.sendPushAcknowledgement(request: acknoledgeRequest)
-        
+        lampAPI.sendPushAcknowledgement(request: acknoledgeRequest) {
+            completionHandler(UIBackgroundFetchResult.noData)
+        }
     }
 
     // The method will be called on the delegate when the user responded to the notification by opening the application, dismissing the notification or choosing a UNNotificationAction.
@@ -170,20 +192,26 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
             alert.addAction(UIAlertAction(title: "alert.button.ok".localized, style: .destructive, handler: { action in
                }))
             appdelegate.window?.rootViewController?.present(alert, animated: true, completion: nil)
+        } else {
+            
+            switch action {
+            case .openAppNoWebView, .openApp, .defaultTap:
+                guard let pageURL = pushInfo.pageURLForAction(action) else { break }
+                _ = openWebPage(pageURL, title: pushInfo.alert)
+            case .dismiss:
+                ()
+            }
         }
-
-        //ToDo: test this expired
-        switch action {
-        case .openAppNoWebView, .openApp, .defaultTap:
-            guard let pageURL = pushInfo.pageURLForAction(action) else { break }
-            _ = openWebPage(pageURL, title: pushInfo.alert)
-        case .dismiss:
-            ()
-        }
-        
     }
     
     private func openWebPage(_ pageURL: URL, title: String?) -> Bool {
+        
+        
+//        let appdelegate = UIApplication.shared.delegate as! AppDelegate
+//        let homeController = (appdelegate.window?.rootViewController as? UINavigationController)?.viewControllers.first as? HomeViewController
+//        homeController?.wkWebView.load(URLRequest(url: pageURL))
+//        return true
+        
         
         let webViewController: WebViewController = WebViewController.getController()
         if let navController = self.window?.rootViewController as? UINavigationController {

@@ -6,12 +6,14 @@ class NotificationService: UNNotificationServiceExtension {
     
     var contentHandler: ((UNNotificationContent) -> Void)?
     var bestAttemptContent: UNMutableNotificationContent?
+
     
     override func didReceive(_ request: UNNotificationRequest, withContentHandler contentHandler: @escaping (UNNotificationContent) -> Void) {
         
-        print("received oush")
+        print("received push \(request.identifier)")
         self.contentHandler = contentHandler
         bestAttemptContent = (request.content.mutableCopy() as? UNMutableNotificationContent)
+        bestAttemptContent?.userInfo["apns-collapse-id"] = request.identifier
         
         defer {
             contentHandler(bestAttemptContent ?? request.content)

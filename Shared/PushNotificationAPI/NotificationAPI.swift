@@ -31,7 +31,7 @@ class NotificationAPI {
         }
     }
     
-    func sendPushAcknowledgement(request: PushNotification.UpdateReadRequest) {
+    func sendPushAcknowledgement(request: PushNotification.UpdateReadRequest, completion: () -> Void) {
         
         guard let userID = User.shared.userId else {
             return
@@ -41,9 +41,9 @@ class NotificationAPI {
         connection.makeWebserviceCall(with: data) { (response: Result<PushNotification.UpdateReadResponse>) in
             switch response {
             case .failure( _):
-                break
+                completion()
             case .success(_):
-                break
+                completion()
             }
         }
     }

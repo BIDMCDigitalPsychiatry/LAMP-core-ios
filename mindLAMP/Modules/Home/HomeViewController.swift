@@ -13,6 +13,7 @@ class HomeViewController: UIViewController {
     private var wkWebView: WKWebView!
     private var loadingObservation: NSKeyValueObservation?
     private var isWebpageLoaded = false
+    //var isHomePageLoaded = false
     //@IBOutlet weak var containerView: UIView!
     private lazy var indicator: UIActivityIndicatorView  = {
         let progressView = UIActivityIndicatorView(style: UIActivityIndicatorView.Style.gray)
@@ -95,7 +96,6 @@ private extension HomeViewController {
     func loadWebView() {
         
         wkWebView = makeWebView()
-        
         wkWebView.navigationDelegate = self
         
         self.view = wkWebView
@@ -152,8 +152,10 @@ private extension HomeViewController {
         preferences.javaScriptCanOpenWindowsAutomatically = true
         
         let configuration = WKWebViewConfiguration()
+        configuration.processPool = WebViewStorage.shared.processPool
         configuration.preferences = preferences
-        configuration.websiteDataStore = WKWebsiteDataStore.default()
+        configuration.websiteDataStore = WebViewStorage.shared.dataStore
+        //configuration.websiteDataStore = WKWebsiteDataStore.default()
         //configuration.userContentController.add(self, name: ScriptMessageHandler.login.rawValue)
         //configuration.userContentController.add(self, name: ScriptMessageHandler.logout.rawValue)
         
@@ -187,19 +189,20 @@ private extension HomeViewController {
         let lampAPI = NotificationAPI(NetworkConfig.networkingAPI())
         
         lampAPI.sendDeviceToken(request: tokenRerquest) {_ in
+            NotificationHelper.shared.removeAllNotifications()
             User.shared.logout()
         }
     }
+    
 }
-
 
 // MARK: - WKNavigationDelegate
 
 
 extension HomeViewController: WKNavigationDelegate {
+    
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
-        print("didFinish navigation")
-        //indicator.stopAnimating()
+
     }
     
     func webView(_ webView: WKWebView, didFail navigation: WKNavigation!, withError error: Error) {
