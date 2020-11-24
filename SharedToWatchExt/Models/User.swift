@@ -20,6 +20,22 @@ struct User {
         return (Endpoint.getSessionKey() != nil) && (userId != nil)
     }
     
+    #if os(iOS)
+    func login(userID: String?, username: String?, password: String?, serverAddress: String?) {
+        print("userId = \(String(describing: userID))")
+
+        let serverAddressWithHttps = serverAddress?.makeURLString()
+        print("serverAddress = \(String(describing: serverAddress))")
+        UserDefaults.standard.passwordShared = password
+        UserDefaults.standard.serverAddress = serverAddressWithHttps
+        UserDefaults.standard.serverAddressShared = serverAddressWithHttps?.cleanHostName()
+        UserDefaults.standard.userIDShared = username
+        UserDefaults.standard.userID = userID
+        UserDefaults.standard.setInitalSensorRecorderTimestamp()
+    }
+    #endif
+    
+    #if os(watchOS)
     func login(userID: String?, serverAddress: String?) {
         print("userId = \(String(describing: userID))")
 
@@ -29,6 +45,7 @@ struct User {
         UserDefaults.standard.userID = userID
         UserDefaults.standard.setInitalSensorRecorderTimestamp()
     }
+    #endif
     
     func logout() {
         //Stop all sensors

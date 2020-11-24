@@ -39,9 +39,9 @@ enum Endpoint: String {
             }
             populatedURLString = baseurl + urlString
         }
-        if let token = getURLToken() {
-            return "\(populatedURLString)?a=\(token)"
-        }
+//        if let token = getURLToken() {
+//            return "\(populatedURLString)?a=\(token)"
+//        }
         return populatedURLString
     }
 }

@@ -251,7 +251,8 @@ extension HomeViewController: WKScriptMessageHandler {
             let base64URLToken = uRLToken.data(using: .utf8)?.base64EncodedString()
             Endpoint.setURLToken(base64URLToken)
 
-            User.shared.login(userID: userID, serverAddress: serverAddress)
+            let (username, password) = token.makeTwoPiecesUsing(seperator: ":")
+            User.shared.login(userID: userID, username: username, password: password, serverAddress: serverAddress)
             
             //Inform watch the login info
             if let dictInfo = User.shared.loginInfo {

@@ -81,6 +81,69 @@ extension UserDefaults {
         }
     }
     
+    var userIDShared: String? {
+        get {
+            if let userDefaults = UserDefaults(suiteName: "group.digital.lamp.mindlamp") {
+                if let value = userDefaults.string(forKey: "userid") {
+                    return value
+                }
+            }
+            return nil
+        }
+        set {
+            if let userDefaults = UserDefaults(suiteName: "group.digital.lamp.mindlamp") {
+                if newValue == nil {
+                    userDefaults.removeObject(forKey: "userid")
+                } else {
+                    userDefaults.set(newValue as AnyObject, forKey: "userid")
+                    userDefaults.synchronize()
+                }
+            }
+        }
+    }
+    
+    var passwordShared: String? {
+        get {
+            if let userDefaults = UserDefaults(suiteName: "group.digital.lamp.mindlamp") {
+                if let value = userDefaults.string(forKey: "password") {
+                    return value
+                }
+            }
+            return nil
+        }
+        set {
+            if let userDefaults = UserDefaults(suiteName: "group.digital.lamp.mindlamp") {
+                if newValue == nil {
+                    userDefaults.removeObject(forKey: "password")
+                } else {
+                    userDefaults.set(newValue as AnyObject, forKey: "password")
+                    userDefaults.synchronize()
+                }
+            }
+        }
+    }
+    
+    var serverAddressShared: String? {
+        get {
+            if let userDefaults = UserDefaults(suiteName: "group.digital.lamp.mindlamp") {
+                if let value = userDefaults.string(forKey: "serverAddress") {
+                    return value
+                }
+            }
+            return nil
+        }
+        set {
+            if let userDefaults = UserDefaults(suiteName: "group.digital.lamp.mindlamp") {
+                if newValue == nil {
+                    userDefaults.removeObject(forKey: "serverAddress")
+                } else {
+                    userDefaults.set(newValue as AnyObject, forKey: "serverAddress")
+                    userDefaults.synchronize()
+                }
+            }
+        }
+    }
+    
     var serverAddress: String? {
         get {
             return self.string(forKey: UserDefaults.Key.serverAddress.rawValue)
@@ -109,9 +172,14 @@ extension UserDefaults {
 //    }
     
     func clearAll() {
-        UserDefaults.standard.userID = nil
-        UserDefaults.standard.serverAddress = nil
-        UserDefaults.standard.sensorRecorderTimestamp = nil
+        
+        UserDefaults.standard.userIDShared = nil
+        UserDefaults.standard.passwordShared = nil
+        UserDefaults.standard.serverAddressShared = nil
+        
+        UserDefaults.standard.removeObject(forKey: UserDefaults.Key.userID.rawValue)
+        UserDefaults.standard.removeObject(forKey: UserDefaults.Key.serverAddress.rawValue)
+        UserDefaults.standard.removeObject(forKey: UserDefaults.Key.sensorRecorderTimestamp.rawValue)
         removeAllNotificationTimestamps()
         UserDefaults.standard.synchronize()
     }

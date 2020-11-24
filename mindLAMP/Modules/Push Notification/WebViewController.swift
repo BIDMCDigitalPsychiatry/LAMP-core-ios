@@ -22,7 +22,6 @@ class WebViewController: UIViewController {
     var pageURL: URL!
     
     override func loadView() {
-        
         //LeakAvoider.cleanCache()
         self.loadWebView()
     }
@@ -30,9 +29,6 @@ class WebViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationController?.setNavigationBarHidden(false, animated: false)
-        print("pageURL = \(pageURL)")
-        
-        //let dummyURL = Bundle.main.url(forResource: "start", withExtension: "html")!
         wkWebView.load(URLRequest(url: pageURL))
     }
         
@@ -51,23 +47,6 @@ class WebViewController: UIViewController {
 //    }
 
 }
-// MARK: - UIWebViewDelegate
-extension WebViewController: WKNavigationDelegate {
-    
-//    func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
-//
-//
-//
-//    }
-    
-    func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
-        print("didFinish navigation")
-    }
-    
-    func webView(_ webView: WKWebView, didFail navigation: WKNavigation!, withError error: Error) {
-        print("error = \(error.localizedDescription)")
-    }
-}
 
 extension WebViewController {
     
@@ -75,8 +54,6 @@ extension WebViewController {
        
         wkWebView = makeWebView()
         
-        wkWebView.navigationDelegate = self
-
         self.view = wkWebView
         view.addSubview(indicator)
 
@@ -106,8 +83,7 @@ extension WebViewController {
         let preferences = WKPreferences()
         preferences.javaScriptEnabled = true
         preferences.javaScriptCanOpenWindowsAutomatically = true
-        
-        let configuration = WKWebViewConfiguration()
+        let configuration = WebConfiguration.getWebViewConfiguration()
         configuration.preferences = preferences
         let webView = WKWebView(frame: .zero, configuration: configuration)
         webView.allowsBackForwardNavigationGestures = true

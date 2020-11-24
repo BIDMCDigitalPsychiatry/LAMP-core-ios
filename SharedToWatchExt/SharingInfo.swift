@@ -15,6 +15,7 @@ struct LoginInfoKey {
     static let sessionToken = "sessionToken"
     static let userId = "userId"
     static let serverAddress = "serverAddress"
+    static let password = "password"
 }
 
 struct LoginInfo {
