@@ -24,6 +24,21 @@
 		B255116524B6202300CDBDD1 /* WatchNotificationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B255116424B6202300CDBDD1 /* WatchNotificationModel.swift */; };
 		B255116924B625CC00CDBDD1 /* WatchDeviceInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = B255116824B625CC00CDBDD1 /* WatchDeviceInfo.swift */; };
 		B255116C24B6291900CDBDD1 /* LoginServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = B255116B24B6291900CDBDD1 /* LoginServices.swift */; };
+		B2587B51256E23BC00A2A7F2 /* UserDefaults+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2587B4B256E23BC00A2A7F2 /* UserDefaults+Extension.swift */; };
+		B2587B52256E23BC00A2A7F2 /* UserDefaults+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2587B4B256E23BC00A2A7F2 /* UserDefaults+Extension.swift */; };
+		B2587B53256E23BC00A2A7F2 /* UserDefaults+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2587B4B256E23BC00A2A7F2 /* UserDefaults+Extension.swift */; };
+		B2587B54256E23BC00A2A7F2 /* Staging.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = B2587B4D256E23BC00A2A7F2 /* Staging.xcconfig */; };
+		B2587B55256E23BC00A2A7F2 /* Staging.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = B2587B4D256E23BC00A2A7F2 /* Staging.xcconfig */; };
+		B2587B56256E23BC00A2A7F2 /* Staging.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = B2587B4D256E23BC00A2A7F2 /* Staging.xcconfig */; };
+		B2587B57256E23BC00A2A7F2 /* Production.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = B2587B4E256E23BC00A2A7F2 /* Production.xcconfig */; };
+		B2587B58256E23BC00A2A7F2 /* Production.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = B2587B4E256E23BC00A2A7F2 /* Production.xcconfig */; };
+		B2587B59256E23BC00A2A7F2 /* Production.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = B2587B4E256E23BC00A2A7F2 /* Production.xcconfig */; };
+		B2587B5A256E23BC00A2A7F2 /* LampURL.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2587B4F256E23BC00A2A7F2 /* LampURL.swift */; };
+		B2587B5B256E23BC00A2A7F2 /* LampURL.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2587B4F256E23BC00A2A7F2 /* LampURL.swift */; };
+		B2587B5C256E23BC00A2A7F2 /* LampURL.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2587B4F256E23BC00A2A7F2 /* LampURL.swift */; };
+		B2587B5D256E23BC00A2A7F2 /* EndPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2587B50256E23BC00A2A7F2 /* EndPoint.swift */; };
+		B2587B5E256E23BC00A2A7F2 /* EndPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2587B50256E23BC00A2A7F2 /* EndPoint.swift */; };
+		B2587B5F256E23BC00A2A7F2 /* EndPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2587B50256E23BC00A2A7F2 /* EndPoint.swift */; };
 		B26A2A2B24EBC6E900BCB043 /* VersionCheckViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B26A2A1D24EBC6E900BCB043 /* VersionCheckViewController.swift */; };
 		B26A2A3324EBCCA400BCB043 /* VersionCheckViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B26A2A3224EBCCA400BCB043 /* VersionCheckViewModel.swift */; };
 		B2704DDA24B4A2A900DE196B /* Interface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B2704DD824B4A2A900DE196B /* Interface.storyboard */; };
@@ -47,9 +62,6 @@
 		B29639D723BDC28200626E1A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B29639D623BDC28200626E1A /* Assets.xcassets */; };
 		B29639DA23BDC28200626E1A /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B29639D923BDC28200626E1A /* Preview Assets.xcassets */; };
 		B29639DD23BDC28200626E1A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B29639DB23BDC28200626E1A /* LaunchScreen.storyboard */; };
-		B2A15BAF2567A8A600222717 /* UserDefaults+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2A15BAE2567A8A600222717 /* UserDefaults+Extension.swift */; };
-		B2A15BB02567A8A600222717 /* UserDefaults+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2A15BAE2567A8A600222717 /* UserDefaults+Extension.swift */; };
-		B2A15BB12567A8A600222717 /* UserDefaults+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2A15BAE2567A8A600222717 /* UserDefaults+Extension.swift */; };
 		B2A15BDC2567A8BE00222717 /* NotificationAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2A15BB42567A8BE00222717 /* NotificationAPI.swift */; };
 		B2A15BDD2567A8BE00222717 /* NotificationAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2A15BB42567A8BE00222717 /* NotificationAPI.swift */; };
 		B2A15BDE2567A8BE00222717 /* PushPayload.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2A15BB52567A8BE00222717 /* PushPayload.swift */; };
@@ -106,18 +118,6 @@
 		B2A15C192567A8BE00222717 /* AsynchronousOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2A15BDA2567A8BE00222717 /* AsynchronousOperation.swift */; };
 		B2A15C1A2567A8BE00222717 /* SharingInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2A15BDB2567A8BE00222717 /* SharingInfo.swift */; };
 		B2A15C1B2567A8BE00222717 /* SharingInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2A15BDB2567A8BE00222717 /* SharingInfo.swift */; };
-		B2A15C272567D52F00222717 /* EndPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2A15C252567D52F00222717 /* EndPoint.swift */; };
-		B2A15C282567D52F00222717 /* EndPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2A15C252567D52F00222717 /* EndPoint.swift */; };
-		B2A15C292567D52F00222717 /* EndPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2A15C252567D52F00222717 /* EndPoint.swift */; };
-		B2A15C2A2567D52F00222717 /* LampURL.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2A15C262567D52F00222717 /* LampURL.swift */; };
-		B2A15C2B2567D52F00222717 /* LampURL.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2A15C262567D52F00222717 /* LampURL.swift */; };
-		B2A15C2C2567D52F00222717 /* LampURL.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2A15C262567D52F00222717 /* LampURL.swift */; };
-		B2A15C302567D66600222717 /* Staging.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = B2A15C2E2567D66600222717 /* Staging.xcconfig */; };
-		B2A15C312567D66600222717 /* Staging.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = B2A15C2E2567D66600222717 /* Staging.xcconfig */; };
-		B2A15C322567D66600222717 /* Staging.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = B2A15C2E2567D66600222717 /* Staging.xcconfig */; };
-		B2A15C332567D66600222717 /* Production.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = B2A15C2F2567D66600222717 /* Production.xcconfig */; };
-		B2A15C342567D66600222717 /* Production.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = B2A15C2F2567D66600222717 /* Production.xcconfig */; };
-		B2A15C352567D66600222717 /* Production.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = B2A15C2F2567D66600222717 /* Production.xcconfig */; };
 		B2A15C372567FE1900222717 /* WebViewConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2A15C362567FE1900222717 /* WebViewConfiguration.swift */; };
 		B2A15C382567FE1900222717 /* WebViewConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2A15C362567FE1900222717 /* WebViewConfiguration.swift */; };
 		B2B8935223D0AD6500321C3E /* DateExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2B8935023D0AD6500321C3E /* DateExtension.swift */; };
@@ -236,6 +236,11 @@
 		B255116424B6202300CDBDD1 /* WatchNotificationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchNotificationModel.swift; sourceTree = "<group>"; };
 		B255116824B625CC00CDBDD1 /* WatchDeviceInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchDeviceInfo.swift; sourceTree = "<group>"; };
 		B255116B24B6291900CDBDD1 /* LoginServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginServices.swift; sourceTree = "<group>"; };
+		B2587B4B256E23BC00A2A7F2 /* UserDefaults+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UserDefaults+Extension.swift"; sourceTree = "<group>"; };
+		B2587B4D256E23BC00A2A7F2 /* Staging.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Staging.xcconfig; sourceTree = "<group>"; };
+		B2587B4E256E23BC00A2A7F2 /* Production.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Production.xcconfig; sourceTree = "<group>"; };
+		B2587B4F256E23BC00A2A7F2 /* LampURL.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LampURL.swift; sourceTree = "<group>"; };
+		B2587B50256E23BC00A2A7F2 /* EndPoint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EndPoint.swift; sourceTree = "<group>"; };
 		B26A2A1D24EBC6E900BCB043 /* VersionCheckViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VersionCheckViewController.swift; sourceTree = "<group>"; };
 		B26A2A3224EBCCA400BCB043 /* VersionCheckViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VersionCheckViewModel.swift; sourceTree = "<group>"; };
 		B26B56C92566EE5B00A87711 /* CustomNotification.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = CustomNotification.entitlements; sourceTree = "<group>"; };
@@ -268,7 +273,6 @@
 		B29639D923BDC28200626E1A /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		B29639DC23BDC28200626E1A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		B29639DE23BDC28200626E1A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		B2A15BAE2567A8A600222717 /* UserDefaults+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UserDefaults+Extension.swift"; sourceTree = "<group>"; };
 		B2A15BB42567A8BE00222717 /* NotificationAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationAPI.swift; sourceTree = "<group>"; };
 		B2A15BB52567A8BE00222717 /* PushPayload.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PushPayload.swift; sourceTree = "<group>"; };
 		B2A15BB72567A8BE00222717 /* LampIdentifiersHealthKit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LampIdentifiersHealthKit.swift; sourceTree = "<group>"; };
@@ -297,10 +301,6 @@
 		B2A15BD92567A8BE00222717 /* BackgroundServices.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BackgroundServices.swift; sourceTree = "<group>"; };
 		B2A15BDA2567A8BE00222717 /* AsynchronousOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AsynchronousOperation.swift; sourceTree = "<group>"; };
 		B2A15BDB2567A8BE00222717 /* SharingInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SharingInfo.swift; sourceTree = "<group>"; };
-		B2A15C252567D52F00222717 /* EndPoint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EndPoint.swift; sourceTree = "<group>"; };
-		B2A15C262567D52F00222717 /* LampURL.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LampURL.swift; sourceTree = "<group>"; };
-		B2A15C2E2567D66600222717 /* Staging.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Staging.xcconfig; sourceTree = "<group>"; };
-		B2A15C2F2567D66600222717 /* Production.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Production.xcconfig; sourceTree = "<group>"; };
 		B2A15C362567FE1900222717 /* WebViewConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewConfiguration.swift; sourceTree = "<group>"; };
 		B2B8935023D0AD6500321C3E /* DateExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateExtension.swift; sourceTree = "<group>"; };
 		B2B8979523D0ADBA00321C3E /* mindLAMP.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = mindLAMP.entitlements; sourceTree = "<group>"; };
@@ -421,6 +421,34 @@
 				B2704E0624B4AE7800DE196B /* UserAuth.swift */,
 			);
 			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		B2587B49256E23BC00A2A7F2 /* Shared */ = {
+			isa = PBXGroup;
+			children = (
+				B2587B4A256E23BC00A2A7F2 /* Extensions */,
+				B2587B4C256E23BC00A2A7F2 /* Configs */,
+				B2587B4F256E23BC00A2A7F2 /* LampURL.swift */,
+				B2587B50256E23BC00A2A7F2 /* EndPoint.swift */,
+			);
+			path = Shared;
+			sourceTree = "<group>";
+		};
+		B2587B4A256E23BC00A2A7F2 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				B2587B4B256E23BC00A2A7F2 /* UserDefaults+Extension.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		B2587B4C256E23BC00A2A7F2 /* Configs */ = {
+			isa = PBXGroup;
+			children = (
+				B2587B4D256E23BC00A2A7F2 /* Staging.xcconfig */,
+				B2587B4E256E23BC00A2A7F2 /* Production.xcconfig */,
+			);
+			path = Configs;
 			sourceTree = "<group>";
 		};
 		B26A2A1A24EBC6E900BCB043 /* VersionCheck */ = {
@@ -545,6 +573,7 @@
 		B29639C423BDC28100626E1A = {
 			isa = PBXGroup;
 			children = (
+				B2587B49256E23BC00A2A7F2 /* Shared */,
 				B2A15BB22567A8BE00222717 /* SharedToWatchExt */,
 				B2A15BAC2567A8A600222717 /* SharedToWatchAndNotification */,
 				B29639CF23BDC28100626E1A /* mindLAMP */,
@@ -601,21 +630,9 @@
 		B2A15BAC2567A8A600222717 /* SharedToWatchAndNotification */ = {
 			isa = PBXGroup;
 			children = (
-				B2A15C2D2567D66600222717 /* Configs */,
-				B2A15C252567D52F00222717 /* EndPoint.swift */,
-				B2A15C262567D52F00222717 /* LampURL.swift */,
-				B2A15BAD2567A8A600222717 /* Extensions */,
 				B2A15C362567FE1900222717 /* WebViewConfiguration.swift */,
 			);
 			path = SharedToWatchAndNotification;
-			sourceTree = "<group>";
-		};
-		B2A15BAD2567A8A600222717 /* Extensions */ = {
-			isa = PBXGroup;
-			children = (
-				B2A15BAE2567A8A600222717 /* UserDefaults+Extension.swift */,
-			);
-			path = Extensions;
 			sourceTree = "<group>";
 		};
 		B2A15BB22567A8BE00222717 /* SharedToWatchExt */ = {
@@ -715,15 +732,6 @@
 				B2A15BDA2567A8BE00222717 /* AsynchronousOperation.swift */,
 			);
 			path = OperationQueue;
-			sourceTree = "<group>";
-		};
-		B2A15C2D2567D66600222717 /* Configs */ = {
-			isa = PBXGroup;
-			children = (
-				B2A15C2E2567D66600222717 /* Staging.xcconfig */,
-				B2A15C2F2567D66600222717 /* Production.xcconfig */,
-			);
-			path = Configs;
 			sourceTree = "<group>";
 		};
 		B2B8979623D0ADBA00321C3E /* Frameworks */ = {
@@ -932,8 +940,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				B2704DF724B4A2AC00DE196B /* Preview Assets.xcassets in Resources */,
-				B2A15C352567D66600222717 /* Production.xcconfig in Resources */,
-				B2A15C322567D66600222717 /* Staging.xcconfig in Resources */,
+				B2587B59256E23BC00A2A7F2 /* Production.xcconfig in Resources */,
+				B2587B56256E23BC00A2A7F2 /* Staging.xcconfig in Resources */,
 				B2704DF424B4A2AC00DE196B /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -950,11 +958,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				5F763011242386AA00B2DD03 /* Localizable.strings in Resources */,
-				B2A15C332567D66600222717 /* Production.xcconfig in Resources */,
+				B2587B57256E23BC00A2A7F2 /* Production.xcconfig in Resources */,
 				B23993BA2440696800E31B06 /* exportOptions.plist in Resources */,
 				B29639DD23BDC28200626E1A /* LaunchScreen.storyboard in Resources */,
 				B29639DA23BDC28200626E1A /* Preview Assets.xcassets in Resources */,
-				B2A15C302567D66600222717 /* Staging.xcconfig in Resources */,
+				B2587B54256E23BC00A2A7F2 /* Staging.xcconfig in Resources */,
 				B29639D723BDC28200626E1A /* Assets.xcassets in Resources */,
 				B246BD1A252CA8B300064A82 /* Home.storyboard in Resources */,
 			);
@@ -964,9 +972,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B2A15C312567D66600222717 /* Staging.xcconfig in Resources */,
+				B2587B55256E23BC00A2A7F2 /* Staging.xcconfig in Resources */,
 				B2D931012445D7E90086477D /* MainInterface.storyboard in Resources */,
-				B2A15C342567D66600222717 /* Production.xcconfig in Resources */,
+				B2587B58256E23BC00A2A7F2 /* Production.xcconfig in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -989,21 +997,21 @@
 				B2A15BDD2567A8BE00222717 /* NotificationAPI.swift in Sources */,
 				B255116524B6202300CDBDD1 /* WatchNotificationModel.swift in Sources */,
 				B2A15C132567A8BE00222717 /* LMConstants.swift in Sources */,
+				B2587B5C256E23BC00A2A7F2 /* LampURL.swift in Sources */,
 				B2A15BE32567A8BE00222717 /* SensorModel+Constructors.swift in Sources */,
 				B2A15BE12567A8BE00222717 /* LampIdentifiersHealthKit.swift in Sources */,
 				B255116924B625CC00CDBDD1 /* WatchDeviceInfo.swift in Sources */,
 				B2FDA83224BF744D000316EE /* ContentView.swift in Sources */,
 				B2A15BE72567A8BE00222717 /* LampIdentifiers.swift in Sources */,
-				B2A15C292567D52F00222717 /* EndPoint.swift in Sources */,
 				B2A15BDF2567A8BE00222717 /* PushPayload.swift in Sources */,
 				B2704DEA24B4A2AC00DE196B /* HostingController.swift in Sources */,
 				B2A15BF72567A8BE00222717 /* NetworkConfig.swift in Sources */,
-				B2A15BB12567A8A600222717 /* UserDefaults+Extension.swift in Sources */,
 				B2A15BFB2567A8BE00222717 /* LMSensorManager.swift in Sources */,
 				B2A15BED2567A8BE00222717 /* Result.swift in Sources */,
 				B2A15C172567A8BE00222717 /* BackgroundServices.swift in Sources */,
 				B2A15C152567A8BE00222717 /* BackgroundOperation.swift in Sources */,
 				B2A15C192567A8BE00222717 /* AsynchronousOperation.swift in Sources */,
+				B2587B5F256E23BC00A2A7F2 /* EndPoint.swift in Sources */,
 				B2A15C012567A8BE00222717 /* StringExtension.swift in Sources */,
 				B2A15C112567A8BE00222717 /* LMLogsManager.swift in Sources */,
 				B2D2CA6625503AAE0086C864 /* WatchOSDelegate.swift in Sources */,
@@ -1013,8 +1021,8 @@
 				B2A15BF92567A8BE00222717 /* LMSensorManager+SensorObservers.swift in Sources */,
 				B2704DEE24B4A2AC00DE196B /* NotificationController.swift in Sources */,
 				B2704DEC24B4A2AC00DE196B /* ExtensionDelegate.swift in Sources */,
+				B2587B53256E23BC00A2A7F2 /* UserDefaults+Extension.swift in Sources */,
 				B2A15C0B2567A8BE00222717 /* FileStorage.swift in Sources */,
-				B2A15C2C2567D52F00222717 /* LampURL.swift in Sources */,
 				B2704DF024B4A2AC00DE196B /* NotificationView.swift in Sources */,
 				B2A15C0F2567A8BE00222717 /* LogsModel.swift in Sources */,
 				B2A15C092567A8BE00222717 /* Logging.swift in Sources */,
@@ -1041,7 +1049,6 @@
 				B2010FA12525F4A90075D0F8 /* AppColors.swift in Sources */,
 				B2B8935223D0AD6500321C3E /* DateExtension.swift in Sources */,
 				B2A15C0E2567A8BE00222717 /* LogsModel.swift in Sources */,
-				B2A15C272567D52F00222717 /* EndPoint.swift in Sources */,
 				B22DF5F2250612E800777D2D /* UserAgentExtension.swift in Sources */,
 				B2A15C0A2567A8BE00222717 /* FileStorage.swift in Sources */,
 				B2A15BE82567A8BE00222717 /* CodableHelpers.swift in Sources */,
@@ -1057,8 +1064,8 @@
 				B2A15C142567A8BE00222717 /* BackgroundOperation.swift in Sources */,
 				B2A15BE02567A8BE00222717 /* LampIdentifiersHealthKit.swift in Sources */,
 				B2A15BDC2567A8BE00222717 /* NotificationAPI.swift in Sources */,
-				B2A15C2A2567D52F00222717 /* LampURL.swift in Sources */,
 				B275F60224518106007A7340 /* HomeWebViewModel.swift in Sources */,
+				B2587B5A256E23BC00A2A7F2 /* LampURL.swift in Sources */,
 				B2962FCD24ADECB700C1D598 /* NodeRunner.mm in Sources */,
 				B2D2CA6825503AE20086C864 /* iOSDelegate.swift in Sources */,
 				B2A15C162567A8BE00222717 /* BackgroundServices.swift in Sources */,
@@ -1072,14 +1079,15 @@
 				B2A15BF22567A8BE00222717 /* ErrorExtension.swift in Sources */,
 				B2A15BFC2567A8BE00222717 /* AppInfo.swift in Sources */,
 				B26A2A2B24EBC6E900BCB043 /* VersionCheckViewController.swift in Sources */,
+				B2587B51256E23BC00A2A7F2 /* UserDefaults+Extension.swift in Sources */,
 				B2A15C1A2567A8BE00222717 /* SharingInfo.swift in Sources */,
 				B2A15BDE2567A8BE00222717 /* PushPayload.swift in Sources */,
 				B23F5279245346E0007A8598 /* PushUserInfo.swift in Sources */,
+				B2587B5D256E23BC00A2A7F2 /* EndPoint.swift in Sources */,
 				B275F5FD24517FC0007A7340 /* UserNotifications.swift in Sources */,
 				B2A15BEC2567A8BE00222717 /* Result.swift in Sources */,
 				B275F60A245196AD007A7340 /* PushNotificationModel.swift in Sources */,
 				B2A15C022567A8BE00222717 /* WatchSessionManager.swift in Sources */,
-				B2A15BAF2567A8A600222717 /* UserDefaults+Extension.swift in Sources */,
 				B2A15BF82567A8BE00222717 /* LMSensorManager+SensorObservers.swift in Sources */,
 				B240815A23D8803900845AEE /* HomeViewController.swift in Sources */,
 				B2A15BFA2567A8BE00222717 /* LMSensorManager.swift in Sources */,
@@ -1094,10 +1102,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B2A15C282567D52F00222717 /* EndPoint.swift in Sources */,
 				B2A15C382567FE1900222717 /* WebViewConfiguration.swift in Sources */,
-				B2A15C2B2567D52F00222717 /* LampURL.swift in Sources */,
-				B2A15BB02567A8A600222717 /* UserDefaults+Extension.swift in Sources */,
+				B2587B5B256E23BC00A2A7F2 /* LampURL.swift in Sources */,
+				B2587B5E256E23BC00A2A7F2 /* EndPoint.swift in Sources */,
+				B2587B52256E23BC00A2A7F2 /* UserDefaults+Extension.swift in Sources */,
 				B2D930FE2445D7E90086477D /* NotificationViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1157,7 +1165,6 @@
 /* Begin XCBuildConfiguration section */
 		B2464EE62527013700A8BB65 /* Debug (Staging) */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = B2A15C2E2567D66600222717 /* Staging.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -1219,7 +1226,6 @@
 		};
 		B2464EE72527013700A8BB65 /* Debug (Staging) */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = B2A15C2E2567D66600222717 /* Staging.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -1260,7 +1266,6 @@
 		};
 		B2464EE82527013700A8BB65 /* Debug (Staging) */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = B2A15C2E2567D66600222717 /* Staging.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = CustomNotification/CustomNotification.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
@@ -1287,7 +1292,6 @@
 		};
 		B2464EE92527013700A8BB65 /* Debug (Staging) */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = B2A15C2E2567D66600222717 /* Staging.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
@@ -1313,7 +1317,6 @@
 		};
 		B2464EEA2527013700A8BB65 /* Debug (Staging) */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = B2A15C2E2567D66600222717 /* Staging.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -1338,7 +1341,6 @@
 		};
 		B2464EEB2527013700A8BB65 /* Debug (Staging) */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = B2A15C2E2567D66600222717 /* Staging.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_COMPLICATION_NAME = Complication;
 				CODE_SIGN_ENTITLEMENTS = "watchkitapp Extension/watchkitapp Extension.entitlements";
@@ -1369,7 +1371,6 @@
 		};
 		B2464EEC2527015100A8BB65 /* Release (Staging) */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = B2A15C2E2567D66600222717 /* Staging.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -1425,7 +1426,6 @@
 		};
 		B2464EED2527015100A8BB65 /* Release (Staging) */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = B2A15C2E2567D66600222717 /* Staging.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -1465,7 +1465,6 @@
 		};
 		B2464EEE2527015100A8BB65 /* Release (Staging) */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = B2A15C2E2567D66600222717 /* Staging.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = CustomNotification/CustomNotification.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
@@ -1492,7 +1491,6 @@
 		};
 		B2464EEF2527015100A8BB65 /* Release (Staging) */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = B2A15C2E2567D66600222717 /* Staging.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
@@ -1518,7 +1516,6 @@
 		};
 		B2464EF02527015100A8BB65 /* Release (Staging) */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = B2A15C2E2567D66600222717 /* Staging.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -1543,7 +1540,6 @@
 		};
 		B2464EF12527015100A8BB65 /* Release (Staging) */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = B2A15C2E2567D66600222717 /* Staging.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_COMPLICATION_NAME = Complication;
 				CODE_SIGN_ENTITLEMENTS = "watchkitapp Extension/watchkitapp Extension.entitlements";
@@ -1574,7 +1570,6 @@
 		};
 		B2704DFE24B4A2AC00DE196B /* Debug (Production) */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = B2A15C2F2567D66600222717 /* Production.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -1599,7 +1594,6 @@
 		};
 		B2704DFF24B4A2AC00DE196B /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = B2A15C2F2567D66600222717 /* Production.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -1624,7 +1618,6 @@
 		};
 		B2704E0124B4A2AC00DE196B /* Debug (Production) */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = B2A15C2F2567D66600222717 /* Production.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_COMPLICATION_NAME = Complication;
 				CODE_SIGN_ENTITLEMENTS = "watchkitapp Extension/watchkitapp Extension.entitlements";
@@ -1655,7 +1648,6 @@
 		};
 		B2704E0224B4A2AC00DE196B /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = B2A15C2F2567D66600222717 /* Production.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_COMPLICATION_NAME = Complication;
 				CODE_SIGN_ENTITLEMENTS = "watchkitapp Extension/watchkitapp Extension.entitlements";
@@ -1686,7 +1678,6 @@
 		};
 		B2847FBC2450550E0042D43B /* Debug (Production) */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = B2A15C2F2567D66600222717 /* Production.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
@@ -1712,7 +1703,6 @@
 		};
 		B2847FBD2450550E0042D43B /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = B2A15C2F2567D66600222717 /* Production.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
@@ -1738,7 +1728,6 @@
 		};
 		B29639DF23BDC28200626E1A /* Debug (Production) */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = B2A15C2F2567D66600222717 /* Production.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -1800,7 +1789,6 @@
 		};
 		B29639E023BDC28200626E1A /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = B2A15C2F2567D66600222717 /* Production.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -1856,7 +1844,6 @@
 		};
 		B29639E223BDC28200626E1A /* Debug (Production) */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = B2A15C2F2567D66600222717 /* Production.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -1897,7 +1884,6 @@
 		};
 		B29639E323BDC28200626E1A /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = B2A15C2F2567D66600222717 /* Production.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -1937,7 +1923,6 @@
 		};
 		B2D931072445D7E90086477D /* Debug (Production) */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = B2A15C2F2567D66600222717 /* Production.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = CustomNotification/CustomNotification.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
@@ -1964,7 +1949,6 @@
 		};
 		B2D931082445D7E90086477D /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = B2A15C2F2567D66600222717 /* Production.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = CustomNotification/CustomNotification.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
