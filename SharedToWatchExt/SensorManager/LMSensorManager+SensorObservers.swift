@@ -20,46 +20,36 @@ extension LMSensorManager: SensorStore {
             printToFile("\nScreen locked")
         }
         sensor_wifi?.startScanning()
-//        //we are facing data loass when fetch data within 5 minutes. So fetching every 10 minutes. Recommended to to fetch hourly
-//        if self.isSyncNow {
-//            sensor_pedometer?.getPedometerData()
-//        }
-        
+
         //set 15 seconds delay to fetch all healthkit data
         DispatchQueue.global().asyncAfter(deadline: .now() + 15) {
             
             self.sensor_wifi?.stopScanning()
-            
             if self.sensor_location == nil { return } //stop syncing if sensors are stopped
-            let request = self.getSensorDataRequest()
-            SensorLogs.shared.storeSensorRequest(request)//store to disk
-            print("\n stored file -- @ \(Date())")
-
-            //syncing to server for alternate fetch.
-            if self.isSyncNow {
-                self.isSyncNow = false
-                self.startWatchSensors()
-                self.batteryLogs()
-                printToFile("\n stored file and sync @ \(Date())")
-                BackgroundServices.shared.performTasks()
-            } else {
-                printToFile("\n stored file @ \(Date())")
-                self.isSyncNow = true
-            }
+            self.syncToServer()
         }
         #elseif os(watchOS)
-        let request = getSensorDataRequest()
-        SensorLogs.shared.storeSensorRequest(request)
+        syncToServer()
+        #endif
+    }
+    
+    func syncToServer() {
+        let request = self.getSensorDataRequest()
+        SensorLogs.shared.storeSensorRequest(request)//store to disk
+        print("\n stored file -- @ \(Date())")
         
-        //syncing to server for alternate fetch
+        //check battery state
+        guard BatteryState.shared.isLowPowerEnabled == false else { return }
+        //syncing to server for alternate fetch.
         if self.isSyncNow {
             self.isSyncNow = false
-            printToFile("\n stored file w @ \(Date())")
+            self.startWatchSensors()
+            printToFile("\n stored file and sync @ \(Date())")
             BackgroundServices.shared.performTasks()
         } else {
+            printToFile("\n stored file @ \(Date())")
             self.isSyncNow = true
         }
-        #endif
     }
 }
 

@@ -144,10 +144,6 @@ class LMSensorManager {
         initiateSensors()
         printToFile("\nStarting sensors")
         sensorManager.startAllSensors()
-
-        #if os(iOS)
-        UIDevice.current.isBatteryMonitoringEnabled = true
-        #endif
     }
     
     private func refreshAllSensors() {
@@ -156,9 +152,11 @@ class LMSensorManager {
     }
     
     func startWatchSensors() {
+        #if os(iOS)
         //send a message to watch to collect sensor data
         let messageInfo: [String: Any] = [IOSCommands.sendWatchSensorEvents : true, IOSCommands.timestamp : Date().timeInMilliSeconds]
         WatchSessionManager.shared.updateApplicationContext(applicationContext: (messageInfo))
+        #endif
     }
     
     /// To stop sensors observing.
@@ -647,18 +645,4 @@ private extension LMSensorManager {
     }
     
 }
-
-// MARK: Battery Logs
-extension LMSensorManager {
-    
-    public func batteryLogs() {
-        guard isBatteryLevelLow() else { return }
-        //LMLogsManager.shared.addLogs(level: .info, logs: Logs.Messages.battery_low)
-    }
-    
-    private func isBatteryLevelLow(than level: Float = 20) -> Bool {
-        return UIDevice.current.batteryLevel < level/100
-    }
-}
-
 #endif
