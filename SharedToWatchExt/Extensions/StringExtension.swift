@@ -30,6 +30,16 @@ extension String {
         return String(self[indexStartOfText...])
     }
     
+    func makeTwoPiecesUsing(seperator: Character) -> (String?, String?) {
+        
+        guard let firstIndex = self.firstIndex(of: seperator) else {
+            return (nil, nil)
+        }
+        let firstPart = String(self[..<firstIndex])
+        let startIndex = self.index(after: firstIndex)
+        let secondPart = String(self[startIndex..<self.endIndex])
+        return (firstPart, secondPart)
+    }
         
     /**
      * Remove "http://" and "https://" if the protocol is included in the "host" name.

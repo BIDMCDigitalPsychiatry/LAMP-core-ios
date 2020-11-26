@@ -8,76 +8,39 @@
 
 /* Begin PBXBuildFile section */
 		5F763011242386AA00B2DD03 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 5F763010242386AA00B2DD03 /* Localizable.strings */; };
-		B20043B325346BA4002B31F5 /* SensorModel+Constructors.swift in Sources */ = {isa = PBXBuildFile; fileRef = B20043B225346BA4002B31F5 /* SensorModel+Constructors.swift */; };
-		B20043B425346BA4002B31F5 /* SensorModel+Constructors.swift in Sources */ = {isa = PBXBuildFile; fileRef = B20043B225346BA4002B31F5 /* SensorModel+Constructors.swift */; };
 		B2010FA12525F4A90075D0F8 /* AppColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2010FA02525F4A90075D0F8 /* AppColors.swift */; };
 		B2010FA22525F4A90075D0F8 /* AppColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2010FA02525F4A90075D0F8 /* AppColors.swift */; };
 		B2040D7E2564ECB60027D671 /* Sensors in Frameworks */ = {isa = PBXBuildFile; productRef = B2040D7D2564ECB60027D671 /* Sensors */; };
 		B2040D802564ECC90027D671 /* Sensors in Frameworks */ = {isa = PBXBuildFile; productRef = B2040D7F2564ECC90027D671 /* Sensors */; };
-		B212B4CF24DB1ACD00DD1299 /* LampIdentifiersHealthKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = B212B4CD24DB1ACD00DD1299 /* LampIdentifiersHealthKit.swift */; };
-		B212B4D024DB1ACD00DD1299 /* LampIdentifiersHealthKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = B212B4CD24DB1ACD00DD1299 /* LampIdentifiersHealthKit.swift */; };
-		B212B4D124DB1ACD00DD1299 /* LampIdentifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = B212B4CE24DB1ACD00DD1299 /* LampIdentifiers.swift */; };
-		B212B4D224DB1ACD00DD1299 /* LampIdentifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = B212B4CE24DB1ACD00DD1299 /* LampIdentifiers.swift */; };
-		B2260D642505E66E00747A3E /* AppInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2260D632505E66E00747A3E /* AppInfo.swift */; };
-		B2260D652505E66E00747A3E /* AppInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2260D632505E66E00747A3E /* AppInfo.swift */; };
-		B22DA79825054F7600456EE4 /* PushPayload.swift in Sources */ = {isa = PBXBuildFile; fileRef = B22DA79725054F7600456EE4 /* PushPayload.swift */; };
-		B22DA79925054F7600456EE4 /* PushPayload.swift in Sources */ = {isa = PBXBuildFile; fileRef = B22DA79725054F7600456EE4 /* PushPayload.swift */; };
 		B22DF5F2250612E800777D2D /* UserAgentExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B22DF5F1250612E800777D2D /* UserAgentExtension.swift */; };
-		B22DF5F42506526400777D2D /* NotificationAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = B22DF5F32506526400777D2D /* NotificationAPI.swift */; };
-		B22DF5F52506526400777D2D /* NotificationAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = B22DF5F32506526400777D2D /* NotificationAPI.swift */; };
-		B238432824B82D3900E548E2 /* SharingInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = B238432724B82D3900E548E2 /* SharingInfo.swift */; };
-		B238432924B82D3900E548E2 /* SharingInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = B238432724B82D3900E548E2 /* SharingInfo.swift */; };
-		B238432E24B8357F00E548E2 /* CodableHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = B238432B24B8357F00E548E2 /* CodableHelpers.swift */; };
-		B238432F24B8357F00E548E2 /* CodableHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = B238432B24B8357F00E548E2 /* CodableHelpers.swift */; };
-		B238433024B8357F00E548E2 /* Networking.swift in Sources */ = {isa = PBXBuildFile; fileRef = B238432C24B8357F00E548E2 /* Networking.swift */; };
-		B238433124B8357F00E548E2 /* Networking.swift in Sources */ = {isa = PBXBuildFile; fileRef = B238432C24B8357F00E548E2 /* Networking.swift */; };
-		B238433224B8357F00E548E2 /* NetworkingAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = B238432D24B8357F00E548E2 /* NetworkingAPI.swift */; };
-		B238433324B8357F00E548E2 /* NetworkingAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = B238432D24B8357F00E548E2 /* NetworkingAPI.swift */; };
-		B238433924B836A200E548E2 /* NetworkConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = B238433724B836A200E548E2 /* NetworkConfig.swift */; };
-		B238433A24B836A200E548E2 /* NetworkConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = B238433724B836A200E548E2 /* NetworkConfig.swift */; };
-		B238433B24B836A200E548E2 /* Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = B238433824B836A200E548E2 /* Result.swift */; };
-		B238433C24B836A200E548E2 /* Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = B238433824B836A200E548E2 /* Result.swift */; };
-		B238433E24B8390300E548E2 /* LampURL.swift in Sources */ = {isa = PBXBuildFile; fileRef = B238433D24B8390300E548E2 /* LampURL.swift */; };
-		B238433F24B8390300E548E2 /* LampURL.swift in Sources */ = {isa = PBXBuildFile; fileRef = B238433D24B8390300E548E2 /* LampURL.swift */; };
-		B238434324B83B7700E548E2 /* ErrorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B238434224B83B7700E548E2 /* ErrorExtension.swift */; };
-		B238434424B83B7700E548E2 /* ErrorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B238434224B83B7700E548E2 /* ErrorExtension.swift */; };
 		B238434924B848F300E548E2 /* LMRunningBuffer.swift in Sources */ = {isa = PBXBuildFile; fileRef = B238434624B848F300E548E2 /* LMRunningBuffer.swift */; };
-		B238436524B8ADD900E548E2 /* SensorModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B238436424B8ADD900E548E2 /* SensorModel.swift */; };
-		B238436624B8ADD900E548E2 /* SensorModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B238436424B8ADD900E548E2 /* SensorModel.swift */; };
-		B238BA9624B7297F00575A7F /* WatchSessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B238BA9524B7297F00575A7F /* WatchSessionManager.swift */; };
-		B238BA9724B7297F00575A7F /* WatchSessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B238BA9524B7297F00575A7F /* WatchSessionManager.swift */; };
-		B239685824B785360031A209 /* EndPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = B239685724B785360031A209 /* EndPoint.swift */; };
-		B239685924B785360031A209 /* EndPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = B239685724B785360031A209 /* EndPoint.swift */; };
 		B23993BA2440696800E31B06 /* exportOptions.plist in Resources */ = {isa = PBXBuildFile; fileRef = B23993B92440696800E31B06 /* exportOptions.plist */; };
 		B23F5279245346E0007A8598 /* PushUserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = B23F5278245346E0007A8598 /* PushUserInfo.swift */; };
 		B240815A23D8803900845AEE /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B240814223D8803900845AEE /* HomeViewController.swift */; };
 		B244A1C223BF4A91007FBDB8 /* FileManager+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B244A1C123BF4A91007FBDB8 /* FileManager+Extension.swift */; };
 		B2458A5E2555128B0078D427 /* LeakAvoider.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2458A5D2555128B0078D427 /* LeakAvoider.swift */; };
-		B246BD0E252C90E700064A82 /* FileStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = B246BD0A252C90E700064A82 /* FileStorage.swift */; };
-		B246BD0F252C90E700064A82 /* FileStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = B246BD0A252C90E700064A82 /* FileStorage.swift */; };
-		B246BD10252C90E700064A82 /* SensorLogs.swift in Sources */ = {isa = PBXBuildFile; fileRef = B246BD0B252C90E700064A82 /* SensorLogs.swift */; };
-		B246BD11252C90E700064A82 /* SensorLogs.swift in Sources */ = {isa = PBXBuildFile; fileRef = B246BD0B252C90E700064A82 /* SensorLogs.swift */; };
-		B246BD12252C90E700064A82 /* LogsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B246BD0C252C90E700064A82 /* LogsModel.swift */; };
-		B246BD13252C90E700064A82 /* LogsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B246BD0C252C90E700064A82 /* LogsModel.swift */; };
-		B246BD14252C90E700064A82 /* LMLogsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B246BD0D252C90E700064A82 /* LMLogsManager.swift */; };
-		B246BD15252C90E700064A82 /* LMLogsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B246BD0D252C90E700064A82 /* LMLogsManager.swift */; };
-		B246BD17252CA42F00064A82 /* LMConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = B246BD16252CA42F00064A82 /* LMConstants.swift */; };
-		B246BD18252CA42F00064A82 /* LMConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = B246BD16252CA42F00064A82 /* LMConstants.swift */; };
 		B246BD1A252CA8B300064A82 /* Home.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B246BD19252CA8B300064A82 /* Home.storyboard */; };
 		B246BD1C252CA8F500064A82 /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B246BD1B252CA8F500064A82 /* WebViewController.swift */; };
-		B250A462252A0A7000FBB780 /* StringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B250A461252A0A7000FBB780 /* StringExtension.swift */; };
-		B250A463252A0A7000FBB780 /* StringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B250A461252A0A7000FBB780 /* StringExtension.swift */; };
 		B255116524B6202300CDBDD1 /* WatchNotificationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B255116424B6202300CDBDD1 /* WatchNotificationModel.swift */; };
 		B255116924B625CC00CDBDD1 /* WatchDeviceInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = B255116824B625CC00CDBDD1 /* WatchDeviceInfo.swift */; };
 		B255116C24B6291900CDBDD1 /* LoginServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = B255116B24B6291900CDBDD1 /* LoginServices.swift */; };
+		B2587B51256E23BC00A2A7F2 /* UserDefaults+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2587B4B256E23BC00A2A7F2 /* UserDefaults+Extension.swift */; };
+		B2587B52256E23BC00A2A7F2 /* UserDefaults+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2587B4B256E23BC00A2A7F2 /* UserDefaults+Extension.swift */; };
+		B2587B53256E23BC00A2A7F2 /* UserDefaults+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2587B4B256E23BC00A2A7F2 /* UserDefaults+Extension.swift */; };
+		B2587B54256E23BC00A2A7F2 /* Staging.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = B2587B4D256E23BC00A2A7F2 /* Staging.xcconfig */; };
+		B2587B55256E23BC00A2A7F2 /* Staging.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = B2587B4D256E23BC00A2A7F2 /* Staging.xcconfig */; };
+		B2587B56256E23BC00A2A7F2 /* Staging.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = B2587B4D256E23BC00A2A7F2 /* Staging.xcconfig */; };
+		B2587B57256E23BC00A2A7F2 /* Production.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = B2587B4E256E23BC00A2A7F2 /* Production.xcconfig */; };
+		B2587B58256E23BC00A2A7F2 /* Production.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = B2587B4E256E23BC00A2A7F2 /* Production.xcconfig */; };
+		B2587B59256E23BC00A2A7F2 /* Production.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = B2587B4E256E23BC00A2A7F2 /* Production.xcconfig */; };
+		B2587B5A256E23BC00A2A7F2 /* LampURL.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2587B4F256E23BC00A2A7F2 /* LampURL.swift */; };
+		B2587B5B256E23BC00A2A7F2 /* LampURL.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2587B4F256E23BC00A2A7F2 /* LampURL.swift */; };
+		B2587B5C256E23BC00A2A7F2 /* LampURL.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2587B4F256E23BC00A2A7F2 /* LampURL.swift */; };
+		B2587B5D256E23BC00A2A7F2 /* EndPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2587B50256E23BC00A2A7F2 /* EndPoint.swift */; };
+		B2587B5E256E23BC00A2A7F2 /* EndPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2587B50256E23BC00A2A7F2 /* EndPoint.swift */; };
+		B2587B5F256E23BC00A2A7F2 /* EndPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2587B50256E23BC00A2A7F2 /* EndPoint.swift */; };
 		B26A2A2B24EBC6E900BCB043 /* VersionCheckViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B26A2A1D24EBC6E900BCB043 /* VersionCheckViewController.swift */; };
 		B26A2A3324EBCCA400BCB043 /* VersionCheckViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B26A2A3224EBCCA400BCB043 /* VersionCheckViewModel.swift */; };
-		B26ABEDC2531C890004CF86D /* BackgroundOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = B26ABED92531C890004CF86D /* BackgroundOperation.swift */; };
-		B26ABEDD2531C890004CF86D /* BackgroundOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = B26ABED92531C890004CF86D /* BackgroundOperation.swift */; };
-		B26ABEDE2531C890004CF86D /* BackgroundServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = B26ABEDA2531C890004CF86D /* BackgroundServices.swift */; };
-		B26ABEDF2531C890004CF86D /* BackgroundServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = B26ABEDA2531C890004CF86D /* BackgroundServices.swift */; };
-		B26ABEE02531C890004CF86D /* AsynchronousOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = B26ABEDB2531C890004CF86D /* AsynchronousOperation.swift */; };
-		B26ABEE12531C890004CF86D /* AsynchronousOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = B26ABEDB2531C890004CF86D /* AsynchronousOperation.swift */; };
 		B2704DDA24B4A2A900DE196B /* Interface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B2704DD824B4A2A900DE196B /* Interface.storyboard */; };
 		B2704DDC24B4A2AC00DE196B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B2704DDB24B4A2AC00DE196B /* Assets.xcassets */; };
 		B2704DEA24B4A2AC00DE196B /* HostingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2704DE924B4A2AC00DE196B /* HostingController.swift */; };
@@ -93,32 +56,80 @@
 		B275F60A245196AD007A7340 /* PushNotificationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B275F609245196AD007A7340 /* PushNotificationModel.swift */; };
 		B2847FB72450550E0042D43B /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2847FB62450550E0042D43B /* NotificationService.swift */; };
 		B2847FBB2450550E0042D43B /* NotificationService.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = B2847FB42450550E0042D43B /* NotificationService.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
-		B285D0A824C8941B0050BD3F /* UserDefaults+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B285D0A524C8941B0050BD3F /* UserDefaults+Extension.swift */; };
-		B285D0A924C8941B0050BD3F /* UserDefaults+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B285D0A524C8941B0050BD3F /* UserDefaults+Extension.swift */; };
-		B285D0AC24C894760050BD3F /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = B285D0AB24C894760050BD3F /* User.swift */; };
-		B285D0AD24C894760050BD3F /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = B285D0AB24C894760050BD3F /* User.swift */; };
 		B2962FCD24ADECB700C1D598 /* NodeRunner.mm in Sources */ = {isa = PBXBuildFile; fileRef = B2962FCA24ADECB700C1D598 /* NodeRunner.mm */; };
 		B2962FCE24ADECB700C1D598 /* NodeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2962FCC24ADECB700C1D598 /* NodeManager.swift */; };
 		B29639D123BDC28100626E1A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B29639D023BDC28100626E1A /* AppDelegate.swift */; };
 		B29639D723BDC28200626E1A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B29639D623BDC28200626E1A /* Assets.xcassets */; };
 		B29639DA23BDC28200626E1A /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B29639D923BDC28200626E1A /* Preview Assets.xcassets */; };
 		B29639DD23BDC28200626E1A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B29639DB23BDC28200626E1A /* LaunchScreen.storyboard */; };
+		B2A15BDC2567A8BE00222717 /* NotificationAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2A15BB42567A8BE00222717 /* NotificationAPI.swift */; };
+		B2A15BDD2567A8BE00222717 /* NotificationAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2A15BB42567A8BE00222717 /* NotificationAPI.swift */; };
+		B2A15BDE2567A8BE00222717 /* PushPayload.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2A15BB52567A8BE00222717 /* PushPayload.swift */; };
+		B2A15BDF2567A8BE00222717 /* PushPayload.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2A15BB52567A8BE00222717 /* PushPayload.swift */; };
+		B2A15BE02567A8BE00222717 /* LampIdentifiersHealthKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2A15BB72567A8BE00222717 /* LampIdentifiersHealthKit.swift */; };
+		B2A15BE12567A8BE00222717 /* LampIdentifiersHealthKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2A15BB72567A8BE00222717 /* LampIdentifiersHealthKit.swift */; };
+		B2A15BE22567A8BE00222717 /* SensorModel+Constructors.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2A15BB82567A8BE00222717 /* SensorModel+Constructors.swift */; };
+		B2A15BE32567A8BE00222717 /* SensorModel+Constructors.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2A15BB82567A8BE00222717 /* SensorModel+Constructors.swift */; };
+		B2A15BE42567A8BE00222717 /* SensorModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2A15BB92567A8BE00222717 /* SensorModel.swift */; };
+		B2A15BE52567A8BE00222717 /* SensorModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2A15BB92567A8BE00222717 /* SensorModel.swift */; };
+		B2A15BE62567A8BE00222717 /* LampIdentifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2A15BBA2567A8BE00222717 /* LampIdentifiers.swift */; };
+		B2A15BE72567A8BE00222717 /* LampIdentifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2A15BBA2567A8BE00222717 /* LampIdentifiers.swift */; };
+		B2A15BE82567A8BE00222717 /* CodableHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2A15BBC2567A8BE00222717 /* CodableHelpers.swift */; };
+		B2A15BE92567A8BE00222717 /* CodableHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2A15BBC2567A8BE00222717 /* CodableHelpers.swift */; };
+		B2A15BEA2567A8BE00222717 /* Networking.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2A15BBD2567A8BE00222717 /* Networking.swift */; };
+		B2A15BEB2567A8BE00222717 /* Networking.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2A15BBD2567A8BE00222717 /* Networking.swift */; };
+		B2A15BEC2567A8BE00222717 /* Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2A15BBE2567A8BE00222717 /* Result.swift */; };
+		B2A15BED2567A8BE00222717 /* Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2A15BBE2567A8BE00222717 /* Result.swift */; };
+		B2A15BEE2567A8BE00222717 /* NetworkingAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2A15BBF2567A8BE00222717 /* NetworkingAPI.swift */; };
+		B2A15BEF2567A8BE00222717 /* NetworkingAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2A15BBF2567A8BE00222717 /* NetworkingAPI.swift */; };
+		B2A15BF22567A8BE00222717 /* ErrorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2A15BC12567A8BE00222717 /* ErrorExtension.swift */; };
+		B2A15BF32567A8BE00222717 /* ErrorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2A15BC12567A8BE00222717 /* ErrorExtension.swift */; };
+		B2A15BF62567A8BE00222717 /* NetworkConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2A15BC32567A8BE00222717 /* NetworkConfig.swift */; };
+		B2A15BF72567A8BE00222717 /* NetworkConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2A15BC32567A8BE00222717 /* NetworkConfig.swift */; };
+		B2A15BF82567A8BE00222717 /* LMSensorManager+SensorObservers.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2A15BC52567A8BE00222717 /* LMSensorManager+SensorObservers.swift */; };
+		B2A15BF92567A8BE00222717 /* LMSensorManager+SensorObservers.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2A15BC52567A8BE00222717 /* LMSensorManager+SensorObservers.swift */; };
+		B2A15BFA2567A8BE00222717 /* LMSensorManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2A15BC62567A8BE00222717 /* LMSensorManager.swift */; };
+		B2A15BFB2567A8BE00222717 /* LMSensorManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2A15BC62567A8BE00222717 /* LMSensorManager.swift */; };
+		B2A15BFC2567A8BE00222717 /* AppInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2A15BC82567A8BE00222717 /* AppInfo.swift */; };
+		B2A15BFD2567A8BE00222717 /* AppInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2A15BC82567A8BE00222717 /* AppInfo.swift */; };
+		B2A15BFE2567A8BE00222717 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2A15BC92567A8BE00222717 /* User.swift */; };
+		B2A15BFF2567A8BE00222717 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2A15BC92567A8BE00222717 /* User.swift */; };
+		B2A15C002567A8BE00222717 /* StringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2A15BCB2567A8BE00222717 /* StringExtension.swift */; };
+		B2A15C012567A8BE00222717 /* StringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2A15BCB2567A8BE00222717 /* StringExtension.swift */; };
+		B2A15C022567A8BE00222717 /* WatchSessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2A15BCC2567A8BE00222717 /* WatchSessionManager.swift */; };
+		B2A15C032567A8BE00222717 /* WatchSessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2A15BCC2567A8BE00222717 /* WatchSessionManager.swift */; };
+		B2A15C082567A8BE00222717 /* Logging.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2A15BD12567A8BE00222717 /* Logging.swift */; };
+		B2A15C092567A8BE00222717 /* Logging.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2A15BD12567A8BE00222717 /* Logging.swift */; };
+		B2A15C0A2567A8BE00222717 /* FileStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2A15BD22567A8BE00222717 /* FileStorage.swift */; };
+		B2A15C0B2567A8BE00222717 /* FileStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2A15BD22567A8BE00222717 /* FileStorage.swift */; };
+		B2A15C0C2567A8BE00222717 /* SensorLogs.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2A15BD32567A8BE00222717 /* SensorLogs.swift */; };
+		B2A15C0D2567A8BE00222717 /* SensorLogs.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2A15BD32567A8BE00222717 /* SensorLogs.swift */; };
+		B2A15C0E2567A8BE00222717 /* LogsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2A15BD42567A8BE00222717 /* LogsModel.swift */; };
+		B2A15C0F2567A8BE00222717 /* LogsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2A15BD42567A8BE00222717 /* LogsModel.swift */; };
+		B2A15C102567A8BE00222717 /* LMLogsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2A15BD52567A8BE00222717 /* LMLogsManager.swift */; };
+		B2A15C112567A8BE00222717 /* LMLogsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2A15BD52567A8BE00222717 /* LMLogsManager.swift */; };
+		B2A15C122567A8BE00222717 /* LMConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2A15BD62567A8BE00222717 /* LMConstants.swift */; };
+		B2A15C132567A8BE00222717 /* LMConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2A15BD62567A8BE00222717 /* LMConstants.swift */; };
+		B2A15C142567A8BE00222717 /* BackgroundOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2A15BD82567A8BE00222717 /* BackgroundOperation.swift */; };
+		B2A15C152567A8BE00222717 /* BackgroundOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2A15BD82567A8BE00222717 /* BackgroundOperation.swift */; };
+		B2A15C162567A8BE00222717 /* BackgroundServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2A15BD92567A8BE00222717 /* BackgroundServices.swift */; };
+		B2A15C172567A8BE00222717 /* BackgroundServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2A15BD92567A8BE00222717 /* BackgroundServices.swift */; };
+		B2A15C182567A8BE00222717 /* AsynchronousOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2A15BDA2567A8BE00222717 /* AsynchronousOperation.swift */; };
+		B2A15C192567A8BE00222717 /* AsynchronousOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2A15BDA2567A8BE00222717 /* AsynchronousOperation.swift */; };
+		B2A15C1A2567A8BE00222717 /* SharingInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2A15BDB2567A8BE00222717 /* SharingInfo.swift */; };
+		B2A15C1B2567A8BE00222717 /* SharingInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2A15BDB2567A8BE00222717 /* SharingInfo.swift */; };
+		B2A15C372567FE1900222717 /* WebViewConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2A15C362567FE1900222717 /* WebViewConfiguration.swift */; };
+		B2A15C382567FE1900222717 /* WebViewConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2A15C362567FE1900222717 /* WebViewConfiguration.swift */; };
 		B2B8935223D0AD6500321C3E /* DateExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2B8935023D0AD6500321C3E /* DateExtension.swift */; };
 		B2B8979823D0ADBA00321C3E /* HealthKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B2B8979723D0ADBA00321C3E /* HealthKit.framework */; };
 		B2C831F025306F6600E6A8A2 /* ComplicationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2C831EF25306F6600E6A8A2 /* ComplicationController.swift */; };
 		B2D2CA6625503AAE0086C864 /* WatchOSDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2D2CA6525503AAE0086C864 /* WatchOSDelegate.swift */; };
 		B2D2CA6825503AE20086C864 /* iOSDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2D2CA6725503AE20086C864 /* iOSDelegate.swift */; };
-		B2D2CA6C255045EC0086C864 /* LMSensorManager+SensorObservers.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2D2CA6A255045EC0086C864 /* LMSensorManager+SensorObservers.swift */; };
-		B2D2CA6D255045EC0086C864 /* LMSensorManager+SensorObservers.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2D2CA6A255045EC0086C864 /* LMSensorManager+SensorObservers.swift */; };
-		B2D2CA6E255045EC0086C864 /* LMSensorManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2D2CA6B255045EC0086C864 /* LMSensorManager.swift */; };
-		B2D2CA6F255045EC0086C864 /* LMSensorManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2D2CA6B255045EC0086C864 /* LMSensorManager.swift */; };
 		B2D930F92445D7E90086477D /* UserNotifications.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B2D930F82445D7E90086477D /* UserNotifications.framework */; };
 		B2D930FB2445D7E90086477D /* UserNotificationsUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B2D930FA2445D7E90086477D /* UserNotificationsUI.framework */; };
 		B2D930FE2445D7E90086477D /* NotificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2D930FD2445D7E90086477D /* NotificationViewController.swift */; };
 		B2D931012445D7E90086477D /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B2D930FF2445D7E90086477D /* MainInterface.storyboard */; };
 		B2D931052445D7E90086477D /* CustomNotification.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = B2D930F72445D7E90086477D /* CustomNotification.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
-		B2E4F9012532A1C100F9080F /* Logging.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2E4F9002532A1C100F9080F /* Logging.swift */; };
-		B2E4F9022532A1C100F9080F /* Logging.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2E4F9002532A1C100F9080F /* Logging.swift */; };
 		B2EE003024EE43760037DD9C /* FileDownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2EE002F24EE43760037DD9C /* FileDownloader.swift */; };
 		B2F3CDF6245932B200F211A3 /* StoryboardExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2F3CDF5245932B200F211A3 /* StoryboardExtension.swift */; };
 		B2F70D2E253EAA2E00D70091 /* watchkitextension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = B2704DE224B4A2AC00DE196B /* watchkitextension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
@@ -211,50 +222,28 @@
 /* Begin PBXFileReference section */
 		5F763010242386AA00B2DD03 /* Localizable.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
 		5FC0151223C5A85300990506 /* mindLAMP-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "mindLAMP-Bridging-Header.h"; sourceTree = "<group>"; };
-		B20043B225346BA4002B31F5 /* SensorModel+Constructors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SensorModel+Constructors.swift"; sourceTree = "<group>"; };
 		B2010FA02525F4A90075D0F8 /* AppColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppColors.swift; sourceTree = "<group>"; };
-		B212B4CD24DB1ACD00DD1299 /* LampIdentifiersHealthKit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LampIdentifiersHealthKit.swift; sourceTree = "<group>"; };
-		B212B4CE24DB1ACD00DD1299 /* LampIdentifiers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LampIdentifiers.swift; sourceTree = "<group>"; };
-		B2260D632505E66E00747A3E /* AppInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppInfo.swift; sourceTree = "<group>"; };
-		B22DA79725054F7600456EE4 /* PushPayload.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PushPayload.swift; sourceTree = "<group>"; };
 		B22DF5F1250612E800777D2D /* UserAgentExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAgentExtension.swift; sourceTree = "<group>"; };
-		B22DF5F32506526400777D2D /* NotificationAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationAPI.swift; sourceTree = "<group>"; };
-		B238432724B82D3900E548E2 /* SharingInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SharingInfo.swift; path = Shared/SharingInfo.swift; sourceTree = "<group>"; };
-		B238432B24B8357F00E548E2 /* CodableHelpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CodableHelpers.swift; sourceTree = "<group>"; };
-		B238432C24B8357F00E548E2 /* Networking.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Networking.swift; sourceTree = "<group>"; };
-		B238432D24B8357F00E548E2 /* NetworkingAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkingAPI.swift; sourceTree = "<group>"; };
-		B238433724B836A200E548E2 /* NetworkConfig.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkConfig.swift; sourceTree = "<group>"; };
-		B238433824B836A200E548E2 /* Result.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Result.swift; sourceTree = "<group>"; };
-		B238433D24B8390300E548E2 /* LampURL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LampURL.swift; sourceTree = "<group>"; };
-		B238434224B83B7700E548E2 /* ErrorExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ErrorExtension.swift; sourceTree = "<group>"; };
 		B238434624B848F300E548E2 /* LMRunningBuffer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LMRunningBuffer.swift; sourceTree = "<group>"; };
 		B238435F24B8989E00E548E2 /* watchkitapp Extension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "watchkitapp Extension.entitlements"; sourceTree = "<group>"; };
-		B238436424B8ADD900E548E2 /* SensorModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SensorModel.swift; sourceTree = "<group>"; };
-		B238BA9524B7297F00575A7F /* WatchSessionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = WatchSessionManager.swift; path = Shared/WatchSessionManager.swift; sourceTree = "<group>"; };
-		B239685724B785360031A209 /* EndPoint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EndPoint.swift; sourceTree = "<group>"; };
 		B23993B92440696800E31B06 /* exportOptions.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = exportOptions.plist; sourceTree = "<group>"; };
 		B23F5278245346E0007A8598 /* PushUserInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PushUserInfo.swift; sourceTree = "<group>"; };
 		B240814223D8803900845AEE /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		B244A1C123BF4A91007FBDB8 /* FileManager+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FileManager+Extension.swift"; sourceTree = "<group>"; };
 		B2458A5D2555128B0078D427 /* LeakAvoider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeakAvoider.swift; sourceTree = "<group>"; };
-		B2464EF325270C9600A8BB65 /* Staging.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Staging.xcconfig; sourceTree = "<group>"; };
-		B2464EF625270DD500A8BB65 /* Production.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Production.xcconfig; sourceTree = "<group>"; };
-		B246BD0A252C90E700064A82 /* FileStorage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileStorage.swift; sourceTree = "<group>"; };
-		B246BD0B252C90E700064A82 /* SensorLogs.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SensorLogs.swift; sourceTree = "<group>"; };
-		B246BD0C252C90E700064A82 /* LogsModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogsModel.swift; sourceTree = "<group>"; };
-		B246BD0D252C90E700064A82 /* LMLogsManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LMLogsManager.swift; sourceTree = "<group>"; };
-		B246BD16252CA42F00064A82 /* LMConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LMConstants.swift; sourceTree = "<group>"; };
 		B246BD19252CA8B300064A82 /* Home.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Home.storyboard; sourceTree = "<group>"; };
 		B246BD1B252CA8F500064A82 /* WebViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
-		B250A461252A0A7000FBB780 /* StringExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringExtension.swift; sourceTree = "<group>"; };
 		B255116424B6202300CDBDD1 /* WatchNotificationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchNotificationModel.swift; sourceTree = "<group>"; };
 		B255116824B625CC00CDBDD1 /* WatchDeviceInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchDeviceInfo.swift; sourceTree = "<group>"; };
 		B255116B24B6291900CDBDD1 /* LoginServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginServices.swift; sourceTree = "<group>"; };
+		B2587B4B256E23BC00A2A7F2 /* UserDefaults+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UserDefaults+Extension.swift"; sourceTree = "<group>"; };
+		B2587B4D256E23BC00A2A7F2 /* Staging.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Staging.xcconfig; sourceTree = "<group>"; };
+		B2587B4E256E23BC00A2A7F2 /* Production.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Production.xcconfig; sourceTree = "<group>"; };
+		B2587B4F256E23BC00A2A7F2 /* LampURL.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LampURL.swift; sourceTree = "<group>"; };
+		B2587B50256E23BC00A2A7F2 /* EndPoint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EndPoint.swift; sourceTree = "<group>"; };
 		B26A2A1D24EBC6E900BCB043 /* VersionCheckViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VersionCheckViewController.swift; sourceTree = "<group>"; };
 		B26A2A3224EBCCA400BCB043 /* VersionCheckViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VersionCheckViewModel.swift; sourceTree = "<group>"; };
-		B26ABED92531C890004CF86D /* BackgroundOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BackgroundOperation.swift; sourceTree = "<group>"; };
-		B26ABEDA2531C890004CF86D /* BackgroundServices.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BackgroundServices.swift; sourceTree = "<group>"; };
-		B26ABEDB2531C890004CF86D /* AsynchronousOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AsynchronousOperation.swift; sourceTree = "<group>"; };
+		B26B56C92566EE5B00A87711 /* CustomNotification.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = CustomNotification.entitlements; sourceTree = "<group>"; };
 		B2704DD624B4A2A900DE196B /* watchkitapp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = watchkitapp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B2704DD924B4A2A900DE196B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Interface.storyboard; sourceTree = "<group>"; };
 		B2704DDB24B4A2AC00DE196B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -275,8 +264,6 @@
 		B2847FB42450550E0042D43B /* NotificationService.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = NotificationService.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		B2847FB62450550E0042D43B /* NotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationService.swift; sourceTree = "<group>"; };
 		B2847FB82450550E0042D43B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		B285D0A524C8941B0050BD3F /* UserDefaults+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UserDefaults+Extension.swift"; sourceTree = "<group>"; };
-		B285D0AB24C894760050BD3F /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		B2962FCA24ADECB700C1D598 /* NodeRunner.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NodeRunner.mm; sourceTree = "<group>"; };
 		B2962FCC24ADECB700C1D598 /* NodeManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NodeManager.swift; sourceTree = "<group>"; };
 		B2962FCF24ADECEC00C1D598 /* NodeRunner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NodeRunner.h; sourceTree = "<group>"; };
@@ -286,21 +273,47 @@
 		B29639D923BDC28200626E1A /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		B29639DC23BDC28200626E1A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		B29639DE23BDC28200626E1A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B2A15BB42567A8BE00222717 /* NotificationAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationAPI.swift; sourceTree = "<group>"; };
+		B2A15BB52567A8BE00222717 /* PushPayload.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PushPayload.swift; sourceTree = "<group>"; };
+		B2A15BB72567A8BE00222717 /* LampIdentifiersHealthKit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LampIdentifiersHealthKit.swift; sourceTree = "<group>"; };
+		B2A15BB82567A8BE00222717 /* SensorModel+Constructors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SensorModel+Constructors.swift"; sourceTree = "<group>"; };
+		B2A15BB92567A8BE00222717 /* SensorModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SensorModel.swift; sourceTree = "<group>"; };
+		B2A15BBA2567A8BE00222717 /* LampIdentifiers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LampIdentifiers.swift; sourceTree = "<group>"; };
+		B2A15BBC2567A8BE00222717 /* CodableHelpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CodableHelpers.swift; sourceTree = "<group>"; };
+		B2A15BBD2567A8BE00222717 /* Networking.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Networking.swift; sourceTree = "<group>"; };
+		B2A15BBE2567A8BE00222717 /* Result.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Result.swift; sourceTree = "<group>"; };
+		B2A15BBF2567A8BE00222717 /* NetworkingAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkingAPI.swift; sourceTree = "<group>"; };
+		B2A15BC12567A8BE00222717 /* ErrorExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ErrorExtension.swift; sourceTree = "<group>"; };
+		B2A15BC32567A8BE00222717 /* NetworkConfig.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkConfig.swift; sourceTree = "<group>"; };
+		B2A15BC52567A8BE00222717 /* LMSensorManager+SensorObservers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "LMSensorManager+SensorObservers.swift"; sourceTree = "<group>"; };
+		B2A15BC62567A8BE00222717 /* LMSensorManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LMSensorManager.swift; sourceTree = "<group>"; };
+		B2A15BC82567A8BE00222717 /* AppInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppInfo.swift; sourceTree = "<group>"; };
+		B2A15BC92567A8BE00222717 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		B2A15BCB2567A8BE00222717 /* StringExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringExtension.swift; sourceTree = "<group>"; };
+		B2A15BCC2567A8BE00222717 /* WatchSessionManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WatchSessionManager.swift; sourceTree = "<group>"; };
+		B2A15BD12567A8BE00222717 /* Logging.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Logging.swift; sourceTree = "<group>"; };
+		B2A15BD22567A8BE00222717 /* FileStorage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileStorage.swift; sourceTree = "<group>"; };
+		B2A15BD32567A8BE00222717 /* SensorLogs.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SensorLogs.swift; sourceTree = "<group>"; };
+		B2A15BD42567A8BE00222717 /* LogsModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogsModel.swift; sourceTree = "<group>"; };
+		B2A15BD52567A8BE00222717 /* LMLogsManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LMLogsManager.swift; sourceTree = "<group>"; };
+		B2A15BD62567A8BE00222717 /* LMConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LMConstants.swift; sourceTree = "<group>"; };
+		B2A15BD82567A8BE00222717 /* BackgroundOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BackgroundOperation.swift; sourceTree = "<group>"; };
+		B2A15BD92567A8BE00222717 /* BackgroundServices.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BackgroundServices.swift; sourceTree = "<group>"; };
+		B2A15BDA2567A8BE00222717 /* AsynchronousOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AsynchronousOperation.swift; sourceTree = "<group>"; };
+		B2A15BDB2567A8BE00222717 /* SharingInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SharingInfo.swift; sourceTree = "<group>"; };
+		B2A15C362567FE1900222717 /* WebViewConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewConfiguration.swift; sourceTree = "<group>"; };
 		B2B8935023D0AD6500321C3E /* DateExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateExtension.swift; sourceTree = "<group>"; };
 		B2B8979523D0ADBA00321C3E /* mindLAMP.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = mindLAMP.entitlements; sourceTree = "<group>"; };
 		B2B8979723D0ADBA00321C3E /* HealthKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HealthKit.framework; path = System/Library/Frameworks/HealthKit.framework; sourceTree = SDKROOT; };
 		B2C831EF25306F6600E6A8A2 /* ComplicationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ComplicationController.swift; sourceTree = "<group>"; };
 		B2D2CA6525503AAE0086C864 /* WatchOSDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchOSDelegate.swift; sourceTree = "<group>"; };
 		B2D2CA6725503AE20086C864 /* iOSDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iOSDelegate.swift; sourceTree = "<group>"; };
-		B2D2CA6A255045EC0086C864 /* LMSensorManager+SensorObservers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "LMSensorManager+SensorObservers.swift"; sourceTree = "<group>"; };
-		B2D2CA6B255045EC0086C864 /* LMSensorManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LMSensorManager.swift; sourceTree = "<group>"; };
 		B2D930F72445D7E90086477D /* CustomNotification.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = CustomNotification.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		B2D930F82445D7E90086477D /* UserNotifications.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UserNotifications.framework; path = System/Library/Frameworks/UserNotifications.framework; sourceTree = SDKROOT; };
 		B2D930FA2445D7E90086477D /* UserNotificationsUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UserNotificationsUI.framework; path = System/Library/Frameworks/UserNotificationsUI.framework; sourceTree = SDKROOT; };
 		B2D930FD2445D7E90086477D /* NotificationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationViewController.swift; sourceTree = "<group>"; };
 		B2D931002445D7E90086477D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainInterface.storyboard; sourceTree = "<group>"; };
 		B2D931022445D7E90086477D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		B2E4F9002532A1C100F9080F /* Logging.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Logging.swift; sourceTree = "<group>"; };
 		B2EE002F24EE43760037DD9C /* FileDownloader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileDownloader.swift; sourceTree = "<group>"; };
 		B2F3CDF5245932B200F211A3 /* StoryboardExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoryboardExtension.swift; sourceTree = "<group>"; };
 		B2FDA83124BF744D000316EE /* ContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -351,32 +364,6 @@
 			path = Common;
 			sourceTree = "<group>";
 		};
-		B22DA79625054F4600456EE4 /* PushNotificationAPI */ = {
-			isa = PBXGroup;
-			children = (
-				B22DF5F32506526400777D2D /* NotificationAPI.swift */,
-				B22DA79725054F7600456EE4 /* PushPayload.swift */,
-			);
-			name = PushNotificationAPI;
-			path = Shared/PushNotificationAPI;
-			sourceTree = "<group>";
-		};
-		B238432A24B8357F00E548E2 /* Network */ = {
-			isa = PBXGroup;
-			children = (
-				B239685724B785360031A209 /* EndPoint.swift */,
-				B238434224B83B7700E548E2 /* ErrorExtension.swift */,
-				B238433724B836A200E548E2 /* NetworkConfig.swift */,
-				B238433824B836A200E548E2 /* Result.swift */,
-				B238432B24B8357F00E548E2 /* CodableHelpers.swift */,
-				B238432C24B8357F00E548E2 /* Networking.swift */,
-				B238432D24B8357F00E548E2 /* NetworkingAPI.swift */,
-				B238433D24B8390300E548E2 /* LampURL.swift */,
-			);
-			name = Network;
-			path = Shared/Network;
-			sourceTree = "<group>";
-		};
 		B238434524B848F300E548E2 /* SensorManager */ = {
 			isa = PBXGroup;
 			children = (
@@ -384,36 +371,6 @@
 				B2D2CA6525503AAE0086C864 /* WatchOSDelegate.swift */,
 			);
 			path = SensorManager;
-			sourceTree = "<group>";
-		};
-		B238434C24B849C700E548E2 /* SensorModels */ = {
-			isa = PBXGroup;
-			children = (
-				B20043B225346BA4002B31F5 /* SensorModel+Constructors.swift */,
-				B212B4CE24DB1ACD00DD1299 /* LampIdentifiers.swift */,
-				B212B4CD24DB1ACD00DD1299 /* LampIdentifiersHealthKit.swift */,
-				B238436424B8ADD900E548E2 /* SensorModel.swift */,
-			);
-			name = SensorModels;
-			path = Shared/SensorModels;
-			sourceTree = "<group>";
-		};
-		B238BA9424B7289500575A7F /* Shared */ = {
-			isa = PBXGroup;
-			children = (
-				B2D2CA69255045EC0086C864 /* SensorManager */,
-				B26ABED82531C890004CF86D /* OperationQueue */,
-				B246BD09252C90E700064A82 /* Logging */,
-				B2464EF225270C5000A8BB65 /* Configs */,
-				B22DA79625054F4600456EE4 /* PushNotificationAPI */,
-				B238BA9524B7297F00575A7F /* WatchSessionManager.swift */,
-				B238432724B82D3900E548E2 /* SharingInfo.swift */,
-				B285D0AA24C894760050BD3F /* Models */,
-				B285D0A324C8941B0050BD3F /* Extensions */,
-				B238434C24B849C700E548E2 /* SensorModels */,
-				B238432A24B8357F00E548E2 /* Network */,
-			);
-			name = Shared;
 			sourceTree = "<group>";
 		};
 		B240814323D8803900845AEE /* AppComponents */ = {
@@ -442,30 +399,6 @@
 			path = Extensions;
 			sourceTree = "<group>";
 		};
-		B2464EF225270C5000A8BB65 /* Configs */ = {
-			isa = PBXGroup;
-			children = (
-				B2464EF325270C9600A8BB65 /* Staging.xcconfig */,
-				B2464EF625270DD500A8BB65 /* Production.xcconfig */,
-			);
-			name = Configs;
-			path = Shared/Configs;
-			sourceTree = "<group>";
-		};
-		B246BD09252C90E700064A82 /* Logging */ = {
-			isa = PBXGroup;
-			children = (
-				B2E4F9002532A1C100F9080F /* Logging.swift */,
-				B246BD16252CA42F00064A82 /* LMConstants.swift */,
-				B246BD0A252C90E700064A82 /* FileStorage.swift */,
-				B246BD0B252C90E700064A82 /* SensorLogs.swift */,
-				B246BD0C252C90E700064A82 /* LogsModel.swift */,
-				B246BD0D252C90E700064A82 /* LMLogsManager.swift */,
-			);
-			name = Logging;
-			path = Shared/Logging;
-			sourceTree = "<group>";
-		};
 		B255115D24B5FA0900CDBDD1 /* PushNotification */ = {
 			isa = PBXGroup;
 			children = (
@@ -490,6 +423,34 @@
 			path = ViewModels;
 			sourceTree = "<group>";
 		};
+		B2587B49256E23BC00A2A7F2 /* Shared */ = {
+			isa = PBXGroup;
+			children = (
+				B2587B4A256E23BC00A2A7F2 /* Extensions */,
+				B2587B4C256E23BC00A2A7F2 /* Configs */,
+				B2587B4F256E23BC00A2A7F2 /* LampURL.swift */,
+				B2587B50256E23BC00A2A7F2 /* EndPoint.swift */,
+			);
+			path = Shared;
+			sourceTree = "<group>";
+		};
+		B2587B4A256E23BC00A2A7F2 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				B2587B4B256E23BC00A2A7F2 /* UserDefaults+Extension.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		B2587B4C256E23BC00A2A7F2 /* Configs */ = {
+			isa = PBXGroup;
+			children = (
+				B2587B4D256E23BC00A2A7F2 /* Staging.xcconfig */,
+				B2587B4E256E23BC00A2A7F2 /* Production.xcconfig */,
+			);
+			path = Configs;
+			sourceTree = "<group>";
+		};
 		B26A2A1A24EBC6E900BCB043 /* VersionCheck */ = {
 			isa = PBXGroup;
 			children = (
@@ -498,17 +459,6 @@
 				B2EE002F24EE43760037DD9C /* FileDownloader.swift */,
 			);
 			path = VersionCheck;
-			sourceTree = "<group>";
-		};
-		B26ABED82531C890004CF86D /* OperationQueue */ = {
-			isa = PBXGroup;
-			children = (
-				B26ABED92531C890004CF86D /* BackgroundOperation.swift */,
-				B26ABEDA2531C890004CF86D /* BackgroundServices.swift */,
-				B26ABEDB2531C890004CF86D /* AsynchronousOperation.swift */,
-			);
-			name = OperationQueue;
-			path = Shared/OperationQueue;
 			sourceTree = "<group>";
 		};
 		B2704DD724B4A2A900DE196B /* watchkitapp */ = {
@@ -610,26 +560,6 @@
 			path = NotificationService;
 			sourceTree = "<group>";
 		};
-		B285D0A324C8941B0050BD3F /* Extensions */ = {
-			isa = PBXGroup;
-			children = (
-				B250A461252A0A7000FBB780 /* StringExtension.swift */,
-				B285D0A524C8941B0050BD3F /* UserDefaults+Extension.swift */,
-			);
-			name = Extensions;
-			path = Shared/Extensions;
-			sourceTree = "<group>";
-		};
-		B285D0AA24C894760050BD3F /* Models */ = {
-			isa = PBXGroup;
-			children = (
-				B285D0AB24C894760050BD3F /* User.swift */,
-				B2260D632505E66E00747A3E /* AppInfo.swift */,
-			);
-			name = Models;
-			path = Shared/Models;
-			sourceTree = "<group>";
-		};
 		B2962FC924ADECB700C1D598 /* NodeComponents */ = {
 			isa = PBXGroup;
 			children = (
@@ -643,7 +573,9 @@
 		B29639C423BDC28100626E1A = {
 			isa = PBXGroup;
 			children = (
-				B238BA9424B7289500575A7F /* Shared */,
+				B2587B49256E23BC00A2A7F2 /* Shared */,
+				B2A15BB22567A8BE00222717 /* SharedToWatchExt */,
+				B2A15BAC2567A8A600222717 /* SharedToWatchAndNotification */,
 				B29639CF23BDC28100626E1A /* mindLAMP */,
 				B2D930FC2445D7E90086477D /* CustomNotification */,
 				B2847FB52450550E0042D43B /* NotificationService */,
@@ -695,6 +627,113 @@
 			path = "Preview Content";
 			sourceTree = "<group>";
 		};
+		B2A15BAC2567A8A600222717 /* SharedToWatchAndNotification */ = {
+			isa = PBXGroup;
+			children = (
+				B2A15C362567FE1900222717 /* WebViewConfiguration.swift */,
+			);
+			path = SharedToWatchAndNotification;
+			sourceTree = "<group>";
+		};
+		B2A15BB22567A8BE00222717 /* SharedToWatchExt */ = {
+			isa = PBXGroup;
+			children = (
+				B2A15BB32567A8BE00222717 /* PushNotificationAPI */,
+				B2A15BB62567A8BE00222717 /* SensorModels */,
+				B2A15BBB2567A8BE00222717 /* Network */,
+				B2A15BC42567A8BE00222717 /* SensorManager */,
+				B2A15BC72567A8BE00222717 /* Models */,
+				B2A15BCA2567A8BE00222717 /* Extensions */,
+				B2A15BCC2567A8BE00222717 /* WatchSessionManager.swift */,
+				B2A15BD02567A8BE00222717 /* Logging */,
+				B2A15BD72567A8BE00222717 /* OperationQueue */,
+				B2A15BDB2567A8BE00222717 /* SharingInfo.swift */,
+			);
+			path = SharedToWatchExt;
+			sourceTree = "<group>";
+		};
+		B2A15BB32567A8BE00222717 /* PushNotificationAPI */ = {
+			isa = PBXGroup;
+			children = (
+				B2A15BB42567A8BE00222717 /* NotificationAPI.swift */,
+				B2A15BB52567A8BE00222717 /* PushPayload.swift */,
+			);
+			path = PushNotificationAPI;
+			sourceTree = "<group>";
+		};
+		B2A15BB62567A8BE00222717 /* SensorModels */ = {
+			isa = PBXGroup;
+			children = (
+				B2A15BB72567A8BE00222717 /* LampIdentifiersHealthKit.swift */,
+				B2A15BB82567A8BE00222717 /* SensorModel+Constructors.swift */,
+				B2A15BB92567A8BE00222717 /* SensorModel.swift */,
+				B2A15BBA2567A8BE00222717 /* LampIdentifiers.swift */,
+			);
+			path = SensorModels;
+			sourceTree = "<group>";
+		};
+		B2A15BBB2567A8BE00222717 /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				B2A15BBC2567A8BE00222717 /* CodableHelpers.swift */,
+				B2A15BBD2567A8BE00222717 /* Networking.swift */,
+				B2A15BBE2567A8BE00222717 /* Result.swift */,
+				B2A15BBF2567A8BE00222717 /* NetworkingAPI.swift */,
+				B2A15BC12567A8BE00222717 /* ErrorExtension.swift */,
+				B2A15BC32567A8BE00222717 /* NetworkConfig.swift */,
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
+		B2A15BC42567A8BE00222717 /* SensorManager */ = {
+			isa = PBXGroup;
+			children = (
+				B2A15BC52567A8BE00222717 /* LMSensorManager+SensorObservers.swift */,
+				B2A15BC62567A8BE00222717 /* LMSensorManager.swift */,
+			);
+			path = SensorManager;
+			sourceTree = "<group>";
+		};
+		B2A15BC72567A8BE00222717 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				B2A15BC82567A8BE00222717 /* AppInfo.swift */,
+				B2A15BC92567A8BE00222717 /* User.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		B2A15BCA2567A8BE00222717 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				B2A15BCB2567A8BE00222717 /* StringExtension.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		B2A15BD02567A8BE00222717 /* Logging */ = {
+			isa = PBXGroup;
+			children = (
+				B2A15BD12567A8BE00222717 /* Logging.swift */,
+				B2A15BD22567A8BE00222717 /* FileStorage.swift */,
+				B2A15BD32567A8BE00222717 /* SensorLogs.swift */,
+				B2A15BD42567A8BE00222717 /* LogsModel.swift */,
+				B2A15BD52567A8BE00222717 /* LMLogsManager.swift */,
+				B2A15BD62567A8BE00222717 /* LMConstants.swift */,
+			);
+			path = Logging;
+			sourceTree = "<group>";
+		};
+		B2A15BD72567A8BE00222717 /* OperationQueue */ = {
+			isa = PBXGroup;
+			children = (
+				B2A15BD82567A8BE00222717 /* BackgroundOperation.swift */,
+				B2A15BD92567A8BE00222717 /* BackgroundServices.swift */,
+				B2A15BDA2567A8BE00222717 /* AsynchronousOperation.swift */,
+			);
+			path = OperationQueue;
+			sourceTree = "<group>";
+		};
 		B2B8979623D0ADBA00321C3E /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -713,19 +752,10 @@
 			path = "Sensor Manager";
 			sourceTree = "<group>";
 		};
-		B2D2CA69255045EC0086C864 /* SensorManager */ = {
-			isa = PBXGroup;
-			children = (
-				B2D2CA6A255045EC0086C864 /* LMSensorManager+SensorObservers.swift */,
-				B2D2CA6B255045EC0086C864 /* LMSensorManager.swift */,
-			);
-			name = SensorManager;
-			path = Shared/SensorManager;
-			sourceTree = "<group>";
-		};
 		B2D930FC2445D7E90086477D /* CustomNotification */ = {
 			isa = PBXGroup;
 			children = (
+				B26B56C92566EE5B00A87711 /* CustomNotification.entitlements */,
 				B2D930FD2445D7E90086477D /* NotificationViewController.swift */,
 				B2D930FF2445D7E90086477D /* MainInterface.storyboard */,
 				B2D931022445D7E90086477D /* Info.plist */,
@@ -910,6 +940,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				B2704DF724B4A2AC00DE196B /* Preview Assets.xcassets in Resources */,
+				B2587B59256E23BC00A2A7F2 /* Production.xcconfig in Resources */,
+				B2587B56256E23BC00A2A7F2 /* Staging.xcconfig in Resources */,
 				B2704DF424B4A2AC00DE196B /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -926,9 +958,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				5F763011242386AA00B2DD03 /* Localizable.strings in Resources */,
+				B2587B57256E23BC00A2A7F2 /* Production.xcconfig in Resources */,
 				B23993BA2440696800E31B06 /* exportOptions.plist in Resources */,
 				B29639DD23BDC28200626E1A /* LaunchScreen.storyboard in Resources */,
 				B29639DA23BDC28200626E1A /* Preview Assets.xcassets in Resources */,
+				B2587B54256E23BC00A2A7F2 /* Staging.xcconfig in Resources */,
 				B29639D723BDC28200626E1A /* Assets.xcassets in Resources */,
 				B246BD1A252CA8B300064A82 /* Home.storyboard in Resources */,
 			);
@@ -938,7 +972,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B2587B55256E23BC00A2A7F2 /* Staging.xcconfig in Resources */,
 				B2D931012445D7E90086477D /* MainInterface.storyboard in Resources */,
+				B2587B58256E23BC00A2A7F2 /* Production.xcconfig in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -949,50 +985,50 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B238433C24B836A200E548E2 /* Result.swift in Sources */,
-				B250A463252A0A7000FBB780 /* StringExtension.swift in Sources */,
-				B238433324B8357F00E548E2 /* NetworkingAPI.swift in Sources */,
-				B2260D652505E66E00747A3E /* AppInfo.swift in Sources */,
 				B2704E0724B4AE7800DE196B /* UserAuth.swift in Sources */,
+				B2A15BEB2567A8BE00222717 /* Networking.swift in Sources */,
+				B2A15C032567A8BE00222717 /* WatchSessionManager.swift in Sources */,
+				B2A15C0D2567A8BE00222717 /* SensorLogs.swift in Sources */,
+				B2A15C1B2567A8BE00222717 /* SharingInfo.swift in Sources */,
+				B2A15BFD2567A8BE00222717 /* AppInfo.swift in Sources */,
+				B2A15BF32567A8BE00222717 /* ErrorExtension.swift in Sources */,
+				B2A15BFF2567A8BE00222717 /* User.swift in Sources */,
 				B238434924B848F300E548E2 /* LMRunningBuffer.swift in Sources */,
-				B238433A24B836A200E548E2 /* NetworkConfig.swift in Sources */,
-				B2D2CA6D255045EC0086C864 /* LMSensorManager+SensorObservers.swift in Sources */,
-				B20043B425346BA4002B31F5 /* SensorModel+Constructors.swift in Sources */,
-				B238BA9724B7297F00575A7F /* WatchSessionManager.swift in Sources */,
-				B238433124B8357F00E548E2 /* Networking.swift in Sources */,
-				B246BD13252C90E700064A82 /* LogsModel.swift in Sources */,
-				B238432F24B8357F00E548E2 /* CodableHelpers.swift in Sources */,
-				B2E4F9022532A1C100F9080F /* Logging.swift in Sources */,
-				B22DF5F52506526400777D2D /* NotificationAPI.swift in Sources */,
-				B238432924B82D3900E548E2 /* SharingInfo.swift in Sources */,
+				B2A15BDD2567A8BE00222717 /* NotificationAPI.swift in Sources */,
 				B255116524B6202300CDBDD1 /* WatchNotificationModel.swift in Sources */,
-				B22DA79925054F7600456EE4 /* PushPayload.swift in Sources */,
-				B285D0AD24C894760050BD3F /* User.swift in Sources */,
-				B285D0A924C8941B0050BD3F /* UserDefaults+Extension.swift in Sources */,
+				B2A15C132567A8BE00222717 /* LMConstants.swift in Sources */,
+				B2587B5C256E23BC00A2A7F2 /* LampURL.swift in Sources */,
+				B2A15BE32567A8BE00222717 /* SensorModel+Constructors.swift in Sources */,
+				B2A15BE12567A8BE00222717 /* LampIdentifiersHealthKit.swift in Sources */,
 				B255116924B625CC00CDBDD1 /* WatchDeviceInfo.swift in Sources */,
-				B246BD18252CA42F00064A82 /* LMConstants.swift in Sources */,
-				B246BD11252C90E700064A82 /* SensorLogs.swift in Sources */,
 				B2FDA83224BF744D000316EE /* ContentView.swift in Sources */,
+				B2A15BE72567A8BE00222717 /* LampIdentifiers.swift in Sources */,
+				B2A15BDF2567A8BE00222717 /* PushPayload.swift in Sources */,
 				B2704DEA24B4A2AC00DE196B /* HostingController.swift in Sources */,
-				B26ABEDF2531C890004CF86D /* BackgroundServices.swift in Sources */,
-				B2D2CA6F255045EC0086C864 /* LMSensorManager.swift in Sources */,
-				B26ABEDD2531C890004CF86D /* BackgroundOperation.swift in Sources */,
-				B26ABEE12531C890004CF86D /* AsynchronousOperation.swift in Sources */,
-				B238436624B8ADD900E548E2 /* SensorModel.swift in Sources */,
-				B238433F24B8390300E548E2 /* LampURL.swift in Sources */,
-				B212B4D224DB1ACD00DD1299 /* LampIdentifiers.swift in Sources */,
-				B212B4D024DB1ACD00DD1299 /* LampIdentifiersHealthKit.swift in Sources */,
-				B246BD15252C90E700064A82 /* LMLogsManager.swift in Sources */,
-				B239685924B785360031A209 /* EndPoint.swift in Sources */,
-				B246BD0F252C90E700064A82 /* FileStorage.swift in Sources */,
+				B2A15BF72567A8BE00222717 /* NetworkConfig.swift in Sources */,
+				B2A15BFB2567A8BE00222717 /* LMSensorManager.swift in Sources */,
+				B2A15BED2567A8BE00222717 /* Result.swift in Sources */,
+				B2A15C172567A8BE00222717 /* BackgroundServices.swift in Sources */,
+				B2A15C152567A8BE00222717 /* BackgroundOperation.swift in Sources */,
+				B2A15C192567A8BE00222717 /* AsynchronousOperation.swift in Sources */,
+				B2587B5F256E23BC00A2A7F2 /* EndPoint.swift in Sources */,
+				B2A15C012567A8BE00222717 /* StringExtension.swift in Sources */,
+				B2A15C112567A8BE00222717 /* LMLogsManager.swift in Sources */,
 				B2D2CA6625503AAE0086C864 /* WatchOSDelegate.swift in Sources */,
 				B255116C24B6291900CDBDD1 /* LoginServices.swift in Sources */,
+				B2A15BEF2567A8BE00222717 /* NetworkingAPI.swift in Sources */,
+				B2A15BE92567A8BE00222717 /* CodableHelpers.swift in Sources */,
+				B2A15BF92567A8BE00222717 /* LMSensorManager+SensorObservers.swift in Sources */,
 				B2704DEE24B4A2AC00DE196B /* NotificationController.swift in Sources */,
 				B2704DEC24B4A2AC00DE196B /* ExtensionDelegate.swift in Sources */,
+				B2587B53256E23BC00A2A7F2 /* UserDefaults+Extension.swift in Sources */,
+				B2A15C0B2567A8BE00222717 /* FileStorage.swift in Sources */,
 				B2704DF024B4A2AC00DE196B /* NotificationView.swift in Sources */,
+				B2A15C0F2567A8BE00222717 /* LogsModel.swift in Sources */,
+				B2A15C092567A8BE00222717 /* Logging.swift in Sources */,
+				B2A15BE52567A8BE00222717 /* SensorModel.swift in Sources */,
 				B2010FA22525F4A90075D0F8 /* AppColors.swift in Sources */,
 				B2C831F025306F6600E6A8A2 /* ComplicationController.swift in Sources */,
-				B238434424B83B7700E548E2 /* ErrorExtension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1008,56 +1044,57 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B238BA9624B7297F00575A7F /* WatchSessionManager.swift in Sources */,
+				B2A15BE42567A8BE00222717 /* SensorModel.swift in Sources */,
 				B2458A5E2555128B0078D427 /* LeakAvoider.swift in Sources */,
-				B238433024B8357F00E548E2 /* Networking.swift in Sources */,
-				B238432E24B8357F00E548E2 /* CodableHelpers.swift in Sources */,
 				B2010FA12525F4A90075D0F8 /* AppColors.swift in Sources */,
-				B238433B24B836A200E548E2 /* Result.swift in Sources */,
 				B2B8935223D0AD6500321C3E /* DateExtension.swift in Sources */,
+				B2A15C0E2567A8BE00222717 /* LogsModel.swift in Sources */,
 				B22DF5F2250612E800777D2D /* UserAgentExtension.swift in Sources */,
-				B2D2CA6E255045EC0086C864 /* LMSensorManager.swift in Sources */,
-				B246BD0E252C90E700064A82 /* FileStorage.swift in Sources */,
+				B2A15C0A2567A8BE00222717 /* FileStorage.swift in Sources */,
+				B2A15BE82567A8BE00222717 /* CodableHelpers.swift in Sources */,
+				B2A15C0C2567A8BE00222717 /* SensorLogs.swift in Sources */,
+				B2A15C082567A8BE00222717 /* Logging.swift in Sources */,
 				B2F3CDF6245932B200F211A3 /* StoryboardExtension.swift in Sources */,
-				B238432824B82D3900E548E2 /* SharingInfo.swift in Sources */,
-				B238436524B8ADD900E548E2 /* SensorModel.swift in Sources */,
 				B2962FCE24ADECB700C1D598 /* NodeManager.swift in Sources */,
-				B2D2CA6C255045EC0086C864 /* LMSensorManager+SensorObservers.swift in Sources */,
+				B2A15C182567A8BE00222717 /* AsynchronousOperation.swift in Sources */,
 				B244A1C223BF4A91007FBDB8 /* FileManager+Extension.swift in Sources */,
-				B239685824B785360031A209 /* EndPoint.swift in Sources */,
-				B285D0A824C8941B0050BD3F /* UserDefaults+Extension.swift in Sources */,
 				B29639D123BDC28100626E1A /* AppDelegate.swift in Sources */,
-				B238433E24B8390300E548E2 /* LampURL.swift in Sources */,
-				B238433924B836A200E548E2 /* NetworkConfig.swift in Sources */,
-				B246BD14252C90E700064A82 /* LMLogsManager.swift in Sources */,
-				B285D0AC24C894760050BD3F /* User.swift in Sources */,
-				B22DA79825054F7600456EE4 /* PushPayload.swift in Sources */,
+				B2A15BEE2567A8BE00222717 /* NetworkingAPI.swift in Sources */,
+				B2A15C002567A8BE00222717 /* StringExtension.swift in Sources */,
+				B2A15C142567A8BE00222717 /* BackgroundOperation.swift in Sources */,
+				B2A15BE02567A8BE00222717 /* LampIdentifiersHealthKit.swift in Sources */,
+				B2A15BDC2567A8BE00222717 /* NotificationAPI.swift in Sources */,
 				B275F60224518106007A7340 /* HomeWebViewModel.swift in Sources */,
-				B212B4CF24DB1ACD00DD1299 /* LampIdentifiersHealthKit.swift in Sources */,
-				B2260D642505E66E00747A3E /* AppInfo.swift in Sources */,
-				B26ABEDE2531C890004CF86D /* BackgroundServices.swift in Sources */,
-				B26ABEDC2531C890004CF86D /* BackgroundOperation.swift in Sources */,
+				B2587B5A256E23BC00A2A7F2 /* LampURL.swift in Sources */,
 				B2962FCD24ADECB700C1D598 /* NodeRunner.mm in Sources */,
-				B238433224B8357F00E548E2 /* NetworkingAPI.swift in Sources */,
-				B212B4D124DB1ACD00DD1299 /* LampIdentifiers.swift in Sources */,
-				B2E4F9012532A1C100F9080F /* Logging.swift in Sources */,
 				B2D2CA6825503AE20086C864 /* iOSDelegate.swift in Sources */,
+				B2A15C162567A8BE00222717 /* BackgroundServices.swift in Sources */,
+				B2A15BFE2567A8BE00222717 /* User.swift in Sources */,
+				B2A15BE62567A8BE00222717 /* LampIdentifiers.swift in Sources */,
 				B246BD1C252CA8F500064A82 /* WebViewController.swift in Sources */,
 				B26A2A3324EBCCA400BCB043 /* VersionCheckViewModel.swift in Sources */,
 				B2EE003024EE43760037DD9C /* FileDownloader.swift in Sources */,
-				B26ABEE02531C890004CF86D /* AsynchronousOperation.swift in Sources */,
-				B246BD17252CA42F00064A82 /* LMConstants.swift in Sources */,
-				B246BD12252C90E700064A82 /* LogsModel.swift in Sources */,
+				B2A15BF62567A8BE00222717 /* NetworkConfig.swift in Sources */,
+				B2A15BE22567A8BE00222717 /* SensorModel+Constructors.swift in Sources */,
+				B2A15BF22567A8BE00222717 /* ErrorExtension.swift in Sources */,
+				B2A15BFC2567A8BE00222717 /* AppInfo.swift in Sources */,
 				B26A2A2B24EBC6E900BCB043 /* VersionCheckViewController.swift in Sources */,
+				B2587B51256E23BC00A2A7F2 /* UserDefaults+Extension.swift in Sources */,
+				B2A15C1A2567A8BE00222717 /* SharingInfo.swift in Sources */,
+				B2A15BDE2567A8BE00222717 /* PushPayload.swift in Sources */,
 				B23F5279245346E0007A8598 /* PushUserInfo.swift in Sources */,
-				B246BD10252C90E700064A82 /* SensorLogs.swift in Sources */,
-				B20043B325346BA4002B31F5 /* SensorModel+Constructors.swift in Sources */,
-				B250A462252A0A7000FBB780 /* StringExtension.swift in Sources */,
+				B2587B5D256E23BC00A2A7F2 /* EndPoint.swift in Sources */,
 				B275F5FD24517FC0007A7340 /* UserNotifications.swift in Sources */,
-				B238434324B83B7700E548E2 /* ErrorExtension.swift in Sources */,
+				B2A15BEC2567A8BE00222717 /* Result.swift in Sources */,
 				B275F60A245196AD007A7340 /* PushNotificationModel.swift in Sources */,
-				B22DF5F42506526400777D2D /* NotificationAPI.swift in Sources */,
+				B2A15C022567A8BE00222717 /* WatchSessionManager.swift in Sources */,
+				B2A15BF82567A8BE00222717 /* LMSensorManager+SensorObservers.swift in Sources */,
 				B240815A23D8803900845AEE /* HomeViewController.swift in Sources */,
+				B2A15BFA2567A8BE00222717 /* LMSensorManager.swift in Sources */,
+				B2A15BEA2567A8BE00222717 /* Networking.swift in Sources */,
+				B2A15C122567A8BE00222717 /* LMConstants.swift in Sources */,
+				B2A15C372567FE1900222717 /* WebViewConfiguration.swift in Sources */,
+				B2A15C102567A8BE00222717 /* LMLogsManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1065,6 +1102,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B2A15C382567FE1900222717 /* WebViewConfiguration.swift in Sources */,
+				B2587B5B256E23BC00A2A7F2 /* LampURL.swift in Sources */,
+				B2587B5E256E23BC00A2A7F2 /* EndPoint.swift in Sources */,
+				B2587B52256E23BC00A2A7F2 /* UserDefaults+Extension.swift in Sources */,
 				B2D930FE2445D7E90086477D /* NotificationViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1124,7 +1165,6 @@
 /* Begin XCBuildConfiguration section */
 		B2464EE62527013700A8BB65 /* Debug (Staging) */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = B2464EF325270C9600A8BB65 /* Staging.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -1186,7 +1226,6 @@
 		};
 		B2464EE72527013700A8BB65 /* Debug (Staging) */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = B2464EF325270C9600A8BB65 /* Staging.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -1227,8 +1266,8 @@
 		};
 		B2464EE82527013700A8BB65 /* Debug (Staging) */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = B2464EF325270C9600A8BB65 /* Staging.xcconfig */;
 			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = CustomNotification/CustomNotification.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 69;
@@ -1253,7 +1292,6 @@
 		};
 		B2464EE92527013700A8BB65 /* Debug (Staging) */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = B2464EF325270C9600A8BB65 /* Staging.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
@@ -1279,7 +1317,6 @@
 		};
 		B2464EEA2527013700A8BB65 /* Debug (Staging) */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = B2464EF325270C9600A8BB65 /* Staging.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -1304,7 +1341,6 @@
 		};
 		B2464EEB2527013700A8BB65 /* Debug (Staging) */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = B2464EF325270C9600A8BB65 /* Staging.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_COMPLICATION_NAME = Complication;
 				CODE_SIGN_ENTITLEMENTS = "watchkitapp Extension/watchkitapp Extension.entitlements";
@@ -1335,7 +1371,6 @@
 		};
 		B2464EEC2527015100A8BB65 /* Release (Staging) */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = B2464EF325270C9600A8BB65 /* Staging.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -1391,7 +1426,6 @@
 		};
 		B2464EED2527015100A8BB65 /* Release (Staging) */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = B2464EF325270C9600A8BB65 /* Staging.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -1431,8 +1465,8 @@
 		};
 		B2464EEE2527015100A8BB65 /* Release (Staging) */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = B2464EF325270C9600A8BB65 /* Staging.xcconfig */;
 			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = CustomNotification/CustomNotification.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 69;
@@ -1457,7 +1491,6 @@
 		};
 		B2464EEF2527015100A8BB65 /* Release (Staging) */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = B2464EF325270C9600A8BB65 /* Staging.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
@@ -1483,7 +1516,6 @@
 		};
 		B2464EF02527015100A8BB65 /* Release (Staging) */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = B2464EF325270C9600A8BB65 /* Staging.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -1508,7 +1540,6 @@
 		};
 		B2464EF12527015100A8BB65 /* Release (Staging) */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = B2464EF325270C9600A8BB65 /* Staging.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_COMPLICATION_NAME = Complication;
 				CODE_SIGN_ENTITLEMENTS = "watchkitapp Extension/watchkitapp Extension.entitlements";
@@ -1539,7 +1570,6 @@
 		};
 		B2704DFE24B4A2AC00DE196B /* Debug (Production) */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = B2464EF625270DD500A8BB65 /* Production.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -1564,7 +1594,6 @@
 		};
 		B2704DFF24B4A2AC00DE196B /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = B2464EF625270DD500A8BB65 /* Production.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -1589,7 +1618,6 @@
 		};
 		B2704E0124B4A2AC00DE196B /* Debug (Production) */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = B2464EF625270DD500A8BB65 /* Production.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_COMPLICATION_NAME = Complication;
 				CODE_SIGN_ENTITLEMENTS = "watchkitapp Extension/watchkitapp Extension.entitlements";
@@ -1620,7 +1648,6 @@
 		};
 		B2704E0224B4A2AC00DE196B /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = B2464EF625270DD500A8BB65 /* Production.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_COMPLICATION_NAME = Complication;
 				CODE_SIGN_ENTITLEMENTS = "watchkitapp Extension/watchkitapp Extension.entitlements";
@@ -1651,7 +1678,6 @@
 		};
 		B2847FBC2450550E0042D43B /* Debug (Production) */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = B2464EF625270DD500A8BB65 /* Production.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
@@ -1677,7 +1703,6 @@
 		};
 		B2847FBD2450550E0042D43B /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = B2464EF625270DD500A8BB65 /* Production.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
@@ -1703,7 +1728,6 @@
 		};
 		B29639DF23BDC28200626E1A /* Debug (Production) */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = B2464EF625270DD500A8BB65 /* Production.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -1765,7 +1789,6 @@
 		};
 		B29639E023BDC28200626E1A /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = B2464EF625270DD500A8BB65 /* Production.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -1821,7 +1844,6 @@
 		};
 		B29639E223BDC28200626E1A /* Debug (Production) */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = B2464EF625270DD500A8BB65 /* Production.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -1862,7 +1884,6 @@
 		};
 		B29639E323BDC28200626E1A /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = B2464EF625270DD500A8BB65 /* Production.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -1902,8 +1923,8 @@
 		};
 		B2D931072445D7E90086477D /* Debug (Production) */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = B2464EF625270DD500A8BB65 /* Production.xcconfig */;
 			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = CustomNotification/CustomNotification.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 69;
@@ -1928,8 +1949,8 @@
 		};
 		B2D931082445D7E90086477D /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = B2464EF625270DD500A8BB65 /* Production.xcconfig */;
 			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = CustomNotification/CustomNotification.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 69;

@@ -13,10 +13,8 @@ class NotificationViewController: UIViewController, UNNotificationContentExtensi
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // Do any required interface initialization here.
-        let webConfiguration = WKWebViewConfiguration()
-        let webView = WKWebView(frame: .zero, configuration: webConfiguration)
-        webConfiguration.dataDetectorTypes =  WKDataDetectorTypes.all
+        let configuration = WebConfiguration.getWebViewConfiguration()
+        let webView = WKWebView(frame: CGRect.zero, configuration: configuration)
         self.webContainer.addSubview(webView)
         
         //Add Constraints
@@ -37,32 +35,35 @@ class NotificationViewController: UIViewController, UNNotificationContentExtensi
         wkWebView = webView
     }
     
+    override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
+    }
+    
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        //webContainerHeight.constant = webContainer.frame.size.width - 35
-        
     }
     
     func didReceive(_ notification: UNNotification) {
+        
+        self.preferredContentSize = CGSize(width: UIScreen.main.bounds.size.width, height: UIScreen.main.bounds.size.height - 120)
+        self.view.setNeedsUpdateConstraints()
+        self.view.setNeedsLayout()
+        
         let content = notification.request.content
-        guard let urlImageString = content.userInfo["page"] as? String, let url = URL(string: urlImageString) else {
-            return
+        if let page = content.userInfo["page"] as? String, let pageURL = URL(string: Endpoint.appendURLTokenTo(urlString: page)) {
+            wkWebView.load(URLRequest(url: pageURL))
         }
-        wkWebView.load(URLRequest(url: url))
     }
-    
 }
 
 // MARK: - UIWebViewDelegate
 extension NotificationViewController: WKNavigationDelegate {
     
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
-        print("webView finish")
         activityIndicator.stopAnimating()
     }
     
     func webView(_ webView: WKWebView, didFail navigation: WKNavigation!, withError error: Error) {
-        print("webView err")
         activityIndicator.stopAnimating()
     }
     
