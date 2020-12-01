@@ -225,7 +225,6 @@
 /* Begin PBXFileReference section */
 		5F763010242386AA00B2DD03 /* Localizable.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
 		5FC0151223C5A85300990506 /* mindLAMP-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "mindLAMP-Bridging-Header.h"; sourceTree = "<group>"; };
-		B2021CC4256FD91300732C77 /* LAMP-swift */ = {isa = PBXFileReference; lastKnownFileType = folder; name = "LAMP-swift"; path = "../../../GIT/LAMP-swift"; sourceTree = "<group>"; };
 		B2073F0E256EC29C0068E001 /* AppColors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppColors.swift; sourceTree = "<group>"; };
 		B22DF5F1250612E800777D2D /* UserAgentExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAgentExtension.swift; sourceTree = "<group>"; };
 		B238434624B848F300E548E2 /* LMRunningBuffer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LMRunningBuffer.swift; sourceTree = "<group>"; };
@@ -564,7 +563,6 @@
 		B29639C423BDC28100626E1A = {
 			isa = PBXGroup;
 			children = (
-				B2021CC4256FD91300732C77 /* LAMP-swift */,
 				B2587B49256E23BC00A2A7F2 /* Shared */,
 				B2A15BB22567A8BE00222717 /* SharedToWatchExt */,
 				B2E6A565256F195000E2CBC8 /* SharedToNotificationContent */,

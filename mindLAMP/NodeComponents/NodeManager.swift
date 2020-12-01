@@ -1,9 +1,8 @@
 //
 //  NodeManager.swift
-//  lampv2
+//  mindLAMP Consortium
 //
 //  Created by ZCo Engg Dept on 03/01/20.
-//  Copyright © 2020 lamp. All rights reserved.
 // https://code.janeasystems.com/nodejs-mobile/getting-started-ios
 
 import Foundation
