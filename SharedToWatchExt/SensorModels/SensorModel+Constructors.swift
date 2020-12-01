@@ -43,6 +43,11 @@ extension SensorDataModel {
         self.z = magneticField.z
     }
     
+    init(activityData: CMMotionActivity) {
+       
+        self.activity = Activity(activity: activityData)
+    }
+    
     init(motionData: MotionData) {
         
         //User Acceleration
@@ -65,4 +70,27 @@ extension SensorDataModel {
         let attitude = Attitude(roll: motionData.deviceAttitude.roll, pitch: motionData.deviceAttitude.pitch, yaw: motionData.deviceAttitude.yaw)
         self.attitude = attitude
     }
+}
+
+extension Activity {
+    init(activity: CMMotionActivity) {
+        self.cycling = activity.cycling
+        self.running = activity.running
+        self.walking = activity.walking
+        self.stationary = activity.stationary
+        self.in_car = activity.automotive
+        self.unknown = activity.unknown
+        switch activity.confidence {
+        case .low:
+            self.confidence = 0.0
+        case .medium:
+            self.confidence = 0.5
+        case.high:
+            self.confidence = 1.0
+        @unknown default:
+            self.confidence = 0.0
+        }
+        ////start_date: UInt64(activityData.startDate.timeInMilliSeconds)
+    }
+    
 }

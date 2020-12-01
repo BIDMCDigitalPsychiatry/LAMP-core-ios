@@ -60,6 +60,8 @@ struct SensorDataModel: Codable {
     var magnetic: Magnetic?
     var rotation: Rotational?
     var attitude: Attitude?
+    var activity: Activity?
+    
     //Health
     var unit: String?
     var value: Double?
@@ -102,6 +104,8 @@ struct SensorDataModel: Codable {
         case magnetic
         case rotation
         case attitude
+        
+        case activity
         //Health
 //        var unit: String?
         case value
@@ -160,4 +164,16 @@ struct Magnetic: Codable {
     var x: Double?
     var y: Double?
     var z: Double?
+}
+
+struct Activity: Codable {
+    var stationary: Bool?
+    var walking: Bool?
+    var running: Bool?
+    var in_car: Bool?
+    var cycling: Bool?
+    var unknown: Bool?
+    
+    //var start_date: UInt64?
+    var confidence: Double?
 }

@@ -53,6 +53,17 @@ extension LMSensorManager: SensorStore {
     }
 }
 
+// MARK:- ActivitySensorObserver
+extension LMSensorManager: ActivitySensorObserver {
+    
+    func onDataChanged(data: ActivityData) {
+        queueActivityData.async(flags: .barrier) {
+            print("ActivityData = \(data.activity)")
+            self.activityDataBuffer.append(data)
+        }
+    }
+}
+
 // MARK:- AccelerometerObserver
 extension LMSensorManager: AccelerometerObserver {
     
