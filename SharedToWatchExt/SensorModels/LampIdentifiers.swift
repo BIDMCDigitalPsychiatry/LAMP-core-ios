@@ -26,6 +26,7 @@ public enum SensorType: LampDataKeysProtocol {
     case lamp_segment
     case lamp_sms
     case lamp_wifi
+    case lamp_Activity
     
     //CMPedometerData
     case lamp_flights_up
@@ -100,6 +101,8 @@ public enum SensorType: LampDataKeysProtocol {
             return "lamp.current_cadence"
         case .lamp_avgActivePace:
             return "lamp.avg_active_pace"
+        case .lamp_Activity:
+            return "lamp.activity_recognition"
         }
     }
 }

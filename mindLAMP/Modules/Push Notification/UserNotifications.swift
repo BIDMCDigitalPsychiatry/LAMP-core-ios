@@ -44,7 +44,7 @@ class NotificationHelper: NSObject {
         guard let userInfo = timer.userInfo as? [AnyHashable : Any] else { return }
         let pushInfo = PushUserInfo(userInfo: userInfo)
         if let identifier = pushInfo.identifier {
-            printToFile("\n exe remove noti")
+            printToFile("\n exe remove noti \(identifier)")
             print("\n exe remove noti")
             removeNotification(identifier: identifier)
         }
@@ -153,8 +153,7 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
         pushInfo.setDeliveredTime()
         
         if let livingTime = pushInfo.expireMilliSeconds, pushInfo.identifier != nil {
-            printToFile("\n schedule timer")
-            print("\n schedule timer")
+            printToFile("\n schedule timer for \(pushInfo.identifier!) = \(livingTime/1000.0)")
             Timer.scheduledTimer(timeInterval: livingTime/1000.0, target: NotificationHelper.shared, selector: #selector(NotificationHelper.shared.fireNotificationExpire), userInfo: userInfo, repeats: false)
             //timer.tolerance = 0.2
         }
@@ -167,6 +166,8 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
         lampAPI.sendPushAcknowledgement(request: acknoledgeRequest) {
             completionHandler(UIBackgroundFetchResult.noData)
         }
+        
+        LMSensorManager.shared.checkIsRunning()
     }
 
     // The method will be called on the delegate when the user responded to the notification by opening the application, dismissing the notification or choosing a UNNotificationAction.
@@ -193,6 +194,13 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
                }))
             appdelegate.window?.rootViewController?.present(alert, animated: true, completion: nil)
         } else {
+            
+//            let deliveredTime = UserDefaults.standard.getTimestampForNotificationId(nId: pushInfo.notificationId ?? "")
+//            let appdelegate = UIApplication.shared.delegate as! AppDelegate
+//            let alert = UIAlertController(title: pushInfo.identifier, message: "\(deliveredTime) + \(pushInfo.expireMilliSeconds)", preferredStyle: .alert)
+//            alert.addAction(UIAlertAction(title: "alert.button.ok".localized, style: .destructive, handler: { action in
+//               }))
+//            appdelegate.window?.rootViewController?.present(alert, animated: true, completion: nil)
             
             switch action {
             case .openAppNoWebView, .openApp, .defaultTap:

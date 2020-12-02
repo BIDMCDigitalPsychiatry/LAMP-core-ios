@@ -1,9 +1,8 @@
 //
 //  ComplicationController.swift
-//  ter WatchKit Extension
+//  mindLAMP Consortium
 //
-//  Created by Jijo Pulikkottil on 09/10/20.
-//  Copyright © 2020 MVoc. All rights reserved.
+//  Created by Zco Engineer on 09/10/20.
 //
 
 import ClockKit

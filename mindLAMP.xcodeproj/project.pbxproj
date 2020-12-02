@@ -8,10 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		5F763011242386AA00B2DD03 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 5F763010242386AA00B2DD03 /* Localizable.strings */; };
-		B2010FA12525F4A90075D0F8 /* AppColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2010FA02525F4A90075D0F8 /* AppColors.swift */; };
-		B2010FA22525F4A90075D0F8 /* AppColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2010FA02525F4A90075D0F8 /* AppColors.swift */; };
 		B2040D7E2564ECB60027D671 /* Sensors in Frameworks */ = {isa = PBXBuildFile; productRef = B2040D7D2564ECB60027D671 /* Sensors */; };
 		B2040D802564ECC90027D671 /* Sensors in Frameworks */ = {isa = PBXBuildFile; productRef = B2040D7F2564ECC90027D671 /* Sensors */; };
+		B2073F0F256EC29C0068E001 /* AppColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2073F0E256EC29C0068E001 /* AppColors.swift */; };
 		B22DF5F2250612E800777D2D /* UserAgentExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B22DF5F1250612E800777D2D /* UserAgentExtension.swift */; };
 		B238434924B848F300E548E2 /* LMRunningBuffer.swift in Sources */ = {isa = PBXBuildFile; fileRef = B238434624B848F300E548E2 /* LMRunningBuffer.swift */; };
 		B23993BA2440696800E31B06 /* exportOptions.plist in Resources */ = {isa = PBXBuildFile; fileRef = B23993B92440696800E31B06 /* exportOptions.plist */; };
@@ -118,8 +117,6 @@
 		B2A15C192567A8BE00222717 /* AsynchronousOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2A15BDA2567A8BE00222717 /* AsynchronousOperation.swift */; };
 		B2A15C1A2567A8BE00222717 /* SharingInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2A15BDB2567A8BE00222717 /* SharingInfo.swift */; };
 		B2A15C1B2567A8BE00222717 /* SharingInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2A15BDB2567A8BE00222717 /* SharingInfo.swift */; };
-		B2A15C372567FE1900222717 /* WebViewConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2A15C362567FE1900222717 /* WebViewConfiguration.swift */; };
-		B2A15C382567FE1900222717 /* WebViewConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2A15C362567FE1900222717 /* WebViewConfiguration.swift */; };
 		B2B8935223D0AD6500321C3E /* DateExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2B8935023D0AD6500321C3E /* DateExtension.swift */; };
 		B2B8979823D0ADBA00321C3E /* HealthKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B2B8979723D0ADBA00321C3E /* HealthKit.framework */; };
 		B2C831F025306F6600E6A8A2 /* ComplicationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2C831EF25306F6600E6A8A2 /* ComplicationController.swift */; };
@@ -130,6 +127,12 @@
 		B2D930FE2445D7E90086477D /* NotificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2D930FD2445D7E90086477D /* NotificationViewController.swift */; };
 		B2D931012445D7E90086477D /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B2D930FF2445D7E90086477D /* MainInterface.storyboard */; };
 		B2D931052445D7E90086477D /* CustomNotification.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = B2D930F72445D7E90086477D /* CustomNotification.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		B2E6A560256F11A300E2CBC8 /* UIDeviceExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2E6A55F256F11A300E2CBC8 /* UIDeviceExtension.swift */; };
+		B2E6A561256F11A300E2CBC8 /* UIDeviceExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2E6A55F256F11A300E2CBC8 /* UIDeviceExtension.swift */; };
+		B2E6A563256F137100E2CBC8 /* BatteryState.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2E6A562256F137100E2CBC8 /* BatteryState.swift */; };
+		B2E6A564256F137100E2CBC8 /* BatteryState.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2E6A562256F137100E2CBC8 /* BatteryState.swift */; };
+		B2E6A567256F195000E2CBC8 /* WebViewConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2E6A566256F195000E2CBC8 /* WebViewConfiguration.swift */; };
+		B2E6A568256F195000E2CBC8 /* WebViewConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2E6A566256F195000E2CBC8 /* WebViewConfiguration.swift */; };
 		B2EE003024EE43760037DD9C /* FileDownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2EE002F24EE43760037DD9C /* FileDownloader.swift */; };
 		B2F3CDF6245932B200F211A3 /* StoryboardExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2F3CDF5245932B200F211A3 /* StoryboardExtension.swift */; };
 		B2F70D2E253EAA2E00D70091 /* watchkitextension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = B2704DE224B4A2AC00DE196B /* watchkitextension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
@@ -222,7 +225,7 @@
 /* Begin PBXFileReference section */
 		5F763010242386AA00B2DD03 /* Localizable.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
 		5FC0151223C5A85300990506 /* mindLAMP-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "mindLAMP-Bridging-Header.h"; sourceTree = "<group>"; };
-		B2010FA02525F4A90075D0F8 /* AppColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppColors.swift; sourceTree = "<group>"; };
+		B2073F0E256EC29C0068E001 /* AppColors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppColors.swift; sourceTree = "<group>"; };
 		B22DF5F1250612E800777D2D /* UserAgentExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAgentExtension.swift; sourceTree = "<group>"; };
 		B238434624B848F300E548E2 /* LMRunningBuffer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LMRunningBuffer.swift; sourceTree = "<group>"; };
 		B238435F24B8989E00E548E2 /* watchkitapp Extension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "watchkitapp Extension.entitlements"; sourceTree = "<group>"; };
@@ -301,7 +304,6 @@
 		B2A15BD92567A8BE00222717 /* BackgroundServices.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BackgroundServices.swift; sourceTree = "<group>"; };
 		B2A15BDA2567A8BE00222717 /* AsynchronousOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AsynchronousOperation.swift; sourceTree = "<group>"; };
 		B2A15BDB2567A8BE00222717 /* SharingInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SharingInfo.swift; sourceTree = "<group>"; };
-		B2A15C362567FE1900222717 /* WebViewConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewConfiguration.swift; sourceTree = "<group>"; };
 		B2B8935023D0AD6500321C3E /* DateExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateExtension.swift; sourceTree = "<group>"; };
 		B2B8979523D0ADBA00321C3E /* mindLAMP.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = mindLAMP.entitlements; sourceTree = "<group>"; };
 		B2B8979723D0ADBA00321C3E /* HealthKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HealthKit.framework; path = System/Library/Frameworks/HealthKit.framework; sourceTree = SDKROOT; };
@@ -314,6 +316,9 @@
 		B2D930FD2445D7E90086477D /* NotificationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationViewController.swift; sourceTree = "<group>"; };
 		B2D931002445D7E90086477D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainInterface.storyboard; sourceTree = "<group>"; };
 		B2D931022445D7E90086477D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B2E6A55F256F11A300E2CBC8 /* UIDeviceExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIDeviceExtension.swift; sourceTree = "<group>"; };
+		B2E6A562256F137100E2CBC8 /* BatteryState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BatteryState.swift; sourceTree = "<group>"; };
+		B2E6A566256F195000E2CBC8 /* WebViewConfiguration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebViewConfiguration.swift; sourceTree = "<group>"; };
 		B2EE002F24EE43760037DD9C /* FileDownloader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileDownloader.swift; sourceTree = "<group>"; };
 		B2F3CDF5245932B200F211A3 /* StoryboardExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoryboardExtension.swift; sourceTree = "<group>"; };
 		B2FDA83124BF744D000316EE /* ContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -356,14 +361,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		5FF29328242239DA00D0BE09 /* Common */ = {
-			isa = PBXGroup;
-			children = (
-				B2010FA02525F4A90075D0F8 /* AppColors.swift */,
-			);
-			path = Common;
-			sourceTree = "<group>";
-		};
 		B238434524B848F300E548E2 /* SensorManager */ = {
 			isa = PBXGroup;
 			children = (
@@ -376,16 +373,9 @@
 		B240814323D8803900845AEE /* AppComponents */ = {
 			isa = PBXGroup;
 			children = (
-				5FF29328242239DA00D0BE09 /* Common */,
+				B2073F0E256EC29C0068E001 /* AppColors.swift */,
 			);
 			path = AppComponents;
-			sourceTree = "<group>";
-		};
-		B240814D23D8803900845AEE /* CoreComponents */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = CoreComponents;
 			sourceTree = "<group>";
 		};
 		B244A1C023BF4A77007FBDB8 /* Extensions */ = {
@@ -575,7 +565,7 @@
 			children = (
 				B2587B49256E23BC00A2A7F2 /* Shared */,
 				B2A15BB22567A8BE00222717 /* SharedToWatchExt */,
-				B2A15BAC2567A8A600222717 /* SharedToWatchAndNotification */,
+				B2E6A565256F195000E2CBC8 /* SharedToNotificationContent */,
 				B29639CF23BDC28100626E1A /* mindLAMP */,
 				B2D930FC2445D7E90086477D /* CustomNotification */,
 				B2847FB52450550E0042D43B /* NotificationService */,
@@ -604,7 +594,6 @@
 				B2962FC924ADECB700C1D598 /* NodeComponents */,
 				B275F5FA24517F74007A7340 /* Modules */,
 				B240814323D8803900845AEE /* AppComponents */,
-				B240814D23D8803900845AEE /* CoreComponents */,
 				B244A1C023BF4A77007FBDB8 /* Extensions */,
 				B29639D023BDC28100626E1A /* AppDelegate.swift */,
 				B29639D623BDC28200626E1A /* Assets.xcassets */,
@@ -627,17 +616,10 @@
 			path = "Preview Content";
 			sourceTree = "<group>";
 		};
-		B2A15BAC2567A8A600222717 /* SharedToWatchAndNotification */ = {
-			isa = PBXGroup;
-			children = (
-				B2A15C362567FE1900222717 /* WebViewConfiguration.swift */,
-			);
-			path = SharedToWatchAndNotification;
-			sourceTree = "<group>";
-		};
 		B2A15BB22567A8BE00222717 /* SharedToWatchExt */ = {
 			isa = PBXGroup;
 			children = (
+				B2E6A55B256F112E00E2CBC8 /* CoreComponents */,
 				B2A15BB32567A8BE00222717 /* PushNotificationAPI */,
 				B2A15BB62567A8BE00222717 /* SensorModels */,
 				B2A15BBB2567A8BE00222717 /* Network */,
@@ -706,6 +688,7 @@
 		B2A15BCA2567A8BE00222717 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				B2E6A55F256F11A300E2CBC8 /* UIDeviceExtension.swift */,
 				B2A15BCB2567A8BE00222717 /* StringExtension.swift */,
 			);
 			path = Extensions;
@@ -761,6 +744,22 @@
 				B2D931022445D7E90086477D /* Info.plist */,
 			);
 			path = CustomNotification;
+			sourceTree = "<group>";
+		};
+		B2E6A55B256F112E00E2CBC8 /* CoreComponents */ = {
+			isa = PBXGroup;
+			children = (
+				B2E6A562256F137100E2CBC8 /* BatteryState.swift */,
+			);
+			path = CoreComponents;
+			sourceTree = "<group>";
+		};
+		B2E6A565256F195000E2CBC8 /* SharedToNotificationContent */ = {
+			isa = PBXGroup;
+			children = (
+				B2E6A566256F195000E2CBC8 /* WebViewConfiguration.swift */,
+			);
+			path = SharedToNotificationContent;
 			sourceTree = "<group>";
 		};
 		B2FDA83024BF744D000316EE /* Views */ = {
@@ -994,6 +993,7 @@
 				B2A15BF32567A8BE00222717 /* ErrorExtension.swift in Sources */,
 				B2A15BFF2567A8BE00222717 /* User.swift in Sources */,
 				B238434924B848F300E548E2 /* LMRunningBuffer.swift in Sources */,
+				B2E6A564256F137100E2CBC8 /* BatteryState.swift in Sources */,
 				B2A15BDD2567A8BE00222717 /* NotificationAPI.swift in Sources */,
 				B255116524B6202300CDBDD1 /* WatchNotificationModel.swift in Sources */,
 				B2A15C132567A8BE00222717 /* LMConstants.swift in Sources */,
@@ -1014,6 +1014,7 @@
 				B2587B5F256E23BC00A2A7F2 /* EndPoint.swift in Sources */,
 				B2A15C012567A8BE00222717 /* StringExtension.swift in Sources */,
 				B2A15C112567A8BE00222717 /* LMLogsManager.swift in Sources */,
+				B2E6A561256F11A300E2CBC8 /* UIDeviceExtension.swift in Sources */,
 				B2D2CA6625503AAE0086C864 /* WatchOSDelegate.swift in Sources */,
 				B255116C24B6291900CDBDD1 /* LoginServices.swift in Sources */,
 				B2A15BEF2567A8BE00222717 /* NetworkingAPI.swift in Sources */,
@@ -1027,7 +1028,6 @@
 				B2A15C0F2567A8BE00222717 /* LogsModel.swift in Sources */,
 				B2A15C092567A8BE00222717 /* Logging.swift in Sources */,
 				B2A15BE52567A8BE00222717 /* SensorModel.swift in Sources */,
-				B2010FA22525F4A90075D0F8 /* AppColors.swift in Sources */,
 				B2C831F025306F6600E6A8A2 /* ComplicationController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1046,7 +1046,6 @@
 			files = (
 				B2A15BE42567A8BE00222717 /* SensorModel.swift in Sources */,
 				B2458A5E2555128B0078D427 /* LeakAvoider.swift in Sources */,
-				B2010FA12525F4A90075D0F8 /* AppColors.swift in Sources */,
 				B2B8935223D0AD6500321C3E /* DateExtension.swift in Sources */,
 				B2A15C0E2567A8BE00222717 /* LogsModel.swift in Sources */,
 				B22DF5F2250612E800777D2D /* UserAgentExtension.swift in Sources */,
@@ -1063,6 +1062,7 @@
 				B2A15C002567A8BE00222717 /* StringExtension.swift in Sources */,
 				B2A15C142567A8BE00222717 /* BackgroundOperation.swift in Sources */,
 				B2A15BE02567A8BE00222717 /* LampIdentifiersHealthKit.swift in Sources */,
+				B2E6A567256F195000E2CBC8 /* WebViewConfiguration.swift in Sources */,
 				B2A15BDC2567A8BE00222717 /* NotificationAPI.swift in Sources */,
 				B275F60224518106007A7340 /* HomeWebViewModel.swift in Sources */,
 				B2587B5A256E23BC00A2A7F2 /* LampURL.swift in Sources */,
@@ -1075,9 +1075,12 @@
 				B26A2A3324EBCCA400BCB043 /* VersionCheckViewModel.swift in Sources */,
 				B2EE003024EE43760037DD9C /* FileDownloader.swift in Sources */,
 				B2A15BF62567A8BE00222717 /* NetworkConfig.swift in Sources */,
+				B2073F0F256EC29C0068E001 /* AppColors.swift in Sources */,
+				B2E6A560256F11A300E2CBC8 /* UIDeviceExtension.swift in Sources */,
 				B2A15BE22567A8BE00222717 /* SensorModel+Constructors.swift in Sources */,
 				B2A15BF22567A8BE00222717 /* ErrorExtension.swift in Sources */,
 				B2A15BFC2567A8BE00222717 /* AppInfo.swift in Sources */,
+				B2E6A563256F137100E2CBC8 /* BatteryState.swift in Sources */,
 				B26A2A2B24EBC6E900BCB043 /* VersionCheckViewController.swift in Sources */,
 				B2587B51256E23BC00A2A7F2 /* UserDefaults+Extension.swift in Sources */,
 				B2A15C1A2567A8BE00222717 /* SharingInfo.swift in Sources */,
@@ -1093,7 +1096,6 @@
 				B2A15BFA2567A8BE00222717 /* LMSensorManager.swift in Sources */,
 				B2A15BEA2567A8BE00222717 /* Networking.swift in Sources */,
 				B2A15C122567A8BE00222717 /* LMConstants.swift in Sources */,
-				B2A15C372567FE1900222717 /* WebViewConfiguration.swift in Sources */,
 				B2A15C102567A8BE00222717 /* LMLogsManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1102,8 +1104,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B2A15C382567FE1900222717 /* WebViewConfiguration.swift in Sources */,
 				B2587B5B256E23BC00A2A7F2 /* LampURL.swift in Sources */,
+				B2E6A568256F195000E2CBC8 /* WebViewConfiguration.swift in Sources */,
 				B2587B5E256E23BC00A2A7F2 /* EndPoint.swift in Sources */,
 				B2587B52256E23BC00A2A7F2 /* UserDefaults+Extension.swift in Sources */,
 				B2D930FE2445D7E90086477D /* NotificationViewController.swift in Sources */,
@@ -1165,6 +1167,7 @@
 /* Begin XCBuildConfiguration section */
 		B2464EE62527013700A8BB65 /* Debug (Staging) */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = B2587B4D256E23BC00A2A7F2 /* Staging.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -1226,6 +1229,7 @@
 		};
 		B2464EE72527013700A8BB65 /* Debug (Staging) */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = B2587B4D256E23BC00A2A7F2 /* Staging.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -1233,7 +1237,7 @@
 				CODE_SIGN_ENTITLEMENTS = mindLAMP/mindLAMP.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 69;
+				CURRENT_PROJECT_VERSION = 70;
 				DEVELOPMENT_ASSET_PATHS = "\"mindLAMP/Preview Content\"";
 				DEVELOPMENT_TEAM = S2Y2D4239K;
 				ENABLE_BITCODE = NO;
@@ -1266,11 +1270,12 @@
 		};
 		B2464EE82527013700A8BB65 /* Debug (Staging) */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = B2587B4D256E23BC00A2A7F2 /* Staging.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = CustomNotification/CustomNotification.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 69;
+				CURRENT_PROJECT_VERSION = 70;
 				DEVELOPMENT_TEAM = S2Y2D4239K;
 				INFOPLIST_FILE = CustomNotification/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
@@ -1292,10 +1297,11 @@
 		};
 		B2464EE92527013700A8BB65 /* Debug (Staging) */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = B2587B4D256E23BC00A2A7F2 /* Staging.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 69;
+				CURRENT_PROJECT_VERSION = 70;
 				DEVELOPMENT_TEAM = S2Y2D4239K;
 				INFOPLIST_FILE = NotificationService/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
@@ -1317,12 +1323,13 @@
 		};
 		B2464EEA2527013700A8BB65 /* Debug (Staging) */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = B2587B4D256E23BC00A2A7F2 /* Staging.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 69;
+				CURRENT_PROJECT_VERSION = 70;
 				DEVELOPMENT_TEAM = S2Y2D4239K;
 				IBSC_MODULE = "$(PRODUCT_MODULE_NAME)";
 				INFOPLIST_FILE = watchkitapp/Info.plist;
@@ -1341,12 +1348,13 @@
 		};
 		B2464EEB2527013700A8BB65 /* Debug (Staging) */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = B2587B4D256E23BC00A2A7F2 /* Staging.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_COMPLICATION_NAME = Complication;
 				CODE_SIGN_ENTITLEMENTS = "watchkitapp Extension/watchkitapp Extension.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 69;
+				CURRENT_PROJECT_VERSION = 70;
 				DEVELOPMENT_ASSET_PATHS = "\"watchkitapp Extension/Preview Content\"";
 				DEVELOPMENT_TEAM = S2Y2D4239K;
 				ENABLE_PREVIEWS = YES;
@@ -1371,6 +1379,7 @@
 		};
 		B2464EEC2527015100A8BB65 /* Release (Staging) */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = B2587B4D256E23BC00A2A7F2 /* Staging.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -1426,6 +1435,7 @@
 		};
 		B2464EED2527015100A8BB65 /* Release (Staging) */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = B2587B4D256E23BC00A2A7F2 /* Staging.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -1433,7 +1443,7 @@
 				CODE_SIGN_ENTITLEMENTS = mindLAMP/mindLAMP.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 69;
+				CURRENT_PROJECT_VERSION = 70;
 				DEVELOPMENT_ASSET_PATHS = "\"mindLAMP/Preview Content\"";
 				DEVELOPMENT_TEAM = S2Y2D4239K;
 				ENABLE_BITCODE = NO;
@@ -1465,11 +1475,12 @@
 		};
 		B2464EEE2527015100A8BB65 /* Release (Staging) */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = B2587B4D256E23BC00A2A7F2 /* Staging.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = CustomNotification/CustomNotification.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 69;
+				CURRENT_PROJECT_VERSION = 70;
 				DEVELOPMENT_TEAM = S2Y2D4239K;
 				INFOPLIST_FILE = CustomNotification/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
@@ -1491,10 +1502,11 @@
 		};
 		B2464EEF2527015100A8BB65 /* Release (Staging) */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = B2587B4D256E23BC00A2A7F2 /* Staging.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 69;
+				CURRENT_PROJECT_VERSION = 70;
 				DEVELOPMENT_TEAM = S2Y2D4239K;
 				INFOPLIST_FILE = NotificationService/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
@@ -1516,12 +1528,13 @@
 		};
 		B2464EF02527015100A8BB65 /* Release (Staging) */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = B2587B4D256E23BC00A2A7F2 /* Staging.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 69;
+				CURRENT_PROJECT_VERSION = 70;
 				DEVELOPMENT_TEAM = S2Y2D4239K;
 				IBSC_MODULE = "$(PRODUCT_MODULE_NAME)";
 				INFOPLIST_FILE = watchkitapp/Info.plist;
@@ -1540,12 +1553,13 @@
 		};
 		B2464EF12527015100A8BB65 /* Release (Staging) */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = B2587B4D256E23BC00A2A7F2 /* Staging.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_COMPLICATION_NAME = Complication;
 				CODE_SIGN_ENTITLEMENTS = "watchkitapp Extension/watchkitapp Extension.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 69;
+				CURRENT_PROJECT_VERSION = 70;
 				DEVELOPMENT_ASSET_PATHS = "\"watchkitapp Extension/Preview Content\"";
 				DEVELOPMENT_TEAM = S2Y2D4239K;
 				ENABLE_PREVIEWS = YES;
@@ -1570,12 +1584,13 @@
 		};
 		B2704DFE24B4A2AC00DE196B /* Debug (Production) */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = B2587B4E256E23BC00A2A7F2 /* Production.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 69;
+				CURRENT_PROJECT_VERSION = 70;
 				DEVELOPMENT_TEAM = S2Y2D4239K;
 				IBSC_MODULE = "$(PRODUCT_MODULE_NAME)";
 				INFOPLIST_FILE = watchkitapp/Info.plist;
@@ -1594,12 +1609,13 @@
 		};
 		B2704DFF24B4A2AC00DE196B /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = B2587B4E256E23BC00A2A7F2 /* Production.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 69;
+				CURRENT_PROJECT_VERSION = 70;
 				DEVELOPMENT_TEAM = S2Y2D4239K;
 				IBSC_MODULE = "$(PRODUCT_MODULE_NAME)";
 				INFOPLIST_FILE = watchkitapp/Info.plist;
@@ -1618,12 +1634,13 @@
 		};
 		B2704E0124B4A2AC00DE196B /* Debug (Production) */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = B2587B4E256E23BC00A2A7F2 /* Production.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_COMPLICATION_NAME = Complication;
 				CODE_SIGN_ENTITLEMENTS = "watchkitapp Extension/watchkitapp Extension.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 69;
+				CURRENT_PROJECT_VERSION = 70;
 				DEVELOPMENT_ASSET_PATHS = "\"watchkitapp Extension/Preview Content\"";
 				DEVELOPMENT_TEAM = S2Y2D4239K;
 				ENABLE_PREVIEWS = YES;
@@ -1648,12 +1665,13 @@
 		};
 		B2704E0224B4A2AC00DE196B /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = B2587B4E256E23BC00A2A7F2 /* Production.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_COMPLICATION_NAME = Complication;
 				CODE_SIGN_ENTITLEMENTS = "watchkitapp Extension/watchkitapp Extension.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 69;
+				CURRENT_PROJECT_VERSION = 70;
 				DEVELOPMENT_ASSET_PATHS = "\"watchkitapp Extension/Preview Content\"";
 				DEVELOPMENT_TEAM = S2Y2D4239K;
 				ENABLE_PREVIEWS = YES;
@@ -1678,10 +1696,11 @@
 		};
 		B2847FBC2450550E0042D43B /* Debug (Production) */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = B2587B4E256E23BC00A2A7F2 /* Production.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 69;
+				CURRENT_PROJECT_VERSION = 70;
 				DEVELOPMENT_TEAM = S2Y2D4239K;
 				INFOPLIST_FILE = NotificationService/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
@@ -1703,10 +1722,11 @@
 		};
 		B2847FBD2450550E0042D43B /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = B2587B4E256E23BC00A2A7F2 /* Production.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 69;
+				CURRENT_PROJECT_VERSION = 70;
 				DEVELOPMENT_TEAM = S2Y2D4239K;
 				INFOPLIST_FILE = NotificationService/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
@@ -1728,6 +1748,7 @@
 		};
 		B29639DF23BDC28200626E1A /* Debug (Production) */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = B2587B4E256E23BC00A2A7F2 /* Production.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -1789,6 +1810,7 @@
 		};
 		B29639E023BDC28200626E1A /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = B2587B4E256E23BC00A2A7F2 /* Production.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -1844,6 +1866,7 @@
 		};
 		B29639E223BDC28200626E1A /* Debug (Production) */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = B2587B4E256E23BC00A2A7F2 /* Production.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -1851,7 +1874,7 @@
 				CODE_SIGN_ENTITLEMENTS = mindLAMP/mindLAMP.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 69;
+				CURRENT_PROJECT_VERSION = 70;
 				DEVELOPMENT_ASSET_PATHS = "\"mindLAMP/Preview Content\"";
 				DEVELOPMENT_TEAM = S2Y2D4239K;
 				ENABLE_BITCODE = NO;
@@ -1884,6 +1907,7 @@
 		};
 		B29639E323BDC28200626E1A /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = B2587B4E256E23BC00A2A7F2 /* Production.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -1891,7 +1915,7 @@
 				CODE_SIGN_ENTITLEMENTS = mindLAMP/mindLAMP.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 69;
+				CURRENT_PROJECT_VERSION = 70;
 				DEVELOPMENT_ASSET_PATHS = "\"mindLAMP/Preview Content\"";
 				DEVELOPMENT_TEAM = S2Y2D4239K;
 				ENABLE_BITCODE = NO;
@@ -1923,11 +1947,12 @@
 		};
 		B2D931072445D7E90086477D /* Debug (Production) */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = B2587B4E256E23BC00A2A7F2 /* Production.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = CustomNotification/CustomNotification.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 69;
+				CURRENT_PROJECT_VERSION = 70;
 				DEVELOPMENT_TEAM = S2Y2D4239K;
 				INFOPLIST_FILE = CustomNotification/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
@@ -1949,11 +1974,12 @@
 		};
 		B2D931082445D7E90086477D /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = B2587B4E256E23BC00A2A7F2 /* Production.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = CustomNotification/CustomNotification.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 69;
+				CURRENT_PROJECT_VERSION = 70;
 				DEVELOPMENT_TEAM = S2Y2D4239K;
 				INFOPLIST_FILE = CustomNotification/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;

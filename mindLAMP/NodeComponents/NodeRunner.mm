@@ -1,9 +1,8 @@
 //
 //  NodeRunner.m
-//  lampv2
+//  mindLAMP Consortium
 //
 //  Created by ZCO Eng. on 22/08/19.
-//  Copyright © 2019 lampv2. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>

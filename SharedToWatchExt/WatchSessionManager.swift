@@ -225,7 +225,6 @@ extension WatchSessionManager {
         #if os(iOS)
         iOSDelegate?.applicationContextReceived(tuple: (session, applicationContext))
         #elseif os(watchOS)
-        UserDefaults.standard.set("jijo0", forKey: "jijoww")
         watchOSDelegate?.applicationContextReceived(tuple: (session, applicationContext))
         #endif
     }

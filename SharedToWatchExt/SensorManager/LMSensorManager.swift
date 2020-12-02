@@ -29,6 +29,9 @@ class LMSensorManager {
     private let sensorManager = SensorManager()
     var sensor_motionManager: MotionManager?
     var sensor_location: LocationsSensor?
+    //only used in iOS now
+    var sensor_Activity: ActivitySensor?
+    
     
     // SensorData storage variables for motion sensors.
     var accelerometerDataBufffer = [AccelerometerData]()
@@ -42,6 +45,9 @@ class LMSensorManager {
     
     var motionDataBuffer = [MotionData]()
     let queueMotionData = DispatchQueue(label: "thread-safe-MotionData", attributes: .concurrent)
+    
+    var activityDataBuffer = [ActivityData]()
+    let queueActivityData = DispatchQueue(label: "thread-safe-ActivityData", attributes: .concurrent)
     
     //check if the sensors are started or not
     private var isStarted = false
@@ -111,6 +117,8 @@ class LMSensorManager {
         setUpSensorMotionManager()
         
         #if os(iOS)
+        setupActivitySensor()
+        
         setupCallsSensor()
         setupScreenSensor()
 
@@ -128,6 +136,8 @@ class LMSensorManager {
         sensor_bluetooth = nil
         sensor_healthKit = nil
         sensor_location = nil
+        
+        sensor_Activity = nil
         sensor_pedometer = nil
         #if os(iOS)
         sensor_calls = nil
@@ -144,10 +154,6 @@ class LMSensorManager {
         initiateSensors()
         printToFile("\nStarting sensors")
         sensorManager.startAllSensors()
-
-        #if os(iOS)
-        UIDevice.current.isBatteryMonitoringEnabled = true
-        #endif
     }
     
     private func refreshAllSensors() {
@@ -156,9 +162,11 @@ class LMSensorManager {
     }
     
     func startWatchSensors() {
+        #if os(iOS)
         //send a message to watch to collect sensor data
         let messageInfo: [String: Any] = [IOSCommands.sendWatchSensorEvents : true, IOSCommands.timestamp : Date().timeInMilliSeconds]
         WatchSessionManager.shared.updateApplicationContext(applicationContext: (messageInfo))
+        #endif
     }
     
     /// To stop sensors observing.
@@ -173,6 +181,7 @@ class LMSensorManager {
         deinitSensors()
         
         //clear the bufffers
+        activityDataBuffer.removeAll()
         accelerometerDataBufffer.removeAll()
         callsDataBuffer.removeAll()
         motionDataBuffer.removeAll()
@@ -238,6 +247,12 @@ private extension LMSensorManager {
         sensorManager.addSensor(sensor_location!)
     }
     
+    func setupActivitySensor() {
+        sensor_Activity = ActivitySensor()
+        sensor_Activity?.sensorObserver = self
+        sensorManager.addSensor(sensor_Activity!)
+    }
+    
     func setupPedometerSensor() {
         sensor_pedometer = PedometerSensor.init(PedometerSensor.Config().apply(closure: { config in
             config.sensorObserver = self
@@ -282,6 +297,7 @@ private extension LMSensorManager {
         arraySensorData.append(contentsOf: fetchMotionData())
         
         #if os(iOS)
+        arraySensorData.append(contentsOf: fetchActivityData())
         arraySensorData.append(contentsOf: fetchGPSData())
         arraySensorData.append(contentsOf: fetchCallsData())
         arraySensorData.append(contentsOf: fetchScreenStateData())
@@ -397,6 +413,23 @@ private extension LMSensorManager {
 
 // MARK: Other sensors data fetch
 private extension LMSensorManager {
+    
+    func fetchActivityData() -> [SensorDataInfo] {
+        
+        // read
+        var dataArray: [ActivityData]!
+        queueGyroscopeData.sync {
+            // perform read and assign value
+            dataArray = activityDataBuffer
+        }
+
+        queueActivityData.async(flags: .barrier) {
+            self.activityDataBuffer.removeAll(keepingCapacity: true)
+        }
+        
+        let sensorArray = dataArray.map { SensorDataInfo(sensor: SensorType.lamp_Activity.lampIdentifier, timestamp: $0.timestamp, data: SensorDataModel(activityData: $0.activity)) }
+        return sensorArray
+    }
     
     func fetchGPSData() -> [SensorDataInfo] {
         
@@ -647,18 +680,4 @@ private extension LMSensorManager {
     }
     
 }
-
-// MARK: Battery Logs
-extension LMSensorManager {
-    
-    public func batteryLogs() {
-        guard isBatteryLevelLow() else { return }
-        //LMLogsManager.shared.addLogs(level: .info, logs: Logs.Messages.battery_low)
-    }
-    
-    private func isBatteryLevelLow(than level: Float = 20) -> Bool {
-        return UIDevice.current.batteryLevel < level/100
-    }
-}
-
 #endif
