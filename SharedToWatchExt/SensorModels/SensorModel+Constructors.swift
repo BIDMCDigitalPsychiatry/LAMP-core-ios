@@ -37,7 +37,6 @@ extension SensorDataModel {
     }
     
     init(magneticField: CMMagneticField) {
-        print("magneticField.x = \(magneticField.x)")
         self.x = magneticField.x
         self.y = magneticField.y
         self.z = magneticField.z
