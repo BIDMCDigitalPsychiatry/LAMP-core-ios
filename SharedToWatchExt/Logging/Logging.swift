@@ -15,7 +15,6 @@ class Logging {
         set(newValue) {
             //save
             UserDefaults.standard.set(newValue, forKey: "isLogToFile")
-            UserDefaults.standard.synchronize()
         }
     }
 }
