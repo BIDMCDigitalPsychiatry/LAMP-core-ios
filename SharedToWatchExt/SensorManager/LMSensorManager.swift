@@ -655,6 +655,7 @@ private extension LMSensorManager {
                         model.value = quantityData.value
                         model.startDate = quantityData.startDate
                         model.endDate = quantityData.endDate
+                        model.source = quantityData.source //for step count only
                         return SensorDataInfo(sensor: quantityType.lampIdentifier, timestamp: Double(quantityData.timestamp), data: model)
                     }
                     arrayData.append(contentsOf: sensorDataArray)

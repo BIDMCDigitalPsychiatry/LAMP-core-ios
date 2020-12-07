@@ -50,6 +50,7 @@ struct SensorDataInfo: Codable {
 
 struct SensorDataModel: Codable {
     
+    var source: String?
     //Triaxial Values for: Accelerometer, Magnetometer, Gyroscope
     var x: Double?
     var y: Double?
@@ -96,6 +97,9 @@ struct SensorDataModel: Codable {
     var endDate: Double?
     
     enum CodingKeys: String, CodingKey {
+        
+        case source
+        
         case x
         case y
         case z
