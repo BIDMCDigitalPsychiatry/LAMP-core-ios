@@ -5,13 +5,13 @@ on:
       - AppGroups
 jobs:
   deploy:
-    name: BuildNubmer Update
+    name: BuildNubmer Incremet
     runs-on: macOS-latest
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
-	  env:
-        token: ${{ secrets.GITHUB_TOKENN }}
+        env:
+          token: ${{ secrets.GITHUB_TOKENN }}
       - uses: yanamura/ios-bump-version@v1
       - name: update
         run: |
