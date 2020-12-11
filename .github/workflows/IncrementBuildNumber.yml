@@ -1,17 +1,17 @@
-name: Deploying
+name: BuildNubmer
 on:
   push:
     branches:
       - AppGroups
 jobs:
   deploy:
-    name: Deploying to Testflight
+    name: BuildNubmer Update
     runs-on: macOS-latest
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
-	env:
-          token: ${{ secrets.GITHUB_TOKENN }}
+	  env:
+        token: ${{ secrets.GITHUB_TOKENN }}
       - uses: yanamura/ios-bump-version@v1
       - name: update
         run: |
