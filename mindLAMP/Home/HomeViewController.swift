@@ -16,7 +16,7 @@ class HomeViewController: UIViewController {
     //var isHomePageLoaded = false
     //@IBOutlet weak var containerView: UIView!
     private lazy var indicator: UIActivityIndicatorView  = {
-        let progressView = UIActivityIndicatorView(style: UIActivityIndicatorView.Style.gray)
+        let progressView = UIActivityIndicatorView(style: UIActivityIndicatorView.Style.large)
         progressView.hidesWhenStopped = true
         progressView.translatesAutoresizingMaskIntoConstraints = false
         return progressView
@@ -148,7 +148,6 @@ private extension HomeViewController {
     
     func makeWebView() -> WKWebView {
         let preferences = WKPreferences()
-        preferences.javaScriptEnabled = true
         preferences.javaScriptCanOpenWindowsAutomatically = true
         
         let configuration = WKWebViewConfiguration()

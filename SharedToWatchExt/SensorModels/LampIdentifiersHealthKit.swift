@@ -194,99 +194,44 @@ extension HKQuantityTypeIdentifier: LampDataKeysProtocol {
     }
 }
 
+#if os(iOS)
 extension HKCategoryTypeIdentifier: LampDataKeysProtocol {
     
     public var lampIdentifier: String {
         
-        if #available(iOS 13.0, *) {
-            switch self {
-            case .sleepAnalysis:
-                return "lamp.sleep"
-            case .appleStandHour:
-                return "lamp.apple_standhour"
-            case .cervicalMucusQuality:
-                return "lamp.cervical_mucusquality"
-            case .ovulationTestResult:
-                return "lamp.ovulation_testresult"
-            case .menstrualFlow:
-                return "lamp.menstrualflow"
-            case .intermenstrualBleeding:
-                return "lamp.intermenstrual_bleeding"
-            case .sexualActivity:
-                return "lamp.sexual_activity"
-            case .mindfulSession:
-                return "lamp.mindful_session"
-            case .highHeartRateEvent:
-                return "lamp.high_heartrateevent"
-            case .lowHeartRateEvent:
-                return "lamp.lowheartrate_event"
-            case .irregularHeartRhythmEvent:
-                return "lamp.irregular_heartrhythmevent"
-            case .audioExposureEvent:
-                return "lamp.audio_exposureevent"
-            case .toothbrushingEvent:
-                return "lamp.toothbrushingevent"
-            default:
-                return "lamp.\(self.rawValue)"
-            }
-        } else {
-            if #available(iOS 12.2, *) {
-                switch self {
-                case .sleepAnalysis:
-                    return "lamp.sleep"
-                case .appleStandHour:
-                    return "lamp.apple_standhour"
-                case .cervicalMucusQuality:
-                    return "lamp.cervical_mucusquality"
-                case .ovulationTestResult:
-                    return "lamp.ovulation_testresult"
-                case .menstrualFlow:
-                    return "lamp.menstrualflow"
-                case .intermenstrualBleeding:
-                    return "lamp.intermenstrual_bleeding"
-                case .sexualActivity:
-                    return "lamp.sexual_activity"
-                case .mindfulSession:
-                    return "lamp.mindful_session"
-                case .highHeartRateEvent:
-                    return "lamp.high_heartrateevent"
-                case .lowHeartRateEvent:
-                    return "lamp.lowheartrate_event"
-                case .irregularHeartRhythmEvent:
-                    return "lamp.irregular_heartrhythmevent"
-                default:
-                    return "lamp.\(self.rawValue)"
-                }
-            } else {
-                switch self {
-                case .sleepAnalysis:
-                    return "lamp.sleep"
-                case .appleStandHour:
-                    return "lamp.apple_standhour"
-                case .cervicalMucusQuality:
-                    return "lamp.cervical_mucusquality"
-                case .ovulationTestResult:
-                    return "lamp.ovulation_testresult"
-                case .menstrualFlow:
-                    return "lamp.menstrualflow"
-                case .intermenstrualBleeding:
-                    return "lamp.intermenstrual_bleeding"
-                case .sexualActivity:
-                    return "lamp.sexual_activity"
-                case .mindfulSession:
-                    return "lamp.mindful_session"
-                default:
-                    return "lamp.\(self.rawValue)"
-                }
-            }
+        switch self {
+        case .sleepAnalysis:
+            return "lamp.sleep"
+        case .appleStandHour:
+            return "lamp.apple_standhour"
+        case .cervicalMucusQuality:
+            return "lamp.cervical_mucusquality"
+        case .ovulationTestResult:
+            return "lamp.ovulation_testresult"
+        case .menstrualFlow:
+            return "lamp.menstrualflow"
+        case .intermenstrualBleeding:
+            return "lamp.intermenstrual_bleeding"
+        case .sexualActivity:
+            return "lamp.sexual_activity"
+        case .mindfulSession:
+            return "lamp.mindful_session"
+        case .highHeartRateEvent:
+            return "lamp.high_heartrateevent"
+        case .lowHeartRateEvent:
+            return "lamp.lowheartrate_event"
+        case .irregularHeartRhythmEvent:
+            return "lamp.irregular_heartrhythmevent"
+        case .environmentalAudioExposureEvent:
+            return "lamp.audio_exposureevent"
+        case .toothbrushingEvent:
+            return "lamp.toothbrushingevent"
+        default:
+            return "lamp.\(self.rawValue)"
         }
-        
-        
-        
-        
     }
 }
-
+#endif
 extension HKCharacteristicTypeIdentifier: LampDataKeysProtocol {
     
     public var lampIdentifier: String {

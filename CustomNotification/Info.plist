@@ -38,10 +38,10 @@
 			<key>UNNotificationExtensionUserInteractionEnabled</key>
 			<true/>
 		</dict>
-		<key>NSExtensionMainStoryboard</key>
-		<string>MainInterface</string>
 		<key>NSExtensionPointIdentifier</key>
 		<string>com.apple.usernotifications.content-extension</string>
+		<key>NSExtensionPrincipalClass</key>
+		<string>CustomNotification.NotificationViewController</string>
 	</dict>
 </dict>
 </plist>
