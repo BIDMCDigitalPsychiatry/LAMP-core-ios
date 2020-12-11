@@ -96,7 +96,6 @@ extension UserDefaults {
                     userDefaults.removeObject(forKey: "userid")
                 } else {
                     userDefaults.set(newValue as AnyObject, forKey: "userid")
-                    userDefaults.synchronize()
                 }
             }
         }
@@ -117,7 +116,6 @@ extension UserDefaults {
                     userDefaults.removeObject(forKey: "password")
                 } else {
                     userDefaults.set(newValue as AnyObject, forKey: "password")
-                    userDefaults.synchronize()
                 }
             }
         }
@@ -138,7 +136,6 @@ extension UserDefaults {
                     userDefaults.removeObject(forKey: "serverAddress")
                 } else {
                     userDefaults.set(newValue as AnyObject, forKey: "serverAddress")
-                    userDefaults.synchronize()
                 }
             }
         }
@@ -181,7 +178,6 @@ extension UserDefaults {
         UserDefaults.standard.removeObject(forKey: UserDefaults.Key.serverAddress.rawValue)
         UserDefaults.standard.removeObject(forKey: UserDefaults.Key.sensorRecorderTimestamp.rawValue)
         removeAllNotificationTimestamps()
-        UserDefaults.standard.synchronize()
     }
     
 //    var logData: String {

@@ -3,6 +3,7 @@
 import Foundation
 import UserNotifications
 import UIKit
+import SwiftUI
 
 class NotificationHelper: NSObject {
     
@@ -139,9 +140,9 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
     
     func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Swift.Void) {
         
+        printToFile("present userInfo = \(notification.request.content.userInfo)")
         print("present userInfo = \(notification.request.content.userInfo)")
-        //let userInfo = notification.request.content.userInfo
-        completionHandler([.alert, .badge, .sound])
+        completionHandler([.banner, .badge, .sound])
     }
     
     
@@ -157,8 +158,7 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
             Timer.scheduledTimer(timeInterval: livingTime/1000.0, target: NotificationHelper.shared, selector: #selector(NotificationHelper.shared.fireNotificationExpire), userInfo: userInfo, repeats: false)
             //timer.tolerance = 0.2
         }
-        
-        
+
         //update server
         let payLoadInfo = PayLoadInfo(userInfo: userInfo, userAgent: UserAgent.defaultAgent)
         let acknoledgeRequest = PushNotification.UpdateReadRequest(timeInterval: pushInfo.deliverdTime, payLoadInfo: payLoadInfo)
@@ -215,22 +215,28 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
     private func openWebPage(_ pageURL: URL, title: String?) -> Bool {
         
         
-//        let appdelegate = UIApplication.shared.delegate as! AppDelegate
-//        let homeController = (appdelegate.window?.rootViewController as? UINavigationController)?.viewControllers.first as? HomeViewController
-//        homeController?.wkWebView.load(URLRequest(url: pageURL))
-//        return true
-        
-        
-        let webViewController: WebViewController = WebViewController.getController()
-        if let navController = self.window?.rootViewController as? UINavigationController {
-            if let existiWebController = navController.topViewController as? WebViewController, existiWebController.pageURL.absoluteString ==  pageURL.absoluteString {
+        guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene else { return false }
+        if let contentView = (windowScene.windows[0].rootViewController as? UIHostingController<HomeView>)?.rootView {
+            
+            if contentView.viewModel.pushedByNotification == true && contentView.viewModel.notificationPageURL?.absoluteString == pageURL.absoluteString {
             } else {
-                webViewController.title = title
-                webViewController.pageURL = pageURL
-                navController.pushViewController(webViewController, animated: true)
+                contentView.viewModel.notificationPageTitle = title
+                contentView.viewModel.notificationPageURL = pageURL
+                contentView.viewModel.pushedByNotification = true
                 return true
             }
         }
+//
+//        let webViewController: WebViewController = WebViewController.getController()
+//        if let navController = self.window?.rootViewController as? UINavigationController {
+//            if let existiWebController = navController.topViewController as? WebViewController, existiWebController.pageURL.absoluteString ==  pageURL.absoluteString {
+//            } else {
+//                webViewController.title = title
+//                webViewController.pageURL = pageURL
+//                navController.pushViewController(webViewController, animated: true)
+//                return true
+//            }
+//        }
         return false
     }
 

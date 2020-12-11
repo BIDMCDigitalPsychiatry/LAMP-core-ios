@@ -12,7 +12,6 @@ enum Endpoint: String {
     
     static func setSessionKey(_ token: String?) {
         UserDefaults.standard.set(token, forKey: "authToken")
-        UserDefaults.standard.synchronize()
     }
     static func getSessionKey() -> String? {
         return UserDefaults.standard.object(forKey: "authToken") as? String
@@ -20,7 +19,6 @@ enum Endpoint: String {
     
     static func setURLToken(_ token: String?) {
         UserDefaults.standard.set(token, forKey: "URLToken")
-        UserDefaults.standard.synchronize()
     }
     static func getURLToken() -> String? {
         return UserDefaults.standard.object(forKey: "URLToken") as? String

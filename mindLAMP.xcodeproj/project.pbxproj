@@ -11,35 +11,37 @@
 		B2040D7E2564ECB60027D671 /* Sensors in Frameworks */ = {isa = PBXBuildFile; productRef = B2040D7D2564ECB60027D671 /* Sensors */; };
 		B2040D802564ECC90027D671 /* Sensors in Frameworks */ = {isa = PBXBuildFile; productRef = B2040D7F2564ECC90027D671 /* Sensors */; };
 		B2073F0F256EC29C0068E001 /* AppColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2073F0E256EC29C0068E001 /* AppColors.swift */; };
+		B212A437257E2DFB003637DF /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B212A436257E2DFB003637DF /* SceneDelegate.swift */; };
+		B212A451257E3453003637DF /* ActivityIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B212A44F257E3453003637DF /* ActivityIndicator.swift */; };
+		B2201C24257F4DBC00C40183 /* LeakAvoider.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2201C19257F4DBC00C40183 /* LeakAvoider.swift */; };
+		B2201C25257F4DBC00C40183 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2201C1A257F4DBC00C40183 /* HomeViewController.swift */; };
+		B2201C26257F4DBC00C40183 /* HomeWebViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2201C1B257F4DBC00C40183 /* HomeWebViewModel.swift */; };
+		B2201C27257F4DBC00C40183 /* PushUserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2201C1E257F4DBC00C40183 /* PushUserInfo.swift */; };
+		B2201C28257F4DBC00C40183 /* PushNotificationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2201C1F257F4DBC00C40183 /* PushNotificationModel.swift */; };
+		B2201C29257F4DBC00C40183 /* UserNotifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2201C20257F4DBC00C40183 /* UserNotifications.swift */; };
+		B2201C2A257F4DBC00C40183 /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2201C21257F4DBC00C40183 /* WebViewController.swift */; };
+		B2201C2B257F4DBC00C40183 /* iOSDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2201C23257F4DBC00C40183 /* iOSDelegate.swift */; };
+		B2201C3C257F4E9700C40183 /* HomeWebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2201C3B257F4E9700C40183 /* HomeWebView.swift */; };
+		B2201C67257F9C9D00C40183 /* NotificationWebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2201C66257F9C9D00C40183 /* NotificationWebView.swift */; };
+		B2201C6E257F9CC400C40183 /* NotificationWebViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2201C6D257F9CC400C40183 /* NotificationWebViewModel.swift */; };
+		B2201C7A257FA60500C40183 /* NotificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2201C79257FA60500C40183 /* NotificationView.swift */; };
+		B2201C86257FADC700C40183 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2201C85257FADC700C40183 /* HomeView.swift */; };
 		B22DF5F2250612E800777D2D /* UserAgentExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B22DF5F1250612E800777D2D /* UserAgentExtension.swift */; };
 		B238434924B848F300E548E2 /* LMRunningBuffer.swift in Sources */ = {isa = PBXBuildFile; fileRef = B238434624B848F300E548E2 /* LMRunningBuffer.swift */; };
 		B23993BA2440696800E31B06 /* exportOptions.plist in Resources */ = {isa = PBXBuildFile; fileRef = B23993B92440696800E31B06 /* exportOptions.plist */; };
-		B23F5279245346E0007A8598 /* PushUserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = B23F5278245346E0007A8598 /* PushUserInfo.swift */; };
-		B240815A23D8803900845AEE /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B240814223D8803900845AEE /* HomeViewController.swift */; };
 		B244A1C223BF4A91007FBDB8 /* FileManager+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B244A1C123BF4A91007FBDB8 /* FileManager+Extension.swift */; };
-		B2458A5E2555128B0078D427 /* LeakAvoider.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2458A5D2555128B0078D427 /* LeakAvoider.swift */; };
-		B246BD1A252CA8B300064A82 /* Home.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B246BD19252CA8B300064A82 /* Home.storyboard */; };
-		B246BD1C252CA8F500064A82 /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B246BD1B252CA8F500064A82 /* WebViewController.swift */; };
 		B255116524B6202300CDBDD1 /* WatchNotificationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B255116424B6202300CDBDD1 /* WatchNotificationModel.swift */; };
 		B255116924B625CC00CDBDD1 /* WatchDeviceInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = B255116824B625CC00CDBDD1 /* WatchDeviceInfo.swift */; };
 		B255116C24B6291900CDBDD1 /* LoginServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = B255116B24B6291900CDBDD1 /* LoginServices.swift */; };
 		B2587B51256E23BC00A2A7F2 /* UserDefaults+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2587B4B256E23BC00A2A7F2 /* UserDefaults+Extension.swift */; };
 		B2587B52256E23BC00A2A7F2 /* UserDefaults+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2587B4B256E23BC00A2A7F2 /* UserDefaults+Extension.swift */; };
 		B2587B53256E23BC00A2A7F2 /* UserDefaults+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2587B4B256E23BC00A2A7F2 /* UserDefaults+Extension.swift */; };
-		B2587B54256E23BC00A2A7F2 /* Staging.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = B2587B4D256E23BC00A2A7F2 /* Staging.xcconfig */; };
-		B2587B55256E23BC00A2A7F2 /* Staging.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = B2587B4D256E23BC00A2A7F2 /* Staging.xcconfig */; };
-		B2587B56256E23BC00A2A7F2 /* Staging.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = B2587B4D256E23BC00A2A7F2 /* Staging.xcconfig */; };
-		B2587B57256E23BC00A2A7F2 /* Production.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = B2587B4E256E23BC00A2A7F2 /* Production.xcconfig */; };
-		B2587B58256E23BC00A2A7F2 /* Production.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = B2587B4E256E23BC00A2A7F2 /* Production.xcconfig */; };
-		B2587B59256E23BC00A2A7F2 /* Production.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = B2587B4E256E23BC00A2A7F2 /* Production.xcconfig */; };
 		B2587B5A256E23BC00A2A7F2 /* LampURL.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2587B4F256E23BC00A2A7F2 /* LampURL.swift */; };
 		B2587B5B256E23BC00A2A7F2 /* LampURL.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2587B4F256E23BC00A2A7F2 /* LampURL.swift */; };
 		B2587B5C256E23BC00A2A7F2 /* LampURL.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2587B4F256E23BC00A2A7F2 /* LampURL.swift */; };
 		B2587B5D256E23BC00A2A7F2 /* EndPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2587B50256E23BC00A2A7F2 /* EndPoint.swift */; };
 		B2587B5E256E23BC00A2A7F2 /* EndPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2587B50256E23BC00A2A7F2 /* EndPoint.swift */; };
 		B2587B5F256E23BC00A2A7F2 /* EndPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2587B50256E23BC00A2A7F2 /* EndPoint.swift */; };
-		B26A2A2B24EBC6E900BCB043 /* VersionCheckViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B26A2A1D24EBC6E900BCB043 /* VersionCheckViewController.swift */; };
-		B26A2A3324EBCCA400BCB043 /* VersionCheckViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B26A2A3224EBCCA400BCB043 /* VersionCheckViewModel.swift */; };
 		B2704DDA24B4A2A900DE196B /* Interface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B2704DD824B4A2A900DE196B /* Interface.storyboard */; };
 		B2704DDC24B4A2AC00DE196B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B2704DDB24B4A2AC00DE196B /* Assets.xcassets */; };
 		B2704DEA24B4A2AC00DE196B /* HostingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2704DE924B4A2AC00DE196B /* HostingController.swift */; };
@@ -50,17 +52,11 @@
 		B2704DF724B4A2AC00DE196B /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B2704DF624B4A2AC00DE196B /* Preview Assets.xcassets */; };
 		B2704DFC24B4A2AC00DE196B /* watchkitapp.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = B2704DD624B4A2A900DE196B /* watchkitapp.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		B2704E0724B4AE7800DE196B /* UserAuth.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2704E0624B4AE7800DE196B /* UserAuth.swift */; };
-		B275F5FD24517FC0007A7340 /* UserNotifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = B275F5FC24517FC0007A7340 /* UserNotifications.swift */; };
-		B275F60224518106007A7340 /* HomeWebViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B275F60124518106007A7340 /* HomeWebViewModel.swift */; };
-		B275F60A245196AD007A7340 /* PushNotificationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B275F609245196AD007A7340 /* PushNotificationModel.swift */; };
 		B2847FB72450550E0042D43B /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2847FB62450550E0042D43B /* NotificationService.swift */; };
 		B2847FBB2450550E0042D43B /* NotificationService.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = B2847FB42450550E0042D43B /* NotificationService.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
-		B2962FCD24ADECB700C1D598 /* NodeRunner.mm in Sources */ = {isa = PBXBuildFile; fileRef = B2962FCA24ADECB700C1D598 /* NodeRunner.mm */; };
-		B2962FCE24ADECB700C1D598 /* NodeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2962FCC24ADECB700C1D598 /* NodeManager.swift */; };
 		B29639D123BDC28100626E1A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B29639D023BDC28100626E1A /* AppDelegate.swift */; };
 		B29639D723BDC28200626E1A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B29639D623BDC28200626E1A /* Assets.xcassets */; };
 		B29639DA23BDC28200626E1A /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B29639D923BDC28200626E1A /* Preview Assets.xcassets */; };
-		B29639DD23BDC28200626E1A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B29639DB23BDC28200626E1A /* LaunchScreen.storyboard */; };
 		B2A15BDC2567A8BE00222717 /* NotificationAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2A15BB42567A8BE00222717 /* NotificationAPI.swift */; };
 		B2A15BDD2567A8BE00222717 /* NotificationAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2A15BB42567A8BE00222717 /* NotificationAPI.swift */; };
 		B2A15BDE2567A8BE00222717 /* PushPayload.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2A15BB52567A8BE00222717 /* PushPayload.swift */; };
@@ -121,11 +117,9 @@
 		B2B8979823D0ADBA00321C3E /* HealthKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B2B8979723D0ADBA00321C3E /* HealthKit.framework */; };
 		B2C831F025306F6600E6A8A2 /* ComplicationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2C831EF25306F6600E6A8A2 /* ComplicationController.swift */; };
 		B2D2CA6625503AAE0086C864 /* WatchOSDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2D2CA6525503AAE0086C864 /* WatchOSDelegate.swift */; };
-		B2D2CA6825503AE20086C864 /* iOSDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2D2CA6725503AE20086C864 /* iOSDelegate.swift */; };
 		B2D930F92445D7E90086477D /* UserNotifications.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B2D930F82445D7E90086477D /* UserNotifications.framework */; };
 		B2D930FB2445D7E90086477D /* UserNotificationsUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B2D930FA2445D7E90086477D /* UserNotificationsUI.framework */; };
 		B2D930FE2445D7E90086477D /* NotificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2D930FD2445D7E90086477D /* NotificationViewController.swift */; };
-		B2D931012445D7E90086477D /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B2D930FF2445D7E90086477D /* MainInterface.storyboard */; };
 		B2D931052445D7E90086477D /* CustomNotification.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = B2D930F72445D7E90086477D /* CustomNotification.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		B2E6A560256F11A300E2CBC8 /* UIDeviceExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2E6A55F256F11A300E2CBC8 /* UIDeviceExtension.swift */; };
 		B2E6A561256F11A300E2CBC8 /* UIDeviceExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2E6A55F256F11A300E2CBC8 /* UIDeviceExtension.swift */; };
@@ -133,7 +127,6 @@
 		B2E6A564256F137100E2CBC8 /* BatteryState.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2E6A562256F137100E2CBC8 /* BatteryState.swift */; };
 		B2E6A567256F195000E2CBC8 /* WebViewConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2E6A566256F195000E2CBC8 /* WebViewConfiguration.swift */; };
 		B2E6A568256F195000E2CBC8 /* WebViewConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2E6A566256F195000E2CBC8 /* WebViewConfiguration.swift */; };
-		B2EE003024EE43760037DD9C /* FileDownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2EE002F24EE43760037DD9C /* FileDownloader.swift */; };
 		B2F3CDF6245932B200F211A3 /* StoryboardExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2F3CDF5245932B200F211A3 /* StoryboardExtension.swift */; };
 		B2F70D2E253EAA2E00D70091 /* watchkitextension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = B2704DE224B4A2AC00DE196B /* watchkitextension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		B2FDA83224BF744D000316EE /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2FDA83124BF744D000316EE /* ContentView.swift */; };
@@ -226,16 +219,26 @@
 		5F763010242386AA00B2DD03 /* Localizable.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
 		5FC0151223C5A85300990506 /* mindLAMP-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "mindLAMP-Bridging-Header.h"; sourceTree = "<group>"; };
 		B2073F0E256EC29C0068E001 /* AppColors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppColors.swift; sourceTree = "<group>"; };
+		B212A436257E2DFB003637DF /* SceneDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
+		B212A44F257E3453003637DF /* ActivityIndicator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityIndicator.swift; sourceTree = "<group>"; };
+		B2201C19257F4DBC00C40183 /* LeakAvoider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LeakAvoider.swift; sourceTree = "<group>"; };
+		B2201C1A257F4DBC00C40183 /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
+		B2201C1B257F4DBC00C40183 /* HomeWebViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeWebViewModel.swift; sourceTree = "<group>"; };
+		B2201C1E257F4DBC00C40183 /* PushUserInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PushUserInfo.swift; sourceTree = "<group>"; };
+		B2201C1F257F4DBC00C40183 /* PushNotificationModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PushNotificationModel.swift; sourceTree = "<group>"; };
+		B2201C20257F4DBC00C40183 /* UserNotifications.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserNotifications.swift; sourceTree = "<group>"; };
+		B2201C21257F4DBC00C40183 /* WebViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
+		B2201C23257F4DBC00C40183 /* iOSDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = iOSDelegate.swift; sourceTree = "<group>"; };
+		B2201C3B257F4E9700C40183 /* HomeWebView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeWebView.swift; sourceTree = "<group>"; };
+		B2201C66257F9C9D00C40183 /* NotificationWebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationWebView.swift; sourceTree = "<group>"; };
+		B2201C6D257F9CC400C40183 /* NotificationWebViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationWebViewModel.swift; sourceTree = "<group>"; };
+		B2201C79257FA60500C40183 /* NotificationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationView.swift; sourceTree = "<group>"; };
+		B2201C85257FADC700C40183 /* HomeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		B22DF5F1250612E800777D2D /* UserAgentExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAgentExtension.swift; sourceTree = "<group>"; };
 		B238434624B848F300E548E2 /* LMRunningBuffer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LMRunningBuffer.swift; sourceTree = "<group>"; };
 		B238435F24B8989E00E548E2 /* watchkitapp Extension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "watchkitapp Extension.entitlements"; sourceTree = "<group>"; };
 		B23993B92440696800E31B06 /* exportOptions.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = exportOptions.plist; sourceTree = "<group>"; };
-		B23F5278245346E0007A8598 /* PushUserInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PushUserInfo.swift; sourceTree = "<group>"; };
-		B240814223D8803900845AEE /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		B244A1C123BF4A91007FBDB8 /* FileManager+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FileManager+Extension.swift"; sourceTree = "<group>"; };
-		B2458A5D2555128B0078D427 /* LeakAvoider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeakAvoider.swift; sourceTree = "<group>"; };
-		B246BD19252CA8B300064A82 /* Home.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Home.storyboard; sourceTree = "<group>"; };
-		B246BD1B252CA8F500064A82 /* WebViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
 		B255116424B6202300CDBDD1 /* WatchNotificationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchNotificationModel.swift; sourceTree = "<group>"; };
 		B255116824B625CC00CDBDD1 /* WatchDeviceInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchDeviceInfo.swift; sourceTree = "<group>"; };
 		B255116B24B6291900CDBDD1 /* LoginServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginServices.swift; sourceTree = "<group>"; };
@@ -244,8 +247,6 @@
 		B2587B4E256E23BC00A2A7F2 /* Production.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Production.xcconfig; sourceTree = "<group>"; };
 		B2587B4F256E23BC00A2A7F2 /* LampURL.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LampURL.swift; sourceTree = "<group>"; };
 		B2587B50256E23BC00A2A7F2 /* EndPoint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EndPoint.swift; sourceTree = "<group>"; };
-		B26A2A1D24EBC6E900BCB043 /* VersionCheckViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VersionCheckViewController.swift; sourceTree = "<group>"; };
-		B26A2A3224EBCCA400BCB043 /* VersionCheckViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VersionCheckViewModel.swift; sourceTree = "<group>"; };
 		B26B56C92566EE5B00A87711 /* CustomNotification.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = CustomNotification.entitlements; sourceTree = "<group>"; };
 		B2704DD624B4A2A900DE196B /* watchkitapp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = watchkitapp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B2704DD924B4A2A900DE196B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Interface.storyboard; sourceTree = "<group>"; };
@@ -261,20 +262,13 @@
 		B2704DF824B4A2AC00DE196B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B2704DF924B4A2AC00DE196B /* PushNotificationPayload.apns */ = {isa = PBXFileReference; lastKnownFileType = text; path = PushNotificationPayload.apns; sourceTree = "<group>"; };
 		B2704E0624B4AE7800DE196B /* UserAuth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAuth.swift; sourceTree = "<group>"; };
-		B275F5FC24517FC0007A7340 /* UserNotifications.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserNotifications.swift; sourceTree = "<group>"; };
-		B275F60124518106007A7340 /* HomeWebViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeWebViewModel.swift; sourceTree = "<group>"; };
-		B275F609245196AD007A7340 /* PushNotificationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PushNotificationModel.swift; sourceTree = "<group>"; };
 		B2847FB42450550E0042D43B /* NotificationService.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = NotificationService.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		B2847FB62450550E0042D43B /* NotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationService.swift; sourceTree = "<group>"; };
 		B2847FB82450550E0042D43B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		B2962FCA24ADECB700C1D598 /* NodeRunner.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NodeRunner.mm; sourceTree = "<group>"; };
-		B2962FCC24ADECB700C1D598 /* NodeManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NodeManager.swift; sourceTree = "<group>"; };
-		B2962FCF24ADECEC00C1D598 /* NodeRunner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NodeRunner.h; sourceTree = "<group>"; };
 		B29639CD23BDC28100626E1A /* mindLAMP 2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "mindLAMP 2.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B29639D023BDC28100626E1A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B29639D623BDC28200626E1A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B29639D923BDC28200626E1A /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		B29639DC23BDC28200626E1A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		B29639DE23BDC28200626E1A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B2A15BB42567A8BE00222717 /* NotificationAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationAPI.swift; sourceTree = "<group>"; };
 		B2A15BB52567A8BE00222717 /* PushPayload.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PushPayload.swift; sourceTree = "<group>"; };
@@ -309,17 +303,14 @@
 		B2B8979723D0ADBA00321C3E /* HealthKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HealthKit.framework; path = System/Library/Frameworks/HealthKit.framework; sourceTree = SDKROOT; };
 		B2C831EF25306F6600E6A8A2 /* ComplicationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ComplicationController.swift; sourceTree = "<group>"; };
 		B2D2CA6525503AAE0086C864 /* WatchOSDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchOSDelegate.swift; sourceTree = "<group>"; };
-		B2D2CA6725503AE20086C864 /* iOSDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iOSDelegate.swift; sourceTree = "<group>"; };
 		B2D930F72445D7E90086477D /* CustomNotification.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = CustomNotification.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		B2D930F82445D7E90086477D /* UserNotifications.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UserNotifications.framework; path = System/Library/Frameworks/UserNotifications.framework; sourceTree = SDKROOT; };
 		B2D930FA2445D7E90086477D /* UserNotificationsUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UserNotificationsUI.framework; path = System/Library/Frameworks/UserNotificationsUI.framework; sourceTree = SDKROOT; };
 		B2D930FD2445D7E90086477D /* NotificationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationViewController.swift; sourceTree = "<group>"; };
-		B2D931002445D7E90086477D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainInterface.storyboard; sourceTree = "<group>"; };
 		B2D931022445D7E90086477D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B2E6A55F256F11A300E2CBC8 /* UIDeviceExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIDeviceExtension.swift; sourceTree = "<group>"; };
 		B2E6A562256F137100E2CBC8 /* BatteryState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BatteryState.swift; sourceTree = "<group>"; };
 		B2E6A566256F195000E2CBC8 /* WebViewConfiguration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebViewConfiguration.swift; sourceTree = "<group>"; };
-		B2EE002F24EE43760037DD9C /* FileDownloader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileDownloader.swift; sourceTree = "<group>"; };
 		B2F3CDF5245932B200F211A3 /* StoryboardExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoryboardExtension.swift; sourceTree = "<group>"; };
 		B2FDA83124BF744D000316EE /* ContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -361,6 +352,56 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		B212A44E257E3453003637DF /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				B212A44F257E3453003637DF /* ActivityIndicator.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		B2201C18257F4DBC00C40183 /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				B2201C85257FADC700C40183 /* HomeView.swift */,
+				B2201C3B257F4E9700C40183 /* HomeWebView.swift */,
+				B2201C19257F4DBC00C40183 /* LeakAvoider.swift */,
+				B2201C1A257F4DBC00C40183 /* HomeViewController.swift */,
+				B2201C1B257F4DBC00C40183 /* HomeWebViewModel.swift */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
+		B2201C1C257F4DBC00C40183 /* Push Notification */ = {
+			isa = PBXGroup;
+			children = (
+				B2201C1D257F4DBC00C40183 /* Models */,
+				B2201C20257F4DBC00C40183 /* UserNotifications.swift */,
+				B2201C21257F4DBC00C40183 /* WebViewController.swift */,
+				B2201C66257F9C9D00C40183 /* NotificationWebView.swift */,
+				B2201C6D257F9CC400C40183 /* NotificationWebViewModel.swift */,
+				B2201C79257FA60500C40183 /* NotificationView.swift */,
+			);
+			path = "Push Notification";
+			sourceTree = "<group>";
+		};
+		B2201C1D257F4DBC00C40183 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				B2201C1E257F4DBC00C40183 /* PushUserInfo.swift */,
+				B2201C1F257F4DBC00C40183 /* PushNotificationModel.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		B2201C22257F4DBC00C40183 /* Sensor Manager */ = {
+			isa = PBXGroup;
+			children = (
+				B2201C23257F4DBC00C40183 /* iOSDelegate.swift */,
+			);
+			path = "Sensor Manager";
+			sourceTree = "<group>";
+		};
 		B238434524B848F300E548E2 /* SensorManager */ = {
 			isa = PBXGroup;
 			children = (
@@ -441,16 +482,6 @@
 			path = Configs;
 			sourceTree = "<group>";
 		};
-		B26A2A1A24EBC6E900BCB043 /* VersionCheck */ = {
-			isa = PBXGroup;
-			children = (
-				B26A2A1D24EBC6E900BCB043 /* VersionCheckViewController.swift */,
-				B26A2A3224EBCCA400BCB043 /* VersionCheckViewModel.swift */,
-				B2EE002F24EE43760037DD9C /* FileDownloader.swift */,
-			);
-			path = VersionCheck;
-			sourceTree = "<group>";
-		};
 		B2704DD724B4A2A900DE196B /* watchkitapp */ = {
 			isa = PBXGroup;
 			children = (
@@ -500,47 +531,6 @@
 			path = Models;
 			sourceTree = "<group>";
 		};
-		B275F5FA24517F74007A7340 /* Modules */ = {
-			isa = PBXGroup;
-			children = (
-				B2C8319A253055C000E6A8A2 /* Sensor Manager */,
-				B26A2A1A24EBC6E900BCB043 /* VersionCheck */,
-				B275F5FE24518037007A7340 /* Home */,
-				B275F5FB24517FA5007A7340 /* Push Notification */,
-				B246BD19252CA8B300064A82 /* Home.storyboard */,
-			);
-			path = Modules;
-			sourceTree = "<group>";
-		};
-		B275F5FB24517FA5007A7340 /* Push Notification */ = {
-			isa = PBXGroup;
-			children = (
-				B275F60824519697007A7340 /* Models */,
-				B246BD1B252CA8F500064A82 /* WebViewController.swift */,
-				B275F5FC24517FC0007A7340 /* UserNotifications.swift */,
-			);
-			path = "Push Notification";
-			sourceTree = "<group>";
-		};
-		B275F5FE24518037007A7340 /* Home */ = {
-			isa = PBXGroup;
-			children = (
-				B240814223D8803900845AEE /* HomeViewController.swift */,
-				B275F60124518106007A7340 /* HomeWebViewModel.swift */,
-				B2458A5D2555128B0078D427 /* LeakAvoider.swift */,
-			);
-			path = Home;
-			sourceTree = "<group>";
-		};
-		B275F60824519697007A7340 /* Models */ = {
-			isa = PBXGroup;
-			children = (
-				B275F609245196AD007A7340 /* PushNotificationModel.swift */,
-				B23F5278245346E0007A8598 /* PushUserInfo.swift */,
-			);
-			path = Models;
-			sourceTree = "<group>";
-		};
 		B2847FB52450550E0042D43B /* NotificationService */ = {
 			isa = PBXGroup;
 			children = (
@@ -548,16 +538,6 @@
 				B2847FB82450550E0042D43B /* Info.plist */,
 			);
 			path = NotificationService;
-			sourceTree = "<group>";
-		};
-		B2962FC924ADECB700C1D598 /* NodeComponents */ = {
-			isa = PBXGroup;
-			children = (
-				B2962FCF24ADECEC00C1D598 /* NodeRunner.h */,
-				B2962FCA24ADECB700C1D598 /* NodeRunner.mm */,
-				B2962FCC24ADECB700C1D598 /* NodeManager.swift */,
-			);
-			path = NodeComponents;
 			sourceTree = "<group>";
 		};
 		B29639C423BDC28100626E1A = {
@@ -591,14 +571,16 @@
 		B29639CF23BDC28100626E1A /* mindLAMP */ = {
 			isa = PBXGroup;
 			children = (
-				B2962FC924ADECB700C1D598 /* NodeComponents */,
-				B275F5FA24517F74007A7340 /* Modules */,
+				B2201C18257F4DBC00C40183 /* Home */,
+				B2201C1C257F4DBC00C40183 /* Push Notification */,
+				B2201C22257F4DBC00C40183 /* Sensor Manager */,
+				B212A44E257E3453003637DF /* Views */,
 				B240814323D8803900845AEE /* AppComponents */,
 				B244A1C023BF4A77007FBDB8 /* Extensions */,
+				B212A436257E2DFB003637DF /* SceneDelegate.swift */,
 				B29639D023BDC28100626E1A /* AppDelegate.swift */,
 				B29639D623BDC28200626E1A /* Assets.xcassets */,
 				B2B8979523D0ADBA00321C3E /* mindLAMP.entitlements */,
-				B29639DB23BDC28200626E1A /* LaunchScreen.storyboard */,
 				B23993B92440696800E31B06 /* exportOptions.plist */,
 				B29639DE23BDC28200626E1A /* Info.plist */,
 				B29639D823BDC28200626E1A /* Preview Content */,
@@ -727,20 +709,11 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		B2C8319A253055C000E6A8A2 /* Sensor Manager */ = {
-			isa = PBXGroup;
-			children = (
-				B2D2CA6725503AE20086C864 /* iOSDelegate.swift */,
-			);
-			path = "Sensor Manager";
-			sourceTree = "<group>";
-		};
 		B2D930FC2445D7E90086477D /* CustomNotification */ = {
 			isa = PBXGroup;
 			children = (
 				B26B56C92566EE5B00A87711 /* CustomNotification.entitlements */,
 				B2D930FD2445D7E90086477D /* NotificationViewController.swift */,
-				B2D930FF2445D7E90086477D /* MainInterface.storyboard */,
 				B2D931022445D7E90086477D /* Info.plist */,
 			);
 			path = CustomNotification;
@@ -878,7 +851,7 @@
 			attributes = {
 				CLASSPREFIX = LAMP;
 				LastSwiftUpdateCheck = 1120;
-				LastUpgradeCheck = 1150;
+				LastUpgradeCheck = 1200;
 				ORGANIZATIONNAME = "Division of Digital Psychiatry";
 				TargetAttributes = {
 					B2704DD524B4A2A900DE196B = {
@@ -939,8 +912,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				B2704DF724B4A2AC00DE196B /* Preview Assets.xcassets in Resources */,
-				B2587B59256E23BC00A2A7F2 /* Production.xcconfig in Resources */,
-				B2587B56256E23BC00A2A7F2 /* Staging.xcconfig in Resources */,
 				B2704DF424B4A2AC00DE196B /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -957,13 +928,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				5F763011242386AA00B2DD03 /* Localizable.strings in Resources */,
-				B2587B57256E23BC00A2A7F2 /* Production.xcconfig in Resources */,
 				B23993BA2440696800E31B06 /* exportOptions.plist in Resources */,
-				B29639DD23BDC28200626E1A /* LaunchScreen.storyboard in Resources */,
 				B29639DA23BDC28200626E1A /* Preview Assets.xcassets in Resources */,
-				B2587B54256E23BC00A2A7F2 /* Staging.xcconfig in Resources */,
 				B29639D723BDC28200626E1A /* Assets.xcassets in Resources */,
-				B246BD1A252CA8B300064A82 /* Home.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -971,9 +938,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B2587B55256E23BC00A2A7F2 /* Staging.xcconfig in Resources */,
-				B2D931012445D7E90086477D /* MainInterface.storyboard in Resources */,
-				B2587B58256E23BC00A2A7F2 /* Production.xcconfig in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1045,7 +1009,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				B2A15BE42567A8BE00222717 /* SensorModel.swift in Sources */,
-				B2458A5E2555128B0078D427 /* LeakAvoider.swift in Sources */,
+				B2201C86257FADC700C40183 /* HomeView.swift in Sources */,
+				B2201C28257F4DBC00C40183 /* PushNotificationModel.swift in Sources */,
+				B2201C3C257F4E9700C40183 /* HomeWebView.swift in Sources */,
 				B2B8935223D0AD6500321C3E /* DateExtension.swift in Sources */,
 				B2A15C0E2567A8BE00222717 /* LogsModel.swift in Sources */,
 				B22DF5F2250612E800777D2D /* UserAgentExtension.swift in Sources */,
@@ -1054,8 +1020,11 @@
 				B2A15C0C2567A8BE00222717 /* SensorLogs.swift in Sources */,
 				B2A15C082567A8BE00222717 /* Logging.swift in Sources */,
 				B2F3CDF6245932B200F211A3 /* StoryboardExtension.swift in Sources */,
-				B2962FCE24ADECB700C1D598 /* NodeManager.swift in Sources */,
+				B2201C2A257F4DBC00C40183 /* WebViewController.swift in Sources */,
+				B2201C25257F4DBC00C40183 /* HomeViewController.swift in Sources */,
+				B2201C7A257FA60500C40183 /* NotificationView.swift in Sources */,
 				B2A15C182567A8BE00222717 /* AsynchronousOperation.swift in Sources */,
+				B2201C26257F4DBC00C40183 /* HomeWebViewModel.swift in Sources */,
 				B244A1C223BF4A91007FBDB8 /* FileManager+Extension.swift in Sources */,
 				B29639D123BDC28100626E1A /* AppDelegate.swift in Sources */,
 				B2A15BEE2567A8BE00222717 /* NetworkingAPI.swift in Sources */,
@@ -1064,35 +1033,32 @@
 				B2A15BE02567A8BE00222717 /* LampIdentifiersHealthKit.swift in Sources */,
 				B2E6A567256F195000E2CBC8 /* WebViewConfiguration.swift in Sources */,
 				B2A15BDC2567A8BE00222717 /* NotificationAPI.swift in Sources */,
-				B275F60224518106007A7340 /* HomeWebViewModel.swift in Sources */,
+				B2201C29257F4DBC00C40183 /* UserNotifications.swift in Sources */,
 				B2587B5A256E23BC00A2A7F2 /* LampURL.swift in Sources */,
-				B2962FCD24ADECB700C1D598 /* NodeRunner.mm in Sources */,
-				B2D2CA6825503AE20086C864 /* iOSDelegate.swift in Sources */,
 				B2A15C162567A8BE00222717 /* BackgroundServices.swift in Sources */,
 				B2A15BFE2567A8BE00222717 /* User.swift in Sources */,
+				B2201C6E257F9CC400C40183 /* NotificationWebViewModel.swift in Sources */,
+				B2201C27257F4DBC00C40183 /* PushUserInfo.swift in Sources */,
 				B2A15BE62567A8BE00222717 /* LampIdentifiers.swift in Sources */,
-				B246BD1C252CA8F500064A82 /* WebViewController.swift in Sources */,
-				B26A2A3324EBCCA400BCB043 /* VersionCheckViewModel.swift in Sources */,
-				B2EE003024EE43760037DD9C /* FileDownloader.swift in Sources */,
 				B2A15BF62567A8BE00222717 /* NetworkConfig.swift in Sources */,
 				B2073F0F256EC29C0068E001 /* AppColors.swift in Sources */,
+				B212A451257E3453003637DF /* ActivityIndicator.swift in Sources */,
 				B2E6A560256F11A300E2CBC8 /* UIDeviceExtension.swift in Sources */,
+				B2201C67257F9C9D00C40183 /* NotificationWebView.swift in Sources */,
 				B2A15BE22567A8BE00222717 /* SensorModel+Constructors.swift in Sources */,
+				B2201C2B257F4DBC00C40183 /* iOSDelegate.swift in Sources */,
 				B2A15BF22567A8BE00222717 /* ErrorExtension.swift in Sources */,
 				B2A15BFC2567A8BE00222717 /* AppInfo.swift in Sources */,
 				B2E6A563256F137100E2CBC8 /* BatteryState.swift in Sources */,
-				B26A2A2B24EBC6E900BCB043 /* VersionCheckViewController.swift in Sources */,
 				B2587B51256E23BC00A2A7F2 /* UserDefaults+Extension.swift in Sources */,
 				B2A15C1A2567A8BE00222717 /* SharingInfo.swift in Sources */,
 				B2A15BDE2567A8BE00222717 /* PushPayload.swift in Sources */,
-				B23F5279245346E0007A8598 /* PushUserInfo.swift in Sources */,
 				B2587B5D256E23BC00A2A7F2 /* EndPoint.swift in Sources */,
-				B275F5FD24517FC0007A7340 /* UserNotifications.swift in Sources */,
+				B212A437257E2DFB003637DF /* SceneDelegate.swift in Sources */,
 				B2A15BEC2567A8BE00222717 /* Result.swift in Sources */,
-				B275F60A245196AD007A7340 /* PushNotificationModel.swift in Sources */,
 				B2A15C022567A8BE00222717 /* WatchSessionManager.swift in Sources */,
 				B2A15BF82567A8BE00222717 /* LMSensorManager+SensorObservers.swift in Sources */,
-				B240815A23D8803900845AEE /* HomeViewController.swift in Sources */,
+				B2201C24257F4DBC00C40183 /* LeakAvoider.swift in Sources */,
 				B2A15BFA2567A8BE00222717 /* LMSensorManager.swift in Sources */,
 				B2A15BEA2567A8BE00222717 /* Networking.swift in Sources */,
 				B2A15C122567A8BE00222717 /* LMConstants.swift in Sources */,
@@ -1146,22 +1112,6 @@
 			name = Interface.storyboard;
 			sourceTree = "<group>";
 		};
-		B29639DB23BDC28200626E1A /* LaunchScreen.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				B29639DC23BDC28200626E1A /* Base */,
-			);
-			name = LaunchScreen.storyboard;
-			sourceTree = "<group>";
-		};
-		B2D930FF2445D7E90086477D /* MainInterface.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				B2D931002445D7E90086477D /* Base */,
-			);
-			name = MainInterface.storyboard;
-			sourceTree = "<group>";
-		};
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
@@ -1192,6 +1142,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -1217,7 +1168,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -1244,17 +1195,17 @@
 				ENABLE_PREVIEWS = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PROJECT_DIR)/mindLAMP/NodeComponents",
 					"$(PROJECT_DIR)/libnode",
 					"$(PROJECT_DIR)/Release-universal",
 				);
 				INFOPLIST_FILE = mindLAMP/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.1.3;
+				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = digital.lamp.mindlamp;
 				PRODUCT_NAME = "mindLAMP 2";
@@ -1263,7 +1214,7 @@
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				VALID_ARCHS = "arm64 arm64e armv7s armv7";
+				VALID_ARCHS = "arm64 arm64e armv7s armv7   x86_64 i386";
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = "Debug (Staging)";
@@ -1278,7 +1229,7 @@
 				CURRENT_PROJECT_VERSION = 71;
 				DEVELOPMENT_TEAM = S2Y2D4239K;
 				INFOPLIST_FILE = CustomNotification/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1304,7 +1255,7 @@
 				CURRENT_PROJECT_VERSION = 71;
 				DEVELOPMENT_TEAM = S2Y2D4239K;
 				INFOPLIST_FILE = NotificationService/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1404,6 +1355,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -1423,7 +1375,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -1450,17 +1402,17 @@
 				ENABLE_PREVIEWS = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PROJECT_DIR)/mindLAMP/NodeComponents",
 					"$(PROJECT_DIR)/libnode",
 					"$(PROJECT_DIR)/Release-universal",
 				);
 				INFOPLIST_FILE = mindLAMP/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.1.3;
+				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = digital.lamp.mindlamp;
 				PRODUCT_NAME = "mindLAMP 2";
@@ -1468,7 +1420,7 @@
 				SWIFT_OBJC_BRIDGING_HEADER = "mindLAMP/mindLAMP-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				VALID_ARCHS = "arm64 arm64e armv7 armv7s";
+				VALID_ARCHS = "arm64 arm64e armv7s armv7   x86_64 i386";
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = "Release (Staging)";
@@ -1483,7 +1435,7 @@
 				CURRENT_PROJECT_VERSION = 71;
 				DEVELOPMENT_TEAM = S2Y2D4239K;
 				INFOPLIST_FILE = CustomNotification/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1509,7 +1461,7 @@
 				CURRENT_PROJECT_VERSION = 71;
 				DEVELOPMENT_TEAM = S2Y2D4239K;
 				INFOPLIST_FILE = NotificationService/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1703,7 +1655,7 @@
 				CURRENT_PROJECT_VERSION = 71;
 				DEVELOPMENT_TEAM = S2Y2D4239K;
 				INFOPLIST_FILE = NotificationService/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1729,7 +1681,7 @@
 				CURRENT_PROJECT_VERSION = 71;
 				DEVELOPMENT_TEAM = S2Y2D4239K;
 				INFOPLIST_FILE = NotificationService/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1773,6 +1725,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -1798,7 +1751,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -1835,6 +1788,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -1854,7 +1808,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -1881,17 +1835,17 @@
 				ENABLE_PREVIEWS = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PROJECT_DIR)/mindLAMP/NodeComponents",
 					"$(PROJECT_DIR)/libnode",
 					"$(PROJECT_DIR)/Release-universal",
 				);
 				INFOPLIST_FILE = mindLAMP/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.1.3;
+				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = digital.lamp.mindlamp;
 				PRODUCT_NAME = "mindLAMP 2";
@@ -1900,7 +1854,7 @@
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				VALID_ARCHS = "arm64 arm64e armv7s armv7";
+				VALID_ARCHS = "arm64 arm64e armv7s armv7   x86_64 i386";
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = "Debug (Production)";
@@ -1922,17 +1876,17 @@
 				ENABLE_PREVIEWS = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PROJECT_DIR)/mindLAMP/NodeComponents",
 					"$(PROJECT_DIR)/libnode",
 					"$(PROJECT_DIR)/Release-universal",
 				);
 				INFOPLIST_FILE = mindLAMP/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.1.3;
+				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = digital.lamp.mindlamp;
 				PRODUCT_NAME = "mindLAMP 2";
@@ -1940,7 +1894,7 @@
 				SWIFT_OBJC_BRIDGING_HEADER = "mindLAMP/mindLAMP-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				VALID_ARCHS = "arm64 arm64e armv7 armv7s";
+				VALID_ARCHS = "arm64 arm64e armv7s armv7   x86_64 i386";
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Release;
@@ -1955,7 +1909,7 @@
 				CURRENT_PROJECT_VERSION = 71;
 				DEVELOPMENT_TEAM = S2Y2D4239K;
 				INFOPLIST_FILE = CustomNotification/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1982,7 +1936,7 @@
 				CURRENT_PROJECT_VERSION = 71;
 				DEVELOPMENT_TEAM = S2Y2D4239K;
 				INFOPLIST_FILE = CustomNotification/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
