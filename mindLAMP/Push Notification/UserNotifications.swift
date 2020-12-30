@@ -4,6 +4,7 @@ import Foundation
 import UserNotifications
 import UIKit
 import SwiftUI
+import LAMP
 
 class NotificationHelper: NSObject {
     
@@ -42,13 +43,17 @@ class NotificationHelper: NSObject {
     @objc func fireNotificationExpire(timer: Timer) {
         printToFile("\n timer fired")
         print("\n timer fired")
-        guard let userInfo = timer.userInfo as? [AnyHashable : Any] else { return }
+        guard let userInfo = timer.userInfo as? [AnyHashable : Any] else {
+            printToFile("\n no userinfo")
+            timer.invalidate()
+            return }
         let pushInfo = PushUserInfo(userInfo: userInfo)
         if let identifier = pushInfo.identifier {
             printToFile("\n exe remove noti \(identifier)")
             print("\n exe remove noti")
             removeNotification(identifier: identifier)
         }
+        timer.invalidate()
     }
 }
 
@@ -104,31 +109,29 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
         if deviceTokenStr != UserDefaults.standard.deviceToken {
             if User.shared.isLogin() {
                 //send to server
-                
+                guard let authheader = Endpoint.getSessionKey(), let participantId = User.shared.userId else {
+                    return
+                }
+                OpenAPIClientAPI.basePath = LampURL.baseURLString
+                OpenAPIClientAPI.customHeaders = ["Authorization": "Basic \(authheader)", "Content-Type": "application/json"]
                 let tokenInfo = DeviceInfoWithToken(deviceToken: deviceTokenStr, userAgent: UserAgent.defaultAgent, action: nil)
-                let tokenRerquest = PushNotification.UpdateTokenRequest(deviceInfoWithToken: tokenInfo)
-                let lampAPI = NotificationAPI(NetworkConfig.networkingAPI())
-                
-                lampAPI.sendDeviceToken(request: tokenRerquest) { (isSuccess) in
-                    if isSuccess {
+               
+                let event = SensorEvent(timestamp: Date().timeInMilliSeconds, sensor: SensorType.lamp_analytics.lampIdentifier, data: tokenInfo)
+                let publisher = SensorEventAPI.sensorEventCreate(participantId: participantId, sensorEvent: event, apiResponseQueue: DispatchQueue.global())
+                subscriber = publisher.sink { value in
+                    switch value {
+                    case .failure(let error):
+                        printError("loginSensorEventCreate error \(error.localizedDescription)")
+                    case .finished:
                         UserDefaults.standard.deviceToken = deviceTokenStr
                     }
+                } receiveValue: { (stringValue) in
+                    print("APNS register = \(stringValue)")
                 }
             } else {
                 UserDefaults.standard.deviceToken = deviceTokenStr
             }
         }
-        
-        //show device token for testing purpose
-//        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 2) {
-//            let appdelegate = UIApplication.shared.delegate as! AppDelegate
-//            let alert = UIAlertController(title: "mindLAMP 2 - Token", message: deviceTokenStr, preferredStyle: .alert)
-//            alert.addAction(UIAlertAction(title: "Copy", style: .destructive, handler: { action in
-//                  let pasteboard = UIPasteboard.general
-//                  pasteboard.string = deviceTokenStr
-//            }))
-//            appdelegate.window?.rootViewController?.present(alert, animated: true, completion: nil)
-//        }
     }
     
     func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
@@ -145,7 +148,6 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
         completionHandler([.banner, .badge, .sound])
     }
     
-    
     func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable : Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
         
         let pushInfo = PushUserInfo(userInfo: userInfo)
@@ -157,16 +159,29 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
             printToFile("\n schedule timer for \(pushInfo.identifier!) = \(livingTime/1000.0)")
             Timer.scheduledTimer(timeInterval: livingTime/1000.0, target: NotificationHelper.shared, selector: #selector(NotificationHelper.shared.fireNotificationExpire), userInfo: userInfo, repeats: false)
             //timer.tolerance = 0.2
-        }
-
-        //update server
-        let payLoadInfo = PayLoadInfo(userInfo: userInfo, userAgent: UserAgent.defaultAgent)
-        let acknoledgeRequest = PushNotification.UpdateReadRequest(timeInterval: pushInfo.deliverdTime, payLoadInfo: payLoadInfo)
-        let lampAPI = NotificationAPI(NetworkConfig.networkingAPI())
-        lampAPI.sendPushAcknowledgement(request: acknoledgeRequest) {
-            completionHandler(UIBackgroundFetchResult.noData)
+            queue.async {
+                let currentRunLoop = RunLoop.current
+                let timer = Timer.scheduledTimer(timeInterval: livingTime/1000.0, target: NotificationHelper.shared, selector: #selector(NotificationHelper.shared.fireNotificationExpire), userInfo: userInfo, repeats: false)
+                currentRunLoop.add(timer, forMode: .common)
+                currentRunLoop.run()
+            }
         }
         
+        //update server
+        let payLoadInfo = PayLoadInfo(action: SensorType.AnalyticAction.notification.rawValue, userInfo: userInfo, userAgent: UserAgent.defaultAgent)
+        let acknoledgeRequest = UpdateReadRequest(timeInterval: pushInfo.deliverdTime, sensor: SensorType.lamp_analytics.lampIdentifier, payLoadInfo: payLoadInfo)
+        guard let authheader = Endpoint.getSessionKey(), let participantId = User.shared.userId else {
+            return
+        }
+        OpenAPIClientAPI.basePath = LampURL.baseURLString
+        OpenAPIClientAPI.customHeaders = ["Authorization": "Basic \(authheader)", "Content-Type": "application/json"]
+        let publisher = SensorEventAPI.pushReceiptEventCreate(participantId: participantId, sensorEvent: acknoledgeRequest.toJSON(), apiResponseQueue: DispatchQueue.global())
+        subscriber = publisher.sink { _ in
+            completionHandler(UIBackgroundFetchResult.noData)
+        } receiveValue: { (stringValue) in
+            print("login receiveValue = \(stringValue)")
+        }
+
         LMSensorManager.shared.checkIsRunning()
     }
 
@@ -214,29 +229,28 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
     
     private func openWebPage(_ pageURL: URL, title: String?) -> Bool {
         
-        
-        guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene else { return false }
-        if let contentView = (windowScene.windows[0].rootViewController as? UIHostingController<HomeView>)?.rootView {
-            
-            if contentView.viewModel.pushedByNotification == true && contentView.viewModel.notificationPageURL?.absoluteString == pageURL.absoluteString {
-            } else {
-                contentView.viewModel.notificationPageTitle = title
-                contentView.viewModel.notificationPageURL = pageURL
-                contentView.viewModel.pushedByNotification = true
-                return true
-            }
-        }
-//
-//        let webViewController: WebViewController = WebViewController.getController()
-//        if let navController = self.window?.rootViewController as? UINavigationController {
-//            if let existiWebController = navController.topViewController as? WebViewController, existiWebController.pageURL.absoluteString ==  pageURL.absoluteString {
+//        guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene else { return false }
+//        if let contentView = (windowScene.windows[0].rootViewController as? UIHostingController<HomeView>)?.rootView {
+//            
+//            if contentView.viewModel.pushedByNotification == true && contentView.viewModel.notificationPageURL?.absoluteString == pageURL.absoluteString {
 //            } else {
-//                webViewController.title = title
-//                webViewController.pageURL = pageURL
-//                navController.pushViewController(webViewController, animated: true)
+//                contentView.viewModel.notificationPageTitle = title
+//                contentView.viewModel.notificationPageURL = pageURL
+//                contentView.viewModel.pushedByNotification = true
 //                return true
 //            }
 //        }
+        
+        let webViewController: WebViewController = WebViewController.getController()
+        if let navController = self.window?.rootViewController as? UINavigationController {
+            if let existiWebController = navController.topViewController as? WebViewController, existiWebController.pageURL.absoluteString ==  pageURL.absoluteString {
+            } else {
+                webViewController.title = title
+                webViewController.pageURL = pageURL
+                navController.pushViewController(webViewController, animated: true)
+                return true
+            }
+        }
         return false
     }
 

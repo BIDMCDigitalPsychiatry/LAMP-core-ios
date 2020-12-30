@@ -1,6 +1,7 @@
 // mindLAMP
 
 import Foundation
+import LAMP
 
 extension Date {
     

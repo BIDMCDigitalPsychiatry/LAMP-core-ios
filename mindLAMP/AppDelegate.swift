@@ -6,12 +6,16 @@
 //
 
 import UIKit
+import Combine
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
     
     var completionHandler: (() -> Void)?
     var window: UIWindow? //for iOS < 13
+    let queue = DispatchQueue(label: "Timer", qos: .background, attributes: .concurrent)
+    var subscriber: AnyCancellable?
+    
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         WatchSessionManager.shared.startSession()
@@ -27,6 +31,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         //Version 1.1.3 Build 70. backward compatibility for already logined users
         shareCredentialsToNotificationExtension()
+        
+        //+for ViewController support
+        self.window = UIWindow(frame: UIScreen.main.bounds)
+        let homeVC = HomeViewController()
+        self.window?.rootViewController = UINavigationController(rootViewController: homeVC)
+        self.window?.makeKeyAndVisible()
 
         return true
     }

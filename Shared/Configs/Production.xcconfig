@@ -4,5 +4,4 @@
 // https://help.apple.com/xcode/#/dev745c5c974
 
 DASHBOARD_URL = https:/$()/dashboard.lamp.digital/#/
-DASHBOARD_API = http:/$()/52.66.237.209:9092
 LAMP_API = https:/$()/api.lamp.digital

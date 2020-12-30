@@ -67,9 +67,7 @@
 		<string>remote-notification</string>
 	</array>
 	<key>WKBackgroundModes</key>
-	<array>
-		<string>physical-therapy</string>
-	</array>
+	<array/>
 	<key>WKExtensionDelegateClassName</key>
 	<string>$(PRODUCT_MODULE_NAME).ExtensionDelegate</string>
 	<key>WKRunsIndependentlyOfCompanionApp</key>
