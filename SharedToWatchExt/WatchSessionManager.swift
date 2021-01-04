@@ -214,7 +214,7 @@ extension WatchSessionManager {
                 try session.updateApplicationContext(applicationContext)
                 print("update context")
             } catch let error {
-                print("update context error \(error.localizedMessage)")
+                print("update context error \(error.localizedDescription)")
             }
         }
     }

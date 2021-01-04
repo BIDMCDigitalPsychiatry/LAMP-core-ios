@@ -2,7 +2,6 @@
 //  SceneDelegate.swift
 //  lampv2
 //
-//  Created by Jijo Pulikkottil on 02/01/20.
 //  Copyright © 2020 lamp. All rights reserved.
 //
 

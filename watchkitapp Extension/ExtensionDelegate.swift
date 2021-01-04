@@ -3,12 +3,15 @@
 import WatchKit
 import UserNotifications
 import WatchConnectivity
+import LAMP
+import Combine
 
 class ExtensionDelegate: NSObject, WKExtensionDelegate {
     
     // An array to keep the background tasks.
     //
     private var wcBackgroundTasks = [WKWatchConnectivityRefreshBackgroundTask]()
+    private var subscriber: AnyCancellable?
     
     func applicationDidFinishLaunching() {
         
@@ -151,7 +154,7 @@ extension ExtensionDelegate {
     }
     
     func didFailToRegisterForRemoteNotificationsWithError(_ error: Error) {
-        print("error = \(error.localizedMessage)")
+        print("error = \(error.localizedDescription)")
     }
     
     func didRegisterForRemoteNotifications(withDeviceToken deviceToken: Data) {
@@ -163,14 +166,24 @@ extension ExtensionDelegate {
         if deviceTokenStr != UserDefaults.standard.deviceToken {
             if User.shared.isLogin() {
                 //send to server
+                guard let authheader = Endpoint.getSessionKey(), let participantId = User.shared.userId else {
+                    return
+                }
+                OpenAPIClientAPI.basePath = LampURL.baseURLString
+                OpenAPIClientAPI.customHeaders = ["Authorization": "Basic \(authheader)", "Content-Type": "application/json"]
                 let tokenInfo = DeviceInfoWithToken(deviceToken: deviceTokenStr, userAgent: UserAgent.defaultAgent, action: nil)
-                let tokenRerquest = PushNotification.UpdateTokenRequest(deviceInfoWithToken: tokenInfo)
-                let lampAPI = NotificationAPI(NetworkConfig.networkingAPI(isBackgroundSession: false))
-                
-                lampAPI.sendDeviceToken(request: tokenRerquest) { (isSuccess) in
-                    if isSuccess {
+               
+                let event = SensorEvent(timestamp: Date().timeInMilliSeconds, sensor: SensorType.lamp_analytics.lampIdentifier, data: tokenInfo)
+                let publisher = SensorEventAPI.sensorEventCreate(participantId: participantId, sensorEvent: event, apiResponseQueue: DispatchQueue.global())
+                subscriber = publisher.sink { value in
+                    switch value {
+                    case .failure(let error):
+                        printError("loginSensorEventCreate error \(error.localizedDescription)")
+                    case .finished:
                         UserDefaults.standard.deviceToken = deviceTokenStr
                     }
+                } receiveValue: { (stringValue) in
+                    print("APNS register = \(stringValue)")
                 }
             } else {
                 UserDefaults.standard.deviceToken = deviceTokenStr
@@ -185,13 +198,18 @@ extension ExtensionDelegate {
     func didReceiveRemoteNotification(_ userInfo: [AnyHashable : Any], fetchCompletionHandler completionHandler: @escaping (WKBackgroundFetchResult) -> Void) {
         //check notification payload
         print("remote APNS")
+
         //update server
-        let payLoadInfo = PayLoadInfo(userInfo: userInfo, userAgent: UserAgent.defaultAgent)
-        let timeStamp = Date().timeIntervalSince1970 * 1000
-        let acknoledgeRequest = PushNotification.UpdateReadRequest(timeInterval: timeStamp, payLoadInfo: payLoadInfo)
-        let lampAPI = NotificationAPI(NetworkConfig.networkingAPI())
-        lampAPI.sendPushAcknowledgement(request: acknoledgeRequest){}
-        
+        let payLoadInfo = PayLoadInfo(action: SensorType.AnalyticAction.notification.rawValue, userInfo: userInfo, userAgent: UserAgent.defaultAgent)
+        let timeStamp = Date().timeIntervalSince1970
+        let acknoledgeRequest = UpdateReadRequest(timeInterval: timeStamp, sensor: SensorType.lamp_analytics.lampIdentifier, payLoadInfo: payLoadInfo)
+        guard let authheader = Endpoint.getSessionKey(), let participantId = User.shared.userId else {
+            return
+        }
+        OpenAPIClientAPI.basePath = LampURL.baseURLString
+        OpenAPIClientAPI.customHeaders = ["Authorization": "Basic \(authheader)", "Content-Type": "application/json"]
+        let publisher = SensorEventAPI.pushReceiptEventCreate(participantId: participantId, sensorEvent: acknoledgeRequest.toJSON(), apiResponseQueue: DispatchQueue.global())
+        subscriber = publisher.sink {_ in } receiveValue: {_ in }
         LMSensorManager.shared.checkIsRunning()
     }
 }

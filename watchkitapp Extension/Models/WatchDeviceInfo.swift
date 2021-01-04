@@ -2,6 +2,7 @@
 
 import Foundation
 import WatchKit
+import LAMP
 
 extension UserAgent {
     static  var defaultAgent: UserAgent {

@@ -20,7 +20,7 @@ class BackgroundServices {
             }
             self.isInProgress = true
             let dispatchQueue = OperationQueue()
-            dispatchQueue.maxConcurrentOperationCount = 1
+            dispatchQueue.maxConcurrentOperationCount = 2
             self.postSensorData(dispatchQueue)
             self.putLogsData(dispatchQueue)
 
@@ -34,25 +34,20 @@ class BackgroundServices {
 extension BackgroundServices {
     
     func postSensorData(_ dispatchQueue: OperationQueue) {
-        guard let userID = User.shared.userId else { return }
+        
         let arrSensorData = SensorLogs.shared.fetchSensorRequest()
-        let endPoint =  String(format: Endpoint.participantSensorEvent.rawValue, userID)
         for fileAndRequest in arrSensorData {
-            let requestData = RequestData(endpoint: endPoint, requestTye: .post, data: fileAndRequest.1)
-            let operation = BackgroundOperation(request: requestData, fileName: fileAndRequest.0)
+            let operation = BackgroundOperation(sensorRequest: fileAndRequest.1, fileName: fileAndRequest.0)
             dispatchQueue.addOperation(operation)
         }
     }
     
     func putLogsData(_ dispatchQueue: OperationQueue) {
+        
         let arrLogsData = LMLogsManager.shared.fetchLogsRequest()
-        let endPoint =  Endpoint.logs.rawValue
         for logRequest in arrLogsData {
-            let logsData = logRequest.1
-            let request = RequestData(endpoint: endPoint, requestTye: .put, urlParams: logsData.urlParams, data: logsData.dataBody)
-            let operation = BackgroundOperation(request: request, connection: NetworkConfig.logsNetworkingAPI(), opType: .logs, fileName: logRequest.0)
+            let operation = BackgroundOperation(logRequest: logRequest.1, fileName: logRequest.0)
             dispatchQueue.addOperation(operation)
         }
-         
     }
 }

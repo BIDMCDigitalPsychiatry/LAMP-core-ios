@@ -2,6 +2,7 @@
 
 import Foundation
 import UIKit
+import LAMP
 
 extension UserAgent {
     static var defaultAgent: UserAgent {

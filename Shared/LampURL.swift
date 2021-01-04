@@ -9,8 +9,8 @@ public enum Environment {
     enum Keys {
       enum Plist {
         static let dashboardURL = "DASHBOARD_URL"
-        static let dashboardAPI = "DASHBOARD_API"
-        static let lampAPI = "LAMP_API"
+        //static let dashboardAPI = "DASHBOARD_API"
+        static let OpenAPIClientAPI = "LAMP_API"
       }
     }
     
@@ -30,15 +30,15 @@ public enum Environment {
         return dasgboardURLstring
     }()
     
-    static let dashboardAPI: String = {
-        guard let endPoint = Environment.infoDictionary[Keys.Plist.dashboardAPI] as? String else {
-            fatalError("API Key not set in plist for this environment")
-        }
-        return endPoint
-    }()
+//    static let dashboardAPI: String = {
+//        guard let endPoint = Environment.infoDictionary[Keys.Plist.dashboardAPI] as? String else {
+//            fatalError("API Key not set in plist for this environment")
+//        }
+//        return endPoint
+//    }()
     
-    static let lampAPI: String = {
-        guard let endPoint = Environment.infoDictionary[Keys.Plist.lampAPI] as? String else {
+    static let OpenAPIClientAPI: String = {
+        guard let endPoint = Environment.infoDictionary[Keys.Plist.OpenAPIClientAPI] as? String else {
             fatalError("API Key not set in plist for this environment")
         }
         return endPoint
@@ -54,7 +54,15 @@ struct LampURL {
     static let dashboardDigitalURLText = (UserDefaults.standard.launchURL ?? Environment.dashboardURL)// + "?a="
     //static let loginLocalHost = "http://127.0.0.1:5000/login"
     static let logsDigital = "https://logs.lamp.digital"
-    static let dashboardURL = Environment.dashboardAPI
-    static let lampAPI = Environment.lampAPI
+    //static let dashboardURL = Environment.dashboardAPI
+    static let OpenAPIClientAPI = Environment.OpenAPIClientAPI
+    
+    static var baseURLString: String {
+        if let url = UserDefaults.standard.serverAddress {
+            return url
+        } else {
+            return LampURL.OpenAPIClientAPI
+        }
+    }
     
 }

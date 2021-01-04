@@ -7,12 +7,15 @@
 
 import UIKit
 import WebKit
+import LAMP
+import Combine
 
 class HomeViewController: UIViewController {
     
     private var wkWebView: WKWebView!
     private var loadingObservation: NSKeyValueObservation?
     private var isWebpageLoaded = false
+    var subscriber: AnyCancellable?
     //var isHomePageLoaded = false
     //@IBOutlet weak var containerView: UIView!
     private lazy var indicator: UIActivityIndicatorView  = {
@@ -43,22 +46,19 @@ class HomeViewController: UIViewController {
         if appState != UIApplication.State.background {
             loadWebPage()
         }
+        NotificationCenter.default.addObserver(self, selector: #selector(updateWatchOS(_:)),
+                                               name: UIApplication.didBecomeActiveNotification, object: nil)
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         // Hide the navigation bar on the this view controller
         self.navigationController?.setNavigationBarHidden(true, animated: animated)
-        
-        NotificationCenter.default.addObserver(self, selector: #selector(updateWatchOS(_:)),
-                                               name: UIApplication.didBecomeActiveNotification, object: nil)
-        
     }
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         // Show the navigation bar on other view controllers
         self.navigationController?.setNavigationBarHidden(false, animated: animated)
-        NotificationCenter.default.removeObserver(self, name: UIApplication.didBecomeActiveNotification, object: nil)
     }
     
     override func didReceiveMemoryWarning() {
@@ -68,6 +68,7 @@ class HomeViewController: UIViewController {
 
     deinit {
         wkWebView.stopLoading()
+        NotificationCenter.default.removeObserver(self, name: UIApplication.didBecomeActiveNotification, object: nil)
         wkWebView.configuration.userContentController.removeScriptMessageHandler(forName: ScriptMessageHandler.login.rawValue)
         wkWebView.configuration.userContentController.removeScriptMessageHandler(forName: ScriptMessageHandler.logout.rawValue)
     }
@@ -129,7 +130,6 @@ private extension HomeViewController {
         if UserDefaults.standard.version == nil {
             if User.shared.isLogin() == true {
                 print("self.lampDashboardURLwithToken = \(self.lampDashboardURLwithToken)")
-                //wkWebView.load(URLRequest(url: URL(string: "https://www.google.com")!))
                 wkWebView.load(URLRequest(url: self.lampDashboardURLwithToken))
             } else {
                 print("LampURL.dashboardDigital = \(LampURL.dashboardDigital)")
@@ -137,10 +137,8 @@ private extension HomeViewController {
             }
         } else {
             // Do any additional setup after loading the view.
-            //ToDO: NodeManager.shared.startNodeServer()
             let deadlineTime = DispatchTime.now() + .seconds(5)
             DispatchQueue.main.asyncAfter(deadline: deadlineTime) {
-                //NodeManager.shared.getServerStatus()
                 self.wkWebView.load(URLRequest(url: LampURL.dashboardDigital))
             }
         }
@@ -172,24 +170,45 @@ private extension HomeViewController {
         
         //call lamp.analytics for login
         let deviceToken = UserDefaults.standard.deviceToken
-        
+        guard let authheader = Endpoint.getSessionKey(), let participantId = User.shared.userId else {
+            return
+        }
+        OpenAPIClientAPI.basePath = LampURL.baseURLString
+        OpenAPIClientAPI.customHeaders = ["Authorization": "Basic \(authheader)", "Content-Type": "application/json"]
         let tokenInfo = DeviceInfoWithToken(deviceToken: deviceToken, userAgent: UserAgent.defaultAgent, action: SensorType.AnalyticAction.login.rawValue)
-        let tokenRerquest = PushNotification.UpdateTokenRequest(deviceInfoWithToken: tokenInfo)
-        let lampAPI = NotificationAPI(NetworkConfig.networkingAPI())
-        
-        lampAPI.sendDeviceToken(request: tokenRerquest) {_ in }
+       
+        let event = SensorEvent(timestamp: Date().timeInMilliSeconds, sensor: SensorType.lamp_analytics.lampIdentifier, data: tokenInfo)
+        let publisher = SensorEventAPI.sensorEventCreate(participantId: participantId, sensorEvent: event, apiResponseQueue: DispatchQueue.global())
+        subscriber = publisher.sink { value in
+            switch value {
+            case .failure(let error):
+                printError("loginSensorEventCreate error \(error.localizedDescription)")
+            case .finished:
+                break
+            }
+        } receiveValue: { (stringValue) in
+            print("login receiveValue = \(stringValue)")
+        }
     }
     
     func performOnLogout() {
         
         //send lamp.analytics for logout
-        let tokenInfo = DeviceInfoWithToken(deviceToken: nil, userAgent: UserAgent.defaultAgent, action: SensorType.AnalyticAction.logout.rawValue)
-        let tokenRerquest = PushNotification.UpdateTokenRequest(deviceInfoWithToken: tokenInfo)
-        let lampAPI = NotificationAPI(NetworkConfig.networkingAPI())
-        
-        lampAPI.sendDeviceToken(request: tokenRerquest) {_ in
+        guard let authheader = Endpoint.getSessionKey(), let participantId = User.shared.userId else {
             NotificationHelper.shared.removeAllNotifications()
             User.shared.logout()
+            return
+        }
+        OpenAPIClientAPI.basePath = LampURL.baseURLString
+        OpenAPIClientAPI.customHeaders = ["Authorization": "Basic \(authheader)", "Content-Type": "application/json"]
+        let tokenInfo = DeviceInfoWithToken(deviceToken: nil, userAgent: UserAgent.defaultAgent, action: SensorType.AnalyticAction.logout.rawValue)
+        let event = SensorEvent(timestamp: Date().timeInMilliSeconds, sensor: SensorType.lamp_analytics.lampIdentifier, data: tokenInfo)
+        let publisher = SensorEventAPI.sensorEventCreate(participantId: participantId, sensorEvent: event)
+        subscriber = publisher.sink { _ in
+            NotificationHelper.shared.removeAllNotifications()
+            User.shared.logout()
+        } receiveValue: { (stringValue) in
+            print("login receiveValue = \(stringValue)")
         }
     }
     

@@ -20,36 +20,36 @@ extension DictionaryEncodable {
         return dict
     }
 }
-
-extension KeyedDecodingContainer {
-    public func decode<T: Decodable>(_ key: Key, as type: T.Type = T.self) throws -> T {
-        return try self.decode(T.self, forKey: key)
-    }
-    
-    public func decodeIfPresent<T: Decodable>(_ key: KeyedDecodingContainer.Key) throws -> T? {
-        return try decodeIfPresent(T.self, forKey: key)
-    }
-}
-
-struct Safe<Base: Decodable>: Decodable {
-    enum MyStructKeys: String, CodingKey { // declaring our keys
-        case errorCode
-        case error
-        //case data
-    }
-
-    let value: Base
-    var errorCode: Int?
-    var errorMessage: String?
-    init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: MyStructKeys.self) // defining our (keyed) container
-
-        if let error = try container.decodeIfPresent(String.self, forKey: .error) {
-            throw NetworkError.errorResponse(error)
-        }
-
-        //value = try container.decode(.data)
-        let container2 = try decoder.singleValueContainer()
-        value = try container2.decode(Base.self)
-    }
-}
+//
+//extension KeyedDecodingContainer {
+//    public func decode<T: Decodable>(_ key: Key, as type: T.Type = T.self) throws -> T {
+//        return try self.decode(T.self, forKey: key)
+//    }
+//    
+//    public func decodeIfPresent<T: Decodable>(_ key: KeyedDecodingContainer.Key) throws -> T? {
+//        return try decodeIfPresent(T.self, forKey: key)
+//    }
+//}
+//
+//struct Safe<Base: Decodable>: Decodable {
+//    enum MyStructKeys: String, CodingKey { // declaring our keys
+//        case errorCode
+//        case error
+//        //case data
+//    }
+//
+//    let value: Base
+//    var errorCode: Int?
+//    var errorMessage: String?
+//    init(from decoder: Decoder) throws {
+//        let container = try decoder.container(keyedBy: MyStructKeys.self) // defining our (keyed) container
+//
+//        if let error = try container.decodeIfPresent(String.self, forKey: .error) {
+//            throw NetworkError.errorResponse(error)
+//        }
+//
+//        //value = try container.decode(.data)
+//        let container2 = try decoder.singleValueContainer()
+//        value = try container2.decode(Base.self)
+//    }
+//}

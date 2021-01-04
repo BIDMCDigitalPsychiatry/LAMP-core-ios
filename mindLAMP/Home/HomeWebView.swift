@@ -2,7 +2,6 @@
 //  WebView.swift
 //  lampv2
 //
-//  Created by Jijo Pulikkottil on 02/01/20.
 //  Copyright © 2020 lamp. All rights reserved.
 //
 
@@ -12,9 +11,10 @@ import WebKit
 struct HomeWebView: UIViewRepresentable {
     
     let viewModel: HomeWebViewModel
+    @Binding var contentHeight: CGFloat//+20201222
     
     func makeCoordinator() -> Coordinator {
-        Coordinator(viewModel)
+        Coordinator(viewModel, contentHeight: $contentHeight)
     }
 
     func makeUIView(context: Context) -> WKWebView {
@@ -32,6 +32,7 @@ struct HomeWebView: UIViewRepresentable {
         let webView = WKWebView(frame: .zero, configuration: configuration)
         webView.allowsBackForwardNavigationGestures = true
         webView.navigationDelegate = context.coordinator
+        webView.scrollView.isScrollEnabled = false//+20201222
 
         return webView
     }
@@ -42,6 +43,7 @@ struct HomeWebView: UIViewRepresentable {
         if appState != UIApplication.State.background {
             
             viewModel.isWebpageLoaded = true
+            print("viewModel.homeURL = \(viewModel.homeURL.absoluteString)")
             uiView.load(URLRequest(url: viewModel.homeURL))
         }
     }
@@ -49,20 +51,35 @@ struct HomeWebView: UIViewRepresentable {
     class Coordinator: NSObject, WKNavigationDelegate {
         
         weak var viewModel: HomeWebViewModel?
+        @Binding var contentHeight: CGFloat
+        var resized = false
 
-        init(_ viewModel: HomeWebViewModel) {
+        init(_ viewModel: HomeWebViewModel, contentHeight: Binding<CGFloat>) {
             self.viewModel = viewModel
+            self._contentHeight = contentHeight
         }
         
         func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
             print("WebView: navigation finished")
             viewModel?.shouldAnimate = false
+            //+20201222
+            webView.evaluateJavaScript("document.readyState") { complete, _ in
+                            guard complete != nil else { return }
+                            webView.evaluateJavaScript("document.body.scrollHeight") { height, _ in
+                                guard let height = height as? CGFloat else { return }
+
+                                if !self.resized {
+                                    self.contentHeight = height
+                                    self.resized = true
+                                }
+                            }
+                        }
         }
     }
 }
 
-struct HomeWebView_Previews: PreviewProvider {
-    static var previews: some View {
-        HomeWebView(viewModel: HomeWebViewModel())
-    }
-}
+//struct HomeWebView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        HomeWebView(viewModel: HomeWebViewModel())
+//    }
+//}

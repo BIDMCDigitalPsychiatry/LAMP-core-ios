@@ -6,7 +6,7 @@
 //
 
 import Foundation
-import Sensors
+import LAMP
 
 extension LMSensorManager: SensorStore {
     
