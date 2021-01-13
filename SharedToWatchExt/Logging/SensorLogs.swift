@@ -13,7 +13,15 @@ class SensorLogs {
     // MARK: - VARIABLES
     
     // MARK: - METHODS
-    private init() {}
+    private init() {
+        
+//        let url = FileManager.default.urls(for: FileManager.SearchPathDirectory.documentDirectory, in: .userDomainMask).first
+//        do {
+//            try FileManager.default.setAttributes([FileAttributeKey.protectionKey : FileProtectionType], ofItemAtPath: url!.path)
+//        } catch {
+//
+//        }
+    }
     
     func createSensorLogsDirectory() {
         FileStorage.createDirectory(name: Logs.Directory.sensorlogs, in: .documents)

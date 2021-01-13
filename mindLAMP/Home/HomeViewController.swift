@@ -203,7 +203,7 @@ private extension HomeViewController {
         OpenAPIClientAPI.customHeaders = ["Authorization": "Basic \(authheader)", "Content-Type": "application/json"]
         let tokenInfo = DeviceInfoWithToken(deviceToken: nil, userAgent: UserAgent.defaultAgent, action: SensorType.AnalyticAction.logout.rawValue)
         let event = SensorEvent(timestamp: Date().timeInMilliSeconds, sensor: SensorType.lamp_analytics.lampIdentifier, data: tokenInfo)
-        let publisher = SensorEventAPI.sensorEventCreate(participantId: participantId, sensorEvent: event)
+        let publisher = SensorEventAPI.sensorEventCreate(participantId: participantId, sensorEvent: event, apiResponseQueue: DispatchQueue.global())
         subscriber = publisher.sink { _ in
             NotificationHelper.shared.removeAllNotifications()
             User.shared.logout()

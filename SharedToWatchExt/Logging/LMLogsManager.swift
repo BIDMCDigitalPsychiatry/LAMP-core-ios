@@ -12,6 +12,7 @@ import LAMP
 class LMLogsManager {
     
     static let shared = LMLogsManager()
+    var lastReportedLog: String?
     // MARK: - VARIABLES
     
     // MARK: - METHODS
@@ -22,6 +23,23 @@ class LMLogsManager {
     }
     
     func addLogs(level: LogsLevel, logs: String) {
+        //To prevent repeated same logs
+
+        if lastReportedLog == logs {
+            return
+        }
+//        lastReportedLog = logs
+//
+//        //To prevent logging of already reported ogs with level less than error
+//        if level.levelValue < LogsLevel.error.levelValue && LogsType.errorsReported.contains(logs) {
+//            return
+//        }
+//        LogsType.errorsReported.append(logs)
+        
+//        if level.levelValue < LogsLevel.error.levelValue && lastReportedLog == logs {
+//            return
+//        }
+        
         let userAgent = UserAgent.defaultAgent.toString()
         let body = LogsData.Body(userId: User.shared.userId, userAgent: userAgent, message: logs)
         let params = LogsData.Params(origin: Logs.URLParams.origin, level: level)

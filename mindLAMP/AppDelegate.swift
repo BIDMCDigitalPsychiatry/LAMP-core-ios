@@ -37,7 +37,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let homeVC = HomeViewController()
         self.window?.rootViewController = UINavigationController(rootViewController: homeVC)
         self.window?.makeKeyAndVisible()
-
+        
         return true
     }
  

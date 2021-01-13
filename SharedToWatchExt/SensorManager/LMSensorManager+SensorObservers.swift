@@ -13,19 +13,28 @@ extension LMSensorManager: SensorStore {
     @objc
     func timeToStore() {
         
+        
+        
+        let dateStr = dateFormatter.string(from: Date())
+        
+        printToFile("fetch now \(dateStr)")
         #if os(iOS)
         if lampScreenSensor?.latestScreenState?.rawValue != ScreenState.screen_locked.rawValue {
             sensor_healthKit?.fetchHealthData()
         } else {
-            printToFile("\nScreen locked")
+            printToFile("Screen locked")
         }
         sensor_wifi?.startScanning()
 
         //set 15 seconds delay to fetch all healthkit data
+        printToFile("15 seconds delay")
         DispatchQueue.global().asyncAfter(deadline: .now() + 15) {
-            
+            printToFile("----")
             self.sensor_wifi?.stopScanning()
-            if self.sensor_location == nil { return } //stop syncing if sensors are stopped
+            if self.sensor_location == nil {
+                printToFile("\ndeallocated")
+                return } //stop syncing if sensors are stopped
+            printToFile("--syncToServer--")
             self.syncToServer()
         }
         #elseif os(watchOS)
@@ -36,18 +45,20 @@ extension LMSensorManager: SensorStore {
     func syncToServer() {
         let request = self.getSensorDataRequest()
         SensorLogs.shared.storeSensorRequest(request)//store to disk
-        print("\n stored file -- @ \(Date())")
-        
+        printToFile("stored file -- @ \(Date())")
+
         //check battery state
-        guard BatteryState.shared.isLowPowerEnabled == false else { return }
+        guard BatteryState.shared.isLowPowerEnabled == false else {
+            printToFile("isLowPowerEnabled")
+            return }
         //syncing to server for alternate fetch.
         if self.isSyncNow {
             self.isSyncNow = false
             self.startWatchSensors()
-            printToFile("\n stored file and sync @ \(Date())")
+            printToFile("stored file and sync @ \(Date())")
             BackgroundServices.shared.performTasks()
         } else {
-            printToFile("\n stored file @ \(Date())")
+            printToFile("stored file @ \(Date())")
             self.isSyncNow = true
         }
     }
@@ -58,7 +69,6 @@ extension LMSensorManager: ActivitySensorObserver {
     
     func onDataChanged(data: ActivityData) {
         queueActivityData.async(flags: .barrier) {
-            print("ActivityData = \(data.activity)")
             self.activityDataBuffer.append(data)
         }
     }
@@ -68,6 +78,8 @@ extension LMSensorManager: ActivitySensorObserver {
 extension LMSensorManager: AccelerometerObserver {
     
     func onDataChanged(data: AccelerometerData) {
+        //let accDate = Date.init(timeIntervalSince1970: data.timestamp/1000)
+        //printToFile("AccelerometerData \(dateFormatter.string(from: Date())), \(data.timestamp)")
         queueAccelerometerData.async(flags: .barrier) {
             self.accelerometerDataBufffer.append(data)
         }
@@ -114,6 +126,18 @@ extension LMSensorManager: LocationsObserver {
             self.locationsDataBuffer.append(data)
         }
     }
+    
+    func onError(_ errType: LocationErrorType) {
+        switch errType {
+
+        case .notEnabled, .denied:
+            LMLogsManager.shared.addLogs(level: .error, logs: Logs.Messages.gps_off)
+            showLocationAlert()
+        case .otherErrors(let error):
+            let msg = String(format: Logs.Messages.location_error, error.localizedDescription)
+            LMLogsManager.shared.addLogs(level: .error, logs: msg)
+        }
+    }
 }
 
 // MARK:- PedometerObserver
@@ -133,8 +157,8 @@ extension LMSensorManager: LMHealthKitSensorObserver {
     }
     
     func onHKDataFetch(for type: String, error: Error?) {
-        let logsMessage = String(format: "\(Logs.Messages.hk_data_fetch_error)  Error: %@ for type: %@", error?.localizedDescription ?? "null", type)
-        LMLogsManager.shared.addLogs(level: .error, logs: logsMessage)
+        let logsMessage = String(format: "\(Logs.Messages.hk_data_fetch_error) %@", error?.localizedDescription ?? "null")
+        LMLogsManager.shared.addLogs(level: .warning, logs: logsMessage)
     }
 }
 

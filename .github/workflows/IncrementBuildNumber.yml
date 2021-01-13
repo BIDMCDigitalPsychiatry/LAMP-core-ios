@@ -2,7 +2,7 @@ name: BuildNubmer
 on:
   push:
     branches:
-      - AppGroups
+      - Development
 jobs:
   deploy:
     name: BuildNubmer Incremet
@@ -17,4 +17,4 @@ jobs:
         run: |
           git add .
           git commit -m "bump version"
-          git push origin AppGroups
+          git push origin Development

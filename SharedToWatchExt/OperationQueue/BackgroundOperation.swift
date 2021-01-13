@@ -61,13 +61,31 @@ private extension BackgroundOperation {
         subscriberSensor = publisher.sink { value in
             self.state = .finished
             switch value {
+            case .failure(let ErrorResponse.error(code, data, error)):
+                printError("postSensorData error code\(code), \(error.localizedDescription)")
+                var msg: String?
+                if let data = data {
+                    printError("Error Json: \(String(describing: String(data: data, encoding: String.Encoding.utf8)))")
+                    let decoder = JSONDecoder()
+                    do {
+                        let errResponse = try decoder.decode(ErrResponse.self, from: data)
+                        msg = errResponse.error
+                    } catch let err {
+                        printError("err = \(err.localizedDescription)")
+                    }
+                }
+                let errorMsg = msg ?? error.localizedDescription
+                LMLogsManager.shared.addLogs(level: .error, logs: Logs.Messages.network_error + " " + errorMsg)
+                
             case .failure(let error):
                 printError("postSensorData error \(error.localizedDescription)")
                 if let nsError = error as NSError? {
                     let errorCode = nsError.code
                     /// -1009 is the offline error code
                     /// so log errors other than connection issue
-                    if errorCode != -1009 {
+                    if errorCode == -1009 {
+                        LMLogsManager.shared.addLogs(level: .warning, logs: Logs.Messages.network_error + " " + nsError.localizedDescription)
+                    } else {
                         LMLogsManager.shared.addLogs(level: .error, logs: Logs.Messages.network_error + " " + nsError.localizedDescription)
                     }
                 }
@@ -84,13 +102,20 @@ private extension BackgroundOperation {
     
     func putLogs() {
         
-        guard let participantId = User.shared.userId, let logRequest = logRequest else {
+        guard let authheader = Endpoint.getSessionKey(), let participantId = User.shared.userId, let logRequest = logRequest else {
             return
         }
-        let publisher = LogsAPI.logsCreate(participantId: participantId, logsData: logRequest, apiResponseQueue: DispatchQueue.global())
+        print("put logs now")
+        OpenAPIClientAPI.customHeaders = ["Authorization": "Basic \(authheader)", "Content-Type": "application/json"]
+        let publisher = LogsAPI.logsCreate(participantId: participantId, logsData: logRequest)
         subscriberLogs = publisher.sink { value in
             self.state = .finished
             switch value {
+            case .failure(let ErrorResponse.error(code, data, error)):
+                printError("putLogs error code\(code), \(error.localizedDescription)")
+                if let data = data {
+                    printError("Error Json: \(String(describing: String(data: data, encoding: String.Encoding.utf8)))")
+                }
             case .failure(let error):
                 printError("putLogs error \(error.localizedDescription)")
             case .finished:
@@ -100,7 +125,7 @@ private extension BackgroundOperation {
                 }
             }
         } receiveValue: { (stringValue) in
-            print("postSensorData receiveValue = \(stringValue)")
+            print("putLogs receiveValue = \(stringValue)")
         }
     }
 }
