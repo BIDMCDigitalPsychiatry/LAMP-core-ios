@@ -6,6 +6,14 @@
 //
 
 import Foundation
+
+//struct LogsType {
+//    static var errorsReported: [String] = []
+//}
+
+struct ErrResponse: Decodable {
+    let error: String?
+}
 //import MONetworking
 
 //enum LogsLevel: String {

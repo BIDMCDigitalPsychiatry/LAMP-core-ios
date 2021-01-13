@@ -38,7 +38,7 @@ public class FileStorage {
         do {
             try FileManager.default.createDirectory(atPath: (urlPath.path), withIntermediateDirectories: true, attributes: [kCFURLIsExcludedFromBackupKey as FileAttributeKey: true])
         } catch let error as NSError {
-            print(error.localizedDescription)
+            printError(error.localizedDescription)
         }
     }
     
@@ -76,6 +76,7 @@ public class FileStorage {
             }
             FileManager.default.createFile(atPath: url.path, contents: data, attributes: nil)
         } catch {
+            printToFile("store file \(error.localizedDescription)")
             print(error.localizedDescription)
         }
     }
@@ -108,6 +109,7 @@ public class FileStorage {
                 return nil
             }
         } else {
+            printToFile("retrieve file content no data")
             print("No data at \(url.path)!")
             return nil
         }

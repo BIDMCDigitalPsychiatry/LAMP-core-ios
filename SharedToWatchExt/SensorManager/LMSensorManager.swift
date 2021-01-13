@@ -21,6 +21,13 @@ import WatchKit
 
 class LMSensorManager {
     
+    lazy var dateFormatter: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.locale = Locale(identifier: "en_US_POSIX")
+        formatter.timeStyle = DateFormatter.Style.medium
+        formatter.dateStyle = DateFormatter.Style.medium
+        return formatter
+    }()
     //singleton object
     static let shared: LMSensorManager = LMSensorManager()
     let storeSensorDataIntervalInMinutes = 5.0 //minutes
@@ -105,6 +112,7 @@ class LMSensorManager {
     
     @objc private func appDidEnterBackground() {
         #if os(iOS)
+        printToFile("appDidEnterBackground")
         //sensor_motionManager?.restartMotionUpdates(). this is doing inside the motion sensor class
         sensor_location?.locationManager.stopMonitoringSignificantLocationChanges()
         sensor_location?.locationManager.startMonitoringSignificantLocationChanges()
@@ -121,7 +129,7 @@ class LMSensorManager {
         
         setupCallsSensor()
         setupScreenSensor()
-
+        
         setupBluetoothSensor()
         setupHealthKitSensor()
         setupPedometerSensor()
@@ -148,9 +156,7 @@ class LMSensorManager {
     
     /// To start sensors observing.
     private func startSensors() {
-        
-        self.isStarted = true
-        
+
         initiateSensors()
         printToFile("\nStarting sensors")
         sensorManager.startAllSensors()
@@ -171,7 +177,12 @@ class LMSensorManager {
     
     /// To stop sensors observing.
     func stopSensors() {
+        
         printToFile("\nStopping senors")
+        isStarted = false
+        self.sensorApiTimer?.invalidate()
+        self.sensorApiTimer = nil
+        
         sensorManager.stopAllSensors()
         
         sensor_pedometer?.removeSavedTimestamps()
@@ -195,13 +206,56 @@ class LMSensorManager {
         return SensorData.Request(sensorEvents: getSensorDataArrray())
     }
     
+    func runevery(seconds: Double, closure: @escaping () -> ()) {
+        
+//        DispatchQueue.global(qos: DispatchQoS.QoSClass.background).asyncAfter(deadline: .now() + seconds) {
+//            closure()
+//            self.runevery(seconds: seconds, closure: closure)
+//        }
+    }
+    
+    func runevery(seconds: Double) {
+        DispatchQueue.global(qos: DispatchQoS.QoSClass.default).async {
+            self.sensorApiTimer?.invalidate()
+            self.sensorApiTimer = nil
+            
+            self.sensorApiTimer = Timer.scheduledTimer(timeInterval: seconds, target: self, selector: #selector(self.timeToStore), userInfo: nil, repeats: true)
+            RunLoop.current.add(self.sensorApiTimer!, forMode: .common)
+            RunLoop.current.run()
+        }
+        
+    }
+    
     func checkIsRunning() {
+        guard User.shared.isLogin() else {
+            printToFile("\nNot logined")
+            return }
         if self.isStarted == false {
-            if User.shared.isLogin() {
-                startSensors()
-            }
+            self.isStarted = true
+            startSensors()
+
+            runevery(seconds: storeSensorDataIntervalInMinutes * 60)
         }
         BackgroundServices.shared.performTasks()
+    }
+    
+    func showLocationAlert() {
+        #if os(iOS)
+        let alertController = UIAlertController(title: "Location Permission Required", message: "Please enable location permissions in settings.", preferredStyle: .alert)
+        
+        let okAction = UIAlertAction(title: "Settings", style: .default, handler: {(cAlertAction) in
+            //Redirect to Settings app
+            UIApplication.shared.open(URL(string:UIApplication.openSettingsURLString)!)
+        })
+        
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
+        alertController.addAction(cancelAction)
+        
+        alertController.addAction(okAction)
+        
+        let appdelegate = UIApplication.shared.delegate as! AppDelegate
+        appdelegate.window?.rootViewController?.present(alertController, animated: true, completion: nil)
+        #endif
     }
 }
 
@@ -217,7 +271,7 @@ private extension LMSensorManager {
             
             config.sensorTimerDelegate = self
             
-            config.sensorTimerDataStoreInterval = storeSensorDataIntervalInMinutes * 60.0
+            //config.sensorTimerDataStoreInterval = storeSensorDataIntervalInMinutes * 60.0
         }))
         sensorManager.addSensor(sensor_motionManager!)
     }
@@ -346,7 +400,7 @@ private extension LMSensorManager {
             // perform read and assign value
             dataArray = accelerometerDataBufffer
         }
-
+        printToFile("accelerometer count \(dataArray.count)")
         queueAccelerometerData.async(flags: .barrier) {
             self.accelerometerDataBufffer.removeAll(keepingCapacity: true)
         }
@@ -363,7 +417,7 @@ private extension LMSensorManager {
             // perform read and assign value
             dataArray = gyroscopeDataBufffer
         }
-
+        
         queueGyroscopeData.async(flags: .barrier) {
             self.gyroscopeDataBufffer.removeAll(keepingCapacity: true)
         }
@@ -380,7 +434,7 @@ private extension LMSensorManager {
             // perform read and assign value
             dataArray = magnetometerDataBufffer
         }
-
+        
         queueMagnetometerData.async(flags: .barrier) {
             self.magnetometerDataBufffer.removeAll(keepingCapacity: true)
         }
@@ -397,7 +451,7 @@ private extension LMSensorManager {
             // perform read and assign value
             dataArray = motionDataBuffer
         }
-
+        
         queueMotionData.async(flags: .barrier) {
             self.motionDataBuffer.removeAll(keepingCapacity: true)
         }
@@ -421,7 +475,7 @@ private extension LMSensorManager {
             // perform read and assign value
             dataArray = activityDataBuffer
         }
-
+        
         queueActivityData.async(flags: .barrier) {
             self.activityDataBuffer.removeAll(keepingCapacity: true)
         }
@@ -438,7 +492,7 @@ private extension LMSensorManager {
             // perform read and assign value
             dataArray = locationsDataBuffer
         }
-
+        
         queueLocationsData.async(flags: .barrier) {
             self.locationsDataBuffer.removeAll(keepingCapacity: true)
         }
@@ -455,7 +509,7 @@ private extension LMSensorManager {
             // perform read and assign value
             dataArray = callsDataBuffer
         }
-
+        
         queueCallsData.async(flags: .barrier) {
             self.callsDataBuffer.removeAll(keepingCapacity: true)
         }
@@ -472,7 +526,7 @@ private extension LMSensorManager {
             // perform read and assign value
             dataArray = screenStateDataBuffer
         }
-
+        
         queueScreenStateData.async(flags: .barrier) {
             self.screenStateDataBuffer.removeAll(keepingCapacity: true)
         }
@@ -526,7 +580,7 @@ private extension LMSensorManager {
             averageActivePaceModel.value = data.averageActivePace
             arrayData.append(SensorEvent(timestamp: Double(data.timestamp), sensor: SensorType.lamp_avgActivePace.lampIdentifier, data: averageActivePaceModel))
         }
-
+        
         return arrayData
     }
     
@@ -629,7 +683,7 @@ private extension LMSensorManager {
         guard let quantityTypes: [HKQuantityTypeIdentifier] = sensor_healthKit?.healthQuantityTypes.map( {HKQuantityTypeIdentifier(rawValue: $0.identifier)} ) else { return nil }
         for quantityType in quantityTypes {
             switch quantityType {
-                
+            
             case .bloodPressureSystolic:
                 if let dataDiastolic = latestData(for: HKQuantityTypeIdentifier.bloodPressureDiastolic, in: arrData), let dataSystolic = latestData(for: HKQuantityTypeIdentifier.bloodPressureSystolic, in: arrData) {
                     var model = SensorDataModel()

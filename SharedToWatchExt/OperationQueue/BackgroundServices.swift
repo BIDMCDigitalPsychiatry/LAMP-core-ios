@@ -36,6 +36,7 @@ extension BackgroundServices {
     func postSensorData(_ dispatchQueue: OperationQueue) {
         
         let arrSensorData = SensorLogs.shared.fetchSensorRequest()
+        printToFile("arrSensorData count = \(arrSensorData.count)")
         for fileAndRequest in arrSensorData {
             let operation = BackgroundOperation(sensorRequest: fileAndRequest.1, fileName: fileAndRequest.0)
             dispatchQueue.addOperation(operation)
@@ -43,7 +44,6 @@ extension BackgroundServices {
     }
     
     func putLogsData(_ dispatchQueue: OperationQueue) {
-        
         let arrLogsData = LMLogsManager.shared.fetchLogsRequest()
         for logRequest in arrLogsData {
             let operation = BackgroundOperation(logRequest: logRequest.1, fileName: logRequest.0)

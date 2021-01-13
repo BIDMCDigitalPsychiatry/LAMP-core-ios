@@ -14,8 +14,8 @@ class UserAuth: ObservableObject {
         case loggedIn
     }
     var serverURLDomain: String = LampURL.OpenAPIClientAPI.cleanHostName()
-    var userName: String?//
-    var password: String?//
+    var userName: String?
+    var password: String?
     var subscriber: AnyCancellable?
     
     @Published var shouldAnimate = false
@@ -97,7 +97,7 @@ class UserAuth: ObservableObject {
         
         let tokenInfo = DeviceInfoWithToken(deviceToken: nil, userAgent: UserAgent.defaultAgent, action: SensorType.AnalyticAction.logout.rawValue)
         let event = SensorEvent(timestamp: Date().timeInMilliSeconds, sensor: SensorType.lamp_analytics.lampIdentifier, data: tokenInfo)
-        let publisher = SensorEventAPI.sensorEventCreate(participantId: participantId, sensorEvent: event)
+        let publisher = SensorEventAPI.sensorEventCreate(participantId: participantId, sensorEvent: event, apiResponseQueue: DispatchQueue.global())
         subscriber = publisher.sink { _ in
             User.shared.logout()
         } receiveValue: { (stringValue) in
@@ -112,7 +112,7 @@ class UserAuth: ObservableObject {
     // required to conform to protocol 'ObservableObject'
     //let willChange = PassthroughSubject<UserAuth,Never>()
     func login(userName: String, password: String, completion: ((Bool) -> Void)? ) {
-        
+       
         self.shouldAnimate = true
         let base64 = Data("\(userName):\(password)".utf8).base64EncodedString()
         Endpoint.setSessionKey(base64)
@@ -130,6 +130,21 @@ class UserAuth: ObservableObject {
             guard let self = self else { return }
             print("value = \(value)")
             switch value {
+            case .failure(let ErrorResponse.error(code, data, error)):
+                printError("login error code\(code), \(error.localizedDescription)")
+                var msg: String?
+                if let data = data {
+                    let decoder = JSONDecoder()
+                    do {
+                        let errResponse = try decoder.decode(ErrResponse.self, from: data)
+                        msg = errResponse.error
+                    } catch let err {
+                        printError("err = \(err.localizedDescription)")
+                    }
+                }
+                //self.errorMsg = HTTPURLResponse.localizedString(forStatusCode: code)
+                self.errorMsg = msg ?? error.localizedDescription
+                self.loginStatus = .loginInput
             case .failure(let error):
                 self.errorMsg = error.localizedDescription
                 self.loginStatus = .loginInput
@@ -188,6 +203,7 @@ class UserAuth: ObservableObject {
         guard let authheader = Endpoint.getSessionKey(), let participantId = User.shared.userId else {
             return
         }
+        OpenAPIClientAPI.basePath = LampURL.baseURLString
         OpenAPIClientAPI.customHeaders = ["Authorization": "Basic \(authheader)", "Content-Type": "application/json"]
       
         let event = SensorEvent(timestamp: Date().timeInMilliSeconds, sensor: SensorType.lamp_analytics.lampIdentifier, data: tokenInfo)
