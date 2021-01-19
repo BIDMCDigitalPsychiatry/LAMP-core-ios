@@ -86,10 +86,12 @@ extension UserDefaults {
             self.set(newValue, forKey: UserDefaults.Key.userID.rawValue)
         }
     }
-    
+    var suiteName: String {
+        return LampURL.groupname
+    }
     var userIDShared: String? {
         get {
-            if let userDefaults = UserDefaults(suiteName: "group.digital.lamp.mindlamp") {
+            if let userDefaults = UserDefaults(suiteName: suiteName) {
                 if let value = userDefaults.string(forKey: "userid") {
                     return value
                 }
@@ -97,7 +99,7 @@ extension UserDefaults {
             return nil
         }
         set {
-            if let userDefaults = UserDefaults(suiteName: "group.digital.lamp.mindlamp") {
+            if let userDefaults = UserDefaults(suiteName: suiteName) {
                 if newValue == nil {
                     userDefaults.removeObject(forKey: "userid")
                 } else {
@@ -109,7 +111,7 @@ extension UserDefaults {
     
     var passwordShared: String? {
         get {
-            if let userDefaults = UserDefaults(suiteName: "group.digital.lamp.mindlamp") {
+            if let userDefaults = UserDefaults(suiteName: suiteName) {
                 if let value = userDefaults.string(forKey: "password") {
                     return value
                 }
@@ -117,7 +119,7 @@ extension UserDefaults {
             return nil
         }
         set {
-            if let userDefaults = UserDefaults(suiteName: "group.digital.lamp.mindlamp") {
+            if let userDefaults = UserDefaults(suiteName: suiteName) {
                 if newValue == nil {
                     userDefaults.removeObject(forKey: "password")
                 } else {
@@ -129,7 +131,7 @@ extension UserDefaults {
     
     var serverAddressShared: String? {
         get {
-            if let userDefaults = UserDefaults(suiteName: "group.digital.lamp.mindlamp") {
+            if let userDefaults = UserDefaults(suiteName: suiteName) {
                 if let value = userDefaults.string(forKey: "serverAddress") {
                     return value
                 }
@@ -137,7 +139,7 @@ extension UserDefaults {
             return nil
         }
         set {
-            if let userDefaults = UserDefaults(suiteName: "group.digital.lamp.mindlamp") {
+            if let userDefaults = UserDefaults(suiteName: suiteName) {
                 if newValue == nil {
                     userDefaults.removeObject(forKey: "serverAddress")
                 } else {

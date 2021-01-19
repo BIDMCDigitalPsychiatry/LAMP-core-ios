@@ -109,7 +109,6 @@
 		B2E6A564256F137100E2CBC8 /* BatteryState.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2E6A562256F137100E2CBC8 /* BatteryState.swift */; };
 		B2E6A567256F195000E2CBC8 /* WebViewConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2E6A566256F195000E2CBC8 /* WebViewConfiguration.swift */; };
 		B2E6A568256F195000E2CBC8 /* WebViewConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2E6A566256F195000E2CBC8 /* WebViewConfiguration.swift */; };
-		B2F3CDF6245932B200F211A3 /* StoryboardExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2F3CDF5245932B200F211A3 /* StoryboardExtension.swift */; };
 		B2F70D2E253EAA2E00D70091 /* watchkitextension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = B2704DE224B4A2AC00DE196B /* watchkitextension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		B2FDA83224BF744D000316EE /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2FDA83124BF744D000316EE /* ContentView.swift */; };
 /* End PBXBuildFile section */
@@ -284,7 +283,6 @@
 		B2E6A55F256F11A300E2CBC8 /* UIDeviceExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIDeviceExtension.swift; sourceTree = "<group>"; };
 		B2E6A562256F137100E2CBC8 /* BatteryState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BatteryState.swift; sourceTree = "<group>"; };
 		B2E6A566256F195000E2CBC8 /* WebViewConfiguration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebViewConfiguration.swift; sourceTree = "<group>"; };
-		B2F3CDF5245932B200F211A3 /* StoryboardExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoryboardExtension.swift; sourceTree = "<group>"; };
 		B2FDA83124BF744D000316EE /* ContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -397,7 +395,6 @@
 			children = (
 				B2B8935023D0AD6500321C3E /* DateExtension.swift */,
 				B244A1C123BF4A91007FBDB8 /* FileManager+Extension.swift */,
-				B2F3CDF5245932B200F211A3 /* StoryboardExtension.swift */,
 				B22DF5F1250612E800777D2D /* UserAgentExtension.swift */,
 			);
 			path = Extensions;
@@ -971,7 +968,6 @@
 				B2A15C0A2567A8BE00222717 /* FileStorage.swift in Sources */,
 				B2A15C0C2567A8BE00222717 /* SensorLogs.swift in Sources */,
 				B2A15C082567A8BE00222717 /* Logging.swift in Sources */,
-				B2F3CDF6245932B200F211A3 /* StoryboardExtension.swift in Sources */,
 				B2201C2A257F4DBC00C40183 /* WebViewController.swift in Sources */,
 				B2346CEF2599DE9800EFF347 /* AppInfo.swift in Sources */,
 				B2201C25257F4DBC00C40183 /* HomeViewController.swift in Sources */,

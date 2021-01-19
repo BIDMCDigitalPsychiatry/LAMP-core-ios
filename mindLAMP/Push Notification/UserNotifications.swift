@@ -231,7 +231,7 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
         
 //        guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene else { return false }
 //        if let contentView = (windowScene.windows[0].rootViewController as? UIHostingController<HomeView>)?.rootView {
-//            
+//
 //            if contentView.viewModel.pushedByNotification == true && contentView.viewModel.notificationPageURL?.absoluteString == pageURL.absoluteString {
 //            } else {
 //                contentView.viewModel.notificationPageTitle = title
@@ -241,7 +241,7 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
 //            }
 //        }
         
-        let webViewController: WebViewController = WebViewController.getController()
+        let webViewController = WebViewController()
         if let navController = self.window?.rootViewController as? UINavigationController {
             if let existiWebController = navController.topViewController as? WebViewController, existiWebController.pageURL.absoluteString ==  pageURL.absoluteString {
             } else {

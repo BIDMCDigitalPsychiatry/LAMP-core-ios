@@ -48,6 +48,7 @@ public enum Environment {
 struct LampURL {
     //static let test = "http://127.0.0.1:5000/login"
     //static let dashboardlive = Environment.dashboardURL
+    static var groupname = "group.digital.lamp.mindlamp"
     static var dashboardDigital: URL {
         return URL(string: dashboardDigitalURLText)!
     }
