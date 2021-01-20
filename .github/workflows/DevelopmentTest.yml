@@ -17,7 +17,7 @@ jobs:
         uses: actions/checkout@v2
         env:
           token: ${{ secrets.GITHUB_TOKENN }}
-      - name: set build number
+      - name: set build number to ENV
         run: |
           chmod +x .github/scripts/commit_count.sh
           .github/secrets/commit_count.sh
