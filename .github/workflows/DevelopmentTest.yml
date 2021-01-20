@@ -18,7 +18,7 @@ jobs:
           DATE: "${{ steps.current-time.outputs.formattedTime }}"	
       - name: Checkout repository
         uses: actions/checkout@v2
-        env:
+        with:
           token: ${{ secrets.GITHUB_TOKENN }}
       - uses: yanamura/ios-bump-version@v1
         with:
