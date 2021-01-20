@@ -13,17 +13,14 @@ jobs:
         id: current-time
         with:
           format: YYYY.M.DD
-      - name: Use current time
-        env:
-          DATE: "${{ steps.current-time.outputs.formattedTime }}"	
       - name: Checkout repository
         uses: actions/checkout@v2
         env:
           token: ${{ secrets.GITHUB_TOKENN }}
       - uses: yanamura/ios-bump-version@v1
         with:
-          version: $DATE
-          build-number: $GITHUB_RUN_NUMBER
+          version: ${{ steps.current-time.outputs.formattedTime }}
+          build-number: ${GITHUB_RUN_NUMBER}
       - name: update
         run: |
           git add .
