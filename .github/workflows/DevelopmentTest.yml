@@ -20,7 +20,7 @@ jobs:
       - name: set build number to ENV
         run: |
           chmod +x .github/scripts/commit_count.sh
-          .github/secrets/commit_count.sh
+          .github/scripts/commit_count.sh
       - uses: yanamura/ios-bump-version@v1
         with:
           version: ${{ steps.current-time.outputs.formattedTime }}
