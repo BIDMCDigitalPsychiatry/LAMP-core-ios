@@ -12,7 +12,7 @@ jobs:
         uses: srfrnk/current-time@master
         id: current-time
         with:
-          format: yyyy.M.dd
+          format: YYYY.M.DD
       - name: Use current time
         env:
           DATE: "${{ steps.current-time.outputs.formattedTime }}"	
@@ -23,7 +23,7 @@ jobs:
       - uses: yanamura/ios-bump-version@v1
         with:
           version: $DATE
-	  build-number: $(git rev-list --count master)
+          build-number: $GITHUB_RUN_NUMBER
       - name: update
         run: |
           git add .
