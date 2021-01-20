@@ -5,7 +5,7 @@ on:
       - Development
 jobs:
   deploy:
-    name: Development Test
+    name: Deploying to Testflight
     runs-on: macOS-latest
     steps:
       - name: Get current time
