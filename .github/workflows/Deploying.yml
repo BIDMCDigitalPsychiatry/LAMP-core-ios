@@ -13,17 +13,19 @@ jobs:
         id: current-time
         with:
           format: YYYY.M.DD
-      - name: Use current time
-        env:
-          DATE: "${{ steps.current-time.outputs.formattedTime }}"	
       - name: Checkout repository
         uses: actions/checkout@v2
         env:
           token: ${{ secrets.GITHUB_TOKENN }}
+      - name: set build number to ENV
+        run: |
+          chmod +x .github/scripts/commit_count.sh
+          .github/scripts/commit_count.sh
       - uses: yanamura/ios-bump-version@v1
         with:
-          version: $DATE
-          build-number: $GITHUB_RUN_NUMBER
+          version: ${{ steps.current-time.outputs.formattedTime }}
+          build-number: ${{ env.GIT_COMMIT_NUMBER }}
+          project-path: mindLAMP.xcodeproj
       - name: update
         run: |
           git add .
