@@ -20,7 +20,7 @@ jobs:
       - uses: yanamura/ios-bump-version@v1
         with:
           version: ${{ steps.current-time.outputs.formattedTime }}
-          build-number: ${{github.run_number}}
+          build-number: 78
       - name: update
         run: |
           git add .
