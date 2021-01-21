@@ -28,11 +28,7 @@ jobs:
         with:
           version: ${{ steps.current-time.outputs.formattedTime }}
           build-number: ${{ steps.commits.outputs.GIT_COMMIT_NUMBER }}
-      - name: Git push
-        run: |
-          git add .
-          git commit -m "bump version"
-          git push origin HEAD
+          project-path: mindLAMP.xcodeproj
       - name: Install gpg 
         run: brew install gpg
       - name: Setup provisioning profile
