@@ -34,7 +34,7 @@
 	<key>CFBundleShortVersionString</key>
 	<string>2021.1.21</string>
 	<key>CFBundleVersion</key>
-	<string>2</string>
+	<string>224</string>
 	<key>DASHBOARD_URL</key>
 	<string>$(DASHBOARD_URL)</string>
 	<key>ITSAppUsesNonExemptEncryption</key>
