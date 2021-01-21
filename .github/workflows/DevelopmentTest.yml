@@ -21,14 +21,13 @@ jobs:
           token: ${{ secrets.GITHUB_TOKENN }}
       - name: Get commits count
         run: |
-          echo "::set-output name=GIT_COMMIT_NUMBER::$(git rev-list --count HEAD)"
+          echo "::set-output name=GIT_COMMIT_NUMBER::$(git rev-list --count master)"
         id: commits
       - name: Set Version and Build number
         uses: yanamura/ios-bump-version@v1
         with:
           version: ${{ steps.current-time.outputs.formattedTime }}
           build-number: ${{ steps.commits.outputs.GIT_COMMIT_NUMBER }}
-          project-path: mindLAMP.xcodeproj
       - name: Git push
         run: |
           git add .
