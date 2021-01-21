@@ -2,7 +2,7 @@ name: Deploying
 on:
   push:
     branches:
-      - master
+      - Development
 jobs:
   deploy:
     name: Deploying to Testflight
@@ -34,21 +34,3 @@ jobs:
           git add .
           git commit -m "bump version"
           git push origin HEAD
-      - name: Install gpg 
-        run: brew install gpg
-      - name: Setup provisioning profile
-        env:
-          IOS_KEYS: ${{ secrets.IOS_KEYS }}
-        run: .github/secrets/decrypt_secrets.sh
-      - name: Archiving project
-        env:
-          PR_NUMBER: $(jq --raw-output .pull_request.number "$GITHUB_EVENT_PATH")
-        run: .github/scripts/archive_app.sh
-      - name: Exporting .ipa
-        run: .github/scripts/export_ipa.sh
-      - name: Publishing app
-        if: success()
-        env:
-          APPLEID_USERNAME: ${{ secrets.APPLEID_USERNAME }}
-          APPLEID_PASSWORD: ${{ secrets.APPLEID_PASSWORD }}
-        run: .github/scripts/publish_testflight.sh
