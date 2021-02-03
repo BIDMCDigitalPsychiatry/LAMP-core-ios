@@ -4,6 +4,7 @@ import Foundation
 
 public struct AppInfo {
     public static let version = Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String ?? ""
+    public static let build = Int(Bundle.main.object(forInfoDictionaryKey: "CFBundleVersion") as? String ?? "") ?? 0
 }
 
 public enum DeviceType: String {

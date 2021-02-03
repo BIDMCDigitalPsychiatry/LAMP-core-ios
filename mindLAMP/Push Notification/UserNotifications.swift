@@ -36,6 +36,19 @@ class NotificationHelper: NSObject {
         UserDefaults.standard.removeTimestampForNotification(nid: identifier)
     }
     
+    //we can execute when ever app active
+    func removeAllExpiredNotifications() {
+        //we should not remove immediatly, suppose a user tap on notification, we have to show "Expired!" message.
+        DispatchQueue.global().asyncAfter(deadline: .now() + 10) {
+            guard let timeStampDict = UserDefaults.standard.notificationTimestamps else { return }
+            for (notId, expiringTime) in timeStampDict {
+                if expiringTime <= Date().timeIntervalSince1970 { //is expired
+                    UserDefaults.standard.removeTimestampForNotification(nid: notId)
+                }
+            }
+        }
+    }
+    
     func removeAllNotifications() {
         UNUserNotificationCenter.current().removeAllDeliveredNotifications()
     }
@@ -153,7 +166,7 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
         let pushInfo = PushUserInfo(userInfo: userInfo)
         printToFile("userInfo = \(userInfo)")
         print("remote userInfo = \(userInfo)")
-        pushInfo.setDeliveredTime()
+        pushInfo.setExpiringTime()
         
         if let livingTime = pushInfo.expireMilliSeconds, pushInfo.identifier != nil {
             printToFile("\n schedule timer for \(pushInfo.identifier!) = \(livingTime/1000.0)")
@@ -169,7 +182,7 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
         
         //update server
         let payLoadInfo = PayLoadInfo(action: SensorType.AnalyticAction.notification.rawValue, userInfo: userInfo, userAgent: UserAgent.defaultAgent)
-        let acknoledgeRequest = UpdateReadRequest(timeInterval: pushInfo.deliverdTime, sensor: SensorType.lamp_analytics.lampIdentifier, payLoadInfo: payLoadInfo)
+        let acknoledgeRequest = UpdateReadRequest(timeInterval: Date().timeIntervalSince1970, sensor: SensorType.lamp_analytics.lampIdentifier, payLoadInfo: payLoadInfo)
         guard let authheader = Endpoint.getSessionKey(), let participantId = User.shared.userId else {
             return
         }

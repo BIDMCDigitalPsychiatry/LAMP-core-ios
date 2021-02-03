@@ -22,26 +22,25 @@ struct PushUserInfo {
         return userInfo["expiry"] as? Double
     }
     
-    func setDeliveredTime() {
+    func setExpiringTime() {
         guard let notificationId = notificationId else {  return }
-        UserDefaults.standard.setTimestampForNotificationId(nId: notificationId)
+        guard let expireMilliSec = expireMilliSeconds else { return }
+        let expireSec = expireMilliSec / 1000
+        let expiringTime = Date().addingTimeInterval(expireSec)
+        UserDefaults.standard.setExpireTimestamp(expiringTime, For: notificationId)
     }
     
-    var deliverdTime: TimeInterval {
+    var expiringTime: TimeInterval {
         guard let notificationId = notificationId else { return 0 }
-        return UserDefaults.standard.getTimestampForNotificationId(nId: notificationId)
+        return UserDefaults.standard.getExpireTimestampFor(notificationId: notificationId)
     }
     
     func isExpired() -> Bool {
         guard let notificationId = notificationId else { return false }
-        let deliveredTime = UserDefaults.standard.getTimestampForNotificationId(nId: notificationId)
         UserDefaults.standard.removeTimestampForNotification(nid: notificationId)
-        printDebug("deliveredTime = \(deliveredTime)")
-        guard deliveredTime > 0  else {return false}
-        guard let expireMilliSec = expireMilliSeconds else { return false }
-        let expireSec = expireMilliSec / 1000
-        let lapsedIntervals = Date().timeIntervalSince1970 - deliveredTime
-        return lapsedIntervals > expireSec
+        guard expiringTime > 0  else {return false}
+        //In older versions , we stored the push delivered time.
+        return expiringTime <= Date().timeIntervalSince1970
     }
     
     func pageURLForAction(_ action: RemoteNotification.Action) -> URL? {

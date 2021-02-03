@@ -52,6 +52,8 @@ class HomeWebViewModel: NSObject, ObservableObject {
     @objc
     func updateWatchOS(_ notification: Notification) {
         
+        NotificationHelper.shared.removeAllExpiredNotifications()
+        
         if isWebpageLoaded == false {
             isWebpageLoaded = true
             shouldReload = true
