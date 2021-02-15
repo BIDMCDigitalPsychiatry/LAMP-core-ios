@@ -59,10 +59,6 @@
 		B29639DA23BDC28200626E1A /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B29639D923BDC28200626E1A /* Preview Assets.xcassets */; };
 		B2A15BDC2567A8BE00222717 /* NotificationAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2A15BB42567A8BE00222717 /* NotificationAPI.swift */; };
 		B2A15BDD2567A8BE00222717 /* NotificationAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2A15BB42567A8BE00222717 /* NotificationAPI.swift */; };
-		B2A15BE02567A8BE00222717 /* LampIdentifiersHealthKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2A15BB72567A8BE00222717 /* LampIdentifiersHealthKit.swift */; };
-		B2A15BE12567A8BE00222717 /* LampIdentifiersHealthKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2A15BB72567A8BE00222717 /* LampIdentifiersHealthKit.swift */; };
-		B2A15BE62567A8BE00222717 /* LampIdentifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2A15BBA2567A8BE00222717 /* LampIdentifiers.swift */; };
-		B2A15BE72567A8BE00222717 /* LampIdentifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2A15BBA2567A8BE00222717 /* LampIdentifiers.swift */; };
 		B2A15BF82567A8BE00222717 /* LMSensorManager+SensorObservers.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2A15BC52567A8BE00222717 /* LMSensorManager+SensorObservers.swift */; };
 		B2A15BF92567A8BE00222717 /* LMSensorManager+SensorObservers.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2A15BC52567A8BE00222717 /* LMSensorManager+SensorObservers.swift */; };
 		B2A15BFA2567A8BE00222717 /* LMSensorManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2A15BC62567A8BE00222717 /* LMSensorManager.swift */; };
@@ -251,8 +247,6 @@
 		B29639D923BDC28200626E1A /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		B29639DE23BDC28200626E1A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B2A15BB42567A8BE00222717 /* NotificationAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationAPI.swift; sourceTree = "<group>"; };
-		B2A15BB72567A8BE00222717 /* LampIdentifiersHealthKit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LampIdentifiersHealthKit.swift; sourceTree = "<group>"; };
-		B2A15BBA2567A8BE00222717 /* LampIdentifiers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LampIdentifiers.swift; sourceTree = "<group>"; };
 		B2A15BC52567A8BE00222717 /* LMSensorManager+SensorObservers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "LMSensorManager+SensorObservers.swift"; sourceTree = "<group>"; };
 		B2A15BC62567A8BE00222717 /* LMSensorManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LMSensorManager.swift; sourceTree = "<group>"; };
 		B2A15BC92567A8BE00222717 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
@@ -596,8 +590,6 @@
 			children = (
 				B2346CEE2599DE9800EFF347 /* AppInfo.swift */,
 				B2346CE62599CEDF00EFF347 /* SensorDataModel.swift */,
-				B2A15BB72567A8BE00222717 /* LampIdentifiersHealthKit.swift */,
-				B2A15BBA2567A8BE00222717 /* LampIdentifiers.swift */,
 			);
 			path = SensorModels;
 			sourceTree = "<group>";
@@ -921,10 +913,8 @@
 				B255116524B6202300CDBDD1 /* WatchNotificationModel.swift in Sources */,
 				B2A15C132567A8BE00222717 /* LMConstants.swift in Sources */,
 				B2587B5C256E23BC00A2A7F2 /* LampURL.swift in Sources */,
-				B2A15BE12567A8BE00222717 /* LampIdentifiersHealthKit.swift in Sources */,
 				B255116924B625CC00CDBDD1 /* WatchDeviceInfo.swift in Sources */,
 				B2FDA83224BF744D000316EE /* ContentView.swift in Sources */,
-				B2A15BE72567A8BE00222717 /* LampIdentifiers.swift in Sources */,
 				B2A15BFB2567A8BE00222717 /* LMSensorManager.swift in Sources */,
 				B2A15C172567A8BE00222717 /* BackgroundServices.swift in Sources */,
 				B2A15C152567A8BE00222717 /* BackgroundOperation.swift in Sources */,
@@ -979,7 +969,6 @@
 				B29639D123BDC28100626E1A /* AppDelegate.swift in Sources */,
 				B2A15C002567A8BE00222717 /* StringExtension.swift in Sources */,
 				B2A15C142567A8BE00222717 /* BackgroundOperation.swift in Sources */,
-				B2A15BE02567A8BE00222717 /* LampIdentifiersHealthKit.swift in Sources */,
 				B2E6A567256F195000E2CBC8 /* WebViewConfiguration.swift in Sources */,
 				B2A15BDC2567A8BE00222717 /* NotificationAPI.swift in Sources */,
 				B2201C29257F4DBC00C40183 /* UserNotifications.swift in Sources */,
@@ -988,7 +977,6 @@
 				B2A15BFE2567A8BE00222717 /* User.swift in Sources */,
 				B2201C6E257F9CC400C40183 /* NotificationWebViewModel.swift in Sources */,
 				B2201C27257F4DBC00C40183 /* PushUserInfo.swift in Sources */,
-				B2A15BE62567A8BE00222717 /* LampIdentifiers.swift in Sources */,
 				B2073F0F256EC29C0068E001 /* AppColors.swift in Sources */,
 				B2E6A560256F11A300E2CBC8 /* UIDeviceExtension.swift in Sources */,
 				B2201C67257F9C9D00C40183 /* NotificationWebView.swift in Sources */,
@@ -1080,7 +1068,7 @@
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -1294,7 +1282,7 @@
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
@@ -1665,7 +1653,7 @@
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -1729,7 +1717,7 @@
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
@@ -1965,7 +1953,7 @@
 			repositoryURL = "https://github.com/BIDMCDigitalPsychiatry/LAMP-swift.git";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 2021.1.13;
+				minimumVersion = 2021.2.15;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */

@@ -15,7 +15,6 @@ struct WebConfiguration {
             do {
                 let data = try JSONSerialization.data(withJSONObject: values, options: [])
                 if let value = String(data: data, encoding: .utf8) {
-                    print("value = \(value)")
                     let contentController = WKUserContentController()
                     let js = "javascript: sessionStorage.setItem('LAMP._auth', '\(value)')"
                     let userScript = WKUserScript(source: js, injectionTime: WKUserScriptInjectionTime.atDocumentStart, forMainFrameOnly: false)

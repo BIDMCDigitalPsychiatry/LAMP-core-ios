@@ -53,10 +53,10 @@ class UserAuth: ObservableObject {
     
     init(_ isLoggedIn: Bool) {
         if isLoggedIn {
-            self.loginStatus = .loggedIn
+            loginStatus = .loggedIn
             LMSensorManager.shared.checkIsRunning()
         } else {
-            self.loginStatus = .logout
+            loginStatus = .logout
         }
 
         NotificationCenter.default.addObserver(
@@ -72,7 +72,7 @@ class UserAuth: ObservableObject {
     //
     @objc func userLogined(_ notification: Notification) {
         print("received notification")
-        self.loginStatus = Status.loggedIn
+        loginStatus = Status.loggedIn
         WKExtension.shared().registerForRemoteNotifications()
     }
     
@@ -80,13 +80,13 @@ class UserAuth: ObservableObject {
     //
     @objc func userLogOut(_ notification: Notification) {
         print("received notification")
-        self.loginStatus = .logout
+        loginStatus = .logout
         User.shared.logout()
     }
     
     func logout() {
         
-        self.loginStatus = .logout
+        loginStatus = .logout
         
         guard let authheader = Endpoint.getSessionKey(), let participantId = User.shared.userId else {
             User.shared.logout()
@@ -113,7 +113,7 @@ class UserAuth: ObservableObject {
     //let willChange = PassthroughSubject<UserAuth,Never>()
     func login(userName: String, password: String, completion: ((Bool) -> Void)? ) {
        
-        self.shouldAnimate = true
+        shouldAnimate = true
         let base64 = Data("\(userName):\(password)".utf8).base64EncodedString()
         Endpoint.setSessionKey(base64)
         
@@ -127,7 +127,7 @@ class UserAuth: ObservableObject {
             //response.data.first
         //}
         subscriber = publisher.sink(receiveCompletion: { [weak self] value in
-            guard let self = self else { return }
+            //guard let self = self else { return }
             print("value = \(value)")
             switch value {
             case .failure(let ErrorResponse.error(code, data, error)):
@@ -143,16 +143,16 @@ class UserAuth: ObservableObject {
                     }
                 }
                 //self.errorMsg = HTTPURLResponse.localizedString(forStatusCode: code)
-                self.errorMsg = msg ?? error.localizedDescription
-                self.loginStatus = .loginInput
+                self?.errorMsg = msg ?? error.localizedDescription
+                self?.loginStatus = .loginInput
             case .failure(let error):
-                self.errorMsg = error.localizedDescription
-                self.loginStatus = .loginInput
+                self?.errorMsg = error.localizedDescription
+                self?.loginStatus = .loginInput
             case .finished:
                 break
             }
-            self.shouldAnimate = false
-            completion?(self.errorMsg == nil)
+            self?.shouldAnimate = false
+            completion?(self?.errorMsg == nil)
         }, receiveValue: { [weak self] response in
             guard let self = self else { return }
             guard let userId = response.data.first?.id else {

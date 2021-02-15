@@ -126,47 +126,69 @@ public struct SensorDataModel: Codable {
     
     public init(){}
     public var source: String?
+    
+    //Location
+    public var latitude: Double?
+    public var longitude: Double?
+    public var altitude: Double?
+    public var accuracy: Double?
+    
     //Triaxial Values for: Accelerometer, Magnetometer, Gyroscope
     public var x: Double?
     public var y: Double?
     public var z: Double?
-
+    //MotionData
     public var motion: Motion?
+    public var rotation: Rotational?
     public var gravity: Gravitational?
     public var magnetic: Magnetic?
-    public var rotation: Rotational?
     public var attitude: Attitude?
+    
+    //PedometerData
+    public var value: Double?
+    public var distance: Double?
+    public var floors_ascended: Double?
+    public var floors_descended: Double?
+    public var pace: Double?
+    public var cadence: Double?
+    public var active_pace: Double?
+    
+    //lamp.nearby_device
+    public var type: String?
+    public var address: String?
+    public var name: String?
+    public var strength: Int?
+    
+    //Calls
+    //public var type: String?
+    public var duration: Double?
+    public var trace: String?
+    
     public var activity: SensorActivity?
     
     //Health
     public var unit: String?
-    public var value: Double?
     public var valueString: String?
     public var bp_diastolic: Double?
     public var bp_systolic: Double?
     public var workout_type: String?
     public var workout_duration: Double?
-    //Location
-    public var latitude: Double?
-    public var longitude: Double?
-    public var altitude: Double?
-    //Bluetooth
-    public var bt_rssi: Int?
-    public var bt_name: String?
-    public var bt_address: String?
-    //Wifi
-    public var bssid: String?
-    public var ssid: String?
+    
+    
+//    //Bluetooth
+//    public var bt_rssi: Int?
+//    public var bt_name: String?
+//    public var bt_address: String?
+//    //Wifi
+//    public var bssid: String?
+//    public var ssid: String?
     //Pedometer
     //var steps: Int?
     //var flights_climbed: Int?
     //var distance: Double?
     //Screen State
     //var state: Int?
-    //Calls
-    public var call_duration: Double?
-    public var call_type: Int?
-    public var call_trace: String?
+    
     
     public var startDate: Double?
     public var endDate: Double?
@@ -175,40 +197,58 @@ public struct SensorDataModel: Codable {
         
         case source
         
+        //Location
+        case latitude
+        case longitude
+        case altitude
+        case accuracy
+        
         case x
         case y
         case z
         case motion
+        case rotation
         case gravity
         case magnetic
-        case rotation
         case attitude
+        
+        case value
+        case distance
+        case floors_ascended
+        case floors_descended
+        case pace
+        case cadence
+        case active_pace
+        
+        case type
+        case address
+        case name
+        case strength
+        
+        case duration
+        case trace
         
         case activity
         //Health
 //        var unit: String?
-        case value
         case valueString
         case bp_diastolic
         case bp_systolic
         case workout_type
         case workout_duration
-        //Location
-        case latitude
-        case longitude
-        case altitude
+
         //Bluetooth
-        case bt_rssi
-        case bt_name
-        case bt_address
-        //Wifi
-        case bssid
-        case ssid
+//        case bt_rssi
+//        case bt_name
+//        case bt_address
+//        //Wifi
+//        case bssid
+//        case ssid
         //Pedometer
         //Calls
-        case call_duration
-        case call_type
-        case call_trace
+//        case call_duration
+//        case call_type
+//        case call_trace
 //
 //        var startDate: Double?
 //        var endDate: Double?
@@ -228,9 +268,9 @@ public struct Rotational: Codable {
 }
 
 public struct Attitude: Codable {
-    var roll: Double?
-    var pitch: Double?
-    var yaw: Double?
+    var x: Double?
+    var y: Double?
+    var z: Double?
 }
 
 public struct Gravitational: Codable {
@@ -265,15 +305,16 @@ extension SensorDataModel {
     }
     
     public init(callsData: CallsData) {
-        self.call_type = callsData.type
-        self.call_duration = Double(callsData.duration)
-        self.call_trace = callsData.trace
+        self.type = callsData.type
+        self.duration = Double(callsData.duration)
+        self.trace = callsData.trace
     }
     
     public init(locationData: LocationsData) {
         self.latitude = locationData.latitude
         self.longitude = locationData.longitude
         self.altitude = locationData.altitude
+        self.accuracy = locationData.accuracy
     }
     
     public init(motionData: MotionData) {
@@ -282,43 +323,54 @@ extension SensorDataModel {
         let motion = Motion(x: motionData.acceleration.x, y: motionData.acceleration.y, z: motionData.acceleration.z)
         self.motion = motion
         
+        //Gyro
+        let rotation = Rotational(x: motionData.rotationRate.x, y: motionData.rotationRate.y, z: motionData.rotationRate.z)
+        self.rotation = rotation
+        
         //Gravity
         let gravity = Gravitational(x: motionData.gravity.x, y: motionData.gravity.y, z: motionData.gravity.z)
         self.gravity = gravity
         
-        //Gyro
-        let rotation = Rotational(x: motionData.rotationRate.x, y: motionData.rotationRate.y, z: motionData.rotationRate.z)
-        self.rotation = rotation
-
         //MageticField
-//      let magnetic = Magnetic(x: motionData.magneticField.x, y: motionData.magneticField.y, z: motionData.magneticField.z)
-//      self.magnetic = magnetic
+        let magnetic = Magnetic(x: motionData.magneticField.x, y: motionData.magneticField.y, z: motionData.magneticField.z)
+        self.magnetic = magnetic
         
         //Attitude
-        let attitude = Attitude(roll: motionData.deviceAttitude.roll, pitch: motionData.deviceAttitude.pitch, yaw: motionData.deviceAttitude.yaw)
+        let attitude = Attitude(x: motionData.deviceAttitude.roll, y: motionData.deviceAttitude.pitch, z: motionData.deviceAttitude.yaw)
         self.attitude = attitude
+    }
+    
+    public init(pedometerData: PedometerData) {
+        
+        self.value = Double(pedometerData.numberOfSteps)
+        self.distance = pedometerData.distance
+        self.floors_ascended = Double(pedometerData.floorsAscended)
+        self.floors_descended = Double(pedometerData.floorsDescended)
+        self.pace = pedometerData.currentPace
+        self.cadence = pedometerData.currentCadence
+        self.active_pace = pedometerData.averageActivePace
     }
 }
 
 extension SensorDataModel {
 
-    public init(rotationRate: CMRotationRate) {
-        self.x = rotationRate.x
-        self.y = rotationRate.y
-        self.z = rotationRate.z
-    }
-    
+//    public init(rotationRate: CMRotationRate) {
+//        self.x = rotationRate.x
+//        self.y = rotationRate.y
+//        self.z = rotationRate.z
+//    }
+//
     public init(accelerationRate: CMAcceleration) {
         self.x = accelerationRate.x
         self.y = accelerationRate.y
         self.z = accelerationRate.z
     }
-    
-    public init(magneticField: CMMagneticField) {
-        self.x = magneticField.x
-        self.y = magneticField.y
-        self.z = magneticField.z
-    }
+//
+//    public init(magneticField: CMMagneticField) {
+//        self.x = magneticField.x
+//        self.y = magneticField.y
+//        self.z = magneticField.z
+//    }
     
     public init(activityData: CMMotionActivity) {
        

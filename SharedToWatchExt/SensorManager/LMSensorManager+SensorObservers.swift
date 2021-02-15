@@ -117,16 +117,19 @@ extension LMSensorManager: MagnetometerObserver {
     }
 }
 
-
-// MARK: - LocationsObserver
-extension LMSensorManager: LocationsObserver {
+// MARK: - LocationsDataObserver
+extension LMSensorManager: LocationsDataObserver {
     
     func onLocationChanged(data: LocationsData) {
         queueLocationsData.async(flags: .barrier) {
             self.locationsDataBuffer.append(data)
         }
     }
-    
+}
+
+// MARK: - LocationsObserver
+extension LMSensorManager: LocationsObserver {
+
     func onError(_ errType: LocationErrorType) {
         switch errType {
 
