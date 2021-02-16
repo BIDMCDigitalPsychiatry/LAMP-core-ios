@@ -21,13 +21,13 @@ class ExtensionDelegate: NSObject, WKExtensionDelegate {
         // Perform any final initialization of your application.
         let center = UNUserNotificationCenter.current()
         center.delegate = self
-        center.requestAuthorization(options: [.alert, .sound, .badge]) {(granted, error ) in
+        center.requestAuthorization(options: [.alert, .sound, .badge]) { [weak self] (granted, error) in
             guard granted else {
                 //print("not granted APNS \(error?.localizedMessage)")
-                self.getNotificationSettings()
+                self?.getNotificationSettings()
                 return }
             print("granted APNS")
-            self.getNotificationSettings()
+            self?.getNotificationSettings()
         }
         let documentsURL = try! FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: false)
         print("documentsURL = \(documentsURL)")
@@ -70,7 +70,7 @@ class ExtensionDelegate: NSObject, WKExtensionDelegate {
             case let backgroundTask as WKApplicationRefreshBackgroundTask:
                 
                 // Schedule the next background update.
-                self.scheduleBackgroundRefreshTasks()
+                scheduleBackgroundRefreshTasks()
                 
                 // Mark the task as ended, and request an updated snapshot.
                 backgroundTask.setTaskCompletedWithSnapshot(true)

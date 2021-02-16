@@ -8,6 +8,7 @@
 import Foundation
 import LAMP
 import CoreLocation
+import Combine
 
 #if os(iOS)
 import UIKit
@@ -120,22 +121,35 @@ class LMSensorManager {
     }
     
     private func initiateSensors() {
+        let specIdentifiers: [String] = sensorSpecs.compactMap({ $0.spec })
+        //Always setup location sensors to keep the app alive in background. but collect location data only if its configured.
+        print("specIdentifiers = \(specIdentifiers)")
+        setupLocationSensor(isNeedData: specIdentifiers.contains(SensorType.lamp_gps.lampIdentifier))
         
-        setupLocationSensor()
-        setUpSensorMotionManager()
+        setUpSensorMotionManager(specIdentifiers)
         
         #if os(iOS)
-        setupActivitySensor()
         
-        setupCallsSensor()
-        setupScreenSensor()
+        if specIdentifiers.contains(SensorType.lamp_Activity.lampIdentifier) {
+            setupActivitySensor()
+        }
+        if specIdentifiers.contains(SensorType.lamp_telephony.lampIdentifier) {
+            setupCallsSensor()
+        }
+        if specIdentifiers.contains(SensorType.lamp_screen_state.lampIdentifier) {
+            setupScreenSensor()
+        }
+        if specIdentifiers.contains(SensorType.lamp_nearby_device.lampIdentifier) {
+            setupWifiSensor()
+            setupBluetoothSensor()
+        }
         
-        setupBluetoothSensor()
-        setupHealthKitSensor()
-        setupPedometerSensor()
-        setupWifiSensor()
+        setupHealthKitSensor(specIdentifiers)
+        
+        if specIdentifiers.contains(SensorType.lamp_steps.lampIdentifier) {
+            setupPedometerSensor()
+        }
         #endif
-        
     }
     
     private func deinitSensors() {
@@ -154,12 +168,66 @@ class LMSensorManager {
         #endif
     }
     
+    var subscriber: AnyCancellable?
+    var sensorSpecs: [Sensor] = []
     /// To start sensors observing.
     private func startSensors() {
-
-        initiateSensors()
-        printToFile("\nStarting sensors")
-        sensorManager.startAllSensors()
+        
+        guard let authheader = Endpoint.getSessionKey(), let participantId = User.shared.userId else {
+            printError("Auth header missing")
+            return
+        }
+        OpenAPIClientAPI.basePath = LampURL.baseURLString
+        OpenAPIClientAPI.customHeaders = ["Authorization": "Basic \(authheader)", "Content-Type": "application/json"]
+        let publisher = SensorAPI.sensorAllByParticipant(participantId: participantId)
+        
+        subscriber = publisher.sink(receiveCompletion: { [weak self] value in
+            guard let self = self else { return }
+            print("value3 = \(value)")
+            switch value {
+            case .failure(let ErrorResponse.error(code, data, error)):
+                printError("sensor names error code\(code), \(error.localizedDescription)")
+                if let data = data {
+                    let decoder = JSONDecoder()
+                    do {
+                        let errResponse = try decoder.decode(ErrResponse.self, from: data)
+                        printError("\nerrResponse \(String(describing: errResponse.error))")
+                    } catch let err {
+                        printError("err = \(err.localizedDescription)")
+                    }
+                }
+                self.startSensorsAfterFailure()
+            case .failure(let error):
+                printError("postSensorData error \(error.localizedDescription)")
+                if let nsError = error as NSError? {
+                    let errorCode = nsError.code
+                    /// -1009 is the offline error code
+                    /// so log errors other than connection issue
+                    if errorCode == -1009 {
+                        LMLogsManager.shared.addLogs(level: .warning, logs: Logs.Messages.network_error + " " + nsError.localizedDescription)
+                    } else {
+                        LMLogsManager.shared.addLogs(level: .error, logs: Logs.Messages.network_error + " " + nsError.localizedDescription)
+                    }
+                }
+                self.startSensorsAfterFailure()
+            case .finished:
+                SensorLogs.shared.storeSensorSpecs(specs: self.sensorSpecs)
+                self.initiateSensors()
+                self.sensorManager.startAllSensors()
+            }
+        }, receiveValue: { response in
+            self.sensorSpecs.append(contentsOf: response.data)
+        })
+    }
+    
+    private func startSensorsAfterFailure() {
+        sensorSpecs.removeAll()
+        if let specs = SensorLogs.shared.fetchSensorSpecs() {
+            print("got from file")
+            sensorSpecs = specs
+            self.initiateSensors()
+            self.sensorManager.startAllSensors()
+        }
     }
     
     private func refreshAllSensors() {
@@ -262,18 +330,24 @@ class LMSensorManager {
 // MARK: - SENSOR SETUP METHODS
 private extension LMSensorManager {
     
-    func setUpSensorMotionManager() {
-        sensor_motionManager = MotionManager.init(MotionManager.Config().apply(closure: { (config) in
-            config.accelerometerObserver = self
-            config.gyroObserver = self
-            config.magnetoObserver = self
-            config.motionObserver = self
+    func setUpSensorMotionManager(_ specIdentifiers: [String]) {
+        
+        let isDevicemotion = specIdentifiers.contains(SensorType.lamp_device_motion.lampIdentifier)
+        let isAccelerometer = specIdentifiers.contains(SensorType.lamp_accelerometer.lampIdentifier)
+        if isDevicemotion || isAccelerometer {
             
-            config.sensorTimerDelegate = self
-            
-            //config.sensorTimerDataStoreInterval = storeSensorDataIntervalInMinutes * 60.0
-        }))
-        sensorManager.addSensor(sensor_motionManager!)
+            sensor_motionManager = MotionManager.init(MotionManager.Config().apply(closure: { (config) in
+                if isAccelerometer {
+                    config.accelerometerObserver = self
+                }
+                //config.gyroObserver = self
+                //config.magnetoObserver = self
+                if isDevicemotion {
+                    config.motionObserver = self
+                }
+            }))
+            sensorManager.addSensor(sensor_motionManager!)
+        }
     }
     
     func setupBluetoothSensor() {
@@ -281,16 +355,27 @@ private extension LMSensorManager {
         sensorManager.addSensor(sensor_bluetooth!)
     }
     
-    func setupHealthKitSensor() {
-        sensor_healthKit = LMHealthKitSensor()
-        sensor_healthKit?.observer = self
-        sensorManager.addSensor(sensor_healthKit!)
+    func setupHealthKitSensor(_ specIdentifiers: [String]) {
+        #if os(iOS)
+        let healthkitSensors: [String] = [HKCategoryTypeIdentifier.sleepAnalysis.lampIdentifier, HKQuantityTypeIdentifier.heartRate.lampIdentifier, HKQuantityTypeIdentifier.bloodPressureDiastolic.lampIdentifier, HKQuantityTypeIdentifier.respiratoryRate.lampIdentifier, HKQuantityTypeIdentifier.bodyTemperature.lampIdentifier, HKQuantityTypeIdentifier.oxygenSaturation.lampIdentifier, HKQuantityTypeIdentifier.bloodGlucose.lampIdentifier, HKQuantityTypeIdentifier.dietaryIron.lampIdentifier]
+            
+        if specIdentifiers.contains(where: { (element) -> Bool in
+            return healthkitSensors.contains(element)
+        }) {
+            sensor_healthKit = LMHealthKitSensor(specIdentifiers)
+            sensor_healthKit?.observer = self
+            sensorManager.addSensor(sensor_healthKit!)
+        }
+        #endif
     }
     
-    func setupLocationSensor() {
+    func setupLocationSensor(isNeedData: Bool) {
         sensor_location = LocationsSensor.init(LocationsSensor.Config().apply(closure: { config in
             #if os(iOS)
             config.sensorObserver = self
+            if isNeedData {
+                config.locationDataObserver = self
+            }
             config.minimumInterval = 1.0
             config.accuracy = kCLLocationAccuracyBestForNavigation
             #elseif os(watchOS)
@@ -346,8 +431,8 @@ private extension LMSensorManager {
         var arraySensorData = [SensorEvent<SensorDataModel>]()
         
         arraySensorData.append(contentsOf: fetchAccelerometerData())
-        arraySensorData.append(contentsOf: fetchGyroscopeData())
-        arraySensorData.append(contentsOf: fetchMagnetometerData())
+//        arraySensorData.append(contentsOf: fetchGyroscopeData())
+//        arraySensorData.append(contentsOf: fetchMagnetometerData())
         arraySensorData.append(contentsOf: fetchMotionData())
         
         #if os(iOS)
@@ -356,15 +441,8 @@ private extension LMSensorManager {
         arraySensorData.append(contentsOf: fetchCallsData())
         arraySensorData.append(contentsOf: fetchScreenStateData())
         
-        
-        if let data = fetchBluetoothData() {
-            arraySensorData.append(data)
-        }
-        
-        if let data = fetchWiFiData() {
-            arraySensorData.append(data)
-        }
-        
+        arraySensorData.append(contentsOf: fetchNearbyDeviceData())
+
         if let data = fetchPedometerData() {
             arraySensorData.append(contentsOf: data)
         }
@@ -404,44 +482,44 @@ private extension LMSensorManager {
         queueAccelerometerData.async(flags: .barrier) {
             self.accelerometerDataBufffer.removeAll(keepingCapacity: true)
         }
-        
+
         let sensorArray = dataArray.map { SensorEvent(timestamp: $0.timestamp, sensor: SensorType.lamp_accelerometer.lampIdentifier, data: SensorDataModel(accelerationRate: $0.acceleration)) }
         return sensorArray
     }
     
-    func fetchGyroscopeData() -> [SensorEvent<SensorDataModel>] {
-        
-        // read
-        var dataArray: [GyroscopeData]!
-        queueGyroscopeData.sync {
-            // perform read and assign value
-            dataArray = gyroscopeDataBufffer
-        }
-        
-        queueGyroscopeData.async(flags: .barrier) {
-            self.gyroscopeDataBufffer.removeAll(keepingCapacity: true)
-        }
-        
-        let sensorArray = dataArray.map { SensorEvent(timestamp: $0.timestamp, sensor: SensorType.lamp_gyroscope.lampIdentifier, data: SensorDataModel(rotationRate: $0.rotationRate)) }
-        return sensorArray
-    }
+//    func fetchGyroscopeData() -> [SensorEvent<SensorDataModel>] {
+//
+//        // read
+//        var dataArray: [GyroscopeData]!
+//        queueGyroscopeData.sync {
+//            // perform read and assign value
+//            dataArray = gyroscopeDataBufffer
+//        }
+//
+//        queueGyroscopeData.async(flags: .barrier) {
+//            self.gyroscopeDataBufffer.removeAll(keepingCapacity: true)
+//        }
+//
+//        let sensorArray = dataArray.map { SensorEvent(timestamp: $0.timestamp, sensor: SensorType.lamp_gyroscope.lampIdentifier, data: SensorDataModel(rotationRate: $0.rotationRate)) }
+//        return sensorArray
+//    }
     
-    func fetchMagnetometerData() -> [SensorEvent<SensorDataModel>] {
-        
-        // read
-        var dataArray: [MagnetometerData]!
-        queueMagnetometerData.sync {
-            // perform read and assign value
-            dataArray = magnetometerDataBufffer
-        }
-        
-        queueMagnetometerData.async(flags: .barrier) {
-            self.magnetometerDataBufffer.removeAll(keepingCapacity: true)
-        }
-        
-        let sensorArray = dataArray.map { SensorEvent(timestamp: $0.timestamp, sensor: SensorType.lamp_magnetometer.lampIdentifier, data: SensorDataModel(magneticField: $0.magnetoData)) }
-        return sensorArray
-    }
+//    func fetchMagnetometerData() -> [SensorEvent<SensorDataModel>] {
+//
+//        // read
+//        var dataArray: [MagnetometerData]!
+//        queueMagnetometerData.sync {
+//            // perform read and assign value
+//            dataArray = magnetometerDataBufffer
+//        }
+//
+//        queueMagnetometerData.async(flags: .barrier) {
+//            self.magnetometerDataBufffer.removeAll(keepingCapacity: true)
+//        }
+//
+//        let sensorArray = dataArray.map { SensorEvent(timestamp: $0.timestamp, sensor: SensorType.lamp_magnetometer.lampIdentifier, data: SensorDataModel(magneticField: $0.magnetoData)) }
+//        return sensorArray
+//    }
     
     func fetchMotionData() -> [SensorEvent<SensorDataModel>] {
         
@@ -457,7 +535,7 @@ private extension LMSensorManager {
         }
         
         let sensorArray = dataArray.map {
-            SensorEvent(timestamp: $0.timestamp, sensor: SensorType.lamp_accelerometer_motion.lampIdentifier, data: SensorDataModel(motionData: $0))
+            SensorEvent(timestamp: $0.timestamp, sensor: SensorType.lamp_device_motion.lampIdentifier, data: SensorDataModel(motionData: $0))
         }
         return sensorArray
     }
@@ -514,7 +592,7 @@ private extension LMSensorManager {
             self.callsDataBuffer.removeAll(keepingCapacity: true)
         }
         
-        let sensorArray = dataArray.map { SensorEvent(timestamp: $0.timestamp, sensor: SensorType.lamp_calls.lampIdentifier, data: SensorDataModel(callsData: $0)) }
+        let sensorArray = dataArray.map { SensorEvent(timestamp: $0.timestamp, sensor: SensorType.lamp_telephony.lampIdentifier, data: SensorDataModel(callsData: $0)) }
         return sensorArray
     }
     
@@ -536,9 +614,6 @@ private extension LMSensorManager {
     }
     
     func fetchPedometerData() -> [SensorEvent<SensorDataModel>]? {
-        
-        var arrayData = [SensorEvent<SensorDataModel>]()
-        
         // read
         var dataArray: [PedometerData]!
         queuePedometerData.sync {
@@ -549,66 +624,36 @@ private extension LMSensorManager {
             self.pedometerDataBuffer.removeAll(keepingCapacity: true)
         }
         
-        for data in dataArray {
-            
-            var stepsModel = SensorDataModel()
-            stepsModel.value = Double(data.numberOfSteps)
-            let stpsData = SensorEvent(timestamp: Double(data.timestamp), sensor: SensorType.lamp_steps.lampIdentifier, data: stepsModel)
-            arrayData.append(stpsData)
-            
-            var flightModel = SensorDataModel()
-            flightModel.value = Double(data.floorsAscended)
-            arrayData.append(SensorEvent(timestamp: Double(data.timestamp), sensor: SensorType.lamp_flights_up.lampIdentifier, data: flightModel))
-            
-            var distanceModel = SensorDataModel()
-            distanceModel.value = data.distance
-            arrayData.append(SensorEvent(timestamp: Double(data.timestamp), sensor: SensorType.lamp_distance.lampIdentifier, data: distanceModel))
-            
-            var descendedModel = SensorDataModel()
-            descendedModel.value = Double(data.floorsDescended)
-            arrayData.append(SensorEvent(timestamp: Double(data.timestamp),sensor: SensorType.lamp_flights_down.lampIdentifier, data: distanceModel))
-            
-            var currentPaceModel = SensorDataModel()
-            currentPaceModel.value = data.currentPace
-            arrayData.append(SensorEvent(timestamp: Double(data.timestamp), sensor: SensorType.lamp_currentPace.lampIdentifier, data: currentPaceModel))
-            
-            var currentCadenceModel = SensorDataModel()
-            currentCadenceModel.value = data.currentCadence
-            arrayData.append(SensorEvent(timestamp: Double(data.timestamp), sensor: SensorType.lamp_currentCadence.lampIdentifier, data: currentCadenceModel))
-            
-            var averageActivePaceModel = SensorDataModel()
-            averageActivePaceModel.value = data.averageActivePace
-            arrayData.append(SensorEvent(timestamp: Double(data.timestamp), sensor: SensorType.lamp_avgActivePace.lampIdentifier, data: averageActivePaceModel))
-        }
-        
-        return arrayData
+        let sensorArray = dataArray.map { SensorEvent(timestamp: $0.timestamp, sensor: SensorType.lamp_steps.lampIdentifier, data: SensorDataModel(pedometerData: $0)) }
+        return sensorArray
     }
     
-    func fetchBluetoothData() -> SensorEvent<SensorDataModel>? {
-        guard let data = sensor_bluetooth?.latestData() else {
-            return nil
+    func fetchNearbyDeviceData() -> [SensorEvent<SensorDataModel>] {
+        var dataArray: [SensorEvent<SensorDataModel>] = []
+        if let data = sensor_bluetooth?.latestData() {
+            var model = SensorDataModel()
+            model.type = SensorType.NearbyDevicetype.bluetooth
+            model.address = data.address
+            model.name = data.name
+            model.strength = data.rssi
+            let bluetoothevent = SensorEvent(timestamp: data.timestamp, sensor: SensorType.lamp_nearby_device.lampIdentifier, data: model)
+            dataArray.append(bluetoothevent)
         }
-        var model = SensorDataModel()
-        model.bt_address = data.address
-        model.bt_name = data.name
-        model.bt_rssi = data.rssi
         
-        return SensorEvent(timestamp: data.timestamp, sensor: SensorType.lamp_bluetooth.lampIdentifier, data: model)
-    }
-    
-    func fetchWiFiData() -> SensorEvent<SensorDataModel>? {
-        guard let data = latestWifiData else {
-            return nil
+        if let data = latestWifiData {
+            var model = SensorDataModel()
+            model.type = SensorType.NearbyDevicetype.wifi
+            model.address = data.bssid
+            model.name = data.ssid
+            model.strength = data.rssi
+            let wifiEvent = SensorEvent(timestamp: data.timestamp, sensor: SensorType.lamp_nearby_device.lampIdentifier, data: model)
+            dataArray.append(wifiEvent)
+            //clear existing
+            latestWifiData = nil
         }
-        var model = SensorDataModel()
-        model.bssid = data.bssid
-        model.ssid = data.ssid
-        
-        //clear existing
-        latestWifiData = nil
-        
-        return SensorEvent(timestamp: Double(data.timestamp), sensor: SensorType.lamp_wifi.lampIdentifier, data: model)
+        return dataArray
     }
+
     
     func fetchWorkoutSegmentData() -> SensorEvent<SensorDataModel>? {
         guard let arrData = sensor_healthKit?.latestWorkoutData() else {
@@ -618,10 +663,8 @@ private extension LMSensorManager {
             return nil
         }
         var model = SensorDataModel()
-        model.workout_type = data.type
-        model.workout_duration = data.value
-        model.startDate = data.startDate
-        model.endDate = data.endDate
+        model.type = data.type
+        model.duration = data.duration
         
         return SensorEvent(timestamp: Double(data.timestamp), sensor: SensorType.lamp_segment.lampIdentifier, data: model)
     }
@@ -704,11 +747,12 @@ private extension LMSensorManager {
                 if let dataArray = allHealthData(for: quantityType, in: arrData) {
                     let sensorDataArray = dataArray.map { (quantityData) -> SensorEvent<SensorDataModel> in
                         var model = SensorDataModel()
-                        model.unit = quantityData.unit
+                        //model.unit = quantityData.unit
+                        model.type = quantityData.type
                         model.value = quantityData.value
-                        model.startDate = quantityData.startDate
-                        model.endDate = quantityData.endDate
-                        model.source = quantityData.source //for step count only
+                        //model.startDate = quantityData.startDate
+                        //model.endDate = quantityData.endDate
+                        //model.source = quantityData.source //for step count only
                         return SensorEvent(timestamp: Double(quantityData.timestamp), sensor: quantityType.lampIdentifier, data: model)
                     }
                     arrayData.append(contentsOf: sensorDataArray)

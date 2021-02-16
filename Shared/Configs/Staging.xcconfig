@@ -5,10 +5,13 @@
 
 // Development.xcconfig
 
-DASHBOARD_URL = https:/$()/dashboard-staging.lamp.digital/#/ //https:/$()/dashboard-staging.lamp.digital/#/  //
+DASHBOARD_URL = https:/$()/dashboard-staging.lamp.digital/#/
 LAMP_API = https:/$()/lampv2.zcodemo.com:9093 //
 
-//ASHBOARD_URL = http:/$()/52.66.237.209:9094/#/
+//DASHBOARD_URL = https:/$()/dashboard-staging.lamp.digital/#/  //
+//LAMP_API = https:/$()/api-staging.lamp.digital
+
+//DASHBOARD_URL = http:/$()/52.66.237.209:9094/#/
 //LAMP_API = http:/$()/52.66.237.209:9093
 
 //DASHBOARD_URL = https:/$()/admin.lampv2.unityhealth.to/#/

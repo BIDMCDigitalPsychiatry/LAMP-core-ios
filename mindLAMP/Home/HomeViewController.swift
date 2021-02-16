@@ -46,7 +46,7 @@ class HomeViewController: UIViewController {
         if appState != UIApplication.State.background {
             loadWebPage()
         }
-        NotificationCenter.default.addObserver(self, selector: #selector(updateWatchOS(_:)),
+        NotificationCenter.default.addObserver(self, selector: #selector(appDidActive(_:)),
                                                name: UIApplication.didBecomeActiveNotification, object: nil)
     }
     
@@ -78,7 +78,9 @@ class HomeViewController: UIViewController {
 
 private extension HomeViewController {
     
-    @objc func updateWatchOS(_ notification: Notification) {
+    @objc func appDidActive(_ notification: Notification) {
+        
+        NotificationHelper.shared.removeAllExpiredNotifications()
         
         if isWebpageLoaded == false {
             printToFile("load page when become active")

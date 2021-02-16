@@ -16,6 +16,7 @@ struct Logs {
     struct Directory {
         static let logs = "Logs"
         static let sensorlogs = "SensorLogs"
+        static let sensorSpecs = "SensorSpecs"
     }
     
     struct Messages { }

@@ -28,11 +28,6 @@ jobs:
         run: |
           agvtool new-marketing-version ${{steps.tags.outputs.LATEST_TAG_NUMBER}}
           agvtool new-version -all ${{steps.commits.outputs.GIT_COMMIT_NUMBER}}
-      - name: update
-        run: |
-          git add .
-          git commit -m "bump version"
-          git push origin HEAD
       - name: Install gpg 
         run: brew install gpg
       - name: Setup provisioning profile

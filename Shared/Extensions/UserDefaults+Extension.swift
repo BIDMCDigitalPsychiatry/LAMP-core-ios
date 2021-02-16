@@ -51,16 +51,23 @@ extension UserDefaults {
         removeObject(forKey: UserDefaults.Key.notificationTimestamps.rawValue)
     }
     
-    func setTimestampForNotificationId(nId: String) {
+//    func setTimestampForNotificationId(nId: String) {
+//        var dictTimestamps = notificationTimestamps ?? [String: Double]()
+//        dictTimestamps[nId] = Date().timeIntervalSince1970
+//
+//        notificationTimestamps = dictTimestamps
+//    }
+    
+    func setExpireTimestamp(_ timeStamp: Date, For notificationId: String) {
         var dictTimestamps = notificationTimestamps ?? [String: Double]()
-        dictTimestamps[nId] = Date().timeIntervalSince1970
+        dictTimestamps[notificationId] = timeStamp.timeIntervalSince1970
         
         notificationTimestamps = dictTimestamps
     }
     
-    func getTimestampForNotificationId(nId: String) -> Double {
+    func getExpireTimestampFor(notificationId: String) -> Double {
         let dictTimestamps = notificationTimestamps
-        return dictTimestamps?[nId] ?? 0
+        return dictTimestamps?[notificationId] ?? 0
     }
     
     func setInitalSensorRecorderTimestamp() {

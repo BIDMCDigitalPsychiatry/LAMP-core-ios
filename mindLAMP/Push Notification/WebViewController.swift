@@ -23,12 +23,12 @@ class WebViewController: UIViewController {
     
     override func loadView() {
         //LeakAvoider.cleanCache()
-        self.loadWebView()
+        loadWebView()
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.navigationController?.setNavigationBarHidden(false, animated: false)
+        navigationController?.setNavigationBarHidden(false, animated: false)
         wkWebView.load(URLRequest(url: pageURL))
     }
         

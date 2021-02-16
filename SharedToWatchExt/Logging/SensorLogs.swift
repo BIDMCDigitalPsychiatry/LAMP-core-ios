@@ -10,21 +10,23 @@ extension Date {
 class SensorLogs {
     
     static let shared = SensorLogs()
+    static let sensorSpecfileName = "SensorSpecs.json"
     // MARK: - VARIABLES
     
     // MARK: - METHODS
-    private init() {
-        
-//        let url = FileManager.default.urls(for: FileManager.SearchPathDirectory.documentDirectory, in: .userDomainMask).first
-//        do {
-//            try FileManager.default.setAttributes([FileAttributeKey.protectionKey : FileProtectionType], ofItemAtPath: url!.path)
-//        } catch {
-//
-//        }
-    }
+    private init() {}
     
     func createSensorLogsDirectory() {
         FileStorage.createDirectory(name: Logs.Directory.sensorlogs, in: .documents)
+    }
+    
+    func storeSensorSpecs(specs: [Sensor]) {
+        FileStorage.store(specs, to: Logs.Directory.sensorSpecs, in: .documents, as: SensorLogs.sensorSpecfileName)
+    }
+    
+    func fetchSensorSpecs() -> [Sensor]? {
+        let data = FileStorage.retrieve(SensorLogs.sensorSpecfileName, from: Logs.Directory.sensorSpecs, in: .documents, as: [Sensor].self)
+        return data
     }
     
     func storeSensorRequest(_ request: SensorData.Request) {
@@ -32,11 +34,7 @@ class SensorLogs {
         let timeStampStr = UInt64(timeStamp).description
         FileStorage.store(request, to: Logs.Directory.sensorlogs, in: .documents, as: timeStampStr + ".json")
     }
-    
-//    func storeSensorRequest(_ request: SensorData.Request, timestampText: String) {
-//        FileStorage.store(request, to: Logs.Directory.sensorlogs, in: .documents, as: timestampText + ".json")
-//    }
-    
+
     func fetchSensorRequest() -> [(String, SensorData.Request)] {
         let urls = FileStorage.urls(for: Logs.Directory.sensorlogs, in: .documents)
         var files = [String]()
@@ -65,5 +63,6 @@ class SensorLogs {
     
     func clearLogsDirectory() {
         FileStorage.clear(Logs.Directory.sensorlogs, in: .documents)
+        FileStorage.clear(Logs.Directory.sensorSpecs, in: .documents)
     }
 }
