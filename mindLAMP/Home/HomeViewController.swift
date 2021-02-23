@@ -15,7 +15,7 @@ class HomeViewController: UIViewController {
     private var wkWebView: WKWebView!
     private var loadingObservation: NSKeyValueObservation?
     private var isWebpageLoaded = false
-    var subscriber: AnyCancellable?
+    var loginSubscriber: AnyCancellable?
     //var isHomePageLoaded = false
     //@IBOutlet weak var containerView: UIView!
     private lazy var indicator: UIActivityIndicatorView  = {
@@ -181,7 +181,7 @@ private extension HomeViewController {
        
         let event = SensorEvent(timestamp: Date().timeInMilliSeconds, sensor: SensorType.lamp_analytics.lampIdentifier, data: tokenInfo)
         let publisher = SensorEventAPI.sensorEventCreate(participantId: participantId, sensorEvent: event, apiResponseQueue: DispatchQueue.global())
-        subscriber = publisher.sink { value in
+        loginSubscriber = publisher.sink { value in
             switch value {
             case .failure(let error):
                 printError("loginSensorEventCreate error \(error.localizedDescription)")
@@ -206,7 +206,7 @@ private extension HomeViewController {
         let tokenInfo = DeviceInfoWithToken(deviceToken: nil, userAgent: UserAgent.defaultAgent, action: SensorType.AnalyticAction.logout.rawValue)
         let event = SensorEvent(timestamp: Date().timeInMilliSeconds, sensor: SensorType.lamp_analytics.lampIdentifier, data: tokenInfo)
         let publisher = SensorEventAPI.sensorEventCreate(participantId: participantId, sensorEvent: event, apiResponseQueue: DispatchQueue.global())
-        subscriber = publisher.sink { _ in
+        loginSubscriber = publisher.sink { _ in
             NotificationHelper.shared.removeAllNotifications()
             User.shared.logout()
         } receiveValue: { (stringValue) in
@@ -226,7 +226,7 @@ extension HomeViewController: WKNavigationDelegate {
     }
     
     func webView(_ webView: WKWebView, didFail navigation: WKNavigation!, withError error: Error) {
-        print("error = \(error.localizedDescription)")
+        print("naviation fail error = \(error.localizedDescription)")
         //indicator.stopAnimating()
     }
     

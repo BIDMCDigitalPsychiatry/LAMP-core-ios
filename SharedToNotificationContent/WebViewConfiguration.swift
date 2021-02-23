@@ -22,7 +22,7 @@ struct WebConfiguration {
                     configuration.userContentController = contentController
                 }
             } catch let error {
-                print("error = \(error.localizedDescription)")
+                print("web error = \(error.localizedDescription)")
             }
             
         }

@@ -154,7 +154,7 @@ extension ExtensionDelegate {
     }
     
     func didFailToRegisterForRemoteNotificationsWithError(_ error: Error) {
-        print("error = \(error.localizedDescription)")
+        print("Notification error = \(error.localizedDescription)")
     }
     
     func didRegisterForRemoteNotifications(withDeviceToken deviceToken: Data) {

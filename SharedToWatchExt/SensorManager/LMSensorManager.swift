@@ -121,6 +121,7 @@ class LMSensorManager {
     }
     
     private func initiateSensors() {
+        
         let specIdentifiers: [String] = sensorSpecs.compactMap({ $0.spec })
         //Always setup location sensors to keep the app alive in background. but collect location data only if its configured.
         print("specIdentifiers = \(specIdentifiers)")
@@ -357,10 +358,9 @@ private extension LMSensorManager {
     
     func setupHealthKitSensor(_ specIdentifiers: [String]) {
         #if os(iOS)
-        let healthkitSensors: [String] = [HKCategoryTypeIdentifier.sleepAnalysis.lampIdentifier, HKQuantityTypeIdentifier.heartRate.lampIdentifier, HKQuantityTypeIdentifier.bloodPressureDiastolic.lampIdentifier, HKQuantityTypeIdentifier.respiratoryRate.lampIdentifier, HKQuantityTypeIdentifier.bodyTemperature.lampIdentifier, HKQuantityTypeIdentifier.oxygenSaturation.lampIdentifier, HKQuantityTypeIdentifier.bloodGlucose.lampIdentifier, HKQuantityTypeIdentifier.dietaryIron.lampIdentifier]
-            
+        let hkSensors = LMHealthKitSensor.healthkitSensors
         if specIdentifiers.contains(where: { (element) -> Bool in
-            return healthkitSensors.contains(element)
+            return hkSensors.contains(element)
         }) {
             sensor_healthKit = LMHealthKitSensor(specIdentifiers)
             sensor_healthKit?.observer = self
@@ -682,9 +682,10 @@ private extension LMSensorManager {
         return arrData.map { (healthData) -> SensorEvent<SensorDataModel> in
             var data = SensorDataModel()
             data.value = healthData.value
-            data.valueString = healthData.valueText
+            data.type = healthData.valueText
             data.startDate = healthData.startDate
             data.endDate = healthData.endDate
+            data.source = healthData.source
             let lampIdentifier = healthData.hkIdentifier.lampIdentifier
             return SensorEvent(timestamp: Double(healthData.timestamp), sensor: lampIdentifier, data: data)
         }
@@ -706,9 +707,11 @@ private extension LMSensorManager {
                         var model = SensorDataModel()
                         model.unit = categoryData.unit
                         model.value = categoryData.value
-                        model.valueString = categoryData.valueText
+                        model.type = categoryData.valueText
                         model.startDate = categoryData.startDate
                         model.endDate = categoryData.endDate
+                        model.source = categoryData.source
+                        model.duration = categoryData.duration
                         return SensorEvent(timestamp: Double(categoryData.timestamp), sensor: categoryType.lampIdentifier, data: model)
                     }
                 }
@@ -730,6 +733,7 @@ private extension LMSensorManager {
             case .bloodPressureSystolic:
                 if let dataDiastolic = latestData(for: HKQuantityTypeIdentifier.bloodPressureDiastolic, in: arrData), let dataSystolic = latestData(for: HKQuantityTypeIdentifier.bloodPressureSystolic, in: arrData) {
                     var model = SensorDataModel()
+                    //model.source = dataDiastolic.source, Systolic source?
                     model.unit = dataDiastolic.unit
                     if let diastolic = dataDiastolic.value {
                         model.bp_diastolic = diastolic
@@ -752,7 +756,7 @@ private extension LMSensorManager {
                         model.value = quantityData.value
                         //model.startDate = quantityData.startDate
                         //model.endDate = quantityData.endDate
-                        //model.source = quantityData.source //for step count only
+                        model.source = quantityData.source
                         return SensorEvent(timestamp: Double(quantityData.timestamp), sensor: quantityType.lampIdentifier, data: model)
                     }
                     arrayData.append(contentsOf: sensorDataArray)

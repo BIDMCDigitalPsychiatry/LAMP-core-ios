@@ -161,7 +161,7 @@ public struct SensorDataModel: Codable {
     
     //Calls
     //public var type: String?
-    public var duration: Double?
+    public var duration: Double?//used for sleep also
     public var trace: String?
     
     public var activity: SensorActivity?
@@ -250,8 +250,8 @@ public struct SensorDataModel: Codable {
 //        case call_type
 //        case call_trace
 //
-//        var startDate: Double?
-//        var endDate: Double?
+//        case startDate
+//        case endDate
     }
 }
 
