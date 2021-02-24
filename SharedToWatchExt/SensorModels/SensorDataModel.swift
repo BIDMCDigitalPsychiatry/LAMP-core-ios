@@ -168,7 +168,7 @@ public struct SensorDataModel: Codable {
     
     //Health
     public var unit: String?
-    public var valueString: String?
+    public var representation: String?
     public var bp_diastolic: Double?
     public var bp_systolic: Double?
     public var workout_type: String?
@@ -231,7 +231,7 @@ public struct SensorDataModel: Codable {
         case activity
         //Health
 //        var unit: String?
-        case valueString
+        case representation
         case bp_diastolic
         case bp_systolic
         case workout_type
@@ -301,7 +301,7 @@ extension SensorDataModel {
 
     public init(screenData: ScreenStateData) {
         self.value = Double(screenData.screenState.rawValue)
-        self.valueString = screenData.screenState.stringValue
+        self.representation = screenData.screenState.stringValue
     }
     
     public init(callsData: CallsData) {

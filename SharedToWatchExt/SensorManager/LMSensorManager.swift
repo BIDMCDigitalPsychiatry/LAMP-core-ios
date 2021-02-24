@@ -682,7 +682,7 @@ private extension LMSensorManager {
         return arrData.map { (healthData) -> SensorEvent<SensorDataModel> in
             var data = SensorDataModel()
             data.value = healthData.value
-            data.type = healthData.valueText
+            data.representation = healthData.representation
             data.startDate = healthData.startDate
             data.endDate = healthData.endDate
             data.source = healthData.source
@@ -707,7 +707,7 @@ private extension LMSensorManager {
                         var model = SensorDataModel()
                         model.unit = categoryData.unit
                         model.value = categoryData.value
-                        model.type = categoryData.valueText
+                        model.representation = categoryData.representation
                         model.startDate = categoryData.startDate
                         model.endDate = categoryData.endDate
                         model.source = categoryData.source
@@ -719,7 +719,7 @@ private extension LMSensorManager {
         }
         return arrayData
     }
-    
+
     func fetchHealthKitQuantityData() -> [SensorEvent<SensorDataModel>]? {
         guard let arrData = sensor_healthKit?.latestQuantityData() else {
             return nil
