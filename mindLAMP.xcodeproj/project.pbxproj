@@ -1953,7 +1953,7 @@
 			repositoryURL = "https://github.com/BIDMCDigitalPsychiatry/LAMP-swift.git";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 2021.2.15;
+				minimumVersion = 2021.2.24;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
