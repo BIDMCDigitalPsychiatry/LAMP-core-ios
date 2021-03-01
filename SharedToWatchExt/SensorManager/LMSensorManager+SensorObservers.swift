@@ -12,9 +12,6 @@ extension LMSensorManager: SensorStore {
     
     @objc
     func timeToStore() {
-        
-        
-        
         let dateStr = dateFormatter.string(from: Date())
         
         printToFile("fetch now \(dateStr)")
@@ -86,15 +83,15 @@ extension LMSensorManager: AccelerometerObserver {
     }
 }
 
-// MARK:- GyroscopeObserver
-extension LMSensorManager: GyroscopeObserver {
-    
-    func onDataChanged(data: GyroscopeData) {
-        queueGyroscopeData.async(flags: .barrier) {
-            self.gyroscopeDataBufffer.append(data)
-        }
-    }
-}
+//// MARK:- GyroscopeObserver
+//extension LMSensorManager: GyroscopeObserver {
+//    
+//    func onDataChanged(data: GyroscopeData) {
+//        queueGyroscopeData.async(flags: .barrier) {
+//            self.gyroscopeDataBufffer.append(data)
+//        }
+//    }
+//}
 
 
 // MARK: - GravityObserver
@@ -107,15 +104,15 @@ extension LMSensorManager: MotionObserver {
     }
 }
 
-// MARK:- MagnetometerObserver
-extension LMSensorManager: MagnetometerObserver {
-    
-    func onDataChanged(data: MagnetometerData) {
-        queueMagnetometerData.async(flags: .barrier) {
-            self.magnetometerDataBufffer.append(data)
-        }
-    }
-}
+//// MARK:- MagnetometerObserver
+//extension LMSensorManager: MagnetometerObserver {
+//    
+//    func onDataChanged(data: MagnetometerData) {
+//        queueMagnetometerData.async(flags: .barrier) {
+//            self.magnetometerDataBufffer.append(data)
+//        }
+//    }
+//}
 
 // MARK: - LocationsDataObserver
 extension LMSensorManager: LocationsDataObserver {
