@@ -31,7 +31,7 @@ class LMSensorManager {
     }()
     //singleton object
     static let shared: LMSensorManager = LMSensorManager()
-    let storeSensorDataIntervalInMinutes = 5.0 //minutes
+    let storeSensorDataIntervalInMinutes = 1.0//+roll 5 //minutes
     
     //manager to hold all sensor references
     private let sensorManager = SensorManager()
@@ -45,11 +45,11 @@ class LMSensorManager {
     var accelerometerDataBufffer = [AccelerometerData]()
     let queueAccelerometerData = DispatchQueue(label: "thread-safe-AccelerometerData", attributes: .concurrent)
     
-    var gyroscopeDataBufffer = [GyroscopeData]()
-    let queueGyroscopeData = DispatchQueue(label: "thread-safe-GyroscopeData", attributes: .concurrent)
-    
-    var magnetometerDataBufffer = [MagnetometerData]()
-    let queueMagnetometerData = DispatchQueue(label: "thread-safe-MagnetometerData", attributes: .concurrent)
+//    var gyroscopeDataBufffer = [GyroscopeData]()
+//    let queueGyroscopeData = DispatchQueue(label: "thread-safe-GyroscopeData", attributes: .concurrent)
+//
+//    var magnetometerDataBufffer = [MagnetometerData]()
+//    let queueMagnetometerData = DispatchQueue(label: "thread-safe-MagnetometerData", attributes: .concurrent)
     
     var motionDataBuffer = [MotionData]()
     let queueMotionData = DispatchQueue(label: "thread-safe-MotionData", attributes: .concurrent)
@@ -72,11 +72,11 @@ class LMSensorManager {
     
     var sensor_bluetooth: LMBluetoothSensor?
     var sensor_healthKit: LMHealthKitSensor?
-    
     var sensor_pedometer: PedometerSensor?
     
-    //TImer to post data to server
-    var sensorApiTimer: Timer?
+    //Timer to post data to server
+    //var sensorApiTimer: Timer?
+    var sensorAPITimer: RepeatingTimer?
     
     // SensorData storage variables for other sensors
     var locationsDataBuffer = [LocationsData]()
@@ -92,6 +92,22 @@ class LMSensorManager {
     let queuePedometerData = DispatchQueue(label: "thread-safe-PedometerData", attributes: .concurrent)
     
     var latestWifiData: WiFiScanData?
+    
+    //******define all sensor specs here.**********
+    lazy var allSensorSpecs: [String] = {
+       var sensors = [SensorType.lamp_gps.lampIdentifier,
+                      SensorType.lamp_Activity.lampIdentifier,
+                      SensorType.lamp_telephony.lampIdentifier,
+                      SensorType.lamp_screen_state.lampIdentifier,
+                      SensorType.lamp_nearby_device.lampIdentifier,
+                      SensorType.lamp_steps.lampIdentifier,
+                      SensorType.lamp_device_motion.lampIdentifier,
+                      SensorType.lamp_accelerometer.lampIdentifier,
+                      SensorType.lamp_analytics.lampIdentifier]
+        sensors.append(contentsOf: LMHealthKitSensor.healthkitSensors)
+        print("sensors = \(sensors)")
+        return sensors
+    }()
     
     private init() {
         
@@ -114,7 +130,6 @@ class LMSensorManager {
     @objc private func appDidEnterBackground() {
         #if os(iOS)
         printToFile("appDidEnterBackground")
-        //sensor_motionManager?.restartMotionUpdates(). this is doing inside the motion sensor class
         sensor_location?.locationManager.stopMonitoringSignificantLocationChanges()
         sensor_location?.locationManager.startMonitoringSignificantLocationChanges()
         #endif
@@ -122,32 +137,31 @@ class LMSensorManager {
     
     private func initiateSensors() {
         
-        let specIdentifiers: [String] = sensorSpecs.compactMap({ $0.spec })
         //Always setup location sensors to keep the app alive in background. but collect location data only if its configured.
-        print("specIdentifiers = \(specIdentifiers)")
-        setupLocationSensor(isNeedData: specIdentifiers.contains(SensorType.lamp_gps.lampIdentifier))
+        print("sensorIdentifiers = \(sensorIdentifiers)")
+        setupLocationSensor(isNeedData: sensorIdentifiers.contains(SensorType.lamp_gps.lampIdentifier))
         
-        setUpSensorMotionManager(specIdentifiers)
+        setUpSensorMotionManager(sensorIdentifiers)
         
         #if os(iOS)
         
-        if specIdentifiers.contains(SensorType.lamp_Activity.lampIdentifier) {
+        if sensorIdentifiers.contains(SensorType.lamp_Activity.lampIdentifier) {
             setupActivitySensor()
         }
-        if specIdentifiers.contains(SensorType.lamp_telephony.lampIdentifier) {
+        if sensorIdentifiers.contains(SensorType.lamp_telephony.lampIdentifier) {
             setupCallsSensor()
         }
-        if specIdentifiers.contains(SensorType.lamp_screen_state.lampIdentifier) {
+        if sensorIdentifiers.contains(SensorType.lamp_screen_state.lampIdentifier) {
             setupScreenSensor()
         }
-        if specIdentifiers.contains(SensorType.lamp_nearby_device.lampIdentifier) {
+        if sensorIdentifiers.contains(SensorType.lamp_nearby_device.lampIdentifier) {
             setupWifiSensor()
             setupBluetoothSensor()
         }
         
-        setupHealthKitSensor(specIdentifiers)
+        setupHealthKitSensor(sensorIdentifiers)
         
-        if specIdentifiers.contains(SensorType.lamp_steps.lampIdentifier) {
+        if sensorIdentifiers.contains(SensorType.lamp_steps.lampIdentifier) {
             setupPedometerSensor()
         }
         #endif
@@ -170,10 +184,11 @@ class LMSensorManager {
     }
     
     var subscriber: AnyCancellable?
-    var sensorSpecs: [Sensor] = []
+    var sensorIdentifiers: [String] = []
     /// To start sensors observing.
     private func startSensors() {
         
+        var sensorSpecs: [Sensor] = []
         guard let authheader = Endpoint.getSessionKey(), let participantId = User.shared.userId else {
             printError("Auth header missing")
             return
@@ -197,7 +212,6 @@ class LMSensorManager {
                         printError("err = \(err.localizedDescription)")
                     }
                 }
-                self.startSensorsAfterFailure()
             case .failure(let error):
                 printError("postSensorData error \(error.localizedDescription)")
                 if let nsError = error as NSError? {
@@ -210,25 +224,26 @@ class LMSensorManager {
                         LMLogsManager.shared.addLogs(level: .error, logs: Logs.Messages.network_error + " " + nsError.localizedDescription)
                     }
                 }
-                self.startSensorsAfterFailure()
             case .finished:
-                SensorLogs.shared.storeSensorSpecs(specs: self.sensorSpecs)
-                self.initiateSensors()
-                self.sensorManager.startAllSensors()
+                SensorLogs.shared.storeSensorSpecs(specs: sensorSpecs)
             }
+            //load sensorspec after api call.
+            self.loadSensorSpecs()
+            
         }, receiveValue: { response in
-            self.sensorSpecs.append(contentsOf: response.data)
+            sensorSpecs.append(contentsOf: response.data)
         })
     }
-    
-    private func startSensorsAfterFailure() {
-        sensorSpecs.removeAll()
-        if let specs = SensorLogs.shared.fetchSensorSpecs() {
-            print("got from file")
-            sensorSpecs = specs
-            self.initiateSensors()
-            self.sensorManager.startAllSensors()
+
+    private func loadSensorSpecs() {
+        sensorIdentifiers.removeAll()
+        if let specsDownloaded = SensorLogs.shared.fetchSensorSpecs(), specsDownloaded.count > 0 {
+            sensorIdentifiers = specsDownloaded.compactMap({ $0.spec })
+        } else {
+            sensorIdentifiers = allSensorSpecs
         }
+        self.initiateSensors()
+        self.sensorManager.startAllSensors()
     }
     
     private func refreshAllSensors() {
@@ -249,8 +264,7 @@ class LMSensorManager {
         
         printToFile("\nStopping senors")
         isStarted = false
-        self.sensorApiTimer?.invalidate()
-        self.sensorApiTimer = nil
+        sensorAPITimer = nil
         
         sensorManager.stopAllSensors()
         
@@ -284,15 +298,20 @@ class LMSensorManager {
     }
     
     func runevery(seconds: Double) {
-        DispatchQueue.global(qos: DispatchQoS.QoSClass.default).async {
-            self.sensorApiTimer?.invalidate()
-            self.sensorApiTimer = nil
-            
-            self.sensorApiTimer = Timer.scheduledTimer(timeInterval: seconds, target: self, selector: #selector(self.timeToStore), userInfo: nil, repeats: true)
-            RunLoop.current.add(self.sensorApiTimer!, forMode: .common)
-            RunLoop.current.run()
-        }
+//        DispatchQueue.global(qos: DispatchQoS.QoSClass.default).async {
+//            self.sensorApiTimer?.invalidate()
+//            self.sensorApiTimer = nil
+//
+//            self.sensorApiTimer = Timer.scheduledTimer(timeInterval: seconds, target: self, selector: #selector(self.timeToStore), userInfo: nil, repeats: true)
+//            RunLoop.current.add(self.sensorApiTimer!, forMode: .common)
+//            RunLoop.current.run()
+//        }
         
+        sensorAPITimer = RepeatingTimer(timeInterval: storeSensorDataIntervalInMinutes * 60)
+        sensorAPITimer?.eventHandler = {
+            self.timeToStore()
+        }
+        sensorAPITimer?.resume()
     }
     
     func checkIsRunning() {
@@ -549,7 +568,7 @@ private extension LMSensorManager {
         
         // read
         var dataArray: [ActivityData]!
-        queueGyroscopeData.sync {
+        queueActivityData.sync {
             // perform read and assign value
             dataArray = activityDataBuffer
         }
@@ -653,7 +672,10 @@ private extension LMSensorManager {
         }
         return dataArray
     }
+}
 
+// MARK: HealthKit data
+private extension LMSensorManager {
     
     func fetchWorkoutSegmentData() -> SensorEvent<SensorDataModel>? {
         guard let arrData = sensor_healthKit?.latestWorkoutData() else {
@@ -668,10 +690,6 @@ private extension LMSensorManager {
         
         return SensorEvent(timestamp: Double(data.timestamp), sensor: SensorType.lamp_segment.lampIdentifier, data: model)
     }
-}
-
-// MARK: HealthKit data
-private extension LMSensorManager {
     
     func fetchHKCharacteristicData() -> [SensorEvent<SensorDataModel>]? {
         
@@ -733,17 +751,15 @@ private extension LMSensorManager {
             case .bloodPressureSystolic:
                 if let dataDiastolic = latestData(for: HKQuantityTypeIdentifier.bloodPressureDiastolic, in: arrData), let dataSystolic = latestData(for: HKQuantityTypeIdentifier.bloodPressureSystolic, in: arrData) {
                     var model = SensorDataModel()
-                    //model.source = dataDiastolic.source, Systolic source?
-                    model.unit = dataDiastolic.unit
                     if let diastolic = dataDiastolic.value {
-                        model.bp_diastolic = diastolic
+                        model.diastolic = SensorDataModel.Pressure(value: diastolic, units: dataDiastolic.unit, source: dataDiastolic.source, timestamp: UInt64(dataDiastolic.timestamp))
                     }
                     if let systolic = dataSystolic.value {
-                        model.bp_systolic = systolic
+                        model.systolic = SensorDataModel.Pressure(value: systolic, units: dataSystolic.unit, source: dataSystolic.source, timestamp: UInt64(dataSystolic.timestamp))
                     }
                     model.startDate = dataSystolic.startDate
                     model.endDate = dataSystolic.endDate
-                    arrayData.append(SensorEvent(timestamp: Double(dataDiastolic.timestamp), sensor: quantityType.lampIdentifier, data: model))
+                    arrayData.append(SensorEvent(timestamp: Double(Date().timeInMilliSeconds), sensor: quantityType.lampIdentifier, data: model))
                 }
             case .bloodPressureDiastolic:
                 ()//handled with Systolic
@@ -751,12 +767,26 @@ private extension LMSensorManager {
                 if let dataArray = allHealthData(for: quantityType, in: arrData) {
                     let sensorDataArray = dataArray.map { (quantityData) -> SensorEvent<SensorDataModel> in
                         var model = SensorDataModel()
-                        //model.unit = quantityData.unit
-                        model.type = quantityData.type
+                        model.unit = quantityData.unit
+                        //model.type = quantityData.type
                         model.value = quantityData.value
                         //model.startDate = quantityData.startDate
                         //model.endDate = quantityData.endDate
                         model.source = quantityData.source
+                        if quantityData.type == HKQuantityTypeIdentifier.bloodGlucose.rawValue {
+                            if let mealtime = quantityData.metadata?["HKBloodGlucoseMealTime"] as? Int {
+                                switch mealtime {
+                                case 0:
+                                    model.meal_time = "unspecified"
+                                case 1:
+                                    model.meal_time = "preprandial"//before meal
+                                case 2:
+                                    model.meal_time = "postprandial"
+                                default:
+                                    break
+                                }
+                            }
+                        }
                         return SensorEvent(timestamp: Double(quantityData.timestamp), sensor: quantityType.lampIdentifier, data: model)
                     }
                     arrayData.append(contentsOf: sensorDataArray)

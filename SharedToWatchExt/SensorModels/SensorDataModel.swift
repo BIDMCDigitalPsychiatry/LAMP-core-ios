@@ -124,7 +124,17 @@ public struct DeviceInfoWithToken: Codable {
 
 public struct SensorDataModel: Codable {
     
+    public struct Pressure: Codable {
+        var value: Double
+        var units: String?
+        var source: String?
+        var timestamp: UInt64?
+    }
+    
     public init(){}
+    public var systolic: Pressure?
+    public var diastolic: Pressure?
+    
     public var source: String?
     
     //Location
@@ -166,29 +176,18 @@ public struct SensorDataModel: Codable {
     
     public var activity: SensorActivity?
     
+    
     //Health
     public var unit: String?
     public var representation: String?
-    public var bp_diastolic: Double?
-    public var bp_systolic: Double?
     public var workout_type: String?
     public var workout_duration: Double?
     
+    //glucose
+    public var meal_time: String?
     
-//    //Bluetooth
-//    public var bt_rssi: Int?
-//    public var bt_name: String?
-//    public var bt_address: String?
-//    //Wifi
-//    public var bssid: String?
-//    public var ssid: String?
-    //Pedometer
-    //var steps: Int?
-    //var flights_climbed: Int?
-    //var distance: Double?
-    //Screen State
-    //var state: Int?
-    
+    //screen data
+    public var battery_level: Float?
     
     public var startDate: Double?
     public var endDate: Double?
@@ -230,28 +229,16 @@ public struct SensorDataModel: Codable {
         
         case activity
         //Health
-//        var unit: String?
+        case unit
         case representation
-        case bp_diastolic
-        case bp_systolic
         case workout_type
         case workout_duration
+        
+        case systolic
+        case diastolic
 
-        //Bluetooth
-//        case bt_rssi
-//        case bt_name
-//        case bt_address
-//        //Wifi
-//        case bssid
-//        case ssid
-        //Pedometer
-        //Calls
-//        case call_duration
-//        case call_type
-//        case call_trace
-//
-//        case startDate
-//        case endDate
+        case battery_level
+        case meal_time
     }
 }
 
@@ -302,6 +289,7 @@ extension SensorDataModel {
     public init(screenData: ScreenStateData) {
         self.value = Double(screenData.screenState.rawValue)
         self.representation = screenData.screenState.stringValue
+        self.battery_level = screenData.batteryLevel
     }
     
     public init(callsData: CallsData) {

@@ -33,7 +33,10 @@
 		B244A1C223BF4A91007FBDB8 /* FileManager+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B244A1C123BF4A91007FBDB8 /* FileManager+Extension.swift */; };
 		B247D14E25A88E2F00776B41 /* WearableApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B247D14D25A88E2F00776B41 /* WearableApp.swift */; };
 		B24AAD5B259462D700E3692D /* LAMP in Frameworks */ = {isa = PBXBuildFile; productRef = B24AAD5A259462D700E3692D /* LAMP */; };
-		B24AAD62259462DE00E3692D /* LAMP in Frameworks */ = {isa = PBXBuildFile; productRef = B24AAD61259462DE00E3692D /* LAMP */; };
+		B24CD25F25E8FAD2007E14ED /* RepeatingTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = B24CD25E25E8FAD2007E14ED /* RepeatingTimer.swift */; };
+		B24CD26025E8FAD2007E14ED /* RepeatingTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = B24CD25E25E8FAD2007E14ED /* RepeatingTimer.swift */; };
+		B24CD28325E9154E007E14ED /* Collection+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B24CD28225E9154E007E14ED /* Collection+Extension.swift */; };
+		B24CD28425E9154E007E14ED /* Collection+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B24CD28225E9154E007E14ED /* Collection+Extension.swift */; };
 		B255116524B6202300CDBDD1 /* WatchNotificationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B255116424B6202300CDBDD1 /* WatchNotificationModel.swift */; };
 		B255116924B625CC00CDBDD1 /* WatchDeviceInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = B255116824B625CC00CDBDD1 /* WatchDeviceInfo.swift */; };
 		B255116C24B6291900CDBDD1 /* LoginServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = B255116B24B6291900CDBDD1 /* LoginServices.swift */; };
@@ -57,6 +60,7 @@
 		B29639D123BDC28100626E1A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B29639D023BDC28100626E1A /* AppDelegate.swift */; };
 		B29639D723BDC28200626E1A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B29639D623BDC28200626E1A /* Assets.xcassets */; };
 		B29639DA23BDC28200626E1A /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B29639D923BDC28200626E1A /* Preview Assets.xcassets */; };
+		B29B296425ED58CC00D133B3 /* LAMP in Frameworks */ = {isa = PBXBuildFile; productRef = B29B296325ED58CC00D133B3 /* LAMP */; };
 		B2A15BDC2567A8BE00222717 /* NotificationAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2A15BB42567A8BE00222717 /* NotificationAPI.swift */; };
 		B2A15BDD2567A8BE00222717 /* NotificationAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2A15BB42567A8BE00222717 /* NotificationAPI.swift */; };
 		B2A15BF82567A8BE00222717 /* LMSensorManager+SensorObservers.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2A15BC52567A8BE00222717 /* LMSensorManager+SensorObservers.swift */; };
@@ -101,8 +105,6 @@
 		B2D931052445D7E90086477D /* CustomNotification.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = B2D930F72445D7E90086477D /* CustomNotification.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		B2E6A560256F11A300E2CBC8 /* UIDeviceExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2E6A55F256F11A300E2CBC8 /* UIDeviceExtension.swift */; };
 		B2E6A561256F11A300E2CBC8 /* UIDeviceExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2E6A55F256F11A300E2CBC8 /* UIDeviceExtension.swift */; };
-		B2E6A563256F137100E2CBC8 /* BatteryState.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2E6A562256F137100E2CBC8 /* BatteryState.swift */; };
-		B2E6A564256F137100E2CBC8 /* BatteryState.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2E6A562256F137100E2CBC8 /* BatteryState.swift */; };
 		B2E6A567256F195000E2CBC8 /* WebViewConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2E6A566256F195000E2CBC8 /* WebViewConfiguration.swift */; };
 		B2E6A568256F195000E2CBC8 /* WebViewConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2E6A566256F195000E2CBC8 /* WebViewConfiguration.swift */; };
 		B2F70D2E253EAA2E00D70091 /* watchkitextension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = B2704DE224B4A2AC00DE196B /* watchkitextension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
@@ -219,6 +221,8 @@
 		B23993B92440696800E31B06 /* exportOptions.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = exportOptions.plist; sourceTree = "<group>"; };
 		B244A1C123BF4A91007FBDB8 /* FileManager+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FileManager+Extension.swift"; sourceTree = "<group>"; };
 		B247D14D25A88E2F00776B41 /* WearableApp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WearableApp.swift; sourceTree = "<group>"; };
+		B24CD25E25E8FAD2007E14ED /* RepeatingTimer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepeatingTimer.swift; sourceTree = "<group>"; };
+		B24CD28225E9154E007E14ED /* Collection+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Collection+Extension.swift"; sourceTree = "<group>"; };
 		B255116424B6202300CDBDD1 /* WatchNotificationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchNotificationModel.swift; sourceTree = "<group>"; };
 		B255116824B625CC00CDBDD1 /* WatchDeviceInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchDeviceInfo.swift; sourceTree = "<group>"; };
 		B255116B24B6291900CDBDD1 /* LoginServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginServices.swift; sourceTree = "<group>"; };
@@ -275,7 +279,6 @@
 		B2D930FD2445D7E90086477D /* NotificationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationViewController.swift; sourceTree = "<group>"; };
 		B2D931022445D7E90086477D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B2E6A55F256F11A300E2CBC8 /* UIDeviceExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIDeviceExtension.swift; sourceTree = "<group>"; };
-		B2E6A562256F137100E2CBC8 /* BatteryState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BatteryState.swift; sourceTree = "<group>"; };
 		B2E6A566256F195000E2CBC8 /* WebViewConfiguration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebViewConfiguration.swift; sourceTree = "<group>"; };
 		B2FDA83124BF744D000316EE /* ContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -285,7 +288,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B24AAD62259462DE00E3692D /* LAMP in Frameworks */,
+				B29B296425ED58CC00D133B3 /* LAMP in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -433,6 +436,7 @@
 			isa = PBXGroup;
 			children = (
 				B2587B4B256E23BC00A2A7F2 /* UserDefaults+Extension.swift */,
+				B24CD28225E9154E007E14ED /* Collection+Extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -563,7 +567,6 @@
 		B2A15BB22567A8BE00222717 /* SharedToWatchExt */ = {
 			isa = PBXGroup;
 			children = (
-				B2E6A55B256F112E00E2CBC8 /* CoreComponents */,
 				B2A15BB32567A8BE00222717 /* PushNotificationAPI */,
 				B2A15BB62567A8BE00222717 /* SensorModels */,
 				B2A15BC42567A8BE00222717 /* SensorManager */,
@@ -639,6 +642,7 @@
 				B2A15BD82567A8BE00222717 /* BackgroundOperation.swift */,
 				B2A15BD92567A8BE00222717 /* BackgroundServices.swift */,
 				B2A15BDA2567A8BE00222717 /* AsynchronousOperation.swift */,
+				B24CD25E25E8FAD2007E14ED /* RepeatingTimer.swift */,
 			);
 			path = OperationQueue;
 			sourceTree = "<group>";
@@ -669,14 +673,6 @@
 				B2D931022445D7E90086477D /* Info.plist */,
 			);
 			path = CustomNotification;
-			sourceTree = "<group>";
-		};
-		B2E6A55B256F112E00E2CBC8 /* CoreComponents */ = {
-			isa = PBXGroup;
-			children = (
-				B2E6A562256F137100E2CBC8 /* BatteryState.swift */,
-			);
-			path = CoreComponents;
 			sourceTree = "<group>";
 		};
 		B2E6A565256F195000E2CBC8 /* SharedToNotificationContent */ = {
@@ -730,7 +726,7 @@
 			);
 			name = "watchkitapp Extension";
 			packageProductDependencies = (
-				B24AAD61259462DE00E3692D /* LAMP */,
+				B29B296325ED58CC00D133B3 /* LAMP */,
 			);
 			productName = "watchkitapp Extension";
 			productReference = B2704DE224B4A2AC00DE196B /* watchkitextension.appex */;
@@ -908,7 +904,6 @@
 				B2B74E43258BC58B0044BE81 /* ActivityIndicatorView.swift in Sources */,
 				B2A15BFF2567A8BE00222717 /* User.swift in Sources */,
 				B238434924B848F300E548E2 /* LMRunningBuffer.swift in Sources */,
-				B2E6A564256F137100E2CBC8 /* BatteryState.swift in Sources */,
 				B2A15BDD2567A8BE00222717 /* NotificationAPI.swift in Sources */,
 				B255116524B6202300CDBDD1 /* WatchNotificationModel.swift in Sources */,
 				B2A15C132567A8BE00222717 /* LMConstants.swift in Sources */,
@@ -919,11 +914,13 @@
 				B2A15C172567A8BE00222717 /* BackgroundServices.swift in Sources */,
 				B2A15C152567A8BE00222717 /* BackgroundOperation.swift in Sources */,
 				B2A15C192567A8BE00222717 /* AsynchronousOperation.swift in Sources */,
+				B24CD26025E8FAD2007E14ED /* RepeatingTimer.swift in Sources */,
 				B2346CF02599DE9800EFF347 /* AppInfo.swift in Sources */,
 				B2587B5F256E23BC00A2A7F2 /* EndPoint.swift in Sources */,
 				B2A15C012567A8BE00222717 /* StringExtension.swift in Sources */,
 				B2A15C112567A8BE00222717 /* LMLogsManager.swift in Sources */,
 				B2E6A561256F11A300E2CBC8 /* UIDeviceExtension.swift in Sources */,
+				B24CD28425E9154E007E14ED /* Collection+Extension.swift in Sources */,
 				B2D2CA6625503AAE0086C864 /* WatchOSDelegate.swift in Sources */,
 				B2346CE82599CEDF00EFF347 /* SensorDataModel.swift in Sources */,
 				B255116C24B6291900CDBDD1 /* LoginServices.swift in Sources */,
@@ -957,6 +954,7 @@
 				B22DF5F2250612E800777D2D /* UserAgentExtension.swift in Sources */,
 				B2A15C0A2567A8BE00222717 /* FileStorage.swift in Sources */,
 				B2A15C0C2567A8BE00222717 /* SensorLogs.swift in Sources */,
+				B24CD25F25E8FAD2007E14ED /* RepeatingTimer.swift in Sources */,
 				B2A15C082567A8BE00222717 /* Logging.swift in Sources */,
 				B2201C2A257F4DBC00C40183 /* WebViewController.swift in Sources */,
 				B2346CEF2599DE9800EFF347 /* AppInfo.swift in Sources */,
@@ -966,6 +964,7 @@
 				B2201C26257F4DBC00C40183 /* HomeWebViewModel.swift in Sources */,
 				B2B8F4B7258B026800BEB872 /* ActivityIndicator.swift in Sources */,
 				B244A1C223BF4A91007FBDB8 /* FileManager+Extension.swift in Sources */,
+				B24CD28325E9154E007E14ED /* Collection+Extension.swift in Sources */,
 				B29639D123BDC28100626E1A /* AppDelegate.swift in Sources */,
 				B2A15C002567A8BE00222717 /* StringExtension.swift in Sources */,
 				B2A15C142567A8BE00222717 /* BackgroundOperation.swift in Sources */,
@@ -981,7 +980,6 @@
 				B2E6A560256F11A300E2CBC8 /* UIDeviceExtension.swift in Sources */,
 				B2201C67257F9C9D00C40183 /* NotificationWebView.swift in Sources */,
 				B2201C2B257F4DBC00C40183 /* iOSDelegate.swift in Sources */,
-				B2E6A563256F137100E2CBC8 /* BatteryState.swift in Sources */,
 				B2587B51256E23BC00A2A7F2 /* UserDefaults+Extension.swift in Sources */,
 				B2A15C1A2567A8BE00222717 /* SharingInfo.swift in Sources */,
 				B2587B5D256E23BC00A2A7F2 /* EndPoint.swift in Sources */,
@@ -1953,7 +1951,7 @@
 			repositoryURL = "https://github.com/BIDMCDigitalPsychiatry/LAMP-swift.git";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 2021.2.24;
+				minimumVersion = 2021.3.1;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
@@ -1964,7 +1962,7 @@
 			package = B24AAD59259462D700E3692D /* XCRemoteSwiftPackageReference "LAMP-swift" */;
 			productName = LAMP;
 		};
-		B24AAD61259462DE00E3692D /* LAMP */ = {
+		B29B296325ED58CC00D133B3 /* LAMP */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = B24AAD59259462D700E3692D /* XCRemoteSwiftPackageReference "LAMP-swift" */;
 			productName = LAMP;
