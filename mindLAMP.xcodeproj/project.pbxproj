@@ -49,6 +49,7 @@
 		B2587B5D256E23BC00A2A7F2 /* EndPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2587B50256E23BC00A2A7F2 /* EndPoint.swift */; };
 		B2587B5E256E23BC00A2A7F2 /* EndPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2587B50256E23BC00A2A7F2 /* EndPoint.swift */; };
 		B2587B5F256E23BC00A2A7F2 /* EndPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2587B50256E23BC00A2A7F2 /* EndPoint.swift */; };
+		B269503D25EE32D900AECC0E /* ActivityLocalNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = B269503C25EE32D900AECC0E /* ActivityLocalNotification.swift */; };
 		B2704DDC24B4A2AC00DE196B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B2704DDB24B4A2AC00DE196B /* Assets.xcassets */; };
 		B2704DEC24B4A2AC00DE196B /* ExtensionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2704DEB24B4A2AC00DE196B /* ExtensionDelegate.swift */; };
 		B2704DF424B4A2AC00DE196B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B2704DF324B4A2AC00DE196B /* Assets.xcassets */; };
@@ -231,6 +232,7 @@
 		B2587B4E256E23BC00A2A7F2 /* Production.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Production.xcconfig; sourceTree = "<group>"; };
 		B2587B4F256E23BC00A2A7F2 /* LampURL.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LampURL.swift; sourceTree = "<group>"; };
 		B2587B50256E23BC00A2A7F2 /* EndPoint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EndPoint.swift; sourceTree = "<group>"; };
+		B269503C25EE32D900AECC0E /* ActivityLocalNotification.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityLocalNotification.swift; sourceTree = "<group>"; };
 		B26B56C92566EE5B00A87711 /* CustomNotification.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = CustomNotification.entitlements; sourceTree = "<group>"; };
 		B2704DD624B4A2A900DE196B /* watchkitapp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = watchkitapp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B2704DDB24B4A2AC00DE196B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -343,6 +345,7 @@
 		B2201C1C257F4DBC00C40183 /* Push Notification */ = {
 			isa = PBXGroup;
 			children = (
+				B269503C25EE32D900AECC0E /* ActivityLocalNotification.swift */,
 				B2201C1D257F4DBC00C40183 /* Models */,
 				B2201C20257F4DBC00C40183 /* UserNotifications.swift */,
 				B2201C21257F4DBC00C40183 /* WebViewController.swift */,
@@ -969,6 +972,7 @@
 				B2A15C002567A8BE00222717 /* StringExtension.swift in Sources */,
 				B2A15C142567A8BE00222717 /* BackgroundOperation.swift in Sources */,
 				B2E6A567256F195000E2CBC8 /* WebViewConfiguration.swift in Sources */,
+				B269503D25EE32D900AECC0E /* ActivityLocalNotification.swift in Sources */,
 				B2A15BDC2567A8BE00222717 /* NotificationAPI.swift in Sources */,
 				B2201C29257F4DBC00C40183 /* UserNotifications.swift in Sources */,
 				B2587B5A256E23BC00A2A7F2 /* LampURL.swift in Sources */,

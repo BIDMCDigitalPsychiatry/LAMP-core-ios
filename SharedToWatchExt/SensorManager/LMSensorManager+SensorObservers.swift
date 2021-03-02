@@ -131,6 +131,12 @@ extension LMSensorManager: LocationsObserver {
         switch errType {
 
         case .notEnabled, .denied:
+            //post as sensor data
+            let dataModel = SensorDataModel(
+            let events = SensorEvent(timestamp: Date().timeInMilliSeconds, sensor: SensorType.lamp_analytics.lampIdentifier, data: <#T##_?#>)
+            let request = SensorData.Request(sensorEvents: events)
+            SensorLogs.shared.storeSensorRequest(request)//store to disk
+            
             LMLogsManager.shared.addLogs(level: .error, logs: Logs.Messages.gps_off)
             showLocationAlert()
         case .otherErrors(let error):
