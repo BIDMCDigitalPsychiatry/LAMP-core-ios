@@ -28,11 +28,16 @@ class SensorLogs {
         let data = FileStorage.retrieve(SensorLogs.sensorSpecfileName, from: Logs.Directory.sensorSpecs, in: .documents, as: [Sensor].self)
         return data
     }
-    
-    func storeSensorRequest(_ request: SensorData.Request) {
-        let timeStamp = Date().timeInMilliSeconds
-        let timeStampStr = UInt64(timeStamp).description
-        FileStorage.store(request, to: Logs.Directory.sensorlogs, in: .documents, as: timeStampStr + ".json")
+    // pass filename if you want to keep only one
+    func storeSensorRequest(_ request: SensorData.Request, fileNameWithoutExt: String? = nil) {
+        let fileName: String
+        if let fName = fileNameWithoutExt {
+            fileName = fName
+        } else {
+            let timeStamp = Date().timeInMilliSeconds
+            fileName = UInt64(timeStamp).description
+        }
+        FileStorage.store(request, to: Logs.Directory.sensorlogs, in: .documents, as: fileName + ".json")
     }
 
     func fetchSensorRequest() -> [(String, SensorData.Request)] {

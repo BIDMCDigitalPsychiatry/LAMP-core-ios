@@ -191,6 +191,11 @@ public struct SensorDataModel: Codable {
     
     public var startDate: Double?
     public var endDate: Double?
+    //analytics
+    var action: String?
+    var device_type: String?// = "iOS" //"Android" or "Web"
+    var user_agent: String?
+    var message: String?
     
     enum CodingKeys: String, CodingKey {
         
@@ -233,12 +238,18 @@ public struct SensorDataModel: Codable {
         case representation
         case workout_type
         case workout_duration
-        
+        //pressure
         case systolic
         case diastolic
-
+        //screen data
         case battery_level
+        //glucose
         case meal_time
+        //lamp.analytics
+        case action
+        case device_type
+        case user_agent
+        case message
     }
 }
 
@@ -285,6 +296,13 @@ public struct SensorActivity: Codable {
 }
 
 extension SensorDataModel {
+    //for log lamp.analytics
+    public init(action: String?, userAgent: UserAgent?, errorMsg: String?) {
+        self.action = action
+        self.user_agent = userAgent?.toString()
+        self.device_type = DeviceType.displayName
+        self.message = errorMsg
+    }
 
     public init(screenData: ScreenStateData) {
         self.value = Double(screenData.screenState.rawValue)
