@@ -41,19 +41,21 @@ extension SensorData.Request: Codable {
 }
 
 public struct UserAgent {
-    var model: String
+    var type: String
     var os_version: String
     var app_version: String
-    public init(model: String, os_version: String, app_version: String) {
-        self.model = model
+    var model: String
+    public init(type: String, os_version: String, app_version: String, model: String) {
+        self.type = type
         self.os_version = os_version
         self.app_version = app_version
+        self.model = model
     }
 }
 
 extension UserAgent {
     public func toString() -> String {
-        return "\(app_version), \(model), \(os_version)"
+        return "NativeCore \(app_version); iOS \(os_version); \(type) \(model)"
     }
 }
 
