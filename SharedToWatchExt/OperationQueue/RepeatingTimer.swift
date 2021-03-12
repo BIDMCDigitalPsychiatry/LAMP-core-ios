@@ -7,14 +7,20 @@ import Foundation
 class RepeatingTimer {
 
     let timeInterval: TimeInterval
+    let isRepeat: Bool
     
-    init(timeInterval: TimeInterval) {
+    init(timeInterval: TimeInterval, repeating: Bool = true) {
         self.timeInterval = timeInterval
+        self.isRepeat = repeating
     }
     
     private lazy var timer: DispatchSourceTimer? = {
         let t = DispatchSource.makeTimerSource()
-        t.schedule(deadline: .now() + self.timeInterval, repeating: self.timeInterval)
+        if isRepeat {
+            t.schedule(deadline: .now() + self.timeInterval, repeating: self.timeInterval)
+        } else {
+            t.schedule(deadline: .now() + self.timeInterval, repeating: TimeInterval.infinity)
+        }
         t.setEventHandler(handler: { [weak self] in
             self?.eventHandler?()
         })
@@ -31,6 +37,7 @@ class RepeatingTimer {
     private var state: State = .suspended
 
     deinit {
+        print("deinit repeating timer")
         timer?.setEventHandler {}
         timer?.cancel()
         /*

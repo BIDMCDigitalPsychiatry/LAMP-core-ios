@@ -170,8 +170,6 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
         
         if let livingTime = pushInfo.expireMilliSeconds, pushInfo.identifier != nil {
             printToFile("\n schedule timer for \(pushInfo.identifier!) = \(livingTime/1000.0)")
-            Timer.scheduledTimer(timeInterval: livingTime/1000.0, target: NotificationHelper.shared, selector: #selector(NotificationHelper.shared.fireNotificationExpire), userInfo: userInfo, repeats: false)
-            //timer.tolerance = 0.2
             queue.async {
                 let currentRunLoop = RunLoop.current
                 let timer = Timer.scheduledTimer(timeInterval: livingTime/1000.0, target: NotificationHelper.shared, selector: #selector(NotificationHelper.shared.fireNotificationExpire), userInfo: userInfo, repeats: false)
