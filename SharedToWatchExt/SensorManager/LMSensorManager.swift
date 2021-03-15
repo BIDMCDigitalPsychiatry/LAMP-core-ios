@@ -31,7 +31,7 @@ class LMSensorManager {
     }()
     //singleton object
     static let shared: LMSensorManager = LMSensorManager()
-    let storeSensorDataIntervalInMinutes = 1.0//+roll 5 //minutes
+    let storeSensorDataIntervalInMinutes = 5.0 //minutes
     
     //manager to hold all sensor references
     private let sensorManager = SensorManager()

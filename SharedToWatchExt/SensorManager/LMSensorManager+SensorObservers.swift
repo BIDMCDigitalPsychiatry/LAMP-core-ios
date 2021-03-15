@@ -131,11 +131,24 @@ extension LMSensorManager: LocationsObserver {
         switch errType {
 
         case .notEnabled, .denied:
-            LMLogsManager.shared.addLogs(level: .error, logs: Logs.Messages.gps_off)
+            //post as sensor data
+            let data = SensorDataModel(action: SensorType.AnalyticAction.logs.rawValue, userAgent: UserAgent.defaultAgent, errorMsg: Logs.Messages.gps_off)
+            let events = [SensorEvent(timestamp: Date().timeInMilliSeconds, sensor: SensorType.lamp_analytics.lampIdentifier, data: data)]
+            let request = SensorData.Request(sensorEvents: events)
+            SensorLogs.shared.storeSensorRequest(request, fileNameWithoutExt: "gps_off")//store to disk
+            
+            //LMLogsManager.shared.addLogs(level: .error, logs: Logs.Messages.gps_off)
             showLocationAlert()
         case .otherErrors(let error):
+            //post as sensor data
             let msg = String(format: Logs.Messages.location_error, error.localizedDescription)
-            LMLogsManager.shared.addLogs(level: .error, logs: msg)
+            let data = SensorDataModel(action: SensorType.AnalyticAction.logs.rawValue, userAgent: UserAgent.defaultAgent, errorMsg: msg)
+            let events = [SensorEvent(timestamp: Date().timeInMilliSeconds, sensor: SensorType.lamp_analytics.lampIdentifier, data: data)]
+            let request = SensorData.Request(sensorEvents: events)
+            SensorLogs.shared.storeSensorRequest(request)//store to disk
+            
+            //let msg = String(format: Logs.Messages.location_error, error.localizedDescription)
+            //LMLogsManager.shared.addLogs(level: .error, logs: msg)
         }
     }
 }
@@ -157,8 +170,15 @@ extension LMSensorManager: LMHealthKitSensorObserver {
     }
     
     func onHKDataFetch(for type: String, error: Error?) {
+        
+        //post as sensor data
         let logsMessage = String(format: "\(Logs.Messages.hk_data_fetch_error) %@", error?.localizedDescription ?? "null")
-        LMLogsManager.shared.addLogs(level: .warning, logs: logsMessage)
+        let data = SensorDataModel(action: SensorType.AnalyticAction.logs.rawValue, userAgent: UserAgent.defaultAgent, errorMsg: logsMessage)
+        let events = [SensorEvent(timestamp: Date().timeInMilliSeconds, sensor: SensorType.lamp_analytics.lampIdentifier, data: data)]
+        let request = SensorData.Request(sensorEvents: events)
+        SensorLogs.shared.storeSensorRequest(request, fileNameWithoutExt: type)//store to disk
+        //let logsMessage = String(format: "\(Logs.Messages.hk_data_fetch_error) %@", error?.localizedDescription ?? "null")
+        //LMLogsManager.shared.addLogs(level: .warning, logs: logsMessage)
     }
 }
 
