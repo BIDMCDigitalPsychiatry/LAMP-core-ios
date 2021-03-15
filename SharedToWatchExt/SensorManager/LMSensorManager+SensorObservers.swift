@@ -7,6 +7,7 @@
 
 import Foundation
 import LAMP
+import UIKit
 
 extension LMSensorManager: SensorStore {
     
@@ -55,6 +56,13 @@ extension LMSensorManager: SensorStore {
             printToFile("stored file and sync @ \(Date())")
             BackgroundServices.shared.performTasks()
         } else {
+            //Check ActivityAPI sync here
+            #if os(iOS)
+            let appdelegate = UIApplication.shared.delegate as! AppDelegate
+            let navController = appdelegate.window?.rootViewController as? UINavigationController
+            (navController?.topViewController as? HomeViewController)?.scheduleHandler.refreshActivities()
+            #endif
+            
             printToFile("stored file @ \(Date())")
             self.isSyncNow = true
         }

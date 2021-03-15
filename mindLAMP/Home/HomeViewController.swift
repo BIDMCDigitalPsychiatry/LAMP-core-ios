@@ -33,6 +33,10 @@ class HomeViewController: UIViewController {
         return LampURL.dashboardDigital
     }
     
+    lazy var scheduleHandler: ActivityLocalNotification = {
+        return ActivityLocalNotification()
+    }()
+
     override func loadView() {
         
         LeakAvoider.cleanCache()
@@ -55,6 +59,12 @@ class HomeViewController: UIViewController {
         // Hide the navigation bar on the this view controller
         self.navigationController?.setNavigationBarHidden(true, animated: animated)
     }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        scheduleHandler.refreshActivities()
+    }
+    
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         // Show the navigation bar on other view controllers
@@ -188,6 +198,7 @@ private extension HomeViewController {
             case .finished:
                 break
             }
+            self.scheduleHandler.refreshActivities()
         } receiveValue: { (stringValue) in
             print("login receiveValue = \(stringValue)")
         }
