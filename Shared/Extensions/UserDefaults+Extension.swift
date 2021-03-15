@@ -29,6 +29,16 @@ extension UserDefaults {
         case version = "version"
         
         case notificationTimestamps = "notificationTimestamps"
+        case activityAPILastAccessedDate = "activityAPILastAccessedDate"
+    }
+    
+    var activityAPILastAccessedDate: Date {
+        get {
+            return (self.object(forKey: UserDefaults.Key.activityAPILastAccessedDate.rawValue)) as? Date ?? Date.init(timeIntervalSince1970: 0)
+        }
+        set {
+            self.set(newValue, forKey: UserDefaults.Key.activityAPILastAccessedDate.rawValue)
+        }
     }
     
     var notificationTimestamps: [String: Double]? {
@@ -188,6 +198,7 @@ extension UserDefaults {
         UserDefaults.standard.userIDShared = nil
         UserDefaults.standard.passwordShared = nil
         UserDefaults.standard.serverAddressShared = nil
+        UserDefaults.standard.activityAPILastAccessedDate = Date.init(timeIntervalSince1970: 0)
         
         UserDefaults.standard.removeObject(forKey: UserDefaults.Key.userID.rawValue)
         UserDefaults.standard.removeObject(forKey: UserDefaults.Key.serverAddress.rawValue)

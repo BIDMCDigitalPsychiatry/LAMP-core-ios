@@ -9,56 +9,30 @@ class ActivityLocalNotification {
     
     var activitySubscriber: AnyCancellable?
     
-//    func demo() {
-//        let content = UNMutableNotificationContent()
-//        content.body = "eeee test"
-//        content.badge = 1
-//
-//        let deliveryTime = Date().addingTimeInterval(5)
-//
-//        //let dateComponent = Calendar.current.dateComponents([.minute, .second], from: deliveryTime)
-//        //let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponent, repeats: true)
-//
-//        //let dateComponent = Calendar.current.dateComponents([.year, .month, .day, .hour, .minute, .second], from:Date().addingTimeInterval(5))
-//
-//        let thisTime: TimeInterval = 60.0 // 1 minute = 60 seconds
-//
-//        // Some examples:
-//        // 5 minutes = 300.0
-//        // 1 hour = 3600.0
-//        // 12 hours = 43200.0
-//        // 1 day = 86400.0
-//        // 1 week = 604800.0
-//
-//        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: thisTime, repeats: true)
-//
-//        let req = UNNotificationRequest(identifier: "eeee", content: content, trigger: trigger)
-//
-//        let notificationCenter = UNUserNotificationCenter.current()
-//        notificationCenter.add(req) { (error) in
-//            print(error)
-//        }
-//
-//    }
+    let intervalToFetchActivity = 12.0 * 60.0 * 60.0 //for 12 hours
     
-    func listNotification(_ sender: Any) {
+    func refreshActivities() {
+        if Date().timeIntervalSince(UserDefaults.standard.activityAPILastAccessedDate) > intervalToFetchActivity {
+            fetchActivities()
+        }
+    }
+   
+    func listNotification() {
         UNUserNotificationCenter.current().getPendingNotificationRequests(completionHandler: {requests -> () in
             print("\(requests.count) requests -------")
             for request in requests{
                 print(request.identifier)
             }
         })
-        
         UNUserNotificationCenter.current().getDeliveredNotifications(completionHandler: {deliveredNotifications -> () in
             print("\(deliveredNotifications.count) Delivered notifications-------")
             for notification in deliveredNotifications{
                 print(notification.request.identifier)
             }
         })
-        
     }
     
-    func fetchActivities() {
+    private func fetchActivities() {
         
         //todo execute once per day
         guard let authheader = Endpoint.getSessionKey(), let participantId = User.shared.userId else {
@@ -69,9 +43,8 @@ class ActivityLocalNotification {
         OpenAPIClientAPI.customHeaders = ["Authorization": "Basic \(authheader)", "Content-Type": "application/json"]
         let publisher = ActivityAPI.activityAllByParticipant(participantId: participantId)
         print("ActivityAPI")
-        activitySubscriber = publisher.sink(receiveCompletion: { [weak self] value in
-            guard let self = self else { return }
-            print("value3 = \(value)")
+        activitySubscriber = publisher.sink(receiveCompletion: { value in
+            print("value activity = \(value)")
             switch value {
             case .failure(let ErrorResponse.error(code, data, error)):
                 printError("ActivityAPI error code\(code), \(error.localizedDescription)")
@@ -97,6 +70,7 @@ class ActivityLocalNotification {
                     }
                 }
             case .finished:
+                UserDefaults.standard.activityAPILastAccessedDate = Date()
                 break
             }
         }, receiveValue: { response in
@@ -105,8 +79,6 @@ class ActivityLocalNotification {
             self.scheduleActivities(allActivity)
         })
     }
-    
-
     
     func cancelAll() {
         UNUserNotificationCenter.current().removeAllPendingNotificationRequests()
@@ -124,77 +96,253 @@ class ActivityLocalNotification {
         }
     }
     
+    let queue = DispatchQueue(label: "NotificationTimer", qos: .background, attributes: .concurrent)
     private func makeLocalNotification(activitySchedule: DurationIntervalLegacy, activityId: String?, title: String?) {
 
         guard let participantid = User.shared.userId, let activityid = activityId else {return}
-        guard let deliveryTime = activitySchedule.time,
+        guard let deliveryTime = activitySchedule.time, let scheduleStartDate = activitySchedule.startDate,
               let repeatType = activitySchedule.repeatType, let title = title else { return }
         
+        //return if start-time greater than curent time
         guard let identifierInt = activitySchedule.notificationId?.first else {return}
         let identifier = String(identifierInt)
-        //var path = "/participant/{participant_id}/activity/{activityid}"
+        
         let pageURL = "/participant/\(participantid)/activity/\(activityid)"
         
         //Create content for your notification
         let content = UNMutableNotificationContent()
-        content.title = title
-        content.body = "Local - You have a mindLAMP activity waiting for you: \(title)"
+        //content.title = title
+        content.body = "You have a mindLAMP activity waiting for you: \(title)"
         content.sound = UNNotificationSound.default
         //"expiry": 21600000
         let actionObj = ["name":"Open App", "page":pageURL]
         let actions = [actionObj]
         content.userInfo = ["notificationId": identifier, "page": pageURL, "actions" : actions]
         
+        //extract startDay
+        let dateComponentStartDay = Calendar.current.dateComponents([.year, .month, .day, .weekday], from: scheduleStartDate)
+        let startDay = Calendar.current.date(from: dateComponentStartDay)
+        print("startDay = \(startDay!)")
         //make different type of notification as per repeat type
         switch repeatType {
 
+        case .biweekly:
+            if let startDate = startDay, startDate > Date() { return }
+            //if we set local notification on every Tuesday and Thursday, then we need two identifiers. But here we have to meet this with same identifier, then only the Tuesday alert will replaced by Thursday alert. So we are not creating a recurrent alert. Instead we will find upcoming date of alert and will schedule. There is no effect it is recurrent or not.
+            let weekdaySet = IndexSet([3, 5]) // Tuesday 3 and Thursday 5
+            schedulteNextWeekDay(weekdaySet: weekdaySet, deliveryTime: deliveryTime, identifier: identifier, content: content)
+        case .triweekly:
+            if let startDate = startDay, startDate > Date() { return }
+            //Every Monday, Wednesday, and Friday. 2, 4, 6
+            let weekdaySet = IndexSet([2, 4, 6])
+            schedulteNextWeekDay(weekdaySet: weekdaySet, deliveryTime: deliveryTime, identifier: identifier, content: content)
+        case .bimonthly:
+            
+            if let startDate = startDay, startDate > Date() { return }
+            //As we have to use same identifier for both alert, we can't create both alert. So we will find upcoming alert date and will create one.  There is no effect it is recurrent or not.
+            let daySet = IndexSet([10, 20])
+            
+            let dayToday =  Calendar.current.component(.day, from: Date())
+            let timeComponent = Calendar.current.dateComponents([.hour, .minute], from:deliveryTime)
+            //check today is 10 or 20
+            if daySet.contains(dayToday) {
+                let dateComponentToDay = Calendar.current.dateComponents([.year, .month, .day], from:Date())
+                let components = DateComponents(year: dateComponentToDay.year, month: dateComponentToDay.month, day: dateComponentToDay.day, hour: timeComponent.hour, minute: timeComponent.minute)
+                if let schedulteTime = Calendar.current.date(from: components), schedulteTime > Date() {
+                    addNoticiationOn(identifier: identifier, content: content, dateComponent: components)
+                    return
+                }
+            }
+            guard let nextDate = nextDay(daySet: daySet) else { return }
+            let dateComponentNotificationDay = Calendar.current.dateComponents([.year, .month, .day], from: nextDate)
+            let components = DateComponents(year: dateComponentNotificationDay.year, month: dateComponentNotificationDay.month, day: dateComponentNotificationDay.day, hour: timeComponent.hour, minute: timeComponent.minute)
+            addNoticiationOn(identifier: identifier, content: content, dateComponent: components)
+
+        case .every3h:
+            if let startDate = startDay, startDate > Date() { return }
+            let hours = 3
+            schduleforEveryHour(hours: hours, deliveryTime: deliveryTime, identifier: identifier, content: content)
+        case .every6h:
+            if let startDate = startDay, startDate > Date() { return }
+            let hours = 6
+            schduleforEveryHour(hours: hours, deliveryTime: deliveryTime, identifier: identifier, content: content)
+        case .every12h:
+            if let startDate = startDay, startDate > Date() { return }
+            let hours = 12
+            schduleforEveryHour(hours: hours, deliveryTime: deliveryTime, identifier: identifier, content: content)
+        case .weekly:
+            //week day of start day
+            
+            let timeComponent = Calendar.current.dateComponents([.hour, .minute], from: deliveryTime)
+            let components = DateComponents(hour: timeComponent.hour, minute: timeComponent.minute, weekday: dateComponentStartDay.weekday)
+            addNoticiationOn(identifier: identifier, content: content, dateComponent: components)
         case .custom:
+            if let startDate = startDay, startDate > Date() { return }
             //trigger daily for all custom times
             activitySchedule.customTimes?.enumerated().forEach({ (i, fireTime) in
                 guard let identifierCustomInt = activitySchedule.notificationId?[safe: i] else {return}
                 let identifierCustom = String(identifierCustomInt)
-                let dateComponent = Calendar.current.dateComponents([.hour, .minute, .second], from:fireTime)
-                let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponent, repeats: true)
-                let req = UNNotificationRequest(identifier: identifierCustom, content: content, trigger: trigger)
-                let notificationCenter = UNUserNotificationCenter.current()
-                notificationCenter.add(req) { (error) in
-                    print(error)
-                }
+                let dateComponent = Calendar.current.dateComponents([.hour, .minute], from:fireTime)
+                addNoticiationOn(identifier: identifierCustom, content: content, dateComponent: dateComponent)
             })
-            
         case .daily:
-            let dateComponent = Calendar.current.dateComponents([.hour, .minute, .second], from:deliveryTime)
-            let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponent, repeats: true)
-            let req = UNNotificationRequest(identifier: identifier, content: content, trigger: trigger)
-            let notificationCenter = UNUserNotificationCenter.current()
-            notificationCenter.add(req) { (error) in
-                print(error)
-            }
+            if let startDate = startDay, startDate > Date() { return }
+            let dateComponent = Calendar.current.dateComponents([.hour, .minute], from:deliveryTime)
+            addNoticiationOn(identifier: identifier, content: content, dateComponent: dateComponent)
         case .hourly:
-            let dateComponent = Calendar.current.dateComponents([.minute, .second], from:deliveryTime)
-            let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponent, repeats: true)
-            let req = UNNotificationRequest(identifier: identifier, content: content, trigger: trigger)
-            let notificationCenter = UNUserNotificationCenter.current()
-            notificationCenter.add(req) { (error) in
-                print(error)
-            }
+            if let startDate = startDay, startDate > Date() { return }
+            let dateComponent = Calendar.current.dateComponents([.minute], from:deliveryTime)
+            addNoticiationOn(identifier: identifier, content: content, dateComponent: dateComponent)
         case .monthly:
-            let dateComponent = Calendar.current.dateComponents([.day, .hour, .minute, .second], from:deliveryTime)
-            let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponent, repeats: true)
-            let req = UNNotificationRequest(identifier: identifier, content: content, trigger: trigger)
-            let notificationCenter = UNUserNotificationCenter.current()
-            notificationCenter.add(req) { (error) in
-                print(error)
-            }
+            let timeComponent = Calendar.current.dateComponents([.hour, .minute], from: deliveryTime)
+            let components = DateComponents(day: dateComponentStartDay.day, hour: timeComponent.hour, minute: timeComponent.minute)
+            addNoticiationOn(identifier: identifier, content: content, dateComponent: components)
         case .none:
-            let dateComponent = Calendar.current.dateComponents([.year, .month, .day, .hour, .minute, .second], from:deliveryTime)
-            let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponent, repeats: false)
-            let req = UNNotificationRequest(identifier: identifier, content: content, trigger: trigger)
-            let notificationCenter = UNUserNotificationCenter.current()
-            notificationCenter.add(req) { (error) in
-                print(error)
+            let dateComponentTime = Calendar.current.dateComponents([.hour, .minute], from:deliveryTime)
+            let triggerOncecomponents = DateComponents(year: dateComponentStartDay.year, month: dateComponentStartDay.month, day: dateComponentStartDay.day, hour: dateComponentTime.hour, minute: dateComponentTime.minute)
+            
+            addNoticiationOn(identifier: identifier, content: content, dateComponent: triggerOncecomponents, repeats: false)
+        }
+    }
+    
+    struct ComponentIntervals {
+        var dateComponent: DateComponents
+        var intervals: TimeInterval
+        init(_ dateComponent: DateComponents) {
+            self.dateComponent = dateComponent
+            self.intervals = Calendar.current.date(from: dateComponent)?.timeIntervalSince(Date()) ?? -1
+        }
+    }
+    
+    private func schedulteNextWeekDay(weekdaySet: IndexSet, deliveryTime: Date, identifier: String, content: UNMutableNotificationContent) {
+        let weekdayToday =  Calendar.current.component(.weekday, from: Date())
+        let timeComponent = Calendar.current.dateComponents([.hour, .minute], from:deliveryTime)
+        if weekdaySet.contains(weekdayToday) {
+            let dateComponentToDay = Calendar.current.dateComponents([.year, .month, .day], from:Date())
+            let components = DateComponents(year: dateComponentToDay.year, month: dateComponentToDay.month, day: dateComponentToDay.day, hour: timeComponent.hour, minute: timeComponent.minute)
+            if let schedulteTime = Calendar.current.date(from: components), schedulteTime > Date() {
+                addNoticiationOn(identifier: identifier, content: content, dateComponent: components)
+                return
             }
         }
-        
+        //if not scheduled today
+        guard let nextDate = nextWeekDay(weekdaySet: weekdaySet) else { return }
+        let dateComponentNotificationDay = Calendar.current.dateComponents([.year, .month, .day], from: nextDate)
+        let components = DateComponents(year: dateComponentNotificationDay.year, month: dateComponentNotificationDay.month, day: dateComponentNotificationDay.day, hour: timeComponent.hour, minute: timeComponent.minute)
+        addNoticiationOn(identifier: identifier, content: content, dateComponent: components)
     }
+    
+    //schedule a non-repeat notification on 'deliveryTime' and scheule repeating interval notification at the tie of first 'deliveryTime'
+    private func schduleforEveryHour(hours: Int, deliveryTime: Date, identifier: String, content: UNMutableNotificationContent) {
+        guard let intervalToStart = timeIntervaForImmediateFutureDate(everyXhour: hours, fireTime: deliveryTime) else { return }
+        //schedule for first
+        let dateComponent = Calendar.current.dateComponents([.year, .month, .day, .hour, .minute], from: Date().addingTimeInterval(intervalToStart))
+        addNoticiationOn(identifier: identifier, content: content, dateComponent: dateComponent, repeats: false)
+        //self.addIntervalNoticiationOn(identifier: identifier, content: content, interval: intervalToStart, isRepeat: false)
+        //schedule for next and repeat
+        queue.async {
+            let currentRunLoop = RunLoop.current
+            let timer = Timer.scheduledTimer(withTimeInterval: intervalToStart, repeats: false) { (timer) in
+                self.addIntervalNoticiationOn(identifier: identifier, content: content, interval: Double(hours) * 60.0 * 60.0)
+                timer.invalidate()
+            }
+            currentRunLoop.add(timer, forMode: .common)
+            currentRunLoop.run()
+        }
+    }
+    
+    //This function used to execute the notitifation when it matched the datecomponent
+    private func addNoticiationOn(identifier: String, content: UNNotificationContent, dateComponent: DateComponents, repeats: Bool = true) {
+        let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponent, repeats: repeats)
+        let req = UNNotificationRequest(identifier: identifier, content: content, trigger: trigger)
+        let notificationCenter = UNUserNotificationCenter.current()
+        notificationCenter.add(req) { (_) in
+        }
+    }
+    
+    //This function used to execute the the notitifation after x seconds
+    private func addIntervalNoticiationOn(identifier: String, content: UNNotificationContent, interval: TimeInterval, isRepeat: Bool = true) {
+        
+        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: interval, repeats: isRepeat)
+        let req = UNNotificationRequest(identifier: identifier, content: content, trigger: trigger)
+        let notificationCenter = UNUserNotificationCenter.current()
+        notificationCenter.add(req) { (_) in
+        }
+    }
+
+    //find the next weekday from the weekday set. //This excludes today's weekday checking.
+    func nextWeekDay(weekdaySet: IndexSet) -> Date? {
+
+        // Get the current calendar and the weekday from today
+        let calendar = Calendar.current
+        var weekday =  calendar.component(.weekday, from: Date())
+
+        // Calculate the next index
+        if let nextWeekday = weekdaySet.integerGreaterThan(weekday) {
+            weekday = nextWeekday
+        } else {
+            weekday = weekdaySet.first!
+        }
+
+        // Get the next day matching this weekday
+        let components = DateComponents(weekday: weekday)
+        return calendar.nextDate(after: Date(), matching: components, matchingPolicy: .nextTime)
+    }
+    
+    //find the next from the day set. //This excludes today checking.
+    func nextDay(daySet: IndexSet) -> Date? {
+
+        let calendar = Calendar.current
+        var day =  calendar.component(.day, from: Date())
+
+        // Calculate the next index
+        if let nextday = daySet.integerGreaterThan(day) {
+            day = nextday
+        } else {
+            day = daySet.first!
+        }
+
+        // Get the next day matching this weekday
+        let components = DateComponents(day: day)
+        return calendar.nextDate(after: Date(), matching: components, matchingPolicy: .nextTime)
+    }
+
+    //fireTime - is the time to start the everyXhour notifications.
+    //This function is used to find the next upcoming notification data. case 1. current time is 10 am, and the fire time is 8 am, then the next notification time is 11am, so this function returns 1*60*60 seconds.
+    //case 2. current time is 10 am and the fire time is 2 pm, then this function returns 1*60*60 seconds for the next notification time of 11 am.
+    func timeIntervaForImmediateFutureDate(everyXhour: Int, fireTime: Date) -> TimeInterval? {
+        
+        let dateComponentDay = Calendar.current.dateComponents([.year, .month, .day], from:Date())
+        let dateComponentTime = Calendar.current.dateComponents([.hour, .minute, .second], from:fireTime)
+        guard let todayDay = dateComponentDay.day else {return 0}
+        
+        let tempDaycomponents = DateComponents(year: dateComponentDay.year, month: dateComponentDay.month, day: todayDay, hour: dateComponentTime.hour, minute: dateComponentTime.minute, second: dateComponentTime.second)
+        guard let tempDate = Calendar.current.date(from: tempDaycomponents) else { return 0 }
+
+        var isMoveForward = false
+        if tempDate < Date() {
+            isMoveForward = true
+        }
+        
+        let n = 24 / everyXhour
+        for i in 0..<n {
+            
+            guard let dHour = dateComponentTime.hour else { continue }
+            let incrementedHour = (dHour + (i * everyXhour))
+            let h = incrementedHour % 24
+            let day = isMoveForward ? (Int(incrementedHour / 24) + todayDay) : todayDay
+            let daycomponents = DateComponents(year: dateComponentDay.year, month: dateComponentDay.month, day: day, hour: h, minute: dateComponentTime.minute, second: dateComponentTime.second)
+            guard let fireDate = Calendar.current.date(from: daycomponents) else { continue }
+            print("fireDate = \(fireDate)")
+            let timeInterval = fireDate.timeIntervalSince(Date())
+            if timeInterval > 0 && timeInterval < (Double(everyXhour) * 60.0 * 60.0) {
+                return timeInterval
+            } else {
+                continue
+            }
+        }
+        return 0
+    }
+
+    
 }

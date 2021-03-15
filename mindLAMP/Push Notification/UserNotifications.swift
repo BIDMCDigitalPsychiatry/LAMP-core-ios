@@ -50,6 +50,7 @@ class NotificationHelper: NSObject {
     }
     
     func removeAllNotifications() {
+        UNUserNotificationCenter.current().removeAllPendingNotificationRequests()
         UNUserNotificationCenter.current().removeAllDeliveredNotifications()
     }
     
