@@ -58,9 +58,11 @@ extension LMSensorManager: SensorStore {
         } else {
             //Check ActivityAPI sync here
             #if os(iOS)
-            let appdelegate = UIApplication.shared.delegate as! AppDelegate
-            let navController = appdelegate.window?.rootViewController as? UINavigationController
-            (navController?.topViewController as? HomeViewController)?.scheduleHandler.refreshActivities()
+            DispatchQueue.main.async {
+                let appdelegate = UIApplication.shared.delegate as! AppDelegate
+                let navController = appdelegate.window?.rootViewController as? UINavigationController
+                (navController?.topViewController as? HomeViewController)?.scheduleHandler.refreshActivities()
+            }
             #endif
             
             printToFile("stored file @ \(Date())")
