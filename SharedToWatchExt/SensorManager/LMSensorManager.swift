@@ -141,7 +141,13 @@ class LMSensorManager {
         print("sensorIdentifiers = \(sensorIdentifiers)")
         setupLocationSensor(isNeedData: sensorIdentifiers.contains(SensorType.lamp_gps.lampIdentifier))
         
-        setUpSensorMotionManager(sensorIdentifiers)
+        let isExist = setUpSensorMotionManager(sensorIdentifiers)
+        
+        if isExist {
+            // then we are using the timer of motion to store/sync sensor data to server
+        } else {
+            runevery(seconds: storeSensorDataIntervalInMinutes * 60)
+        }
         
         #if os(iOS)
         
@@ -322,7 +328,7 @@ class LMSensorManager {
             self.isStarted = true
             startSensors()
 
-            runevery(seconds: storeSensorDataIntervalInMinutes * 60)
+            //runevery(seconds: storeSensorDataIntervalInMinutes * 60)
         }
         BackgroundServices.shared.performTasks()
     }
@@ -350,7 +356,7 @@ class LMSensorManager {
 // MARK: - SENSOR SETUP METHODS
 private extension LMSensorManager {
     
-    func setUpSensorMotionManager(_ specIdentifiers: [String]) {
+    func setUpSensorMotionManager(_ specIdentifiers: [String]) -> Bool {
         
         let isDevicemotion = specIdentifiers.contains(SensorType.lamp_device_motion.lampIdentifier)
         let isAccelerometer = specIdentifiers.contains(SensorType.lamp_accelerometer.lampIdentifier)
@@ -365,9 +371,12 @@ private extension LMSensorManager {
                 if isDevicemotion {
                     config.motionObserver = self
                 }
+                config.sensorTimerDelegate = self
             }))
             sensorManager.addSensor(sensor_motionManager!)
+            return true
         }
+        return false
     }
     
     func setupBluetoothSensor() {
