@@ -164,6 +164,7 @@ public struct SensorDataModel: Codable {
     public var pace: Double?
     public var cadence: Double?
     public var active_pace: Double?
+    public var event: String?
     
     //lamp.nearby_device
     public var type: String?
@@ -225,6 +226,7 @@ public struct SensorDataModel: Codable {
         case pace
         case cadence
         case active_pace
+        case event
         
         case type
         case address
@@ -357,6 +359,7 @@ extension SensorDataModel {
         self.pace = pedometerData.currentPace
         self.cadence = pedometerData.currentCadence
         self.active_pace = pedometerData.averageActivePace
+        self.event = pedometerData.event
     }
 }
 

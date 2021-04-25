@@ -222,6 +222,7 @@
 		B23993B92440696800E31B06 /* exportOptions.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = exportOptions.plist; sourceTree = "<group>"; };
 		B244A1C123BF4A91007FBDB8 /* FileManager+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FileManager+Extension.swift"; sourceTree = "<group>"; };
 		B247D14D25A88E2F00776B41 /* WearableApp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WearableApp.swift; sourceTree = "<group>"; };
+		B249BE8726315446007AAA81 /* LAMP-swift */ = {isa = PBXFileReference; lastKnownFileType = folder; name = "LAMP-swift"; path = "../../LAMP-swift"; sourceTree = "<group>"; };
 		B24CD25E25E8FAD2007E14ED /* RepeatingTimer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepeatingTimer.swift; sourceTree = "<group>"; };
 		B24CD28225E9154E007E14ED /* Collection+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Collection+Extension.swift"; sourceTree = "<group>"; };
 		B255116424B6202300CDBDD1 /* WatchNotificationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchNotificationModel.swift; sourceTree = "<group>"; };
@@ -511,6 +512,7 @@
 		B29639C423BDC28100626E1A = {
 			isa = PBXGroup;
 			children = (
+				B249BE8726315446007AAA81 /* LAMP-swift */,
 				B2587B49256E23BC00A2A7F2 /* Shared */,
 				B2A15BB22567A8BE00222717 /* SharedToWatchExt */,
 				B2E6A565256F195000E2CBC8 /* SharedToNotificationContent */,
@@ -1110,7 +1112,7 @@
 				CODE_SIGN_ENTITLEMENTS = mindLAMP/mindLAMP.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 257.1;
+				CURRENT_PROJECT_VERSION = 259.2;
 				DEVELOPMENT_ASSET_PATHS = "\"mindLAMP/Preview Content\"";
 				DEVELOPMENT_TEAM = S2Y2D4239K;
 				ENABLE_BITCODE = NO;
@@ -1148,7 +1150,7 @@
 				CODE_SIGN_ENTITLEMENTS = CustomNotification/CustomNotification.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 257.1;
+				CURRENT_PROJECT_VERSION = 259.2;
 				DEVELOPMENT_TEAM = S2Y2D4239K;
 				INFOPLIST_FILE = CustomNotification/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
@@ -1174,7 +1176,7 @@
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 257.1;
+				CURRENT_PROJECT_VERSION = 259.2;
 				DEVELOPMENT_TEAM = S2Y2D4239K;
 				INFOPLIST_FILE = NotificationService/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
@@ -1202,7 +1204,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 257.1;
+				CURRENT_PROJECT_VERSION = 259.2;
 				DEVELOPMENT_TEAM = S2Y2D4239K;
 				IBSC_MODULE = "$(PRODUCT_MODULE_NAME)";
 				INFOPLIST_FILE = watchkitapp/Info.plist;
@@ -1227,7 +1229,7 @@
 				CODE_SIGN_ENTITLEMENTS = "watchkitapp Extension/watchkitapp Extension.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 257.1;
+				CURRENT_PROJECT_VERSION = 259.2;
 				DEVELOPMENT_ASSET_PATHS = "\"watchkitapp Extension/Preview Content\"";
 				DEVELOPMENT_TEAM = S2Y2D4239K;
 				ENABLE_PREVIEWS = YES;
@@ -1318,7 +1320,7 @@
 				CODE_SIGN_ENTITLEMENTS = mindLAMP/mindLAMP.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 257.1;
+				CURRENT_PROJECT_VERSION = 259.2;
 				DEVELOPMENT_ASSET_PATHS = "\"mindLAMP/Preview Content\"";
 				DEVELOPMENT_TEAM = S2Y2D4239K;
 				ENABLE_BITCODE = NO;
@@ -1355,7 +1357,7 @@
 				CODE_SIGN_ENTITLEMENTS = CustomNotification/CustomNotification.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 257.1;
+				CURRENT_PROJECT_VERSION = 259.2;
 				DEVELOPMENT_TEAM = S2Y2D4239K;
 				INFOPLIST_FILE = CustomNotification/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
@@ -1381,7 +1383,7 @@
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 257.1;
+				CURRENT_PROJECT_VERSION = 259.2;
 				DEVELOPMENT_TEAM = S2Y2D4239K;
 				INFOPLIST_FILE = NotificationService/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
@@ -1409,7 +1411,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 257.1;
+				CURRENT_PROJECT_VERSION = 259.2;
 				DEVELOPMENT_TEAM = S2Y2D4239K;
 				IBSC_MODULE = "$(PRODUCT_MODULE_NAME)";
 				INFOPLIST_FILE = watchkitapp/Info.plist;
@@ -1434,7 +1436,7 @@
 				CODE_SIGN_ENTITLEMENTS = "watchkitapp Extension/watchkitapp Extension.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 257.1;
+				CURRENT_PROJECT_VERSION = 259.2;
 				DEVELOPMENT_ASSET_PATHS = "\"watchkitapp Extension/Preview Content\"";
 				DEVELOPMENT_TEAM = S2Y2D4239K;
 				ENABLE_PREVIEWS = YES;
@@ -1465,7 +1467,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 257.1;
+				CURRENT_PROJECT_VERSION = 259.2;
 				DEVELOPMENT_TEAM = S2Y2D4239K;
 				IBSC_MODULE = "$(PRODUCT_MODULE_NAME)";
 				INFOPLIST_FILE = watchkitapp/Info.plist;
@@ -1490,7 +1492,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 257.1;
+				CURRENT_PROJECT_VERSION = 259.2;
 				DEVELOPMENT_TEAM = S2Y2D4239K;
 				IBSC_MODULE = "$(PRODUCT_MODULE_NAME)";
 				INFOPLIST_FILE = watchkitapp/Info.plist;
@@ -1515,7 +1517,7 @@
 				CODE_SIGN_ENTITLEMENTS = "watchkitapp Extension/watchkitapp Extension.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 257.1;
+				CURRENT_PROJECT_VERSION = 259.2;
 				DEVELOPMENT_ASSET_PATHS = "\"watchkitapp Extension/Preview Content\"";
 				DEVELOPMENT_TEAM = S2Y2D4239K;
 				ENABLE_PREVIEWS = YES;
@@ -1546,7 +1548,7 @@
 				CODE_SIGN_ENTITLEMENTS = "watchkitapp Extension/watchkitapp Extension.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 257.1;
+				CURRENT_PROJECT_VERSION = 259.2;
 				DEVELOPMENT_ASSET_PATHS = "\"watchkitapp Extension/Preview Content\"";
 				DEVELOPMENT_TEAM = S2Y2D4239K;
 				ENABLE_PREVIEWS = YES;
@@ -1575,7 +1577,7 @@
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 257.1;
+				CURRENT_PROJECT_VERSION = 259.2;
 				DEVELOPMENT_TEAM = S2Y2D4239K;
 				INFOPLIST_FILE = NotificationService/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
@@ -1601,7 +1603,7 @@
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 257.1;
+				CURRENT_PROJECT_VERSION = 259.2;
 				DEVELOPMENT_TEAM = S2Y2D4239K;
 				INFOPLIST_FILE = NotificationService/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
@@ -1753,7 +1755,7 @@
 				CODE_SIGN_ENTITLEMENTS = mindLAMP/mindLAMP.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 257.1;
+				CURRENT_PROJECT_VERSION = 259.2;
 				DEVELOPMENT_ASSET_PATHS = "\"mindLAMP/Preview Content\"";
 				DEVELOPMENT_TEAM = S2Y2D4239K;
 				ENABLE_BITCODE = NO;
@@ -1794,7 +1796,7 @@
 				CODE_SIGN_ENTITLEMENTS = mindLAMP/mindLAMP.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 257.1;
+				CURRENT_PROJECT_VERSION = 259.2;
 				DEVELOPMENT_ASSET_PATHS = "\"mindLAMP/Preview Content\"";
 				DEVELOPMENT_TEAM = S2Y2D4239K;
 				ENABLE_BITCODE = NO;
@@ -1831,7 +1833,7 @@
 				CODE_SIGN_ENTITLEMENTS = CustomNotification/CustomNotification.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 257.1;
+				CURRENT_PROJECT_VERSION = 259.2;
 				DEVELOPMENT_TEAM = S2Y2D4239K;
 				INFOPLIST_FILE = CustomNotification/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
@@ -1858,7 +1860,7 @@
 				CODE_SIGN_ENTITLEMENTS = CustomNotification/CustomNotification.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 257.1;
+				CURRENT_PROJECT_VERSION = 259.2;
 				DEVELOPMENT_TEAM = S2Y2D4239K;
 				INFOPLIST_FILE = CustomNotification/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
