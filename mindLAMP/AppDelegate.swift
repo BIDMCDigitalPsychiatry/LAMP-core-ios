@@ -6,7 +6,7 @@
 //
 
 import UIKit
-import Combine
+//import Combine
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -14,7 +14,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var completionHandler: (() -> Void)?
     var window: UIWindow? //for iOS < 13
     let queue = DispatchQueue(label: "Timer", qos: .background, attributes: .concurrent)
-    var subscriber: AnyCancellable?
+    //var subscriber: AnyCancellable?
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.

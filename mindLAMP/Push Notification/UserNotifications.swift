@@ -123,14 +123,33 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
         if deviceTokenStr != UserDefaults.standard.deviceToken {
             if User.shared.isLogin() {
                 //send to server
+                guard let participantId = User.shared.userId else {
+                    return
+                }
+                
+                let tokenInfo = DeviceInfoWithToken(deviceToken: deviceTokenStr, userAgent: UserAgent.defaultAgent, action: nil)
+               
+                let event = SensorEvent(timestamp: Date().timeInMilliSeconds, sensor: SensorType.lamp_analytics.lampIdentifier, data: tokenInfo)
+                
+                let endPoint =  String(format: Endpoint.participantSensorEvent.rawValue, participantId)
+                let data = RequestData(endpoint: endPoint, requestTye: HTTPMethodType.post, data: event)
+                let lampAPI = NetworkConfig.networkingAPI()
+                lampAPI.makeWebserviceCall(with: data) { (response: Result<EmptyResponse>) in
+                    switch response {
+                    case .failure(_):
+                        break
+                    case .success(_):
+                        UserDefaults.standard.deviceToken = deviceTokenStr
+                    }
+                }
+              
+                /*
                 guard let authheader = Endpoint.getSessionKey(), let participantId = User.shared.userId else {
                     return
                 }
                 OpenAPIClientAPI.basePath = LampURL.baseURLString
                 OpenAPIClientAPI.customHeaders = ["Authorization": "Basic \(authheader)", "Content-Type": "application/json"]
-                let tokenInfo = DeviceInfoWithToken(deviceToken: deviceTokenStr, userAgent: UserAgent.defaultAgent, action: nil)
-               
-                let event = SensorEvent(timestamp: Date().timeInMilliSeconds, sensor: SensorType.lamp_analytics.lampIdentifier, data: tokenInfo)
+                
                 let publisher = SensorEventAPI.sensorEventCreate(participantId: participantId, sensorEvent: event, apiResponseQueue: DispatchQueue.global())
                 subscriber = publisher.sink { value in
                     switch value {
@@ -141,7 +160,7 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
                     }
                 } receiveValue: { (stringValue) in
                     print("APNS register = \(stringValue)")
-                }
+                }*/
             } else {
                 UserDefaults.standard.deviceToken = deviceTokenStr
             }
@@ -182,6 +201,20 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
         //update server
         let payLoadInfo = PayLoadInfo(action: SensorType.AnalyticAction.notification.rawValue, userInfo: userInfo, userAgent: UserAgent.defaultAgent)
         let acknoledgeRequest = UpdateReadRequest(timeInterval: Date().timeIntervalSince1970, sensor: SensorType.lamp_analytics.lampIdentifier, payLoadInfo: payLoadInfo)
+        guard let participantId = User.shared.userId else {
+            return
+        }
+        let lampAPI = NetworkConfig.networkingAPI()
+        let endPoint = String(format: Endpoint.participantSensorEvent.rawValue, participantId)
+        let data = RequestData(endpoint: endPoint, requestType: HTTPMethodType.post, body: acknoledgeRequest.toJSON())
+        lampAPI.makeWebserviceCall(with: data) { (response: Result<EmptyResponse>) in
+            completionHandler(UIBackgroundFetchResult.noData)
+        }
+        
+        
+        /*
+        let payLoadInfo = PayLoadInfo(action: SensorType.AnalyticAction.notification.rawValue, userInfo: userInfo, userAgent: UserAgent.defaultAgent)
+        let acknoledgeRequest = UpdateReadRequest(timeInterval: Date().timeIntervalSince1970, sensor: SensorType.lamp_analytics.lampIdentifier, payLoadInfo: payLoadInfo)
         guard let authheader = Endpoint.getSessionKey(), let participantId = User.shared.userId else {
             return
         }
@@ -192,7 +225,7 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
             completionHandler(UIBackgroundFetchResult.noData)
         } receiveValue: { (stringValue) in
             print("login receiveValue = \(stringValue)")
-        }
+        }*/
 
         LMSensorManager.shared.checkIsRunning()
     }

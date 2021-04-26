@@ -8,14 +8,15 @@
 import UIKit
 import WebKit
 import LAMP
-import Combine
+//import Combine
 
 class HomeViewController: UIViewController {
     
     private var wkWebView: WKWebView!
     private var loadingObservation: NSKeyValueObservation?
     private var isWebpageLoaded = false
-    var loginSubscriber: AnyCancellable?
+    let lampAPI = NetworkConfig.networkingAPI()
+    //var loginSubscriber: AnyCancellable?
     //var isHomePageLoaded = false
     //@IBOutlet weak var containerView: UIView!
     private lazy var indicator: UIActivityIndicatorView  = {
@@ -177,11 +178,30 @@ private extension HomeViewController {
     }
     
     func performOnLogin() {
+        
         printToFile("\nperformOnLogin")
         LMSensorManager.shared.checkIsRunning()
         
         //call lamp.analytics for login
         let deviceToken = UserDefaults.standard.deviceToken
+        guard let participantId = User.shared.userId else { return }
+        
+        let tokenInfo = DeviceInfoWithToken(deviceToken: deviceToken, userAgent: UserAgent.defaultAgent, action: SensorType.AnalyticAction.login.rawValue)
+        let event = SensorEvent(timestamp: Date().timeInMilliSeconds, sensor: SensorType.lamp_analytics.lampIdentifier, data: tokenInfo)
+        
+        let endPoint =  String(format: Endpoint.participantSensorEvent.rawValue, participantId)
+        let data = RequestData(endpoint: endPoint, requestTye: HTTPMethodType.post, data: event)
+        lampAPI.makeWebserviceCall(with: data) { (response: Result<EmptyResponse>) in
+            switch response {
+            case .failure(let error):
+                printError("loginSensorEventCreate error \(error.localizedDescription)")
+            case .success:
+                break
+            }
+            self.scheduleHandler.refreshActivities()
+        }
+  
+        /* let deviceToken = UserDefaults.standard.deviceToken
         guard let authheader = Endpoint.getSessionKey(), let participantId = User.shared.userId else {
             return
         }
@@ -201,12 +221,29 @@ private extension HomeViewController {
             self.scheduleHandler.refreshActivities()
         } receiveValue: { (stringValue) in
             print("login receiveValue = \(stringValue)")
-        }
+        }*/
     }
     
     func performOnLogout() {
         
+        struct EmptyResponse: Decodable {
+        }
         //send lamp.analytics for logout
+        guard let authheader = Endpoint.getSessionKey(), let participantId = User.shared.userId else {
+            NotificationHelper.shared.removeAllNotifications()
+            User.shared.logout()
+            return
+        }
+        let tokenInfo = DeviceInfoWithToken(deviceToken: nil, userAgent: UserAgent.defaultAgent, action: SensorType.AnalyticAction.logout.rawValue)
+        let event = SensorEvent(timestamp: Date().timeInMilliSeconds, sensor: SensorType.lamp_analytics.lampIdentifier, data: tokenInfo)
+        let lampAPI = NetworkConfig.networkingAPI()
+        let endPoint =  String(format: Endpoint.participantSensorEvent.rawValue, participantId)
+        let data = RequestData(endpoint: endPoint, requestTye: HTTPMethodType.post, data: event)
+        lampAPI.makeWebserviceCall(with: data) { (response: Result<EmptyResponse>) in
+            NotificationHelper.shared.removeAllNotifications()
+            User.shared.logout()
+        }
+/*
         guard let authheader = Endpoint.getSessionKey(), let participantId = User.shared.userId else {
             NotificationHelper.shared.removeAllNotifications()
             User.shared.logout()
@@ -222,7 +259,7 @@ private extension HomeViewController {
             User.shared.logout()
         } receiveValue: { (stringValue) in
             print("login receiveValue = \(stringValue)")
-        }
+        }*/
     }
     
 }

@@ -8,7 +8,7 @@
 import Foundation
 import LAMP
 import CoreLocation
-import Combine
+//import Combine
 
 #if os(iOS)
 import UIKit
@@ -189,12 +189,39 @@ class LMSensorManager {
         #endif
     }
     
-    var subscriber: AnyCancellable?
+    //var subscriber: AnyCancellable?
     var sensorIdentifiers: [String] = []
     /// To start sensors observing.
     private func startSensors() {
         
-        var sensorSpecs: [Sensor] = []
+        guard let participantId = User.shared.userId else { return }
+        let lampAPI = NetworkConfig.networkingAPI()
+        let endPoint =  String(format: Endpoint.sensor.rawValue, participantId)
+        let requestData = RequestData(endpoint: endPoint, requestTye: .get)
+        lampAPI.makeWebserviceCall(with: requestData) { (response: Result<SensorAPI.Response>) in
+            switch response {
+            case .failure(let err):
+                if let nsError = err as NSError? {
+                    let errorCode = nsError.code
+                    /// -1009 is the offline error code
+                    /// so log errors other than connection issue
+                    if errorCode == -1009 {
+                        LMLogsManager.shared.addLogs(level: .warning, logs: Logs.Messages.network_error + " " + nsError.localizedDescription)
+                    } else {
+                        LMLogsManager.shared.addLogs(level: .error, logs: Logs.Messages.network_error + " " + nsError.localizedDescription)
+                    }
+                }
+            case .success(let response):
+                let sensorSpecs: [Sensor] = response.data
+                print("sensorSpecs count = \(sensorSpecs.count)")
+                SensorLogs.shared.storeSensorSpecs(specs: sensorSpecs)
+            }
+            //load sensorspec after api call.
+            self.loadSensorSpecs()
+        }
+        
+        
+        /*var sensorSpecs: [Sensor] = []
         guard let authheader = Endpoint.getSessionKey(), let participantId = User.shared.userId else {
             printError("Auth header missing")
             return
@@ -239,6 +266,7 @@ class LMSensorManager {
         }, receiveValue: { response in
             sensorSpecs.append(contentsOf: response.data)
         })
+        */
     }
 
     private func loadSensorSpecs() {
