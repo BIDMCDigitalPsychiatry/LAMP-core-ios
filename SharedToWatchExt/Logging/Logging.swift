@@ -22,7 +22,7 @@ class Logging {
 // MARK: - Global functions for logging
 
 func print(_ items: Any ..., separator: String = " ", terminator: String = "\n") {
-    #if DEBUG
+    //+roll#if DEBUG
         var idx = items.startIndex
         let endIdx = items.endIndex
         repeat {
@@ -30,7 +30,7 @@ func print(_ items: Any ..., separator: String = " ", terminator: String = "\n")
             idx += 1
         }
             while idx < endIdx
-    #endif
+    //#endif
 }
 /**
  Prints the filename, function name, line number and textual representation of `object` and a newline character into

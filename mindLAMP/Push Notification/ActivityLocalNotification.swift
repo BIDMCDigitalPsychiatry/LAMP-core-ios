@@ -3,11 +3,11 @@
 import Foundation
 import UserNotifications
 import LAMP
-import Combine
+//import Combine
 
 class ActivityLocalNotification {
     
-    var activitySubscriber: AnyCancellable?
+    //var activitySubscriber: AnyCancellable?
     
     let intervalToFetchActivity = 12.0 * 60.0 * 60.0 //for 12 hours
     
@@ -34,7 +34,43 @@ class ActivityLocalNotification {
     
     private func fetchActivities() {
         
+//        struct Params: Encodable {
+//            var ignore_binary = true
+//        }
+        
         //todo execute once per day
+        guard let participantId = User.shared.userId else {
+            printError("Auth header missing")
+            return
+        }
+        //update server
+        let lampAPI = NetworkConfig.networkingAPI()
+        let endPoint = String(format: Endpoint.activity.rawValue, participantId)
+        let data = RequestData(endpoint: endPoint, requestTye: HTTPMethodType.get)
+        lampAPI.makeWebserviceCall(with: data) { (response: Result<ActivityAPI.Response>) in
+            
+            switch response {
+            case .failure(let error):
+                if let nsError = error as NSError? {
+                    let errorCode = nsError.code
+                    /// -1009 is the offline error code
+                    /// so log errors other than connection issue
+                    if errorCode == -1009 {
+                        LMLogsManager.shared.addLogs(level: .warning, logs: Logs.Messages.network_error + " " + nsError.localizedDescription)
+                    } else {
+                        LMLogsManager.shared.addLogs(level: .error, logs: Logs.Messages.network_error + " " + nsError.localizedDescription)
+                    }
+                    print("ActivityAPI error = \( nsError.localizedDescription)")
+                }
+            case .success(let response):
+                let allActivity = response.data
+                print("ActivityAPI allActivity = \(allActivity.count)")
+                self.scheduleActivities(allActivity)
+            }
+            UserDefaults.standard.activityAPILastAccessedDate = Date()
+        }
+        
+        /*
         guard let authheader = Endpoint.getSessionKey(), let participantId = User.shared.userId else {
             printError("Auth header missing")
             return
@@ -78,6 +114,7 @@ class ActivityLocalNotification {
             print("ActivityAPI allActivity = \(allActivity.count)")
             self.scheduleActivities(allActivity)
         })
+         */
     }
     
     func cancelAll() {
