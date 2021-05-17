@@ -13,9 +13,9 @@ extension LMSensorManager: SensorStore {
     
     @objc
     func timeToStore() {
-        let dateStr = dateFormatter.string(from: Date())
-        
-        printToFile("fetch now \(dateStr)")
+//        let dateStr = dateFormatter.string(from: Date())
+//        
+//        print("fetch now \(dateStr)")
         #if os(iOS)
         if lampScreenSensor?.latestScreenState?.rawValue != ScreenState.screen_locked.rawValue {
             sensor_healthKit?.fetchHealthData()
@@ -49,12 +49,16 @@ extension LMSensorManager: SensorStore {
         guard BatteryState.shared.isLowPowerEnabled == false else {
             printToFile("isLowPowerEnabled")
             return }
+        
         //syncing to server for alternate fetch.
         if self.isSyncNow {
             self.isSyncNow = false
             self.startWatchSensors()
+            
             printToFile("stored file and sync @ \(Date())")
-            BackgroundServices.shared.performTasks()
+            if isOktoSync() {
+                BackgroundServices.shared.performTasks()
+            }
         } else {
             //Check ActivityAPI sync here
             #if os(iOS)

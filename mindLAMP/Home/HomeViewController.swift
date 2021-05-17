@@ -229,7 +229,7 @@ private extension HomeViewController {
         struct EmptyResponse: Decodable {
         }
         //send lamp.analytics for logout
-        guard let authheader = Endpoint.getSessionKey(), let participantId = User.shared.userId else {
+        guard let _ = Endpoint.getSessionKey(), let participantId = User.shared.userId else {
             NotificationHelper.shared.removeAllNotifications()
             User.shared.logout()
             return

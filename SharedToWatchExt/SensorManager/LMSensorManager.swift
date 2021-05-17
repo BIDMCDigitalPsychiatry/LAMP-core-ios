@@ -19,8 +19,12 @@ import HealthKit
 import WatchKit
 #endif
 
-
 class LMSensorManager {
+    
+    // to store frequency of gps, accelerometer and device_motion
+    var frquencySettings = [String: Double]()
+    var isUploadUsingAnyNetwork: Bool = true
+    var isReachableViaWiFi: Bool = true
     
     lazy var dateFormatter: DateFormatter = {
         let formatter = DateFormatter()
@@ -31,7 +35,7 @@ class LMSensorManager {
     }()
     //singleton object
     static let shared: LMSensorManager = LMSensorManager()
-    let storeSensorDataIntervalInMinutes = 5.0 //minutes
+    let storeSensorDataIntervalInMinutes = 5.0 // minutes
     
     //manager to hold all sensor references
     private let sensorManager = SensorManager()
@@ -68,6 +72,10 @@ class LMSensorManager {
     var sensor_calls: CallsSensor?
     var lampScreenSensor: ScreenSensor?
     var sensor_wifi: WiFiSensor?
+    #endif
+    
+    #if os(iOS)
+    var reachability: Reachability = try! Reachability()
     #endif
     
     var sensor_bluetooth: LMBluetoothSensor?
@@ -116,6 +124,14 @@ class LMSensorManager {
                                                selector: #selector(appDidEnterBackground),
                                                name: UIApplication.didEnterBackgroundNotification,
                                                object: nil)
+        
+        // Reachability
+        NotificationCenter.default.addObserver(self, selector: #selector(reachabilityChanged(note:)), name: .reachabilityChanged, object: reachability)
+        do{
+            try reachability.startNotifier()
+        }catch{
+            print("could not start reachability notifier")
+        }
         #endif
     }
     
@@ -124,6 +140,9 @@ class LMSensorManager {
         NotificationCenter.default.removeObserver(self,
                                                   name: UIApplication.didEnterBackgroundNotification,
                                                   object: nil)
+        
+        reachability.stopNotifier()
+        NotificationCenter.default.removeObserver(self, name: .reachabilityChanged, object: reachability)
         #endif
     }
     
@@ -132,6 +151,24 @@ class LMSensorManager {
         printToFile("appDidEnterBackground")
         sensor_location?.locationManager.stopMonitoringSignificantLocationChanges()
         sensor_location?.locationManager.startMonitoringSignificantLocationChanges()
+        #endif
+    }
+    
+    @objc func reachabilityChanged(note: Notification) {
+        #if os(iOS)
+        guard let reachability = note.object as? Reachability else { return }
+
+        switch reachability.connection {
+        case .wifi:
+            isReachableViaWiFi = true
+            print("Reachable via WiFi")
+        case .cellular:
+            isReachableViaWiFi = false
+            print("Reachable via Cellular")
+        case .unavailable:
+            isReachableViaWiFi = false
+            print("Network not reachable")
+        }
         #endif
     }
     
@@ -158,6 +195,7 @@ class LMSensorManager {
             setupCallsSensor()
         }
         if sensorIdentifiers.contains(SensorType.lamp_screen_state.lampIdentifier) {
+            UIDevice.current.isBatteryMonitoringEnabled = true
             setupScreenSensor()
         }
         if sensorIdentifiers.contains(SensorType.lamp_nearby_device.lampIdentifier) {
@@ -273,8 +311,20 @@ class LMSensorManager {
         sensorIdentifiers.removeAll()
         if let specsDownloaded = SensorLogs.shared.fetchSensorSpecs(), specsDownloaded.count > 0 {
             sensorIdentifiers = specsDownloaded.compactMap({ $0.spec })
+            //celllular upload check
+            self.isUploadUsingAnyNetwork = specsDownloaded.contains { (sensor) -> Bool in
+                return sensor.settings?.cellular_upload == true
+            }
+            //load settings dict for frquency
+            specsDownloaded.forEach { (sensor) in
+                if let spec = sensor.spec, let settings = sensor.settings, let frquency = settings.frequency {
+                    frquencySettings[spec] = frquency
+                }
+            }
+            
         } else {
             sensorIdentifiers = allSensorSpecs
+            frquencySettings = [:]
         }
         self.initiateSensors()
         self.sensorManager.startAllSensors()
@@ -358,7 +408,21 @@ class LMSensorManager {
 
             //runevery(seconds: storeSensorDataIntervalInMinutes * 60)
         }
-        BackgroundServices.shared.performTasks()
+        if isOktoSync() {
+            //check battery state
+            guard BatteryState.shared.isLowPowerEnabled == false else {
+                printToFile("isLowPowerEnabled")
+                return }
+            BackgroundServices.shared.performTasks()
+        }
+    }
+    
+    func isOktoSync() -> Bool {
+        //if use Wifi only, and if reachability with Cellular then return
+        if isUploadUsingAnyNetwork == false && isReachableViaWiFi == false { // it means we should sync data only with WiFi,
+            return false
+        }
+        return true
     }
     
     func showLocationAlert() {
@@ -400,6 +464,25 @@ private extension LMSensorManager {
                     config.motionObserver = self
                 }
                 config.sensorTimerDelegate = self
+                config.sensorTimerDataStoreInterval = storeSensorDataIntervalInMinutes * 60.0
+                
+                //set frquency
+                if isAccelerometer && isDevicemotion {
+                    if let frquency = frquencySettings[SensorType.lamp_device_motion.lampIdentifier] {
+                        config.frequency = frquency
+                    }
+                    if let frquency = frquencySettings[SensorType.lamp_accelerometer.lampIdentifier], frquency > config.frequency {
+                        config.frequency = frquency
+                    }
+                } else if isDevicemotion {
+                    if let frquency = frquencySettings[SensorType.lamp_device_motion.lampIdentifier] {
+                        config.frequency = frquency
+                    }
+                } else { //accelero only
+                    if let frquency = frquencySettings[SensorType.lamp_accelerometer.lampIdentifier] {
+                        config.frequency = frquency
+                    }
+                }
             }))
             sensorManager.addSensor(sensor_motionManager!)
             return true
@@ -432,8 +515,11 @@ private extension LMSensorManager {
             if isNeedData {
                 config.locationDataObserver = self
             }
-            config.minimumInterval = 1.0
+            //config.minimumInterval = 1.0
             config.accuracy = kCLLocationAccuracyBestForNavigation
+            if let frquency = frquencySettings[SensorType.lamp_gps.lampIdentifier] {
+                config.frequency = frquency
+            }
             #elseif os(watchOS)
             config.accuracy = kCLLocationAccuracyKilometer//TODO: test with other accuracy
             #endif
@@ -619,7 +705,7 @@ private extension LMSensorManager {
     }
     
     func fetchGPSData() -> [SensorEvent<SensorDataModel>] {
-        
+        print("fetch gps")
         // read
         var dataArray: [LocationsData]!
         queueLocationsData.sync {
