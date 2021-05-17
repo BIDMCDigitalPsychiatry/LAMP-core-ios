@@ -9,8 +9,17 @@
 
 import ClockKit
 
-
 class ComplicationController: NSObject, CLKComplicationDataSource {
+    
+    func getComplicationDescriptors(handler: @escaping ([CLKComplicationDescriptor]) -> Void) {
+            let descriptors = [
+                CLKComplicationDescriptor(identifier: "complication", displayName: "Latinorum", supportedFamilies: [.circularSmall, .extraLarge, .graphicBezel, .graphicCircular, .graphicCorner, .modularLarge, .modularSmall, .utilitarianLarge, .utilitarianSmall, .utilitarianSmallFlat])
+                // Multiple complication support can be added here with more descriptors
+            ]
+            
+            // Call the handler with the currently supported complication descriptors
+            handler(descriptors)
+        }
     
     func getSupportedTimeTravelDirections(for complication: CLKComplication, withHandler handler: @escaping (CLKComplicationTimeTravelDirections) -> Void) {
         handler([.forward, .backward])
