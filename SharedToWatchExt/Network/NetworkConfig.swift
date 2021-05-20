@@ -13,15 +13,7 @@ class NetworkConfig {
     class var logsURL: String {
         return LampURL.logsDigital
     }
-    
-//    class var dashboardURL: String {
-//        return LampURL.dashboardURL
-//    }
-    
-//    static func dashboardAPI() -> NetworkingAPI {
-//        return Networking(baseURL: URL(string: NetworkConfig.dashboardURL)!, isBackgroundSession: false)
-//    }
-    
+
     static func logsNetworkingAPI() -> NetworkingAPI {
         return Networking(baseURL: URL(string: NetworkConfig.logsURL)!, isBackgroundSession: false)
     }
@@ -29,11 +21,7 @@ class NetworkConfig {
     static func networkingAPI(isBackgroundSession: Bool = false) -> NetworkingAPI {
         return Networking(baseURL: URL(string: LampURL.baseURLString)!, isBackgroundSession: isBackgroundSession)
     }
-    
-    static func networkingAPI(urlString: String) -> NetworkingAPI {
-        return Networking(baseURL: URL(string: urlString)!, isBackgroundSession: false)
-    }
-    
+   
 }
 
 struct RequestData: RequestProtocol {
