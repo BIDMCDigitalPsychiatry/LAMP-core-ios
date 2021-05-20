@@ -35,7 +35,7 @@ class LMSensorManager {
     }()
     //singleton object
     static let shared: LMSensorManager = LMSensorManager()
-    let storeSensorDataIntervalInMinutes = 5.0 // minutes
+    let storeSensorDataIntervalInMinutes = 5.0// minutes
     
     //manager to hold all sensor references
     private let sensorManager = SensorManager()
@@ -255,7 +255,9 @@ class LMSensorManager {
                 SensorLogs.shared.storeSensorSpecs(specs: sensorSpecs)
             }
             //load sensorspec after api call.
-            self.loadSensorSpecs()
+            DispatchQueue.main.async {
+                self.loadSensorSpecs()
+            }
         }
         
         
@@ -471,7 +473,7 @@ private extension LMSensorManager {
                     if let frquency = frquencySettings[SensorType.lamp_device_motion.lampIdentifier] {
                         config.frequency = frquency
                     }
-                    if let frquency = frquencySettings[SensorType.lamp_accelerometer.lampIdentifier], frquency > config.frequency {
+                    if let frquency = frquencySettings[SensorType.lamp_accelerometer.lampIdentifier], let frequecySet = config.frequency,  frquency > frequecySet {
                         config.frequency = frquency
                     }
                 } else if isDevicemotion {
@@ -509,13 +511,12 @@ private extension LMSensorManager {
     }
     
     func setupLocationSensor(isNeedData: Bool) {
-        sensor_location = LocationsSensor.init(LocationsSensor.Config().apply(closure: { config in
+      sensor_location = LocationsSensor.init(LocationsSensor.Config().apply(closure: { config in
             #if os(iOS)
             config.sensorObserver = self
             if isNeedData {
                 config.locationDataObserver = self
             }
-            //config.minimumInterval = 1.0
             config.accuracy = kCLLocationAccuracyBestForNavigation
             if let frquency = frquencySettings[SensorType.lamp_gps.lampIdentifier] {
                 config.frequency = frquency
@@ -523,7 +524,7 @@ private extension LMSensorManager {
             #elseif os(watchOS)
             config.accuracy = kCLLocationAccuracyKilometer//TODO: test with other accuracy
             #endif
-            
+
         }))
         sensorManager.addSensor(sensor_location!)
     }
