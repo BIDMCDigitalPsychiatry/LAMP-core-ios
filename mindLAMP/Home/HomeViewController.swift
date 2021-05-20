@@ -15,7 +15,9 @@ class HomeViewController: UIViewController {
     private var wkWebView: WKWebView!
     private var loadingObservation: NSKeyValueObservation?
     private var isWebpageLoaded = false
-    let lampAPI = NetworkConfig.networkingAPI()
+    lazy var lampAPI: NetworkingAPI = {
+        return NetworkConfig.networkingAPI()
+    }()
     //var loginSubscriber: AnyCancellable?
     //var isHomePageLoaded = false
     //@IBOutlet weak var containerView: UIView!
@@ -236,7 +238,6 @@ private extension HomeViewController {
         }
         let tokenInfo = DeviceInfoWithToken(deviceToken: nil, userAgent: UserAgent.defaultAgent, action: SensorType.AnalyticAction.logout.rawValue)
         let event = SensorEvent(timestamp: Date().timeInMilliSeconds, sensor: SensorType.lamp_analytics.lampIdentifier, data: tokenInfo)
-        let lampAPI = NetworkConfig.networkingAPI()
         let endPoint =  String(format: Endpoint.participantSensorEvent.rawValue, participantId)
         let data = RequestData(endpoint: endPoint, requestTye: HTTPMethodType.post, data: event)
         lampAPI.makeWebserviceCall(with: data) { (response: Result<EmptyResponse>) in

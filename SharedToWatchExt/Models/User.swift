@@ -37,10 +37,9 @@ struct User {
     
     #if os(watchOS)
     func login(userID: String?, serverAddress: String?) {
-        print("userId = \(String(describing: userID))")
 
         let serverAddressWithHttps = serverAddress?.makeURLString()
-        print("serverAddress = \(String(describing: serverAddress))")
+       
         UserDefaults.standard.serverAddress = serverAddressWithHttps
         UserDefaults.standard.userID = userID
         UserDefaults.standard.setInitalSensorRecorderTimestamp()
