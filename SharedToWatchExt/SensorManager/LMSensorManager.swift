@@ -317,6 +317,13 @@ class LMSensorManager {
             self.isUploadUsingAnyNetwork = specsDownloaded.contains { (sensor) -> Bool in
                 return sensor.settings?.cellular_upload == true
             }
+            // filter null calues
+            let cellularFlags: [Bool] = specsDownloaded.compactMap({$0.settings?.cellular_upload})
+            // if atleast one key is exist and it contains true then we can use any network.
+            if cellularFlags.count > 0 {
+                self.isUploadUsingAnyNetwork = cellularFlags.contains(true)
+            }
+            
             //load settings dict for frquency
             specsDownloaded.forEach { (sensor) in
                 if let spec = sensor.spec, let settings = sensor.settings, let frquency = settings.frequency {
