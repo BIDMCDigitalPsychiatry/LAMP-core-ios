@@ -186,13 +186,12 @@ extension LMSensorManager: LMHealthKitSensorObserver {
     func onHKDataFetch(for type: String, error: Error?) {
         
         //post as sensor data
-        let logsMessage = String(format: "\(Logs.Messages.hk_data_fetch_error) %@", error?.localizedDescription ?? "null")
-        let data = SensorDataModel(action: SensorType.AnalyticAction.logs.rawValue, userAgent: UserAgent.defaultAgent, errorMsg: logsMessage)
-        let events = [SensorEvent(timestamp: Date().timeInMilliSeconds, sensor: SensorType.lamp_analytics.lampIdentifier, data: data)]
-        let request = SensorData.Request(sensorEvents: events)
-        SensorLogs.shared.storeSensorRequest(request, fileNameWithoutExt: type)//store to disk
-        //let logsMessage = String(format: "\(Logs.Messages.hk_data_fetch_error) %@", error?.localizedDescription ?? "null")
-        //LMLogsManager.shared.addLogs(level: .warning, logs: logsMessage)
+        //https://github.com/BIDMCDigitalPsychiatry/LAMP-platform/issues/280
+//        let logsMessage = String(format: "\(Logs.Messages.hk_data_fetch_error) %@", error?.localizedDescription ?? "null")
+//        let data = SensorDataModel(action: SensorType.AnalyticAction.logs.rawValue, userAgent: UserAgent.defaultAgent, errorMsg: logsMessage)
+//        let events = [SensorEvent(timestamp: Date().timeInMilliSeconds, sensor: SensorType.lamp_analytics.lampIdentifier, data: data)]
+//        let request = SensorData.Request(sensorEvents: events)
+//        SensorLogs.shared.storeSensorRequest(request, fileNameWithoutExt: type)//store to disk
     }
 }
 
