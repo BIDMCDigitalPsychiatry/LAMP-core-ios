@@ -22,7 +22,7 @@ jobs:
         id: tags
       - name: Get commits count
         run: |
-          echo "::set-output name=GIT_COMMIT_NUMBER::$(git rev-list --count master)"
+          echo "::set-output name=GIT_COMMIT_NUMBER::$(git rev-list --count HEAD)"
         id: commits
       - name: Set version and build number
         run: |
