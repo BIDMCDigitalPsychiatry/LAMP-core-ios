@@ -272,7 +272,6 @@ extension HomeViewController: WKUIDelegate {
         }
         return nil
     }
-
 }
 // MARK: - WKNavigationDelegate
 

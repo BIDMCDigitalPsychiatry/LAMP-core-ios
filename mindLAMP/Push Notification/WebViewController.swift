@@ -29,6 +29,7 @@ class WebViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationController?.setNavigationBarHidden(false, animated: false)
+        wkWebView.uiDelegate = self
         wkWebView.load(URLRequest(url: pageURL))
     }
         
@@ -46,6 +47,15 @@ class WebViewController: UIViewController {
 //        present(alert, animated: true, completion: nil)
 //    }
 
+}
+
+extension WebViewController: WKUIDelegate {
+    func webView(_ webView: WKWebView, createWebViewWith configuration: WKWebViewConfiguration, for navigationAction: WKNavigationAction, windowFeatures: WKWindowFeatures) -> WKWebView? {
+        if navigationAction.targetFrame == nil && navigationAction.request.url != nil {
+            UIApplication.shared.open(navigationAction.request.url!)
+        }
+        return nil
+    }
 }
 
 extension WebViewController {
