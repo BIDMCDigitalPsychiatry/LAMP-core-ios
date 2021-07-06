@@ -56,7 +56,6 @@ class HomeViewController: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(appDidActive(_:)),
                                                name: UIApplication.didBecomeActiveNotification, object: nil)
     }
-    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         // Hide the navigation bar on the this view controller
@@ -113,6 +112,7 @@ private extension HomeViewController {
         
         wkWebView = makeWebView()
         wkWebView.navigationDelegate = self
+        wkWebView.uiDelegate = self
         
         self.view = wkWebView
         view.addSubview(indicator)
@@ -265,6 +265,15 @@ private extension HomeViewController {
     
 }
 
+extension HomeViewController: WKUIDelegate {
+    func webView(_ webView: WKWebView, createWebViewWith configuration: WKWebViewConfiguration, for navigationAction: WKNavigationAction, windowFeatures: WKWindowFeatures) -> WKWebView? {
+        if navigationAction.targetFrame == nil && navigationAction.request.url != nil {
+            UIApplication.shared.open(navigationAction.request.url!)
+        }
+        return nil
+    }
+
+}
 // MARK: - WKNavigationDelegate
 
 
@@ -288,6 +297,16 @@ extension HomeViewController: WKNavigationDelegate {
             self.loadWebPage()
         }))
         self.present(alert, animated: true, completion: nil)
+    }
+    
+    func webView(_ webView: WKWebView, didReceive challenge: URLAuthenticationChallenge, completionHandler: @escaping (URLSession.AuthChallengeDisposition, URLCredential?) -> Void) {
+        
+        if let serverTrust = challenge.protectionSpace.serverTrust {
+            let credential = URLCredential(trust: serverTrust)
+            completionHandler(.useCredential, credential)
+        } else{
+            completionHandler(.useCredential, nil)
+        }
     }
 }
 
