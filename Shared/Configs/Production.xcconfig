@@ -5,3 +5,4 @@
 
 DASHBOARD_URL = https:/$()/dashboard.lamp.digital/#/
 LAMP_API = https:/$()/api.lamp.digital
+Branding = NativeCore

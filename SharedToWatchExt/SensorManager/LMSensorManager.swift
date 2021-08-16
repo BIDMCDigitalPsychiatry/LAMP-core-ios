@@ -109,9 +109,11 @@ class LMSensorManager {
                       SensorType.lamp_screen_state.lampIdentifier,
                       SensorType.lamp_nearby_device.lampIdentifier,
                       SensorType.lamp_steps.lampIdentifier,
-                      SensorType.lamp_device_motion.lampIdentifier,
                       SensorType.lamp_accelerometer.lampIdentifier,
                       SensorType.lamp_analytics.lampIdentifier]
+        if Environment.isDiigApp == false {
+            sensors.append(SensorType.lamp_device_motion.lampIdentifier)
+        }
         sensors.append(contentsOf: LMHealthKitSensor.healthkitSensors)
         print("sensors = \(sensors)")
         return sensors
@@ -475,6 +477,11 @@ private extension LMSensorManager {
                 config.sensorTimerDelegate = self
                 config.sensorTimerDataStoreInterval = storeSensorDataIntervalInMinutes * 60.0
                 
+                if Environment.isDiigApp {
+                    config.pausePeriod = 3
+                    config.collectionPeriod = 1
+                }
+                
                 //set frquency
                 if isAccelerometer && isDevicemotion {
                     if let frquency = frquencySettings[SensorType.lamp_device_motion.lampIdentifier] {
@@ -527,6 +534,10 @@ private extension LMSensorManager {
             config.accuracy = kCLLocationAccuracyBestForNavigation
             if let frquency = frquencySettings[SensorType.lamp_gps.lampIdentifier] {
                 config.frequency = frquency
+            } else {
+                if Environment.isDiigApp {
+                    config.frequency = 1.0 / 600.0
+                }
             }
             #elseif os(watchOS)
             config.accuracy = kCLLocationAccuracyKilometer//TODO: test with other accuracy

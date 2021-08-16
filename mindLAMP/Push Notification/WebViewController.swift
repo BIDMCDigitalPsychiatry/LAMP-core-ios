@@ -29,6 +29,12 @@ class WebViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationController?.setNavigationBarHidden(false, animated: false)
+        //+20210119
+        if Environment.isDiigApp {
+            let infoButton = UIBarButtonItem(image: UIImage(named: "icn-info"), style: .plain, target: self, action: #selector(infoButtonTapped))
+            self.navigationItem.rightBarButtonItem = infoButton
+        }
+        
         wkWebView.uiDelegate = self
         wkWebView.load(URLRequest(url: pageURL))
     }
@@ -59,6 +65,14 @@ extension WebViewController: WKUIDelegate {
 }
 
 extension WebViewController {
+    
+    @objc
+    func infoButtonTapped() {
+        let alert = UIAlertController(title: "", message: title, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "alert.button.ok".localized, style: .default, handler: { action in
+        }))
+        present(alert, animated: true, completion: nil)
+    }
     
     func loadWebView() {
        
