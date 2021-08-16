@@ -36,6 +36,8 @@
 		B24CD26025E8FAD2007E14ED /* RepeatingTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = B24CD25E25E8FAD2007E14ED /* RepeatingTimer.swift */; };
 		B24CD28325E9154E007E14ED /* Collection+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B24CD28225E9154E007E14ED /* Collection+Extension.swift */; };
 		B24CD28425E9154E007E14ED /* Collection+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B24CD28225E9154E007E14ED /* Collection+Extension.swift */; };
+		B24EEA0C26CA9CEA003A294D /* LAMP in Frameworks */ = {isa = PBXBuildFile; productRef = B24EEA0B26CA9CEA003A294D /* LAMP */; };
+		B24EEA1326CA9EE2003A294D /* LAMP in Frameworks */ = {isa = PBXBuildFile; productRef = B24EEA1226CA9EE2003A294D /* LAMP */; };
 		B255116524B6202300CDBDD1 /* WatchNotificationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B255116424B6202300CDBDD1 /* WatchNotificationModel.swift */; };
 		B255116924B625CC00CDBDD1 /* WatchDeviceInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = B255116824B625CC00CDBDD1 /* WatchDeviceInfo.swift */; };
 		B255116C24B6291900CDBDD1 /* LoginServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = B255116B24B6291900CDBDD1 /* LoginServices.swift */; };
@@ -72,7 +74,6 @@
 		B29827C22635D38300FC78E6 /* ErrorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B29827B72635D38300FC78E6 /* ErrorExtension.swift */; };
 		B29827C32635D38300FC78E6 /* NetworkConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = B29827B82635D38300FC78E6 /* NetworkConfig.swift */; };
 		B29827C42635D38300FC78E6 /* NetworkConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = B29827B82635D38300FC78E6 /* NetworkConfig.swift */; };
-		B29B296425ED58CC00D133B3 /* LAMP in Frameworks */ = {isa = PBXBuildFile; productRef = B29B296325ED58CC00D133B3 /* LAMP */; };
 		B2A15BDC2567A8BE00222717 /* NotificationAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2A15BB42567A8BE00222717 /* NotificationAPI.swift */; };
 		B2A15BDD2567A8BE00222717 /* NotificationAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2A15BB42567A8BE00222717 /* NotificationAPI.swift */; };
 		B2A15BF82567A8BE00222717 /* LMSensorManager+SensorObservers.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2A15BC52567A8BE00222717 /* LMSensorManager+SensorObservers.swift */; };
@@ -307,7 +308,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B29B296425ED58CC00D133B3 /* LAMP in Frameworks */,
+				B24EEA1326CA9EE2003A294D /* LAMP in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -322,6 +323,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B24EEA0C26CA9CEA003A294D /* LAMP in Frameworks */,
 				B2B8979823D0ADBA00321C3E /* HealthKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -759,7 +761,7 @@
 			);
 			name = "watchkitapp Extension";
 			packageProductDependencies = (
-				B29B296325ED58CC00D133B3 /* LAMP */,
+				B24EEA1226CA9EE2003A294D /* LAMP */,
 			);
 			productName = "watchkitapp Extension";
 			productReference = B2704DE224B4A2AC00DE196B /* watchkitextension.appex */;
@@ -802,6 +804,7 @@
 			);
 			name = mindLAMP;
 			packageProductDependencies = (
+				B24EEA0B26CA9CEA003A294D /* LAMP */,
 			);
 			productName = lampv2;
 			productReference = B29639CD23BDC28100626E1A /* mindLAMP 2.app */;
@@ -1986,7 +1989,12 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		B29B296325ED58CC00D133B3 /* LAMP */ = {
+		B24EEA0B26CA9CEA003A294D /* LAMP */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = B24AAD59259462D700E3692D /* XCRemoteSwiftPackageReference "LAMP-swift" */;
+			productName = LAMP;
+		};
+		B24EEA1226CA9EE2003A294D /* LAMP */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = B24AAD59259462D700E3692D /* XCRemoteSwiftPackageReference "LAMP-swift" */;
 			productName = LAMP;
