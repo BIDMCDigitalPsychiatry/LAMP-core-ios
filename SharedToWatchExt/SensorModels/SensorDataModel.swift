@@ -55,7 +55,8 @@ public struct UserAgent {
 
 extension UserAgent {
     public func toString() -> String {
-        return "NativeCore \(app_version); iOS \(os_version); \(type) \(model)"
+        let appSource = Environment.appSource
+        return "\(appSource) \(app_version); iOS \(os_version); \(type) \(model)"
     }
 }
 

@@ -9,9 +9,16 @@ public enum Environment {
     enum Keys {
       enum Plist {
         static let dashboardURL = "DASHBOARD_URL"
-        //static let dashboardAPI = "DASHBOARD_API"
+        static let branding = "Branding"
         static let OpenAPIClientAPI = "LAMP_API"
       }
+    }
+    
+    static var isDiigApp: Bool {
+        guard let appname = Environment.infoDictionary[Keys.Plist.branding] as? String else {
+            return false
+        }
+        return appname == "DiiG"
     }
     
     // MARK: - Plist
@@ -43,11 +50,18 @@ public enum Environment {
         }
         return endPoint
     }()
+    
+    static let appSource: String = {
+        guard let source = Environment.infoDictionary[Keys.Plist.branding] as? String else {
+            fatalError("API Key not set in plist for this environment")
+        }
+        return source
+    }()
 }
 
 struct LampURL {
-    //static let test = "http://127.0.0.1:5000/login"
-    //static let dashboardlive = Environment.dashboardURL
+    // static let test = "http://127.0.0.1:5000/login"
+    // static let dashboardlive = Environment.dashboardURL
     static var groupname = "group.digital.lamp.mindlamp"
     static var dashboardDigital: URL {
         return URL(string: dashboardDigitalURLText)!

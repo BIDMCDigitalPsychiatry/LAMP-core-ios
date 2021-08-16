@@ -32,7 +32,6 @@
 		B23993BA2440696800E31B06 /* exportOptions.plist in Resources */ = {isa = PBXBuildFile; fileRef = B23993B92440696800E31B06 /* exportOptions.plist */; };
 		B244A1C223BF4A91007FBDB8 /* FileManager+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B244A1C123BF4A91007FBDB8 /* FileManager+Extension.swift */; };
 		B247D14E25A88E2F00776B41 /* WearableApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B247D14D25A88E2F00776B41 /* WearableApp.swift */; };
-		B24AAD5B259462D700E3692D /* LAMP in Frameworks */ = {isa = PBXBuildFile; productRef = B24AAD5A259462D700E3692D /* LAMP */; };
 		B24CD25F25E8FAD2007E14ED /* RepeatingTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = B24CD25E25E8FAD2007E14ED /* RepeatingTimer.swift */; };
 		B24CD26025E8FAD2007E14ED /* RepeatingTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = B24CD25E25E8FAD2007E14ED /* RepeatingTimer.swift */; };
 		B24CD28325E9154E007E14ED /* Collection+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B24CD28225E9154E007E14ED /* Collection+Extension.swift */; };
@@ -323,7 +322,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B24AAD5B259462D700E3692D /* LAMP in Frameworks */,
 				B2B8979823D0ADBA00321C3E /* HealthKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -804,7 +802,6 @@
 			);
 			name = mindLAMP;
 			packageProductDependencies = (
-				B24AAD5A259462D700E3692D /* LAMP */,
 			);
 			productName = lampv2;
 			productReference = B29639CD23BDC28100626E1A /* mindLAMP 2.app */;
@@ -1983,17 +1980,12 @@
 			repositoryURL = "https://github.com/BIDMCDigitalPsychiatry/LAMP-swift.git";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 2021.5.19;
+				minimumVersion = 2021.8.16;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		B24AAD5A259462D700E3692D /* LAMP */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = B24AAD59259462D700E3692D /* XCRemoteSwiftPackageReference "LAMP-swift" */;
-			productName = LAMP;
-		};
 		B29B296325ED58CC00D133B3 /* LAMP */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = B24AAD59259462D700E3692D /* XCRemoteSwiftPackageReference "LAMP-swift" */;

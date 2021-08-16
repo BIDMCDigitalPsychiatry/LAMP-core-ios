@@ -19,6 +19,8 @@
 			</array>
 		</dict>
 	</dict>
+	<key>Branding</key>
+	<string>$(Branding)</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleExecutable</key>
