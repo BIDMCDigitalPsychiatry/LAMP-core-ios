@@ -409,6 +409,10 @@ class LMSensorManager {
         sensorAPITimer?.resume()
     }
     
+    var isRunning: Bool {
+        isStarted
+    }
+    
     func checkIsRunning() {
         guard User.shared.isLogin() else {
             printToFile("\nNot logined")

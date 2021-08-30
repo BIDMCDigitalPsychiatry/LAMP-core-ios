@@ -2,6 +2,11 @@
 
 import Foundation
 
+enum PushCommand: String {
+    case syncNow = "SynchronizeData"
+    case deviceMetric = "DeviceMetrics"
+}
+
 struct PushUserInfo {
     
     let userInfo: [AnyHashable: Any]
@@ -20,6 +25,13 @@ struct PushUserInfo {
     
     var expireMilliSeconds: Double? {
         return userInfo["expiry"] as? Double
+    }
+    
+    var command: PushCommand? {
+        guard let command = userInfo["command"] as? String else {
+            return nil
+        }
+        return PushCommand(rawValue: command)
     }
     
     func setExpiringTime() {

@@ -3,8 +3,9 @@
 import Foundation
 import LAMP
 
-extension Date {
-    
+struct FileInfo: Encodable {
+    var name: String
+    var size: String
 }
 
 class SensorLogs {
@@ -53,6 +54,19 @@ class SensorLogs {
         return requests
     }
     
+    func getAllPendingFiles() -> [FileInfo]? {
+        let urls = FileStorage.urls(for: Logs.Directory.sensorlogs, in: .documents)
+       
+        let files = urls?.map({ FileInfo(name: $0.deletingPathExtension().lastPathComponent, size: $0.fileSizeString) })
+        return files?.sorted(by: { (item1, item2) -> Bool in
+            if let d1 = Double(item1.name), let d2 = Double(item2.name) {
+                return d1 < d2
+            } else {
+                return false
+            }
+        })
+    }
+    
     func printAllFiles() {
         let urls = FileStorage.urls(for: Logs.Directory.sensorlogs, in: .documents)
         var files = [String]()
@@ -69,5 +83,28 @@ class SensorLogs {
     func clearLogsDirectory() {
         FileStorage.clear(Logs.Directory.sensorlogs, in: .documents)
         FileStorage.clear(Logs.Directory.sensorSpecs, in: .documents)
+    }
+}
+
+extension URL {
+    var attributes: [FileAttributeKey : Any]? {
+        do {
+            return try FileManager.default.attributesOfItem(atPath: path)
+        } catch let error as NSError {
+            print("FileAttribute error: \(error)")
+        }
+        return nil
+    }
+
+    var fileSize: UInt64 {
+        return attributes?[.size] as? UInt64 ?? UInt64(0)
+    }
+
+    var fileSizeString: String {
+        return ByteCountFormatter.string(fromByteCount: Int64(fileSize), countStyle: .file)
+    }
+
+    var creationDate: Date? {
+        return attributes?[.creationDate] as? Date
     }
 }

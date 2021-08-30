@@ -31,6 +31,8 @@
 		B238434924B848F300E548E2 /* LMRunningBuffer.swift in Sources */ = {isa = PBXBuildFile; fileRef = B238434624B848F300E548E2 /* LMRunningBuffer.swift */; };
 		B23993BA2440696800E31B06 /* exportOptions.plist in Resources */ = {isa = PBXBuildFile; fileRef = B23993B92440696800E31B06 /* exportOptions.plist */; };
 		B244A1C223BF4A91007FBDB8 /* FileManager+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B244A1C123BF4A91007FBDB8 /* FileManager+Extension.swift */; };
+		B2464A0826DBF7240077D6BA /* Diagnostics.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2464A0726DBF7240077D6BA /* Diagnostics.swift */; };
+		B2464A0926DBF7240077D6BA /* Diagnostics.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2464A0726DBF7240077D6BA /* Diagnostics.swift */; };
 		B247D14E25A88E2F00776B41 /* WearableApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B247D14D25A88E2F00776B41 /* WearableApp.swift */; };
 		B24CD25F25E8FAD2007E14ED /* RepeatingTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = B24CD25E25E8FAD2007E14ED /* RepeatingTimer.swift */; };
 		B24CD26025E8FAD2007E14ED /* RepeatingTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = B24CD25E25E8FAD2007E14ED /* RepeatingTimer.swift */; };
@@ -233,6 +235,7 @@
 		B238435F24B8989E00E548E2 /* watchkitapp Extension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "watchkitapp Extension.entitlements"; sourceTree = "<group>"; };
 		B23993B92440696800E31B06 /* exportOptions.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = exportOptions.plist; sourceTree = "<group>"; };
 		B244A1C123BF4A91007FBDB8 /* FileManager+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FileManager+Extension.swift"; sourceTree = "<group>"; };
+		B2464A0726DBF7240077D6BA /* Diagnostics.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Diagnostics.swift; sourceTree = "<group>"; };
 		B247D14D25A88E2F00776B41 /* WearableApp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WearableApp.swift; sourceTree = "<group>"; };
 		B24CD25E25E8FAD2007E14ED /* RepeatingTimer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepeatingTimer.swift; sourceTree = "<group>"; };
 		B24CD28225E9154E007E14ED /* Collection+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Collection+Extension.swift"; sourceTree = "<group>"; };
@@ -618,6 +621,7 @@
 		B2A15BB32567A8BE00222717 /* PushNotificationAPI */ = {
 			isa = PBXGroup;
 			children = (
+				B2464A0726DBF7240077D6BA /* Diagnostics.swift */,
 				B2A15BB42567A8BE00222717 /* NotificationAPI.swift */,
 			);
 			path = PushNotificationAPI;
@@ -953,6 +957,7 @@
 				B2A15C192567A8BE00222717 /* AsynchronousOperation.swift in Sources */,
 				B24CD26025E8FAD2007E14ED /* RepeatingTimer.swift in Sources */,
 				B2346CF02599DE9800EFF347 /* AppInfo.swift in Sources */,
+				B2464A0926DBF7240077D6BA /* Diagnostics.swift in Sources */,
 				B2587B5F256E23BC00A2A7F2 /* EndPoint.swift in Sources */,
 				B2A15C012567A8BE00222717 /* StringExtension.swift in Sources */,
 				B2A15C112567A8BE00222717 /* LMLogsManager.swift in Sources */,
@@ -1018,6 +1023,7 @@
 				B2A15BDC2567A8BE00222717 /* NotificationAPI.swift in Sources */,
 				B2201C29257F4DBC00C40183 /* UserNotifications.swift in Sources */,
 				B2587B5A256E23BC00A2A7F2 /* LampURL.swift in Sources */,
+				B2464A0826DBF7240077D6BA /* Diagnostics.swift in Sources */,
 				B2A15C162567A8BE00222717 /* BackgroundServices.swift in Sources */,
 				B2A15BFE2567A8BE00222717 /* User.swift in Sources */,
 				B2201C6E257F9CC400C40183 /* NotificationWebViewModel.swift in Sources */,
@@ -1983,7 +1989,7 @@
 			repositoryURL = "https://github.com/BIDMCDigitalPsychiatry/LAMP-swift.git";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 2021.8.16;
+				minimumVersion = 2021.8.30;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */

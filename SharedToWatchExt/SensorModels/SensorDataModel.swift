@@ -60,32 +60,47 @@ extension UserAgent {
     }
 }
 
+
+extension Encodable {
+  var dictionary: [String: Any]? {
+    guard let data = try? JSONEncoder().encode(self) else { return nil }
+    return (try? JSONSerialization.jsonObject(with: data, options: .allowFragments)).flatMap { $0 as? [String: Any] }
+  }
+}
+
+
 public struct PayLoadInfo {
     var action: String
     var device_type: String// = "iOS" //"Android" or "Web"
     var user_agent: UserAgent?
     var payload: [String: Any]?
-    public init(action: String, userInfo: [AnyHashable: Any], userAgent: UserAgent?) {
-        self.action = action
+    var diagnostics: [String: Any]?
+    public init(action: SensorType.AnalyticAction, userInfo: [AnyHashable: Any], userAgent: UserAgent?) {
+        self.action = action.rawValue
         self.user_agent = userAgent
         self.device_type = DeviceType.displayName
-        do {
-            let jsonData = try JSONSerialization.data(withJSONObject: userInfo, options: .prettyPrinted)
-            //let jsonString = String(bytes: jsonData, encoding: String.Encoding.utf8) ?? ""
-            let decoded = try JSONSerialization.jsonObject(with: jsonData, options: [])
-            // you can now cast it with the right type
-            if let dictFromJSON = decoded as? [String: Any] {
-                payload = dictFromJSON
+        if action == SensorType.AnalyticAction.diagnostic {
+            diagnostics = Diagnostics().dictionary
+        } else {
+            do {
+                let jsonData = try JSONSerialization.data(withJSONObject: userInfo, options: .prettyPrinted)
+                //let jsonString = String(bytes: jsonData, encoding: String.Encoding.utf8) ?? ""
+                let decoded = try JSONSerialization.jsonObject(with: jsonData, options: [])
+                // you can now cast it with the right type
+                if let dictFromJSON = decoded as? [String: Any] {
+                    payload = dictFromJSON
+                }
+                
+            } catch {
+                print(error.localizedDescription)
             }
-            
-        } catch {
-            print(error.localizedDescription)
         }
     }
     
     public func toJSON() -> [String: Any] {
+        let content = action == SensorType.AnalyticAction.diagnostic.rawValue ? diagnostics : payload
         return ["action": action,
-                "content": payload ?? NSNull(),
+                "content": content ?? NSNull(),
                 "device_type": device_type,
                 "user_agent": user_agent?.toString() ?? NSNull()
         ]
