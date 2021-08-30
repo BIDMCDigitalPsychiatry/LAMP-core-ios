@@ -200,7 +200,7 @@ extension ExtensionDelegate {
         print("remote APNS")
 
         //update server
-        let payLoadInfo = PayLoadInfo(action: SensorType.AnalyticAction.notification.rawValue, userInfo: userInfo, userAgent: UserAgent.defaultAgent)
+        let payLoadInfo = PayLoadInfo(action: SensorType.AnalyticAction.notification, userInfo: userInfo, userAgent: UserAgent.defaultAgent)
         let timeStamp = Date().timeIntervalSince1970
         let acknoledgeRequest = UpdateReadRequest(timeInterval: timeStamp, sensor: SensorType.lamp_analytics.lampIdentifier, payLoadInfo: payLoadInfo)
         guard let authheader = Endpoint.getSessionKey(), let participantId = User.shared.userId else {

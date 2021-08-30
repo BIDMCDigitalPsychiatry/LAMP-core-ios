@@ -199,7 +199,9 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
         }
         
         //update server
-        let payLoadInfo = PayLoadInfo(action: SensorType.AnalyticAction.notification.rawValue, userInfo: userInfo, userAgent: UserAgent.defaultAgent)
+        let analyticAction = pushInfo.command == PushCommand.deviceMetric ? SensorType.AnalyticAction.diagnostic : SensorType.AnalyticAction.notification
+            
+        let payLoadInfo = PayLoadInfo(action: analyticAction, userInfo: userInfo, userAgent: UserAgent.defaultAgent)
         let acknoledgeRequest = UpdateReadRequest(timeInterval: Date().timeIntervalSince1970, sensor: SensorType.lamp_analytics.lampIdentifier, payLoadInfo: payLoadInfo)
         guard let participantId = User.shared.userId else {
             return

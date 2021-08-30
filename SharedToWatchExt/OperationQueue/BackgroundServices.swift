@@ -11,6 +11,10 @@ class BackgroundServices {
     
     static let shared = BackgroundServices()
     private var isInProgress = false
+    
+    var isRunning: Bool {
+        isInProgress
+    }
 
     func performTasks() {
 
@@ -50,7 +54,6 @@ extension BackgroundServices {
 //            dispatchQueue.addOperation(operation)
 //        }
 //    }
-    
     func postSensorData(_ dispatchQueue: OperationQueue) {
         guard let userID = User.shared.userId else { return }
         let arrSensorData = SensorLogs.shared.fetchSensorRequest()
