@@ -125,6 +125,18 @@ public struct UpdateReadRequest {
     }
 }
 
+//public struct LPMRequest: Encodable {
+//    var timestamp: UInt64
+//    var sensor: String
+//    var data: SensorDataModel
+//
+//    public init(timeInterval: TimeInterval, sensor: String, sensorData: SensorDataModel) {
+//        data = sensorData
+//        timestamp = UInt64(timeInterval * 1000)
+//        self.sensor = sensor
+//    }
+//}
+
 public struct DeviceInfoWithToken: Codable {
     
     var action: String? //SensorType.AnalyticAction.login.rawValue
@@ -316,6 +328,14 @@ public struct SensorActivity: Codable {
 }
 
 extension SensorDataModel {
+    // for lowpowermode lamp.analytics
+    public init(action: String?, userAgent: UserAgent?, value: Bool) {
+        self.action = action
+        self.user_agent = userAgent?.toString()
+        self.device_type = DeviceType.displayName
+        self.value = value ? 1 : 0
+    }
+
     //for log lamp.analytics
     public init(action: String?, userAgent: UserAgent?, errorMsg: String?) {
         self.action = action

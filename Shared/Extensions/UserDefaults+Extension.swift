@@ -32,6 +32,14 @@ extension UserDefaults {
         case activityAPILastAccessedDate = "activityAPILastAccessedDate"
     }
     
+    var lpmCount: Int {
+        get {
+            let count = self.integer(forKey: "lpmCount")
+            self.setValue(count + 1, forKey: "lpmCount")
+            return count
+        }
+    }
+    
     var activityAPILastAccessedDate: Date {
         get {
             return (self.object(forKey: UserDefaults.Key.activityAPILastAccessedDate.rawValue)) as? Date ?? Date.init(timeIntervalSince1970: 0)
@@ -194,7 +202,7 @@ extension UserDefaults {
 //    }
     
     func clearAll() {
-        
+        setValue(0, forKey: "lpmCount")
         UserDefaults.standard.userIDShared = nil
         UserDefaults.standard.passwordShared = nil
         UserDefaults.standard.serverAddressShared = nil

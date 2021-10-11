@@ -122,6 +122,7 @@ class LMSensorManager {
     private init() {
         
         #if os(iOS)
+        NotificationCenter.default.addObserver(self, selector: #selector(powerStateChanged), name: Notification.Name.NSProcessInfoPowerStateDidChange, object: nil)
         NotificationCenter.default.addObserver(self,
                                                selector: #selector(appDidEnterBackground),
                                                name: UIApplication.didEnterBackgroundNotification,
@@ -142,10 +143,43 @@ class LMSensorManager {
         NotificationCenter.default.removeObserver(self,
                                                   name: UIApplication.didEnterBackgroundNotification,
                                                   object: nil)
-        
+        NotificationCenter.default.removeObserver(self,
+                                                  name: Notification.Name.NSProcessInfoPowerStateDidChange,
+                                                  object: nil)
         reachability.stopNotifier()
         NotificationCenter.default.removeObserver(self, name: .reachabilityChanged, object: reachability)
         #endif
+    }
+    
+    @objc func powerStateChanged(_ notification: Notification) {
+        let lowerPowerEnabled = ProcessInfo.processInfo.isLowPowerModeEnabled
+        // take appropriate action
+        
+        //post as sensor data
+        let sensorData = SensorDataModel(action: SensorType.AnalyticAction.lowpowermode.rawValue, userAgent: UserAgent.defaultAgent, value: lowerPowerEnabled)
+        
+        let event = SensorEvent(timestamp: Date().timeInMilliSeconds, sensor: SensorType.lamp_analytics.lampIdentifier, data: sensorData)
+
+        let request = SensorData.Request(sensorEvents: [event])
+        if lowerPowerEnabled {
+            guard let participantId = User.shared.userId else {
+                return
+            }
+            let lampAPI = NetworkConfig.networkingAPI()
+            let endPoint = String(format: Endpoint.participantSensorEvent.rawValue, participantId)
+            let data = RequestData(endpoint: endPoint, requestTye: HTTPMethodType.post, data: request)
+            lampAPI.makeWebserviceCall(with: data) { (response: Result<SensorData.Response>) in
+                switch response {
+                case .success:
+                    ()
+                case .failure:
+                    SensorLogs.shared.storeSensorRequest(request, fileNameWithoutExt: "\(UserDefaults.standard.lpmCount)")
+                }
+            }
+        } else {
+            SensorLogs.shared.storeSensorRequest(request, fileNameWithoutExt: "\(UserDefaults.standard.lpmCount)")
+        }
+        
     }
     
     @objc private func appDidEnterBackground() {

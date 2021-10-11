@@ -8,6 +8,11 @@ struct FileInfo: Encodable {
     var size: String
 }
 
+struct FileName: Encodable {
+    var nameWithoutExt: String
+    var name: String
+}
+
 class SensorLogs {
     
     static let shared = SensorLogs()
@@ -41,10 +46,34 @@ class SensorLogs {
         FileStorage.store(request, to: Logs.Directory.sensorlogs, in: .documents, as: fileName + ".json")
     }
 
-    func fetchSensorRequest() -> [(String, SensorData.Request)] {
+//    func fetchSensorRequest() -> [(String, SensorData.Request)] {
+//        let urls = FileStorage.urls(for: Logs.Directory.sensorlogs, in: .documents)
+//        var files = [String]()
+//        urls?.forEach({ files.append($0.lastPathComponent) })
+//        var requests = [(String, SensorData.Request)]()
+//        for file in files {
+//            if let request = FileStorage.retrieve(file, from: Logs.Directory.sensorlogs, in: .documents, as: SensorData.Request.self) {
+//                requests.append((file, request))
+//            }
+//        }
+//        return requests
+//    }
+    
+    func fetchSensorRequest(count: Int = 10) -> [(String, SensorData.Request)] {
         let urls = FileStorage.urls(for: Logs.Directory.sensorlogs, in: .documents)
-        var files = [String]()
-        urls?.forEach({ files.append($0.lastPathComponent) })
+        guard let fileObjects = urls?.map({ FileName(nameWithoutExt: $0.deletingPathExtension().lastPathComponent, name: $0.lastPathComponent) }) else { return [] }
+        
+        let fileObjecsSorted = fileObjects.sorted(by: { (item1, item2) -> Bool in
+            if let d1 = Double(item1.nameWithoutExt), let d2 = Double(item2.nameWithoutExt) {
+                return d1 < d2
+            } else {
+                return false
+            }
+        })
+        
+        let files = Array(fileObjecsSorted.prefix(count)).map { (f) -> String in
+            f.name
+        }
         var requests = [(String, SensorData.Request)]()
         for file in files {
             if let request = FileStorage.retrieve(file, from: Logs.Directory.sensorlogs, in: .documents, as: SensorData.Request.self) {
