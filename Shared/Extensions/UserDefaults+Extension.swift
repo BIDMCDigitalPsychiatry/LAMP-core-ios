@@ -30,6 +30,7 @@ extension UserDefaults {
         
         case notificationTimestamps = "notificationTimestamps"
         case activityAPILastAccessedDate = "activityAPILastAccessedDate"
+        case sensorAPILastAccessedDate = "sensorAPILastAccessedDate"
     }
     
     var lpmCount: Int {
@@ -37,6 +38,15 @@ extension UserDefaults {
             let count = self.integer(forKey: "lpmCount")
             self.setValue(count + 1, forKey: "lpmCount")
             return count
+        }
+    }
+    
+    var sensorAPILastAccessedDate: Date {
+        get {
+            return (self.object(forKey: UserDefaults.Key.sensorAPILastAccessedDate.rawValue)) as? Date ?? Date.init(timeIntervalSince1970: 0)
+        }
+        set {
+            self.set(newValue, forKey: UserDefaults.Key.sensorAPILastAccessedDate.rawValue)
         }
     }
     

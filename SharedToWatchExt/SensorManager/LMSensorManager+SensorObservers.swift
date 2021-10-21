@@ -41,9 +41,13 @@ extension LMSensorManager: SensorStore {
     }
     
     func syncToServer() {
-        let request = self.getSensorDataRequest()
-        SensorLogs.shared.storeSensorRequest(request)//store to disk
-        printToFile("stored file -- @ \(Date())")
+        if let request = self.getSensorDataRequest() {
+            SensorLogs.shared.storeSensorRequest(request)//store to disk
+            print("stored file -- @ \(Date())")
+        } else {
+            print("no file to store")
+        }
+        
 
         //check battery state
         guard BatteryState.shared.isLowPowerEnabled == false else {
@@ -67,6 +71,7 @@ extension LMSensorManager: SensorStore {
                 let navController = appdelegate.window?.rootViewController as? UINavigationController
                 (navController?.topViewController as? HomeViewController)?.scheduleHandler.refreshActivities()
             }
+            refreshSensorSpecs() // not for watch ???
             #endif
             
             printToFile("stored file @ \(Date())")

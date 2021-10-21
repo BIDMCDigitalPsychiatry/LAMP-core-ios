@@ -119,6 +119,50 @@ class LMSensorManager {
         return sensors
     }()
     
+    let intervalToFetchSensorConfig = 2 * 60.0 * 60.0 //for 2 hours
+    
+    func refreshSensorSpecs() {
+        if Date().timeIntervalSince(UserDefaults.standard.sensorAPILastAccessedDate) > intervalToFetchSensorConfig {
+            fetchSensorSpec()
+        }
+    }
+    
+    private func fetchSensorSpec() {
+        guard let participantId = User.shared.userId else { return }
+        let lampAPI = NetworkConfig.networkingAPI()
+        let endPoint =  String(format: Endpoint.sensor.rawValue, participantId)
+        let requestData = RequestData(endpoint: endPoint, requestTye: .get)
+        lampAPI.makeWebserviceCall(with: requestData) { [weak self] (response: Result<SensorAPI.Response>) in
+            guard let self = self else { return }
+            UserDefaults.standard.sensorAPILastAccessedDate = Date()
+            switch response {
+            case .failure(let err):
+                if let nsError = err as NSError? {
+                    let errorCode = nsError.code
+                    // -1009 is the offline error code
+                    // so log errors other than connection issue
+                    if errorCode == -1009 {
+                        LMLogsManager.shared.addLogs(level: .warning, logs: Logs.Messages.network_error + " " + nsError.localizedDescription)
+                    } else {
+                        LMLogsManager.shared.addLogs(level: .error, logs: Logs.Messages.network_error + " " + nsError.localizedDescription)
+                    }
+                }
+            case .success(let response):
+                let sensorSpecs: [Sensor] = response.data
+                print("sensorSpecs date = \(Date())")
+                let identifiers = sensorSpecs.compactMap({ $0.spec })
+                if Set(identifiers) != Set(self.sensorIdentifiers) {
+                    print("sensorSpecs new count 2 = \(sensorSpecs.count)")
+                    SensorLogs.shared.storeSensorSpecs(specs: sensorSpecs)
+                    //load sensorspec after api call.
+                    DispatchQueue.main.async {
+                        self.loadSensorSpecs()
+                    }
+                }
+            }
+        }
+    }
+    
     private init() {
         
         #if os(iOS)
@@ -209,13 +253,14 @@ class LMSensorManager {
     }
     
     private func initiateSensors() {
-        
+        isStarted = true
         //Always setup location sensors to keep the app alive in background. but collect location data only if its configured.
         print("sensorIdentifiers = \(sensorIdentifiers)")
         setupLocationSensor(isNeedData: sensorIdentifiers.contains(SensorType.lamp_gps.lampIdentifier))
         
         let isExist = setUpSensorMotionManager(sensorIdentifiers)
         
+        sensorAPITimer = nil
         if isExist {
             // then we are using the timer of motion to store/sync sensor data to server
         } else {
@@ -268,7 +313,9 @@ class LMSensorManager {
     /// To start sensors observing.
     private func startSensors() {
         
-        guard let participantId = User.shared.userId else { return }
+        guard let participantId = User.shared.userId else {
+            self.isStarted = false
+            return }
         let lampAPI = NetworkConfig.networkingAPI()
         let endPoint =  String(format: Endpoint.sensor.rawValue, participantId)
         let requestData = RequestData(endpoint: endPoint, requestTye: .get)
@@ -277,8 +324,8 @@ class LMSensorManager {
             case .failure(let err):
                 if let nsError = err as NSError? {
                     let errorCode = nsError.code
-                    /// -1009 is the offline error code
-                    /// so log errors other than connection issue
+                    // -1009 is the offline error code
+                    // so log errors other than connection issue
                     if errorCode == -1009 {
                         LMLogsManager.shared.addLogs(level: .warning, logs: Logs.Messages.network_error + " " + nsError.localizedDescription)
                     } else {
@@ -290,6 +337,7 @@ class LMSensorManager {
                 print("sensorSpecs count = \(sensorSpecs.count)")
                 SensorLogs.shared.storeSensorSpecs(specs: sensorSpecs)
             }
+            UserDefaults.standard.sensorAPILastAccessedDate = Date()
             //load sensorspec after api call.
             DispatchQueue.main.async {
                 self.loadSensorSpecs()
@@ -346,7 +394,11 @@ class LMSensorManager {
     }
 
     private func loadSensorSpecs() {
-        sensorIdentifiers.removeAll()
+        
+//        sensorIdentifiers.removeAll()
+//        sensorManager.stopAllSensors()
+//        sensorManager.clear()
+        stopSensors()
         if let specsDownloaded = SensorLogs.shared.fetchSensorSpecs(), specsDownloaded.count > 0 {
             sensorIdentifiers = specsDownloaded.compactMap({ $0.spec })
             //celllular upload check
@@ -375,10 +427,10 @@ class LMSensorManager {
         self.sensorManager.startAllSensors()
     }
     
-    private func refreshAllSensors() {
-        sensorManager.stopAllSensors()
-        sensorManager.startAllSensors()
-    }
+//    private func refreshAllSensors() {
+//        sensorManager.stopAllSensors()
+//        sensorManager.startAllSensors()
+//    }
     
     func startWatchSensors() {
         #if os(iOS)
@@ -392,10 +444,12 @@ class LMSensorManager {
     func stopSensors() {
         
         printToFile("\nStopping senors")
+        sensorIdentifiers.removeAll()
         isStarted = false
         sensorAPITimer = nil
         
         sensorManager.stopAllSensors()
+        sensorManager.clear()
         
         sensor_pedometer?.removeSavedTimestamps()
         sensor_healthKit?.removeSavedTimestamps()
@@ -413,9 +467,12 @@ class LMSensorManager {
         screenStateDataBuffer.removeAll()
     }
     
-    func getSensorDataRequest() -> SensorData.Request {
-        
-        return SensorData.Request(sensorEvents: getSensorDataArrray())
+    func getSensorDataRequest() -> SensorData.Request? {
+        let events = getSensorDataArrray()
+        if events.count > 0 {
+            return SensorData.Request(sensorEvents: events)
+        }
+        return nil
     }
     
     func runevery(seconds: Double, closure: @escaping () -> ()) {
@@ -455,7 +512,7 @@ class LMSensorManager {
             self.isStarted = true
             startSensors()
 
-            //runevery(seconds: storeSensorDataIntervalInMinutes * 60)
+            // runevery(seconds: storeSensorDataIntervalInMinutes * 60)
         }
         if isOktoSync() {
             //check battery state
@@ -685,41 +742,7 @@ private extension LMSensorManager {
         let sensorArray = dataArray.map { SensorEvent(timestamp: $0.timestamp, sensor: SensorType.lamp_accelerometer.lampIdentifier, data: SensorDataModel(accelerationRate: $0.acceleration)) }
         return sensorArray
     }
-    
-//    func fetchGyroscopeData() -> [SensorEvent<SensorDataModel>] {
-//
-//        // read
-//        var dataArray: [GyroscopeData]!
-//        queueGyroscopeData.sync {
-//            // perform read and assign value
-//            dataArray = gyroscopeDataBufffer
-//        }
-//
-//        queueGyroscopeData.async(flags: .barrier) {
-//            self.gyroscopeDataBufffer.removeAll(keepingCapacity: true)
-//        }
-//
-//        let sensorArray = dataArray.map { SensorEvent(timestamp: $0.timestamp, sensor: SensorType.lamp_gyroscope.lampIdentifier, data: SensorDataModel(rotationRate: $0.rotationRate)) }
-//        return sensorArray
-//    }
-    
-//    func fetchMagnetometerData() -> [SensorEvent<SensorDataModel>] {
-//
-//        // read
-//        var dataArray: [MagnetometerData]!
-//        queueMagnetometerData.sync {
-//            // perform read and assign value
-//            dataArray = magnetometerDataBufffer
-//        }
-//
-//        queueMagnetometerData.async(flags: .barrier) {
-//            self.magnetometerDataBufffer.removeAll(keepingCapacity: true)
-//        }
-//
-//        let sensorArray = dataArray.map { SensorEvent(timestamp: $0.timestamp, sensor: SensorType.lamp_magnetometer.lampIdentifier, data: SensorDataModel(magneticField: $0.magnetoData)) }
-//        return sensorArray
-//    }
-    
+        
     func fetchMotionData() -> [SensorEvent<SensorDataModel>] {
         
         // read
@@ -762,7 +785,6 @@ private extension LMSensorManager {
     }
     
     func fetchGPSData() -> [SensorEvent<SensorDataModel>] {
-        print("fetch gps")
         // read
         var dataArray: [LocationsData]!
         queueLocationsData.sync {
