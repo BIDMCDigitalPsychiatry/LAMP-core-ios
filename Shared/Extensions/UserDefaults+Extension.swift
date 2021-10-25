@@ -24,13 +24,14 @@ extension UserDefaults {
         
         //for iOS only
         case launchURL = "launchURL"
-        case nodeJSPath = "nodeJSPath"
-        case nodeRootFolder = "nodeRootFolder"
+        // case nodeJSPath = "nodeJSPath"
+        // case nodeRootFolder = "nodeRootFolder"
         case version = "version"
         
         case notificationTimestamps = "notificationTimestamps"
         case activityAPILastAccessedDate = "activityAPILastAccessedDate"
         case sensorAPILastAccessedDate = "sensorAPILastAccessedDate"
+        case activityAPILastScheduledDate = "activityAPILastScheduledDate"
     }
     
     var lpmCount: Int {
@@ -56,6 +57,15 @@ extension UserDefaults {
         }
         set {
             self.set(newValue, forKey: UserDefaults.Key.activityAPILastAccessedDate.rawValue)
+        }
+    }
+    
+    var activityAPILastScheduledDate: Date {
+        get {
+            return (self.object(forKey: UserDefaults.Key.activityAPILastScheduledDate.rawValue)) as? Date ?? Date.init(timeIntervalSince1970: 0)
+        }
+        set {
+            self.set(newValue, forKey: UserDefaults.Key.activityAPILastScheduledDate.rawValue)
         }
     }
     
@@ -217,6 +227,7 @@ extension UserDefaults {
         UserDefaults.standard.passwordShared = nil
         UserDefaults.standard.serverAddressShared = nil
         UserDefaults.standard.activityAPILastAccessedDate = Date.init(timeIntervalSince1970: 0)
+        UserDefaults.standard.activityAPILastScheduledDate = Date.init(timeIntervalSince1970: 0)
         
         UserDefaults.standard.removeObject(forKey: UserDefaults.Key.userID.rawValue)
         UserDefaults.standard.removeObject(forKey: UserDefaults.Key.serverAddress.rawValue)
@@ -242,22 +253,22 @@ extension UserDefaults {
             self.set(newValue, forKey: UserDefaults.Key.launchURL.rawValue)
         }
     }
-    var nodeJSPath: String? {
-        get {
-            return self.string(forKey: UserDefaults.Key.nodeJSPath.rawValue)
-        }
-        set {
-            self.set(newValue, forKey: UserDefaults.Key.nodeJSPath.rawValue)
-        }
-    }
-    var nodeRootFolder: String? {
-        get {
-            return self.string(forKey: UserDefaults.Key.nodeRootFolder.rawValue)
-        }
-        set {
-            self.set(newValue, forKey: UserDefaults.Key.nodeRootFolder.rawValue)
-        }
-    }
+//    var nodeJSPath: String? {
+//        get {
+//            return self.string(forKey: UserDefaults.Key.nodeJSPath.rawValue)
+//        }
+//        set {
+//            self.set(newValue, forKey: UserDefaults.Key.nodeJSPath.rawValue)
+//        }
+//    }
+//    var nodeRootFolder: String? {
+//        get {
+//            return self.string(forKey: UserDefaults.Key.nodeRootFolder.rawValue)
+//        }
+//        set {
+//            self.set(newValue, forKey: UserDefaults.Key.nodeRootFolder.rawValue)
+//        }
+//    }
     var version: String? {
         get {
             return self.string(forKey: UserDefaults.Key.version.rawValue)
