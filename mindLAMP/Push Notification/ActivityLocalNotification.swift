@@ -4,12 +4,25 @@ import Foundation
 import UserNotifications
 import LAMP
 //import Combine
+//
+extension Activity: Equatable {
+    public static func ==(lhs: Activity, rhs: Activity) -> Bool {
+        // Using "identifier" property for comparison
+        return lhs.id == rhs.id && lhs.spec == rhs.spec && lhs.name == rhs.name && lhs.schedule == rhs.schedule
+    }
+}
+extension DurationIntervalLegacy: Equatable {
+    public static func ==(lhs: DurationIntervalLegacy, rhs: DurationIntervalLegacy) -> Bool {
+        return lhs.repeatType == rhs.repeatType && lhs.startDate == rhs.startDate && lhs.time == rhs.time && lhs.customTimes == rhs.customTimes && lhs.notificationId == rhs.notificationId
+    }
+}
 
 class ActivityLocalNotification {
     
     //var activitySubscriber: AnyCancellable?
-    
-    let intervalToFetchActivity = 12.0 * 60.0 * 60.0 //for 12 hours
+    var allActivitiesScheduled: [Activity] = []
+    let intervalToFetchActivity = 40.0 * 60.0 //for 1 hour
+    let intervalToScheduleActivity = 12.0 * 60.0 * 60.0 //for 12 hour
     
     func refreshActivities() {
         if Date().timeIntervalSince(UserDefaults.standard.activityAPILastAccessedDate) > intervalToFetchActivity {
@@ -47,7 +60,7 @@ class ActivityLocalNotification {
         let lampAPI = NetworkConfig.networkingAPI()
         let endPoint = String(format: Endpoint.activity.rawValue, participantId)
         let data = RequestData(endpoint: endPoint, requestTye: HTTPMethodType.get)
-        lampAPI.makeWebserviceCall(with: data) { (response: Result<ActivityAPI.Response>) in
+        lampAPI.makeWebserviceCall(with: data) { [weak self] (response: Result<ActivityAPI.Response>) in
             
             switch response {
             case .failure(let error):
@@ -65,7 +78,12 @@ class ActivityLocalNotification {
             case .success(let response):
                 let allActivity = response.data
                 print("ActivityAPI allActivity = \(allActivity.count)")
-                self.scheduleActivities(allActivity)
+                guard let self = self else { return }
+                print("ActivityAPI same? = \(self.allActivitiesScheduled == allActivity)")
+                if self.allActivitiesScheduled != allActivity || Date().timeIntervalSince(UserDefaults.standard.activityAPILastScheduledDate) > self.intervalToScheduleActivity {
+                    print("scheduling")
+                    self.scheduleActivities(allActivity)
+                }
             }
             UserDefaults.standard.activityAPILastAccessedDate = Date()
         }
@@ -123,8 +141,12 @@ class ActivityLocalNotification {
     
     private func scheduleActivities(_ allActivity: [Activity]) {
         
+        allActivitiesScheduled = allActivity
+        UserDefaults.standard.activityAPILastScheduledDate = Date()
+        print("cancelled all")
         cancelAll()
         allActivity.forEach { (activity) in
+            print("scheduling")
             let title = activity.name
             let activityId = activity.id
             activity.schedule?.forEach({ (durationIntervalLegacy) in

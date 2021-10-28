@@ -27,6 +27,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //        print("Launched documentsURL = \(documentsURL) \(Date())")
 
         UserDefaults.standard.activityAPILastAccessedDate = Date.init(timeIntervalSince1970: 0)// to fetch activity when ever launch app.
+        UserDefaults.standard.activityAPILastScheduledDate = Date.init(timeIntervalSince1970: 0)
         LMSensorManager.shared.checkIsRunning()
 
         //Version 1.1.3 Build 70. backward compatibility for already logined users

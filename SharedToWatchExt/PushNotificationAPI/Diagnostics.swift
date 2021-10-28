@@ -19,6 +19,9 @@ struct Diagnostics: Encodable {
     var isAPIInProgress: Bool
     var availableDiskSpace: String
     var configuredSensors: [String]?
+    var lastAccessedTime_Sensor: Double?
+    var lastAccessedTime_Activity: Double?
+    var lastRescheduledTime_Activity: Double?
     
     init() {
         isLowpowerMode = BatteryState.shared.isLowPowerEnabled
@@ -45,6 +48,9 @@ struct Diagnostics: Encodable {
                 configuredSensors = LMSensorManager.shared.allSensorSpecs
             }
         }
+        lastAccessedTime_Sensor = UserDefaults.standard.sensorAPILastAccessedDate.timeInMilliSeconds
+        lastAccessedTime_Activity = UserDefaults.standard.activityAPILastAccessedDate.timeInMilliSeconds
+        lastRescheduledTime_Activity = UserDefaults.standard.activityAPILastScheduledDate.timeInMilliSeconds
     }
 }
 
