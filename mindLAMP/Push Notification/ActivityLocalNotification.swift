@@ -8,7 +8,7 @@ import LAMP
 extension Activity: Equatable {
     public static func ==(lhs: Activity, rhs: Activity) -> Bool {
         // Using "identifier" property for comparison
-        return lhs.id == rhs.id && lhs.spec == rhs.spec && lhs.name == rhs.name
+        return lhs.id == rhs.id && lhs.spec == rhs.spec && lhs.name == rhs.name && lhs.schedule == rhs.schedule
     }
 }
 extension DurationIntervalLegacy: Equatable {
@@ -21,7 +21,7 @@ class ActivityLocalNotification {
     
     //var activitySubscriber: AnyCancellable?
     var allActivitiesScheduled: [Activity] = []
-    let intervalToFetchActivity = 1.0 * 60.0 * 60.0 //for 1 hour
+    let intervalToFetchActivity = 40.0 * 60.0 //for 1 hour
     let intervalToScheduleActivity = 12.0 * 60.0 * 60.0 //for 12 hour
     
     func refreshActivities() {
@@ -79,7 +79,9 @@ class ActivityLocalNotification {
                 let allActivity = response.data
                 print("ActivityAPI allActivity = \(allActivity.count)")
                 guard let self = self else { return }
+                print("ActivityAPI same? = \(self.allActivitiesScheduled == allActivity)")
                 if self.allActivitiesScheduled != allActivity || Date().timeIntervalSince(UserDefaults.standard.activityAPILastScheduledDate) > self.intervalToScheduleActivity {
+                    print("scheduling")
                     self.scheduleActivities(allActivity)
                 }
             }
@@ -141,8 +143,10 @@ class ActivityLocalNotification {
         
         allActivitiesScheduled = allActivity
         UserDefaults.standard.activityAPILastScheduledDate = Date()
+        print("cancelled all")
         cancelAll()
         allActivity.forEach { (activity) in
+            print("scheduling")
             let title = activity.name
             let activityId = activity.id
             activity.schedule?.forEach({ (durationIntervalLegacy) in

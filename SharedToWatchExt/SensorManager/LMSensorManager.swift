@@ -119,7 +119,7 @@ class LMSensorManager {
         return sensors
     }()
     
-    let intervalToFetchSensorConfig = 1 * 60.0 * 60.0 //for 2 hours
+    let intervalToFetchSensorConfig = 40.0 * 60.0 //for 1 hour 
     
     func refreshSensorSpecs() {
         if Date().timeIntervalSince(UserDefaults.standard.sensorAPILastAccessedDate) > intervalToFetchSensorConfig {
