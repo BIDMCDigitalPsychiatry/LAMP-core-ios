@@ -177,7 +177,6 @@ class ActivityLocalNotification {
         let actionObj = ["name":"Open App", "page":pageURL]
         let actions = [actionObj]
         content.userInfo = ["notificationId": identifier, "page": pageURL, "actions" : actions]
-        
         //extract startDay
         let dateComponentStartDay = Calendar.current.dateComponents([.year, .month, .day, .weekday], from: scheduleStartDate)
         let startDay = Calendar.current.date(from: dateComponentStartDay)

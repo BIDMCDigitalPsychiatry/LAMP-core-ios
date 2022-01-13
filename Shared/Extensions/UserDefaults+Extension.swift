@@ -134,6 +134,19 @@ extension UserDefaults {
     var suiteName: String {
         return LampURL.groupname
     }
+    var badgeCountShared: Int {
+        get {
+            if let userDefaults = UserDefaults(suiteName: suiteName) {
+                return userDefaults.integer(forKey: "badgeCount")
+            }
+            return 0
+        }
+        set {
+            if let userDefaults = UserDefaults(suiteName: suiteName) {
+                userDefaults.set(newValue, forKey: "badgeCount")
+            }
+        }
+    }
     var userIDShared: String? {
         get {
             if let userDefaults = UserDefaults(suiteName: suiteName) {

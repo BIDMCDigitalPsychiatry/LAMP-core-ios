@@ -4,10 +4,6 @@ set -eo pipefail
 echo "Start Import"
 
 gpg --quiet --batch --yes --decrypt --passphrase="$IOS_KEYS" --output .github/secrets/Certificates.p12 .github/secrets/Certificates.p12.gpg
-gpg --quiet --batch --yes --decrypt --passphrase="$IOS_KEYS" --output .github/secrets/PushCertificates.p12 .github/secrets/PushCertificates.p12.gpg
-
-gpg --quiet --batch --yes --decrypt --passphrase="$IOS_KEYS" --output .github/secrets/WatchAppExtPushCertificates.p12 .github/secrets/WatchAppExtPushCertificates.p12.gpg
-gpg --quiet --batch --yes --decrypt --passphrase="$IOS_KEYS" --output .github/secrets/WatchAppPushCertificates.p12 .github/secrets/WatchAppPushCertificates.p12.gpg
 
 gpg --quiet --batch --yes --decrypt --passphrase="$IOS_KEYS" --output .github/secrets/mindLAMP_2.mobileprovision .github/secrets/mindLAMP_2.mobileprovision.gpg
 gpg --quiet --batch --yes --decrypt --passphrase="$IOS_KEYS" --output .github/secrets/mindLAMP_2_Notification_Extension_AppStore.mobileprovision .github/secrets/mindLAMP_2_Notification_Extension_AppStore.mobileprovision.gpg

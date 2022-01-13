@@ -34,6 +34,7 @@ class NotificationHelper: NSObject {
     func removeNotification(identifier: String) {
         UNUserNotificationCenter.current().removeDeliveredNotifications(withIdentifiers: [identifier])
         UserDefaults.standard.removeTimestampForNotification(nid: identifier)
+        (UIApplication.shared.delegate as? AppDelegate)?.calculateBadgeCount()
     }
     
     //we can execute when ever app active
@@ -55,16 +56,11 @@ class NotificationHelper: NSObject {
     }
     
     @objc func fireNotificationExpire(timer: Timer) {
-        printToFile("\n timer fired")
-        print("\n timer fired")
         guard let userInfo = timer.userInfo as? [AnyHashable : Any] else {
-            printToFile("\n no userinfo")
             timer.invalidate()
             return }
         let pushInfo = PushUserInfo(userInfo: userInfo)
         if let identifier = pushInfo.identifier {
-            printToFile("\n exe remove noti \(identifier)")
-            print("\n exe remove noti")
             removeNotification(identifier: identifier)
         }
         timer.invalidate()
@@ -175,21 +171,16 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
     //The application can choose to have the notification presented as a sound, badge, alert and/or in the notification list. This decision should be based on whether the information in the notification is otherwise visible to the user.
     
     func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Swift.Void) {
-        
-        printToFile("present userInfo = \(notification.request.content.userInfo)")
-        print("present userInfo = \(notification.request.content.userInfo)")
         completionHandler([.banner, .badge, .sound])
     }
     
     func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable : Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
         
         let pushInfo = PushUserInfo(userInfo: userInfo)
-        printToFile("userInfo = \(userInfo)")
-        print("remote userInfo = \(userInfo)")
+
         pushInfo.setExpiringTime()
         
         if let livingTime = pushInfo.expireMilliSeconds, pushInfo.identifier != nil {
-            printToFile("\n schedule timer for \(pushInfo.identifier!) = \(livingTime/1000.0)")
             queue.async {
                 let currentRunLoop = RunLoop.current
                 let timer = Timer.scheduledTimer(timeInterval: livingTime/1000.0, target: NotificationHelper.shared, selector: #selector(NotificationHelper.shared.fireNotificationExpire), userInfo: userInfo, repeats: false)
@@ -228,7 +219,8 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
         } receiveValue: { (stringValue) in
             print("login receiveValue = \(stringValue)")
         }*/
-
+        
+        calculateBadgeCount()
         LMSensorManager.shared.checkIsRunning()
     }
 
@@ -236,11 +228,21 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
     //The delegate must be set before the application returns from applicationDidFinishLaunching:.
     func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Swift.Void) {
         
+        calculateBadgeCount()
         guard let remoteAction = RemoteNotification.Action.buildFromIdentifier(response.actionIdentifier) else { return }
         respondedToNotification(remoteAction: remoteAction, userInfo: response.notification.request.content.userInfo)
-        printToFile("response.notification.request.content.userInfo = \(response.notification.request.content.userInfo)")
-        print("response.notification.request.content.userInfo = \(response.notification.request.content.userInfo)")
         completionHandler()
+    }
+    
+    func calculateBadgeCount() {
+
+        UNUserNotificationCenter.current().getDeliveredNotifications { nots in
+            // let distinctIdentifiersCount = Set(nots.map({$0.request.identifier})).count
+            DispatchQueue.main.async {
+                UIApplication.shared.applicationIconBadgeNumber = nots.count
+                UserDefaults.standard.badgeCountShared = nots.count
+            }
+        }
     }
     
     func respondedToNotification(remoteAction: RemoteNotification.Action, userInfo: [AnyHashable: Any]) {

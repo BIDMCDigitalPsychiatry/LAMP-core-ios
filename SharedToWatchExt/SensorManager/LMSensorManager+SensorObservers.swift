@@ -22,6 +22,7 @@ extension LMSensorManager: SensorStore {
         } else {
             printToFile("Screen locked")
         }
+        (UIApplication.shared.delegate as? AppDelegate)?.calculateBadgeCount()
         sensor_wifi?.startScanning()
 
         //set 15 seconds delay to fetch all healthkit data
