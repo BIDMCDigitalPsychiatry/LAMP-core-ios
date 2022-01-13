@@ -27,10 +27,6 @@ echo "Copied"
 
 security create-keychain -p "" build.keychain
 security import .github/secrets/Certificates.p12 -t agg -k ~/Library/Keychains/build.keychain -P "$IOS_KEYS" -A
-security import .github/secrets/PushCertificates.p12 -t agg -k ~/Library/Keychains/build.keychain -P "$IOS_KEYS" -A
-
-security import .github/secrets/WatchAppExtPushCertificates.p12 -t agg -k ~/Library/Keychains/build.keychain -P "$IOS_KEYS" -A
-security import .github/secrets/WatchAppPushCertificates.p12 -t agg -k ~/Library/Keychains/build.keychain -P "$IOS_KEYS" -A
 
 security list-keychains -s ~/Library/Keychains/build.keychain
 security default-keychain -s ~/Library/Keychains/build.keychain
