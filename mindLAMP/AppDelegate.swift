@@ -16,6 +16,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     //var subscriber: AnyCancellable?
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+        // Logging.isLogToFile = true
         // Override point for customization after application launch.
         WatchSessionManager.shared.startSession()
         WatchSessionManager.shared.iOSDelegate = LMSensorManager.shared
@@ -48,6 +49,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(_ application: UIApplication, handleEventsForBackgroundURLSession identifier: String, completionHandler: @escaping () -> Void) {
         completionHandler()
+    }
+    
+    func applicationWillEnterForeground(_ application: UIApplication) {
+        calculateBadgeCount()
+    }
+    func applicationDidEnterBackground(_ application: UIApplication) {
+        calculateBadgeCount()
     }
 }
 

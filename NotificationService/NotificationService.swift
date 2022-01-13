@@ -1,5 +1,5 @@
 // NotificationService
-
+import Foundation
 import UserNotifications
 
 class NotificationService: UNNotificationServiceExtension {
@@ -10,11 +10,14 @@ class NotificationService: UNNotificationServiceExtension {
     
     override func didReceive(_ request: UNNotificationRequest, withContentHandler contentHandler: @escaping (UNNotificationContent) -> Void) {
         
-        print("received push \(request.identifier)")
+        // print("received push \(request.identifier)")
         self.contentHandler = contentHandler
         bestAttemptContent = (request.content.mutableCopy() as? UNMutableNotificationContent)
         bestAttemptContent?.userInfo["apns-collapse-id"] = request.identifier
-        
+        // update badge
+        let badgeCount = UserDefaults.standard.badgeCountShared + 1
+        bestAttemptContent?.badge = badgeCount as NSNumber
+        UserDefaults.standard.badgeCountShared = badgeCount
         defer {
             contentHandler(bestAttemptContent ?? request.content)
         }
