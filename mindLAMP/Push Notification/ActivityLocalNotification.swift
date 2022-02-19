@@ -141,12 +141,19 @@ class ActivityLocalNotification {
     
     private func scheduleActivities(_ allActivity: [Activity]) {
         
+        //we have to handle the datetime received as the local time of the user.
+        let localActivities: [Activity] = allActivity.map { activity in
+            let schedules: [DurationIntervalLegacy]? = activity.schedule?.map { interval in
+                let cudtomTimes: [Date]? = interval.customTimes?.compactMap({$0.toLocal})
+                return DurationIntervalLegacy(repeatType: interval.repeatType, startDate: interval.startDate?.toLocal, time: interval.time?.toLocal, customTimes: cudtomTimes, notificationId: interval.notificationId)
+            }
+            return Activity(id: activity.id, spec: activity.spec, name: activity.name, schedule: schedules)
+        }
+
         allActivitiesScheduled = allActivity
         UserDefaults.standard.activityAPILastScheduledDate = Date()
-        print("cancelled all")
         cancelAll()
-        allActivity.forEach { (activity) in
-            print("scheduling")
+        localActivities.forEach { (activity) in
             let title = activity.name
             let activityId = activity.id
             activity.schedule?.forEach({ (durationIntervalLegacy) in
@@ -180,7 +187,6 @@ class ActivityLocalNotification {
         //extract startDay
         let dateComponentStartDay = Calendar.current.dateComponents([.year, .month, .day, .weekday], from: scheduleStartDate)
         let startDay = Calendar.current.date(from: dateComponentStartDay)
-        print("startDay = \(startDay!)")
         //make different type of notification as per repeat type
         switch repeatType {
 
@@ -255,6 +261,10 @@ class ActivityLocalNotification {
             let timeComponent = Calendar.current.dateComponents([.hour, .minute], from: deliveryTime)
             let components = DateComponents(day: dateComponentStartDay.day, hour: timeComponent.hour, minute: timeComponent.minute)
             addNoticiationOn(identifier: identifier, content: content, dateComponent: components)
+        case .fortnightly:
+            if let startDate = startDay, startDate > Date() { return }
+            let hours = 14 * 24 //every two weeeks +roll 1 to 14
+            schduleforEveryHour(hours: hours, deliveryTime: deliveryTime, identifier: identifier, content: content)
         case .none:
             let dateComponentTime = Calendar.current.dateComponents([.hour, .minute], from:deliveryTime)
             let triggerOncecomponents = DateComponents(year: dateComponentStartDay.year, month: dateComponentStartDay.month, day: dateComponentStartDay.day, hour: dateComponentTime.hour, minute: dateComponentTime.minute)
