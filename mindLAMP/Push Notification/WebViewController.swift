@@ -78,8 +78,18 @@ extension WebViewController {
        
         wkWebView = makeWebView()
         
-        self.view = wkWebView
-        view.addSubview(indicator)
+        self.view = UIView()
+        self.view.backgroundColor = .systemBackground
+        
+        self.view.addSubview(wkWebView)
+        wkWebView.scrollView.backgroundColor = .systemBackground
+        wkWebView.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            wkWebView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            wkWebView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            wkWebView.rightAnchor.constraint(equalTo: view.rightAnchor),
+            wkWebView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)])
+        wkWebView.addSubview(indicator)
 
         //To show activity indicator when webview is Loading..
         loadingObservation = wkWebView.observe(\.isLoading, options: [.new, .old]) { [weak self] (_, change) in
@@ -93,7 +103,7 @@ extension WebViewController {
                 strongSelf.indicator.startAnimating()
                 NSLayoutConstraint.activate([strongSelf.indicator.centerXAnchor.constraint(equalTo: strongSelf.view.centerXAnchor),
                                              strongSelf.indicator.centerYAnchor.constraint(equalTo: strongSelf.view.centerYAnchor)])
-                strongSelf.view.bringSubviewToFront(strongSelf.indicator)
+                strongSelf.wkWebView.bringSubviewToFront(strongSelf.indicator)
             }
             else if !new && old {
                 strongSelf.indicator.stopAnimating()

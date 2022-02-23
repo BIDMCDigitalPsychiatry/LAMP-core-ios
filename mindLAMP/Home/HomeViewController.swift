@@ -126,7 +126,7 @@ private extension HomeViewController {
             wkWebView.rightAnchor.constraint(equalTo: view.rightAnchor),
             wkWebView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)])
         //wkWebView.scrollView.contentInsetAdjustmentBehavior = .never
-        view.addSubview(indicator)
+        wkWebView.addSubview(indicator)
         
         //To show activity indicator when webview is Loading..
         loadingObservation = wkWebView.observe(\.isLoading, options: [.new, .old]) { [weak self] (_, change) in
@@ -140,7 +140,7 @@ private extension HomeViewController {
                 strongSelf.indicator.startAnimating()
                 NSLayoutConstraint.activate([strongSelf.indicator.centerXAnchor.constraint(equalTo: strongSelf.view.centerXAnchor),
                                              strongSelf.indicator.centerYAnchor.constraint(equalTo: strongSelf.view.centerYAnchor)])
-                strongSelf.view.bringSubviewToFront(strongSelf.indicator)
+                strongSelf.wkWebView.bringSubviewToFront(strongSelf.indicator)
             }
             else if !new && old {
                 strongSelf.indicator.stopAnimating()
