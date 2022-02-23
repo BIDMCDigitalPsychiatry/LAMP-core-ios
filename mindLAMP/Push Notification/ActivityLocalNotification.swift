@@ -302,7 +302,7 @@ class ActivityLocalNotification {
     
     //schedule a non-repeat notification on 'deliveryTime' and scheule repeating interval notification at the tie of first 'deliveryTime'
     private func schduleforEveryHour(hours: Int, deliveryTime: Date, identifier: String, content: UNMutableNotificationContent) {
-        guard let intervalToStart = timeIntervaForImmediateFutureDate(everyXhour: hours, fireTime: deliveryTime) else { return }
+        guard let intervalToStart = timeIntervaForImmediateFutureDate(everyXhours: hours, fireTime: deliveryTime) else { return }
         //schedule for first
         let dateComponent = Calendar.current.dateComponents([.year, .month, .day, .hour, .minute], from: Date().addingTimeInterval(intervalToStart))
         addNoticiationOn(identifier: identifier, content: content, dateComponent: dateComponent, repeats: false)
@@ -378,8 +378,12 @@ class ActivityLocalNotification {
     //fireTime - is the time to start the everyXhour notifications.
     //This function is used to find the next upcoming notification data. case 1. current time is 10 am, and the fire time is 8 am, then the next notification time is 11am, so this function returns 1*60*60 seconds.
     //case 2. current time is 10 am and the fire time is 2 pm, then this function returns 1*60*60 seconds for the next notification time of 11 am.
-    func timeIntervaForImmediateFutureDate(everyXhour: Int, fireTime: Date) -> TimeInterval? {
-        
+    func timeIntervaForImmediateFutureDate(everyXhours: Int, fireTime: Date) -> TimeInterval? {
+        //this is the assumption that, if everyhour is greater than 24 then it should be multiple of 24
+        var everyXhour = everyXhours
+        if everyXhour >= 24 {
+            everyXhour = 24
+        }
         let dateComponentDay = Calendar.current.dateComponents([.year, .month, .day], from:Date())
         let dateComponentTime = Calendar.current.dateComponents([.hour, .minute, .second], from:fireTime)
         guard let todayDay = dateComponentDay.day else {return 0}
