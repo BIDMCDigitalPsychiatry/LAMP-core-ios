@@ -25,7 +25,7 @@ class NotificationHelper: NSObject {
     func handleLaunchWithRemoteNotification(_ launchOptions: [UIApplication.LaunchOptionsKey: Any]?) {
         guard let userInfo = launchOptions?[UIApplication.LaunchOptionsKey.remoteNotification] as? [String: Any] else { return }
         let appdelegate = UIApplication.shared.delegate as! AppDelegate
-        let delay = 2.0
+        let delay = 3.0
         DispatchQueue.main.asyncAfter(deadline: .now() + delay) {
             appdelegate.respondedToNotification(remoteAction: RemoteNotification.Action.defaultTap, userInfo: userInfo)
         }
@@ -34,7 +34,9 @@ class NotificationHelper: NSObject {
     func removeNotification(identifier: String) {
         UNUserNotificationCenter.current().removeDeliveredNotifications(withIdentifiers: [identifier])
         UserDefaults.standard.removeTimestampForNotification(nid: identifier)
-        (UIApplication.shared.delegate as? AppDelegate)?.calculateBadgeCount()
+        DispatchQueue.main.async {
+            (UIApplication.shared.delegate as? AppDelegate)?.calculateBadgeCount()
+        }
     }
     
     //we can execute when ever app active
@@ -300,7 +302,19 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
                 return true
             }
         }
+        
+//        if let navController = self.window?.rootViewController as? UINavigationController {
+//            
+//            if let existiWebController = navController.topViewController as? HomeViewController {
+//                //existiWebController.title = title
+//                print("pageURL = \(pageURL.absoluteString)")
+//                existiWebController.tappedActivityURL = pageURL
+//                // navController.pushViewController(webViewController, animated: true)
+//                return true
+//            }
+//        }
         return false
     }
+
 
 }
