@@ -262,9 +262,23 @@ class ActivityLocalNotification {
             let components = DateComponents(day: dateComponentStartDay.day, hour: timeComponent.hour, minute: timeComponent.minute)
             addNoticiationOn(identifier: identifier, content: content, dateComponent: components)
         case .fortnightly:
-            if let startDate = startDay, startDate > Date() { return }
-            let hours = 14 * 24 //every two weeeks +roll 1 to 14
-            schduleforEveryHour(hours: hours, deliveryTime: deliveryTime, identifier: identifier, content: content)
+            // for two weeks notification, we are scheduling only next 3 notifications
+            let dateComponentTime = Calendar.current.dateComponents([.hour, .minute], from:deliveryTime)
+            let triggerOncecomponents = DateComponents(year: dateComponentStartDay.year, month: dateComponentStartDay.month, day: dateComponentStartDay.day, hour: dateComponentTime.hour, minute: dateComponentTime.minute)
+            guard var triggerDate = Calendar.current.date(from: triggerOncecomponents) else { return }
+            var incrementIndex = 1
+            
+            if triggerDate > Date() {
+                incrementIndex = 0
+            }
+            //print("incrementIndex = \(incrementIndex)")
+            for _ in 1...3 {
+                guard let scheduleDateTime = Calendar.current.date(byAdding: .day, value: 14 * incrementIndex, to: triggerDate) else { break }
+                triggerDate = scheduleDateTime
+                //print("triggerDate = \(scheduleDateTime)")
+                let components = Calendar.current.dateComponents([.year, .month, .day, .hour, .minute], from: scheduleDateTime)
+                addNoticiationOn(identifier: identifier, content: content, dateComponent: components, repeats: false)
+            }
         case .none:
             let dateComponentTime = Calendar.current.dateComponents([.hour, .minute], from:deliveryTime)
             let triggerOncecomponents = DateComponents(year: dateComponentStartDay.year, month: dateComponentStartDay.month, day: dateComponentStartDay.day, hour: dateComponentTime.hour, minute: dateComponentTime.minute)

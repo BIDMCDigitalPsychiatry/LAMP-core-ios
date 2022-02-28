@@ -39,6 +39,13 @@ class HomeViewController: UIViewController {
     lazy var scheduleHandler: ActivityLocalNotification = {
         return ActivityLocalNotification()
     }()
+    
+    var tappedActivityURL: URL? {
+        didSet {
+            guard let pageURL = tappedActivityURL else {return}
+            wkWebView.load(URLRequest(url: pageURL))
+        }
+    }
 
     override func loadView() {
         

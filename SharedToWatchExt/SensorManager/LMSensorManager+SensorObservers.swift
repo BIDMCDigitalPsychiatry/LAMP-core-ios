@@ -22,7 +22,9 @@ extension LMSensorManager: SensorStore {
         } else {
             printToFile("Screen locked")
         }
-        (UIApplication.shared.delegate as? AppDelegate)?.calculateBadgeCount()
+        DispatchQueue.main.async {
+            (UIApplication.shared.delegate as? AppDelegate)?.calculateBadgeCount()
+        }
         sensor_wifi?.startScanning()
 
         //set 15 seconds delay to fetch all healthkit data
@@ -158,7 +160,9 @@ extension LMSensorManager: LocationsObserver {
             SensorLogs.shared.storeSensorRequest(request, fileNameWithoutExt: "gps_off")//store to disk
             
             //LMLogsManager.shared.addLogs(level: .error, logs: Logs.Messages.gps_off)
-            showLocationAlert()
+            DispatchQueue.main.async {
+                self.showLocationAlert()
+            }
         case .otherErrors(let error):
             //post as sensor data
             let msg = String(format: Logs.Messages.location_error, error.localizedDescription)
