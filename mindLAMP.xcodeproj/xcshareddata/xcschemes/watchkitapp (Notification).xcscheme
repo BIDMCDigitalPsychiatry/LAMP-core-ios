@@ -56,8 +56,10 @@
       allowLocationSimulation = "YES"
       launchAutomaticallySubstyle = "8"
       notificationPayloadFile = "watchkitapp Extension/PushNotificationPayload.apns">
-      <BuildableProductRunnable
-         runnableDebuggingMode = "0">
+      <RemoteRunnable
+         runnableDebuggingMode = "2"
+         BundleIdentifier = "com.apple.Carousel"
+         RemotePath = "/mindLAMP 2">
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "B2704DD524B4A2A900DE196B"
@@ -65,7 +67,7 @@
             BlueprintName = "watchkitapp"
             ReferencedContainer = "container:mindLAMP.xcodeproj">
          </BuildableReference>
-      </BuildableProductRunnable>
+      </RemoteRunnable>
    </LaunchAction>
    <ProfileAction
       buildConfiguration = "Release (Production)"
@@ -75,8 +77,10 @@
       debugDocumentVersioning = "YES"
       launchAutomaticallySubstyle = "8"
       notificationPayloadFile = "watchkitapp Extension/PushNotificationPayload.apns">
-      <BuildableProductRunnable
-         runnableDebuggingMode = "0">
+      <RemoteRunnable
+         runnableDebuggingMode = "2"
+         BundleIdentifier = "com.apple.Carousel"
+         RemotePath = "/mindLAMP 2">
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "B2704DD524B4A2A900DE196B"
@@ -84,7 +88,16 @@
             BlueprintName = "watchkitapp"
             ReferencedContainer = "container:mindLAMP.xcodeproj">
          </BuildableReference>
-      </BuildableProductRunnable>
+      </RemoteRunnable>
+      <MacroExpansion>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "B2704DD524B4A2A900DE196B"
+            BuildableName = "watchkitapp.app"
+            BlueprintName = "watchkitapp"
+            ReferencedContainer = "container:mindLAMP.xcodeproj">
+         </BuildableReference>
+      </MacroExpansion>
    </ProfileAction>
    <AnalyzeAction
       buildConfiguration = "Debug (Production)">
