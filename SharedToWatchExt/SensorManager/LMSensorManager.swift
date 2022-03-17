@@ -106,7 +106,7 @@ class LMSensorManager {
        var sensors = [SensorType.lamp_gps.lampIdentifier,
                       SensorType.lamp_Activity.lampIdentifier,
                       SensorType.lamp_telephony.lampIdentifier,
-                      SensorType.lamp_screen_state.lampIdentifier,
+                      SensorType.lamp_device_state.lampIdentifier,
                       SensorType.lamp_nearby_device.lampIdentifier,
                       SensorType.lamp_steps.lampIdentifier,
                       SensorType.lamp_accelerometer.lampIdentifier,
@@ -149,10 +149,8 @@ class LMSensorManager {
                 }
             case .success(let response):
                 let sensorSpecs: [Sensor] = response.data
-                print("sensorSpecs date = \(Date())")
                 let identifiers = sensorSpecs.compactMap({ $0.spec })
                 if Set(identifiers) != Set(self.sensorIdentifiers) {
-                    print("sensorSpecs new count 2 = \(sensorSpecs.count)")
                     SensorLogs.shared.storeSensorSpecs(specs: sensorSpecs)
                     //load sensorspec after api call.
                     DispatchQueue.main.async {
@@ -241,13 +239,10 @@ class LMSensorManager {
         switch reachability.connection {
         case .wifi:
             isReachableViaWiFi = true
-            print("Reachable via WiFi")
         case .cellular:
             isReachableViaWiFi = false
-            print("Reachable via Cellular")
         case .unavailable:
             isReachableViaWiFi = false
-            print("Network not reachable")
         }
         #endif
     }
@@ -275,7 +270,7 @@ class LMSensorManager {
         if sensorIdentifiers.contains(SensorType.lamp_telephony.lampIdentifier) {
             setupCallsSensor()
         }
-        if sensorIdentifiers.contains(SensorType.lamp_screen_state.lampIdentifier) {
+        if sensorIdentifiers.contains(SensorType.lamp_screen_state.lampIdentifier) || sensorIdentifiers.contains(SensorType.lamp_device_state.lampIdentifier) {
             UIDevice.current.isBatteryMonitoringEnabled = true
             setupScreenSensor()
         }
@@ -394,10 +389,6 @@ class LMSensorManager {
     }
 
     private func loadSensorSpecs() {
-        
-//        sensorIdentifiers.removeAll()
-//        sensorManager.stopAllSensors()
-//        sensorManager.clear()
         stopSensors()
         if let specsDownloaded = SensorLogs.shared.fetchSensorSpecs(), specsDownloaded.count > 0 {
             sensorIdentifiers = specsDownloaded.compactMap({ $0.spec })
@@ -426,11 +417,6 @@ class LMSensorManager {
         self.initiateSensors()
         self.sensorManager.startAllSensors()
     }
-    
-//    private func refreshAllSensors() {
-//        sensorManager.stopAllSensors()
-//        sensorManager.startAllSensors()
-//    }
     
     func startWatchSensors() {
         #if os(iOS)
@@ -830,7 +816,7 @@ private extension LMSensorManager {
             self.screenStateDataBuffer.removeAll(keepingCapacity: true)
         }
         
-        let sensorArray = dataArray.map { SensorEvent(timestamp: $0.timestamp, sensor: SensorType.lamp_screen_state.lampIdentifier, data: SensorDataModel(screenData: $0)) }
+        let sensorArray = dataArray.map { SensorEvent(timestamp: $0.timestamp, sensor: SensorType.lamp_device_state.lampIdentifier, data: SensorDataModel(screenData: $0)) }
         return sensorArray
     }
     
@@ -905,7 +891,7 @@ private extension LMSensorManager {
             data.representation = healthData.representation
             data.startDate = healthData.startDate
             data.endDate = healthData.endDate
-            data.source = healthData.source
+            data.source = Tristate(healthData.source)
             let lampIdentifier = healthData.hkIdentifier.lampIdentifier
             return SensorEvent(timestamp: Double(healthData.timestamp), sensor: lampIdentifier, data: data)
         }
@@ -930,7 +916,7 @@ private extension LMSensorManager {
                         model.representation = categoryData.representation
                         model.startDate = categoryData.startDate
                         model.endDate = categoryData.endDate
-                        model.source = categoryData.source
+                        model.source = Tristate(categoryData.source)
                         model.duration = categoryData.duration
                         return SensorEvent(timestamp: Double(categoryData.timestamp), sensor: categoryType.lampIdentifier, data: model)
                     }
@@ -961,6 +947,7 @@ private extension LMSensorManager {
                     }
                     model.startDate = dataSystolic.startDate
                     model.endDate = dataSystolic.endDate
+                    model.source = Tristate(dataDiastolic.source)
                     arrayData.append(SensorEvent(timestamp: Double(Date().timeInMilliSeconds), sensor: quantityType.lampIdentifier, data: model))
                 }
             case .bloodPressureDiastolic:
@@ -974,7 +961,10 @@ private extension LMSensorManager {
                         model.value = quantityData.value
                         //model.startDate = quantityData.startDate
                         //model.endDate = quantityData.endDate
-                        model.source = quantityData.source
+                        model.source = Tristate(quantityData.source)
+                        if quantityData.type == HKQuantityTypeIdentifier.stepCount.rawValue {
+                            model.type = PedometerData.SensorType.step_count.rawValue
+                        }
                         if quantityData.type == HKQuantityTypeIdentifier.bloodGlucose.rawValue {
                             if let mealtime = quantityData.metadata?["HKBloodGlucoseMealTime"] as? Int {
                                 switch mealtime {
