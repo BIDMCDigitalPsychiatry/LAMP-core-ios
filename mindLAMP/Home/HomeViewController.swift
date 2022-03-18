@@ -102,7 +102,6 @@ private extension HomeViewController {
         NotificationHelper.shared.removeAllExpiredNotifications()
         
         if isWebpageLoaded == false {
-            printToFile("load page when become active")
             loadWebPage()
         }
         

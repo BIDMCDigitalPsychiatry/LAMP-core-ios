@@ -43,7 +43,6 @@ struct HomeWebView: UIViewRepresentable {
         if appState != UIApplication.State.background {
             
             viewModel.isWebpageLoaded = true
-            print("viewModel.homeURL = \(viewModel.homeURL.absoluteString)")
             uiView.load(URLRequest(url: viewModel.homeURL))
         }
     }
@@ -60,7 +59,6 @@ struct HomeWebView: UIViewRepresentable {
         }
         
         func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
-            print("WebView: navigation finished")
             viewModel?.shouldAnimate = false
             //+20201222
             webView.evaluateJavaScript("document.readyState") { complete, _ in
@@ -77,9 +75,3 @@ struct HomeWebView: UIViewRepresentable {
         }
     }
 }
-
-//struct HomeWebView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        HomeWebView(viewModel: HomeWebViewModel())
-//    }
-//}
