@@ -125,18 +125,6 @@ public struct UpdateReadRequest {
     }
 }
 
-//public struct LPMRequest: Encodable {
-//    var timestamp: UInt64
-//    var sensor: String
-//    var data: SensorDataModel
-//
-//    public init(timeInterval: TimeInterval, sensor: String, sensorData: SensorDataModel) {
-//        data = sensorData
-//        timestamp = UInt64(timeInterval * 1000)
-//        self.sensor = sensor
-//    }
-//}
-
 public struct DeviceInfoWithToken: Codable {
     
     var action: String? //SensorType.AnalyticAction.login.rawValue
@@ -164,8 +152,8 @@ public struct SensorDataModel: Codable {
     public init(){}
     public var systolic: Pressure?
     public var diastolic: Pressure?
-    
-    public var source: String?
+    //healthkit, steps allow (null)
+    public var source: Tristate?
     
     //Location
     public var latitude: Double?
@@ -186,27 +174,17 @@ public struct SensorDataModel: Codable {
     
     //PedometerData
     public var value: Double?
-    public var distance: Double?
-    public var floors_ascended: Double?
-    public var floors_descended: Double?
-    public var pace: Double?
-    public var cadence: Double?
-    public var active_pace: Double?
-    public var event: String?
     
     //lamp.nearby_device
-    public var type: String?
+    public var type: String? //Calls, lamp.steps
     public var address: String?
     public var name: String?
     public var strength: Int?
     
     //Calls
-    //public var type: String?
     public var duration: Double?//used for sleep also
-    public var trace: String?
     
     public var activity: SensorActivity?
-    
     
     //Health
     public var unit: String?
@@ -248,13 +226,6 @@ public struct SensorDataModel: Codable {
         case attitude
         
         case value
-        case distance
-        case floors_ascended
-        case floors_descended
-        case pace
-        case cadence
-        case active_pace
-        case event
         
         case type
         case address
@@ -262,7 +233,6 @@ public struct SensorDataModel: Codable {
         case strength
         
         case duration
-        case trace
         
         case activity
         //Health
@@ -353,7 +323,6 @@ extension SensorDataModel {
     public init(callsData: CallsData) {
         self.type = callsData.type
         self.duration = Double(callsData.duration)
-        self.trace = callsData.trace
     }
     
     public init(locationData: LocationsData) {
@@ -388,36 +357,20 @@ extension SensorDataModel {
     
     public init(pedometerData: PedometerData) {
         
-        self.value = Double(pedometerData.numberOfSteps)
-        self.distance = pedometerData.distance
-        self.floors_ascended = Double(pedometerData.floorsAscended)
-        self.floors_descended = Double(pedometerData.floorsDescended)
-        self.pace = pedometerData.currentPace
-        self.cadence = pedometerData.currentCadence
-        self.active_pace = pedometerData.averageActivePace
-        self.event = pedometerData.event
+        self.type = pedometerData.type
+        self.value = pedometerData.value
+        self.unit = pedometerData.unit
+        self.source = Tristate("null")
     }
 }
 
 extension SensorDataModel {
 
-//    public init(rotationRate: CMRotationRate) {
-//        self.x = rotationRate.x
-//        self.y = rotationRate.y
-//        self.z = rotationRate.z
-//    }
-//
     public init(accelerationRate: CMAcceleration) {
         self.x = accelerationRate.x
         self.y = accelerationRate.y
         self.z = accelerationRate.z
     }
-//
-//    public init(magneticField: CMMagneticField) {
-//        self.x = magneticField.x
-//        self.y = magneticField.y
-//        self.z = magneticField.z
-//    }
     
     public init(activityData: CMMotionActivity) {
        
