@@ -611,8 +611,10 @@ private extension LMSensorManager {
             config.sensorObserver = self
             if isNeedData {
                 config.locationDataObserver = self
+                config.accuracy = kCLLocationAccuracyBestForNavigation
+            } else {
+                config.accuracy = kCLLocationAccuracyReduced
             }
-            config.accuracy = kCLLocationAccuracyBestForNavigation
             if let frquency = frquencySettings[SensorType.lamp_gps.lampIdentifier] {
                 config.frequency = frquency
             } else {
