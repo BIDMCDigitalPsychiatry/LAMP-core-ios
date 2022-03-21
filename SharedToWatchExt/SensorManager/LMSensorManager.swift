@@ -248,6 +248,7 @@ class LMSensorManager {
     }
     
     private func initiateSensors() {
+        
         isStarted = true
         //Always setup location sensors to keep the app alive in background. but collect location data only if its configured.
         print("sensorIdentifiers = \(sensorIdentifiers)")
@@ -411,7 +412,7 @@ class LMSensorManager {
             }
             
         } else {
-            sensorIdentifiers = allSensorSpecs
+            sensorIdentifiers = [] //allSensorSpecs //collect no sensors if nothing is configured
             frquencySettings = [:]
         }
         self.initiateSensors()
