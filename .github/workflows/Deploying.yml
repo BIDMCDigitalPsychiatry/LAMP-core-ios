@@ -6,6 +6,22 @@ on:
   release:
     types: [created]
 jobs:
+  version_name:
+    name: Get Version
+    runs-on: macOS-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+        env:
+          token: ${{ secrets.GITHUB_TOKENN }}
+    if: github.event_name == 'push'
+    outputs:
+     versiontext: ${{ steps.spin_up.outputs.uniqueVMActionsTag }}
+    if: github.event_name == 'release'
+    outputs:
+     versiontext: ${{ steps.spin_up.outputs.uniqueVMActionsTag }}
   version-update:
     if: github.event_name == 'push'
     name: Version increment
@@ -31,6 +47,6 @@ jobs:
         id: updatedversion
       - name: Set version and build number
         run: |
-          echo "version 0 is ${{steps.updatedversion.outputs.VERSION}}"
-          echo "version 2 is ${{agvtool what-marketing-version}}
-          echo "version 3 is $(agvtool what-marketing-version)
+          OLD_VERSION=$(agvtool what-marketing-version -terse1)
+          echo "version 0 is ${{OLD_VERSION}}"
+          echo "version 3 is $(OLD_VERSION)
