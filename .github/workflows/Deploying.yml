@@ -30,9 +30,8 @@ jobs:
           echo "::set-output name=VERSION::$(date -j -v +1d -f "%Y.%m.%d" "${{steps.dateversion.outputs.LATEST_TAG_NUMBER}}" +'%Y.%-m.%-d')"
         id: updatedversion
       - name: Set version and build number
-        env:
-          OLD_VERSION: $(agvtool what-marketing-version -terse1)
         run: |
+          echo "::set-output name=OLD_VERSION::$(agvtool what-marketing-version -terse1)"
           echo "version 0 is ${{OLD_VERSION}}"
           echo "version 3 is $(OLD_VERSION)
           echo "version 3 is $OLD_VERSION
