@@ -27,5 +27,6 @@ jobs:
         id: commits
       - name: Set version and build number
         run: |
-          echo "version is {{$(date +'%Y.%-m.%-d' -d '1 day')}}"
-          echo "version 2 is {{$(date +'%Y.%-m.%-d' -d '2 days')}}"
+          echo "version 0 is {{$(date +'%Y.%-m.%-d')}}"
+          echo "version 1 is {{$(date +'%Y.%-m.%-d' -d \"1 day\")}}"
+          echo "version 2 is {{$(date +'%Y.%-m.%-d' -d \"2 days\")}}"
