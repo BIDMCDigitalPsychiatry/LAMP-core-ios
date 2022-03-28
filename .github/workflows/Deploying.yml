@@ -6,6 +6,46 @@ on:
   release:
     types: [created]
 jobs:
+  deploy:
+    name: Deploying to Testflight
+    runs-on: macOS-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+        env:
+          token: ${{ secrets.GITHUB_TOKENN }}
+      - name: Get latest tag
+        run: |
+          echo "::set-output name=LATEST_TAG_NUMBER::$(git describe --tags `git rev-list --tags --max-count=1`)"
+        id: tags
+      - name: Get commits count
+        run: |
+          echo "::set-output name=GIT_COMMIT_NUMBER::$(git rev-list --count HEAD)"
+        id: commits
+      - name: Set version and build number
+        run: |
+          agvtool new-marketing-version ${{steps.tags.outputs.LATEST_TAG_NUMBER}}
+          agvtool new-version -all ${{steps.commits.outputs.GIT_COMMIT_NUMBER}}
+      - name: Install gpg 
+        run: brew install gpg
+      - name: Setup provisioning profile
+        env:
+          IOS_KEYS: ${{ secrets.IOS_KEYS }}
+        run: .github/secrets/decrypt_secrets.sh
+      - name: Archiving project
+        env:
+          PR_NUMBER: $(jq --raw-output .pull_request.number "$GITHUB_EVENT_PATH")
+        run: .github/scripts/archive_app.sh
+      - name: Exporting .ipa
+        run: .github/scripts/export_ipa.sh
+      - name: Publishing app
+        if: success()
+        env:
+          APPLEID_USERNAME: ${{ secrets.APPLEID_USERNAME }}
+          APPLEID_PASSWORD: ${{ secrets.APPLEID_PASSWORD }}
+        run: .github/scripts/publish_testflight.sh
   version-update:
     if: github.event_name == 'push'
     name: Version increment
@@ -19,11 +59,18 @@ jobs:
           token: ${{ secrets.GITHUB_TOKENN }}
       - name: Get version from date
         run: |
-          echo "::set-output name=VERSION::$(date +'%Y.%-m.%-d')"
-          echo "Version code after empty commit is $((date+24*60*60) +'%Y-%-m-%-d')"
+          echo "::set-output name=VERSION::$(date +'%Y.%-m.%-d' -d "1 day")"
         id: dateversion
       - name: Get commits count
         run: |
           echo "::set-output name=GIT_COMMIT_NUMBER::$(git rev-list --count HEAD)"
         id: commits
-  
+      - name: Set version and build number
+        run: |
+          agvtool new-marketing-version ${{steps.dateversion.outputs.VERSION}}
+          agvtool new-version -all ${{steps.commits.outputs.GIT_COMMIT_NUMBER}}
+      - name: update
+        run: |
+          git add .
+          git commit -m "bump version"
+          git push origin HEAD:master
