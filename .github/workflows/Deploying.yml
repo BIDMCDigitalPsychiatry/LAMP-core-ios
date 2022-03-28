@@ -27,7 +27,7 @@ jobs:
         id: commits
       - name: update version
         run: |
-          echo "::set-output name=VERSION::$(date -j -v +1d -f "%Y.%m.%d" "$(steps.dateversion.outputs.LATEST_TAG_NUMBER)" +'%Y.%-m.%-d')"
+          echo "::set-output name=VERSION::$(date -j -v +1d -f "%Y.%m.%d" "${{steps.dateversion.outputs.LATEST_TAG_NUMBER}}" +'%Y.%-m.%-d')"
         id: updatedversion
       - name: Set version and build number
         run: |
