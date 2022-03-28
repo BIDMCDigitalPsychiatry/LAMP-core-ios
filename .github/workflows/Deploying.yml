@@ -28,5 +28,4 @@ jobs:
       - name: Set version and build number
         run: |
           echo "version 0 is {{$(date +'%Y.%-m.%-d')}}"
-          echo "version 1 is {{$(date +'%Y.%-m.%-d' -d \"1 day\")}}"
-          echo "version 2 is {{$(date +'%Y.%-m.%-d' -d \"2 days\")}}"
+          echo "version 1 is {{$(date -j -v +1d -f "%Y.%m.%d" "$(date +'%Y.%m.%d')" +'%Y.%-m.%-d')}}"
