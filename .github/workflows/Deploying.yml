@@ -6,22 +6,6 @@ on:
   release:
     types: [created]
 jobs:
-  version_name:
-    name: Get Version
-    runs-on: macOS-latest
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v2
-        with:
-          fetch-depth: 0
-        env:
-          token: ${{ secrets.GITHUB_TOKENN }}
-    if: github.event_name == 'push'
-    outputs:
-     versiontext: ${{ steps.spin_up.outputs.uniqueVMActionsTag }}
-    if: github.event_name == 'release'
-    outputs:
-     versiontext: ${{ steps.spin_up.outputs.uniqueVMActionsTag }}
   version-update:
     if: github.event_name == 'push'
     name: Version increment
