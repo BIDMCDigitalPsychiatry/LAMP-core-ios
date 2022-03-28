@@ -39,11 +39,16 @@ class HomeViewController: UIViewController {
     lazy var scheduleHandler: ActivityLocalNotification = {
         return ActivityLocalNotification()
     }()
-    
     var tappedActivityURL: URL? {
         didSet {
             guard let pageURL = tappedActivityURL else {return}
-            wkWebView.load(URLRequest(url: pageURL))
+            wkWebView.endEditing(true)
+            indicator.startAnimating()
+            view.bringSubviewToFront(indicator)
+            DispatchQueue.main.async {
+                self.wkWebView.load(URLRequest(url: pageURL))
+            }
+            
         }
     }
 
@@ -132,8 +137,10 @@ private extension HomeViewController {
             wkWebView.rightAnchor.constraint(equalTo: view.rightAnchor),
             wkWebView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)])
         //wkWebView.scrollView.contentInsetAdjustmentBehavior = .never
-        wkWebView.addSubview(indicator)
-        
+        //wkWebView.addSubview(indicator)
+        self.view.addSubview(indicator)
+        NSLayoutConstraint.activate([indicator.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+                                     indicator.centerYAnchor.constraint(equalTo: view.centerYAnchor)])
         //To show activity indicator when webview is Loading..
         loadingObservation = wkWebView.observe(\.isLoading, options: [.new, .old]) { [weak self] (_, change) in
             guard let strongSelf = self else { return }
@@ -142,15 +149,16 @@ private extension HomeViewController {
             let old = change.oldValue!
             
             if new && !old {
-                strongSelf.view.addSubview(strongSelf.indicator)
+                // strongSelf.view.addSubview(strongSelf.indicator)
                 strongSelf.indicator.startAnimating()
-                NSLayoutConstraint.activate([strongSelf.indicator.centerXAnchor.constraint(equalTo: strongSelf.view.centerXAnchor),
-                                             strongSelf.indicator.centerYAnchor.constraint(equalTo: strongSelf.view.centerYAnchor)])
-                strongSelf.wkWebView.bringSubviewToFront(strongSelf.indicator)
+                //NSLayoutConstraint.activate([strongSelf.indicator.centerXAnchor.constraint(equalTo: strongSelf.view.centerXAnchor),
+                //                             strongSelf.indicator.centerYAnchor.constraint(equalTo: strongSelf.view.centerYAnchor)])
+                //strongSelf.wkWebView.bringSubviewToFront(strongSelf.indicator)
+                strongSelf.view.bringSubviewToFront(strongSelf.indicator)
             }
             else if !new && old {
                 strongSelf.indicator.stopAnimating()
-                strongSelf.indicator.removeFromSuperview()
+                // strongSelf.indicator.removeFromSuperview() we should not remove because we have to show again when reload
             }
         }
         
@@ -190,6 +198,14 @@ private extension HomeViewController {
         
         configuration.userContentController.add(LeakAvoider(delegate:self), name: ScriptMessageHandler.login.rawValue)
         configuration.userContentController.add(LeakAvoider(delegate:self), name: ScriptMessageHandler.logout.rawValue)
+        
+//        //to read console logs
+//        // inject JS to capture console.log output and send to iOS
+//        let source = "function captureLog(msg) { window.webkit.messageHandlers.logHandler.postMessage(msg); } window.console.log = captureLog;"
+//        let script = WKUserScript(source: source, injectionTime: .atDocumentStart, forMainFrameOnly: false)
+//        configuration.userContentController.addUserScript(script)
+//        // register the bridge script that listens for the output
+//        configuration.userContentController.add(self, name: "logHandler")
         
         let webView = WKWebView(frame: .zero, configuration: configuration)
         webView.allowsBackForwardNavigationGestures = true
@@ -296,12 +312,12 @@ extension HomeViewController: WKUIDelegate {
 extension HomeViewController: WKNavigationDelegate {
     
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
-
+        indicator.stopAnimating()
     }
     
     func webView(_ webView: WKWebView, didFail navigation: WKNavigation!, withError error: Error) {
         print("naviation fail error = \(error.localizedDescription)")
-        //indicator.stopAnimating()
+        indicator.stopAnimating()
     }
     
     func webView(_ webView: WKWebView, didFailProvisionalNavigation navigation: WKNavigation!, withError error: Error) {
@@ -330,6 +346,9 @@ extension HomeViewController: WKNavigationDelegate {
 
 extension HomeViewController: WKScriptMessageHandler {
     func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
+//        if message.name == "logHandler" {
+//            print("CONSOLE LOG: \(message.body)")
+//        }
         if message.name == ScriptMessageHandler.login.rawValue {
             guard let dictBody = message.body as? [String: Any] else {
                 printError("Message body not in expected format.")

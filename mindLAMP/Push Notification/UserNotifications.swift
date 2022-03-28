@@ -292,27 +292,27 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
 //            }
 //        }
         
-        let webViewController = WebViewController()
-        if let navController = self.window?.rootViewController as? UINavigationController {
-            if let existiWebController = navController.topViewController as? WebViewController, existiWebController.pageURL.absoluteString ==  pageURL.absoluteString {
-            } else {
-                webViewController.title = title
-                webViewController.pageURL = pageURL
-                navController.pushViewController(webViewController, animated: true)
-                return true
-            }
-        }
-        
+//        let webViewController = WebViewController()
 //        if let navController = self.window?.rootViewController as? UINavigationController {
-//            
-//            if let existiWebController = navController.topViewController as? HomeViewController {
-//                //existiWebController.title = title
-//                print("pageURL = \(pageURL.absoluteString)")
-//                existiWebController.tappedActivityURL = pageURL
-//                // navController.pushViewController(webViewController, animated: true)
+//            if let existiWebController = navController.topViewController as? WebViewController, existiWebController.pageURL.absoluteString ==  pageURL.absoluteString {
+//            } else {
+//                webViewController.title = title
+//                webViewController.pageURL = pageURL
+//                navController.pushViewController(webViewController, animated: true)
 //                return true
 //            }
 //        }
+        
+        if let navController = self.window?.rootViewController as? UINavigationController {
+            
+            if let existiWebController = navController.topViewController as? HomeViewController {
+                //existiWebController.title = title
+                //print("pageURL = \(pageURL.absoluteString)")
+                existiWebController.tappedActivityURL = pageURL
+                // navController.pushViewController(webViewController, animated: true)
+                return true
+            }
+        }
         return false
     }
 
