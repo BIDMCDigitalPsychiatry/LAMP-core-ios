@@ -31,4 +31,8 @@ jobs:
         id: updatedversion
       - name: Set version and build number
         run: |
+          v = agvtool what-marketing-version
           echo "version 0 is ${{steps.updatedversion.outputs.VERSION}}"
+          echo "version 1 is $(v)
+          echo "version 2 is ${{v}}
+          echo "version 3 is $(agvtool what-marketing-version)
