@@ -71,6 +71,6 @@ jobs:
           agvtool new-version -all ${{steps.commits.outputs.GIT_COMMIT_NUMBER}}
       - name: update
         run: |
-        git add .
-        git commit -m "bump version"
-        git push origin HEAD:master
+          git add .
+          git commit -m "bump version"
+          git push origin HEAD:master
