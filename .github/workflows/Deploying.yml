@@ -17,15 +17,18 @@ jobs:
           fetch-depth: 0
         env:
           token: ${{ secrets.GITHUB_TOKENN }}
-      - name: Get version from date
+      - name: Get version from releases
         run: |
-          echo "::set-output name=VERSION::$(date +'%Y.%-m.%-d' -d "1 day")"
+          echo "::set-output name=LATEST_TAG_NUMBER::$(git describe --tags `git rev-list --tags --max-count=1`)"
         id: dateversion
       - name: Get commits count
         run: |
           echo "::set-output name=GIT_COMMIT_NUMBER::$(git rev-list --count HEAD)"
         id: commits
+      - name: update version
+        run: |
+          echo "::set-output name=VERSION::$(date -j -v +1d -f "%Y.%m.%d" "$(steps.dateversion.outputs.LATEST_TAG_NUMBER)" +'%Y.%-m.%-d')"
+        id: updatedversion
       - name: Set version and build number
         run: |
-          echo "version 0 is {{$(date +'%Y.%-m.%-d')}}"
-          echo "version 1 is {{$(date -j -v +1d -f "%Y.%m.%d" "$(date +'%Y.%m.%d')" +'%Y.%-m.%-d')}}"
+          echo "version 0 is ${{steps.updatedversion.outputs.VERSION}}"
