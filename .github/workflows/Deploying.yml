@@ -8,6 +8,7 @@ on:
 jobs:
   versionjob:
     name: Get Version
+    if: github.event_name == 'push'
     runs-on: macOS-latest
     steps:
       - name: Checkout repository
@@ -16,18 +17,34 @@ jobs:
           fetch-depth: 0
         env:
           token: ${{ secrets.GITHUB_TOKENN }}
-      - name: version as per event
+      - name: version as date
         run: |
-        if: github.event_name == 'push'
          echo "::set-output name=VERSION::$(date +'%Y.%-m.%-d')"
-        if: github.event_name == 'release'
+        id: dateversion
+    outputs:
+     versiontext: ${{ steps.dateversion.outputs.VERSION }}
+  versionjob2:
+    name: Get Version
+    if: github.event_name == 'release'
+    runs-on: macOS-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+        env:
+          token: ${{ secrets.GITHUB_TOKENN }}
+      - name: version as date
+        id: dateversion
+        run: |
          echo "::set-output name=VERSION::$(git describe --tags `git rev-list --tags --max-count=1`)"
     outputs:
      versiontext: ${{ steps.dateversion.outputs.VERSION }}
   version-update:
     name: Version increment
     runs-on: macOS-latest
-    needs: [versionjob]
+    if: ${{ always() }}
+    needs: [versionjob, versionjob2]
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
@@ -38,11 +55,11 @@ jobs:
       - name: Get version from releases
         run: |
           echo "::set-output name=LATEST_TAG_NUMBER::$(git describe --tags `git rev-list --tags --max-count=1`)"
-        id: dateversion
+        id: tagversion
       - name: Get commits count
         run: |
           echo "::set-output name=GIT_COMMIT_NUMBER::$(git rev-list --count HEAD)"
         id: commits
       - name: Set version and build number
         run: |
-          echo "version=${{needs.versionjob.outputs.versiontext}}"
+          echo "version= ${{ format('{0}{1}.', needs.versionjob.outputs.versiontext, needs.versionjob2.outputs.versiontext }}"
