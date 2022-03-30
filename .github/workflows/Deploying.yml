@@ -6,9 +6,9 @@ on:
   release:
     types: [created]
 jobs:
-  versionjob:
-    name: Get Version
+  push_deploy:
     if: github.event_name == 'push'
+    name: Deploying to Testflight
     runs-on: macOS-latest
     steps:
       - name: Checkout repository
@@ -17,15 +17,39 @@ jobs:
           fetch-depth: 0
         env:
           token: ${{ secrets.GITHUB_TOKENN }}
-      - name: version as date
+      - name: Get version from date
         run: |
-         echo "::set-output name=VERSION::$(date +'%Y.%-m.%-d')"
+          echo "::set-output name=VERSION::$(date +'%Y.%-m.%-d')"
         id: dateversion
-    outputs:
-     versiontext: ${{ steps.dateversion.outputs.VERSION }}
-  versionjob2:
-    name: Get Version
+      - name: Get commits count
+        run: |
+          echo "::set-output name=GIT_COMMIT_NUMBER::$(git rev-list --count HEAD)"
+        id: commits
+      - name: Set version and build number
+        run: |
+          agvtool new-marketing-version ${{steps.dateversion.outputs.VERSION}}
+          agvtool new-version -all ${{steps.commits.outputs.GIT_COMMIT_NUMBER}}
+      - name: Install gpg
+        run: brew install gpg
+      - name: Setup provisioning profile
+        env:
+          IOS_KEYS: ${{ secrets.IOS_KEYS }}
+        run: .github/secrets/decrypt_secrets.sh
+      - name: Archiving project
+        env:
+          PR_NUMBER: $(jq --raw-output .pull_request.number "$GITHUB_EVENT_PATH")
+        run: .github/scripts/archive_app.sh
+      - name: Exporting .ipa
+        run: .github/scripts/export_ipa.sh
+      - name: Publishing app
+        if: success()
+        env:
+          APPLEID_USERNAME: ${{ secrets.APPLEID_USERNAME }}
+          APPLEID_PASSWORD: ${{ secrets.APPLEID_PASSWORD }}
+        run: .github/scripts/publish_testflight.sh
+  release_deploy:
     if: github.event_name == 'release'
+    name: Deploying to Testflight
     runs-on: macOS-latest
     steps:
       - name: Checkout repository
@@ -34,17 +58,41 @@ jobs:
           fetch-depth: 0
         env:
           token: ${{ secrets.GITHUB_TOKENN }}
-      - name: version as date
-        id: dateversion
+      - name: Get latest tag
         run: |
-         echo "::set-output name=VERSION::$(git describe --tags `git rev-list --tags --max-count=1`)"
-    outputs:
-     versiontext: ${{ steps.dateversion.outputs.VERSION }}
+          echo "::set-output name=LATEST_TAG_NUMBER::$(git describe --tags `git rev-list --tags --max-count=1`)"
+        id: tags
+      - name: Get commits count
+        run: |
+          echo "::set-output name=GIT_COMMIT_NUMBER::$(git rev-list --count HEAD)"
+        id: commits
+      - name: Set version and build number
+        run: |
+          agvtool new-marketing-version ${{steps.tags.outputs.LATEST_TAG_NUMBER}}
+          agvtool new-version -all ${{steps.commits.outputs.GIT_COMMIT_NUMBER}}
+      - name: Install gpg
+        run: brew install gpg
+      - name: Setup provisioning profile
+        env:
+          IOS_KEYS: ${{ secrets.IOS_KEYS }}
+        run: .github/secrets/decrypt_secrets.sh
+      - name: Archiving project
+        env:
+          PR_NUMBER: $(jq --raw-output .pull_request.number "$GITHUB_EVENT_PATH")
+        run: .github/scripts/archive_app.sh
+      - name: Exporting .ipa
+        run: .github/scripts/export_ipa.sh
+      - name: Publishing app
+        if: success()
+        env:
+          APPLEID_USERNAME: ${{ secrets.APPLEID_USERNAME }}
+          APPLEID_PASSWORD: ${{ secrets.APPLEID_PASSWORD }}
+        run: .github/scripts/publish_testflight.sh
   version-update:
+    if: github.event_name == 'release'
     name: Version increment
     runs-on: macOS-latest
-    if: ${{ always() }}
-    needs: [versionjob, versionjob2]
+    needs: [release_deploy]
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
@@ -62,4 +110,10 @@ jobs:
         id: commits
       - name: Set version and build number
         run: |
-          echo "version= ${{ format('{0}{1}.', needs.versionjob.outputs.versiontext, needs.versionjob2.outputs.versiontext }}"
+          agvtool new-marketing-version ${{steps.dateversion.outputs.LATEST_TAG_NUMBER}}
+          agvtool new-version -all ${{steps.commits.outputs.GIT_COMMIT_NUMBER}}
+      - name: update
+        run: |
+          git add .
+          git commit -m "bump version"
+          git push origin HEAD:master
