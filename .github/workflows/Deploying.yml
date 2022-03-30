@@ -6,10 +6,28 @@ on:
   release:
     types: [created]
 jobs:
+  versionjob:
+    name: Get Version
+    runs-on: macOS-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+        env:
+          token: ${{ secrets.GITHUB_TOKENN }}
+            - name: version as per event
+        run: |
+        if: github.event_name == 'push'
+         echo "::set-output name=VERSION::$(date +'%Y.%-m.%-d')"
+        if: github.event_name == 'release'
+         echo "::set-output name=VERSION::$(git describe --tags `git rev-list --tags --max-count=1`)"
+    outputs:
+     versiontext: ${{ steps.dateversion.outputs.VERSION }}
   version-update:
-    if: github.event_name == 'push'
     name: Version increment
     runs-on: macOS-latest
+    needs: [versionjob]
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
@@ -25,13 +43,6 @@ jobs:
         run: |
           echo "::set-output name=GIT_COMMIT_NUMBER::$(git rev-list --count HEAD)"
         id: commits
-      - name: update version
-        run: |
-          echo "::set-output name=VERSION::$(date -j -v +1d -f "%Y.%m.%d" "${{steps.dateversion.outputs.LATEST_TAG_NUMBER}}" +'%Y.%-m.%-d')"
-        id: updatedversion
       - name: Set version and build number
         run: |
-          echo "::set-output name=OLD_VERSION::$(agvtool what-marketing-version -terse1)"
-          echo "version 0 is ${{OLD_VERSION}}"
-          echo "version 3 is $(OLD_VERSION)
-          echo "version 3 is $OLD_VERSION
+          echo "version=${{needs.versionjob.outputs.versiontext}}"
