@@ -6,9 +6,9 @@ on:
   release:
     types: [created]
 jobs:
-  push_deploy:
+  push_deploy_staging:
     if: github.event_name == 'push'
-    name: Deploying to Testflight
+    name: Deploying to Testflight for Staging
     runs-on: macOS-latest
     steps:
       - name: Checkout repository
@@ -38,7 +38,7 @@ jobs:
       - name: Archiving project
         env:
           PR_NUMBER: $(jq --raw-output .pull_request.number "$GITHUB_EVENT_PATH")
-        run: .github/scripts/archive_app.sh
+        run: .github/scripts/archive_staging_app.sh
       - name: Exporting .ipa
         run: .github/scripts/export_ipa.sh
       - name: Publishing app
@@ -47,9 +47,9 @@ jobs:
           APPLEID_USERNAME: ${{ secrets.APPLEID_USERNAME }}
           APPLEID_PASSWORD: ${{ secrets.APPLEID_PASSWORD }}
         run: .github/scripts/publish_testflight.sh
-  release_deploy:
+  release_deploy_production:
     if: github.event_name == 'release'
-    name: Deploying to Testflight
+    name: Deploying to Testflight for Production
     runs-on: macOS-latest
     steps:
       - name: Checkout repository
@@ -79,7 +79,7 @@ jobs:
       - name: Archiving project
         env:
           PR_NUMBER: $(jq --raw-output .pull_request.number "$GITHUB_EVENT_PATH")
-        run: .github/scripts/archive_app.sh
+        run: .github/scripts/archive_production_app.sh
       - name: Exporting .ipa
         run: .github/scripts/export_ipa.sh
       - name: Publishing app
