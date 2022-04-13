@@ -92,7 +92,7 @@ jobs:
     if: github.event_name == 'release'
     name: Version increment
     runs-on: macOS-latest
-    needs: [release_deploy]
+    needs: [release_deploy_production]
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
