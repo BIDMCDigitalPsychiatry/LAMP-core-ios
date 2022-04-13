@@ -3,11 +3,6 @@
 // Configuration settings file format documentation can be found at:
 // https://help.apple.com/xcode/#/dev745c5c974
 
-//Production
-//DASHBOARD_URL = https:/$()/dashboard.lamp.digital/#/
-//LAMP_API = https:/$()/api.lamp.digital
-//Staging
-DASHBOARD_URL = https:/$()/dashboard-staging.lamp.digital/#/
-LAMP_API = https:/$()/api-staging.lamp.digital
-
+DASHBOARD_URL = https:/$()/dashboard.lamp.digital/#/
+LAMP_API = https:/$()/api.lamp.digital
 Branding = NativeCore
