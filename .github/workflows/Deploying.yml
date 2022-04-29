@@ -110,7 +110,7 @@ jobs:
         id: commits
       - name: Set version and build number
         run: |
-          agvtool new-marketing-version ${{steps.dateversion.outputs.LATEST_TAG_NUMBER}}
+          agvtool new-marketing-version ${{steps.tagversion.outputs.LATEST_TAG_NUMBER}}
           agvtool new-version -all ${{steps.commits.outputs.GIT_COMMIT_NUMBER}}
       - name: update
         run: |
