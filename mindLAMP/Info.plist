@@ -76,6 +76,21 @@
 	<string>Your voice data is required for clinical study.</string>
 	<key>NSMotionUsageDescription</key>
 	<string>Your motion activity data is required for clinical study.</string>
+	<key>NSSensorKitUsageDetail</key>
+	<dict>
+		<key>SRSensorUsageAmbientLightSensor</key>
+		<dict>
+			<key>Description</key>
+			<string>Clicnical Study</string>
+		</dict>
+		<key>SRSensorUsageDeviceUsage</key>
+		<dict>
+			<key>Description</key>
+			<string>Clicnical study</string>
+			<key>Required</key>
+			<true/>
+		</dict>
+	</dict>
 	<key>UIBackgroundModes</key>
 	<array>
 		<string>fetch</string>
