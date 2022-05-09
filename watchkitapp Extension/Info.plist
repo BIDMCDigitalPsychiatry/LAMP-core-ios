@@ -21,7 +21,7 @@
 	<key>CFBundleShortVersionString</key>
 	<string>2022.3.28</string>
 	<key>CFBundleVersion</key>
-	<string>323</string>
+	<string>$(CURRENT_PROJECT_VERSION)</string>
 	<key>CLKComplicationPrincipalClass</key>
 	<string>$(PRODUCT_MODULE_NAME).ComplicationController</string>
 	<key>DASHBOARD_URL</key>
