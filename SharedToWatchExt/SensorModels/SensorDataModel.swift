@@ -70,13 +70,13 @@ extension Encodable {
 
 
 public struct PayLoadInfo {
-    var action: String
+    var type: String
     var device_type: String// = "iOS" //"Android" or "Web"
     var user_agent: UserAgent?
     var payload: [String: Any]?
     var diagnostics: [String: Any]?
     public init(action: SensorType.AnalyticAction, userInfo: [AnyHashable: Any], userAgent: UserAgent?) {
-        self.action = action.rawValue
+        self.type = action.rawValue
         self.user_agent = userAgent
         self.device_type = DeviceType.displayName
         if action == SensorType.AnalyticAction.diagnostic {
@@ -98,8 +98,8 @@ public struct PayLoadInfo {
     }
     
     public func toJSON() -> [String: Any] {
-        let content = action == SensorType.AnalyticAction.diagnostic.rawValue ? diagnostics : payload
-        return ["action": action,
+        let content = type == SensorType.AnalyticAction.diagnostic.rawValue ? diagnostics : payload
+        return ["type": type,
                 "content": content ?? NSNull(),
                 "device_type": device_type,
                 "user_agent": user_agent?.toString() ?? NSNull()
@@ -127,13 +127,13 @@ public struct UpdateReadRequest {
 
 public struct DeviceInfoWithToken: Codable {
     
-    var action: String? //SensorType.AnalyticAction.login.rawValue
+    var type: String? //SensorType.AnalyticAction.login.rawValue
     var device_type: String// = "iOS" //"Android" or "Web"
     var user_agent: String?
     var device_token: String?
     
     public init(deviceToken: String?, userAgent: UserAgent?, action: String?) {
-        self.action = action
+        self.type = action
         self.device_token = deviceToken
         self.user_agent = userAgent?.toString()
         self.device_type = DeviceType.displayName
@@ -201,7 +201,7 @@ public struct SensorDataModel: Codable {
     public var startDate: Double?
     public var endDate: Double?
     //analytics
-    var action: String?
+    // renamed to type var action: String?
     var device_type: String?// = "iOS" //"Android" or "Web"
     var user_agent: String?
     var message: String?
@@ -248,7 +248,7 @@ public struct SensorDataModel: Codable {
         //glucose
         case meal_time
         //lamp.analytics
-        case action
+        // case action //renamed to type
         case device_type
         case user_agent
         case message
@@ -300,7 +300,7 @@ public struct SensorActivity: Codable {
 extension SensorDataModel {
     // for lowpowermode lamp.analytics
     public init(action: String?, userAgent: UserAgent?, value: Bool) {
-        self.action = action
+        self.type = action
         self.user_agent = userAgent?.toString()
         self.device_type = DeviceType.displayName
         self.value = value ? 1 : 0
@@ -308,7 +308,7 @@ extension SensorDataModel {
 
     //for log lamp.analytics
     public init(action: String?, userAgent: UserAgent?, errorMsg: String?) {
-        self.action = action
+        self.type = action
         self.user_agent = userAgent?.toString()
         self.device_type = DeviceType.displayName
         self.message = errorMsg
