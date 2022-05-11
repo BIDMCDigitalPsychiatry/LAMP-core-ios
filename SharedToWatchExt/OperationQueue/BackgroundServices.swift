@@ -54,13 +54,24 @@ extension BackgroundServices {
 //            dispatchQueue.addOperation(operation)
 //        }
 //    }
+//    func postSensorData(_ dispatchQueue: OperationQueue) {
+//        guard let userID = User.shared.userId else { return }
+//        let arrSensorData = SensorLogs.shared.fetchSensorRequest()
+//        let endPoint =  String(format: Endpoint.participantSensorEvent.rawValue, userID)
+//        for fileAndRequest in arrSensorData {
+//            let requestData = RequestData(endpoint: endPoint, requestTye: .post, data: fileAndRequest.1)
+//            let operation = BackgroundOperation(request: requestData, fileName: fileAndRequest.0)
+//            dispatchQueue.addOperation(operation)
+//        }
+//    }
+
     func postSensorData(_ dispatchQueue: OperationQueue) {
         guard let userID = User.shared.userId else { return }
-        let arrSensorData = SensorLogs.shared.fetchSensorRequest()
+        let arrSensorData: [(file: String, data: Data)] = SensorLogs.shared.fetchSensorRequest()
         let endPoint =  String(format: Endpoint.participantSensorEvent.rawValue, userID)
         for fileAndRequest in arrSensorData {
-            let requestData = RequestData(endpoint: endPoint, requestTye: .post, data: fileAndRequest.1)
-            let operation = BackgroundOperation(request: requestData, fileName: fileAndRequest.0)
+            let requestData = RequestData(endpoint: endPoint, requestTye: .post, jsonData: fileAndRequest.data)
+            let operation = BackgroundOperation(request: requestData, fileName: fileAndRequest.file)
             dispatchQueue.addOperation(operation)
         }
     }

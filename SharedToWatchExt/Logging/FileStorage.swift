@@ -115,6 +115,19 @@ public class FileStorage {
         }
     }
     
+    static func retrieve(_ fileName: String, from folder: String?, in directory: Directory) -> Data? {
+        var url = getURL(for: directory)
+        if let dirName = folder {
+            url.appendPathComponent(dirName, isDirectory: true)
+        }
+        url.appendPathComponent(fileName, isDirectory: false)
+        
+        if !FileManager.default.fileExists(atPath: url.path) {
+            return nil
+        }
+        return FileManager.default.contents(atPath: url.path)
+    }
+    
     /// Remove all files at specified folder in/or directory.
     static func clear(_ folder: String?, in directory: Directory) {
         var url = getURL(for: directory)

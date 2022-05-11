@@ -112,6 +112,28 @@ struct RequestData: RequestProtocol {
             self.contentType = .json
         }
     }
+    
+    init(endpoint: String, requestTye: HTTPMethodType, urlParams: Encodable? = nil, jsonData: Data?, endpointDetails: String = "") {
+        self.requestTye = requestTye
+        self.endpoint = endpoint
+        self.endpointDetails = endpointDetails
+        if requestTye == .get {
+            self.parameters = (jsonData as? DictionaryEncodable)?.dictionary()
+        }
+        if let params = urlParams {
+            self.parameters = (params as? DictionaryEncodable)?.dictionary()
+        }
+        if requestTye == .post || requestTye == .put {
+            self.jsonData = jsonData
+        }
+        if parameters != nil {
+            self.contentType = .urlEncoded
+        }
+        if let postData = jsonData, postData.count > 0 {
+            self.contentType = .json
+        }
+    }
+    
     init(endpoint: String, requestTye: HTTPMethodType, urlParams: Encodable? = nil, headers: [String: String]? = nil) {
         self.requestTye = requestTye
         self.endpoint = endpoint
