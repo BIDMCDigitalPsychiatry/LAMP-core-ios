@@ -188,7 +188,8 @@ private extension HomeViewController {
         let preferences = WKPreferences()
         preferences.javaScriptCanOpenWindowsAutomatically = true
         
-        let configuration = WKWebViewConfiguration()
+        
+        let configuration = WebConfiguration.getWebViewConfiguration()
         configuration.processPool = WebViewStorage.shared.processPool
         configuration.preferences = preferences
         configuration.websiteDataStore = WebViewStorage.shared.dataStore
