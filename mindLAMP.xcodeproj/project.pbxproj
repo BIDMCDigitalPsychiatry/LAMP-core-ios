@@ -1220,7 +1220,7 @@
 				MARKETING_VERSION = 2022.2.28;
 				PRODUCT_BUNDLE_IDENTIFIER = digital.lamp.mindlamp.CustomNotification;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "mindLAMP 2 Custom Notification Dev 202205";
+				PROVISIONING_PROFILE_SPECIFIER = "mindLAMP2 Custom Notification Extension AppStore";
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1270,7 +1270,7 @@
 				MARKETING_VERSION = 2022.2.28;
 				PRODUCT_BUNDLE_IDENTIFIER = digital.lamp.mindlamp.wearable;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "Wearable Dev 202205";
+				PROVISIONING_PROFILE_SPECIFIER = "mindLAMP2 WatchApp AppStore";
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 5.0;
@@ -1505,7 +1505,7 @@
 				MARKETING_VERSION = 2022.2.28;
 				PRODUCT_BUNDLE_IDENTIFIER = digital.lamp.mindlamp.wearable.extension;
 				PRODUCT_NAME = watchkitextension;
-				PROVISIONING_PROFILE_SPECIFIER = "Wearable Ext Dev Profile 202205";
+				PROVISIONING_PROFILE_SPECIFIER = "mindLAMP2 WatchApp Extension AppStore";
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 5.0;

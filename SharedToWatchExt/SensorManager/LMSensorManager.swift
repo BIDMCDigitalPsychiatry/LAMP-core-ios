@@ -638,10 +638,10 @@ private extension LMSensorManager {
         // For now, please restrict these sensor types to only the server addresses from the domain group *.lamp.digital.
         if UserDefaults.standard.serverAddressShared?.hasSuffix(".lamp.digital") == true {
             let sensorKitSensors = SRSensorLoader.allLampIdentifiers
-            if specIdentifiers.contains(where: { (element) -> Bool in
-                return sensorKitSensors.contains(element)
-            }) {
-                sensorLoader = SRSensorLoader(specIdentifiers)
+            let sensorKitSpecIdentifier = specIdentifiers.filter({ sensorKitSensors.contains($0) })
+            if sensorKitSpecIdentifier.count > 0 {
+                let frequencies = frquencySettings.filter({ sensorKitSensors.contains($0.key) })
+                sensorLoader = SRSensorLoader(sensorKitSpecIdentifier, frquencySettings: frequencies)
                 sensorLoader?.observer = self
                 sensorManager.addSensor(sensorLoader!)
             }
