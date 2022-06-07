@@ -67,7 +67,6 @@ public class FileStorage {
             url.appendPathComponent(dirName, isDirectory: true)
         }
         url.appendPathComponent(fileName, isDirectory: false)
-        
         let encoder = JSONEncoder()
         do {
             let data = try encoder.encode(object)
@@ -78,6 +77,25 @@ public class FileStorage {
         } catch {
             printToFile("store file \(error.localizedDescription)")
             print(error.localizedDescription)
+        }
+    }
+    
+    static func store(_ data: Data, to folder: String?, in directory: Directory, as fileName: String) {
+        var url = getURL(for: directory)
+        if let dirName = folder {
+            createDirectory(name: dirName, in: directory)
+            url.appendPathComponent(dirName, isDirectory: true)
+        }
+        url.appendPathComponent(fileName, isDirectory: false)
+        
+        do {
+            if FileManager.default.fileExists(atPath: url.path) {
+                try FileManager.default.removeItem(at: url)
+            }
+            FileManager.default.createFile(atPath: url.path, contents: data, attributes: nil)
+        } catch {
+            printToFile("store file \(error.localizedDescription)")
+            print("store file" + error.localizedDescription)
         }
     }
     

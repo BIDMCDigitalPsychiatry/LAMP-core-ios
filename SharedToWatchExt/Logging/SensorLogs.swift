@@ -45,6 +45,17 @@ class SensorLogs {
         }
         FileStorage.store(request, to: Logs.Directory.sensorlogs, in: .documents, as: fileName + ".json")
     }
+    
+    func storeSensorKitRequest(_ data: Data, fileNameWithoutExt: String? = nil) {
+        let fileName: String
+        if let fName = fileNameWithoutExt {
+            fileName = fName
+        } else {
+            let timeStamp = Date().timeInMilliSeconds
+            fileName = UInt64(timeStamp).description
+        }
+        FileStorage.store(data, to: Logs.Directory.sensorlogs, in: .documents, as: fileName + ".json")
+    }
 
 //    func fetchSensorRequest() -> [(String, SensorData.Request)] {
 //        let urls = FileStorage.urls(for: Logs.Directory.sensorlogs, in: .documents)

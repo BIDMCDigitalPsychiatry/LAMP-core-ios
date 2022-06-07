@@ -13,6 +13,7 @@ import CoreLocation
 #if os(iOS)
 import UIKit
 import HealthKit
+import SensorKit
 #endif
 
 #if os(watchOS)
@@ -101,6 +102,14 @@ class LMSensorManager {
     
     var latestWifiData: WiFiScanData?
     
+    //SensorKit Data
+    let queueSensorKitBufferData = DispatchQueue(label: "thread-safe-VisitData", attributes: .concurrent)
+    var sensorKitDataBuffer: [SensorKitEvent] = []
+#if os(iOS)
+    var sensorLoader: SRSensorLoader?
+#endif
+    
+    
     //******define all sensor specs here.**********
     lazy var allSensorSpecs: [String] = {
        var sensors = [SensorType.lamp_gps.lampIdentifier,
@@ -115,6 +124,9 @@ class LMSensorManager {
             sensors.append(SensorType.lamp_device_motion.lampIdentifier)
         }
         sensors.append(contentsOf: LMHealthKitSensor.healthkitSensors)
+#if os(iOS)
+        sensors.append(contentsOf: SRSensorLoader.allLampIdentifiers)
+#endif
         print("sensors = \(sensors)")
         return sensors
     }()
@@ -264,6 +276,8 @@ class LMSensorManager {
         }
         
         #if os(iOS)
+        //set up new sensorkit
+        setupSensorKitSensors(sensorIdentifiers)
         
         if sensorIdentifiers.contains(SensorType.lamp_Activity.lampIdentifier) {
             setupActivitySensor()
@@ -390,7 +404,7 @@ class LMSensorManager {
     }
 
     private func loadSensorSpecs() {
-        stopSensors()
+        stopSensors(islogout: false)
         if let specsDownloaded = SensorLogs.shared.fetchSensorSpecs(), specsDownloaded.count > 0 {
             sensorIdentifiers = specsDownloaded.compactMap({ $0.spec })
             //celllular upload check
@@ -426,11 +440,10 @@ class LMSensorManager {
         WatchSessionManager.shared.updateApplicationContext(applicationContext: (messageInfo))
         #endif
     }
-    
-    /// To stop sensors observing.
-    func stopSensors() {
-        
-        printToFile("\nStopping senors")
+
+    // To stop sensors observing.
+    func stopSensors(islogout: Bool) {
+
         sensorIdentifiers.removeAll()
         isStarted = false
         sensorAPITimer = nil
@@ -438,10 +451,15 @@ class LMSensorManager {
         sensorManager.stopAllSensors()
         sensorManager.clear()
         
-        sensor_pedometer?.removeSavedTimestamps()
-        sensor_healthKit?.removeSavedTimestamps()
-        sensor_healthKit?.clearDataArrays()
-        
+        if islogout {
+            sensor_pedometer?.removeSavedTimestamps()
+            sensor_healthKit?.removeSavedTimestamps()
+            #if os(iOS)
+            sensorLoader?.removeSavedTimestamps()
+            #endif
+            sensor_healthKit?.clearDataArrays()
+        }
+
         deinitSensors()
         
         //clear the bufffers
@@ -452,6 +470,7 @@ class LMSensorManager {
         pedometerDataBuffer.removeAll()
         locationsDataBuffer.removeAll()
         screenStateDataBuffer.removeAll()
+        // sensorKitDataBuffer
     }
     
     func getSensorDataRequest() -> SensorData.Request? {
@@ -460,6 +479,12 @@ class LMSensorManager {
             return SensorData.Request(sensorEvents: events)
         }
         return nil
+    }
+    
+    func getSensorKitRequest() -> Data? {
+        let sensorKitDataArray = getSensorKitArrray()
+        
+        return SensorKitData.Request(sensorEvents: sensorKitDataArray).toData()
     }
     
     func runevery(seconds: Double, closure: @escaping () -> ()) {
@@ -496,6 +521,7 @@ class LMSensorManager {
             printToFile("\nNot logined")
             return }
         if self.isStarted == false {
+            print("\nstartSensors")
             self.isStarted = true
             startSensors()
 
@@ -606,6 +632,24 @@ private extension LMSensorManager {
         #endif
     }
     
+    func setupSensorKitSensors(_ specIdentifiers: [String]) {
+        #if os(iOS)
+        
+        // For now, please restrict these sensor types to only the server addresses from the domain group *.lamp.digital.
+        if UserDefaults.standard.serverAddressShared?.hasSuffix(".lamp.digital") == true {
+            let sensorKitSensors = SRSensorLoader.allLampIdentifiers
+            if specIdentifiers.contains(where: { (element) -> Bool in
+                return sensorKitSensors.contains(element)
+            }) {
+                sensorLoader = SRSensorLoader(specIdentifiers)
+                sensorLoader?.observer = self
+                sensorManager.addSensor(sensorLoader!)
+            }
+        }
+        
+        #endif
+    }
+    
     func setupLocationSensor(isNeedData: Bool) {
       sensor_location = LocationsSensor.init(LocationsSensor.Config().apply(closure: { config in
             #if os(iOS)
@@ -672,6 +716,11 @@ private extension LMSensorManager {
 // MARK: Fetch data as per confoguration
 private extension LMSensorManager {
     
+    func getSensorKitArrray() -> [SensorKitEvent] {
+        var arraySensorKitData = [SensorKitEvent]()
+        arraySensorKitData.append(contentsOf: fetchSensorData())
+        return arraySensorKitData
+    }
     func getSensorDataArrray() -> [SensorEvent<SensorDataModel>] {
         var arraySensorData = [SensorEvent<SensorDataModel>]()
         
@@ -710,6 +759,21 @@ private extension LMSensorManager {
         #endif
         
         return arraySensorData
+    }
+}
+// MARK: sensors data fetch
+private extension LMSensorManager {
+    func fetchSensorData() -> [SensorKitEvent] {
+        // read
+        var dataArray: [SensorKitEvent]!
+        queueSensorKitBufferData.sync {
+            // perform read and assign value
+            dataArray = sensorKitDataBuffer
+        }
+        queueSensorKitBufferData.async(flags: .barrier) {
+            self.sensorKitDataBuffer.removeAll(keepingCapacity: true)
+        }
+        return dataArray
     }
 }
 
