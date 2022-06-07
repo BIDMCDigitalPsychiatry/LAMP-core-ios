@@ -23,10 +23,10 @@ extension UserDefaults {
         case sensorRecorderTimestamp = "sensorRecorderTimestamp"
         
         //for iOS only
-        case launchURL = "launchURL"
+        // case launchURL = "launchURL"
         // case nodeJSPath = "nodeJSPath"
         // case nodeRootFolder = "nodeRootFolder"
-        case version = "version"
+        // case version = "version"
         
         case notificationTimestamps = "notificationTimestamps"
         case activityAPILastAccessedDate = "activityAPILastAccessedDate"
@@ -258,14 +258,14 @@ extension UserDefaults {
 //            self.set(newLog, forKey: "logData")
 //        }
 //    }
-    var launchURL: String? {
-        get {
-            return self.string(forKey: UserDefaults.Key.launchURL.rawValue)
-        }
-        set {
-            self.set(newValue, forKey: UserDefaults.Key.launchURL.rawValue)
-        }
-    }
+//    var launchURL: String? {
+//        get {
+//            return self.string(forKey: UserDefaults.Key.launchURL.rawValue)
+//        }
+//        set {
+//            self.set(newValue, forKey: UserDefaults.Key.launchURL.rawValue)
+//        }
+//    }
 //    var nodeJSPath: String? {
 //        get {
 //            return self.string(forKey: UserDefaults.Key.nodeJSPath.rawValue)
@@ -282,12 +282,12 @@ extension UserDefaults {
 //            self.set(newValue, forKey: UserDefaults.Key.nodeRootFolder.rawValue)
 //        }
 //    }
-    var version: String? {
-        get {
-            return self.string(forKey: UserDefaults.Key.version.rawValue)
-        }
-        set {
-            self.set(newValue, forKey: UserDefaults.Key.version.rawValue)
-        }
-    }
+//    var version: String? {
+//        get {
+//            return self.string(forKey: UserDefaults.Key.version.rawValue)
+//        }
+//        set {
+//            self.set(newValue, forKey: UserDefaults.Key.version.rawValue)
+//        }
+//    }
 }

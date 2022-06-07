@@ -60,7 +60,6 @@ class HomeViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        print("mindLAMP Home")
         let appState = UIApplication.shared.applicationState
         if appState != UIApplication.State.background {
             loadWebPage()
@@ -166,21 +165,10 @@ private extension HomeViewController {
     
     func loadWebPage() {
         isWebpageLoaded = true
-        //check dashboard is offline available
-        if UserDefaults.standard.version == nil {
-            if User.shared.isLogin() == true {
-                print("self.lampDashboardURLwithToken = \(self.lampDashboardURLwithToken)")
-                wkWebView.load(URLRequest(url: self.lampDashboardURLwithToken))
-            } else {
-                print("LampURL.dashboardDigital = \(LampURL.dashboardDigital)")
-                wkWebView.load(URLRequest(url: LampURL.dashboardDigital))
-            }
+        if User.shared.isLogin() == true {
+            wkWebView.load(URLRequest(url: self.lampDashboardURLwithToken))
         } else {
-            // Do any additional setup after loading the view.
-            let deadlineTime = DispatchTime.now() + .seconds(5)
-            DispatchQueue.main.asyncAfter(deadline: deadlineTime) {
-                self.wkWebView.load(URLRequest(url: LampURL.dashboardDigital))
-            }
+            wkWebView.load(URLRequest(url: LampURL.dashboardDigital))
         }
     }
     
@@ -354,7 +342,7 @@ extension HomeViewController: WKScriptMessageHandler {
                 printError("Message body not in expected format.")
                 return
             }
-            print("dictBody = \(dictBody)\n")
+            // print("dictBody = \(dictBody)\n")
             //read token. it will be inthe format of UserName:Password
             guard let token = (dictBody[ScriptMessageKey.authorizationToken.rawValue] as? String),
                 let idObjectDict = dictBody[ScriptMessageKey.identityObject.rawValue] as? [String: Any],
