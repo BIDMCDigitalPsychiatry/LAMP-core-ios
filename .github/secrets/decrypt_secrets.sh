@@ -5,7 +5,7 @@ echo "Start Import"
 
 gpg --quiet --batch --yes --decrypt --passphrase="$IOS_KEYS" --output .github/secrets/Certificates.p12 .github/secrets/Certificates.p12.gpg
 
-gpg --quiet --batch --yes --decrypt --passphrase="$IOS_KEYS" --output .github/secrets/mindLAMP2.mobileprovision .github/secrets/mindLAMP2.mobileprovision.gpg
+gpg --quiet --batch --yes --decrypt --passphrase="$IOS_KEYS" --output .github/secrets/mindLAMP2_2022.mobileprovision.gpg .github/secrets/mindLAMP2_2022.mobileprovision.gpg
 gpg --quiet --batch --yes --decrypt --passphrase="$IOS_KEYS" --output .github/secrets/mindLAMP2_Custom_Notification_Extension_AppStore.mobileprovision .github/secrets/mindLAMP2_Custom_Notification_Extension_AppStore.mobileprovision.gpg
 gpg --quiet --batch --yes --decrypt --passphrase="$IOS_KEYS" --output .github/secrets/mindLAMP2_Notification_Service_AppStore.mobileprovision .github/secrets/mindLAMP2_Notification_Service_AppStore.mobileprovision.gpg
 
@@ -16,7 +16,7 @@ echo "Imported"
 
 mkdir -p ~/Library/MobileDevice/Provisioning\ Profiles
 
-cp .github/secrets/mindLAMP2.mobileprovision ~/Library/MobileDevice/Provisioning\ Profiles/mindLAMP2.mobileprovision
+cp .github/secrets/mindLAMP2_2022.mobileprovision.gpg ~/Library/MobileDevice/Provisioning\ Profiles/mindLAMP2_2022.mobileprovision.gpg
 cp .github/secrets/mindLAMP2_Custom_Notification_Extension_AppStore.mobileprovision ~/Library/MobileDevice/Provisioning\ Profiles/mindLAMP2_Custom_Notification_Extension_AppStore.mobileprovision
 cp .github/secrets/mindLAMP2_Notification_Service_AppStore.mobileprovision ~/Library/MobileDevice/Provisioning\ Profiles/mindLAMP2_Notification_Service_AppStore.mobileprovision
 
