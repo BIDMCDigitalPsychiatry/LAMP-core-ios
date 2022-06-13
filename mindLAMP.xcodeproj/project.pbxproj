@@ -219,7 +219,6 @@
 		B2073F0E256EC29C0068E001 /* AppColors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppColors.swift; sourceTree = "<group>"; };
 		B212A436257E2DFB003637DF /* SceneDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		B212A44F257E3453003637DF /* ActivityIndicator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityIndicator.swift; sourceTree = "<group>"; };
-		B214D9D82828D28A0077A0E5 /* LAMP-swift */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = "LAMP-swift"; path = "../../../LAMP-swift"; sourceTree = "<group>"; };
 		B2201C19257F4DBC00C40183 /* LeakAvoider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LeakAvoider.swift; sourceTree = "<group>"; };
 		B2201C1A257F4DBC00C40183 /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		B2201C1B257F4DBC00C40183 /* HomeWebViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeWebViewModel.swift; sourceTree = "<group>"; };
@@ -540,7 +539,6 @@
 		B29639C423BDC28100626E1A = {
 			isa = PBXGroup;
 			children = (
-				B214D9D82828D28A0077A0E5 /* LAMP-swift */,
 				B2587B49256E23BC00A2A7F2 /* Shared */,
 				B2A15BB22567A8BE00222717 /* SharedToWatchExt */,
 				B2E6A565256F195000E2CBC8 /* SharedToNotificationContent */,
@@ -2007,7 +2005,7 @@
 			repositoryURL = "https://github.com/BIDMCDigitalPsychiatry/LAMP-swift.git";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 2022.3.29;
+				minimumVersion = 2022.6.13;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
