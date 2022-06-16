@@ -94,14 +94,14 @@ extension Encodable {
 
 public struct PayLoadInfo {
     var type: String
-    var device_type: String// = "iOS" //"Android" or "Web"
+    // removed this, as it has the useragent. var device_type: String// = "iOS" //"Android" or "Web"
     var user_agent: UserAgent?
     var payload: [String: Any]?
     var diagnostics: [String: Any]?
     public init(action: SensorType.AnalyticAction, userInfo: [AnyHashable: Any], userAgent: UserAgent?) {
         self.type = action.rawValue
         self.user_agent = userAgent
-        self.device_type = DeviceType.displayName
+        // self.device_type = DeviceType.displayName
         if action == SensorType.AnalyticAction.diagnostic {
             diagnostics = Diagnostics().dictionary
         } else {
@@ -123,8 +123,8 @@ public struct PayLoadInfo {
     public func toJSON() -> [String: Any] {
         let content = type == SensorType.AnalyticAction.diagnostic.rawValue ? diagnostics : payload
         return ["type": type,
-                "content": content ?? NSNull(),
-                "device_type": device_type,
+                "payload": content ?? NSNull(),
+                // "device_type": device_type,
                 "user_agent": user_agent?.toString() ?? NSNull()
         ]
     }
