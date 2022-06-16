@@ -48,7 +48,7 @@ struct User {
     
     func logout() {
         //Stop all sensors
-        LMSensorManager.shared.stopSensors()
+        LMSensorManager.shared.stopSensors(islogout: true)
         
         SensorLogs.shared.clearLogsDirectory()
         LMLogsManager.shared.clearLogsDirectory()

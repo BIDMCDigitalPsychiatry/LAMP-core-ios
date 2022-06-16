@@ -66,7 +66,7 @@ struct LampURL {
     static var dashboardDigital: URL {
         return URL(string: dashboardDigitalURLText)!
     }
-    static let dashboardDigitalURLText = (UserDefaults.standard.launchURL ?? Environment.dashboardURL)// + "?a="
+    static let dashboardDigitalURLText = Environment.dashboardURL //(UserDefaults.standard.launchURL ?? Environment.dashboardURL)// + "?a="
     //static let loginLocalHost = "http://127.0.0.1:5000/login"
     static let logsDigital = "https://logs.lamp.digital"
     //static let dashboardURL = Environment.dashboardAPI

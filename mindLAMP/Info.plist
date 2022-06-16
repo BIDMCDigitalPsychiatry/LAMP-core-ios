@@ -76,6 +76,43 @@
 	<string>Your voice data is required for clinical study.</string>
 	<key>NSMotionUsageDescription</key>
 	<string>Your motion activity data is required for clinical study.</string>
+	<key>NSSensorKitPrivacyPolicyURL</key>
+	<string>https://docs.lamp.digital/privacy/</string>
+	<key>NSSensorKitUsageDescription</key>
+	<string>Your SensorKit Usage Data is required for a clinical research study you have opted to join.</string>
+	<key>NSSensorKitUsageDetail</key>
+	<dict>
+		<key>SRSensorUsageAmbientLightSensor</key>
+		<dict>
+			<key>Description</key>
+			<string>Your Ambient Light Sensor data is required for a clinical research study you have opted to join.</string>
+		</dict>
+		<key>SRSensorUsageDeviceUsage</key>
+		<dict>
+			<key>Description</key>
+			<string>Your Device Usage Data is required for a clinical research study you have opted to join.</string>
+		</dict>
+		<key>SRSensorUsageMessageUsage</key>
+		<dict>
+			<key>Description</key>
+			<string>Your Message Usage Data is required for a clinical research study you have opted to join.</string>
+		</dict>
+		<key>SRSensorUsagePhoneUsage</key>
+		<dict>
+			<key>Description</key>
+			<string>Your Phone Usage data is required for a clinical research study you have opted to join.</string>
+		</dict>
+		<key>SRSensorUsageVisits</key>
+		<dict>
+			<key>Description</key>
+			<string>Your Visit data is required for a clinical research study you have opted to join.</string>
+		</dict>
+		<key>SRSensorUsageWristDetection</key>
+		<dict>
+			<key>Description</key>
+			<string>Your Wrist Detection Data is required for a clinical research study you have opted to join.</string>
+		</dict>
+	</dict>
 	<key>UIBackgroundModes</key>
 	<array>
 		<string>fetch</string>

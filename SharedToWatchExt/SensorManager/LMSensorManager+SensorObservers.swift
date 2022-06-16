@@ -22,6 +22,9 @@ extension LMSensorManager: SensorStore {
         } else {
             printToFile("Screen locked")
         }
+        //SensorKit data fetch
+        sensorLoader?.fetchData()
+        
         DispatchQueue.main.async {
             (UIApplication.shared.delegate as? AppDelegate)?.calculateBadgeCount()
         }
@@ -50,8 +53,15 @@ extension LMSensorManager: SensorStore {
         } else {
             print("no file to store")
         }
-        
-
+        #if os(iOS)
+        if let request = self.getSensorKitRequest() {
+            print("write to file \(request.count)")
+            SensorLogs.shared.storeSensorKitRequest(request)//store to disk
+            print("stored file -- @ \(Date())")
+        } else {
+            print("no file to store")
+        }
+        #endif
         //check battery state
         guard BatteryState.shared.isLowPowerEnabled == false else {
             printToFile("isLowPowerEnabled")
@@ -82,6 +92,44 @@ extension LMSensorManager: SensorStore {
         }
     }
 }
+
+// SensorKitCallbacks
+
+#if os(iOS)
+extension LMSensorManager: SensorKitObserver {
+    func onSensorKitError(_ errType: Error) {
+        DispatchQueue.main.async {
+            self.showSensorKitAlert(errType)
+        }
+    }
+    
+    func onSensorFetch(_ fetchedData: SensorKitEvent) {
+        
+        queueSensorKitBufferData.async(flags: .barrier) { [weak self] in
+            self?.sensorKitDataBuffer.append(fetchedData)
+        }
+    }
+    func showSensorKitAlert(_ error: Error) {
+        #if os(iOS)
+        let alertController = UIAlertController(title: "Research Sensor & Usage Data Permission Required", message: "Please enable permissions in Settings -> Privacy -> Research Senspr & Usage Data.", preferredStyle: .alert)
+        
+        let okAction = UIAlertAction(title: "Settings", style: .default, handler: {(cAlertAction) in
+            //Redirect to Settings app
+            UIApplication.shared.open(URL(string:UIApplication.openSettingsURLString)!)
+        })
+        
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
+        alertController.addAction(cancelAction)
+        
+        alertController.addAction(okAction)
+        
+        let appdelegate = UIApplication.shared.delegate as! AppDelegate
+        appdelegate.window?.rootViewController?.present(alertController, animated: true, completion: nil)
+        #endif
+    }
+}
+#endif
+
 
 // MARK:- ActivitySensorObserver
 extension LMSensorManager: ActivitySensorObserver {

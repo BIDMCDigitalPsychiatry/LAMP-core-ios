@@ -45,6 +45,17 @@ class SensorLogs {
         }
         FileStorage.store(request, to: Logs.Directory.sensorlogs, in: .documents, as: fileName + ".json")
     }
+    
+    func storeSensorKitRequest(_ data: Data, fileNameWithoutExt: String? = nil) {
+        let fileName: String
+        if let fName = fileNameWithoutExt {
+            fileName = fName
+        } else {
+            let timeStamp = Date().timeInMilliSeconds
+            fileName = UInt64(timeStamp).description
+        }
+        FileStorage.store(data, to: Logs.Directory.sensorlogs, in: .documents, as: fileName + ".json")
+    }
 
 //    func fetchSensorRequest() -> [(String, SensorData.Request)] {
 //        let urls = FileStorage.urls(for: Logs.Directory.sensorlogs, in: .documents)
@@ -59,7 +70,31 @@ class SensorLogs {
 //        return requests
 //    }
     
-    func fetchSensorRequest(count: Int = 10) -> [(String, SensorData.Request)] {
+//    func fetchSensorRequest(count: Int = 10) -> [(String, SensorData.Request)] {
+//        let urls = FileStorage.urls(for: Logs.Directory.sensorlogs, in: .documents)
+//        guard let fileObjects = urls?.map({ FileName(nameWithoutExt: $0.deletingPathExtension().lastPathComponent, name: $0.lastPathComponent) }) else { return [] }
+//        
+//        let fileObjecsSorted = fileObjects.sorted(by: { (item1, item2) -> Bool in
+//            if let d1 = Double(item1.nameWithoutExt), let d2 = Double(item2.nameWithoutExt) {
+//                return d1 < d2
+//            } else {
+//                return false
+//            }
+//        })
+//        
+//        let files = Array(fileObjecsSorted.prefix(count)).map { (f) -> String in
+//            f.name
+//        }
+//        var requests = [(String, SensorData.Request)]()
+//        for file in files {
+//            if let request = FileStorage.retrieve(file, from: Logs.Directory.sensorlogs, in: .documents, as: SensorData.Request.self) {
+//                requests.append((file, request))
+//            }
+//        }
+//        return requests
+//    }
+    
+    func fetchSensorRequest(count: Int = 10) -> [(String, Data)] {
         let urls = FileStorage.urls(for: Logs.Directory.sensorlogs, in: .documents)
         guard let fileObjects = urls?.map({ FileName(nameWithoutExt: $0.deletingPathExtension().lastPathComponent, name: $0.lastPathComponent) }) else { return [] }
         
@@ -74,12 +109,13 @@ class SensorLogs {
         let files = Array(fileObjecsSorted.prefix(count)).map { (f) -> String in
             f.name
         }
-        var requests = [(String, SensorData.Request)]()
+        var requests = [(String, Data)]()
         for file in files {
-            if let request = FileStorage.retrieve(file, from: Logs.Directory.sensorlogs, in: .documents, as: SensorData.Request.self) {
+            if let request = FileStorage.retrieve(file, from: Logs.Directory.sensorlogs, in: .documents) {
                 requests.append((file, request))
             }
         }
+        
         return requests
     }
     

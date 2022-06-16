@@ -77,11 +77,8 @@ class ActivityLocalNotification {
                 }
             case .success(let response):
                 let allActivity = response.data
-                print("ActivityAPI allActivity = \(allActivity.count)")
                 guard let self = self else { return }
-                print("ActivityAPI same? = \(self.allActivitiesScheduled == allActivity)")
                 if self.allActivitiesScheduled != allActivity || Date().timeIntervalSince(UserDefaults.standard.activityAPILastScheduledDate) > self.intervalToScheduleActivity {
-                    print("scheduling")
                     self.scheduleActivities(allActivity)
                 }
             }

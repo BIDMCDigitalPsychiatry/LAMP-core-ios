@@ -22,23 +22,46 @@ public enum SensorData {
     }
 }
 
-extension SensorData.Request: Codable {
+extension SensorData.Request: Encodable {
 
     public func encode(to encoder: Encoder) throws {
         var container = encoder.singleValueContainer()
         try container.encode(sensorEvents)
     }
     
-    public init(from decoder: Decoder) throws {
-        do {
-            let container = try decoder.singleValueContainer()
-            sensorEvents = try container.decode([SensorEvent<SensorDataModel>].self)
-        } catch {
-            assertionFailure("ERROR: \(error)")
-            sensorEvents = []
+//    public init(from decoder: Decoder) throws {
+//        do {
+//            let container = try decoder.singleValueContainer()
+//            sensorEvents = try container.decode([SensorEvent<SensorDataModel>].self)
+//        } catch {
+//            assertionFailure("ERROR: \(error)")
+//            sensorEvents = []
+//        }
+//    }
+}
+
+public enum SensorKitData {
+
+    public struct Request {
+        public var sensorEvents: [SensorKitEvent]
+        public init(sensorEvents: [SensorKitEvent]) {
+            self.sensorEvents = sensorEvents
+        }
+        
+        func toData() -> Data? {
+            guard sensorEvents.count > 0 else { return nil }
+            do {
+                let array = sensorEvents.map({$0.toJSON()})
+                let jsonData = try JSONSerialization.data(withJSONObject: array)
+                return jsonData
+            } catch let error {
+                print("error jp = \(error.localizedDescription)")
+                return nil
+            }
         }
     }
 }
+
 
 public struct UserAgent {
     var type: String
