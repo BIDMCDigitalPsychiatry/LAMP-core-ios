@@ -251,7 +251,9 @@ class LMSensorManager {
         switch reachability.connection {
         case .wifi:
             isReachableViaWiFi = true
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "Reachability"), object: nil)
         case .cellular:
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "Reachability"), object: nil)
             isReachableViaWiFi = false
         case .unavailable:
             isReachableViaWiFi = false

@@ -1,16 +1,14 @@
 {
-  "object": {
-    "pins": [
-      {
-        "package": "LAMP",
-        "repositoryURL": "https://github.com/BIDMCDigitalPsychiatry/LAMP-swift.git",
-        "state": {
-          "branch": null,
-          "revision": "d102ef22e10795702d73cbb472cc7d7b26f1b7b7",
-          "version": "2022.6.13"
-        }
+  "pins" : [
+    {
+      "identity" : "lamp-swift",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/BIDMCDigitalPsychiatry/LAMP-swift.git",
+      "state" : {
+        "revision" : "d102ef22e10795702d73cbb472cc7d7b26f1b7b7",
+        "version" : "2022.6.13"
       }
-    ]
-  },
-  "version": 1
+    }
+  ],
+  "version" : 2
 }
