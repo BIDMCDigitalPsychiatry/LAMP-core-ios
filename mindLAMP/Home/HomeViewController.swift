@@ -328,7 +328,7 @@ extension HomeViewController: WKNavigationDelegate {
     }
     
     func webView(_ webView: WKWebView, didFailProvisionalNavigation navigation: WKNavigation!, withError error: Error) {
-        
+        if (error as NSError).code == -999 { return }
         let alert = UIAlertController(title: "alert.lamp.title".localized, message: error.localizedDescription, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "alert.button.cancel".localized, style: .cancel, handler: { action in
            }))
