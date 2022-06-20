@@ -15,7 +15,7 @@ class HomeViewController: UIViewController {
     private var wkWebView: WKWebView!
     private var loadingObservation: NSKeyValueObservation?
     private var isWebpageLoaded = false
-    lazy var lampAPI: NetworkingAPI = {
+    private lazy var lampAPI: NetworkingAPI = {
         return NetworkConfig.networkingAPI()
     }()
     //var loginSubscriber: AnyCancellable?
@@ -28,7 +28,7 @@ class HomeViewController: UIViewController {
         return progressView
     }()
     
-    var lampDashboardURLwithToken: URL {
+    private var lampDashboardURLwithToken: URL {
         let urlString = LampURL.dashboardDigitalURLText
         if let base64token = Endpoint.getURLToken() {
             return URL(string: urlString + "?a=" + base64token)!
@@ -66,6 +66,7 @@ class HomeViewController: UIViewController {
         }
         NotificationCenter.default.addObserver(self, selector: #selector(appDidActive(_:)),
                                                name: UIApplication.didBecomeActiveNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(reachabilityChanged(note:)), name: NSNotification.Name(rawValue: "Reachability"), object: nil)
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -92,8 +93,16 @@ class HomeViewController: UIViewController {
     deinit {
         wkWebView.stopLoading()
         NotificationCenter.default.removeObserver(self, name: UIApplication.didBecomeActiveNotification, object: nil)
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: "Reachability"), object: nil)
+        
         wkWebView.configuration.userContentController.removeScriptMessageHandler(forName: ScriptMessageHandler.login.rawValue)
         wkWebView.configuration.userContentController.removeScriptMessageHandler(forName: ScriptMessageHandler.logout.rawValue)
+    }
+    
+    @objc func reachabilityChanged(note: Notification) {
+        if isWebpageLoaded == false && !indicator.isAnimating {
+            loadWebPage()
+        }
     }
 }
 
@@ -104,8 +113,7 @@ private extension HomeViewController {
     @objc func appDidActive(_ notification: Notification) {
         
         NotificationHelper.shared.removeAllExpiredNotifications()
-        
-        if isWebpageLoaded == false {
+        if isWebpageLoaded == false && !indicator.isAnimating {
             loadWebPage()
         }
         
@@ -164,7 +172,6 @@ private extension HomeViewController {
     }
     
     func loadWebPage() {
-        isWebpageLoaded = true
         if User.shared.isLogin() == true {
             wkWebView.load(URLRequest(url: self.lampDashboardURLwithToken))
         } else {
@@ -187,6 +194,17 @@ private extension HomeViewController {
         
         configuration.userContentController.add(LeakAvoider(delegate:self), name: ScriptMessageHandler.login.rawValue)
         configuration.userContentController.add(LeakAvoider(delegate:self), name: ScriptMessageHandler.logout.rawValue)
+        
+        configuration.userContentController.add(LeakAvoider(delegate:self), name: "loadchecker")
+        let source = """
+function captureDivs() {
+    var divs = document.getElementsByTagName("div");
+    window.webkit.messageHandlers.loadchecker.postMessage(divs.length);
+}
+window.onload = captureDivs;
+"""
+        let userScript = WKUserScript(source: source, injectionTime: .atDocumentStart, forMainFrameOnly: true)
+        configuration.userContentController.addUserScript(userScript)
         
 //        //to read console logs
 //        // inject JS to capture console.log output and send to iOS
@@ -301,16 +319,16 @@ extension HomeViewController: WKUIDelegate {
 extension HomeViewController: WKNavigationDelegate {
     
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
+        // we are getting this call back even if the page is not loaded. we can reproduce it by on/off the wifi frequently while loading page.#651
         indicator.stopAnimating()
     }
     
     func webView(_ webView: WKWebView, didFail navigation: WKNavigation!, withError error: Error) {
-        print("naviation fail error = \(error.localizedDescription)")
         indicator.stopAnimating()
     }
     
     func webView(_ webView: WKWebView, didFailProvisionalNavigation navigation: WKNavigation!, withError error: Error) {
-        
+        if (error as NSError).code == -999 { return }
         let alert = UIAlertController(title: "alert.lamp.title".localized, message: error.localizedDescription, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "alert.button.cancel".localized, style: .cancel, handler: { action in
            }))
@@ -339,6 +357,8 @@ extension HomeViewController: WKScriptMessageHandler {
 //            print("CONSOLE LOG: \(message.body)")
 //        }
         if message.name == ScriptMessageHandler.login.rawValue {
+            isWebpageLoaded = true // we will get this event, not only while login but also when relaunch the app (login will happen when launch home page with authToken). so this is the safe place to set the flag. Only issue is, if user is with login pagewhich is handled seperatly using div count. #651
+            
             guard let dictBody = message.body as? [String: Any] else {
                 printError("Message body not in expected format.")
                 return
@@ -376,6 +396,13 @@ extension HomeViewController: WKScriptMessageHandler {
             let messageInfo: [String: Any] = [IOSCommands.logout: true, "timestamp" : Date().timeInMilliSeconds]
             WatchSessionManager.shared.updateApplicationContext(applicationContext: messageInfo)
             performOnLogout()
+        } else if message.name == "loadchecker" { //#651
+            guard let divCount = message.body as? Int else {
+                return
+            }
+            if divCount > 0 {
+                isWebpageLoaded = true
+            }
         }
     }
 }
