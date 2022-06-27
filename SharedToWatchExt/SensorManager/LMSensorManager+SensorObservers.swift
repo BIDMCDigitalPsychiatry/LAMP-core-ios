@@ -200,7 +200,7 @@ extension LMSensorManager: LocationsObserver {
     func onError(_ errType: LocationErrorType) {
         switch errType {
 
-        case .notEnabled, .denied:
+        case .notEnabled:
             //post as sensor data
             let data = SensorDataModel(action: SensorType.AnalyticAction.logs.rawValue, userAgent: UserAgent.defaultAgent, errorMsg: Logs.Messages.gps_off)
             let events = [SensorEvent(timestamp: Date().timeInMilliSeconds, sensor: SensorType.lamp_analytics.lampIdentifier, data: data)]
@@ -211,6 +211,13 @@ extension LMSensorManager: LocationsObserver {
             DispatchQueue.main.async {
                 self.showLocationAlert()
             }
+        case .denied:
+            //post as sensor data
+            let data = SensorDataModel(action: SensorType.AnalyticAction.logs.rawValue, userAgent: UserAgent.defaultAgent, errorMsg: Logs.Messages.gps_denied)
+            let events = [SensorEvent(timestamp: Date().timeInMilliSeconds, sensor: SensorType.lamp_analytics.lampIdentifier, data: data)]
+            let request = SensorData.Request(sensorEvents: events)
+            SensorLogs.shared.storeSensorRequest(request, fileNameWithoutExt: "gps_denied")//store to disk
+
         case .otherErrors(let error):
             //post as sensor data
             let msg = String(format: Logs.Messages.location_error, error.localizedDescription)

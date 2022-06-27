@@ -27,6 +27,7 @@ extension Logs.Messages {
     
     static let battery_low = "Battery is low."
     static let gps_off = "GPS is disabled."
+    static let gps_denied = "GPS is denied."
     static let location_error = "GPS Failed: %@"
     
     static let network_error = "Network error."
