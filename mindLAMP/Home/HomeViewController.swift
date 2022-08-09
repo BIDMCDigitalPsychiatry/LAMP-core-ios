@@ -53,8 +53,7 @@ class HomeViewController: UIViewController {
     }
 
     override func loadView() {
-        
-        LeakAvoider.cleanCache()
+        super.loadView()
         self.loadWebView()
     }
     
@@ -268,8 +267,7 @@ window.onload = captureDivs;
     
     func performOnLogout() {
         
-        struct EmptyResponse: Decodable {
-        }
+        LeakAvoider.cleanCache()
         //send lamp.analytics for logout
         guard let _ = Endpoint.getSessionKey(), let participantId = User.shared.userId else {
             NotificationHelper.shared.removeAllNotifications()
