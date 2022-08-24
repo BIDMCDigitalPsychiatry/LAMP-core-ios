@@ -110,26 +110,26 @@ class LMSensorManager {
 #endif
     
     
-    //******define all sensor specs here.**********
-    lazy var allSensorSpecs: [String] = {
-       var sensors = [SensorType.lamp_gps.lampIdentifier,
-                      SensorType.lamp_Activity.lampIdentifier,
-                      SensorType.lamp_telephony.lampIdentifier,
-                      SensorType.lamp_device_state.lampIdentifier,
-                      SensorType.lamp_nearby_device.lampIdentifier,
-                      SensorType.lamp_steps.lampIdentifier,
-                      SensorType.lamp_accelerometer.lampIdentifier,
-                      SensorType.lamp_analytics.lampIdentifier]
-        if Environment.isDiigApp == false {
-            sensors.append(SensorType.lamp_device_motion.lampIdentifier)
-        }
-        sensors.append(contentsOf: LMHealthKitSensor.healthkitSensors)
-#if os(iOS)
-        sensors.append(contentsOf: SRSensorLoader.allLampIdentifiers)
-#endif
-        print("sensors = \(sensors)")
-        return sensors
-    }()
+//    //******define all sensor specs here.**********
+//    lazy var allSensorSpecs: [String] = {
+//       var sensors = [SensorType.lamp_gps.lampIdentifier,
+//                      SensorType.lamp_Activity.lampIdentifier,
+//                      SensorType.lamp_telephony.lampIdentifier,
+//                      SensorType.lamp_device_state.lampIdentifier,
+//                      SensorType.lamp_nearby_device.lampIdentifier,
+//                      SensorType.lamp_steps.lampIdentifier,
+//                      SensorType.lamp_accelerometer.lampIdentifier,
+//                      SensorType.lamp_analytics.lampIdentifier]
+//        if Environment.isDiigApp == false {
+//            sensors.append(SensorType.lamp_device_motion.lampIdentifier)
+//        }
+//        sensors.append(contentsOf: LMHealthKitSensor.healthkitSensors)
+//#if os(iOS)
+//        sensors.append(contentsOf: SRSensorLoader.allLampIdentifiers)
+//#endif
+//        print("sensors = \(sensors)")
+//        return sensors
+//    }()
     
     let intervalToFetchSensorConfig = 40.0 * 60.0 //for 1 hour 
     
@@ -638,7 +638,7 @@ private extension LMSensorManager {
         #if os(iOS)
         
         // For now, please restrict these sensor types to only the server addresses from the domain group *.lamp.digital.
-        if UserDefaults.standard.serverAddressShared?.hasSuffix(".lamp.digital") == true {
+        if UIDevice.current.userInterfaceIdiom != .pad && UserDefaults.standard.serverAddressShared?.hasSuffix(".lamp.digital") == true {
             let sensorKitSensors = SRSensorLoader.allLampIdentifiers
             let sensorKitSpecIdentifier = specIdentifiers.filter({ sensorKitSensors.contains($0) })
             if sensorKitSpecIdentifier.count > 0 {
