@@ -116,6 +116,7 @@
 		B2B8935223D0AD6500321C3E /* DateExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2B8935023D0AD6500321C3E /* DateExtension.swift */; };
 		B2B8979823D0ADBA00321C3E /* HealthKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B2B8979723D0ADBA00321C3E /* HealthKit.framework */; };
 		B2B8F4B7258B026800BEB872 /* ActivityIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2B8F4B6258B026800BEB872 /* ActivityIndicator.swift */; };
+		B2C5EEDB28B61D0100EF90AA /* SensorKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B2C5EEDA28B61D0100EF90AA /* SensorKit.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		B2C831F025306F6600E6A8A2 /* ComplicationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2C831EF25306F6600E6A8A2 /* ComplicationController.swift */; };
 		B2D2CA6625503AAE0086C864 /* WatchOSDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2D2CA6525503AAE0086C864 /* WatchOSDelegate.swift */; };
 		B2D930F92445D7E90086477D /* UserNotifications.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B2D930F82445D7E90086477D /* UserNotifications.framework */; };
@@ -300,6 +301,7 @@
 		B2B8979523D0ADBA00321C3E /* mindLAMP.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = mindLAMP.entitlements; sourceTree = "<group>"; };
 		B2B8979723D0ADBA00321C3E /* HealthKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HealthKit.framework; path = System/Library/Frameworks/HealthKit.framework; sourceTree = SDKROOT; };
 		B2B8F4B6258B026800BEB872 /* ActivityIndicator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityIndicator.swift; sourceTree = "<group>"; };
+		B2C5EEDA28B61D0100EF90AA /* SensorKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SensorKit.framework; path = System/Library/Frameworks/SensorKit.framework; sourceTree = SDKROOT; };
 		B2C831EF25306F6600E6A8A2 /* ComplicationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ComplicationController.swift; sourceTree = "<group>"; };
 		B2D2CA6525503AAE0086C864 /* WatchOSDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchOSDelegate.swift; sourceTree = "<group>"; };
 		B2D930F72445D7E90086477D /* CustomNotification.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = CustomNotification.appex; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -332,6 +334,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B2C5EEDB28B61D0100EF90AA /* SensorKit.framework in Frameworks */,
 				B24EEA0C26CA9CEA003A294D /* LAMP in Frameworks */,
 				B2B8979823D0ADBA00321C3E /* HealthKit.framework in Frameworks */,
 			);
@@ -697,6 +700,7 @@
 		B2B8979623D0ADBA00321C3E /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				B2C5EEDA28B61D0100EF90AA /* SensorKit.framework */,
 				B2B8979723D0ADBA00321C3E /* HealthKit.framework */,
 				B2D930F82445D7E90086477D /* UserNotifications.framework */,
 				B2D930FA2445D7E90086477D /* UserNotificationsUI.framework */,
