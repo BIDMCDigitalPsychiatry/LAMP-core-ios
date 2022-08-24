@@ -45,7 +45,7 @@ struct Diagnostics: Encodable {
             if let specsDownloaded = SensorLogs.shared.fetchSensorSpecs(), specsDownloaded.count > 0 {
                 configuredSensors = specsDownloaded.compactMap({ $0.spec })
             } else {
-                configuredSensors = LMSensorManager.shared.allSensorSpecs
+                configuredSensors = nil
             }
         }
         lastAccessedTime_Sensor = UserDefaults.standard.sensorAPILastAccessedDate.timeInMilliSeconds
