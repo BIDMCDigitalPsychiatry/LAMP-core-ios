@@ -1,0 +1,24 @@
+/* 
+  Localizable.strings
+  mindLAMP
+
+  Created by Jijo Pulikkottil on 20/12/22.
+  Copyright © 2022 Division of Digital Psychiatry. All rights reserved.
+*/
+"alert.lamp.title" = "mindLAMP 2";
+"alert.notification.expired"    = "La notification a expiré";
+"alert.button.ok"   = "Ok";
+"alert.button.retry" = "Réessayez";
+"alert.button.cancel" = "Annuler";
+"alert.button.settings" = "Réglages";
+"alert.sensorkit.title" = "Permission requise pour les capteurs de recherche et les données d'utilisation";
+"alert.sensorkit.message" = "Veuillez activer les autorisations dans Paramètres -> Confidentialité -> Capteur de recherche et données d'utilisation.";
+"alert.location.title" = "Permission de localisation requise";
+"alert.location.message" = "Veuillez activer les autorisations de localisation dans les paramètres.";
+
+"notification.action.text" = "Ouvrir l'application";
+
+"error.server.notresponding" = "Le serveur ne répond pas !";
+"error.invalid.url" = "URL non valide";
+"error.network.generic" = "Un problème est survenu. Veuillez réessayer plus tard.";
+"error.network.timeout" = "Délai d'attente de la demande.";

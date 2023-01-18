@@ -22,11 +22,17 @@ class NotificationService: UNNotificationServiceExtension {
             contentHandler(bestAttemptContent ?? request.content)
         }
         if let bestAttemptContent = bestAttemptContent {
+            let userInfo = bestAttemptContent.userInfo
+            //Localizing alert
+            if let activity_name = userInfo["title"] as? String {
+                bestAttemptContent.body = String(format: "notification.activity.alert".localized, arguments: ["\(activity_name)"])
+            }
+            
             var isActionExist = false
             var isPageExist = false
             // Modify the notification content here...
             //bestAttemptContent.title = "\(bestAttemptContent.title) [modified]"
-            let userInfo = bestAttemptContent.userInfo
+            
             if let actionArry = userInfo["actions"] as? [[String: String]],
                 actionArry.count > 0,
                 actionArry[0]["name"]?.lowercased() == "open app" {

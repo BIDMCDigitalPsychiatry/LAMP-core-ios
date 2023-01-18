@@ -111,14 +111,14 @@ extension LMSensorManager: SensorKitObserver {
     }
     func showSensorKitAlert(_ error: Error) {
         #if os(iOS)
-        let alertController = UIAlertController(title: "Research Sensor & Usage Data Permission Required", message: "Please enable permissions in Settings -> Privacy -> Research Senspr & Usage Data.", preferredStyle: .alert)
+        let alertController = UIAlertController(title: "alert.sensorkit.title".localized, message: "alert.sensorkit.message".localized, preferredStyle: .alert)
         
-        let okAction = UIAlertAction(title: "Settings", style: .default, handler: {(cAlertAction) in
+        let okAction = UIAlertAction(title: "alert.button.settings".localized, style: .default, handler: {(cAlertAction) in
             //Redirect to Settings app
             UIApplication.shared.open(URL(string:UIApplication.openSettingsURLString)!)
         })
         
-        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
+        let cancelAction = UIAlertAction(title: "alert.button.cancel".localized, style: .cancel)
         alertController.addAction(cancelAction)
         
         alertController.addAction(okAction)

@@ -1,0 +1,37 @@
+/* 
+  InfoPlist.strings
+  mindLAMP
+
+  Created by Jijo Pulikkottil on 20/12/22.
+  Copyright © 2022 Division of Digital Psychiatry. All rights reserved.
+*/
+/* Bundle name */
+"CFBundleName" = "mindLAMP 2";
+/* Privacy - Bluetooth Always Usage Description */
+"NSBluetoothAlwaysUsageDescription" = "Dine bluetooth-data er påkrævede til klinisk undersøgelse.";
+/* Privacy - Bluetooth Peripheral Usage Description */
+"NSBluetoothPeripheralUsageDescription" = "Dine bluetooth-data er påkrævede til klinisk undersøgelse.";
+/* Privacy - Camera Usage Description */
+"NSCameraUsageDescription" = "";
+/* Privacy - Health Records Usage Description */
+"NSHealthClinicalHealthRecordsShareUsageDescription" = "Dine sundhedsdata er nødvendige til klinisk undersøgelse.";
+/* Privacy - Health Share Usage Description */
+"NSHealthShareUsageDescription" = "Dine sundhedsdata er nødvendige til klinisk undersøgelse.";
+/* Privacy - Health Update Usage Description */
+"NSHealthUpdateUsageDescription" = "Dine sundhedsdata er nødvendige til klinisk undersøgelse.";
+/* Copyright (human-readable) */
+"NSHumanReadableCopyright" = "John Torous";
+/* Privacy - Location Always and When In Use Usage Description */
+"NSLocationAlwaysAndWhenInUseUsageDescription" = "Adgang til at bruge din lokalitet er påkrævet til klinisk undersøgelse.";
+/* Privacy - Location Always Usage Description */
+"NSLocationAlwaysUsageDescription" = "Adgang til at bruge din lokalitet er påkrævet til klinisk undersøgelse.";
+/* Privacy - Location When In Use Usage Description */
+"NSLocationWhenInUseUsageDescription" = "Adgang til at bruge din lokalitet er påkrævet til klinisk undersøgelse.";
+/* Privacy - Microphone Usage Description */
+"NSMicrophoneUsageDescription" = "Dine stemmedata er påkrævet til klinisk undersøgelse.";
+/* Privacy - Motion Usage Description */
+"NSMotionUsageDescription" = "Din bevægelsesaktivitet er påkrævet til klinisk undersøgelse.";
+/* Privacy - SensorKit Privacy Policy URL */
+"NSSensorKitPrivacyPolicyURL" = "https://docs.lamp.digital/privacy/";
+/* Privacy - SensorKit Usage Description */
+"NSSensorKitUsageDescription" = "Dine SensorKit-brugsdata er nødvendige for et klinisk forskningsstudie, du har valgt at deltage i.";

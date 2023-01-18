@@ -175,7 +175,7 @@ class ActivityLocalNotification {
         //Create content for your notification
         let content = UNMutableNotificationContent()
         //content.title = title
-        content.body = "You have a mindLAMP activity waiting for you: \(title)"
+        content.body = String(format: "notification.activity.alert".localized, arguments: ["\(title)"])
         content.sound = UNNotificationSound.default
         //"expiry": 21600000
         let actionObj = ["name":"Open App", "page":pageURL]

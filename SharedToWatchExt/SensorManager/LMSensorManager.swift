@@ -548,14 +548,14 @@ class LMSensorManager {
     
     func showLocationAlert() {
         #if os(iOS)
-        let alertController = UIAlertController(title: "Location Permission Required", message: "Please enable location permissions in settings.", preferredStyle: .alert)
+        let alertController = UIAlertController(title: "alert.location.title".localized, message: "alert.location.message".localized, preferredStyle: .alert)
         
-        let okAction = UIAlertAction(title: "Settings", style: .default, handler: {(cAlertAction) in
+        let okAction = UIAlertAction(title: "alert.button.settings".localized, style: .default, handler: {(cAlertAction) in
             //Redirect to Settings app
             UIApplication.shared.open(URL(string:UIApplication.openSettingsURLString)!)
         })
         
-        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
+        let cancelAction = UIAlertAction(title: "alert.button.cancel".localized, style: .cancel)
         alertController.addAction(cancelAction)
         
         alertController.addAction(okAction)

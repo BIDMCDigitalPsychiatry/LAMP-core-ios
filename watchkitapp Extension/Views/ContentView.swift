@@ -14,7 +14,7 @@ struct LoginView: View {
              
                 VStack(alignment: .center, spacing: 2) {
                     
-                    TextField("Email Address", text: Binding<String>(
+                    TextField("label.emailaddress".localized, text: Binding<String>(
                         get: { self.userName },
                         set: {
                             self.userName = $0
@@ -25,7 +25,7 @@ struct LoginView: View {
                     .multilineTextAlignment(.center)
                     .foregroundColor(.white)
                     
-                    SecureField("Password", text: Binding<String>(
+                    SecureField("label.password".localized, text: Binding<String>(
                         get: { self.password },
                         set: {
                             self.password = $0
@@ -43,7 +43,7 @@ struct LoginView: View {
                                 self.isAlert = !isSuccess
                             }
                         }) {
-                            Text("Go")
+                            Text("button.go".localized)
                         }.disabled(userName.isEmpty || password.isEmpty)
                             .frame(width: 80, height: 40, alignment: Alignment.bottom)
                             .clipShape(RoundedRectangle(cornerRadius: 5))
@@ -63,7 +63,7 @@ struct LoginView: View {
                 
             }
             .alert(isPresented: $isAlert) { () -> Alert in
-                Alert(title: Text(""), message: Text(self.userAuth.errorMsg!), dismissButton: .default(Text("Ok")))
+                Alert(title: Text(""), message: Text(self.userAuth.errorMsg!), dismissButton: .default(Text("alert.button.ok".localized)))
         }
     }
 }
@@ -75,7 +75,7 @@ struct HomeView: View {
             Button(action: {
                 self.userAuth.logout()
             }) {
-                Text("Logout")
+                Text("button.logout".localized)
             }
         }
     }
@@ -88,7 +88,7 @@ struct LaunchView: View {
             Button(action: {
                 self.userAuth.startLogin()
             }) {
-                Text("Login")
+                Text("button.login".localized)
             }
         }
     }
@@ -100,7 +100,7 @@ struct ServerURLView: View {
     var body: some View {
         return VStack {
             Spacer()
-            TextField("Server URL", text: Binding<String>(
+            TextField("button.server.url".localized, text: Binding<String>(
                 get: { self.serverURLDomain },
                 set: {
                     self.serverURLDomain = $0

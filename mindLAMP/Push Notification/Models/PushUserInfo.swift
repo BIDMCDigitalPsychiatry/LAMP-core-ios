@@ -71,7 +71,7 @@ struct PushUserInfo {
     
     private func getPageURLForActionButton(_ action: RemoteNotification.Action) -> URL? {
         if let actionArry = userInfo["actions"] as? [[String: String]],
-            let acionObj = actionArry.first(where:{ $0["name"] == action.title}) {
+            let acionObj = actionArry.first(where:{ $0["name"] == action.name}) {
             if let page = acionObj["page"] {
                 return URL(string: Endpoint.appendURLTokenTo(urlString: page))
             }

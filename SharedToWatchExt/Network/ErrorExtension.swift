@@ -11,9 +11,9 @@ enum NetworkError: Error {
         switch self {
 
         case .invalidURL:
-            return NSLocalizedString("networking.invalid.url", comment: "Invalid URL")
+            return NSLocalizedString("error.invalid.url", comment: "Invalid URL")
         case .noResponse:
-            return NSLocalizedString("networking.notresponding", comment: "Server is not responding!")
+            return NSLocalizedString("error.server.notresponding", comment: "Server is not responding!")
         case .errorResponse(let msg):
             return msg
         }
