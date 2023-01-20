@@ -5,4 +5,6 @@
   Created by Jijo Pulikkottil on 27/12/22.
   Copyright © 2022 Division of Digital Psychiatry. All rights reserved.
 */
-"notification.activity.alert" = "Une activité mindLAMP vous attend : %@.";
+//"notification.activity.alert" = "Une activité mindLAMP vous attend : %@.";
+
+"You have a mindLAMP activity waiting for you: %@." = "You havee a mindLAMP activity waiting for you: %@.";

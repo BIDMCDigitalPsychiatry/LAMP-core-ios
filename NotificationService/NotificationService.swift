@@ -23,10 +23,6 @@ class NotificationService: UNNotificationServiceExtension {
         }
         if let bestAttemptContent = bestAttemptContent {
             let userInfo = bestAttemptContent.userInfo
-            //Localizing alert
-            if let activity_name = userInfo["title"] as? String {
-                bestAttemptContent.body = String(format: "notification.activity.alert".localized, arguments: ["\(activity_name)"])
-            }
             
             var isActionExist = false
             var isPageExist = false

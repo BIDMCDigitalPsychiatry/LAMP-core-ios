@@ -19,3 +19,4 @@
 "error.network.403" = "Godkendelse mislykkedes!";
 "error.server.id.notfound" = "Bruger ikke fundet.";
 "error.network.generic" = "Noget gik galt. Prøv igen senere.";
+"You have a mindLAMP activity waiting for you: %@." = "Du har en mindLAMP-aktivitet, der venter på dig: %@.";

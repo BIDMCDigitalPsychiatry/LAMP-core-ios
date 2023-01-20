@@ -19,3 +19,4 @@
 "error.network.403" = "Échec de l'authentification !";
 "error.server.id.notfound" = "Utilisateur non trouvé.";
 "error.network.generic" = "Un problème est survenu. Veuillez réessayer plus tard.";
+"You have a mindLAMP activity waiting for you: %@." = "Une activité mindLAMP vous attend : %@.";

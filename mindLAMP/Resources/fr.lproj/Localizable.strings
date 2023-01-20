@@ -22,3 +22,6 @@
 "error.invalid.url" = "URL non valide";
 "error.network.generic" = "Un problème est survenu. Veuillez réessayer plus tard.";
 "error.network.timeout" = "Délai d'attente de la demande.";
+
+"You have a mindLAMP activity waiting for you: %@." = "Une activité mindLAMP vous attend : %@.";
+"notification.activity.alert" = "Une activité mindLAMP vous attend : %@.";

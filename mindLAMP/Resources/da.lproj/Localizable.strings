@@ -22,3 +22,6 @@
 "error.invalid.url" = "Ugyldig URL";
 "error.network.generic" = "Noget gik galt. Prøv igen senere.";
 "error.network.timeout" = "Bed om en pause.";
+
+"You have a mindLAMP activity waiting for you: %@." = "Du har en mindLAMP-aktivitet, der venter på dig: %@.";
+"notification.activity.alert" = "Du har en mindLAMP-aktivitet, der venter på dig: %@.";
