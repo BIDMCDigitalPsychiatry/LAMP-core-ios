@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		5F763011242386AA00B2DD03 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 5F763010242386AA00B2DD03 /* Localizable.strings */; };
 		B2073F0F256EC29C0068E001 /* AppColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2073F0E256EC29C0068E001 /* AppColors.swift */; };
 		B212A437257E2DFB003637DF /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B212A436257E2DFB003637DF /* SceneDelegate.swift */; };
 		B2201C24257F4DBC00C40183 /* LeakAvoider.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2201C19257F4DBC00C40183 /* LeakAvoider.swift */; };
@@ -78,6 +77,9 @@
 		B29827C22635D38300FC78E6 /* ErrorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B29827B72635D38300FC78E6 /* ErrorExtension.swift */; };
 		B29827C32635D38300FC78E6 /* NetworkConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = B29827B82635D38300FC78E6 /* NetworkConfig.swift */; };
 		B29827C42635D38300FC78E6 /* NetworkConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = B29827B82635D38300FC78E6 /* NetworkConfig.swift */; };
+		B29C0069295ACF60009EAF7B /* String+Localize.swift in Sources */ = {isa = PBXBuildFile; fileRef = B29C0068295ACF60009EAF7B /* String+Localize.swift */; };
+		B29C006A295ACF89009EAF7B /* String+Localize.swift in Sources */ = {isa = PBXBuildFile; fileRef = B29C0068295ACF60009EAF7B /* String+Localize.swift */; };
+		B29C006B295ACF8B009EAF7B /* String+Localize.swift in Sources */ = {isa = PBXBuildFile; fileRef = B29C0068295ACF60009EAF7B /* String+Localize.swift */; };
 		B2A15BDC2567A8BE00222717 /* NotificationAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2A15BB42567A8BE00222717 /* NotificationAPI.swift */; };
 		B2A15BDD2567A8BE00222717 /* NotificationAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2A15BB42567A8BE00222717 /* NotificationAPI.swift */; };
 		B2A15BF82567A8BE00222717 /* LMSensorManager+SensorObservers.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2A15BC52567A8BE00222717 /* LMSensorManager+SensorObservers.swift */; };
@@ -118,6 +120,10 @@
 		B2B8F4B7258B026800BEB872 /* ActivityIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2B8F4B6258B026800BEB872 /* ActivityIndicator.swift */; };
 		B2C5EEDB28B61D0100EF90AA /* SensorKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B2C5EEDA28B61D0100EF90AA /* SensorKit.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		B2C831F025306F6600E6A8A2 /* ComplicationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2C831EF25306F6600E6A8A2 /* ComplicationController.swift */; };
+		B2D12D6629520E010044F5DC /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = B2D12D6829520E010044F5DC /* Localizable.strings */; };
+		B2D12D7129520E2B0044F5DC /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = B2D12D7329520E2B0044F5DC /* InfoPlist.strings */; };
+		B2D12D7629520E360044F5DC /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = B2D12D7829520E360044F5DC /* Localizable.strings */; };
+		B2D12D7B29520E3D0044F5DC /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = B2D12D7D29520E3D0044F5DC /* InfoPlist.strings */; };
 		B2D2CA6625503AAE0086C864 /* WatchOSDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2D2CA6525503AAE0086C864 /* WatchOSDelegate.swift */; };
 		B2D930F92445D7E90086477D /* UserNotifications.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B2D930F82445D7E90086477D /* UserNotifications.framework */; };
 		B2D930FB2445D7E90086477D /* UserNotificationsUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B2D930FA2445D7E90086477D /* UserNotificationsUI.framework */; };
@@ -178,6 +184,16 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
+		B20EF2482976FC050043DD23 /* Embed App Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+			);
+			name = "Embed App Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		B2704DFD24B4A2AC00DE196B /* Embed Watch Content */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
@@ -215,7 +231,6 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		5F763010242386AA00B2DD03 /* Localizable.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
 		5FC0151223C5A85300990506 /* mindLAMP-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "mindLAMP-Bridging-Header.h"; sourceTree = "<group>"; };
 		B2073F0E256EC29C0068E001 /* AppColors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppColors.swift; sourceTree = "<group>"; };
 		B212A436257E2DFB003637DF /* SceneDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -278,6 +293,7 @@
 		B29827B62635D38300FC78E6 /* NetworkingAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkingAPI.swift; sourceTree = "<group>"; };
 		B29827B72635D38300FC78E6 /* ErrorExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ErrorExtension.swift; sourceTree = "<group>"; };
 		B29827B82635D38300FC78E6 /* NetworkConfig.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkConfig.swift; sourceTree = "<group>"; };
+		B29C0068295ACF60009EAF7B /* String+Localize.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Localize.swift"; sourceTree = "<group>"; };
 		B2A15BB42567A8BE00222717 /* NotificationAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationAPI.swift; sourceTree = "<group>"; };
 		B2A15BC52567A8BE00222717 /* LMSensorManager+SensorObservers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "LMSensorManager+SensorObservers.swift"; sourceTree = "<group>"; };
 		B2A15BC62567A8BE00222717 /* LMSensorManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LMSensorManager.swift; sourceTree = "<group>"; };
@@ -303,6 +319,20 @@
 		B2B8F4B6258B026800BEB872 /* ActivityIndicator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityIndicator.swift; sourceTree = "<group>"; };
 		B2C5EEDA28B61D0100EF90AA /* SensorKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SensorKit.framework; path = System/Library/Frameworks/SensorKit.framework; sourceTree = SDKROOT; };
 		B2C831EF25306F6600E6A8A2 /* ComplicationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ComplicationController.swift; sourceTree = "<group>"; };
+		B2D12D6729520E010044F5DC /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		B2D12D6B29520E060044F5DC /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Localizable.strings; sourceTree = "<group>"; };
+		B2D12D6F29520E090044F5DC /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/Localizable.strings; sourceTree = "<group>"; };
+		B2D12D7229520E2B0044F5DC /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		B2D12D7429520E2F0044F5DC /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		B2D12D7529520E300044F5DC /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		B2D12D7729520E360044F5DC /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		B2D12D7929520E380044F5DC /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Localizable.strings; sourceTree = "<group>"; };
+		B2D12D7A29520E390044F5DC /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/Localizable.strings; sourceTree = "<group>"; };
+		B2D12D7C29520E3D0044F5DC /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		B2D12D7E29520E400044F5DC /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		B2D12D7F29520E410044F5DC /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		B2D12D802952396D0044F5DC /* base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = base; path = base.lproj/Localizable.strings; sourceTree = "<group>"; };
+		B2D12D81295239770044F5DC /* base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = base; path = base.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		B2D2CA6525503AAE0086C864 /* WatchOSDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchOSDelegate.swift; sourceTree = "<group>"; };
 		B2D930F72445D7E90086477D /* CustomNotification.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = CustomNotification.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		B2D930F82445D7E90086477D /* UserNotifications.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UserNotifications.framework; path = System/Library/Frameworks/UserNotifications.framework; sourceTree = SDKROOT; };
@@ -311,6 +341,10 @@
 		B2D931022445D7E90086477D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B2E6A55F256F11A300E2CBC8 /* UIDeviceExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIDeviceExtension.swift; sourceTree = "<group>"; };
 		B2E6A566256F195000E2CBC8 /* WebViewConfiguration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebViewConfiguration.swift; sourceTree = "<group>"; };
+		B2F0F14C296E9741008A8A7B /* da */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = da; path = da.lproj/Localizable.strings; sourceTree = "<group>"; };
+		B2F0F14D296E9868008A8A7B /* da */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = da; path = da.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		B2F0F14E296EB8EB008A8A7B /* da */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = da; path = da.lproj/Localizable.strings; sourceTree = "<group>"; };
+		B2F0F14F296EB9A6008A8A7B /* da */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = da; path = da.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		B2FDA83124BF744D000316EE /* ContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -470,6 +504,7 @@
 			children = (
 				B27DBDA427856455002DFAF9 /* UserDefaults+Extension.swift */,
 				B24CD28225E9154E007E14ED /* Collection+Extension.swift */,
+				B29C0068295ACF60009EAF7B /* String+Localize.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -502,6 +537,7 @@
 				B255116A24B628FD00CDBDD1 /* Services */,
 				B255115D24B5FA0900CDBDD1 /* PushNotification */,
 				B2704E0524B4AE6C00DE196B /* Models */,
+				B2A40FAA29520D5700D9AC17 /* Resources */,
 				B2704DEB24B4A2AC00DE196B /* ExtensionDelegate.swift */,
 				B247D14D25A88E2F00776B41 /* WearableApp.swift */,
 				B2C831EF25306F6600E6A8A2 /* ComplicationController.swift */,
@@ -577,6 +613,7 @@
 				B212A44E257E3453003637DF /* Views */,
 				B240814323D8803900845AEE /* AppComponents */,
 				B244A1C023BF4A77007FBDB8 /* Extensions */,
+				B2A40FA929520D3F00D9AC17 /* Resources */,
 				B212A436257E2DFB003637DF /* SceneDelegate.swift */,
 				B29639D023BDC28100626E1A /* AppDelegate.swift */,
 				B29639D623BDC28200626E1A /* Assets.xcassets */,
@@ -585,7 +622,6 @@
 				B29639DE23BDC28200626E1A /* Info.plist */,
 				B29639D823BDC28200626E1A /* Preview Content */,
 				5FC0151223C5A85300990506 /* mindLAMP-Bridging-Header.h */,
-				5F763010242386AA00B2DD03 /* Localizable.strings */,
 			);
 			path = mindLAMP;
 			sourceTree = "<group>";
@@ -697,6 +733,25 @@
 			path = OperationQueue;
 			sourceTree = "<group>";
 		};
+		B2A40FA929520D3F00D9AC17 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				B2D12D6829520E010044F5DC /* Localizable.strings */,
+				B2D12D7329520E2B0044F5DC /* InfoPlist.strings */,
+			);
+			name = Resources;
+			path = mindLAMP/Resources;
+			sourceTree = SOURCE_ROOT;
+		};
+		B2A40FAA29520D5700D9AC17 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				B2D12D7829520E360044F5DC /* Localizable.strings */,
+				B2D12D7D29520E3D0044F5DC /* InfoPlist.strings */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
 		B2B8979623D0ADBA00321C3E /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -770,6 +825,7 @@
 				B2704DDE24B4A2AC00DE196B /* Sources */,
 				B2704DDF24B4A2AC00DE196B /* Frameworks */,
 				B2704DE024B4A2AC00DE196B /* Resources */,
+				B20EF2482976FC050043DD23 /* Embed App Extensions */,
 			);
 			buildRules = (
 			);
@@ -850,7 +906,7 @@
 			isa = PBXProject;
 			attributes = {
 				CLASSPREFIX = LAMP;
-				LastSwiftUpdateCheck = 1120;
+				LastSwiftUpdateCheck = 1340;
 				LastUpgradeCheck = 1220;
 				ORGANIZATIONNAME = "Division of Digital Psychiatry";
 				TargetAttributes = {
@@ -879,6 +935,15 @@
 			knownRegions = (
 				en,
 				Base,
+				base,
+				de,
+				da,
+				fr,
+				hi,
+				ko,
+				es,
+				it,
+				zh,
 			);
 			mainGroup = B29639C423BDC28100626E1A;
 			packageReferences = (
@@ -911,6 +976,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				B2704DF724B4A2AC00DE196B /* Preview Assets.xcassets in Resources */,
+				B2D12D7B29520E3D0044F5DC /* InfoPlist.strings in Resources */,
+				B2D12D7629520E360044F5DC /* Localizable.strings in Resources */,
 				B2704DF424B4A2AC00DE196B /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -926,10 +993,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5F763011242386AA00B2DD03 /* Localizable.strings in Resources */,
 				B23993BA2440696800E31B06 /* exportOptions.plist in Resources */,
+				B2D12D6629520E010044F5DC /* Localizable.strings in Resources */,
 				B29639DA23BDC28200626E1A /* Preview Assets.xcassets in Resources */,
 				B29639D723BDC28200626E1A /* Assets.xcassets in Resources */,
+				B2D12D7129520E2B0044F5DC /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -952,6 +1020,7 @@
 				B29827BE2635D38300FC78E6 /* Result.swift in Sources */,
 				B2A15C0D2567A8BE00222717 /* SensorLogs.swift in Sources */,
 				B247D14E25A88E2F00776B41 /* WearableApp.swift in Sources */,
+				B29C006B295ACF8B009EAF7B /* String+Localize.swift in Sources */,
 				B2A15C1B2567A8BE00222717 /* SharingInfo.swift in Sources */,
 				B29827C22635D38300FC78E6 /* ErrorExtension.swift in Sources */,
 				B2B74E43258BC58B0044BE81 /* ActivityIndicatorView.swift in Sources */,
@@ -998,6 +1067,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B2847FB72450550E0042D43B /* NotificationService.swift in Sources */,
+				B29C006A295ACF89009EAF7B /* String+Localize.swift in Sources */,
 				B27DBDA727856455002DFAF9 /* UserDefaults+Extension.swift in Sources */,
 				B27DBDA227856437002DFAF9 /* LampURL.swift in Sources */,
 			);
@@ -1023,6 +1093,7 @@
 				B24CD25F25E8FAD2007E14ED /* RepeatingTimer.swift in Sources */,
 				B2A15C082567A8BE00222717 /* Logging.swift in Sources */,
 				B2201C2A257F4DBC00C40183 /* WebViewController.swift in Sources */,
+				B29C0069295ACF60009EAF7B /* String+Localize.swift in Sources */,
 				B2346CEF2599DE9800EFF347 /* AppInfo.swift in Sources */,
 				B2201C25257F4DBC00C40183 /* HomeViewController.swift in Sources */,
 				B2201C7A257FA60500C40183 /* NotificationView.swift in Sources */,
@@ -1101,12 +1172,62 @@
 		};
 /* End PBXTargetDependency section */
 
+/* Begin PBXVariantGroup section */
+		B2D12D6829520E010044F5DC /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				B2D12D6729520E010044F5DC /* en */,
+				B2D12D6B29520E060044F5DC /* fr */,
+				B2D12D6F29520E090044F5DC /* ko */,
+				B2D12D802952396D0044F5DC /* base */,
+				B2F0F14C296E9741008A8A7B /* da */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+		B2D12D7329520E2B0044F5DC /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				B2D12D7229520E2B0044F5DC /* en */,
+				B2D12D7429520E2F0044F5DC /* ko */,
+				B2D12D7529520E300044F5DC /* fr */,
+				B2D12D81295239770044F5DC /* base */,
+				B2F0F14D296E9868008A8A7B /* da */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		B2D12D7829520E360044F5DC /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				B2D12D7729520E360044F5DC /* en */,
+				B2D12D7929520E380044F5DC /* fr */,
+				B2D12D7A29520E390044F5DC /* ko */,
+				B2F0F14E296EB8EB008A8A7B /* da */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+		B2D12D7D29520E3D0044F5DC /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				B2D12D7C29520E3D0044F5DC /* en */,
+				B2D12D7E29520E400044F5DC /* fr */,
+				B2D12D7F29520E410044F5DC /* ko */,
+				B2F0F14F296EB9A6008A8A7B /* da */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
 /* Begin XCBuildConfiguration section */
 		B2464EE62527013700A8BB65 /* Debug (Staging) */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = B2587B4D256E23BC00A2A7F2 /* Staging.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -1176,7 +1297,7 @@
 				CODE_SIGN_ENTITLEMENTS = mindLAMP/mindLAMP.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 389;
+				CURRENT_PROJECT_VERSION = 399;
 				DEVELOPMENT_ASSET_PATHS = "\"mindLAMP/Preview Content\"";
 				DEVELOPMENT_TEAM = S2Y2D4239K;
 				ENABLE_BITCODE = NO;
@@ -1188,12 +1309,13 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2022.2.28;
+				MARKETING_VERSION = 2022.10.27;
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = digital.lamp.mindlamp;
 				PRODUCT_NAME = "mindLAMP 2";
 				PROVISIONING_PROFILE_SPECIFIER = "mindLAMP2 2022";
+				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = "mindLAMP/mindLAMP-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
@@ -1210,7 +1332,7 @@
 				CODE_SIGN_ENTITLEMENTS = CustomNotification/CustomNotification.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 389;
+				CURRENT_PROJECT_VERSION = 399;
 				DEVELOPMENT_TEAM = S2Y2D4239K;
 				INFOPLIST_FILE = CustomNotification/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
@@ -1219,7 +1341,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 2022.2.28;
+				MARKETING_VERSION = 2022.10.27;
 				PRODUCT_BUNDLE_IDENTIFIER = digital.lamp.mindlamp.CustomNotification;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "mindLAMP2 Custom Notification Extension AppStore";
@@ -1237,7 +1359,7 @@
 				CODE_SIGN_ENTITLEMENTS = NotificationService/NotificationService.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 389;
+				CURRENT_PROJECT_VERSION = 399;
 				DEVELOPMENT_TEAM = S2Y2D4239K;
 				INFOPLIST_FILE = NotificationService/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
@@ -1246,7 +1368,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 2022.2.28;
+				MARKETING_VERSION = 2022.10.27;
 				PRODUCT_BUNDLE_IDENTIFIER = digital.lamp.mindlamp.NotificationService;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "mindLAMP2 Notification Service AppStore";
@@ -1265,11 +1387,11 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 389;
+				CURRENT_PROJECT_VERSION = 399;
 				DEVELOPMENT_TEAM = S2Y2D4239K;
 				IBSC_MODULE = "$(PRODUCT_MODULE_NAME)";
 				INFOPLIST_FILE = watchkitapp/Info.plist;
-				MARKETING_VERSION = 2022.2.28;
+				MARKETING_VERSION = 2022.10.27;
 				PRODUCT_BUNDLE_IDENTIFIER = digital.lamp.mindlamp.wearable;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "mindLAMP2 WatchApp AppStore";
@@ -1290,7 +1412,7 @@
 				CODE_SIGN_ENTITLEMENTS = "watchkitapp Extension/watchkitapp Extension.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 389;
+				CURRENT_PROJECT_VERSION = 399;
 				DEVELOPMENT_ASSET_PATHS = "\"watchkitapp Extension/Preview Content\"";
 				DEVELOPMENT_TEAM = S2Y2D4239K;
 				ENABLE_PREVIEWS = YES;
@@ -1300,7 +1422,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 2022.2.28;
+				MARKETING_VERSION = 2022.10.27;
 				PRODUCT_BUNDLE_IDENTIFIER = digital.lamp.mindlamp.wearable.extension;
 				PRODUCT_NAME = watchkitextension;
 				PROVISIONING_PROFILE_SPECIFIER = "mindLAMP2 WatchApp Extension AppStore";
@@ -1318,6 +1440,7 @@
 			baseConfigurationReference = B2587B4D256E23BC00A2A7F2 /* Staging.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -1381,7 +1504,7 @@
 				CODE_SIGN_ENTITLEMENTS = mindLAMP/mindLAMP.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 389;
+				CURRENT_PROJECT_VERSION = 399;
 				DEVELOPMENT_ASSET_PATHS = "\"mindLAMP/Preview Content\"";
 				DEVELOPMENT_TEAM = S2Y2D4239K;
 				ENABLE_BITCODE = NO;
@@ -1393,12 +1516,13 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2022.2.28;
+				MARKETING_VERSION = 2022.10.27;
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = digital.lamp.mindlamp;
 				PRODUCT_NAME = "mindLAMP 2";
 				PROVISIONING_PROFILE_SPECIFIER = "mindLAMP2 2022";
+				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = "mindLAMP/mindLAMP-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1414,7 +1538,7 @@
 				CODE_SIGN_ENTITLEMENTS = CustomNotification/CustomNotification.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 389;
+				CURRENT_PROJECT_VERSION = 399;
 				DEVELOPMENT_TEAM = S2Y2D4239K;
 				INFOPLIST_FILE = CustomNotification/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
@@ -1423,7 +1547,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 2022.2.28;
+				MARKETING_VERSION = 2022.10.27;
 				PRODUCT_BUNDLE_IDENTIFIER = digital.lamp.mindlamp.CustomNotification;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "mindLAMP2 Custom Notification Extension AppStore";
@@ -1441,7 +1565,7 @@
 				CODE_SIGN_ENTITLEMENTS = NotificationService/NotificationService.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 389;
+				CURRENT_PROJECT_VERSION = 399;
 				DEVELOPMENT_TEAM = S2Y2D4239K;
 				INFOPLIST_FILE = NotificationService/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
@@ -1450,7 +1574,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 2022.2.28;
+				MARKETING_VERSION = 2022.10.27;
 				PRODUCT_BUNDLE_IDENTIFIER = digital.lamp.mindlamp.NotificationService;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "mindLAMP2 Notification Service AppStore";
@@ -1469,11 +1593,11 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 389;
+				CURRENT_PROJECT_VERSION = 399;
 				DEVELOPMENT_TEAM = S2Y2D4239K;
 				IBSC_MODULE = "$(PRODUCT_MODULE_NAME)";
 				INFOPLIST_FILE = watchkitapp/Info.plist;
-				MARKETING_VERSION = 2022.2.28;
+				MARKETING_VERSION = 2022.10.27;
 				PRODUCT_BUNDLE_IDENTIFIER = digital.lamp.mindlamp.wearable;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "mindLAMP2 WatchApp AppStore";
@@ -1494,7 +1618,7 @@
 				CODE_SIGN_ENTITLEMENTS = "watchkitapp Extension/watchkitapp Extension.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 389;
+				CURRENT_PROJECT_VERSION = 399;
 				DEVELOPMENT_ASSET_PATHS = "\"watchkitapp Extension/Preview Content\"";
 				DEVELOPMENT_TEAM = S2Y2D4239K;
 				ENABLE_PREVIEWS = YES;
@@ -1504,7 +1628,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 2022.2.28;
+				MARKETING_VERSION = 2022.10.27;
 				PRODUCT_BUNDLE_IDENTIFIER = digital.lamp.mindlamp.wearable.extension;
 				PRODUCT_NAME = watchkitextension;
 				PROVISIONING_PROFILE_SPECIFIER = "mindLAMP2 WatchApp Extension AppStore";
@@ -1525,11 +1649,11 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 389;
+				CURRENT_PROJECT_VERSION = 399;
 				DEVELOPMENT_TEAM = S2Y2D4239K;
 				IBSC_MODULE = "$(PRODUCT_MODULE_NAME)";
 				INFOPLIST_FILE = watchkitapp/Info.plist;
-				MARKETING_VERSION = 2022.2.28;
+				MARKETING_VERSION = 2022.10.27;
 				PRODUCT_BUNDLE_IDENTIFIER = digital.lamp.mindlamp.wearable;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "mindLAMP2 WatchApp AppStore";
@@ -1550,11 +1674,11 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 389;
+				CURRENT_PROJECT_VERSION = 399;
 				DEVELOPMENT_TEAM = S2Y2D4239K;
 				IBSC_MODULE = "$(PRODUCT_MODULE_NAME)";
 				INFOPLIST_FILE = watchkitapp/Info.plist;
-				MARKETING_VERSION = 2022.2.28;
+				MARKETING_VERSION = 2022.10.27;
 				PRODUCT_BUNDLE_IDENTIFIER = digital.lamp.mindlamp.wearable;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "mindLAMP2 WatchApp AppStore";
@@ -1575,7 +1699,7 @@
 				CODE_SIGN_ENTITLEMENTS = "watchkitapp Extension/watchkitapp Extension.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 389;
+				CURRENT_PROJECT_VERSION = 399;
 				DEVELOPMENT_ASSET_PATHS = "\"watchkitapp Extension/Preview Content\"";
 				DEVELOPMENT_TEAM = S2Y2D4239K;
 				ENABLE_PREVIEWS = YES;
@@ -1585,7 +1709,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 2022.2.28;
+				MARKETING_VERSION = 2022.10.27;
 				PRODUCT_BUNDLE_IDENTIFIER = digital.lamp.mindlamp.wearable.extension;
 				PRODUCT_NAME = watchkitextension;
 				PROVISIONING_PROFILE_SPECIFIER = "mindLAMP2 WatchApp Extension AppStore";
@@ -1606,7 +1730,7 @@
 				CODE_SIGN_ENTITLEMENTS = "watchkitapp Extension/watchkitapp Extension.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 389;
+				CURRENT_PROJECT_VERSION = 399;
 				DEVELOPMENT_ASSET_PATHS = "\"watchkitapp Extension/Preview Content\"";
 				DEVELOPMENT_TEAM = S2Y2D4239K;
 				ENABLE_PREVIEWS = YES;
@@ -1616,7 +1740,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 2022.2.28;
+				MARKETING_VERSION = 2022.10.27;
 				PRODUCT_BUNDLE_IDENTIFIER = digital.lamp.mindlamp.wearable.extension;
 				PRODUCT_NAME = watchkitextension;
 				PROVISIONING_PROFILE_SPECIFIER = "mindLAMP2 WatchApp Extension AppStore";
@@ -1636,7 +1760,7 @@
 				CODE_SIGN_ENTITLEMENTS = NotificationService/NotificationService.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 389;
+				CURRENT_PROJECT_VERSION = 399;
 				DEVELOPMENT_TEAM = S2Y2D4239K;
 				INFOPLIST_FILE = NotificationService/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
@@ -1645,7 +1769,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 2022.2.28;
+				MARKETING_VERSION = 2022.10.27;
 				PRODUCT_BUNDLE_IDENTIFIER = digital.lamp.mindlamp.NotificationService;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "mindLAMP2 Notification Service AppStore";
@@ -1663,7 +1787,7 @@
 				CODE_SIGN_ENTITLEMENTS = NotificationService/NotificationService.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 389;
+				CURRENT_PROJECT_VERSION = 399;
 				DEVELOPMENT_TEAM = S2Y2D4239K;
 				INFOPLIST_FILE = NotificationService/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
@@ -1672,7 +1796,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 2022.2.28;
+				MARKETING_VERSION = 2022.10.27;
 				PRODUCT_BUNDLE_IDENTIFIER = digital.lamp.mindlamp.NotificationService;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "mindLAMP2 Notification Service AppStore";
@@ -1688,6 +1812,7 @@
 			baseConfigurationReference = B2587B4E256E23BC00A2A7F2 /* Production.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -1752,6 +1877,7 @@
 			baseConfigurationReference = B2587B4E256E23BC00A2A7F2 /* Production.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -1815,7 +1941,7 @@
 				CODE_SIGN_ENTITLEMENTS = mindLAMP/mindLAMP.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 389;
+				CURRENT_PROJECT_VERSION = 399;
 				DEVELOPMENT_ASSET_PATHS = "\"mindLAMP/Preview Content\"";
 				DEVELOPMENT_TEAM = S2Y2D4239K;
 				ENABLE_BITCODE = NO;
@@ -1827,12 +1953,13 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2022.2.28;
+				MARKETING_VERSION = 2022.10.27;
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = digital.lamp.mindlamp;
 				PRODUCT_NAME = "mindLAMP 2";
 				PROVISIONING_PROFILE_SPECIFIER = "mindLAMP2 2022";
+				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = "mindLAMP/mindLAMP-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
@@ -1852,7 +1979,7 @@
 				CODE_SIGN_ENTITLEMENTS = mindLAMP/mindLAMP.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 389;
+				CURRENT_PROJECT_VERSION = 399;
 				DEVELOPMENT_ASSET_PATHS = "\"mindLAMP/Preview Content\"";
 				DEVELOPMENT_TEAM = S2Y2D4239K;
 				ENABLE_BITCODE = NO;
@@ -1864,12 +1991,13 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2022.2.28;
+				MARKETING_VERSION = 2022.10.27;
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = digital.lamp.mindlamp;
 				PRODUCT_NAME = "mindLAMP 2";
 				PROVISIONING_PROFILE_SPECIFIER = "mindLAMP2 2022";
+				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = "mindLAMP/mindLAMP-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1885,7 +2013,7 @@
 				CODE_SIGN_ENTITLEMENTS = CustomNotification/CustomNotification.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 389;
+				CURRENT_PROJECT_VERSION = 399;
 				DEVELOPMENT_TEAM = S2Y2D4239K;
 				INFOPLIST_FILE = CustomNotification/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
@@ -1894,7 +2022,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 2022.2.28;
+				MARKETING_VERSION = 2022.10.27;
 				PRODUCT_BUNDLE_IDENTIFIER = digital.lamp.mindlamp.CustomNotification;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "mindLAMP2 Custom Notification Extension AppStore";
@@ -1912,7 +2040,7 @@
 				CODE_SIGN_ENTITLEMENTS = CustomNotification/CustomNotification.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 389;
+				CURRENT_PROJECT_VERSION = 399;
 				DEVELOPMENT_TEAM = S2Y2D4239K;
 				INFOPLIST_FILE = CustomNotification/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
@@ -1921,7 +2049,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 2022.2.28;
+				MARKETING_VERSION = 2022.10.27;
 				PRODUCT_BUNDLE_IDENTIFIER = digital.lamp.mindlamp.CustomNotification;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "mindLAMP2 Custom Notification Extension AppStore";

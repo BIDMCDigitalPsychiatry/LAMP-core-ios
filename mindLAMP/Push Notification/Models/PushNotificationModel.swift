@@ -19,18 +19,6 @@ struct RemoteNotification {
         case dismiss //UNNotificationDismissActionIdentifier
         case defaultTap //UNNotificationDefaultActionIdentifier:
         
-        var encodableValue: String? {
-            switch self {
-
-            case .openApp, .openAppNoWebView:
-                return title
-            case .dismiss:
-                return nil
-            case .defaultTap:
-                return nil
-            }
-        }
-       
         static func buildFromIdentifier(_ identifier: String) -> RemoteNotification.Action? {
             
             if let customAction = Action(rawValue: identifier) {
@@ -59,6 +47,18 @@ struct RemoteNotification {
         }
 
         var title: String {
+            switch self {
+            case .openApp:
+                return "notification.action.text".localized
+            case .openAppNoWebView:
+                return "notification.action.text".localized
+            case .dismiss, .defaultTap:
+                break
+            }
+            return ""
+        }
+
+        var name: String {
             switch self {
             case .openApp:
                 return "Open App"

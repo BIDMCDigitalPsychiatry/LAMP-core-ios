@@ -327,7 +327,21 @@ extension HomeViewController: WKNavigationDelegate {
     
     func webView(_ webView: WKWebView, didFailProvisionalNavigation navigation: WKNavigation!, withError error: Error) {
         if (error as NSError).code == -999 { return }
-        let alert = UIAlertController(title: "alert.lamp.title".localized, message: error.localizedDescription, preferredStyle: .alert)
+        let msg: String
+        if (error as NSError).code == -1001 { // TIMED OUT:
+            // CODE to handle TIMEOUT
+            msg = "error.network.timeout".localized
+        } else if (error as NSError).code == -1003 { // SERVER CANNOT BE FOUND
+            // CODE to handle SERVER not found
+            msg = "error.server.notresponding".localized
+        } else if (error as NSError).code == -1100 { // URL NOT FOUND ON SERVER
+            // CODE to handle URL not found
+            msg = "error.invalid.url".localized
+        } else {
+            msg = "error.network.generic".localized
+        }
+        
+        let alert = UIAlertController(title: "alert.lamp.title".localized, message: msg, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "alert.button.cancel".localized, style: .cancel, handler: { action in
            }))
         alert.addAction(UIAlertAction(title: "alert.button.retry".localized, style: .default, handler: { action in
@@ -361,11 +375,22 @@ extension HomeViewController: WKScriptMessageHandler {
                 printError("Message body not in expected format.")
                 return
             }
-            // print("dictBody = \(dictBody)\n")
+            print("dictBody = \(dictBody)\n")
             //read token. it will be inthe format of UserName:Password
             guard let token = (dictBody[ScriptMessageKey.authorizationToken.rawValue] as? String),
                 let idObjectDict = dictBody[ScriptMessageKey.identityObject.rawValue] as? [String: Any],
                 let userID = idObjectDict["id"] as? String  else { return }
+            
+            //read langiuage
+//            let script = "localStorage.getItem(\"\(key)\")"
+//            wkWebView.evaluateJavaScript(script) { (jsonText, error) in
+//                if let error = error {
+//                    print ("localStorage.getitem('token') failed due to \(error)")
+//                    assertionFailure()
+//                }
+//                print("localStorage jsonText = \(jsonText)")
+//            }
+            
             
             let serverAddress = dictBody[ScriptMessageKey.serverAddress.rawValue] as? String
             

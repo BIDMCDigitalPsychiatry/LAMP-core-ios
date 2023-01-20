@@ -1,0 +1,10 @@
+/* 
+  InfoPlist.strings
+  mindLAMP
+
+  Created by Jijo Pulikkottil on 20/12/22.
+  Copyright © 2022 Division of Digital Psychiatry. All rights reserved.
+*/
+"Your Health data is required for clinical study." = "연구를 위해 건강데이터가 파악합니다.";
+"Your location access required for clinical study." = "연구를 위해 위치를 파악합니다.";
+"Your motion activity data is required for clinical study." = "연구를 위해 활동 데이터를 파악합니다.";

@@ -107,6 +107,19 @@ class UserAuth: ObservableObject {
     }
 
     private var cancellable: AnyCancellable?
+    
+    private func getErrorFrom(_ code: Int) -> String? {
+        if 200 ... 299 ~= code { return nil } else {
+            let msg: String
+            switch code {
+            case 403:
+                msg = "error.network.403".localized
+            default:
+                msg = "error.network.generic".localized
+            }
+            return msg
+        }
+    }
     //let didChange = PassthroughSubject<UserAuth,Never>()
     
     // required to conform to protocol 'ObservableObject'
@@ -130,24 +143,27 @@ class UserAuth: ObservableObject {
             //guard let self = self else { return }
             print("value = \(value)")
             switch value {
-            case .failure(let ErrorResponse.error(code, data, error)):
-                printError("login error code\(code), \(error.localizedDescription)")
-                var msg: String?
-                if let data = data {
-                    let decoder = JSONDecoder()
-                    do {
-                        let errResponse = try decoder.decode(ErrResponse.self, from: data)
-                        msg = errResponse.error
-                    } catch let err {
-                        printError("err = \(err.localizedDescription)")
-                    }
+            case .failure(let ErrorResponse.error(code, _, _)):
+                if let msg = self?.getErrorFrom(code) {
+                    self?.errorMsg = msg
+                    self?.loginStatus = .loginInput
                 }
-                //self.errorMsg = HTTPURLResponse.localizedString(forStatusCode: code)
-                self?.errorMsg = msg ?? error.localizedDescription
-                self?.loginStatus = .loginInput
+//                var msg: String?
+//                if let data = data {
+//                    let decoder = JSONDecoder()
+//                    do {
+//                        let errResponse = try decoder.decode(ErrResponse.self, from: data)
+//                        msg = errResponse.error
+//                    } catch let err {
+//                        printError("err = \(err.localizedDescription)")
+//                    }
+//                }
             case .failure(let error):
-                self?.errorMsg = error.localizedDescription
-                self?.loginStatus = .loginInput
+                let code = (error as NSError).code
+                if let msg = self?.getErrorFrom(code) {
+                    self?.errorMsg = msg
+                    self?.loginStatus = .loginInput
+                }
             case .finished:
                 break
             }
@@ -156,7 +172,8 @@ class UserAuth: ObservableObject {
         }, receiveValue: { [weak self] response in
             guard let self = self else { return }
             guard let userId = response.data.first?.id else {
-                print("no data")
+                self.errorMsg = "error.server.id.notfound".localized
+                self.loginStatus = .loginInput
                 return}
             User.shared.login(userID: userId, serverAddress: self.serverURL)
             self.loginStatus = .loggedIn

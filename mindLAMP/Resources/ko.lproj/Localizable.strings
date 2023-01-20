@@ -1,0 +1,27 @@
+/* 
+  Localizable.strings
+  mindLAMP
+
+  Created by Jijo Pulikkottil on 20/12/22.
+  Copyright © 2022 Division of Digital Psychiatry. All rights reserved.
+*/
+"alert.lamp.title" = "mindLAMP 2";
+"alert.notification.expired"    = "알림이 만료되었습니다!";
+"alert.button.ok"   = "Ok";
+"alert.button.retry" = "재시도";
+"alert.button.cancel" = "취소";
+"alert.button.settings" = "설정";
+"alert.sensorkit.title" = "데이터 사용에 관한 허가가 필요합니다.";
+"alert.sensorkit.message" = "설정 -> 개인정보 보호(privacy) -> 연구 센서 & 사용데이터 에서 권한을 활성화 하십시오.";
+"alert.location.title" = "위치 접근 허용이 필요합니다.";
+"alert.location.message" = "설정 에서, 위치 접근을 허용 하십시오.";
+
+"notification.action.text" = "어플 실행";
+
+"error.server.notresponding" = "서버가 응답하지 않습니다.";
+"error.invalid.url" = "유효하지 않은 URL";
+"error.network.generic" = "문제가 발생하였습니다. 나중에 다시 시도해주세요.";
+"error.network.timeout" = "요청 시간이 초과되었습니다.";
+
+"You have a mindLAMP activity waiting for you: %@." = "대기 중인 mindLAMP 활동이 있습니다 %@.";
+"notification.activity.alert" = "대기 중인 mindLAMP 활동이 있습니다 %@.";
