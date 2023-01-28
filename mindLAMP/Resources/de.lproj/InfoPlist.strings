@@ -1,0 +1,37 @@
+/* 
+  InfoPlist.strings
+  mindLAMP
+
+  Created by Jijo Pulikkottil on 20/12/22.
+  Copyright © 2022 Division of Digital Psychiatry. All rights reserved.
+*/
+/* Bundle name */
+"CFBundleName" = "mindLAMP 2";
+/* Privacy - Bluetooth Always Usage Description */
+"NSBluetoothAlwaysUsageDescription" = "Ihre Bluetooth-Daten werden für die klinische Studie benötigt.";
+/* Privacy - Bluetooth Peripheral Usage Description */
+"NSBluetoothPeripheralUsageDescription" = "Ihre Bluetooth-Daten werden für die klinische Studie benötigt.";
+/* Privacy - Camera Usage Description */
+"NSCameraUsageDescription" = "";
+/* Privacy - Health Records Usage Description */
+"NSHealthClinicalHealthRecordsShareUsageDescription" = "Ihre Gesundheitsdaten werden für klinische Studien benötigt.";
+/* Privacy - Health Share Usage Description */
+"NSHealthShareUsageDescription" = "Ihre Gesundheitsdaten werden für klinische Studien benötigt.";
+/* Privacy - Health Update Usage Description */
+"NSHealthUpdateUsageDescription" = "Ihre Gesundheitsdaten werden für klinische Studien benötigt.";
+/* Copyright (human-readable) */
+"NSHumanReadableCopyright" = "John Torous";
+/* Privacy - Location Always and When In Use Usage Description */
+"NSLocationAlwaysAndWhenInUseUsageDescription" = "Für die klinische Studie wird der Zugang zu Ihrem Standort benötigt";
+/* Privacy - Location Always Usage Description */
+"NSLocationAlwaysUsageDescription" = "Für die klinische Studie wird der Zugang zu Ihrem Standort benötigt" ;
+/* Privacy - Location When In Use Usage Description */
+"NSLocationWhenInUseUsageDescription" = "Für die klinische Studie wird der Zugang zu Ihrem Standort benötigt" ;
+/* Privacy - Microphone Usage Description */
+"NSMicrophoneUsageDescription" = "Ihre Stimmdaten werden für die klinische Studie benötigt.";
+/* Privacy - Motion Usage Description */
+"NSMotionUsageDescription" = "Die Daten Ihrer Bewegungsaktivitäten werden für die klinische Studie benötigt";
+/* Privacy - SensorKit Privacy Policy URL */
+"NSSensorKitPrivacyPolicyURL" = "https://docs.lamp.digital/privacy/";
+/* Privacy - SensorKit Usage Description */
+"NSSensorKitUsageDescription" = "Für die klinische Forschungsstudie, für die Sie sich entschieden haben, werden Ihre SensorKit-Nutzungsdaten benötigt.";
