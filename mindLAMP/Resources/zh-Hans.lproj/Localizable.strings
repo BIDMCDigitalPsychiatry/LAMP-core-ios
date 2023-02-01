@@ -1,0 +1,27 @@
+/* 
+  Localizable.strings
+  mindLAMP
+
+  Created by Jijo Pulikkottil on 20/12/22.
+  Copyright © 2022 Division of Digital Psychiatry. All rights reserved.
+*/
+"alert.lamp.title" = "mindLAMP 2";
+"alert.notification.expired"    = "通知已过期";
+"alert.button.ok"   = "OK";
+"alert.button.retry" = "重试";
+"alert.button.cancel" = "取消";
+"alert.button.settings" = "设定";
+"alert.sensorkit.title" = "需要获取研究传感器及用量数据";
+"alert.sensorkit.message" = "请于设定 -> 私隐 -> 研究传感器与用量数据给予权限";
+"alert.location.title" = "需要获取定位服务";
+"alert.location.message" = "请于设定给予定位服务权限";
+
+"notification.action.text" = "打开APP";
+
+"error.server.notresponding" = "伺服器沒有響應!";
+"error.invalid.url" = "无效 URL";
+"error.network.generic" = "页面发生错误，请稍后重试。";
+"error.network.timeout" = "请求超时";
+
+"You have a mindLAMP activity waiting for you: %@." = "正有一项mindLAMP等候您: %@";
+"notification.activity.alert" = "正有一项mindLAMP等候您: %@";

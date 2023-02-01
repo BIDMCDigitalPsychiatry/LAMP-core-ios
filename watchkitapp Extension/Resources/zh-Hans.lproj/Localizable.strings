@@ -1,0 +1,22 @@
+/* 
+  Localizable.strings
+  mindLAMP
+
+  Created by Jijo Pulikkottil on 20/12/22.
+  Copyright © 2022 Division of Digital Psychiatry. All rights reserved.
+*/
+"label.emailaddress" = "电邮地址";
+"label.password" = "密码";
+
+"button.go" = "开始";
+"button.logout" = "登出";
+"button.login" = "登入";
+"button.server.url" = "服务器URL";
+
+"alert.button.ok"   = "OK";
+"alert.button.cancel" = "取消";
+
+"error.network.403" = "认证失败！";
+"error.server.id.notfound" = "未能找到用戶";
+"error.network.generic" = "页面发生错误，请稍后重试。";
+"You have a mindLAMP activity waiting for you: %@." = "正有一项mindLAMP等候您: %@";

@@ -1,0 +1,37 @@
+/* 
+  InfoPlist.strings
+  mindLAMP
+
+  Created by Jijo Pulikkottil on 20/12/22.
+  Copyright © 2022 Division of Digital Psychiatry. All rights reserved.
+*/
+/* Bundle name */
+"CFBundleName" = "mindLAMP 2";
+/* Privacy - Bluetooth Always Usage Description */
+"NSBluetoothAlwaysUsageDescription" = "臨床研究需要你的藍芽數據";
+/* Privacy - Bluetooth Peripheral Usage Description */
+"NSBluetoothPeripheralUsageDescription" = "臨床研究需要你的藍芽數據";
+/* Privacy - Camera Usage Description */
+"NSCameraUsageDescription" = "";
+/* Privacy - Health Records Usage Description */
+"NSHealthClinicalHealthRecordsShareUsageDescription" = "此臨床研究需要您的健康數據";
+/* Privacy - Health Share Usage Description */
+"NSHealthShareUsageDescription" = "此臨床研究需要您的健康數據";
+/* Privacy - Health Update Usage Description */
+"NSHealthUpdateUsageDescription" = "此臨床研究需要您的健康數據";
+/* Copyright (human-readable) */
+"NSHumanReadableCopyright" = "John Torous";
+/* Privacy - Location Always and When In Use Usage Description */
+"NSLocationAlwaysAndWhenInUseUsageDescription" = "臨床研究需要獲取你的位置";
+/* Privacy - Location Always Usage Description */
+"NSLocationAlwaysUsageDescription" = "臨床研究需要獲取你的位置";
+/* Privacy - Location When In Use Usage Description */
+"NSLocationWhenInUseUsageDescription" = "臨床研究需要獲取你的位置";
+/* Privacy - Microphone Usage Description */
+"NSMicrophoneUsageDescription" = "臨床研究需要您的語音數據";
+/* Privacy - Motion Usage Description */
+"NSMotionUsageDescription" = "臨床研究需要您的運動活動數據";
+/* Privacy - SensorKit Privacy Policy URL */
+"NSSensorKitPrivacyPolicyURL" = "https://docs.lamp.digital/privacy/";
+/* Privacy - SensorKit Usage Description */
+"NSSensorKitUsageDescription" = "您所選擇參與的研究需要您的SensorKit用量數據";
