@@ -317,6 +317,18 @@
 		B2B8979523D0ADBA00321C3E /* mindLAMP.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = mindLAMP.entitlements; sourceTree = "<group>"; };
 		B2B8979723D0ADBA00321C3E /* HealthKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HealthKit.framework; path = System/Library/Frameworks/HealthKit.framework; sourceTree = SDKROOT; };
 		B2B8F4B6258B026800BEB872 /* ActivityIndicator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityIndicator.swift; sourceTree = "<group>"; };
+		B2B96DAB2984C094006CBA22 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Localizable.strings; sourceTree = "<group>"; };
+		B2B96DAC2984C118006CBA22 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		B2B96DAD2984C12B006CBA22 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Localizable.strings; sourceTree = "<group>"; };
+		B2B96DAE2984C12F006CBA22 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		B2B96DAF2984C709006CBA22 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		B2B96DB02984C709006CBA22 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
+		B2B96DB12984C709006CBA22 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		B2B96DB22984C709006CBA22 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
+		B2B96DB32984C71B006CBA22 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		B2B96DB42984C71B006CBA22 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
+		B2B96DB52984C71B006CBA22 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		B2B96DB62984C71B006CBA22 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
 		B2C5EEDA28B61D0100EF90AA /* SensorKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SensorKit.framework; path = System/Library/Frameworks/SensorKit.framework; sourceTree = SDKROOT; };
 		B2C831EF25306F6600E6A8A2 /* ComplicationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ComplicationController.swift; sourceTree = "<group>"; };
 		B2D12D6729520E010044F5DC /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -943,7 +955,8 @@
 				ko,
 				es,
 				it,
-				zh,
+				"zh-Hans",
+				"zh-Hant",
 			);
 			mainGroup = B29639C423BDC28100626E1A;
 			packageReferences = (
@@ -1181,6 +1194,9 @@
 				B2D12D6F29520E090044F5DC /* ko */,
 				B2D12D802952396D0044F5DC /* base */,
 				B2F0F14C296E9741008A8A7B /* da */,
+				B2B96DAB2984C094006CBA22 /* de */,
+				B2B96DAF2984C709006CBA22 /* zh-Hans */,
+				B2B96DB32984C71B006CBA22 /* zh-Hant */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";
@@ -1193,6 +1209,9 @@
 				B2D12D7529520E300044F5DC /* fr */,
 				B2D12D81295239770044F5DC /* base */,
 				B2F0F14D296E9868008A8A7B /* da */,
+				B2B96DAC2984C118006CBA22 /* de */,
+				B2B96DB02984C709006CBA22 /* zh-Hans */,
+				B2B96DB42984C71B006CBA22 /* zh-Hant */,
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
@@ -1204,6 +1223,9 @@
 				B2D12D7929520E380044F5DC /* fr */,
 				B2D12D7A29520E390044F5DC /* ko */,
 				B2F0F14E296EB8EB008A8A7B /* da */,
+				B2B96DAD2984C12B006CBA22 /* de */,
+				B2B96DB12984C709006CBA22 /* zh-Hans */,
+				B2B96DB52984C71B006CBA22 /* zh-Hant */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";
@@ -1215,6 +1237,9 @@
 				B2D12D7E29520E400044F5DC /* fr */,
 				B2D12D7F29520E410044F5DC /* ko */,
 				B2F0F14F296EB9A6008A8A7B /* da */,
+				B2B96DAE2984C12F006CBA22 /* de */,
+				B2B96DB22984C709006CBA22 /* zh-Hans */,
+				B2B96DB62984C71B006CBA22 /* zh-Hant */,
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";

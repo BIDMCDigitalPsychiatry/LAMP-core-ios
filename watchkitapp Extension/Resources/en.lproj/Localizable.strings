@@ -19,4 +19,4 @@
 "error.network.403" = "Authentication Failed!";
 "error.server.id.notfound" = "User not found.";
 "error.network.generic" = "Something went wrong. Please try again later.";
-"You have a mindLAMP activity waiting for you: %@." = "Youu have a mindLAMP activity waiting for you: %@.";
+"You have a mindLAMP activity waiting for you: %@." = "You have a mindLAMP activity waiting for you: %@.";

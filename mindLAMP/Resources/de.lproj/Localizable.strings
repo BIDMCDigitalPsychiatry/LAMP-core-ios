@@ -5,3 +5,23 @@
   Created by Jijo Pulikkottil on 20/12/22.
   Copyright © 2022 Division of Digital Psychiatry. All rights reserved.
 */
+"alert.lamp.title" = "mindLAMP 2";
+"alert.notification.expired"    = "Mitteilung abgelaufen";
+"alert.button.ok"   = "Ok";
+"alert.button.retry" = "Versuchen Sie es nochmal";
+"alert.button.cancel" = "Abbrechen";
+"alert.button.settings" = "Einstellungen";
+"alert.sensorkit.title" = "Sensor & Nutzungsdaten Erlaubnis erforderlich";
+"alert.sensorkit.message" = "Bitte aktivieren Sie die Berechtigungen unter Einstellungen -> Datenschutz -> Sensor & Nutzungsdaten.";
+"alert.location.title" = "Standortberechtigung erforderlich";
+"alert.location.message" = "Bitte aktivieren Sie die Standortberechtigung in Ihren Einstellungen.";
+
+"notification.action.text" = "App öffnen";
+
+"error.server.notresponding" = "Der Server antwortet nicht";
+"error.invalid.url" = "ungültige URL";
+"error.network.generic" = "Etwas ist schief gelaufen. Bitte versuchen Sie es nochmal.";
+"error.network.timeout" = "Zeitüberschreitung bei der Anfrage";
+
+"You have a mindLAMP activity waiting for you: %@." = "Sie haben eine mindLAMP-Aktivität, die auf Sie wartet: %@.";
+"notification.activity.alert" = "Sie haben eine mindLAMP-Aktivität, die auf Sie wartet: %@.";

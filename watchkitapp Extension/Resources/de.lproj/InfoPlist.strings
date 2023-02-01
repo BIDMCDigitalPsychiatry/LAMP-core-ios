@@ -1,0 +1,10 @@
+/* 
+  InfoPlist.strings
+  mindLAMP
+
+  Created by Jijo Pulikkottil on 20/12/22.
+  Copyright © 2022 Division of Digital Psychiatry. All rights reserved.
+*/
+"Your Health data is required for clinical study." = "Ihre Gesundheitsdaten werden für klinische Studien benötigt.";
+"Your location access required for clinical study." = "Für die klinische Studie wird der Zugang zu Ihrem Standort benötigt";
+"Your motion activity data is required for clinical study." = "Die Daten Ihrer Bewegungsaktivitäten werden für die klinische Studie benötigt";
