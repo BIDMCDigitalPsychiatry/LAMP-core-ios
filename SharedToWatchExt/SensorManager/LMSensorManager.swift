@@ -1017,6 +1017,7 @@ private extension LMSensorManager {
                     model.startDate = dataSystolic.startDate
                     model.endDate = dataSystolic.endDate
                     model.source = Tristate(dataDiastolic.source)
+                    model.device_model = Tristate(dataDiastolic.hkDevice)
                     arrayData.append(SensorEvent(timestamp: Double(Date().timeInMilliSeconds), sensor: quantityType.lampIdentifier, data: model))
                 }
             case .bloodPressureDiastolic:
@@ -1031,6 +1032,7 @@ private extension LMSensorManager {
                         //model.startDate = quantityData.startDate
                         //model.endDate = quantityData.endDate
                         model.source = Tristate(quantityData.source)
+                        model.device_model = Tristate(quantityData.hkDevice)
                         if quantityData.type == HKQuantityTypeIdentifier.stepCount.rawValue {
                             model.type = PedometerData.SensorType.step_count.rawValue
                         }

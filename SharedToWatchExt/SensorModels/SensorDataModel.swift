@@ -177,6 +177,7 @@ public struct SensorDataModel: Codable {
     public var diastolic: Pressure?
     //healthkit, steps allow (null)
     public var source: Tristate?
+    public var device_model: Tristate?
     
     //Location
     public var latitude: Double?
@@ -232,7 +233,7 @@ public struct SensorDataModel: Codable {
     enum CodingKeys: String, CodingKey {
         
         case source
-        
+        case device_model
         //Location
         case latitude
         case longitude
@@ -383,7 +384,7 @@ extension SensorDataModel {
         self.type = pedometerData.type
         self.value = pedometerData.value
         self.unit = pedometerData.unit
-        self.source = Tristate("null")
+        self.source = Tristate(pedometerData.source)
     }
 }
 
