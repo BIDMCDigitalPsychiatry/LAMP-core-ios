@@ -18,7 +18,7 @@
 
 "notification.action.text" = "打开APP";
 
-"error.server.notresponding" = "伺服器沒有響應!";
+"error.server.notresponding" = "服務器没有响应!";
 "error.invalid.url" = "无效 URL";
 "error.network.generic" = "页面发生错误，请稍后重试。";
 "error.network.timeout" = "请求超时";
