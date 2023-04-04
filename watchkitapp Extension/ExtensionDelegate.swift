@@ -6,7 +6,7 @@ import WatchConnectivity
 import LAMP
 import Combine
 
-class ExtensionDelegate: NSObject, WKExtensionDelegate {
+class ExtensionDelegate: NSObject, WKApplicationDelegate {
     
     // An array to keep the background tasks.
     //
@@ -96,7 +96,7 @@ class ExtensionDelegate: NSObject, WKExtensionDelegate {
     func scheduleBackgroundRefreshTasks() {
         
         // Get the shared extension object.
-        let watchExtension = WKExtension.shared()
+        let watchExtension = WKApplication.shared()
         
         // If there is a complication on the watch face, the app should get at least four
         // updates an hour. So calculate a target date 15 minutes in the future.
@@ -141,15 +141,15 @@ extension ExtensionDelegate {
         
         //guard settings.authorizationStatus == .authorized else { return }
         UNUserNotificationCenter.current().delegate = self
-        if WKExtension.shared().isRegisteredForRemoteNotifications == true {
+        if WKApplication.shared().isRegisteredForRemoteNotifications == true {
             print("registered")
         }
         if User.shared.isLogin() == false {
-            WKExtension.shared().unregisterForRemoteNotifications()
+            WKApplication.shared().unregisterForRemoteNotifications()
         } else {
             print("registering")
             //UserDefaults.standard.logData = "registering"
-            WKExtension.shared().registerForRemoteNotifications()
+            WKApplication.shared().registerForRemoteNotifications()
         }
     }
     

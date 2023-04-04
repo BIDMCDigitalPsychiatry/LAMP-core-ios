@@ -2,6 +2,8 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>Branding</key>
+	<string>$(Branding)</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleDisplayName</key>
@@ -20,14 +22,45 @@
 	<string>$(MARKETING_VERSION)</string>
 	<key>CFBundleVersion</key>
 	<string>$(CURRENT_PROJECT_VERSION)</string>
+	<key>CLKComplicationPrincipalClass</key>
+	<string>$(PRODUCT_MODULE_NAME).ComplicationController</string>
+	<key>DASHBOARD_URL</key>
+	<string>$(DASHBOARD_URL)</string>
+	<key>ITSAppUsesNonExemptEncryption</key>
+	<false/>
+	<key>LAMP_API</key>
+	<string>$(LAMP_API)</string>
+	<key>NSAllowsArbitraryLoads</key>
+	<true/>
+	<key>NSHealthShareUsageDescription</key>
+	<string>Your Health data is required for clinical study.</string>
+	<key>NSHealthUpdateUsageDescription</key>
+	<string>Your Health data is required for clinical study.</string>
+	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+	<string>Your location access required for clinical study.</string>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>Your location access required for clinical study.</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>Your location access required for clinical study.</string>
+	<key>NSMotionUsageDescription</key>
+	<string>Your motion activity data is required for clinical study.</string>
+	<key>UIBackgroundModes</key>
+	<array>
+		<string>location</string>
+		<string>remote-notification</string>
+	</array>
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
 		<string>UIInterfaceOrientationPortraitUpsideDown</string>
 	</array>
+	<key>WKApplication</key>
+	<true/>
+	<key>WKBackgroundModes</key>
+	<array/>
 	<key>WKCompanionAppBundleIdentifier</key>
 	<string>digital.lamp.mindlamp</string>
-	<key>WKWatchKitApp</key>
+	<key>WKRunsIndependentlyOfCompanionApp</key>
 	<true/>
 </dict>
 </plist>

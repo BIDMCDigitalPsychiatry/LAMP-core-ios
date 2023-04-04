@@ -12,7 +12,7 @@ import WatchKit
 @main
 struct WearableApp: App {
     
-    @WKExtensionDelegateAdaptor(ExtensionDelegate.self) var extensionDelegate
+    @WKApplicationDelegateAdaptor(ExtensionDelegate.self) var extensionDelegate
     
     @SceneBuilder var body: some Scene {
         WindowGroup {

@@ -30,7 +30,7 @@ struct ActivityIndicatorView: View {
    // MARK: - View
    var body: some View {
        GeometryReader { geometry in
-            ForEach(0..<self.count) { index in
+            ForEach(0..<self.count,  id: \.self) { index in
                 Circle()
                     .fill(Color.white)
                     .frame(width: 3.0, height: 3.0)

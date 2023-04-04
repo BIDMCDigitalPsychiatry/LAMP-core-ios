@@ -20,7 +20,7 @@ public extension UIDevice {
                 String.init(validatingUTF8: ptr)
             }
         }
-        if let modelcodeide = modelCode, let modelStr = String.init(validatingUTF8: modelcodeide) {
+        if let modelcodeide = modelCode, let modelStr = String(stringValue: modelcodeide) {
             return modelStr
         } else {
             return "nil"

@@ -24,7 +24,7 @@ extension LMSensorManager: WatchOSDelegate {
                 User.shared.logout()
                 Utils.postNotificationOnMainQueueAsync(name: .userLogOut)
 //                if isLoginPreviously {
-//                    WKExtension.shared().unregisterForRemoteNotifications()
+//                    WKApplication.shared().unregisterForRemoteNotifications()
 //                }
             }
         }

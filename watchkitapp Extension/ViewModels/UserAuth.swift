@@ -73,7 +73,7 @@ class UserAuth: ObservableObject {
     @objc func userLogined(_ notification: Notification) {
         print("received notification")
         loginStatus = Status.loggedIn
-        WKExtension.shared().registerForRemoteNotifications()
+        WKApplication.shared().registerForRemoteNotifications()
     }
     
     // .login notification handler. Update the UI the notification object.
