@@ -51,6 +51,7 @@
 		B2704DF724B4A2AC00DE196B /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B2704DF624B4A2AC00DE196B /* Preview Assets.xcassets */; };
 		B2704DFC24B4A2AC00DE196B /* watchkitapp.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = B2704DD624B4A2A900DE196B /* watchkitapp.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		B2704E0724B4AE7800DE196B /* UserAuth.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2704E0624B4AE7800DE196B /* UserAuth.swift */; };
+		B272899F29E5CD33000B660A /* LAMP in Frameworks */ = {isa = PBXBuildFile; productRef = B2EC709E29DC191700172466 /* LAMP */; };
 		B27667A325FBDD740009022D /* ActivityLocalNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = B27667A225FBDD740009022D /* ActivityLocalNotification.swift */; };
 		B27DBDA027856437002DFAF9 /* LampURL.swift in Sources */ = {isa = PBXBuildFile; fileRef = B27DBD9F27856437002DFAF9 /* LampURL.swift */; };
 		B27DBDA127856437002DFAF9 /* LampURL.swift in Sources */ = {isa = PBXBuildFile; fileRef = B27DBD9F27856437002DFAF9 /* LampURL.swift */; };
@@ -323,8 +324,6 @@
 		B2D12D7C29520E3D0044F5DC /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		B2D12D7E29520E400044F5DC /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		B2D12D7F29520E410044F5DC /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		B2D12D802952396D0044F5DC /* base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = base; path = base.lproj/Localizable.strings; sourceTree = "<group>"; };
-		B2D12D81295239770044F5DC /* base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = base; path = base.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		B2D2CA6525503AAE0086C864 /* WatchOSDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchOSDelegate.swift; sourceTree = "<group>"; };
 		B2D930F72445D7E90086477D /* CustomNotification.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = CustomNotification.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		B2D930F82445D7E90086477D /* UserNotifications.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UserNotifications.framework; path = System/Library/Frameworks/UserNotifications.framework; sourceTree = SDKROOT; };
@@ -345,6 +344,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B272899F29E5CD33000B660A /* LAMP in Frameworks */,
 				B24EEA1326CA9EE2003A294D /* LAMP in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -905,7 +905,6 @@
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
-				Base,
 				base,
 				de,
 				da,
@@ -1135,7 +1134,6 @@
 				B2D12D6729520E010044F5DC /* en */,
 				B2D12D6B29520E060044F5DC /* fr */,
 				B2D12D6F29520E090044F5DC /* ko */,
-				B2D12D802952396D0044F5DC /* base */,
 				B2F0F14C296E9741008A8A7B /* da */,
 				B2B96DAB2984C094006CBA22 /* de */,
 				B2B96DAF2984C709006CBA22 /* zh-Hans */,
@@ -1150,7 +1148,6 @@
 				B2D12D7229520E2B0044F5DC /* en */,
 				B2D12D7429520E2F0044F5DC /* ko */,
 				B2D12D7529520E300044F5DC /* fr */,
-				B2D12D81295239770044F5DC /* base */,
 				B2F0F14D296E9868008A8A7B /* da */,
 				B2B96DAC2984C118006CBA22 /* de */,
 				B2B96DB02984C709006CBA22 /* zh-Hans */,
