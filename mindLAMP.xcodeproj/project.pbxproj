@@ -1274,7 +1274,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2022.10.27;
+				MARKETING_VERSION = 2023.8.25;
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = digital.lamp.mindlamp;
@@ -1306,7 +1306,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 2022.10.27;
+				MARKETING_VERSION = 2023.8.25;
 				PRODUCT_BUNDLE_IDENTIFIER = digital.lamp.mindlamp.CustomNotification;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "mindLAMP2 Custom Notification Extension AppStore";
@@ -1333,7 +1333,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 2022.10.27;
+				MARKETING_VERSION = 2023.8.25;
 				PRODUCT_BUNDLE_IDENTIFIER = digital.lamp.mindlamp.NotificationService;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "mindLAMP2 Notification Service AppStore";
@@ -1361,7 +1361,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 2022.10.27;
+				MARKETING_VERSION = 2023.8.25;
 				PRODUCT_BUNDLE_IDENTIFIER = digital.lamp.mindlamp.wearable;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "mindLAMP2 WatchApp AppStore";
@@ -1455,7 +1455,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2022.10.27;
+				MARKETING_VERSION = 2023.8.25;
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = digital.lamp.mindlamp;
@@ -1486,7 +1486,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 2022.10.27;
+				MARKETING_VERSION = 2023.8.25;
 				PRODUCT_BUNDLE_IDENTIFIER = digital.lamp.mindlamp.CustomNotification;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "mindLAMP2 Custom Notification Extension AppStore";
@@ -1513,7 +1513,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 2022.10.27;
+				MARKETING_VERSION = 2023.8.25;
 				PRODUCT_BUNDLE_IDENTIFIER = digital.lamp.mindlamp.NotificationService;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "mindLAMP2 Notification Service AppStore";
@@ -1541,7 +1541,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 2022.10.27;
+				MARKETING_VERSION = 2023.8.25;
 				PRODUCT_BUNDLE_IDENTIFIER = digital.lamp.mindlamp.wearable;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "mindLAMP2 WatchApp AppStore";
@@ -1571,7 +1571,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 2022.10.27;
+				MARKETING_VERSION = 2023.8.25;
 				PRODUCT_BUNDLE_IDENTIFIER = digital.lamp.mindlamp.wearable;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "mindLAMP2 WatchApp AppStore";
@@ -1601,7 +1601,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 2022.10.27;
+				MARKETING_VERSION = 2023.8.25;
 				PRODUCT_BUNDLE_IDENTIFIER = digital.lamp.mindlamp.wearable;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "mindLAMP2 WatchApp AppStore";
@@ -1630,7 +1630,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 2022.10.27;
+				MARKETING_VERSION = 2023.8.25;
 				PRODUCT_BUNDLE_IDENTIFIER = digital.lamp.mindlamp.NotificationService;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "mindLAMP2 Notification Service AppStore";
@@ -1657,7 +1657,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 2022.10.27;
+				MARKETING_VERSION = 2023.8.25;
 				PRODUCT_BUNDLE_IDENTIFIER = digital.lamp.mindlamp.NotificationService;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "mindLAMP2 Notification Service AppStore";
@@ -1814,7 +1814,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2022.10.27;
+				MARKETING_VERSION = 2023.8.25;
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = digital.lamp.mindlamp;
@@ -1852,7 +1852,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2022.10.27;
+				MARKETING_VERSION = 2023.8.25;
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = digital.lamp.mindlamp;
@@ -1883,7 +1883,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 2022.10.27;
+				MARKETING_VERSION = 2023.8.25;
 				PRODUCT_BUNDLE_IDENTIFIER = digital.lamp.mindlamp.CustomNotification;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "mindLAMP2 Custom Notification Extension AppStore";
@@ -1910,7 +1910,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 2022.10.27;
+				MARKETING_VERSION = 2023.8.25;
 				PRODUCT_BUNDLE_IDENTIFIER = digital.lamp.mindlamp.CustomNotification;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "mindLAMP2 Custom Notification Extension AppStore";
