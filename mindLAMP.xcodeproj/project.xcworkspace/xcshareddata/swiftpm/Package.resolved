@@ -5,8 +5,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/BIDMCDigitalPsychiatry/LAMP-swift.git",
       "state" : {
-        "revision" : "7a40bb3daebc4d8547d696167e389d167edfd6c7",
-        "version" : "2023.4.19"
+        "revision" : "9a9475c70c2231d071c8b86e609009519f218620",
+        "version" : "2023.10.11"
       }
     }
   ],

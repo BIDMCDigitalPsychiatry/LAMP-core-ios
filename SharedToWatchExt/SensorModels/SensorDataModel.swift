@@ -346,7 +346,7 @@ extension SensorDataModel {
     
     public init(callsData: CallsData) {
         self.type = callsData.type
-        self.duration = Double(callsData.duration)
+        self.duration = callsData.duration
     }
     
     public init(locationData: LocationsData) {
