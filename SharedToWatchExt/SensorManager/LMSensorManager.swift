@@ -72,14 +72,14 @@ class LMSensorManager {
     #if os(iOS)
     var sensor_calls: CallsSensor?
     var lampScreenSensor: ScreenSensor?
-    var sensor_wifi: WiFiSensor?
+    //var sensor_wifi: WiFiSensor?
     #endif
     
     #if os(iOS)
     var reachability: Reachability = try! Reachability()
     #endif
     
-    var sensor_bluetooth: LMBluetoothSensor?
+    var nearByDevice: NearByDevice?
     var sensor_healthKit: LMHealthKitSensor?
     var sensor_pedometer: PedometerSensor?
     
@@ -99,8 +99,6 @@ class LMSensorManager {
     
     var pedometerDataBuffer = [PedometerData]()
     let queuePedometerData = DispatchQueue(label: "thread-safe-PedometerData", attributes: .concurrent)
-    
-    var latestWifiData: WiFiScanData?
     
     //SensorKit Data
     let queueSensorKitBufferData = DispatchQueue(label: "thread-safe-VisitData", attributes: .concurrent)
@@ -292,8 +290,7 @@ class LMSensorManager {
             setupScreenSensor()
         }
         if sensorIdentifiers.contains(SensorType.lamp_nearby_device.lampIdentifier) {
-            setupWifiSensor()
-            setupBluetoothSensor()
+            setupNearBySensor()
         }
         
         setupHealthKitSensor(sensorIdentifiers)
@@ -307,7 +304,7 @@ class LMSensorManager {
     private func deinitSensors() {
         
         sensor_motionManager = nil
-        sensor_bluetooth = nil
+        nearByDevice = nil
         sensor_healthKit = nil
         sensor_location = nil
         
@@ -315,7 +312,6 @@ class LMSensorManager {
         sensor_pedometer = nil
         #if os(iOS)
         sensor_calls = nil
-        sensor_wifi = nil
         lampScreenSensor = nil
         #endif
     }
@@ -616,9 +612,13 @@ private extension LMSensorManager {
         return false
     }
     
-    func setupBluetoothSensor() {
-        sensor_bluetooth = LMBluetoothSensor()
-        sensorManager.addSensor(sensor_bluetooth!)
+    func setupNearBySensor() {
+        nearByDevice = NearByDevice(NearByDevice.Config().apply(closure: { config in
+            if let frquency = frquencySettings[SensorType.lamp_nearby_device.lampIdentifier] {
+                config.frequency = frquency
+            }
+        }))
+        sensorManager.addSensor(nearByDevice!)
     }
     
     func setupHealthKitSensor(_ specIdentifiers: [String]) {
@@ -703,14 +703,6 @@ private extension LMSensorManager {
             config.interval = 1.0 //in seconds
         }))
         sensorManager.addSensor(lampScreenSensor!)
-    }
-    
-    func setupWifiSensor() {
-        //we start scanning only when using the default timer (i.e when calling timeTostore() )
-        sensor_wifi = WiFiSensor.init(WiFiSensor.Config().apply(closure: { config in
-            config.sensorObserver = self
-        }))
-        sensorManager.addSensor(sensor_wifi!)
     }
     #endif
 }
@@ -906,26 +898,30 @@ private extension LMSensorManager {
     
     func fetchNearbyDeviceData() -> [SensorEvent<SensorDataModel>] {
         var dataArray: [SensorEvent<SensorDataModel>] = []
-        if let data = sensor_bluetooth?.latestData() {
-            var model = SensorDataModel()
-            model.type = SensorType.NearbyDevicetype.bluetooth
-            model.address = data.address
-            model.name = data.name
-            model.strength = data.rssi
-            let bluetoothevent = SensorEvent(timestamp: data.timestamp, sensor: SensorType.lamp_nearby_device.lampIdentifier, data: model)
-            dataArray.append(bluetoothevent)
+        if let dataa = nearByDevice?.latestBluetoothData() {
+            dataa.forEach { data in
+                var model = SensorDataModel()
+                model.type = SensorType.NearbyDevicetype.bluetooth
+                model.address = data.address
+                model.name = data.name
+                model.strength = data.rssi
+                let bluetoothevent = SensorEvent(timestamp: data.timestamp, sensor: SensorType.lamp_nearby_device.lampIdentifier, data: model)
+                dataArray.append(bluetoothevent)
+            }
+            
         }
         
-        if let data = latestWifiData {
-            var model = SensorDataModel()
-            model.type = SensorType.NearbyDevicetype.wifi
-            model.address = data.bssid
-            model.name = data.ssid
-            model.strength = data.rssi
-            let wifiEvent = SensorEvent(timestamp: data.timestamp, sensor: SensorType.lamp_nearby_device.lampIdentifier, data: model)
-            dataArray.append(wifiEvent)
-            //clear existing
-            latestWifiData = nil
+        if let dataa = nearByDevice?.latestWifiData() {
+            dataa.forEach { data in
+                var model = SensorDataModel()
+                model.type = SensorType.NearbyDevicetype.wifi
+                model.address = data.bssid
+                model.name = data.ssid
+                model.strength = data.rssi
+                let wifiEvent = SensorEvent(timestamp: data.timestamp, sensor: SensorType.lamp_nearby_device.lampIdentifier, data: model)
+                dataArray.append(wifiEvent)
+            }
+            
         }
         return dataArray
     }

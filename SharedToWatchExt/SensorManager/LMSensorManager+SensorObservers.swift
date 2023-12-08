@@ -28,13 +28,11 @@ extension LMSensorManager: SensorStore {
         DispatchQueue.main.async {
             (UIApplication.shared.delegate as? AppDelegate)?.calculateBadgeCount()
         }
-        sensor_wifi?.startScanning()
 
         //set 15 seconds delay to fetch all healthkit data
         printToFile("15 seconds delay")
         DispatchQueue.global().asyncAfter(deadline: .now() + 15) {
             printToFile("----")
-            self.sensor_wifi?.stopScanning()
             if self.sensor_location == nil {
                 printToFile("\ndeallocated")
                 return } //stop syncing if sensors are stopped
@@ -293,23 +291,4 @@ extension LMSensorManager: ScreenStateObserver {
     }
 }
 
-// MARK: - WiFiObserver
-extension LMSensorManager: WiFiObserver {
-    
-    func onWiFiAPDetected(data: WiFiScanData) {
-        latestWifiData = data
-    }
-    
-    func onWiFiDisabled() {
-        print("\(#function)")
-    }
-    
-    func onWiFiScanStarted() {
-        print("\(#function)")
-    }
-    
-    func onWiFiScanEnded() {
-        print("\(#function)")
-    }
-}
 #endif
