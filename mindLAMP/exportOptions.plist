@@ -11,15 +11,15 @@
 	<key>provisioningProfiles</key>
 	<dict>
 		<key>digital.lamp.mindlamp</key>
-		<string>mindLAMP2 2022</string>
+		<string>mindLAMP2</string>
 		<key>digital.lamp.mindlamp.CustomNotification</key>
-		<string>mindLAMP2 Custom Notification Extension AppStore</string>
+		<string>mindLAMP2 Custom Notification Extension</string>
 		<key>digital.lamp.mindlamp.NotificationService</key>
-		<string>mindLAMP2 Notification Service AppStore</string>
+		<string>mindLAMP2 Notification Service</string>
 		<key>digital.lamp.mindlamp.wearable</key>
-		<string>mindLAMP2 WatchApp AppStore</string>
+		<string>mindLAMP2 WatchApp</string>
 		<key>digital.lamp.mindlamp.wearable.extension</key>
-		<string>mindLAMP2 WatchApp Extension AppStore</string>
+		<string>mindLAMP2 WatchApp Extension</string>
 	</dict>
 </dict>
 </plist>
