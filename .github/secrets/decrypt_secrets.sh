@@ -16,12 +16,12 @@ echo "Imported"
 
 mkdir -p ~/Library/MobileDevice/Provisioning\ Profiles
 
-cp .github/secrets/mindLAMP2_2022.mobileprovision ~/Library/MobileDevice/Provisioning\ Profiles/mindLAMP2.mobileprovision
-cp .github/secrets/mindLAMP2_Custom_Notification_Extension_AppStore.mobileprovision ~/Library/MobileDevice/Provisioning\ Profiles/mindLAMP2_Custom_Notification_Extension.mobileprovision
-cp .github/secrets/mindLAMP2_Notification_Service_AppStore.mobileprovision ~/Library/MobileDevice/Provisioning\ Profiles/mindLAMP2_Notification_Service.mobileprovision
+cp .github/secrets/mindLAMP2.mobileprovision ~/Library/MobileDevice/Provisioning\ Profiles/mindLAMP2.mobileprovision
+cp .github/secrets/mindLAMP2_Custom_Notification_Extension.mobileprovision ~/Library/MobileDevice/Provisioning\ Profiles/mindLAMP2_Custom_Notification_Extension.mobileprovision
+cp .github/secrets/mindLAMP2_Notification_Service.mobileprovision ~/Library/MobileDevice/Provisioning\ Profiles/mindLAMP2_Notification_Service.mobileprovision
 
-cp .github/secrets/mindLAMP2_WatchApp_Extension_AppStore.mobileprovision ~/Library/MobileDevice/Provisioning\ Profiles/mindLAMP2_WatchApp_Extension.mobileprovision
-cp .github/secrets/mindLAMP2_WatchApp_AppStore.mobileprovision ~/Library/MobileDevice/Provisioning\ Profiles/mindLAMP2_WatchApp.mobileprovision
+cp .github/secrets/mindLAMP2_WatchApp_Extension.mobileprovision ~/Library/MobileDevice/Provisioning\ Profiles/mindLAMP2_WatchApp_Extension.mobileprovision
+cp .github/secrets/mindLAMP2_WatchApp.mobileprovision ~/Library/MobileDevice/Provisioning\ Profiles/mindLAMP2_WatchApp.mobileprovision
 
 echo "Copied"
 
