@@ -742,6 +742,10 @@ private extension LMSensorManager {
         if let data = fetchHealthKitQuantityData() {
             arraySensorData.append(contentsOf: data)
         }
+        if let data = fetchBPData() {
+            arraySensorData.append(contentsOf: data)
+        }
+        
         if let data = fetchHKCategoryData() {
             arraySensorData.append(contentsOf: data)
         }
@@ -751,7 +755,6 @@ private extension LMSensorManager {
         }
         sensor_healthKit?.clearDataArrays()//clear all healthkit data fetched
         #endif
-        
         return arraySensorData
     }
 }
@@ -990,6 +993,27 @@ private extension LMSensorManager {
         }
         return arrayData
     }
+    
+    func fetchBPData() -> [SensorEvent<SensorDataModel>]? {
+        guard let arrData = sensor_healthKit?.latestBPData() else {
+            return nil
+        }
+
+        return arrData.compactMap { bpdata in
+            
+            if let sys = bpdata.systolic, let dias = bpdata.diastolic {
+                var model = SensorDataModel()
+                model.diastolic = SensorDataModel.Pressure(value: dias, units: bpdata.unit, source: bpdata.source, timestamp: UInt64(bpdata.timestamp))
+                model.systolic = SensorDataModel.Pressure(value: sys, units: bpdata.unit, source: bpdata.source, timestamp: UInt64(bpdata.timestamp))
+                model.startDate = bpdata.startDate
+                model.endDate = bpdata.endDate
+                model.source = Tristate(bpdata.source)
+                model.device_model = Tristate(bpdata.hkDevice)
+                return SensorEvent(timestamp: Double(Date().timeInMilliSeconds), sensor: bpdata.hkIdentifier.lampIdentifier, data: model)
+            }
+            return nil
+        }
+    }
 
     func fetchHealthKitQuantityData() -> [SensorEvent<SensorDataModel>]? {
         guard let arrData = sensor_healthKit?.latestQuantityData() else {
@@ -997,25 +1021,12 @@ private extension LMSensorManager {
         }
         var arrayData = [SensorEvent<SensorDataModel>]()
         
-        guard let quantityTypes: [HKQuantityTypeIdentifier] = sensor_healthKit?.healthQuantityTypes.map( {HKQuantityTypeIdentifier(rawValue: $0.identifier)} ) else { return nil }
+        guard let quantityTypes: [HKQuantityTypeIdentifier] = sensor_healthKit?.healthQuantityTypes(isForAuthoroization: false).map( {HKQuantityTypeIdentifier(rawValue: $0.identifier)} ) else { return nil }
         for quantityType in quantityTypes {
             switch quantityType {
             
             case .bloodPressureSystolic:
-                if let dataDiastolic = latestData(for: HKQuantityTypeIdentifier.bloodPressureDiastolic, in: arrData), let dataSystolic = latestData(for: HKQuantityTypeIdentifier.bloodPressureSystolic, in: arrData) {
-                    var model = SensorDataModel()
-                    if let diastolic = dataDiastolic.value {
-                        model.diastolic = SensorDataModel.Pressure(value: diastolic, units: dataDiastolic.unit, source: dataDiastolic.source, timestamp: UInt64(dataDiastolic.timestamp))
-                    }
-                    if let systolic = dataSystolic.value {
-                        model.systolic = SensorDataModel.Pressure(value: systolic, units: dataSystolic.unit, source: dataSystolic.source, timestamp: UInt64(dataSystolic.timestamp))
-                    }
-                    model.startDate = dataSystolic.startDate
-                    model.endDate = dataSystolic.endDate
-                    model.source = Tristate(dataDiastolic.source)
-                    model.device_model = Tristate(dataDiastolic.hkDevice)
-                    arrayData.append(SensorEvent(timestamp: Double(Date().timeInMilliSeconds), sensor: quantityType.lampIdentifier, data: model))
-                }
+                ()
             case .bloodPressureDiastolic:
                 ()//handled with Systolic
             default://bodyMass, height, respiratoryRate, heartRate
