@@ -11,6 +11,7 @@ gpg --quiet --batch --yes --decrypt --passphrase="$IOS_KEYS" --output .github/se
 
 gpg --quiet --batch --yes --decrypt --passphrase="$IOS_KEYS" --output .github/secrets/mindLAMP2_WatchApp_Extension.mobileprovision .github/secrets/mindLAMP2_WatchApp_Extension.mobileprovision.gpg
 gpg --quiet --batch --yes --decrypt --passphrase="$IOS_KEYS" --output .github/secrets/mindLAMP2_WatchApp.mobileprovision .github/secrets/mindLAMP2_WatchApp.mobileprovision.gpg
+gpg --quiet --batch --yes --decrypt --passphrase="$IOS_KEYS" --output .github/secrets/mindLAMP2_StreakWidget.mobileprovision .github/secrets/mindLAMP2_StreakWidget.mobileprovision.gpg
 
 echo "Imported"
 
@@ -22,6 +23,7 @@ cp .github/secrets/mindLAMP2_Notification_Service.mobileprovision ~/Library/Mobi
 
 cp .github/secrets/mindLAMP2_WatchApp_Extension.mobileprovision ~/Library/MobileDevice/Provisioning\ Profiles/mindLAMP2_WatchApp_Extension.mobileprovision
 cp .github/secrets/mindLAMP2_WatchApp.mobileprovision ~/Library/MobileDevice/Provisioning\ Profiles/mindLAMP2_WatchApp.mobileprovision
+cp .github/secrets/mindLAMP2_WatchApp.mobileprovision ~/Library/MobileDevice/Provisioning\ Profiles/mindLAMP2_StreakWidget.mobileprovision
 
 echo "Copied"
 
