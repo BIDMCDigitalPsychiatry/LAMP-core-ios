@@ -84,52 +84,6 @@ class ActivityLocalNotification {
             }
             UserDefaults.standard.activityAPILastAccessedDate = Date()
         }
-        
-        /*
-        guard let authheader = Endpoint.getSessionKey(), let participantId = User.shared.userId else {
-            printError("Auth header missing")
-            return
-        }
-        OpenAPIClientAPI.basePath = LampURL.baseURLString
-        OpenAPIClientAPI.customHeaders = ["Authorization": "Basic \(authheader)", "Content-Type": "application/json"]
-        let publisher = ActivityAPI.activityAllByParticipant(participantId: participantId)
-        print("ActivityAPI")
-        activitySubscriber = publisher.sink(receiveCompletion: { value in
-            print("value activity = \(value)")
-            switch value {
-            case .failure(let ErrorResponse.error(code, data, error)):
-                printError("ActivityAPI error code\(code), \(error.localizedDescription)")
-                if let data = data {
-                    let decoder = JSONDecoder()
-                    do {
-                        let errResponse = try decoder.decode(ErrResponse.self, from: data)
-                        printError("\nActivityAPI errResponse \(String(describing: errResponse.error))")
-                    } catch let err {
-                        printError("ActivityAPI err = \(err.localizedDescription)")
-                    }
-                }
-            case .failure(let error):
-                printError("ActivityAPI error \(error.localizedDescription)")
-                if let nsError = error as NSError? {
-                    let errorCode = nsError.code
-                    /// -1009 is the offline error code
-                    /// so log errors other than connection issue
-                    if errorCode == -1009 {
-                        LMLogsManager.shared.addLogs(level: .warning, logs: Logs.Messages.network_error + " " + nsError.localizedDescription)
-                    } else {
-                        LMLogsManager.shared.addLogs(level: .error, logs: Logs.Messages.network_error + " " + nsError.localizedDescription)
-                    }
-                }
-            case .finished:
-                UserDefaults.standard.activityAPILastAccessedDate = Date()
-                break
-            }
-        }, receiveValue: { response in
-            let allActivity = response.data
-            print("ActivityAPI allActivity = \(allActivity.count)")
-            self.scheduleActivities(allActivity)
-        })
-         */
     }
     
     func cancelAll() {

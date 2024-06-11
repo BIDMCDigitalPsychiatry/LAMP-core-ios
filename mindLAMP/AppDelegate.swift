@@ -14,6 +14,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow? //for iOS < 13
     let queue = DispatchQueue(label: "Timer", qos: .background, attributes: .concurrent)
     //var subscriber: AnyCancellable?
+    private var widgetHelper = StreakWidgetHelper()
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Logging.isLogToFile = true
@@ -57,6 +58,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     func applicationDidEnterBackground(_ application: UIApplication) {
         calculateBadgeCount()
+    }
+    func applicationWillResignActive(_ application: UIApplication) {
+        widgetHelper.fetchActivityEvents(participantId: UserDefaults.standard.participantIdShared, completion: nil)
     }
 }
 

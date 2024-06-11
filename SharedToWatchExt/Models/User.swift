@@ -31,6 +31,7 @@ struct User {
         UserDefaults.standard.serverAddressShared = serverAddressWithHttps?.cleanHostName()
         UserDefaults.standard.userIDShared = username
         UserDefaults.standard.userID = userID
+        UserDefaults.standard.participantIdShared = userID
         UserDefaults.standard.setInitalSensorRecorderTimestamp()
     }
     #endif

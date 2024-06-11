@@ -190,7 +190,7 @@ struct RequestData: RequestProtocol {
         switch endURL {
         case .logs, .getLatestDashboard:
             return false
-        case .participantSensorEvent, .getParticipant, .sensor, .activity:
+        case .participantSensorEvent, .getParticipant, .sensor, .activity, .activityEvent:
             return true
         }
     }
@@ -200,7 +200,7 @@ struct RequestData: RequestProtocol {
         switch endURL {
         case .getLatestDashboard:
             return true
-        case .logs, .participantSensorEvent, .getParticipant, .sensor, .activity:
+        case .logs, .participantSensorEvent, .getParticipant, .sensor, .activity, .activityEvent:
             return false
         }
     }
