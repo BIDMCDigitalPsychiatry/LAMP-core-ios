@@ -147,6 +147,33 @@ extension UserDefaults {
             }
         }
     }
+    var streakDataCurrentShared: Int {
+        get {
+            if let userDefaults = UserDefaults(suiteName: suiteName) {
+                return userDefaults.integer(forKey: "streakDataCurrentShared")
+            }
+            return 0
+        }
+        set {
+            if let userDefaults = UserDefaults(suiteName: suiteName) {
+                userDefaults.set(newValue as AnyObject, forKey: "streakDataCurrentShared")
+            }
+        }
+    }
+    var streakDataMaxShared: Int {
+        get {
+            if let userDefaults = UserDefaults(suiteName: suiteName) {
+                return userDefaults.integer(forKey: "streakDataMaxShared")
+            }
+            return 0
+        }
+        set {
+            if let userDefaults = UserDefaults(suiteName: suiteName) {
+                userDefaults.set(newValue as AnyObject, forKey: "streakDataMaxShared")
+            }
+        }
+    }
+    ///this is user name
     var userIDShared: String? {
         get {
             if let userDefaults = UserDefaults(suiteName: suiteName) {
@@ -162,6 +189,26 @@ extension UserDefaults {
                     userDefaults.removeObject(forKey: "userid")
                 } else {
                     userDefaults.set(newValue as AnyObject, forKey: "userid")
+                }
+            }
+        }
+    }
+    //this is userid
+    var participantIdShared: String? {
+        get {
+            if let userDefaults = UserDefaults(suiteName: suiteName) {
+                if let value = userDefaults.string(forKey: "participantIdShared") {
+                    return value
+                }
+            }
+            return nil
+        }
+        set {
+            if let userDefaults = UserDefaults(suiteName: suiteName) {
+                if newValue == nil {
+                    userDefaults.removeObject(forKey: "participantIdShared")
+                } else {
+                    userDefaults.set(newValue as AnyObject, forKey: "participantIdShared")
                 }
             }
         }

@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		B2073F0F256EC29C0068E001 /* AppColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2073F0E256EC29C0068E001 /* AppColors.swift */; };
+		B20B62622C0CE540000B3899 /* mindLAMP2Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B20B62612C0CE540000B3899 /* mindLAMP2Tests.swift */; };
 		B212A437257E2DFB003637DF /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B212A436257E2DFB003637DF /* SceneDelegate.swift */; };
 		B2201C24257F4DBC00C40183 /* LeakAvoider.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2201C19257F4DBC00C40183 /* LeakAvoider.swift */; };
 		B2201C25257F4DBC00C40183 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2201C1A257F4DBC00C40183 /* HomeViewController.swift */; };
@@ -33,6 +34,7 @@
 		B2464A0826DBF7240077D6BA /* Diagnostics.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2464A0726DBF7240077D6BA /* Diagnostics.swift */; };
 		B2464A0926DBF7240077D6BA /* Diagnostics.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2464A0726DBF7240077D6BA /* Diagnostics.swift */; };
 		B247D14E25A88E2F00776B41 /* WearableApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B247D14D25A88E2F00776B41 /* WearableApp.swift */; };
+		B24AC1542C09B235009DE84E /* StreakWidgetHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = B24AC1532C09B235009DE84E /* StreakWidgetHelper.swift */; };
 		B24CD25F25E8FAD2007E14ED /* RepeatingTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = B24CD25E25E8FAD2007E14ED /* RepeatingTimer.swift */; };
 		B24CD26025E8FAD2007E14ED /* RepeatingTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = B24CD25E25E8FAD2007E14ED /* RepeatingTimer.swift */; };
 		B24CD28325E9154E007E14ED /* Collection+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B24CD28225E9154E007E14ED /* Collection+Extension.swift */; };
@@ -45,6 +47,19 @@
 		B2587B5D256E23BC00A2A7F2 /* EndPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2587B50256E23BC00A2A7F2 /* EndPoint.swift */; };
 		B2587B5E256E23BC00A2A7F2 /* EndPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2587B50256E23BC00A2A7F2 /* EndPoint.swift */; };
 		B2587B5F256E23BC00A2A7F2 /* EndPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2587B50256E23BC00A2A7F2 /* EndPoint.swift */; };
+		B2657AA12C11A22E009AFC3B /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B2657AA02C11A22E009AFC3B /* WidgetKit.framework */; };
+		B2657AA32C11A22E009AFC3B /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B2657AA22C11A22E009AFC3B /* SwiftUI.framework */; };
+		B2657AA62C11A22E009AFC3B /* StreakWidgetBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2657AA52C11A22E009AFC3B /* StreakWidgetBundle.swift */; };
+		B2657AA82C11A22E009AFC3B /* StreakWidgetLiveActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2657AA72C11A22E009AFC3B /* StreakWidgetLiveActivity.swift */; };
+		B2657AAA2C11A22E009AFC3B /* StreakWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2657AA92C11A22E009AFC3B /* StreakWidget.swift */; };
+		B2657AAC2C11A22E009AFC3B /* AppIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2657AAB2C11A22E009AFC3B /* AppIntent.swift */; };
+		B2657AAE2C11A230009AFC3B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B2657AAD2C11A230009AFC3B /* Assets.xcassets */; };
+		B2657AB22C11A230009AFC3B /* StreakWidgetExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = B2657A9F2C11A22E009AFC3B /* StreakWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		B2657AB82C11AB94009AFC3B /* StreakWidgetHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = B24AC1532C09B235009DE84E /* StreakWidgetHelper.swift */; };
+		B2657ABA2C14C148009AFC3B /* LampURL.swift in Sources */ = {isa = PBXBuildFile; fileRef = B27DBD9F27856437002DFAF9 /* LampURL.swift */; };
+		B2657ABB2C14C1D4009AFC3B /* EndPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2587B50256E23BC00A2A7F2 /* EndPoint.swift */; };
+		B2657ABC2C14C20B009AFC3B /* String+Localize.swift in Sources */ = {isa = PBXBuildFile; fileRef = B29C0068295ACF60009EAF7B /* String+Localize.swift */; };
+		B2657ABF2C15E6E4009AFC3B /* UserDefaults+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B27DBDA427856455002DFAF9 /* UserDefaults+Extension.swift */; };
 		B2704DDC24B4A2AC00DE196B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B2704DDB24B4A2AC00DE196B /* Assets.xcassets */; };
 		B2704DEC24B4A2AC00DE196B /* ExtensionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2704DEB24B4A2AC00DE196B /* ExtensionDelegate.swift */; };
 		B2704DF424B4A2AC00DE196B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B2704DF324B4A2AC00DE196B /* Assets.xcassets */; };
@@ -153,6 +168,20 @@
 /* End PBXBuildRule section */
 
 /* Begin PBXContainerItemProxy section */
+		B20B62632C0CE540000B3899 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B29639C523BDC28100626E1A /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = B29639CC23BDC28100626E1A;
+			remoteInfo = mindLAMP;
+		};
+		B2657AB02C11A230009AFC3B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B29639C523BDC28100626E1A /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = B2657A9E2C11A22E009AFC3B;
+			remoteInfo = StreakWidgetExtension;
+		};
 		B2704DFA24B4A2AC00DE196B /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = B29639C523BDC28100626E1A /* Project object */;
@@ -206,6 +235,7 @@
 			files = (
 				B2D931052445D7E90086477D /* CustomNotification.appex in Embed Foundation Extensions */,
 				B2847FBB2450550E0042D43B /* NotificationService.appex in Embed Foundation Extensions */,
+				B2657AB22C11A230009AFC3B /* StreakWidgetExtension.appex in Embed Foundation Extensions */,
 			);
 			name = "Embed Foundation Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -215,6 +245,8 @@
 /* Begin PBXFileReference section */
 		5FC0151223C5A85300990506 /* mindLAMP-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "mindLAMP-Bridging-Header.h"; sourceTree = "<group>"; };
 		B2073F0E256EC29C0068E001 /* AppColors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppColors.swift; sourceTree = "<group>"; };
+		B20B625F2C0CE540000B3899 /* mindLAMP2Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = mindLAMP2Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		B20B62612C0CE540000B3899 /* mindLAMP2Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = mindLAMP2Tests.swift; sourceTree = "<group>"; };
 		B212A436257E2DFB003637DF /* SceneDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		B212A44F257E3453003637DF /* ActivityIndicator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityIndicator.swift; sourceTree = "<group>"; };
 		B2201C19257F4DBC00C40183 /* LeakAvoider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LeakAvoider.swift; sourceTree = "<group>"; };
@@ -239,6 +271,7 @@
 		B244A1C123BF4A91007FBDB8 /* FileManager+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FileManager+Extension.swift"; sourceTree = "<group>"; };
 		B2464A0726DBF7240077D6BA /* Diagnostics.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Diagnostics.swift; sourceTree = "<group>"; };
 		B247D14D25A88E2F00776B41 /* WearableApp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WearableApp.swift; sourceTree = "<group>"; };
+		B24AC1532C09B235009DE84E /* StreakWidgetHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StreakWidgetHelper.swift; sourceTree = "<group>"; };
 		B24CD25E25E8FAD2007E14ED /* RepeatingTimer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepeatingTimer.swift; sourceTree = "<group>"; };
 		B24CD28225E9154E007E14ED /* Collection+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Collection+Extension.swift"; sourceTree = "<group>"; };
 		B255116424B6202300CDBDD1 /* WatchNotificationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchNotificationModel.swift; sourceTree = "<group>"; };
@@ -247,6 +280,16 @@
 		B2587B4D256E23BC00A2A7F2 /* Staging.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Staging.xcconfig; sourceTree = "<group>"; };
 		B2587B4E256E23BC00A2A7F2 /* Production.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Production.xcconfig; sourceTree = "<group>"; };
 		B2587B50256E23BC00A2A7F2 /* EndPoint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EndPoint.swift; sourceTree = "<group>"; };
+		B2657A9F2C11A22E009AFC3B /* StreakWidgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = StreakWidgetExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		B2657AA02C11A22E009AFC3B /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
+		B2657AA22C11A22E009AFC3B /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
+		B2657AA52C11A22E009AFC3B /* StreakWidgetBundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StreakWidgetBundle.swift; sourceTree = "<group>"; };
+		B2657AA72C11A22E009AFC3B /* StreakWidgetLiveActivity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StreakWidgetLiveActivity.swift; sourceTree = "<group>"; };
+		B2657AA92C11A22E009AFC3B /* StreakWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StreakWidget.swift; sourceTree = "<group>"; };
+		B2657AAB2C11A22E009AFC3B /* AppIntent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppIntent.swift; sourceTree = "<group>"; };
+		B2657AAD2C11A230009AFC3B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		B2657AAF2C11A230009AFC3B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B2657AB92C11B8AF009AFC3B /* StreakWidgetExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = StreakWidgetExtension.entitlements; sourceTree = "<group>"; };
 		B26B56C92566EE5B00A87711 /* CustomNotification.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = CustomNotification.entitlements; sourceTree = "<group>"; };
 		B2704DD624B4A2A900DE196B /* watchkitapp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = watchkitapp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B2704DDB24B4A2AC00DE196B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -340,6 +383,22 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		B20B625C2C0CE540000B3899 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B2657A9C2C11A22E009AFC3B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B2657AA32C11A22E009AFC3B /* SwiftUI.framework in Frameworks */,
+				B2657AA12C11A22E009AFC3B /* WidgetKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		B2704DDF24B4A2AC00DE196B /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -378,6 +437,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		B20B62602C0CE540000B3899 /* mindLAMP2Tests */ = {
+			isa = PBXGroup;
+			children = (
+				B20B62612C0CE540000B3899 /* mindLAMP2Tests.swift */,
+			);
+			path = mindLAMP2Tests;
+			sourceTree = "<group>";
+		};
 		B212A44E257E3453003637DF /* Views */ = {
 			isa = PBXGroup;
 			children = (
@@ -456,6 +523,14 @@
 			path = Extensions;
 			sourceTree = "<group>";
 		};
+		B24AC1522C09B1F6009DE84E /* StreakWidgetHelper */ = {
+			isa = PBXGroup;
+			children = (
+				B24AC1532C09B235009DE84E /* StreakWidgetHelper.swift */,
+			);
+			path = StreakWidgetHelper;
+			sourceTree = "<group>";
+		};
 		B255115D24B5FA0900CDBDD1 /* PushNotification */ = {
 			isa = PBXGroup;
 			children = (
@@ -508,6 +583,19 @@
 				B2587B4E256E23BC00A2A7F2 /* Production.xcconfig */,
 			);
 			path = Configs;
+			sourceTree = "<group>";
+		};
+		B2657AA42C11A22E009AFC3B /* StreakWidget */ = {
+			isa = PBXGroup;
+			children = (
+				B2657AA52C11A22E009AFC3B /* StreakWidgetBundle.swift */,
+				B2657AA72C11A22E009AFC3B /* StreakWidgetLiveActivity.swift */,
+				B2657AA92C11A22E009AFC3B /* StreakWidget.swift */,
+				B2657AAB2C11A22E009AFC3B /* AppIntent.swift */,
+				B2657AAD2C11A230009AFC3B /* Assets.xcassets */,
+				B2657AAF2C11A230009AFC3B /* Info.plist */,
+			);
+			path = StreakWidget;
 			sourceTree = "<group>";
 		};
 		B2704DD724B4A2A900DE196B /* watchkitapp */ = {
@@ -570,14 +658,18 @@
 		B29639C423BDC28100626E1A = {
 			isa = PBXGroup;
 			children = (
+				B2657AB92C11B8AF009AFC3B /* StreakWidgetExtension.entitlements */,
 				B2587B49256E23BC00A2A7F2 /* Shared */,
 				B2A15BB22567A8BE00222717 /* SharedToWatchExt */,
 				B2E6A565256F195000E2CBC8 /* SharedToNotificationContent */,
+				B24AC1522C09B1F6009DE84E /* StreakWidgetHelper */,
 				B29639CF23BDC28100626E1A /* mindLAMP */,
 				B2D930FC2445D7E90086477D /* CustomNotification */,
 				B2847FB52450550E0042D43B /* NotificationService */,
 				B2704DD724B4A2A900DE196B /* watchkitapp */,
 				B2704DE624B4A2AC00DE196B /* watchkitapp Extension */,
+				B20B62602C0CE540000B3899 /* mindLAMP2Tests */,
+				B2657AA42C11A22E009AFC3B /* StreakWidget */,
 				B29639CE23BDC28100626E1A /* Products */,
 				B2B8979623D0ADBA00321C3E /* Frameworks */,
 			);
@@ -590,6 +682,8 @@
 				B2D930F72445D7E90086477D /* CustomNotification.appex */,
 				B2847FB42450550E0042D43B /* NotificationService.appex */,
 				B2704DD624B4A2A900DE196B /* watchkitapp.app */,
+				B20B625F2C0CE540000B3899 /* mindLAMP2Tests.xctest */,
+				B2657A9F2C11A22E009AFC3B /* StreakWidgetExtension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -750,6 +844,8 @@
 				B2B8979723D0ADBA00321C3E /* HealthKit.framework */,
 				B2D930F82445D7E90086477D /* UserNotifications.framework */,
 				B2D930FA2445D7E90086477D /* UserNotificationsUI.framework */,
+				B2657AA02C11A22E009AFC3B /* WidgetKit.framework */,
+				B2657AA22C11A22E009AFC3B /* SwiftUI.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -792,6 +888,41 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		B20B625E2C0CE540000B3899 /* mindLAMP2Tests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = B20B62692C0CE540000B3899 /* Build configuration list for PBXNativeTarget "mindLAMP2Tests" */;
+			buildPhases = (
+				B20B625B2C0CE540000B3899 /* Sources */,
+				B20B625C2C0CE540000B3899 /* Frameworks */,
+				B20B625D2C0CE540000B3899 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				B20B62642C0CE540000B3899 /* PBXTargetDependency */,
+			);
+			name = mindLAMP2Tests;
+			productName = mindLAMP2Tests;
+			productReference = B20B625F2C0CE540000B3899 /* mindLAMP2Tests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		B2657A9E2C11A22E009AFC3B /* StreakWidgetExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = B2657AB72C11A230009AFC3B /* Build configuration list for PBXNativeTarget "StreakWidgetExtension" */;
+			buildPhases = (
+				B2657A9B2C11A22E009AFC3B /* Sources */,
+				B2657A9C2C11A22E009AFC3B /* Frameworks */,
+				B2657A9D2C11A22E009AFC3B /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = StreakWidgetExtension;
+			productName = StreakWidgetExtension;
+			productReference = B2657A9F2C11A22E009AFC3B /* StreakWidgetExtension.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 		B2704DD524B4A2A900DE196B /* watchkitapp */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = B2704E0424B4A2AC00DE196B /* Build configuration list for PBXNativeTarget "watchkitapp" */;
@@ -847,6 +978,7 @@
 				B2D931042445D7E90086477D /* PBXTargetDependency */,
 				B2847FBA2450550E0042D43B /* PBXTargetDependency */,
 				B2704DFB24B4A2AC00DE196B /* PBXTargetDependency */,
+				B2657AB12C11A230009AFC3B /* PBXTargetDependency */,
 			);
 			name = mindLAMP;
 			packageProductDependencies = (
@@ -880,10 +1012,17 @@
 			isa = PBXProject;
 			attributes = {
 				CLASSPREFIX = LAMP;
-				LastSwiftUpdateCheck = 1340;
+				LastSwiftUpdateCheck = 1540;
 				LastUpgradeCheck = 1420;
 				ORGANIZATIONNAME = "Division of Digital Psychiatry";
 				TargetAttributes = {
+					B20B625E2C0CE540000B3899 = {
+						CreatedOnToolsVersion = 15.4;
+						TestTargetID = B29639CC23BDC28100626E1A;
+					};
+					B2657A9E2C11A22E009AFC3B = {
+						CreatedOnToolsVersion = 15.4;
+					};
 					B2704DD524B4A2A900DE196B = {
 						CreatedOnToolsVersion = 11.2.1;
 					};
@@ -925,11 +1064,28 @@
 				B2D930F62445D7E90086477D /* CustomNotification */,
 				B2847FB32450550E0042D43B /* NotificationService */,
 				B2704DD524B4A2A900DE196B /* watchkitapp */,
+				B20B625E2C0CE540000B3899 /* mindLAMP2Tests */,
+				B2657A9E2C11A22E009AFC3B /* StreakWidgetExtension */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		B20B625D2C0CE540000B3899 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B2657A9D2C11A22E009AFC3B /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B2657AAE2C11A230009AFC3B /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		B2704DD424B4A2A900DE196B /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -971,6 +1127,30 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		B20B625B2C0CE540000B3899 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B20B62622C0CE540000B3899 /* mindLAMP2Tests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B2657A9B2C11A22E009AFC3B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B2657AA82C11A22E009AFC3B /* StreakWidgetLiveActivity.swift in Sources */,
+				B2657ABA2C14C148009AFC3B /* LampURL.swift in Sources */,
+				B2657AAC2C11A22E009AFC3B /* AppIntent.swift in Sources */,
+				B2657AB82C11AB94009AFC3B /* StreakWidgetHelper.swift in Sources */,
+				B2657AAA2C11A22E009AFC3B /* StreakWidget.swift in Sources */,
+				B2657ABC2C14C20B009AFC3B /* String+Localize.swift in Sources */,
+				B2657ABB2C14C1D4009AFC3B /* EndPoint.swift in Sources */,
+				B2657ABF2C15E6E4009AFC3B /* UserDefaults+Extension.swift in Sources */,
+				B2657AA62C11A22E009AFC3B /* StreakWidgetBundle.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		B2704DDE24B4A2AC00DE196B /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -1046,6 +1226,7 @@
 				B27DBDA527856455002DFAF9 /* UserDefaults+Extension.swift in Sources */,
 				B2B8935223D0AD6500321C3E /* DateExtension.swift in Sources */,
 				B27DBDA027856437002DFAF9 /* LampURL.swift in Sources */,
+				B24AC1542C09B235009DE84E /* StreakWidgetHelper.swift in Sources */,
 				B2A15C0E2567A8BE00222717 /* LogsModel.swift in Sources */,
 				B22DF5F2250612E800777D2D /* UserAgentExtension.swift in Sources */,
 				B2A15C0A2567A8BE00222717 /* FileStorage.swift in Sources */,
@@ -1110,6 +1291,16 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		B20B62642C0CE540000B3899 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = B29639CC23BDC28100626E1A /* mindLAMP */;
+			targetProxy = B20B62632C0CE540000B3899 /* PBXContainerItemProxy */;
+		};
+		B2657AB12C11A230009AFC3B /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = B2657A9E2C11A22E009AFC3B /* StreakWidgetExtension */;
+			targetProxy = B2657AB02C11A230009AFC3B /* PBXContainerItemProxy */;
+		};
 		B2704DFB24B4A2AC00DE196B /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = B2704DD524B4A2A900DE196B /* watchkitapp */;
@@ -1187,6 +1378,208 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		B20B62652C0CE540000B3899 /* Debug (Production) */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_STYLE = Manual;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = "";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MARKETING_VERSION = 1.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = digital.lamp.mindlamp.mindLAMP2Tests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/mindLAMP 2.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/mindLAMP 2";
+			};
+			name = "Debug (Production)";
+		};
+		B20B62662C0CE540000B3899 /* Debug (Staging) */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_STYLE = Manual;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = "";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MARKETING_VERSION = 1.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = digital.lamp.mindlamp.mindLAMP2Tests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/mindLAMP 2.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/mindLAMP 2";
+			};
+			name = "Debug (Staging)";
+		};
+		B20B62672C0CE540000B3899 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CODE_SIGN_STYLE = Manual;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = "";
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = digital.lamp.mindlamp.mindLAMP2Tests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/mindLAMP 2.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/mindLAMP 2";
+			};
+			name = Release;
+		};
+		B20B62682C0CE540000B3899 /* Release (Staging) */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CODE_SIGN_STYLE = Manual;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = "";
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = digital.lamp.mindlamp.mindLAMP2Tests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/mindLAMP 2.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/mindLAMP 2";
+			};
+			name = "Release (Staging)";
+		};
 		B2464EE62527013700A8BB65 /* Debug (Staging) */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = B2587B4D256E23BC00A2A7F2 /* Staging.xcconfig */;
@@ -1567,6 +1960,252 @@
 				TARGETED_DEVICE_FAMILY = 4;
 				VERSIONING_SYSTEM = "apple-generic";
 				WATCHOS_DEPLOYMENT_TARGET = 7.0;
+			};
+			name = "Release (Staging)";
+		};
+		B2657AB32C11A230009AFC3B /* Debug (Production) */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_ENTITLEMENTS = StreakWidgetExtension.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				CODE_SIGN_STYLE = Manual;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = "";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = StreakWidget/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = StreakWidget;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright © 2024 Division of Digital Psychiatry. All rights reserved.";
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MARKETING_VERSION = 1.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = digital.lamp.mindlamp.StreakWidget;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = "Debug (Production)";
+		};
+		B2657AB42C11A230009AFC3B /* Debug (Staging) */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_ENTITLEMENTS = StreakWidgetExtension.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				CODE_SIGN_STYLE = Manual;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = "";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = StreakWidget/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = StreakWidget;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright © 2024 Division of Digital Psychiatry. All rights reserved.";
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MARKETING_VERSION = 1.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = digital.lamp.mindlamp.StreakWidget;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = "Debug (Staging)";
+		};
+		B2657AB52C11A230009AFC3B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CODE_SIGN_ENTITLEMENTS = StreakWidgetExtension.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				CODE_SIGN_STYLE = Manual;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = "";
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = StreakWidget/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = StreakWidget;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright © 2024 Division of Digital Psychiatry. All rights reserved.";
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = digital.lamp.mindlamp.StreakWidget;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		B2657AB62C11A230009AFC3B /* Release (Staging) */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CODE_SIGN_ENTITLEMENTS = StreakWidgetExtension.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				CODE_SIGN_STYLE = Manual;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = "";
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = StreakWidget/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = StreakWidget;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright © 2024 Division of Digital Psychiatry. All rights reserved.";
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = digital.lamp.mindlamp.StreakWidget;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = "Release (Staging)";
 		};
@@ -1956,6 +2595,28 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		B20B62692C0CE540000B3899 /* Build configuration list for PBXNativeTarget "mindLAMP2Tests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B20B62652C0CE540000B3899 /* Debug (Production) */,
+				B20B62662C0CE540000B3899 /* Debug (Staging) */,
+				B20B62672C0CE540000B3899 /* Release */,
+				B20B62682C0CE540000B3899 /* Release (Staging) */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		B2657AB72C11A230009AFC3B /* Build configuration list for PBXNativeTarget "StreakWidgetExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B2657AB32C11A230009AFC3B /* Debug (Production) */,
+				B2657AB42C11A230009AFC3B /* Debug (Staging) */,
+				B2657AB52C11A230009AFC3B /* Release */,
+				B2657AB62C11A230009AFC3B /* Release (Staging) */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		B2704E0424B4A2AC00DE196B /* Build configuration list for PBXNativeTarget "watchkitapp" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
