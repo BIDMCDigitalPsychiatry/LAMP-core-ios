@@ -63,15 +63,15 @@ struct StreakWidgetEntryView : View {
                 .aspectRatio(contentMode: .fit)
                 .frame(width: 40)
             
-//            let daysText1: String = entry.currentStreak == 1 ? "day" : "days"
-//            Text("Current streak: \(entry.currentStreak) \(daysText1)")
-//                .font(.system(size: 12))
-//                .fontWeight(.black)
-//
-//            let daysText: String = entry.longestStreak == 1 ? "day" : "days"
-//            Text("Longest Streak: \(entry.longestStreak) \(daysText)")
-//                .font(.system(size: 12))
-//                .fontWeight(.black)
+            let daysText1: String = entry.currentStreak == 1 ? "day" : "days"
+            Text("Current streak: \(entry.currentStreak) \(daysText1)")
+                .font(.system(size: 12))
+                .fontWeight(.black)
+
+            let daysText: String = entry.longestStreak == 1 ? "day" : "days"
+            Text("Longest Streak: \(entry.longestStreak) \(daysText)")
+                .font(.system(size: 12))
+                .fontWeight(.black)
             
             Text("Way To Go!")
                 .font(.system(size: 14))

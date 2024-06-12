@@ -2,6 +2,7 @@
 
 import Foundation
 //import LAMP
+import WidgetKit
 
 public class StreakWidgetHelper {
     
@@ -35,8 +36,6 @@ public class StreakWidgetHelper {
         let task = URLSession.shared.dataTask(with: urlRequest(participantId: participantId)) { [weak self] data, response, error in
             
             if let data, let urlResponse = response as? HTTPURLResponse {
-             
-                print("data jj = \(String(data: data, encoding: .utf8))")
                 let decoder = JSONDecoder()
                 let formatter = ISO8601DateFormatter()
                 decoder.dateDecodingStrategy = .formatted(formatter)
@@ -50,7 +49,7 @@ public class StreakWidgetHelper {
                     if let reslut {
                         StreakWidgetHelper.cachedEntry = reslut
                     }
-                    
+                    WidgetCenter.shared.reloadAllTimelines()
                     completion?(responseData.dates)
                     
                     
@@ -119,6 +118,30 @@ public class StreakWidgetHelper {
         return false
     }
     
+    
+    // Function to extract unique days from an array of dates
+    func uniqueDays(from dates: [Date]) -> [Date] {
+        var uniqueDaysSet = Set<String>()
+        var uniqueDaysArray = [Date]()
+        
+        let dateFormatter = DateFormatter()
+        dateFormatter.timeZone = .current
+        dateFormatter.locale = Locale(identifier: "en_US_POSIX")
+        dateFormatter.dateFormat = "yyyy-MM-dd"
+        
+        for date in dates {
+            print("date = \(date)")
+            let dayString = dateFormatter.string(from: date)
+            print("dayString = \(dayString)")
+            if !uniqueDaysSet.contains(dayString) {
+                uniqueDaysSet.insert(dayString)
+                uniqueDaysArray.append(dateFormatter.date(from: dayString)!)
+            }
+        }
+        
+        return uniqueDaysArray
+    }
+
     public func findCurrentStreak(from dates: [Date]) -> Int {
         
         var currentStreak = 0
@@ -148,34 +171,14 @@ public class StreakWidgetHelper {
         return currentStreak
         
     }
-    
-    // Function to extract unique days from an array of dates
-    func uniqueDays(from dates: [Date]) -> [Date] {
-        var uniqueDaysSet = Set<String>()
-        var uniqueDaysArray = [Date]()
-        
-        let dateFormatter = DateFormatter()
-        dateFormatter.locale = Locale(identifier: "en_US_POSIX")
-        dateFormatter.dateFormat = "yyyy-MM-dd"
-        
-        for date in dates {
-            let dayString = dateFormatter.string(from: date)
-            if !uniqueDaysSet.contains(dayString) {
-                uniqueDaysSet.insert(dayString)
-                uniqueDaysArray.append(dateFormatter.date(from: dayString)!)
-            }
-        }
-        
-        return uniqueDaysArray
-    }
-
 
     public func findCurentAndLongestStreak(dates: [Date]) -> (Int, Int) {
         
         guard dates.count > 0 else {
             return (0, 0)
         }
-        let sortedDates = dates.sorted()
+        let uniqueDays = uniqueDays(from: dates)
+        let sortedDatesDesc = uniqueDays.sorted()
         
         //filter duplicates?
         
@@ -187,8 +190,8 @@ public class StreakWidgetHelper {
         let today = Date()
         
         // Iterate through the sorted dates
-        for i in 1..<sortedDates.count {
-            if areDatesConsecutive(sortedDates[i-1], sortedDates[i]) {
+        for i in 1..<sortedDatesDesc.count {
+            if areDatesConsecutive(sortedDatesDesc[i-1], sortedDatesDesc[i]) {
                 tempStreak += 1
             } else {
                 tempStreak = 1
@@ -196,11 +199,11 @@ public class StreakWidgetHelper {
             maxStreak = max(maxStreak, tempStreak)
         }
         
-        let j = sortedDates.count - 1
+        let j = sortedDatesDesc.count - 1
         let calendar = Calendar.current
         let previousDay = calendar.date(byAdding: .day, value: -1, to: today)!
-        if calendar.isDate(today, inSameDayAs: sortedDates[j]) ||
-            calendar.isDate(previousDay, inSameDayAs: sortedDates[j]) {
+        if calendar.isDate(today, inSameDayAs: sortedDatesDesc[j]) ||
+            calendar.isDate(previousDay, inSameDayAs: sortedDatesDesc[j]) {
             currentStreak = tempStreak
         }
         
