@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import WidgetKit
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -60,7 +61,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         calculateBadgeCount()
     }
     func applicationWillResignActive(_ application: UIApplication) {
-        widgetHelper.fetchActivityEvents(participantId: UserDefaults.standard.participantIdShared, completion: nil)
+        widgetHelper.fetchActivityEvents(participantId: UserDefaults.standard.participantIdShared) { _ in
+            WidgetCenter.shared.reloadAllTimelines()
+        }
     }
 }
 

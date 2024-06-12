@@ -2,7 +2,6 @@
 
 import Foundation
 //import LAMP
-import WidgetKit
 
 public class StreakWidgetHelper {
     
@@ -49,7 +48,6 @@ public class StreakWidgetHelper {
                     if let reslut {
                         StreakWidgetHelper.cachedEntry = reslut
                     }
-                    WidgetCenter.shared.reloadAllTimelines()
                     completion?(responseData.dates)
                     
                     
