@@ -23,18 +23,24 @@ struct Provider: TimelineProvider {
     func getTimeline(in context: Context, completion: @escaping (Timeline<Entry>) -> ()) {
 
         helper.fetchActivityEvents(participantId: UserDefaults.standard.participantIdShared) { dates in
-            guard let dates else {
-                return
-            }
-            let reslut = (UserDefaults.standard.streakDataCurrentShared, UserDefaults.standard.streakDataMaxShared)
-            
-            let entry = SimpleEntry(date: Date(), currentStreak: reslut.0, longestStreak: reslut.1)
             
             //Next fetch happens 15 minutes later
             let nextUpdate = Calendar.current.date(
                 byAdding: DateComponents(hour: 4),
                 to: Date()
             )!
+            guard dates != nil else {
+                let entry = SimpleEntry(date: Date(), currentStreak: 0, longestStreak: 0)
+                let timeline = Timeline(
+                    entries: [entry],
+                    policy: .after(nextUpdate)
+                )
+                completion(timeline)
+                return
+            }
+            let reslut = (UserDefaults.standard.streakDataCurrentShared, UserDefaults.standard.streakDataMaxShared)
+            
+            let entry = SimpleEntry(date: Date(), currentStreak: reslut.0, longestStreak: reslut.1)
             
             let timeline = Timeline(
                 entries: [entry],
@@ -54,28 +60,56 @@ struct SimpleEntry: TimelineEntry {
 struct StreakWidgetEntryView : View {
     
     var entry: Provider.Entry
+    @SwiftUI.Environment(\.widgetFamily) var family
 
+    @ViewBuilder
     var body: some View {
-        VStack(alignment: .center, spacing: 5) {
-            
-            Image("logo")
-                .resizable()
-                .aspectRatio(contentMode: .fit)
-                .frame(width: 40)
-            
-            let daysText1: String = entry.currentStreak == 1 ? "day" : "days"
-            Text("Current streak: \(entry.currentStreak) \(daysText1)")
-                .font(.system(size: 12))
-                .fontWeight(.black)
-
-            let daysText: String = entry.longestStreak == 1 ? "day" : "days"
-            Text("Longest Streak: \(entry.longestStreak) \(daysText)")
-                .font(.system(size: 12))
-                .fontWeight(.black)
-            
-            Text("Way To Go!")
-                .font(.system(size: 14))
-                .fontWeight(.bold)
+        
+        switch family {
+        case .systemSmall:
+            VStack(alignment: .center, spacing: 5) {
+                
+                Image("logo")
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+                    .frame(width: 36)
+                
+                let daysText1: String = entry.currentStreak == 1 ? "day" : "days"
+                Text("Current streak: \(entry.currentStreak) \(daysText1)")
+                    .font(.system(size: 10))
+                    .fontWeight(.medium)
+                
+                let daysText: String = entry.longestStreak == 1 ? "day" : "days"
+                Text("Longest Streak: \(entry.longestStreak) \(daysText)")
+                    .font(.system(size: 10))
+                    .fontWeight(.medium)
+                
+                Text("Way To Go!")
+                    .font(.system(size: 11))
+                    .fontWeight(.medium)
+            }
+        default:
+            VStack(alignment: .center, spacing: 5) {
+                
+                Image("logo")
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+                    .frame(width: 40)
+                
+                let daysText1: String = entry.currentStreak == 1 ? "day" : "days"
+                Text("Current streak: \(entry.currentStreak) \(daysText1)")
+                    .font(.system(size: 14))
+                    .fontWeight(.medium)
+                
+                let daysText: String = entry.longestStreak == 1 ? "day" : "days"
+                Text("Longest Streak: \(entry.longestStreak) \(daysText)")
+                    .font(.system(size: 14))
+                    .fontWeight(.medium)
+                
+                Text("Way To Go!")
+                    .font(.system(size: 15))
+                    .fontWeight(.medium)
+            }
         }
     }
 }

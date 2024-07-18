@@ -41,7 +41,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let homeVC = HomeViewController()
         self.window?.rootViewController = UINavigationController(rootViewController: homeVC)
         self.window?.makeKeyAndVisible()
-        
+
         return true
     }
  
@@ -64,6 +64,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         widgetHelper.fetchActivityEvents(participantId: UserDefaults.standard.participantIdShared) { _ in
             WidgetCenter.shared.reloadAllTimelines()
         }
+    }
+    
+    func application(_ application: UIApplication, willContinueUserActivityWithType userActivityType: String) -> Bool {
+
+        if userActivityType == "StreakWidget" {
+            if let navController = self.window?.rootViewController as? UINavigationController {
+                
+                if let existiWebController = navController.topViewController as? HomeViewController {
+                    existiWebController.tappedWidget()
+                    return true
+                }
+            }
+        }
+        return true
     }
 }
 
