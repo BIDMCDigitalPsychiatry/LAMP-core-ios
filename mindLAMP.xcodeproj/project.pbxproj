@@ -263,7 +263,6 @@
 		B2201C79257FA60500C40183 /* NotificationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationView.swift; sourceTree = "<group>"; };
 		B2201C85257FADC700C40183 /* HomeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		B22DF5F1250612E800777D2D /* UserAgentExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAgentExtension.swift; sourceTree = "<group>"; };
-		B230E5E72C2BD1A00061DA68 /* LAMP-swift */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = "LAMP-swift"; path = "../../LAMP-Swift/LAMP-swift"; sourceTree = "<group>"; };
 		B2346CE62599CEDF00EFF347 /* SensorDataModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SensorDataModel.swift; sourceTree = "<group>"; };
 		B2346CEE2599DE9800EFF347 /* AppInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppInfo.swift; sourceTree = "<group>"; };
 		B238434624B848F300E548E2 /* LMRunningBuffer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LMRunningBuffer.swift; sourceTree = "<group>"; };
@@ -659,7 +658,6 @@
 		B29639C423BDC28100626E1A = {
 			isa = PBXGroup;
 			children = (
-				B230E5E72C2BD1A00061DA68 /* LAMP-swift */,
 				B2657AB92C11B8AF009AFC3B /* StreakWidgetExtension.entitlements */,
 				B2587B49256E23BC00A2A7F2 /* Shared */,
 				B2A15BB22567A8BE00222717 /* SharedToWatchExt */,
@@ -2770,7 +2768,7 @@
 			repositoryURL = "https://github.com/BIDMCDigitalPsychiatry/LAMP-swift.git";
 			requirement = {
 				kind = exactVersion;
-				version = 2023.12.19;
+				version = 2024.7.23;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
