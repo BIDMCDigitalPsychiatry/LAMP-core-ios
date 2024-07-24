@@ -22,34 +22,53 @@ public class StreakWidgetHelper {
         }
     }
     static var cachedEntry:(Int, Int) = (0, 0)
+    
+    func longestStreakFor(participantId: String) -> Int {
+        let dict: [String: Int]? = UserDefaults.standard.object(forKey: "longestActivityStreak") as? [String: Int]
+        return dict?[participantId] ?? 0
+    }
+    
+    func setLongestStreak(streak: Int, participantId: String) {
+        let dict: [String: Int] = [participantId: streak]
+        UserDefaults.standard.setValue(dict, forKey: "longestActivityStreak")
+    }
+    
     public func fetchActivityEvents(participantId: String?, completion: (([Date]?) -> Void)?) {
         
         guard let participantId else {
             completion?(nil)
             return
         }
-        //todo execute once per day
-
-        //update server
         
-        let task = URLSession.shared.dataTask(with: urlRequest(participantId: participantId)) { [weak self] data, response, error in
-            
+        let fromDate: Date
+        if longestStreakFor(participantId: participantId) <= 0 {
+            fromDate = Calendar.current.date(byAdding: .year, value: -1, to: Date())!
+        } else {
+            fromDate = Calendar.current.date(byAdding: .month, value: -3, to: Date())!
+        }
+        
+        let task = URLSession.shared.dataTask(with: urlRequest(participantId: participantId, fromDate: fromDate)) { [weak self] data, response, error in
+
             if let data, let urlResponse = response as? HTTPURLResponse {
+
+                
                 let decoder = JSONDecoder()
                 let formatter = ISO8601DateFormatter()
                 decoder.dateDecodingStrategy = .formatted(formatter)
                 do {
                     let responseData = try decoder.decode(ActivityEventResponse.self, from: data)
-                    
                     let reslut = self?.findCurentAndLongestStreak(dates: responseData.dates ?? [])
+                    
+                    
                     UserDefaults.standard.streakDataCurrentShared = reslut?.0 ?? 0
                     UserDefaults.standard.streakDataMaxShared = reslut?.1 ?? 0
+                    
+                    self?.setLongestStreak(streak: reslut?.1 ?? 0, participantId: participantId)
 
                     if let reslut {
                         StreakWidgetHelper.cachedEntry = reslut
                     }
                     completion?(responseData.dates)
-                    
                     
                 } catch (let err) {
                     completion?(nil)
@@ -87,12 +106,21 @@ public class StreakWidgetHelper {
 //        }
     }
     
-    func urlRequest(participantId: String) -> URLRequest {
-        
+    func urlRequest(participantId: String, fromDate: Date) -> URLRequest {
+        //from to timestamp
         let endPoint = String(format: Endpoint.activityEvent.rawValue, participantId)
-        
         let baseURL = URL(string: LampURL.baseURLString)!
-        var request = URLRequest(url: baseURL.appendingPathComponent(endPoint))
+        let fullurl = baseURL.appendingPathComponent(endPoint)
+        //https://api-staging.lamp.digital/participant/U2604494105/activity_event?from=1719945000516&to=1720031400516
+        var components = URLComponents(string: fullurl.absoluteString)!
+        
+        components.queryItems = [
+            URLQueryItem(name: "from", value: String(fromDate.timeInMilliSeconds)),
+            //URLQueryItem(name: "to", value: String(Date().timeInMilliSeconds)),
+        ]
+        let url = components.url!
+        
+        var request = URLRequest(url: url)
         request.httpMethod = "GET"
         var requestHeaders = [String: String]()
         requestHeaders["Content-Type"] = "application/json"
@@ -123,14 +151,12 @@ public class StreakWidgetHelper {
         var uniqueDaysArray = [Date]()
         
         let dateFormatter = DateFormatter()
-        dateFormatter.timeZone = .current
+        dateFormatter.timeZone = TimeZone(secondsFromGMT: 0)
         dateFormatter.locale = Locale(identifier: "en_US_POSIX")
         dateFormatter.dateFormat = "yyyy-MM-dd"
         
         for date in dates {
-            print("date = \(date)")
             let dayString = dateFormatter.string(from: date)
-            print("dayString = \(dayString)")
             if !uniqueDaysSet.contains(dayString) {
                 uniqueDaysSet.insert(dayString)
                 uniqueDaysArray.append(dateFormatter.date(from: dayString)!)

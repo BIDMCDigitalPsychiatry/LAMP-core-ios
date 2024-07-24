@@ -18,6 +18,8 @@ class HomeViewController: UIViewController {
     private lazy var lampAPI: NetworkingAPI = {
         return NetworkConfig.networkingAPI()
     }()
+    
+    var feedURLToLoad: URL?
     //var loginSubscriber: AnyCancellable?
     //var isHomePageLoaded = false
     //@IBOutlet weak var containerView: UIView!
@@ -51,7 +53,31 @@ class HomeViewController: UIViewController {
             
         }
     }
+    
+    func tappedWidget() {
+        
+        guard let participantId = User.shared.userId else {
+            return
+        }
+        let urlstring = String(format: "https://dashboard-staging.lamp.digital/#/participant/%@/feed", participantId)
+        
+        guard isWebpageLoaded == true else {
+            feedURLToLoad = URL(string: urlstring)
+            return
+        }
+        wkWebView.evaluateJavaScript("window.location.href='\(urlstring)';") { obbj ,error in
+            self.wkWebView.evaluateJavaScript("window.location.reload()")
+        }
 
+//        guard let pageURL = URL(string: urlstring) else {return}
+//        wkWebView.endEditing(true)
+//        indicator.startAnimating()
+//        view.bringSubviewToFront(indicator)
+//        DispatchQueue.main.async {
+//            self.wkWebView.load(URLRequest(url: pageURL))
+//        }
+    }
+    
     override func loadView() {
         super.loadView()
         self.loadWebView()
@@ -172,7 +198,12 @@ private extension HomeViewController {
     
     func loadWebPage() {
         if User.shared.isLogin() == true {
-            wkWebView.load(URLRequest(url: self.lampDashboardURLwithToken))
+            if let feedURL = feedURLToLoad {
+                wkWebView.load(URLRequest(url: feedURL))
+                feedURLToLoad = nil
+            } else {
+                wkWebView.load(URLRequest(url: self.lampDashboardURLwithToken))
+            }
         } else {
             wkWebView.load(URLRequest(url: LampURL.dashboardDigital))
         }
