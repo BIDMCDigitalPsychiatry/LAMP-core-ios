@@ -1,6 +1,6 @@
 {
   "originHash" : "fc48a6bab5016fb028fdd589d5bc4d0270adb311945526b62b6566882c00538d",
-  "pins" : [
+  "packages" : [
     {
       "identity" : "lamp-swift",
       "kind" : "remoteSourceControl",
@@ -11,5 +11,5 @@
       }
     }
   ],
-  "version" : 3
+  "version" : 2
 }
