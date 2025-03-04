@@ -126,6 +126,8 @@
 			<string>Your Wrist Detection Data is required for a clinical research study you have opted to join.</string>
 		</dict>
 	</dict>
+	<key>NSSpeechRecognitionUsageDescription</key>
+	<string>Your speech recognition is required for clinical study.</string>
 	<key>UIBackgroundModes</key>
 	<array>
 		<string>bluetooth-central</string>

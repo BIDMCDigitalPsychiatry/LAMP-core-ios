@@ -8,6 +8,7 @@ import Combine
 enum ScriptMessageHandler: String {
     case login = "login"
     case logout = "logout"
+    case allowSpeech = "allowSpeech"
 }
 
 enum ScriptMessageKey: String {
