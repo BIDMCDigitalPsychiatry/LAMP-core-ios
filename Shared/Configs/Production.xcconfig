@@ -2,7 +2,8 @@
 
 // Configuration settings file format documentation can be found at:
 // https://help.apple.com/xcode/#/dev745c5c974
-
-DASHBOARD_URL = https:/$()/dashboard.lamp.digital/#/
+ //https:/$()/cloud.google.com/speech-to-text?hl=en#demo
+DASHBOARD_URL = https:/$()/lamp-dashboard.zcodemo.com/#/
+//DASHBOARD_URL = https:/$()/dashboard.lamp.digital/#/
 LAMP_API = https:/$()/api.lamp.digital
 Branding = NativeCore

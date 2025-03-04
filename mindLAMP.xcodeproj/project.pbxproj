@@ -1682,8 +1682,9 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = mindLAMP/mindLAMP.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 424;
+				CURRENT_PROJECT_VERSION = 430;
 				DEVELOPMENT_ASSET_PATHS = "\"mindLAMP/Preview Content\"";
 				DEVELOPMENT_TEAM = S2Y2D4239K;
 				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = S2Y2D4239K;
@@ -1696,13 +1697,13 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2024.6.15;
+				MARKETING_VERSION = 2024.9.24;
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = digital.lamp.mindlamp;
 				PRODUCT_NAME = "mindLAMP 2";
 				PROVISIONING_PROFILE_SPECIFIER = mindLAMP2;
-				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = mindLAMP2;
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = "mindLAMP Dev 2025";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
@@ -1724,7 +1725,7 @@
 				CODE_SIGN_ENTITLEMENTS = CustomNotification/CustomNotification.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 424;
+				CURRENT_PROJECT_VERSION = 429;
 				DEVELOPMENT_TEAM = S2Y2D4239K;
 				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = S2Y2D4239K;
 				INFOPLIST_FILE = CustomNotification/Info.plist;
@@ -1734,7 +1735,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 2024.6.15;
+				MARKETING_VERSION = 2024.9.24;
 				PRODUCT_BUNDLE_IDENTIFIER = digital.lamp.mindlamp.CustomNotification;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "mindLAMP2 Custom Notification Extension";
@@ -1757,7 +1758,7 @@
 				CODE_SIGN_ENTITLEMENTS = NotificationService/NotificationService.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 424;
+				CURRENT_PROJECT_VERSION = 429;
 				DEVELOPMENT_TEAM = S2Y2D4239K;
 				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = S2Y2D4239K;
 				INFOPLIST_FILE = NotificationService/Info.plist;
@@ -1767,7 +1768,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 2024.6.15;
+				MARKETING_VERSION = 2024.9.24;
 				PRODUCT_BUNDLE_IDENTIFIER = digital.lamp.mindlamp.NotificationService;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "mindLAMP2 Notification Service";
@@ -1793,7 +1794,7 @@
 				CODE_SIGN_ENTITLEMENTS = "watchkitapp Extension/watchkitapp Extension.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 424;
+				CURRENT_PROJECT_VERSION = 430;
 				DEVELOPMENT_TEAM = S2Y2D4239K;
 				"DEVELOPMENT_TEAM[sdk=watchos*]" = S2Y2D4239K;
 				INFOPLIST_FILE = watchkitapp/Info.plist;
@@ -1801,7 +1802,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 2024.6.15;
+				MARKETING_VERSION = 2024.9.24;
 				PRODUCT_BUNDLE_IDENTIFIER = digital.lamp.mindlamp.wearable;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "mindLAMP WatchApp Dev";
@@ -1883,8 +1884,9 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = mindLAMP/mindLAMP.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 424;
+				CURRENT_PROJECT_VERSION = 430;
 				DEVELOPMENT_ASSET_PATHS = "\"mindLAMP/Preview Content\"";
 				DEVELOPMENT_TEAM = S2Y2D4239K;
 				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = S2Y2D4239K;
@@ -1897,13 +1899,13 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2024.6.15;
+				MARKETING_VERSION = 2024.9.24;
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = digital.lamp.mindlamp;
 				PRODUCT_NAME = "mindLAMP 2";
 				PROVISIONING_PROFILE_SPECIFIER = mindLAMP2;
-				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = mindLAMP2;
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = "mindLAMP Dev 2025";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
@@ -1924,7 +1926,7 @@
 				CODE_SIGN_ENTITLEMENTS = CustomNotification/CustomNotification.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 424;
+				CURRENT_PROJECT_VERSION = 429;
 				DEVELOPMENT_TEAM = S2Y2D4239K;
 				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = S2Y2D4239K;
 				INFOPLIST_FILE = CustomNotification/Info.plist;
@@ -1934,7 +1936,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 2024.6.15;
+				MARKETING_VERSION = 2024.9.24;
 				PRODUCT_BUNDLE_IDENTIFIER = digital.lamp.mindlamp.CustomNotification;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "mindLAMP2 Custom Notification Extension";
@@ -1957,7 +1959,7 @@
 				CODE_SIGN_ENTITLEMENTS = NotificationService/NotificationService.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 424;
+				CURRENT_PROJECT_VERSION = 429;
 				DEVELOPMENT_TEAM = S2Y2D4239K;
 				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = S2Y2D4239K;
 				INFOPLIST_FILE = NotificationService/Info.plist;
@@ -1967,7 +1969,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 2024.6.15;
+				MARKETING_VERSION = 2024.9.24;
 				PRODUCT_BUNDLE_IDENTIFIER = digital.lamp.mindlamp.NotificationService;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "mindLAMP2 Notification Service";
@@ -1993,7 +1995,7 @@
 				CODE_SIGN_ENTITLEMENTS = "watchkitapp Extension/watchkitapp Extension.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 424;
+				CURRENT_PROJECT_VERSION = 430;
 				DEVELOPMENT_TEAM = S2Y2D4239K;
 				"DEVELOPMENT_TEAM[sdk=watchos*]" = S2Y2D4239K;
 				INFOPLIST_FILE = watchkitapp/Info.plist;
@@ -2001,7 +2003,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 2024.6.15;
+				MARKETING_VERSION = 2024.9.24;
 				PRODUCT_BUNDLE_IDENTIFIER = digital.lamp.mindlamp.wearable;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "mindLAMP WatchApp Dev";
@@ -2295,7 +2297,7 @@
 				CODE_SIGN_ENTITLEMENTS = "watchkitapp Extension/watchkitapp Extension.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 424;
+				CURRENT_PROJECT_VERSION = 430;
 				DEVELOPMENT_TEAM = S2Y2D4239K;
 				"DEVELOPMENT_TEAM[sdk=watchos*]" = S2Y2D4239K;
 				INFOPLIST_FILE = watchkitapp/Info.plist;
@@ -2303,7 +2305,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 2024.6.15;
+				MARKETING_VERSION = 2024.9.24;
 				PRODUCT_BUNDLE_IDENTIFIER = digital.lamp.mindlamp.wearable;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "mindLAMP WatchApp Dev";
@@ -2327,7 +2329,7 @@
 				CODE_SIGN_ENTITLEMENTS = "watchkitapp Extension/watchkitapp Extension.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 424;
+				CURRENT_PROJECT_VERSION = 430;
 				DEVELOPMENT_TEAM = S2Y2D4239K;
 				"DEVELOPMENT_TEAM[sdk=watchos*]" = S2Y2D4239K;
 				INFOPLIST_FILE = watchkitapp/Info.plist;
@@ -2335,7 +2337,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 2024.6.15;
+				MARKETING_VERSION = 2024.9.24;
 				PRODUCT_BUNDLE_IDENTIFIER = digital.lamp.mindlamp.wearable;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "mindLAMP WatchApp Dev";
@@ -2356,7 +2358,7 @@
 				CODE_SIGN_ENTITLEMENTS = NotificationService/NotificationService.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 424;
+				CURRENT_PROJECT_VERSION = 429;
 				DEVELOPMENT_TEAM = S2Y2D4239K;
 				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = S2Y2D4239K;
 				INFOPLIST_FILE = NotificationService/Info.plist;
@@ -2366,7 +2368,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 2024.6.15;
+				MARKETING_VERSION = 2024.9.24;
 				PRODUCT_BUNDLE_IDENTIFIER = digital.lamp.mindlamp.NotificationService;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "mindLAMP2 Notification Service";
@@ -2389,7 +2391,7 @@
 				CODE_SIGN_ENTITLEMENTS = NotificationService/NotificationService.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 424;
+				CURRENT_PROJECT_VERSION = 429;
 				DEVELOPMENT_TEAM = S2Y2D4239K;
 				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = S2Y2D4239K;
 				INFOPLIST_FILE = NotificationService/Info.plist;
@@ -2399,7 +2401,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 2024.6.15;
+				MARKETING_VERSION = 2024.9.24;
 				PRODUCT_BUNDLE_IDENTIFIER = digital.lamp.mindlamp.NotificationService;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "mindLAMP2 Notification Service";
@@ -2548,8 +2550,9 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = mindLAMP/mindLAMP.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 424;
+				CURRENT_PROJECT_VERSION = 430;
 				DEVELOPMENT_ASSET_PATHS = "\"mindLAMP/Preview Content\"";
 				DEVELOPMENT_TEAM = S2Y2D4239K;
 				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = S2Y2D4239K;
@@ -2562,13 +2565,13 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2024.6.15;
+				MARKETING_VERSION = 2024.9.24;
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = digital.lamp.mindlamp;
 				PRODUCT_NAME = "mindLAMP 2";
 				PROVISIONING_PROFILE_SPECIFIER = mindLAMP2;
-				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = mindLAMP2;
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = "mindLAMP Dev 2025";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
@@ -2592,8 +2595,9 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = mindLAMP/mindLAMP.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 424;
+				CURRENT_PROJECT_VERSION = 430;
 				DEVELOPMENT_ASSET_PATHS = "\"mindLAMP/Preview Content\"";
 				DEVELOPMENT_TEAM = S2Y2D4239K;
 				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = S2Y2D4239K;
@@ -2606,13 +2610,13 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2024.6.15;
+				MARKETING_VERSION = 2024.9.24;
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = digital.lamp.mindlamp;
 				PRODUCT_NAME = "mindLAMP 2";
 				PROVISIONING_PROFILE_SPECIFIER = mindLAMP2;
-				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = mindLAMP2;
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = "mindLAMP Dev 2025";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
@@ -2633,7 +2637,7 @@
 				CODE_SIGN_ENTITLEMENTS = CustomNotification/CustomNotification.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 424;
+				CURRENT_PROJECT_VERSION = 429;
 				DEVELOPMENT_TEAM = S2Y2D4239K;
 				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = S2Y2D4239K;
 				INFOPLIST_FILE = CustomNotification/Info.plist;
@@ -2643,7 +2647,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 2024.6.15;
+				MARKETING_VERSION = 2024.9.24;
 				PRODUCT_BUNDLE_IDENTIFIER = digital.lamp.mindlamp.CustomNotification;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "mindLAMP2 Custom Notification Extension";
@@ -2666,7 +2670,7 @@
 				CODE_SIGN_ENTITLEMENTS = CustomNotification/CustomNotification.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 424;
+				CURRENT_PROJECT_VERSION = 429;
 				DEVELOPMENT_TEAM = S2Y2D4239K;
 				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = S2Y2D4239K;
 				INFOPLIST_FILE = CustomNotification/Info.plist;
@@ -2676,7 +2680,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 2024.6.15;
+				MARKETING_VERSION = 2024.9.24;
 				PRODUCT_BUNDLE_IDENTIFIER = digital.lamp.mindlamp.CustomNotification;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "mindLAMP2 Custom Notification Extension";

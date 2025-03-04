@@ -18,7 +18,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     private var widgetHelper = StreakWidgetHelper()
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        // Logging.isLogToFile = true
+//        Logging.isLogToFile = true
         // Override point for customization after application launch.
         WatchSessionManager.shared.startSession()
         WatchSessionManager.shared.iOSDelegate = LMSensorManager.shared

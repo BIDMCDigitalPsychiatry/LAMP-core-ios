@@ -32,7 +32,22 @@ public class StreakWidgetHelper {
         let dict: [String: Int] = [participantId: streak]
         UserDefaults.standard.setValue(dict, forKey: "longestActivityStreak")
     }
-    
+    private func logResponse(_ data: Data?, _ response: URLResponse?, _ error: Error?) {
+        //#if DEBUG
+        print("httpResponse = \(String(describing: response))")
+        print("error = \(String(describing: error))")
+        
+        do {
+            if let dataResp = data {
+                let jsonResult: AnyObject = try JSONSerialization.jsonObject(with: dataResp, options:
+                    JSONSerialization.ReadingOptions.mutableContainers) as AnyObject
+                print("response=\(jsonResult)")
+            }
+        } catch {
+            
+        }
+        //#endif
+    }
     public func fetchActivityEvents(participantId: String?, completion: (([Date]?) -> Void)?) {
         
         guard let participantId else {
@@ -49,6 +64,7 @@ public class StreakWidgetHelper {
         
         let task = URLSession.shared.dataTask(with: urlRequest(participantId: participantId, fromDate: fromDate)) { [weak self] data, response, error in
 
+//            self?.logResponse(data, response, error)
             if let data, let urlResponse = response as? HTTPURLResponse {
 
                 
