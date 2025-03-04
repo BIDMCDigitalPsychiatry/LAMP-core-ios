@@ -18,7 +18,10 @@ class HomeViewController: UIViewController {
     private lazy var lampAPI: NetworkingAPI = {
         return NetworkConfig.networkingAPI()
     }()
-    
+    private lazy var speechRecognizer: SpeechRecognizer =
+    {
+        SpeechRecognizer()
+    }()
     var feedURLToLoad: URL?
     //var loginSubscriber: AnyCancellable?
     //var isHomePageLoaded = false
@@ -224,7 +227,7 @@ private extension HomeViewController {
         
         configuration.userContentController.add(LeakAvoider(delegate:self), name: ScriptMessageHandler.login.rawValue)
         configuration.userContentController.add(LeakAvoider(delegate:self), name: ScriptMessageHandler.logout.rawValue)
-        
+        configuration.userContentController.add(LeakAvoider(delegate:self), name: ScriptMessageHandler.allowSpeech.rawValue)
         configuration.userContentController.add(LeakAvoider(delegate:self), name: "loadchecker")
         let source = """
 function captureDivs() {
@@ -457,6 +460,17 @@ extension HomeViewController: WKScriptMessageHandler {
             if divCount > 0 {
                 isWebpageLoaded = true
             }
+        } else if message.name == ScriptMessageHandler.allowSpeech.rawValue {
+            Task { @MainActor in
+                
+                do {
+                    try await speechRecognizer.getPermissions()
+                } catch let error {
+                    print("speechRecognizer error")
+                    return
+                }
+            }
+
         }
     }
 }
