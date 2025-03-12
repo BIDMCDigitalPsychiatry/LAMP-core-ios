@@ -8,30 +8,31 @@
 /* Bundle name */
 "CFBundleName" = "mindLAMP 2";
 /* Privacy - Bluetooth Always Usage Description */
-"NSBluetoothAlwaysUsageDescription" = "Your bluetooth data is required for clinical study.";
+"NSBluetoothAlwaysUsageDescription" = "आपका ब्लूटूथ डेटा क्लिनिकल अध्ययन के लिए आवश्यक है।";
 /* Privacy - Bluetooth Peripheral Usage Description */
-"NSBluetoothPeripheralUsageDescription" = "Your bluetooth data is required for clinical study.";
+"NSBluetoothPeripheralUsageDescription" = "आपका ब्लूटूथ डेटा क्लिनिकल अध्ययन के लिए आवश्यक है।";
 /* Privacy - Camera Usage Description */
 "NSCameraUsageDescription" = "";
 /* Privacy - Health Records Usage Description */
-"NSHealthClinicalHealthRecordsShareUsageDescription" = "Your Health data is required for clinical study.";
+"NSHealthClinicalHealthRecordsShareUsageDescription" = "आपका स्वास्थ्य डेटा नैदानिक अध्ययन के लिए आवश्यक है।";
 /* Privacy - Health Share Usage Description */
-"NSHealthShareUsageDescription" = "Your Health data is required for clinical study.";
+"NSHealthShareUsageDescription" = "आपका स्वास्थ्य डेटा नैदानिक अध्ययन के लिए आवश्यक है।";
 /* Privacy - Health Update Usage Description */
-"NSHealthUpdateUsageDescription" = "Your Health data is required for clinical study.";
+"NSHealthUpdateUsageDescription" = "आपका स्वास्थ्य डेटा नैदानिक अध्ययन के लिए आवश्यक है।";
 /* Copyright (human-readable) */
 "NSHumanReadableCopyright" = "John Torous";
 /* Privacy - Location Always and When In Use Usage Description */
-"NSLocationAlwaysAndWhenInUseUsageDescription" = "Your location access required for clinical study.";
+"NSLocationAlwaysAndWhenInUseUsageDescription" = "नैदानिक अध्ययन के लिए आपके स्थान तक पहुंच आवश्यक है।";
 /* Privacy - Location Always Usage Description */
-"NSLocationAlwaysUsageDescription" = "Your location access required for clinical study.";
+"NSLocationAlwaysUsageDescription" = "नैदानिक अध्ययन के लिए आपके स्थान तक पहुंच आवश्यक है।";
 /* Privacy - Location When In Use Usage Description */
-"NSLocationWhenInUseUsageDescription" = "Your location access required for clinical study.";
+"NSLocationWhenInUseUsageDescription" = "नैदानिक अध्ययन के लिए आपके स्थान तक पहुंच आवश्यक है।";
 /* Privacy - Microphone Usage Description */
-"NSMicrophoneUsageDescription" = "Your voice data is required for clinical study.";
+"NSMicrophoneUsageDescription" = "क्लिनिकल अध्ययन के लिए आपका वॉयस डेटा आवश्यक है।";
 /* Privacy - Motion Usage Description */
-"NSMotionUsageDescription" = "Your motion activity data is required for clinical study.";
+"NSMotionUsageDescription" = "नैदानिक अध्ययन के लिए आपकी गति गतिविधि डेटा आवश्यक है।";
 /* Privacy - SensorKit Privacy Policy URL */
 "NSSensorKitPrivacyPolicyURL" = "https://docs.lamp.digital/privacy/";
 /* Privacy - SensorKit Usage Description */
-"NSSensorKitUsageDescription" = "Your SensorKit Usage Data is required for a clinical research study you have opted to join.";
+"NSSensorKitUsageDescription" = "आपके द्वारा चुने गए नैदानिक अनुसंधान अध्ययन के लिए आपका सेंसरकिट उपयोग डेटा आवश्यक है।";
+"NSSpeechRecognitionUsageDescription" = "नैदानिक अध्ययन के लिए आपकी वाक् पहचान आवश्यक है।";

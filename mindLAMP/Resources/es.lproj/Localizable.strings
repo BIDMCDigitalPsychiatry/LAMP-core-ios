@@ -6,22 +6,22 @@
   Copyright © 2022 Division of Digital Psychiatry. All rights reserved.
 */
 "alert.lamp.title" = "mindLAMP 2";
-"alert.notification.expired"    = "Notification expired!";
-"alert.button.ok"   = "OK";
-"alert.button.retry" = "Retry";
-"alert.button.cancel" = "Cancel";
-"alert.button.settings" = "Settings";
-"alert.sensorkit.title" = "Research Sensor & Usage Data Permission Required";
-"alert.sensorkit.message" = "Please enable permissions in Settings -> Privacy -> Research Sensor & Usage Data.";
-"alert.location.title" = "Location Permission Required";
-"alert.location.message" = "Please enable location permissions in settings.";
+"alert.notification.expired"    = "¡Notificación expirada!";
+"alert.button.ok"   = "DE ACUERDO";
+"alert.button.retry" = "Rever";
+"alert.button.cancel" = "Cancelar";
+"alert.button.settings" = "Ajustes";
+"alert.sensorkit.title" = "Se requiere permiso para investigar sensores y datos de uso";
+"alert.sensorkit.message" = "Habilite los permisos en Configuración -> Privacidad -> Investigación de datos de uso y sensores.";
+"alert.location.title" = "Se requiere permiso de ubicación";
+"alert.location.message" = "Habilite los permisos de ubicación en la configuración.";
 
-"notification.action.text" = "Open App";
+"notification.action.text" = "Abrir aplicación";
 
-"error.server.notresponding" = "Server is not responding!";
-"error.invalid.url" = "Invalid URL";
-"error.network.generic" = "Something went wrong. Please try again later.";
-"error.network.timeout" = "Request timeout.";
+"error.server.notresponding" = "¡El servidor no responde!";
+"error.invalid.url" = "URL no válida";
+"error.network.generic" = "Algo salió mal. Inténtalo de nuevo más tarde.";
+"error.network.timeout" = "Tiempo de espera de solicitud.";
 
-"You have a mindLAMP activity waiting for you: %@." = "You have a mindLAMP activity waiting for you: %@.";
-"notification.activity.alert" = "You have a mindLAMP activity waiting for you: %@.";
+"You have a mindLAMP activity waiting for you: %@." = "Tienes una actividad mindLAMP esperándote: %@.";
+"notification.activity.alert" = "Tienes una actividad mindLAMP esperándote: %@.";

@@ -8,31 +8,31 @@
 /* Bundle name */
 "CFBundleName" = "mindLAMP 2";
 /* Privacy - Bluetooth Always Usage Description */
-"NSBluetoothAlwaysUsageDescription" = "Your bluetooth data is required for clinical study.";
+"NSBluetoothAlwaysUsageDescription" = "I dati Bluetooth sono necessari per lo studio clinico.";
 /* Privacy - Bluetooth Peripheral Usage Description */
-"NSBluetoothPeripheralUsageDescription" = "Your bluetooth data is required for clinical study.";
+"NSBluetoothPeripheralUsageDescription" = "I dati Bluetooth sono necessari per lo studio clinico.";
 /* Privacy - Camera Usage Description */
 "NSCameraUsageDescription" = "";
 /* Privacy - Health Records Usage Description */
-"NSHealthClinicalHealthRecordsShareUsageDescription" = "Your Health data is required for clinical study.";
+"NSHealthClinicalHealthRecordsShareUsageDescription" = "I tuoi dati sanitari sono necessari per lo studio clinico.";
 /* Privacy - Health Share Usage Description */
-"NSHealthShareUsageDescription" = "Your Health data is required for clinical study.";
+"NSHealthShareUsageDescription" = "I tuoi dati sanitari sono necessari per lo studio clinico.";
 /* Privacy - Health Update Usage Description */
-"NSHealthUpdateUsageDescription" = "Your Health data is required for clinical study.";
+"NSHealthUpdateUsageDescription" = "I tuoi dati sanitari sono necessari per lo studio clinico.";
 /* Copyright (human-readable) */
 "NSHumanReadableCopyright" = "John Torous";
 /* Privacy - Location Always and When In Use Usage Description */
-"NSLocationAlwaysAndWhenInUseUsageDescription" = "Your location access required for clinical study.";
+"NSLocationAlwaysAndWhenInUseUsageDescription" = "Per lo studio clinico è necessario l'accesso alla tua posizione.";
 /* Privacy - Location Always Usage Description */
-"NSLocationAlwaysUsageDescription" = "Your location access required for clinical study.";
+"NSLocationAlwaysUsageDescription" = "Per lo studio clinico è necessario l'accesso alla tua posizione.";
 /* Privacy - Location When In Use Usage Description */
-"NSLocationWhenInUseUsageDescription" = "Your location access required for clinical study.";
+"NSLocationWhenInUseUsageDescription" = "Per lo studio clinico è necessario l'accesso alla tua posizione.";
 /* Privacy - Microphone Usage Description */
-"NSMicrophoneUsageDescription" = "Your voice data is required for clinical study.";
+"NSMicrophoneUsageDescription" = "I tuoi dati vocali sono necessari per lo studio clinico.";
 /* Privacy - Motion Usage Description */
-"NSMotionUsageDescription" = "Your motion activity data is required for clinical study.";
+"NSMotionUsageDescription" = "I dati sulla tua attività motoria sono necessari per lo studio clinico.";
 /* Privacy - SensorKit Privacy Policy URL */
 "NSSensorKitPrivacyPolicyURL" = "https://docs.lamp.digital/privacy/";
 /* Privacy - SensorKit Usage Description */
-"NSSensorKitUsageDescription" = "Your SensorKit Usage Data is required for a clinical research study you have opted to join.";
-"NSSpeechRecognitionUsageDescription" = "Your speech recognition is required for clinical study.";
+"NSSensorKitUsageDescription" = "I tuoi dati di utilizzo di SensorKit sono necessari per uno studio di ricerca clinica a cui hai scelto di partecipare.";
+"NSSpeechRecognitionUsageDescription" = "Per lo studio clinico è necessario il riconoscimento vocale.";

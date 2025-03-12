@@ -5,18 +5,18 @@
   Created by Jijo Pulikkottil on 20/12/22.
   Copyright © 2022 Division of Digital Psychiatry. All rights reserved.
 */
-"label.emailaddress" = "Email Address";
+"label.emailaddress" = "Indirizzo e-mail";
 "label.password" = "Password";
 
-"button.go" = "Go";
-"button.logout" = "Logout";
+"button.go" = "Andare";
+"button.logout" = "Esci";
 "button.login" = "Login";
-"button.server.url" = "Server URL";
+"button.server.url" = "URL del server";
 
-"alert.button.ok"   = "Ok";
-"alert.button.cancel" = "Cancel";
+"alert.button.ok"   = "OK";
+"alert.button.cancel" = "Cancellare";
 
-"error.network.403" = "Authentication Failed!";
-"error.server.id.notfound" = "User not found.";
-"error.network.generic" = "Something went wrong. Please try again later.";
-"You have a mindLAMP activity waiting for you: %@." = "You have a mindLAMP activity waiting for you: %@.";
+"error.network.403" = "Autenticazione fallita!";
+"error.server.id.notfound" = "Utente non trovato.";
+"error.network.generic" = "Qualcosa è andato storto. Riprova più tardi.";
+"You have a mindLAMP activity waiting for you: %@." = "Hai un'attività mindLAMP che ti aspetta: %@.";

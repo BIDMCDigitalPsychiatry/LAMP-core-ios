@@ -6,22 +6,22 @@
   Copyright © 2022 Division of Digital Psychiatry. All rights reserved.
 */
 "alert.lamp.title" = "mindLAMP 2";
-"alert.notification.expired"    = "Notification expired!";
-"alert.button.ok"   = "OK";
-"alert.button.retry" = "Retry";
-"alert.button.cancel" = "Cancel";
-"alert.button.settings" = "Settings";
-"alert.sensorkit.title" = "Research Sensor & Usage Data Permission Required";
-"alert.sensorkit.message" = "Please enable permissions in Settings -> Privacy -> Research Sensor & Usage Data.";
-"alert.location.title" = "Location Permission Required";
-"alert.location.message" = "Please enable location permissions in settings.";
+"alert.notification.expired"    = "अधिसूचना समाप्त!";
+"alert.button.ok"   = "ठीक है";
+"alert.button.retry" =  "पुन: प्रयास करें";
+"alert.button.cancel" = "रद्द करना";
+"alert.button.settings" = "सेटिंग्स";
+"alert.sensorkit.title" = "अनुसंधान सेंसर और उपयोग डेटा अनुमति आवश्यक";
+"alert.sensorkit.message" = "कृपया सेटिंग्स -> गोपनीयता -> अनुसंधान सेंसर और उपयोग डेटा में अनुमतियाँ सक्षम करें।";
+"alert.location.title" = "स्थान अनुमति आवश्यक";
+"alert.location.message" = "कृपया सेटिंग में स्थान अनुमतियाँ सक्षम करें.";
 
-"notification.action.text" = "Open App";
+"notification.action.text" = "ऐप खोलें";
 
-"error.server.notresponding" = "Server is not responding!";
-"error.invalid.url" = "Invalid URL";
-"error.network.generic" = "Something went wrong. Please try again later.";
-"error.network.timeout" = "Request timeout.";
+"error.server.notresponding" = "सर्वर जवाब नहीं दे रहा है!";
+"error.invalid.url" = "असामान्य यूआरएल";
+"error.network.generic" = "कुछ गलत हो गया है। कृपया बाद में दोबारा प्रयास करें।";
+"error.network.timeout" = "ब्रेक का अनुरोध।";
 
-"You have a mindLAMP activity waiting for you: %@." = "You have a mindLAMP activity waiting for you: %@.";
-"notification.activity.alert" = "You have a mindLAMP activity waiting for you: %@.";
+"You have a mindLAMP activity waiting for you: %@." = "आपके लिए एक mindLAMP गतिविधि प्रतीक्षा कर रही है: %@.";
+"notification.activity.alert" = "आपके लिए एक mindLAMP गतिविधि प्रतीक्षा कर रही है: %@.";

@@ -5,6 +5,6 @@
   Created by Jijo Pulikkottil on 20/12/22.
   Copyright © 2022 Division of Digital Psychiatry. All rights reserved.
 */
-"Your Health data is required for clinical study." = "Your Health data is required for clinical study.";
-"Your location access required for clinical study." = "Your location access required for clinical study.";
-"Your motion activity data is required for clinical study." = "Your motion activity data is required for clinical study.";
+"Your Health data is required for clinical study." = "Sus datos de salud son necesarios para el estudio clínico.";
+"Your location access required for clinical study." = "Se requiere acceso a su ubicación para el estudio clínico.";
+"Your motion activity data is required for clinical study." = "Sus datos de actividad de movimiento son necesarios para el estudio clínico.";
