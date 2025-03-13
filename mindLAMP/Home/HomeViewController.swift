@@ -115,6 +115,7 @@ class HomeViewController: UIViewController {
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
+        LeakAvoider.cleanCache()
         printError("Stopping sensors for a while due to memory warning")
     }
 
