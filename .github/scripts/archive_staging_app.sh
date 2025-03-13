@@ -6,5 +6,5 @@ xcodebuild -project mindLAMP.xcodeproj \
             -scheme mindLAMP\ \(Staging\) \
             -configuration Release\ \(Staging\) \
             -archivePath $PWD/build/mindLAMP.xcarchive \
-            -destination 'platform=iOS Simulator,name=iPhone 15 Pro,OS=17.2' \
+            -destination "generic/platform=iOS" \
             clean archive | xcpretty
