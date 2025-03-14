@@ -9,13 +9,12 @@ jobs:
   push_deploy_staging:
     if: github.event_name == 'push'
     name: Deploying to Testflight for Staging
-    runs-on: macOS-latest
+    runs-on: macos-latest
     steps:
-      - uses: maxim-lobanov/setup-xcode@v1
-        with:
-          xcode-version: latest-stable
+      - name: check Xcode version
+        run: /usr/bin/xcodebuild -version
       - name: Checkout repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
         with:
           fetch-depth: 0
         env:
