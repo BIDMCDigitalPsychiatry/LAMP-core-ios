@@ -20,6 +20,8 @@
 		<string>mindLAMP2 WatchApp</string>
 		<key>digital.lamp.mindlamp.wearable.extension</key>
 		<string>mindLAMP2 WatchApp Extension</string>
+		<key>digital.lamp.mindlamp.StreakWidget</key>
+		<string>mindLAMP2_StreakWidget</string>
 	</dict>
 </dict>
 </plist>
