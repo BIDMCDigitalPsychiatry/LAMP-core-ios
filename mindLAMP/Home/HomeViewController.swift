@@ -467,7 +467,7 @@ extension HomeViewController: WKScriptMessageHandler {
                 do {
                     try await speechRecognizer.getPermissions()
                 } catch let error {
-                    print("speechRecognizer error")
+                    print("speechRecognizer error \(error.localizedDescription)")
                     return
                 }
             }
