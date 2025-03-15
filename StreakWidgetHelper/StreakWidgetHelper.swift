@@ -49,7 +49,7 @@ public class StreakWidgetHelper {
         
         let task = URLSession.shared.dataTask(with: urlRequest(participantId: participantId, fromDate: fromDate)) { [weak self] data, response, error in
 
-            if let data, let urlResponse = response as? HTTPURLResponse {
+            if let data, let _ = response as? HTTPURLResponse {
 
                 
                 let decoder = JSONDecoder()
@@ -70,7 +70,7 @@ public class StreakWidgetHelper {
                     }
                     completion?(responseData.dates)
                     
-                } catch (let err) {
+                } catch {
                     completion?(nil)
                 }
             } else {
