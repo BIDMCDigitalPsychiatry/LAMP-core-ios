@@ -3,10 +3,10 @@
 set -eo pipefail
 
 mkdir -p ~/private_keys
-echo "$APPSTORE_API_KEY_BASE64" | base64 --decode > ~/private_keys/AuthKey_V7878248C8.p8
+echo "$APPSTORE_API_KEY_BASE64" | base64 --decode > $APPSTORE_API_KEY_PATH
 xcrun altool --upload-app -t ios -f build/mindLAMP\ 2.ipa \
       --apiKey $APPSTORE_KEY_ID \
       --apiIssuer $APPSTORE_ISSUER_ID \
-      --apiKeyPath ~/private_keys/AuthKey_V7878248C8.p8 \
+      --apiKeyPath $APPSTORE_API_KEY_PATH \
       --verbose
-rm -f ~/private_keys/AuthKey_V7878248C8.p8
+rm -f $APPSTORE_API_KEY_PATH
