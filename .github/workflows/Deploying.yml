@@ -90,6 +90,8 @@ jobs:
         env:
           APPLEID_USERNAME: ${{ secrets.APPLEID_USERNAME }}
           APPLEID_PASSWORD: ${{ secrets.APPLEID_PASSWORD }}
+          APPSTORE_KEY_ID: ${{ secrets.APPSTORE_KEY_ID }}
+          APPSTORE_ISSUER_ID: ${{ secrets.APPSTORE_ISSUER_ID }}
         run: .github/scripts/publish_testflight.sh
   release_deploy_production:
     if: github.event_name == 'release'
