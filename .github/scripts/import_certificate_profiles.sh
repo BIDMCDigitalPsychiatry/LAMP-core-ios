@@ -27,7 +27,7 @@ security set-keychain-settings -lut 21600 $KEYCHAIN_PATH
 security unlock-keychain -p "$KEYCHAIN_PASSWORD" $KEYCHAIN_PATH
 
 echo "import certificate to keychain"
-security import $CERTIFICATE_PATH -P "$IOS_KEYS" -A -t cert -f pkcs12 -k $KEYCHAIN_PATH
+security import $CERTIFICATE_PATH -P "$P12_PASSWORD" -A -t cert -f pkcs12 -k $KEYCHAIN_PATH
 security list-keychain -d user -s $KEYCHAIN_PATH
 
 echo "apply provisioning profile"
