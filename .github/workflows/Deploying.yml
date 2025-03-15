@@ -21,11 +21,11 @@ jobs:
           token: ${{ secrets.GITHUB_TOKENN }}
       - name: Get version from date
         run: |
-          echo "::set-output name=VERSION::$(date +'%Y.%-m.%-d')"
+          echo "VERSION=$(date +'%Y.%-m.%-d')" >> $GITHUB_OUTPUT
         id: dateversion
       - name: Get commits count
         run: |
-          echo "::set-output name=GIT_COMMIT_NUMBER::$(git rev-list --count HEAD)"
+          echo "GIT_COMMIT_NUMBER=$(git rev-list --count HEAD)" >> $GITHUB_OUTPUT
         id: commits
       - name: Set version and build number
         run: |
