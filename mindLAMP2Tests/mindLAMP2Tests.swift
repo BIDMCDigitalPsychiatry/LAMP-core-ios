@@ -24,12 +24,14 @@ final class mindLAMP2Tests: XCTestCase {
         dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
         dateFormatter.locale = Locale(identifier: "en_US_POSIX")
         dateFormatter.timeZone = .utc
+        let calendar = Calendar.current
+        let currentDate = Date()
         let dates = [
-            dateFormatter.date(from: "2024-06-12 03:34:10")!,
-            dateFormatter.date(from: "2024-06-11 14:53:00")!,
-            dateFormatter.date(from: "2024-06-11 06:54:00")!,
-            dateFormatter.date(from: "2024-06-10 16:17:29")!,
-            dateFormatter.date(from: "2024-06-10 14:42:00")!,
+            currentDate,
+            calendar.date(byAdding: .day, value: -1, to: currentDate)!,
+            calendar.date(byAdding: .day, value: -1, to: currentDate)!,
+            calendar.date(byAdding: .day, value: -2, to: currentDate)!,
+            calendar.date(byAdding: .day, value: -2, to: currentDate)!,
             
             dateFormatter.date(from: "2024-05-05 09:00:00")!,
             dateFormatter.date(from: "2024-05-06 10:00:00")!,
@@ -52,13 +54,15 @@ final class mindLAMP2Tests: XCTestCase {
         dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
         dateFormatter.locale = Locale(identifier: "en_US_POSIX")
         dateFormatter.timeZone = .utc
+        let calendar = Calendar.current
+        let currentDate = Date()
         let dates = [
-            dateFormatter.date(from: "2024-06-12 03:34:10")!,
-            dateFormatter.date(from: "2024-06-11 14:53:00")!,
-            dateFormatter.date(from: "2024-06-11 06:54:00")!,
-            dateFormatter.date(from: "2024-06-10 16:17:29")!,
-            dateFormatter.date(from: "2024-06-10 14:42:00")!,
-            dateFormatter.date(from: "2024-06-09 20:42:00")!,
+            currentDate,
+            calendar.date(byAdding: .day, value: -1, to: currentDate)!,
+            calendar.date(byAdding: .day, value: -1, to: currentDate)!,
+            calendar.date(byAdding: .day, value: -2, to: currentDate)!,
+            calendar.date(byAdding: .day, value: -2, to: currentDate)!,
+            calendar.date(byAdding: .day, value: -3, to: currentDate)!,
             
             dateFormatter.date(from: "2024-05-05 09:00:00")!,
             dateFormatter.date(from: "2024-05-06 10:00:00")!,
@@ -72,7 +76,7 @@ final class mindLAMP2Tests: XCTestCase {
         let streak:(current: Int, max: Int) = sut.findCurentAndLongestStreak(dates: dates)
         
         XCTAssertEqual(streak.max, 4)
-        XCTAssertEqual(streak.current, 3)
+        XCTAssertEqual(streak.current, 4)
     }
 
     func testPerformanceExample() throws {
