@@ -1,0 +1,22 @@
+/* 
+  Localizable.strings
+  mindLAMP
+
+  Created by Jijo Pulikkottil on 20/12/22.
+  Copyright © 2022 Division of Digital Psychiatry. All rights reserved.
+*/
+"label.emailaddress" = "Dirección de correo electrónico";
+"label.password" = "Contraseña";
+
+"button.go" = "Ir";
+"button.logout" = "Cerrar sesión";
+"button.login" = "Acceso";
+"button.server.url" = "URL del servidor";
+
+"alert.button.ok"   = "DE ACUERDO";
+"alert.button.cancel" = "Cancelar";
+
+"error.network.403" = "¡Error de autenticación!";
+"error.server.id.notfound" = "Usuario no encontrado.";
+"error.network.generic" = "Algo salió mal. Inténtalo de nuevo más tarde.";
+"You have a mindLAMP activity waiting for you: %@." = "Tienes una actividad mindLAMP esperándote: %@.";

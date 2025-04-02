@@ -1,0 +1,38 @@
+/* 
+  InfoPlist.strings
+  mindLAMP
+
+  Created by Jijo Pulikkottil on 20/12/22.
+  Copyright © 2022 Division of Digital Psychiatry. All rights reserved.
+*/
+/* Bundle name */
+"CFBundleName" = "mindLAMP 2";
+/* Privacy - Bluetooth Always Usage Description */
+"NSBluetoothAlwaysUsageDescription" = "आपका ब्लूटूथ डेटा क्लिनिकल अध्ययन के लिए आवश्यक है।";
+/* Privacy - Bluetooth Peripheral Usage Description */
+"NSBluetoothPeripheralUsageDescription" = "आपका ब्लूटूथ डेटा क्लिनिकल अध्ययन के लिए आवश्यक है।";
+/* Privacy - Camera Usage Description */
+"NSCameraUsageDescription" = "";
+/* Privacy - Health Records Usage Description */
+"NSHealthClinicalHealthRecordsShareUsageDescription" = "आपका स्वास्थ्य डेटा नैदानिक अध्ययन के लिए आवश्यक है।";
+/* Privacy - Health Share Usage Description */
+"NSHealthShareUsageDescription" = "आपका स्वास्थ्य डेटा नैदानिक अध्ययन के लिए आवश्यक है।";
+/* Privacy - Health Update Usage Description */
+"NSHealthUpdateUsageDescription" = "आपका स्वास्थ्य डेटा नैदानिक अध्ययन के लिए आवश्यक है।";
+/* Copyright (human-readable) */
+"NSHumanReadableCopyright" = "John Torous";
+/* Privacy - Location Always and When In Use Usage Description */
+"NSLocationAlwaysAndWhenInUseUsageDescription" = "नैदानिक अध्ययन के लिए आपके स्थान तक पहुंच आवश्यक है।";
+/* Privacy - Location Always Usage Description */
+"NSLocationAlwaysUsageDescription" = "नैदानिक अध्ययन के लिए आपके स्थान तक पहुंच आवश्यक है।";
+/* Privacy - Location When In Use Usage Description */
+"NSLocationWhenInUseUsageDescription" = "नैदानिक अध्ययन के लिए आपके स्थान तक पहुंच आवश्यक है।";
+/* Privacy - Microphone Usage Description */
+"NSMicrophoneUsageDescription" = "क्लिनिकल अध्ययन के लिए आपका वॉयस डेटा आवश्यक है।";
+/* Privacy - Motion Usage Description */
+"NSMotionUsageDescription" = "नैदानिक अध्ययन के लिए आपकी गति गतिविधि डेटा आवश्यक है।";
+/* Privacy - SensorKit Privacy Policy URL */
+"NSSensorKitPrivacyPolicyURL" = "https://docs.lamp.digital/privacy/";
+/* Privacy - SensorKit Usage Description */
+"NSSensorKitUsageDescription" = "आपके द्वारा चुने गए नैदानिक अनुसंधान अध्ययन के लिए आपका सेंसरकिट उपयोग डेटा आवश्यक है।";
+"NSSpeechRecognitionUsageDescription" = "नैदानिक अध्ययन के लिए आपकी वाक् पहचान आवश्यक है।";

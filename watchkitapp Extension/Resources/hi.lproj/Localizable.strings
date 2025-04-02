@@ -1,0 +1,22 @@
+/* 
+  Localizable.strings
+  mindLAMP
+
+  Created by Jijo Pulikkottil on 20/12/22.
+  Copyright © 2022 Division of Digital Psychiatry. All rights reserved.
+*/
+"label.emailaddress" = "मेल पता";
+"label.password" = "पासवर्ड";
+
+"button.go" = "जाना";
+"button.logout" = "लॉग आउट";
+"button.login" = "लॉग इन करें";
+"button.server.url" = "सर्वर यूआरएल";
+
+"alert.button.ok"   = "ठीक है";
+"alert.button.cancel" = "रद्द करना";
+
+"error.network.403" = "प्रमाणीकरण विफल होना!";
+"error.server.id.notfound" = "उपयोगकर्ता नहीं मिला.";
+"error.network.generic" = "कुछ गलत हो गया है। कृपया बाद में दोबारा प्रयास करें।";
+"You have a mindLAMP activity waiting for you: %@." = "आपके लिए एक mindLAMP गतिविधि प्रतीक्षा कर रही है: %@.";

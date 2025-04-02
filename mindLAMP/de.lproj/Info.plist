@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>---Application Scene Manifest---</key>
+	<dict>
+		<key>UIApplicationSupportsMultipleScenes</key>
+		<false/>
+		<key>UISceneConfigurations</key>
+		<dict>
+			<key>UIWindowSceneSessionRoleApplication</key>
+			<array>
+				<dict>
+					<key>UISceneConfigurationName</key>
+					<string>Default Configuration</string>
+					<key>UISceneDelegateClassName</key>
+					<string>$(PRODUCT_MODULE_NAME).SceneDelegate</string>
+				</dict>
+			</array>
+		</dict>
+	</dict>
+	<key>Branding</key>
+	<string>$(Branding)</string>
+	<key>CFBundleDevelopmentRegion</key>
+	<string>$(DEVELOPMENT_LANGUAGE)</string>
+	<key>CFBundleExecutable</key>
+	<string>$(EXECUTABLE_NAME)</string>
+	<key>CFBundleIdentifier</key>
+	<string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
+	<key>CFBundleInfoDictionaryVersion</key>
+	<string>6.0</string>
+	<key>CFBundleName</key>
+	<string>$(PRODUCT_NAME)</string>
+	<key>CFBundlePackageType</key>
+	<string>$(PRODUCT_BUNDLE_PACKAGE_TYPE)</string>
+	<key>CFBundleShortVersionString</key>
+	<string>2024.6.15</string>
+	<key>CFBundleURLTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLName</key>
+			<string>digital.lamp.mindlamp</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>widget-deeplink</string>
+			</array>
+		</dict>
+	</array>
+	<key>CFBundleVersion</key>
+	<string>424</string>
+	<key>DASHBOARD_URL</key>
+	<string>$(DASHBOARD_URL)</string>
+	<key>ITSAppUsesNonExemptEncryption</key>
+	<false/>
+	<key>LAMP_API</key>
+	<string>$(LAMP_API)</string>
+	<key>LSRequiresIPhoneOS</key>
+	<true/>
+	<key>NSAppTransportSecurity</key>
+	<dict>
+		<key>NSAllowsArbitraryLoads</key>
+		<true/>
+		<key>NSAllowsArbitraryLoadsInWebContent</key>
+		<true/>
+	</dict>
+	<key>NSBluetoothAlwaysUsageDescription</key>
+	<string>Your bluetooth data is required for clinical study.</string>
+	<key>NSBluetoothPeripheralUsageDescription</key>
+	<string>Your bluetooth data is required for clinical study.</string>
+	<key>NSCameraUsageDescription</key>
+	<string></string>
+	<key>NSHealthClinicalHealthRecordsShareUsageDescription</key>
+	<string>Your Health data is required for clinical study.</string>
+	<key>NSHealthShareUsageDescription</key>
+	<string>Your Health data is required for clinical study.</string>
+	<key>NSHealthUpdateUsageDescription</key>
+	<string>Your Health data is required for clinical study.</string>
+	<key>NSHumanReadableCopyright</key>
+	<string>John Torous</string>
+	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+	<string>Your location access required for clinical study.</string>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>Your location access required for clinical study.</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>Your location access required for clinical study.</string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>Your voice data is required for clinical study.</string>
+	<key>NSMotionUsageDescription</key>
+	<string>Your motion activity data is required for clinical study.</string>
+	<key>NSSensorKitPrivacyPolicyURL</key>
+	<string>https://docs.lamp.digital/privacy/</string>
+	<key>NSSensorKitUsageDescription</key>
+	<string>Your SensorKit Usage Data is required for a clinical research study you have opted to join.</string>
+	<key>NSSensorKitUsageDetail</key>
+	<dict>
+		<key>SRSensorUsageAmbientLightSensor</key>
+		<dict>
+			<key>Description</key>
+			<string>Your Ambient Light Sensor data is required for a clinical research study you have opted to join.</string>
+		</dict>
+		<key>SRSensorUsageDeviceUsage</key>
+		<dict>
+			<key>Description</key>
+			<string>Your Device Usage Data is required for a clinical research study you have opted to join.</string>
+		</dict>
+		<key>SRSensorUsageMessageUsage</key>
+		<dict>
+			<key>Description</key>
+			<string>Your Message Usage Data is required for a clinical research study you have opted to join.</string>
+		</dict>
+		<key>SRSensorUsagePhoneUsage</key>
+		<dict>
+			<key>Description</key>
+			<string>Your Phone Usage data is required for a clinical research study you have opted to join.</string>
+		</dict>
+		<key>SRSensorUsageVisits</key>
+		<dict>
+			<key>Description</key>
+			<string>Your Visit data is required for a clinical research study you have opted to join.</string>
+		</dict>
+		<key>SRSensorUsageWristDetection</key>
+		<dict>
+			<key>Description</key>
+			<string>Your Wrist Detection Data is required for a clinical research study you have opted to join.</string>
+		</dict>
+	</dict>
+	<key>NSSpeechRecognitionUsageDescription</key>
+	<string>Your speech recognition is required for clinical study.</string>
+	<key>UIBackgroundModes</key>
+	<array>
+		<string>bluetooth-central</string>
+		<string>fetch</string>
+		<string>location</string>
+		<string>remote-notification</string>
+	</array>
+	<key>UILaunchScreen</key>
+	<dict>
+		<key>UIColorName</key>
+		<string>colorWhite</string>
+		<key>UIImageName</key>
+		<string>logo</string>
+		<key>UIImageRespectsSafeAreaInsets</key>
+		<false/>
+	</dict>
+	<key>UIRequiredDeviceCapabilities</key>
+	<array>
+		<string>armv7</string>
+	</array>
+	<key>UIRequiresFullScreen</key>
+	<false/>
+	<key>UISupportedInterfaceOrientations</key>
+	<array>
+		<string>UIInterfaceOrientationPortrait</string>
+		<string>UIInterfaceOrientationLandscapeLeft</string>
+		<string>UIInterfaceOrientationLandscapeRight</string>
+	</array>
+	<key>UISupportedInterfaceOrientations~ipad</key>
+	<array>
+		<string>UIInterfaceOrientationPortrait</string>
+		<string>UIInterfaceOrientationPortraitUpsideDown</string>
+		<string>UIInterfaceOrientationLandscapeLeft</string>
+		<string>UIInterfaceOrientationLandscapeRight</string>
+	</array>
+	<key>UIUserInterfaceStyle</key>
+	<string>Light</string>
+</dict>
+</plist>

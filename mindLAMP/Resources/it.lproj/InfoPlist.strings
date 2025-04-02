@@ -1,0 +1,38 @@
+/* 
+  InfoPlist.strings
+  mindLAMP
+
+  Created by Jijo Pulikkottil on 20/12/22.
+  Copyright © 2022 Division of Digital Psychiatry. All rights reserved.
+*/
+/* Bundle name */
+"CFBundleName" = "mindLAMP 2";
+/* Privacy - Bluetooth Always Usage Description */
+"NSBluetoothAlwaysUsageDescription" = "I dati Bluetooth sono necessari per lo studio clinico.";
+/* Privacy - Bluetooth Peripheral Usage Description */
+"NSBluetoothPeripheralUsageDescription" = "I dati Bluetooth sono necessari per lo studio clinico.";
+/* Privacy - Camera Usage Description */
+"NSCameraUsageDescription" = "";
+/* Privacy - Health Records Usage Description */
+"NSHealthClinicalHealthRecordsShareUsageDescription" = "I tuoi dati sanitari sono necessari per lo studio clinico.";
+/* Privacy - Health Share Usage Description */
+"NSHealthShareUsageDescription" = "I tuoi dati sanitari sono necessari per lo studio clinico.";
+/* Privacy - Health Update Usage Description */
+"NSHealthUpdateUsageDescription" = "I tuoi dati sanitari sono necessari per lo studio clinico.";
+/* Copyright (human-readable) */
+"NSHumanReadableCopyright" = "John Torous";
+/* Privacy - Location Always and When In Use Usage Description */
+"NSLocationAlwaysAndWhenInUseUsageDescription" = "Per lo studio clinico è necessario l'accesso alla tua posizione.";
+/* Privacy - Location Always Usage Description */
+"NSLocationAlwaysUsageDescription" = "Per lo studio clinico è necessario l'accesso alla tua posizione.";
+/* Privacy - Location When In Use Usage Description */
+"NSLocationWhenInUseUsageDescription" = "Per lo studio clinico è necessario l'accesso alla tua posizione.";
+/* Privacy - Microphone Usage Description */
+"NSMicrophoneUsageDescription" = "I tuoi dati vocali sono necessari per lo studio clinico.";
+/* Privacy - Motion Usage Description */
+"NSMotionUsageDescription" = "I dati sulla tua attività motoria sono necessari per lo studio clinico.";
+/* Privacy - SensorKit Privacy Policy URL */
+"NSSensorKitPrivacyPolicyURL" = "https://docs.lamp.digital/privacy/";
+/* Privacy - SensorKit Usage Description */
+"NSSensorKitUsageDescription" = "I tuoi dati di utilizzo di SensorKit sono necessari per uno studio di ricerca clinica a cui hai scelto di partecipare.";
+"NSSpeechRecognitionUsageDescription" = "Per lo studio clinico è necessario il riconoscimento vocale.";
