@@ -35,4 +35,4 @@
 "NSSensorKitPrivacyPolicyURL" = "https://docs.lamp.digital/privacy/";
 /* Privacy - SensorKit Usage Description */
 "NSSensorKitUsageDescription" = "Für die klinische Forschungsstudie, für die Sie sich entschieden haben, werden Ihre SensorKit-Nutzungsdaten benötigt.";
-"NSSpeechRecognitionUsageDescription" = "Your speech recognition is required for clinical study.";
+"NSSpeechRecognitionUsageDescription" = "Für die klinische Studie wird Ihre Spracherkennung benötigt.";
