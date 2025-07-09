@@ -18,6 +18,7 @@ class HomeViewController: UIViewController {
     private lazy var lampAPI: NetworkingAPI = {
         return NetworkConfig.networkingAPI()
     }()
+//    var lastLoadedURL: URL?
     private lazy var speechRecognizer: SpeechRecognizer =
     {
         SpeechRecognizer()
@@ -175,6 +176,17 @@ private extension HomeViewController {
         //wkWebView.scrollView.contentInsetAdjustmentBehavior = .never
         //wkWebView.addSubview(indicator)
         self.view.addSubview(indicator)
+//        
+//        let button = UIButton()
+//        button.setTitle("Retry", for: .normal)
+//        button.frame = CGRect(x: 0, y: 0, width: 100, height: 20)
+//        view.addSubview(button)
+//        NSLayoutConstraint.activate([
+//            button.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+//            button.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor)])
+//        button.addTarget(self, action: #selector(retry), for: UIControl.Event.touchUpInside)
+//        button.layer.zPosition = 100
+//        
         NSLayoutConstraint.activate([indicator.centerXAnchor.constraint(equalTo: view.centerXAnchor),
                                      indicator.centerYAnchor.constraint(equalTo: view.centerYAnchor)])
         //To show activity indicator when webview is Loading..
@@ -200,6 +212,12 @@ private extension HomeViewController {
         
     }
     
+//    @objc
+//    private func retry() {
+//        if let lastLoadedURL {
+//            wkWebView.load(URLRequest(url: lastLoadedURL))
+//        }
+//    }
     func loadWebPage() {
         if User.shared.isLogin() == true {
             if let feedURL = feedURLToLoad {
@@ -355,7 +373,17 @@ extension HomeViewController: WKNavigationDelegate {
         // we are getting this call back even if the page is not loaded. we can reproduce it by on/off the wifi frequently while loading page.#651
         indicator.stopAnimating()
     }
-    
+//    func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction,
+//                  decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
+//
+//        if let url = navigationAction.request.url {
+//            print("User tapped link or navigating to URL: \(url.absoluteString)")
+//            lastLoadedURL = url
+//        }
+//
+//        // Allow navigation
+//        decisionHandler(.allow)
+//    }
     func webView(_ webView: WKWebView, didFail navigation: WKNavigation!, withError error: Error) {
         indicator.stopAnimating()
     }
