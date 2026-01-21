@@ -1,0 +1,15 @@
+// mindLAMP
+
+// Configuration settings file format documentation can be found at:
+// https://help.apple.com/xcode/#/dev745c5c974
+
+// Dev.xcconfig
+
+DASHBOARD_URL = https:/$()/dashboard.dev.lamp.digital/#/
+LAMP_API = https:/$()/api.dev.lamp.digital
+Branding = NativeCore
+
+// Legacy configs (retained for reference)
+//DASHBOARD_URL = http:/$()/52.66.237.209:9094/#/
+//LAMP_API = http:/$()/52.66.237.209:9093
+//LAMP_API = https:/$()/lampv2.zcodemo.com:9093
