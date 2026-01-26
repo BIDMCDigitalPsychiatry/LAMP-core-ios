@@ -8,8 +8,20 @@
 //DASHBOARD_URL = http:/$()/52.66.237.209:9094/#/
 //LAMP_API = https:/$()/lampv2.zcodemo.com:9093 //
 
-DASHBOARD_URL = https:/$()/dashboard-staging.lamp.digital/#/  //
-LAMP_API = https:/$()/api-staging.lamp.digital
+//DASHBOARD_URL = https:/$()/lamp-dashboard.zcodemo.com/#/
+//LAMP_API = https:/$()/lamp-api.zcodemo.com
+
+//DASHBOARD_URL = https:/$()/lampdev.armylevelup.app/#/
+//LAMP_API = https:/$()/lampdev-api.armylevelup.app
+
+//DASHBOARD_URL = https:/$()/mindlamp.armylevelup.app/#/
+//LAMP_API = https:/$()/mindlamp-api.armylevelup.app
+
+DASHBOARD_URL = https:/$()/lamp-dashboard.zcodemo.com/#/
+LAMP_API = https:/$()/lamp-api.zcodemo.com
+
+//DASHBOARD_URL = https:/$()/dashboard-staging.lamp.digital/#/  //
+//LAMP_API = https:/$()/api-staging.lamp.digital
 
 //DASHBOARD_URL = http:/$()/52.66.237.209:9094/#/
 //LAMP_API = http:/$()/52.66.237.209:9093

@@ -54,10 +54,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         completionHandler()
     }
     
+    func applicationDidBecomeActive(_ application: UIApplication) {
+        UIApplication.shared.isIdleTimerDisabled = true
+    }
+    
     func applicationWillEnterForeground(_ application: UIApplication) {
         calculateBadgeCount()
     }
     func applicationDidEnterBackground(_ application: UIApplication) {
+        UIApplication.shared.isIdleTimerDisabled = false
         calculateBadgeCount()
     }
     func applicationWillResignActive(_ application: UIApplication) {
@@ -83,7 +88,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 private extension AppDelegate {
     func shareCredentialsToNotificationExtension() {
-        if let base64Auth = Endpoint.getSessionKey(), UserDefaults.standard.userIDShared == nil {
+        if let base64Auth = Endpoint.getBase64BasicAuth(), UserDefaults.standard.userIDShared == nil {
             
             guard let decodedData = Data(base64Encoded: base64Auth), let decodedString = String(data: decodedData, encoding: .utf8) else {
                 return

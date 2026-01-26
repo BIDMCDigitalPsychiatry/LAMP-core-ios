@@ -52,8 +52,8 @@ struct RequestData: RequestProtocol {
             }
         }
         else if isAuth() {
-            if let token = getSessionToken() {
-                requestHeaders["Authorization"] = "Basic \(token)"
+            if let authHeader = getAuthorizationHeader() {
+                requestHeaders["Authorization"] = authHeader
             }
             if let apikey = getAPIKey() {
                 requestHeaders["API-KEY"] = apikey
@@ -207,8 +207,8 @@ struct RequestData: RequestProtocol {
     func getAPIKey() -> String? {
         return Endpoint.getAPIKey()
     }
-    func getSessionToken() -> String? {
-        return Endpoint.getSessionKey()
+    func getAuthorizationHeader() -> String? {
+        return Endpoint.getAuthHeader()
     }
 
 }

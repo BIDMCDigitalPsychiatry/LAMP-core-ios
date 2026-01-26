@@ -15,9 +15,7 @@ struct User {
     }
 
     func isLogin() -> Bool {
-        print("Endpoint.getSessionKey() = \(String(describing: Endpoint.getSessionKey()))")
-        print("userId = \(String(describing: userId))")
-        return (Endpoint.getSessionKey() != nil) && (userId != nil)
+        return (Endpoint.getAuthHeader() != nil) && (userId != nil)
     }
     
     #if os(iOS)
@@ -54,13 +52,13 @@ struct User {
         SensorLogs.shared.clearLogsDirectory()
         LMLogsManager.shared.clearLogsDirectory()
         
-        Endpoint.setSessionKey(nil)
+        Endpoint.setAuthHeader(nil)
         UserDefaults.standard.clearAll()
     }
     
     var loginInfo: [String: Any]? {
-        if let sessionToken = Endpoint.getSessionKey(), let userId = userId, let address = serverURL {
-            return [LoginInfoKey.sessionToken: sessionToken, LoginInfoKey.userId: userId, LoginInfoKey.serverAddress: address]
+        if let authHeader = Endpoint.getAuthHeader(), let userId = userId, let address = serverURL {
+            return [LoginInfoKey.authHeader: authHeader, LoginInfoKey.userId: userId, LoginInfoKey.serverAddress: address]
         }
         return nil
     }

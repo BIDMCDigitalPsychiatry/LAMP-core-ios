@@ -88,12 +88,12 @@ class UserAuth: ObservableObject {
         
         loginStatus = .logout
         
-        guard let authheader = Endpoint.getSessionKey(), let participantId = User.shared.userId else {
+        guard let authheader = Endpoint.getAuthHeader(), let participantId = User.shared.userId else {
             User.shared.logout()
             return
         }
         OpenAPIClientAPI.basePath = LampURL.baseURLString
-        OpenAPIClientAPI.customHeaders = ["Authorization": "Basic \(authheader)", "Content-Type": "application/json"]
+        OpenAPIClientAPI.customHeaders = ["Authorization": authheader, "Content-Type": "application/json"]
         
         let tokenInfo = DeviceInfoWithToken(deviceToken: nil, userAgent: UserAgent.defaultAgent, action: SensorType.AnalyticAction.logout.rawValue)
         let event = SensorEvent(timestamp: Date().timeInMilliSeconds, sensor: SensorType.lamp_analytics.lampIdentifier, data: tokenInfo)
@@ -128,7 +128,7 @@ class UserAuth: ObservableObject {
        
         shouldAnimate = true
         let base64 = Data("\(userName):\(password)".utf8).base64EncodedString()
-        Endpoint.setSessionKey(base64)
+        Endpoint.setBase64BasicAuth(base64)
         
         //+202012
         OpenAPIClientAPI.basePath = LampURL.baseURLString
@@ -217,11 +217,11 @@ class UserAuth: ObservableObject {
 
     func sendInfoToServer(tokenInfo: DeviceInfoWithToken) {
         
-        guard let authheader = Endpoint.getSessionKey(), let participantId = User.shared.userId else {
+        guard let authheader = Endpoint.getAuthHeader(), let participantId = User.shared.userId else {
             return
         }
         OpenAPIClientAPI.basePath = LampURL.baseURLString
-        OpenAPIClientAPI.customHeaders = ["Authorization": "Basic \(authheader)", "Content-Type": "application/json"]
+        OpenAPIClientAPI.customHeaders = ["Authorization": authheader, "Content-Type": "application/json"]
       
         let event = SensorEvent(timestamp: Date().timeInMilliSeconds, sensor: SensorType.lamp_analytics.lampIdentifier, data: tokenInfo)
         let publisher = SensorEventAPI.sensorEventCreate(participantId: participantId, sensorEvent: event, apiResponseQueue: DispatchQueue.global())

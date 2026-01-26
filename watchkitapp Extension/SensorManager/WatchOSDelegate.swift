@@ -12,7 +12,7 @@ extension LMSensorManager: WatchOSDelegate {
         DispatchQueue.main.async() {
             if let loginDict = tuple.applicationContext[IOSCommands.login] as? [String: Any] {
                 let loginInfo = LoginInfo(loginDict)
-                Endpoint.setSessionKey(loginInfo.sessionToken)
+                Endpoint.setAuthHeader(loginInfo.authHeader)
                 User.shared.login(userID: loginInfo.userId, serverAddress: loginInfo.serverAddress)
                 Utils.postNotificationOnMainQueueAsync(name: .userLogined)
                 LMSensorManager.shared.checkIsRunning()

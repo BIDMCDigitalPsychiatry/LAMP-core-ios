@@ -246,6 +246,7 @@ private extension HomeViewController {
         
         configuration.userContentController.add(LeakAvoider(delegate:self), name: ScriptMessageHandler.login.rawValue)
         configuration.userContentController.add(LeakAvoider(delegate:self), name: ScriptMessageHandler.logout.rawValue)
+        configuration.userContentController.add(LeakAvoider(delegate:self), name: ScriptMessageHandler.renewToken.rawValue)
         configuration.userContentController.add(LeakAvoider(delegate:self), name: ScriptMessageHandler.allowSpeech.rawValue)
         configuration.userContentController.add(LeakAvoider(delegate:self), name: "loadchecker")
         let source = """
@@ -322,7 +323,7 @@ window.onload = captureDivs;
         
         LeakAvoider.cleanCache()
         //send lamp.analytics for logout
-        guard let _ = Endpoint.getSessionKey(), let participantId = User.shared.userId else {
+        guard let _ = Endpoint.getAuthHeader(), let participantId = User.shared.userId else {
             NotificationHelper.shared.removeAllNotifications()
             User.shared.logout()
             return
@@ -385,6 +386,7 @@ extension HomeViewController: WKNavigationDelegate {
 //        decisionHandler(.allow)
 //    }
     func webView(_ webView: WKWebView, didFail navigation: WKNavigation!, withError error: Error) {
+        print("webview failed \(error)")
         indicator.stopAnimating()
     }
     
@@ -431,6 +433,7 @@ extension HomeViewController: WKScriptMessageHandler {
 //        if message.name == "logHandler" {
 //            print("CONSOLE LOG: \(message.body)")
 //        }
+        print("message.name = \(message.name)")
         if message.name == ScriptMessageHandler.login.rawValue {
             isWebpageLoaded = true // we will get this event, not only while login but also when relaunch the app (login will happen when launch home page with authToken). so this is the safe place to set the flag. Only issue is, if user is with login pagewhich is handled seperatly using div count. #651
             
@@ -440,10 +443,16 @@ extension HomeViewController: WKScriptMessageHandler {
             }
             print("dictBody = \(dictBody)\n")
             //read token. it will be inthe format of UserName:Password
-            guard let token = (dictBody[ScriptMessageKey.authorizationToken.rawValue] as? String),
+            guard
                 let idObjectDict = dictBody[ScriptMessageKey.identityObject.rawValue] as? [String: Any],
                 let userID = idObjectDict["id"] as? String  else { return }
             
+            let basicAuthToken = (dictBody[ScriptMessageKey.authorizationToken.rawValue] as? String)
+            let bearerAccessToken = (dictBody[ScriptMessageKey.accessToken.rawValue] as? String)
+            let bearerRefreshToken = (dictBody[ScriptMessageKey.refreshToken.rawValue] as? String)
+            Task {
+                await TokenManager.shared.updateTokens(access: bearerAccessToken, refresh: bearerRefreshToken)
+            }
             //read langiuage
 //            let script = "localStorage.getItem(\"\(key)\")"
 //            wkWebView.evaluateJavaScript(script) { (jsonText, error) in
@@ -457,20 +466,30 @@ extension HomeViewController: WKScriptMessageHandler {
             
             let serverAddress = dictBody[ScriptMessageKey.serverAddress.rawValue] as? String
             
-            let base64Token = token.data(using: .utf8)?.base64EncodedString()
-            Endpoint.setSessionKey(base64Token)
+//            let base64Token = token.data(using: .utf8)?.base64EncodedString()
+//            Endpoint.setSessionKey(base64Token)
+            let base64BasicToken = basicAuthToken?.data(using: .utf8)?.base64EncodedString()
+            Endpoint.setBase64BasicAuth(base64BasicToken)
+            
+            if let bearerAccessToken {
+                Endpoint.setToken(bearerAccessToken, for: .bearer)
+            } else if let base64BasicToken {
+                Endpoint.setToken(base64BasicToken, for: .basic)
+            }
             
             let serverAddressValue = serverAddress ?? ""
             
             let withOutHttp = serverAddressValue.cleanHostName()
 
-            //store url token to load dashboarn on next launch
-            let uRLToken = "\(token):\(withOutHttp)"//UserName:Password:ServerAddress
-            let base64URLToken = uRLToken.data(using: .utf8)?.base64EncodedString()
-            Endpoint.setURLToken(base64URLToken)
+            if let basicAuthToken {
+                //store url token to load dashboarn on next launch
+                let uRLToken = "\(basicAuthToken):\(withOutHttp)"//UserName:Password:ServerAddress
+                let base64URLToken = uRLToken.data(using: .utf8)?.base64EncodedString()
+                Endpoint.setURLToken(base64URLToken)
 
-            let (username, password) = token.makeTwoPiecesUsing(seperator: ":")
-            User.shared.login(userID: userID, username: username, password: password, serverAddress: serverAddress)
+                let (username, password) = basicAuthToken.makeTwoPiecesUsing(seperator: ":")
+                User.shared.login(userID: userID, username: username, password: password, serverAddress: serverAddress)
+            }
             
             //Inform watch the login info
             if let dictInfo = User.shared.loginInfo {
@@ -488,6 +507,20 @@ extension HomeViewController: WKScriptMessageHandler {
             }
             if divCount > 0 {
                 isWebpageLoaded = true
+            }
+        } else if message.name == ScriptMessageHandler.renewToken.rawValue {
+            guard let dictBody = message.body as? [String: Any] else {
+                printError("Message body not in expected format.")
+                return
+            }
+            print("dictBody renewToken  ctrlr= \(dictBody)\n")
+            let bearerAccessToken = (dictBody[ScriptMessageKey.accessToken.rawValue] as? String)
+            let bearerRefreshToken = (dictBody[ScriptMessageKey.refreshToken.rawValue] as? String)
+            if let bearerAccessToken {
+                Endpoint.setToken(bearerAccessToken, for: .bearer)
+                Task {
+                    await TokenManager.shared.updateTokens(access: bearerAccessToken, refresh: bearerRefreshToken)
+                }
             }
         } else if message.name == ScriptMessageHandler.allowSpeech.rawValue {
             Task { @MainActor in

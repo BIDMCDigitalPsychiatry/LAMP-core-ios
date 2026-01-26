@@ -117,6 +117,10 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
         
         printDebug("APNS deviceToken = \(deviceTokenStr)")
         
+//        DispatchQueue.main.async {
+//            UIPasteboard.general.string = deviceTokenStr
+//        }
+        
         // Sync to Server and store to userdefault if any change in devicetoken value
         if deviceTokenStr != UserDefaults.standard.deviceToken {
             if User.shared.isLogin() {

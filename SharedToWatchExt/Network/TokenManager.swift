@@ -1,23 +1,44 @@
-final class TokenManager {
-    static let shared = TokenManager()
-    
-    private init() {}
-    
-    var accessToken: String?
-    var refreshToken: String?
+// mindLAMP
+import Foundation
 
-    func updateTokens(access: String, refresh: String) {
-        self.accessToken = access
-        self.refreshToken = refresh
+actor TokenManager {
+    static let shared = TokenManager()
+
+    private init() {
+        self.accessToken = Endpoint.getBearerAccessToken()
+        self.refreshToken = Endpoint.getBearerRefreshToken()
     }
 
-    /// Actual refresh call
-    func refreshAccessToken(baseURL: URL,
-                            session: URLSession,
-                            completion: @escaping (Result<String, Error>) -> Void) {
+    private var accessToken: String?
+    private var refreshToken: String?
+    private var isRefreshing = false
+    private var waiters: [(Result<String>) -> Void] = []
 
-        guard let refreshToken = self.refreshToken else {
-            completion(.failure(NSError(domain: "NoRefreshToken", code: 0)))
+    func updateTokens(access: String?, refresh: String?) {
+        self.accessToken = access
+        self.refreshToken = refresh
+        Endpoint.setBearerRefreshToken(refresh)
+        print("Done updateTokens")
+    }
+
+    /// Ensures only one refresh runs at a time
+    func refreshAccessToken(
+        baseURL: URL,
+        session: URLSession,
+        completion: @escaping (Result<String>) -> Void
+    ) {
+
+        // If already refreshing → queue the completion
+        if isRefreshing {
+            waiters.append(completion)
+            return
+        }
+
+        isRefreshing = true
+        waiters.append(completion)
+
+        guard let refreshToken else {
+            finishAll(.failure(NSError(domain: "NoRefreshToken", code: 0)))
             return
         }
 
@@ -28,29 +49,61 @@ final class TokenManager {
         request.httpMethod = "POST"
         request.setValue("Bearer \(accessToken ?? "")", forHTTPHeaderField: "Authorization")
 
-        let body: [String: Any] = ["refreshToken": refreshToken]
+        let body = ["refreshToken": refreshToken]
         request.httpBody = try? JSONSerialization.data(withJSONObject: body)
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
 
-        let task = session.dataTask(with: request) { data, response, error in
-            if let error = error { return completion(.failure(error)) }
-
-            guard let data = data else {
-                return completion(.failure(NSError(domain: "NoData", code: 0)))
-            }
-
-            struct Response: Decodable {
-                let token: String
-            }
-
-            do {
-                let decoded = try JSONDecoder().decode(Response.self, from: data)
-                self.accessToken = decoded.token
-                completion(.success(decoded.token))
-            } catch {
-                completion(.failure(error))
-            }
+        print("getting refresh token")
+        let task = session.dataTask(with: request) { [weak self] data, response, error in
+            Task { await self?.handleRefreshResponse(data: data, error: error) }
         }
         task.resume()
+    }
+
+    private func handleRefreshResponse(data: Data?, error: Error?) {
+        if let error {
+            print("error = \(error)")
+            finishAll(.failure(error))
+            return
+        }
+
+        guard let data else {
+            print("NoData")
+            finishAll(.failure(NSError(domain: "NoData", code: 0)))
+            return
+        }
+
+        struct Response: Decodable {
+            struct TokenData: Decodable {
+                var access_token: String
+                var refresh_token: String
+            }
+            var data: TokenData
+        }
+
+        do {
+            let decoded = try JSONDecoder().decode(Response.self, from: data)
+
+            accessToken = decoded.data.access_token
+            refreshToken = decoded.data.refresh_token
+            print("got token = \(accessToken!)")
+            Endpoint.setToken(decoded.data.access_token, for: .bearer)
+            Endpoint.setBearerRefreshToken(decoded.data.refresh_token)
+
+            finishAll(.success(decoded.data.access_token))
+        } catch {
+            print("parse error = \(error)")
+            finishAll(.failure(error))
+        }
+    }
+
+    private func finishAll(_ result: Result<String>) {
+        isRefreshing = false
+        let callbacks = waiters
+        waiters.removeAll()
+
+        for cb in callbacks {
+            cb(result)
+        }
     }
 }

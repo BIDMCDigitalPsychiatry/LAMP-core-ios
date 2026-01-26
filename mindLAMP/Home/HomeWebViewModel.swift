@@ -9,12 +9,15 @@ enum ScriptMessageHandler: String {
     case login = "login"
     case logout = "logout"
     case allowSpeech = "allowSpeech"
+    case renewToken = "renewToken"
 }
 
 enum ScriptMessageKey: String {
     case authorizationToken = "authorizationToken"
     case identityObject = "identityObject"
     case serverAddress = "serverAddress"
+    case accessToken = "accessToken"
+    case refreshToken = "refreshToken"
 }
 
 class WebViewStorage {
@@ -85,34 +88,53 @@ extension HomeWebViewModel: WKScriptMessageHandler {
             }
             print("dictBody = \(dictBody)\n")
             //read token. it will be inthe format of UserName:Password
-            guard let token = (dictBody[ScriptMessageKey.authorizationToken.rawValue] as? String),
+            guard
                 let idObjectDict = dictBody[ScriptMessageKey.identityObject.rawValue] as? [String: Any],
                 let userID = idObjectDict["id"] as? String  else { return }
-            
+            let basicAuthToken = (dictBody[ScriptMessageKey.authorizationToken.rawValue] as? String)
+            let bearerAccessToken = (dictBody[ScriptMessageKey.accessToken.rawValue] as? String)
+            let bearerRefreshToken = (dictBody[ScriptMessageKey.refreshToken.rawValue] as? String)
+            Task {
+                await TokenManager.shared.updateTokens(access: bearerAccessToken, refresh: bearerRefreshToken)
+            }
             let serverAddress = dictBody[ScriptMessageKey.serverAddress.rawValue] as? String
             
-            let base64Token = token.data(using: .utf8)?.base64EncodedString()
-            Endpoint.setSessionKey(base64Token)
+            let base64BasicToken = basicAuthToken?.data(using: .utf8)?.base64EncodedString()
+            Endpoint.setBase64BasicAuth(base64BasicToken)
+            
+            if let bearerAccessToken {
+                Endpoint.setToken(bearerAccessToken, for: .bearer)
+            } else if let base64BasicToken {
+                Endpoint.setToken(base64BasicToken, for: .basic)
+            }
             
             let serverAddressValue = serverAddress ?? ""
             
             let withOutHttp = serverAddressValue.cleanHostName()
 
             //store url token to load dashboarn on next launch
-            let uRLToken = "\(token):\(withOutHttp)"//UserName:Password:ServerAddress
-            let base64URLToken = uRLToken.data(using: .utf8)?.base64EncodedString()
-            Endpoint.setURLToken(base64URLToken)
+            if let basicAuthToken {
+                let uRLToken = "\(basicAuthToken):\(withOutHttp)"//UserName:Password:ServerAddress
+                let base64URLToken = uRLToken.data(using: .utf8)?.base64EncodedString()
+                Endpoint.setURLToken(base64URLToken)
+                
+                let (username, password) = basicAuthToken.makeTwoPiecesUsing(seperator: ":")
+                User.shared.login(userID: userID, username: username, password: password, serverAddress: serverAddress)
+            }
 
-            let (username, password) = token.makeTwoPiecesUsing(seperator: ":")
-            User.shared.login(userID: userID, username: username, password: password, serverAddress: serverAddress)
-            
             //Inform watch the login info
             if let dictInfo = User.shared.loginInfo {
                 let messageInfo: [String: Any] = [IOSCommands.login: dictInfo, "timestamp" : Date().timeInMilliSeconds]
                 WatchSessionManager.shared.updateApplicationContext(applicationContext: messageInfo)
             }
             performOnLogin()
-        } else if message.name == ScriptMessageHandler.logout.rawValue {
+        } else if message.name == ScriptMessageHandler.renewToken.rawValue {
+            guard let dictBody = message.body as? [String: Any] else {
+                printError("Message body not in expected format.")
+                return
+            }
+            print("dictBody renewToken = \(dictBody)\n")
+        }  else if message.name == ScriptMessageHandler.logout.rawValue {
             let messageInfo: [String: Any] = [IOSCommands.logout: true, "timestamp" : Date().timeInMilliSeconds]
             WatchSessionManager.shared.updateApplicationContext(applicationContext: messageInfo)
             performOnLogout()
@@ -124,11 +146,11 @@ extension HomeWebViewModel: WKScriptMessageHandler {
         
         //call lamp.analytics for login
         let deviceToken = UserDefaults.standard.deviceToken
-        guard let authheader = Endpoint.getSessionKey(), let participantId = User.shared.userId else {
+        guard let authheader = Endpoint.getAuthHeader(), let participantId = User.shared.userId else {
             return
         }
         OpenAPIClientAPI.basePath = LampURL.baseURLString
-        OpenAPIClientAPI.customHeaders = ["Authorization": "Basic \(authheader)", "Content-Type": "application/json"]
+        OpenAPIClientAPI.customHeaders = ["Authorization": authheader, "Content-Type": "application/json"]
         let tokenInfo = DeviceInfoWithToken(deviceToken: deviceToken, userAgent: UserAgent.defaultAgent, action: SensorType.AnalyticAction.login.rawValue)
        
         let event = SensorEvent(timestamp: Date().timeInMilliSeconds, sensor: SensorType.lamp_analytics.lampIdentifier, data: tokenInfo)
@@ -148,13 +170,13 @@ extension HomeWebViewModel: WKScriptMessageHandler {
     func performOnLogout() {
         
         //send lamp.analytics for logout
-        guard let authheader = Endpoint.getSessionKey(), let participantId = User.shared.userId else {
+        guard let authheader = Endpoint.getAuthHeader(), let participantId = User.shared.userId else {
             NotificationHelper.shared.removeAllNotifications()
             User.shared.logout()
             return
         }
         OpenAPIClientAPI.basePath = LampURL.baseURLString
-        OpenAPIClientAPI.customHeaders = ["Authorization": "Basic \(authheader)", "Content-Type": "application/json"]
+        OpenAPIClientAPI.customHeaders = ["Authorization": authheader, "Content-Type": "application/json"]
         let tokenInfo = DeviceInfoWithToken(deviceToken: nil, userAgent: UserAgent.defaultAgent, action: SensorType.AnalyticAction.logout.rawValue)
         let event = SensorEvent(timestamp: Date().timeInMilliSeconds, sensor: SensorType.lamp_analytics.lampIdentifier, data: tokenInfo)
         let publisher = SensorEventAPI.sensorEventCreate(participantId: participantId, sensorEvent: event, apiResponseQueue: DispatchQueue.global())

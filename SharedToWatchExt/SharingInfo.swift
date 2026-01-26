@@ -12,24 +12,24 @@ struct IOSCommands {
 }
 
 struct LoginInfoKey {
-    static let sessionToken = "sessionToken"
+    static let authHeader = "authHeader"
     static let userId = "userId"
     static let serverAddress = "serverAddress"
     static let password = "password"
 }
 
 struct LoginInfo {
-    let sessionToken: String
+    let authHeader: String
     let userId: String
     let serverAddress: String
     
     init(_ dict: [String: Any]) {
-        guard let token = dict[LoginInfoKey.sessionToken] as? String,
+        guard let authHeader = dict[LoginInfoKey.authHeader] as? String,
             let address = dict[LoginInfoKey.serverAddress] as? String,
             let id = dict[LoginInfoKey.userId] as? String else {
                 fatalError("Timed color dictionary doesn't have right keys!")
         }
-        self.sessionToken = token
+        self.authHeader = authHeader
         self.userId = id
         self.serverAddress = address
     }

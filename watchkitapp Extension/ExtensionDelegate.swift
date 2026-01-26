@@ -166,11 +166,11 @@ extension ExtensionDelegate {
         if deviceTokenStr != UserDefaults.standard.deviceToken {
             if User.shared.isLogin() {
                 //send to server
-                guard let authheader = Endpoint.getSessionKey(), let participantId = User.shared.userId else {
+                guard let authheader = Endpoint.getAuthHeader(), let participantId = User.shared.userId else {
                     return
                 }
                 OpenAPIClientAPI.basePath = LampURL.baseURLString
-                OpenAPIClientAPI.customHeaders = ["Authorization": "Basic \(authheader)", "Content-Type": "application/json"]
+                OpenAPIClientAPI.customHeaders = ["Authorization": authheader, "Content-Type": "application/json"]
                 let tokenInfo = DeviceInfoWithToken(deviceToken: deviceTokenStr, userAgent: UserAgent.defaultAgent, action: nil)
                
                 let event = SensorEvent(timestamp: Date().timeInMilliSeconds, sensor: SensorType.lamp_analytics.lampIdentifier, data: tokenInfo)
@@ -203,11 +203,11 @@ extension ExtensionDelegate {
         let payLoadInfo = PayLoadInfo(action: SensorType.AnalyticAction.notification, userInfo: userInfo, userAgent: UserAgent.defaultAgent)
         let timeStamp = Date().timeIntervalSince1970
         let acknoledgeRequest = UpdateReadRequest(timeInterval: timeStamp, sensor: SensorType.lamp_analytics.lampIdentifier, payLoadInfo: payLoadInfo)
-        guard let authheader = Endpoint.getSessionKey(), let participantId = User.shared.userId else {
+        guard let authheader = Endpoint.getAuthHeader(), let participantId = User.shared.userId else {
             return
         }
         OpenAPIClientAPI.basePath = LampURL.baseURLString
-        OpenAPIClientAPI.customHeaders = ["Authorization": "Basic \(authheader)", "Content-Type": "application/json"]
+        OpenAPIClientAPI.customHeaders = ["Authorization": authheader, "Content-Type": "application/json"]
         let publisher = SensorEventAPI.pushReceiptEventCreate(participantId: participantId, sensorEvent: acknoledgeRequest.toJSON(), apiResponseQueue: DispatchQueue.global())
         subscriber = publisher.sink {_ in } receiveValue: {_ in }
         LMSensorManager.shared.checkIsRunning()

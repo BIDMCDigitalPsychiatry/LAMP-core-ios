@@ -145,6 +145,8 @@
 		B2D930FB2445D7E90086477D /* UserNotificationsUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B2D930FA2445D7E90086477D /* UserNotificationsUI.framework */; };
 		B2D930FE2445D7E90086477D /* NotificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2D930FD2445D7E90086477D /* NotificationViewController.swift */; };
 		B2D931052445D7E90086477D /* CustomNotification.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = B2D930F72445D7E90086477D /* CustomNotification.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		B2DF5BF12ED9E3D8009D51B4 /* TokenManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2DF5BF02ED9E3D8009D51B4 /* TokenManager.swift */; };
+		B2DF5BF22ED9E3D9009D51B4 /* TokenManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2DF5BF02ED9E3D8009D51B4 /* TokenManager.swift */; };
 		B2E6A560256F11A300E2CBC8 /* UIDeviceExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2E6A55F256F11A300E2CBC8 /* UIDeviceExtension.swift */; };
 		B2E6A561256F11A300E2CBC8 /* UIDeviceExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2E6A55F256F11A300E2CBC8 /* UIDeviceExtension.swift */; };
 		B2E6A567256F195000E2CBC8 /* WebViewConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2E6A566256F195000E2CBC8 /* WebViewConfiguration.swift */; };
@@ -386,6 +388,7 @@
 		B2D930FA2445D7E90086477D /* UserNotificationsUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UserNotificationsUI.framework; path = System/Library/Frameworks/UserNotificationsUI.framework; sourceTree = SDKROOT; };
 		B2D930FD2445D7E90086477D /* NotificationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationViewController.swift; sourceTree = "<group>"; };
 		B2D931022445D7E90086477D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B2DF5BF02ED9E3D8009D51B4 /* TokenManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenManager.swift; sourceTree = "<group>"; };
 		B2E6A55F256F11A300E2CBC8 /* UIDeviceExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIDeviceExtension.swift; sourceTree = "<group>"; };
 		B2E6A566256F195000E2CBC8 /* WebViewConfiguration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebViewConfiguration.swift; sourceTree = "<group>"; };
 		B2F0F14C296E9741008A8A7B /* da */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = da; path = da.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -737,6 +740,7 @@
 		B29827B22635D38300FC78E6 /* Network */ = {
 			isa = PBXGroup;
 			children = (
+				B2DF5BF02ED9E3D8009D51B4 /* TokenManager.swift */,
 				B29827B32635D38300FC78E6 /* CodableHelpers.swift */,
 				B29827B42635D38300FC78E6 /* Networking.swift */,
 				B29827B52635D38300FC78E6 /* Result.swift */,
@@ -1219,6 +1223,7 @@
 				B255116C24B6291900CDBDD1 /* LoginServices.swift in Sources */,
 				B2A15BF92567A8BE00222717 /* LMSensorManager+SensorObservers.swift in Sources */,
 				B27DBDA827856455002DFAF9 /* UserDefaults+Extension.swift in Sources */,
+				B2DF5BF12ED9E3D8009D51B4 /* TokenManager.swift in Sources */,
 				B29827C02635D38300FC78E6 /* NetworkingAPI.swift in Sources */,
 				B2704DEC24B4A2AC00DE196B /* ExtensionDelegate.swift in Sources */,
 				B2A15C0B2567A8BE00222717 /* FileStorage.swift in Sources */,
@@ -1253,6 +1258,7 @@
 				B27DBDA527856455002DFAF9 /* UserDefaults+Extension.swift in Sources */,
 				B2B8935223D0AD6500321C3E /* DateExtension.swift in Sources */,
 				B27DBDA027856437002DFAF9 /* LampURL.swift in Sources */,
+				B2DF5BF22ED9E3D9009D51B4 /* TokenManager.swift in Sources */,
 				B24AC1542C09B235009DE84E /* StreakWidgetHelper.swift in Sources */,
 				B2A15C0E2567A8BE00222717 /* LogsModel.swift in Sources */,
 				B22DF5F2250612E800777D2D /* UserAgentExtension.swift in Sources */,
@@ -1719,7 +1725,7 @@
 				CODE_SIGN_ENTITLEMENTS = mindLAMP/mindLAMP.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 471;
+				CURRENT_PROJECT_VERSION = 484;
 				DEVELOPMENT_ASSET_PATHS = "\"mindLAMP/Preview Content\"";
 				DEVELOPMENT_TEAM = S2Y2D4239K;
 				ENABLE_BITCODE = NO;
@@ -1758,7 +1764,7 @@
 				CODE_SIGN_ENTITLEMENTS = CustomNotification/CustomNotification.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 471;
+				CURRENT_PROJECT_VERSION = 484;
 				DEVELOPMENT_TEAM = S2Y2D4239K;
 				INFOPLIST_FILE = CustomNotification/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
@@ -1789,7 +1795,7 @@
 				CODE_SIGN_ENTITLEMENTS = NotificationService/NotificationService.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 471;
+				CURRENT_PROJECT_VERSION = 484;
 				DEVELOPMENT_TEAM = S2Y2D4239K;
 				INFOPLIST_FILE = NotificationService/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
@@ -1823,7 +1829,7 @@
 				CODE_SIGN_ENTITLEMENTS = "watchkitapp Extension/watchkitapp Extension.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 471;
+				CURRENT_PROJECT_VERSION = 484;
 				DEVELOPMENT_TEAM = S2Y2D4239K;
 				INFOPLIST_FILE = watchkitapp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1912,7 +1918,7 @@
 				CODE_SIGN_ENTITLEMENTS = mindLAMP/mindLAMP.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 471;
+				CURRENT_PROJECT_VERSION = 484;
 				DEVELOPMENT_ASSET_PATHS = "\"mindLAMP/Preview Content\"";
 				DEVELOPMENT_TEAM = S2Y2D4239K;
 				ENABLE_BITCODE = NO;
@@ -1950,7 +1956,7 @@
 				CODE_SIGN_ENTITLEMENTS = CustomNotification/CustomNotification.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 471;
+				CURRENT_PROJECT_VERSION = 484;
 				DEVELOPMENT_TEAM = S2Y2D4239K;
 				INFOPLIST_FILE = CustomNotification/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
@@ -1981,7 +1987,7 @@
 				CODE_SIGN_ENTITLEMENTS = NotificationService/NotificationService.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 471;
+				CURRENT_PROJECT_VERSION = 484;
 				DEVELOPMENT_TEAM = S2Y2D4239K;
 				INFOPLIST_FILE = NotificationService/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
@@ -2015,7 +2021,7 @@
 				CODE_SIGN_ENTITLEMENTS = "watchkitapp Extension/watchkitapp Extension.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 471;
+				CURRENT_PROJECT_VERSION = 484;
 				DEVELOPMENT_TEAM = S2Y2D4239K;
 				INFOPLIST_FILE = watchkitapp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -2074,7 +2080,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 484;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_TEAM = S2Y2D4239K;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -2105,7 +2111,7 @@
 					"@executable_path/../../Frameworks",
 				);
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 2025.4.2;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -2165,7 +2171,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 484;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_TEAM = S2Y2D4239K;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -2196,7 +2202,7 @@
 					"@executable_path/../../Frameworks",
 				);
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 2025.4.2;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -2227,7 +2233,7 @@
 				CODE_SIGN_ENTITLEMENTS = StreakWidgetExtension.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 484;
 				DEVELOPMENT_TEAM = S2Y2D4239K;
 				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu17;
@@ -2242,7 +2248,7 @@
 					"@executable_path/../../Frameworks",
 				);
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 2025.4.2;
 				PRODUCT_BUNDLE_IDENTIFIER = digital.lamp.mindlamp.StreakWidget;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -2267,7 +2273,7 @@
 				CODE_SIGN_ENTITLEMENTS = StreakWidgetExtension.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 484;
 				DEVELOPMENT_TEAM = S2Y2D4239K;
 				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu17;
@@ -2282,7 +2288,7 @@
 					"@executable_path/../../Frameworks",
 				);
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 2025.4.2;
 				PRODUCT_BUNDLE_IDENTIFIER = digital.lamp.mindlamp.StreakWidget;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -2307,7 +2313,7 @@
 				CODE_SIGN_ENTITLEMENTS = "watchkitapp Extension/watchkitapp Extension.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 471;
+				CURRENT_PROJECT_VERSION = 484;
 				DEVELOPMENT_TEAM = S2Y2D4239K;
 				INFOPLIST_FILE = watchkitapp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -2337,7 +2343,7 @@
 				CODE_SIGN_ENTITLEMENTS = "watchkitapp Extension/watchkitapp Extension.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 471;
+				CURRENT_PROJECT_VERSION = 484;
 				DEVELOPMENT_TEAM = S2Y2D4239K;
 				INFOPLIST_FILE = watchkitapp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -2364,7 +2370,7 @@
 				CODE_SIGN_ENTITLEMENTS = NotificationService/NotificationService.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 471;
+				CURRENT_PROJECT_VERSION = 484;
 				DEVELOPMENT_TEAM = S2Y2D4239K;
 				INFOPLIST_FILE = NotificationService/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
@@ -2395,7 +2401,7 @@
 				CODE_SIGN_ENTITLEMENTS = NotificationService/NotificationService.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 471;
+				CURRENT_PROJECT_VERSION = 484;
 				DEVELOPMENT_TEAM = S2Y2D4239K;
 				INFOPLIST_FILE = NotificationService/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
@@ -2553,7 +2559,7 @@
 				CODE_SIGN_ENTITLEMENTS = mindLAMP/mindLAMP.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 471;
+				CURRENT_PROJECT_VERSION = 484;
 				DEVELOPMENT_ASSET_PATHS = "\"mindLAMP/Preview Content\"";
 				DEVELOPMENT_TEAM = S2Y2D4239K;
 				ENABLE_BITCODE = NO;
@@ -2595,7 +2601,7 @@
 				CODE_SIGN_ENTITLEMENTS = mindLAMP/mindLAMP.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 471;
+				CURRENT_PROJECT_VERSION = 484;
 				DEVELOPMENT_ASSET_PATHS = "\"mindLAMP/Preview Content\"";
 				DEVELOPMENT_TEAM = S2Y2D4239K;
 				ENABLE_BITCODE = NO;
@@ -2633,7 +2639,7 @@
 				CODE_SIGN_ENTITLEMENTS = CustomNotification/CustomNotification.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 471;
+				CURRENT_PROJECT_VERSION = 484;
 				DEVELOPMENT_TEAM = S2Y2D4239K;
 				INFOPLIST_FILE = CustomNotification/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
@@ -2664,7 +2670,7 @@
 				CODE_SIGN_ENTITLEMENTS = CustomNotification/CustomNotification.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 471;
+				CURRENT_PROJECT_VERSION = 484;
 				DEVELOPMENT_TEAM = S2Y2D4239K;
 				INFOPLIST_FILE = CustomNotification/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;

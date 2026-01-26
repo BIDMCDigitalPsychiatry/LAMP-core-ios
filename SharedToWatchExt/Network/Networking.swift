@@ -72,47 +72,106 @@ public class Networking: NSObject, NetworkingAPI {
         sendRequest(urlRequest, completion: callback)
     }
     
-    private func sendRequest<T: Decodable>(_ request: URLRequest, completion: @escaping (Result<T>) -> Void) {
-        currentTask = session.dataTask(with: request) { (data, response, error) in
-            
-            self.logResponse(data, response, error)
-            
-            if let err = error {
-                completion(.failure(err))
-                return
-            }
+    private func sendRequest<T: Decodable>(
+        _ request: URLRequest,
+        completion: @escaping (Result<T>) -> Void
+    ) {
 
-            if let dataResp = data {
-//                let dateFormatter = DateFormatter()
-//                dateFormatter.timeZone = TimeZone(abbreviation: "GMT")
-//                dateFormatter.locale =  Locale(identifier: "en_US_POSIX")
-//                dateFormatter.dateFormat = "MM/dd/yyyy HH:mm:ss"
-                
-                let decoder = JSONDecoder()
-                let formatter = OpenISO8601DateFormatter()
-                decoder.dateDecodingStrategy = .formatted(formatter)
+        func perform(_ req: URLRequest) {
+            currentTask = session.dataTask(with: req) { data, response, error in
+
+                Networking.logResponse(data, response, error)
+
+                if let err = error {
+                    completion(.failure(err))
+                    return
+                }
+
+                // Check HTTP status
+                if let httpResponse = response as? HTTPURLResponse,
+                   httpResponse.statusCode == 401 {
+                    
+                    print(" 401 → refresh token")
+
+                    // ⬇️ FIX: You must wrap async call in Task
+                    Task {
+                        await self.handle401AndRetry(
+                            originalRequest: req,
+                            completion: completion
+                        )
+                    }
+                    return
+                }
+
+                // Normal decode handling
+                guard let dataResp = data else {
+                    completion(.failure(NetworkError.noResponse))
+                    return
+                }
+
                 do {
+                    let decoder = JSONDecoder()
+                    let formatter = OpenISO8601DateFormatter()
+                    decoder.dateDecodingStrategy = .formatted(formatter)
+
                     let responseData = try decoder.decode(Safe<T>.self, from: dataResp)
                     completion(.success(responseData.value))
-                } catch (let err) {
-                    completion(.failure(err))
+                } catch {
+                    completion(.failure(error))
                 }
+            }
+            
+            currentTask?.resume()
+        }
 
-            } else {
-                
-                if let httpResponse = response as? HTTPURLResponse {
-                    let status = httpResponse.statusCode
-                    guard (200...299).contains(status) else {
-                        let errorMsg = HTTPURLResponse.localizedString(forStatusCode: httpResponse.statusCode)
-                        completion(.failure(NetworkError.errorResponse(errorMsg)))
-                        return
+        // ⬇️ perform should NOT be async
+        perform(request)
+    }
+    
+    private func handle401AndRetry<T: Decodable>(
+        originalRequest: URLRequest,
+        completion: @escaping (Result<T>) -> Void
+    ) async {
+        
+        await TokenManager.shared.refreshAccessToken(baseURL: baseURL, session: session) { result in
+            switch result {
+            case .failure(let err):
+                completion(.failure(err))
+
+            case .success(let newToken):
+                // Rebuild request with updated Bearer
+                var retryRequest = originalRequest
+                retryRequest.setValue("Bearer \(newToken)", forHTTPHeaderField: "Authorization")
+
+                // Retry the original request with new token
+                let retryTask = self.session.dataTask(with: retryRequest) { data, response, error in
+
+                    print("response with new token")
+                    Networking.logResponse(data, response, error)
+
+                    if let error = error {
+                        return completion(.failure(error))
+                    }
+
+                    guard let data else {
+                        return completion(.failure(NetworkError.noResponse))
+                    }
+
+                    do {
+                        let decoder = JSONDecoder()
+                        let formatter = OpenISO8601DateFormatter()
+                        decoder.dateDecodingStrategy = .formatted(formatter)
+
+                        let responseData = try decoder.decode(Safe<T>.self, from: data)
+                        completion(.success(responseData.value))
+                    } catch {
+                        completion(.failure(error))
                     }
                 }
-                completion(.failure(NetworkError.noResponse))
+
+                retryTask.resume()
             }
         }
-        
-        currentTask?.resume()
     }
     
     /// log the responsees
@@ -121,7 +180,7 @@ public class Networking: NSObject, NetworkingAPI {
     ///   - data:
     ///   - response:
     ///   - error:
-    private func logResponse(_ data: Data?, _ response: URLResponse?, _ error: Error?) {
+    static func logResponse(_ data: Data?, _ response: URLResponse?, _ error: Error?) {
         #if DEBUG
         print("httpResponse = \(String(describing: response))")
         print("error = \(String(describing: error))")

@@ -22,7 +22,7 @@ public protocol RequestProtocol {
     func buildEndpoint() -> String
     func isAuth() -> Bool
     func getAPIKey() -> String?
-    func getSessionToken() -> String?
+    func getAuthorizationHeader() -> String?
     func getRequestHeaders() -> [String: String]
     var requestTye: HTTPMethodType {get}
     var jsonData: Data? {get}
