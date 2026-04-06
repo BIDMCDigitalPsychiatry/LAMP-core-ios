@@ -508,6 +508,10 @@ extension HomeViewController: WKScriptMessageHandler {
             if divCount > 0 {
                 isWebpageLoaded = true
             }
+            
+            //Load Video Recorder from here
+            // start with VideoDiaryHelper
+            
         } else if message.name == ScriptMessageHandler.renewToken.rawValue {
             guard let dictBody = message.body as? [String: Any] else {
                 printError("Message body not in expected format.")

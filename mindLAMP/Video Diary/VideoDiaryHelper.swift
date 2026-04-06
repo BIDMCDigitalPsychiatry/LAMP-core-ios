@@ -1,0 +1,6 @@
+// mindLAMP
+
+class VideoDiaryHelper {
+    
+    
+}
