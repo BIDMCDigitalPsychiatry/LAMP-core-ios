@@ -554,11 +554,11 @@ extension HomeViewController: WKScriptMessageHandler {
                 }
                 print("dictBody = \(dictBody)\n")
 
-                guard let apiBase = URL(string: LampURL.baseURLString) else {
+                guard let apiBase = URL(string: LampURL.videoUploadServiceBaseURLString) else {
                     printError("Invalid API base URL for video diary upload.")
                     return
                 }
-                let authHeader = Endpoint.getAuthHeader()
+                let authHeader = LampURL.videoUploadServiceAuthorizationHeader
                 guard let recordingConfig = VideoDiary.RecordingConfiguration(messageBody: dictBody),
                       let uploadConfig = VideoMultipartUploadService.uploadConfiguration(
                           fromMessageBody: dictBody,

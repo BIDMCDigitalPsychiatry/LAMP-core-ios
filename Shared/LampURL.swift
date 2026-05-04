@@ -71,6 +71,12 @@ struct LampURL {
     static let logsDigital = "https://logs.lamp.digital"
     //static let dashboardURL = Environment.dashboardAPI
     static let OpenAPIClientAPI = Environment.OpenAPIClientAPI
+
+    /// Multipart video upload control plane (`globalThis.VIDEO_UPLOAD_SERVICE_CONFIG` on web).
+    static let videoUploadServiceBaseURLString = "https://video.dev.lamp.digital"
+    /// Full `Authorization` header (`Bearer …`) for the video upload API.
+    static let videoUploadServiceAuthorizationHeader =
+        "Bearer emNvLW1pY2hhZWw6YjU3NDJmNzgtM2ZlYy0xMWYxLWFiNzItZGZmZDA4Mzc1MTY3"
     
     static var baseURLString: String {
         if let url = UserDefaults.standard.serverAddress {

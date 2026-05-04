@@ -21,7 +21,7 @@ struct VideoDiaryUploadJob: Codable, Equatable, Sendable {
     /// Filename within the staging directory (not a full path), e.g. `"UUID.mov"`.
     var localVideoFileName: String
     var recordingConfiguration: VideoDiary.RecordingConfiguration
-    /// Control-plane API base URL string (same host as `LampURL.baseURLString` at enqueue time).
+    /// Control-plane API base URL string (`LampURL.videoUploadServiceBaseURLString` at enqueue time).
     var apiBaseURLString: String
     var participantId: String
     var activityId: String

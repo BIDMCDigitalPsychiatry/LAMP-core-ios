@@ -130,9 +130,10 @@ actor VideoDiaryUploadCoordinator {
                 try? jobStore.saveJob(job)
             }
 
-            guard let auth = Endpoint.getAuthHeader(),
-                  let uploadConfiguration = job.makeUploadConfiguration(authorizationHeaderValue: auth) else {
-                await failJobTerminal(jobId: job.id, message: "Missing or invalid authorization for upload.")
+            guard let uploadConfiguration = job.makeUploadConfiguration(
+                authorizationHeaderValue: LampURL.videoUploadServiceAuthorizationHeader
+            ) else {
+                await failJobTerminal(jobId: job.id, message: "Invalid video upload API base URL in job.")
                 continue
             }
 
