@@ -26,7 +26,7 @@ struct VideoDiaryUploadJob: Codable, Equatable, Sendable {
     var participantId: String
     var activityId: String
     var policy: VideoDiaryUploadPolicy
-    /// Present after a successful **initiate** call; tracks `uploadId`, part layout, and finished part ETags.
+    /// Present after a successful **initiate** call; tracks session `id`, part layout, and finished part ETags.
     var multipart: VideoDiaryMultipartProgress?
     var lastErrorDescription: String?
 
@@ -59,22 +59,59 @@ struct VideoDiaryUploadJob: Codable, Equatable, Sendable {
 
 /// Snapshot of server multipart session needed to PUT remaining parts and call **complete**.
 /// `completedPartETags` keys are 1-based part numbers matching the API.
-struct VideoDiaryMultipartProgress: Codable, Equatable, Sendable {
-    var uploadId: String
+struct VideoDiaryMultipartProgress: Equatable, Sendable {
+    var id: String
     var expiresAt: TimeInterval
     var partDescriptors: [VideoUploadPartDescriptor]
     var completedPartETags: [Int: String]
 
     init(
-        uploadId: String,
+        id: String,
         expiresAt: TimeInterval,
         partDescriptors: [VideoUploadPartDescriptor],
         completedPartETags: [Int: String]
     ) {
-        self.uploadId = uploadId
+        self.id = id
         self.expiresAt = expiresAt
         self.partDescriptors = partDescriptors
         self.completedPartETags = completedPartETags
+    }
+}
+
+extension VideoDiaryMultipartProgress: Codable {
+    private enum CodingKeys: String, CodingKey {
+        case id
+        case uploadId
+        case expiresAt
+        case partDescriptors
+        case completedPartETags
+    }
+
+    init(from decoder: Decoder) throws {
+        let c = try decoder.container(keyedBy: CodingKeys.self)
+        if let newId = try c.decodeIfPresent(String.self, forKey: .id) {
+            self.id = newId
+        } else if let legacy = try c.decodeIfPresent(String.self, forKey: .uploadId) {
+            self.id = legacy
+        } else {
+            throw DecodingError.dataCorrupted(
+                DecodingError.Context(
+                    codingPath: c.codingPath,
+                    debugDescription: "Expected \"id\" or legacy \"uploadId\" for multipart session."
+                )
+            )
+        }
+        expiresAt = try c.decode(TimeInterval.self, forKey: .expiresAt)
+        partDescriptors = try c.decode([VideoUploadPartDescriptor].self, forKey: .partDescriptors)
+        completedPartETags = try c.decode([Int: String].self, forKey: .completedPartETags)
+    }
+
+    func encode(to encoder: Encoder) throws {
+        var c = encoder.container(keyedBy: CodingKeys.self)
+        try c.encode(id, forKey: .id)
+        try c.encode(expiresAt, forKey: .expiresAt)
+        try c.encode(partDescriptors, forKey: .partDescriptors)
+        try c.encode(completedPartETags, forKey: .completedPartETags)
     }
 }
 

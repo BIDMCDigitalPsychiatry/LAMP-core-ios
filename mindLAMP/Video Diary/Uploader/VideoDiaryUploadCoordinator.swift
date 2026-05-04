@@ -9,7 +9,7 @@ import Foundation
 /// Receives the **final** outcome of a job (after the file is removed from disk on success).
 @MainActor
 protocol VideoDiaryUploadCoordinatorDelegate: AnyObject {
-    func videoDiaryUploadDidFinish(jobId: UUID, result: Swift.Result<VideoUploadCompleteResponse, Error>)
+    func videoDiaryUploadDidFinish(jobId: UUID, result: Swift.Result<Void, Error>)
 }
 
 // MARK: - Coordinator
@@ -95,7 +95,7 @@ actor VideoDiaryUploadCoordinator {
 
     // MARK: Persistence hops (called from `VideoMultipartUploadService` callbacks)
 
-    /// Checkpoint after **initiate** so we never lose `uploadId` if the app terminates before the first `PUT`.
+    /// Checkpoint after **initiate** so we never lose the multipart session `id` if the app terminates before the first `PUT`.
     func persistInitiatedSnapshot(jobId: UUID, snapshot: VideoDiaryMultipartProgress) async throws {
         var job = try jobStore.loadJob(id: jobId)
         job.multipart = snapshot
@@ -149,7 +149,7 @@ actor VideoDiaryUploadCoordinator {
             let captureJobId = job.id
 
             do {
-                let response = try await service.uploadResumable(
+                try await service.uploadResumable(
                     fileURL: fileURL,
                     recordingConfiguration: job.recordingConfiguration,
                     activityId: job.activityId,
@@ -166,7 +166,7 @@ actor VideoDiaryUploadCoordinator {
 
                 try jobStore.removeArtifacts(jobId: job.id, videoFileName: job.localVideoFileName)
                 try dequeueHead(jobId: job.id)
-                await notifySuccess(jobId: job.id, response: response)
+                await notifySuccess(jobId: job.id)
             } catch {
                 await handleUploadError(jobId: captureJobId, error: error)
                 return
@@ -211,8 +211,8 @@ actor VideoDiaryUploadCoordinator {
         try jobStore.saveQueueIndex(index)
     }
 
-    private func notifySuccess(jobId: UUID, response: VideoUploadCompleteResponse) async {
-        let result: Swift.Result<VideoUploadCompleteResponse, Error> = .success(response)
+    private func notifySuccess(jobId: UUID) async {
+        let result: Swift.Result<Void, Error> = .success(())
         // Snapshot delegate on the actor; `MainActor.run` must not touch actor-isolated storage directly.
         let callbackTarget = self.delegate
         await MainActor.run {

@@ -602,18 +602,18 @@ extension HomeViewController: WKScriptMessageHandler {
 }
 
 extension HomeViewController: VideoDiaryUploadCoordinatorDelegate {
-    func videoDiaryUploadDidFinish(jobId: UUID, result: Swift.Result<VideoUploadCompleteResponse, Error>) {
+    func videoDiaryUploadDidFinish(jobId: UUID, result: Swift.Result<Void, Error>) {
         handleVideoDiaryBackgroundUploadResult(result)
     }
 }
 
 private extension HomeViewController {
     /// Fires a DOM event the dashboard can listen for; adjust name/payload with your web contract.
-    func handleVideoDiaryBackgroundUploadResult(_ result: Swift.Result<VideoUploadCompleteResponse, Error>) {
+    func handleVideoDiaryBackgroundUploadResult(_ result: Swift.Result<Void, Error>) {
         let detail: [String: Any]
         switch result {
-        case .success(let response):
-            detail = ["success": true, "status": response.status, "sha256": response.sha256]
+        case .success:
+            detail = ["success": true]
         case .failure(let error):
             detail = ["success": false, "error": error.localizedDescription]
         }

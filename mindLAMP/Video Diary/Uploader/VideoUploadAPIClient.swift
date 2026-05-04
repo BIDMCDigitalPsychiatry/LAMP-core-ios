@@ -76,9 +76,21 @@ struct VideoUploadAPIClient: Sendable {
         return try await postJSON(path, body: body)
     }
 
-    func complete(body: VideoUploadCompleteRequestBody) async throws -> VideoUploadCompleteResponse {
+    /// Control plane returns no body on success (checksum may be added later).
+    func complete(body: VideoUploadCompleteRequestBody) async throws {
         let path = "/participant/\(configuration.participantId)/video/upload/complete"
-        return try await postJSON(path, body: body)
+        var request = URLRequest(url: try endpoint(path))
+        request.httpMethod = "POST"
+        applyCommonHeaders(to: &request)
+        request.httpBody = try encoder.encode(body)
+        let (data, response) = try await session.data(for: request)
+        guard let http = response as? HTTPURLResponse else {
+            throw VideoUploadAPIError.badStatus(code: -1, body: nil)
+        }
+        guard (200 ... 299).contains(http.statusCode) else {
+            let text = String(data: data, encoding: .utf8)
+            throw VideoUploadAPIError.badStatus(code: http.statusCode, body: text)
+        }
     }
 
     func refreshURLs(body: VideoUploadRefreshURLsRequestBody) async throws -> VideoUploadRefreshURLsResponse {

@@ -21,7 +21,7 @@ struct VideoUploadMetadataPayload: Encodable, Sendable {
 }
 
 struct VideoUploadInitiateResponse: Decodable, Sendable {
-    var uploadId: String
+    var id: String
     var parts: [VideoUploadPartDescriptor]
     var expiresAt: TimeInterval
 }
@@ -36,7 +36,7 @@ struct VideoUploadPartDescriptor: Codable, Sendable, Hashable {
 // MARK: - Complete
 
 struct VideoUploadCompleteRequestBody: Encodable, Sendable {
-    var uploadId: String
+    var id: String
     var parts: [VideoUploadCompletedPartPayload]
 }
 
@@ -45,15 +45,10 @@ struct VideoUploadCompletedPartPayload: Encodable, Sendable {
     var etag: String
 }
 
-struct VideoUploadCompleteResponse: Decodable, Sendable {
-    var status: String
-    var sha256: String
-}
-
 // MARK: - Refresh URLs
 
 struct VideoUploadRefreshURLsRequestBody: Encodable, Sendable {
-    var uploadId: String
+    var id: String
     var partNumbers: [Int]
 }
 
@@ -65,5 +60,5 @@ struct VideoUploadRefreshURLsResponse: Decodable, Sendable {
 // MARK: - Abort
 
 struct VideoUploadAbortRequestBody: Encodable, Sendable {
-    var uploadId: String
+    var id: String
 }

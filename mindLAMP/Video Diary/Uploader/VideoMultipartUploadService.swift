@@ -73,7 +73,7 @@ final class VideoMultipartUploadService: @unchecked Sendable {
         recordingConfiguration: VideoDiary.RecordingConfiguration,
         activityId: String,
         progress: @escaping @Sendable (Double) -> Void
-    ) async throws -> VideoUploadCompleteResponse {
+    ) async throws {
         try await uploadResumable(
             fileURL: fileURL,
             recordingConfiguration: recordingConfiguration,
@@ -100,13 +100,13 @@ final class VideoMultipartUploadService: @unchecked Sendable {
         progress: @escaping @Sendable (Double) -> Void,
         onInitiated: @escaping @Sendable (VideoDiaryMultipartProgress) async throws -> Void,
         onPartUploaded: @escaping @Sendable (Int, String) async throws -> Void
-    ) async throws -> VideoUploadCompleteResponse {
-        let uploadId: String
+    ) async throws {
+        let sessionID: String
         let sortedParts: [VideoUploadPartDescriptor]
         let registry: UploadPartURLRegistry
 
         if let resume {
-            uploadId = resume.uploadId
+            sessionID = resume.id
             sortedParts = resume.partDescriptors.sorted { $0.partNumber < $1.partNumber }
             registry = UploadPartURLRegistry(parts: resume.partDescriptors, expiresAt: resume.expiresAt)
         } else {
@@ -137,12 +137,12 @@ final class VideoMultipartUploadService: @unchecked Sendable {
                 throw VideoMultipartUploadError.initiateMissingParts
             }
 
-            uploadId = initiated.uploadId
+            sessionID = initiated.id
             sortedParts = initiated.parts.sorted { $0.partNumber < $1.partNumber }
             registry = UploadPartURLRegistry(parts: initiated.parts, expiresAt: initiated.expiresAt)
 
             let snapshot = VideoDiaryMultipartProgress(
-                uploadId: uploadId,
+                id: sessionID,
                 expiresAt: initiated.expiresAt,
                 partDescriptors: initiated.parts,
                 completedPartETags: [:]
@@ -156,7 +156,7 @@ final class VideoMultipartUploadService: @unchecked Sendable {
         do {
             mergedETags = try await uploadAllPartsParallel(
                 fileURL: fileURL,
-                uploadId: uploadId,
+                sessionID: sessionID,
                 parts: sortedParts,
                 registry: registry,
                 existingPartETags: mergedETags,
@@ -171,11 +171,11 @@ final class VideoMultipartUploadService: @unchecked Sendable {
                 }
                 return VideoUploadCompletedPartPayload(partNumber: part.partNumber, etag: etag)
             }
-            let completeBody = VideoUploadCompleteRequestBody(uploadId: uploadId, parts: completeParts)
-            return try await apiClient.complete(body: completeBody)
+            let completeBody = VideoUploadCompleteRequestBody(id: sessionID, parts: completeParts)
+            try await apiClient.complete(body: completeBody)
         } catch {
             if shouldAbortRemoteSessionOnFailure {
-                try? await apiClient.abort(body: VideoUploadAbortRequestBody(uploadId: uploadId))
+                try? await apiClient.abort(body: VideoUploadAbortRequestBody(id: sessionID))
             }
             throw error
         }
@@ -183,7 +183,7 @@ final class VideoMultipartUploadService: @unchecked Sendable {
 
     private func uploadAllPartsParallel(
         fileURL: URL,
-        uploadId: String,
+        sessionID: String,
         parts sortedParts: [VideoUploadPartDescriptor],
         registry: UploadPartURLRegistry,
         existingPartETags: [Int: String],
@@ -236,7 +236,7 @@ final class VideoMultipartUploadService: @unchecked Sendable {
                     let etag = try await Self.uploadSinglePartWithRetries(
                         fileURL: fileURL,
                         part: part,
-                        uploadId: uploadId,
+                        sessionID: sessionID,
                         registry: registry,
                         apiClient: client,
                         session: session
@@ -264,7 +264,7 @@ final class VideoMultipartUploadService: @unchecked Sendable {
     private static func uploadSinglePartWithRetries(
         fileURL: URL,
         part: VideoUploadPartDescriptor,
-        uploadId: String,
+        sessionID: String,
         registry: UploadPartURLRegistry,
         apiClient: VideoUploadAPIClient,
         session: URLSession
@@ -289,7 +289,7 @@ final class VideoMultipartUploadService: @unchecked Sendable {
             } catch let VideoMultipartUploadError.uploadPartHTTP(status, _) where status == 403 || status == 401 {
                 guard refreshCount < maxRefresh else { throw VideoMultipartUploadError.uploadPartHTTP(status: status, partNumber: part.partNumber) }
                 let refreshed = try await apiClient.refreshURLs(
-                    body: VideoUploadRefreshURLsRequestBody(uploadId: uploadId, partNumbers: [part.partNumber])
+                    body: VideoUploadRefreshURLsRequestBody(id: sessionID, partNumbers: [part.partNumber])
                 )
                 await registry.applyRefresh(refreshed)
                 refreshCount += 1
