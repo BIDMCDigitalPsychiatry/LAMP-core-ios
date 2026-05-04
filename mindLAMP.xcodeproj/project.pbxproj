@@ -7,7 +7,18 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		2BD1E92E2F83A38E005F4972 /* VideoDiaryHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BD1E92D2F83A37F005F4972 /* VideoDiaryHelper.swift */; };
+		2BDD78382FA87D9500527816 /* VideoUploadAPIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BDD78332FA87D9500527816 /* VideoUploadAPIClient.swift */; };
+		2BDD78392FA87D9500527816 /* VideoUploadAPIModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BDD78342FA87D9500527816 /* VideoUploadAPIModels.swift */; };
+		2BDD783A2FA87D9500527816 /* VideoDiaryRecordingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BDD782A2FA87D9500527816 /* VideoDiaryRecordingView.swift */; };
+		2BDD783B2FA87D9500527816 /* VideoDiaryUploadJob.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BDD782E2FA87D9500527816 /* VideoDiaryUploadJob.swift */; };
+		2BDD783C2FA87D9500527816 /* VideoDiaryUploadJobStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BDD782F2FA87D9500527816 /* VideoDiaryUploadJobStore.swift */; };
+		2BDD783D2FA87D9500527816 /* VideoMultipartUploadService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BDD78322FA87D9500527816 /* VideoMultipartUploadService.swift */; };
+		2BDD783E2FA87D9500527816 /* VideoDiaryNetworkPathMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BDD782C2FA87D9500527816 /* VideoDiaryNetworkPathMonitor.swift */; };
+		2BDD783F2FA87D9500527816 /* VideoDiaryAVRecorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BDD78292FA87D9500527816 /* VideoDiaryAVRecorder.swift */; };
+		2BDD78402FA87D9500527816 /* VideoDiaryUploadCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BDD782D2FA87D9500527816 /* VideoDiaryUploadCoordinator.swift */; };
+		2BDD78412FA87D9500527816 /* VideoDiaryHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BDD78362FA87D9500527816 /* VideoDiaryHelper.swift */; };
+		2BDD78422FA87D9500527816 /* VideoDiaryUploadPolicy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BDD78302FA87D9500527816 /* VideoDiaryUploadPolicy.swift */; };
+		2BDD78432FA87D9500527816 /* VideoDiaryURLSessionBackgroundCompletionRegistry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BDD78312FA87D9500527816 /* VideoDiaryURLSessionBackgroundCompletionRegistry.swift */; };
 		B2073F0F256EC29C0068E001 /* AppColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2073F0E256EC29C0068E001 /* AppColors.swift */; };
 		B20B62622C0CE540000B3899 /* mindLAMP2Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B20B62612C0CE540000B3899 /* mindLAMP2Tests.swift */; };
 		B212A437257E2DFB003637DF /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B212A436257E2DFB003637DF /* SceneDelegate.swift */; };
@@ -247,7 +258,18 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		2BD1E92D2F83A37F005F4972 /* VideoDiaryHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoDiaryHelper.swift; sourceTree = "<group>"; };
+		2BDD78292FA87D9500527816 /* VideoDiaryAVRecorder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoDiaryAVRecorder.swift; sourceTree = "<group>"; };
+		2BDD782A2FA87D9500527816 /* VideoDiaryRecordingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoDiaryRecordingView.swift; sourceTree = "<group>"; };
+		2BDD782C2FA87D9500527816 /* VideoDiaryNetworkPathMonitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoDiaryNetworkPathMonitor.swift; sourceTree = "<group>"; };
+		2BDD782D2FA87D9500527816 /* VideoDiaryUploadCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoDiaryUploadCoordinator.swift; sourceTree = "<group>"; };
+		2BDD782E2FA87D9500527816 /* VideoDiaryUploadJob.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoDiaryUploadJob.swift; sourceTree = "<group>"; };
+		2BDD782F2FA87D9500527816 /* VideoDiaryUploadJobStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoDiaryUploadJobStore.swift; sourceTree = "<group>"; };
+		2BDD78302FA87D9500527816 /* VideoDiaryUploadPolicy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoDiaryUploadPolicy.swift; sourceTree = "<group>"; };
+		2BDD78312FA87D9500527816 /* VideoDiaryURLSessionBackgroundCompletionRegistry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoDiaryURLSessionBackgroundCompletionRegistry.swift; sourceTree = "<group>"; };
+		2BDD78322FA87D9500527816 /* VideoMultipartUploadService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoMultipartUploadService.swift; sourceTree = "<group>"; };
+		2BDD78332FA87D9500527816 /* VideoUploadAPIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoUploadAPIClient.swift; sourceTree = "<group>"; };
+		2BDD78342FA87D9500527816 /* VideoUploadAPIModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoUploadAPIModels.swift; sourceTree = "<group>"; };
+		2BDD78362FA87D9500527816 /* VideoDiaryHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoDiaryHelper.swift; sourceTree = "<group>"; };
 		5FC0151223C5A85300990506 /* mindLAMP-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "mindLAMP-Bridging-Header.h"; sourceTree = "<group>"; };
 		B2073F0E256EC29C0068E001 /* AppColors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppColors.swift; sourceTree = "<group>"; };
 		B20B625F2C0CE540000B3899 /* mindLAMP2Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = mindLAMP2Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -457,28 +479,39 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		2BD1E92A2F83A33C005F4972 /* Video Diary */ = {
+		2BDD782B2FA87D9500527816 /* Recorder */ = {
 			isa = PBXGroup;
 			children = (
-				2BD1E92D2F83A37F005F4972 /* VideoDiaryHelper.swift */,
-				2BD1E92C2F83A353005F4972 /* Uploader */,
-				2BD1E92B2F83A348005F4972 /* Recorder */,
-			);
-			path = "Video Diary";
-			sourceTree = "<group>";
-		};
-		2BD1E92B2F83A348005F4972 /* Recorder */ = {
-			isa = PBXGroup;
-			children = (
+				2BDD78292FA87D9500527816 /* VideoDiaryAVRecorder.swift */,
+				2BDD782A2FA87D9500527816 /* VideoDiaryRecordingView.swift */,
 			);
 			path = Recorder;
 			sourceTree = "<group>";
 		};
-		2BD1E92C2F83A353005F4972 /* Uploader */ = {
+		2BDD78352FA87D9500527816 /* Uploader */ = {
 			isa = PBXGroup;
 			children = (
+				2BDD782C2FA87D9500527816 /* VideoDiaryNetworkPathMonitor.swift */,
+				2BDD782D2FA87D9500527816 /* VideoDiaryUploadCoordinator.swift */,
+				2BDD782E2FA87D9500527816 /* VideoDiaryUploadJob.swift */,
+				2BDD782F2FA87D9500527816 /* VideoDiaryUploadJobStore.swift */,
+				2BDD78302FA87D9500527816 /* VideoDiaryUploadPolicy.swift */,
+				2BDD78312FA87D9500527816 /* VideoDiaryURLSessionBackgroundCompletionRegistry.swift */,
+				2BDD78322FA87D9500527816 /* VideoMultipartUploadService.swift */,
+				2BDD78332FA87D9500527816 /* VideoUploadAPIClient.swift */,
+				2BDD78342FA87D9500527816 /* VideoUploadAPIModels.swift */,
 			);
 			path = Uploader;
+			sourceTree = "<group>";
+		};
+		2BDD78372FA87D9500527816 /* Video Diary */ = {
+			isa = PBXGroup;
+			children = (
+				2BDD782B2FA87D9500527816 /* Recorder */,
+				2BDD78352FA87D9500527816 /* Uploader */,
+				2BDD78362FA87D9500527816 /* VideoDiaryHelper.swift */,
+			);
+			path = "Video Diary";
 			sourceTree = "<group>";
 		};
 		B20B62602C0CE540000B3899 /* mindLAMP2Tests */ = {
@@ -736,7 +769,7 @@
 		B29639CF23BDC28100626E1A /* mindLAMP */ = {
 			isa = PBXGroup;
 			children = (
-				2BD1E92A2F83A33C005F4972 /* Video Diary */,
+				2BDD78372FA87D9500527816 /* Video Diary */,
 				B2F160D92D48DD62009259C1 /* SpeechRecognizerHelper */,
 				B2B8F4B5258B026800BEB872 /* Views */,
 				B2201C18257F4DBC00C40183 /* Home */,
@@ -1298,7 +1331,6 @@
 				B2201C2A257F4DBC00C40183 /* WebViewController.swift in Sources */,
 				B29C0069295ACF60009EAF7B /* String+Localize.swift in Sources */,
 				B2346CEF2599DE9800EFF347 /* AppInfo.swift in Sources */,
-				2BD1E92E2F83A38E005F4972 /* VideoDiaryHelper.swift in Sources */,
 				B2201C25257F4DBC00C40183 /* HomeViewController.swift in Sources */,
 				B2201C7A257FA60500C40183 /* NotificationView.swift in Sources */,
 				B2A15C182567A8BE00222717 /* AsynchronousOperation.swift in Sources */,
@@ -1318,6 +1350,18 @@
 				B2464A0826DBF7240077D6BA /* Diagnostics.swift in Sources */,
 				B2A15C162567A8BE00222717 /* BackgroundServices.swift in Sources */,
 				B2A15BFE2567A8BE00222717 /* User.swift in Sources */,
+				2BDD78382FA87D9500527816 /* VideoUploadAPIClient.swift in Sources */,
+				2BDD78392FA87D9500527816 /* VideoUploadAPIModels.swift in Sources */,
+				2BDD783A2FA87D9500527816 /* VideoDiaryRecordingView.swift in Sources */,
+				2BDD783B2FA87D9500527816 /* VideoDiaryUploadJob.swift in Sources */,
+				2BDD783C2FA87D9500527816 /* VideoDiaryUploadJobStore.swift in Sources */,
+				2BDD783D2FA87D9500527816 /* VideoMultipartUploadService.swift in Sources */,
+				2BDD783E2FA87D9500527816 /* VideoDiaryNetworkPathMonitor.swift in Sources */,
+				2BDD783F2FA87D9500527816 /* VideoDiaryAVRecorder.swift in Sources */,
+				2BDD78402FA87D9500527816 /* VideoDiaryUploadCoordinator.swift in Sources */,
+				2BDD78412FA87D9500527816 /* VideoDiaryHelper.swift in Sources */,
+				2BDD78422FA87D9500527816 /* VideoDiaryUploadPolicy.swift in Sources */,
+				2BDD78432FA87D9500527816 /* VideoDiaryURLSessionBackgroundCompletionRegistry.swift in Sources */,
 				B2201C6E257F9CC400C40183 /* NotificationWebViewModel.swift in Sources */,
 				B2201C27257F4DBC00C40183 /* PushUserInfo.swift in Sources */,
 				B2073F0F256EC29C0068E001 /* AppColors.swift in Sources */,
@@ -1514,7 +1558,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.6;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MARKETING_VERSION = 1.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
@@ -1597,7 +1641,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.6;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MARKETING_VERSION = 1.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
@@ -1635,7 +1679,7 @@
 				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu17;
 				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.6;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = digital.lamp.mindlamp.mindLAMP2Tests;
@@ -1667,7 +1711,7 @@
 				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu17;
 				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.6;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = digital.lamp.mindlamp.mindLAMP2Tests;
@@ -1766,7 +1810,7 @@
 				ENABLE_PREVIEWS = YES;
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = mindLAMP/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.6;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1801,7 +1845,7 @@
 				CURRENT_PROJECT_VERSION = 484;
 				DEVELOPMENT_TEAM = S2Y2D4239K;
 				INFOPLIST_FILE = CustomNotification/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.6;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1832,7 +1876,7 @@
 				CURRENT_PROJECT_VERSION = 484;
 				DEVELOPMENT_TEAM = S2Y2D4239K;
 				INFOPLIST_FILE = NotificationService/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.6;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1959,7 +2003,7 @@
 				ENABLE_PREVIEWS = YES;
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = mindLAMP/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.6;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1993,7 +2037,7 @@
 				CURRENT_PROJECT_VERSION = 484;
 				DEVELOPMENT_TEAM = S2Y2D4239K;
 				INFOPLIST_FILE = CustomNotification/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.6;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -2024,7 +2068,7 @@
 				CURRENT_PROJECT_VERSION = 484;
 				DEVELOPMENT_TEAM = S2Y2D4239K;
 				INFOPLIST_FILE = NotificationService/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.6;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -2139,7 +2183,7 @@
 				INFOPLIST_FILE = StreakWidget/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = StreakWidget;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright © 2024 Division of Digital Psychiatry. All rights reserved.";
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.6;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -2231,7 +2275,7 @@
 				INFOPLIST_FILE = StreakWidget/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = StreakWidget;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright © 2024 Division of Digital Psychiatry. All rights reserved.";
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.6;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -2278,7 +2322,7 @@
 				INFOPLIST_FILE = StreakWidget/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = StreakWidget;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright © 2024 Division of Digital Psychiatry. All rights reserved.";
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.6;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -2319,7 +2363,7 @@
 				INFOPLIST_FILE = StreakWidget/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = StreakWidget;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright © 2024 Division of Digital Psychiatry. All rights reserved.";
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.6;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -2411,7 +2455,7 @@
 				CURRENT_PROJECT_VERSION = 484;
 				DEVELOPMENT_TEAM = S2Y2D4239K;
 				INFOPLIST_FILE = NotificationService/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.6;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -2442,7 +2486,7 @@
 				CURRENT_PROJECT_VERSION = 484;
 				DEVELOPMENT_TEAM = S2Y2D4239K;
 				INFOPLIST_FILE = NotificationService/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.6;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -2604,7 +2648,7 @@
 				ENABLE_PREVIEWS = YES;
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = mindLAMP/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.6;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -2646,7 +2690,7 @@
 				ENABLE_PREVIEWS = YES;
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = mindLAMP/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.6;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -2746,7 +2790,7 @@
 				ENABLE_PREVIEWS = YES;
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = mindLAMP/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.6;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -2780,7 +2824,7 @@
 				CURRENT_PROJECT_VERSION = 484;
 				DEVELOPMENT_TEAM = S2Y2D4239K;
 				INFOPLIST_FILE = CustomNotification/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.6;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -2811,7 +2855,7 @@
 				CURRENT_PROJECT_VERSION = 484;
 				DEVELOPMENT_TEAM = S2Y2D4239K;
 				INFOPLIST_FILE = NotificationService/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.6;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -2877,7 +2921,7 @@
 				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu17;
 				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.6;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = digital.lamp.mindlamp.mindLAMP2Tests;
@@ -2913,7 +2957,7 @@
 				INFOPLIST_FILE = StreakWidget/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = StreakWidget;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright © 2024 Division of Digital Psychiatry. All rights reserved.";
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.6;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -2945,7 +2989,7 @@
 				CURRENT_PROJECT_VERSION = 484;
 				DEVELOPMENT_TEAM = S2Y2D4239K;
 				INFOPLIST_FILE = CustomNotification/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.6;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -2976,7 +3020,7 @@
 				CURRENT_PROJECT_VERSION = 484;
 				DEVELOPMENT_TEAM = S2Y2D4239K;
 				INFOPLIST_FILE = CustomNotification/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.6;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

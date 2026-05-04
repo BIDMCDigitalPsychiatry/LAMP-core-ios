@@ -10,6 +10,7 @@ enum ScriptMessageHandler: String {
     case logout = "logout"
     case allowSpeech = "allowSpeech"
     case renewToken = "renewToken"
+    case beginVideoDiary = "beginVideoDiary"
 }
 
 enum ScriptMessageKey: String {
@@ -168,7 +169,9 @@ extension HomeWebViewModel: WKScriptMessageHandler {
     }
     
     func performOnLogout() {
-        
+        Task {
+            await VideoDiaryUploadCoordinator.shared.cancelAllDueToLogout()
+        }
         //send lamp.analytics for logout
         guard let authheader = Endpoint.getAuthHeader(), let participantId = User.shared.userId else {
             NotificationHelper.shared.removeAllNotifications()

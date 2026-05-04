@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SwiftUI
 import WebKit
 import LAMP
 //import Combine
@@ -176,7 +177,7 @@ private extension HomeViewController {
         //wkWebView.scrollView.contentInsetAdjustmentBehavior = .never
         //wkWebView.addSubview(indicator)
         self.view.addSubview(indicator)
-//        
+//
 //        let button = UIButton()
 //        button.setTitle("Retry", for: .normal)
 //        button.frame = CGRect(x: 0, y: 0, width: 100, height: 20)
@@ -186,9 +187,12 @@ private extension HomeViewController {
 //            button.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor)])
 //        button.addTarget(self, action: #selector(retry), for: UIControl.Event.touchUpInside)
 //        button.layer.zPosition = 100
-//        
+//
         NSLayoutConstraint.activate([indicator.centerXAnchor.constraint(equalTo: view.centerXAnchor),
                                      indicator.centerYAnchor.constraint(equalTo: view.centerYAnchor)])
+        Task {
+            await VideoDiaryUploadCoordinator.shared.registerDelegate(self)
+        }
         //To show activity indicator when webview is Loading..
         loadingObservation = wkWebView.observe(\.isLoading, options: [.new, .old]) { [weak self] (_, change) in
             guard let strongSelf = self else { return }
@@ -224,9 +228,11 @@ private extension HomeViewController {
                 wkWebView.load(URLRequest(url: feedURL))
                 feedURLToLoad = nil
             } else {
+                print("jp self.lampDashboardURLwithToken = \(self.lampDashboardURLwithToken)")
                 wkWebView.load(URLRequest(url: self.lampDashboardURLwithToken))
             }
         } else {
+            print("jp = \(LampURL.dashboardDigital)")
             wkWebView.load(URLRequest(url: LampURL.dashboardDigital))
         }
     }
@@ -248,6 +254,7 @@ private extension HomeViewController {
         configuration.userContentController.add(LeakAvoider(delegate:self), name: ScriptMessageHandler.logout.rawValue)
         configuration.userContentController.add(LeakAvoider(delegate:self), name: ScriptMessageHandler.renewToken.rawValue)
         configuration.userContentController.add(LeakAvoider(delegate:self), name: ScriptMessageHandler.allowSpeech.rawValue)
+        configuration.userContentController.add(LeakAvoider(delegate:self), name: ScriptMessageHandler.beginVideoDiary.rawValue)
         configuration.userContentController.add(LeakAvoider(delegate:self), name: "loadchecker")
         let source = """
 function captureDivs() {
@@ -320,7 +327,9 @@ window.onload = captureDivs;
     }
     
     func performOnLogout() {
-        
+        Task {
+            await VideoDiaryUploadCoordinator.shared.cancelAllDueToLogout()
+        }
         LeakAvoider.cleanCache()
         //send lamp.analytics for logout
         guard let _ = Endpoint.getAuthHeader(), let participantId = User.shared.userId else {
@@ -517,7 +526,7 @@ extension HomeViewController: WKScriptMessageHandler {
                 printError("Message body not in expected format.")
                 return
             }
-            print("dictBody renewToken  ctrlr= \(dictBody)\n")
+            print("dictBody = \(dictBody)\n")
             let bearerAccessToken = (dictBody[ScriptMessageKey.accessToken.rawValue] as? String)
             let bearerRefreshToken = (dictBody[ScriptMessageKey.refreshToken.rawValue] as? String)
             if let bearerAccessToken {
@@ -537,7 +546,82 @@ extension HomeViewController: WKScriptMessageHandler {
                 }
             }
 
+        } else if message.name == ScriptMessageHandler.beginVideoDiary.rawValue {
+            Task { @MainActor in
+                guard let dictBody = message.body as? [String: Any] else {
+                    printError("Message body not in expected format.- \(message.body)")
+                    return
+                }
+                print("dictBody = \(dictBody)\n")
+
+                guard let apiBase = URL(string: LampURL.baseURLString) else {
+                    printError("Invalid API base URL for video diary upload.")
+                    return
+                }
+                let authHeader = Endpoint.getAuthHeader()
+                guard let recordingConfig = VideoDiary.RecordingConfiguration(messageBody: dictBody),
+                      let uploadConfig = VideoMultipartUploadService.uploadConfiguration(
+                          fromMessageBody: dictBody,
+                          apiBaseURL: apiBase,
+                          authorizationHeaderValue: authHeader
+                      ) else {
+                    printError("Invalid video diary payload: need activityId, participantId, and settings.")
+                    return
+                }
+
+                let helper = VideoDiaryHelper(configuration: recordingConfig)
+                let hostingController = UIHostingController(
+                    rootView: VideoDiaryRecordingView(
+                        videoHelper: helper,
+                        onSubmitRecording: { [weak self, recordingConfig, apiBase, uploadConfig] fileURL in
+                            guard let self else { return }
+                            self.dismiss(animated: true) {
+                                Task {
+                                    do {
+                                        try await VideoDiaryUploadCoordinator.shared.enqueue(
+                                            sourceVideoFileURL: fileURL,
+                                            recordingConfiguration: recordingConfig,
+                                            apiBaseURL: apiBase,
+                                            participantId: uploadConfig.participantId,
+                                            activityId: uploadConfig.activityId,
+                                            policy: .default
+                                        )
+                                    } catch {
+                                        printError("Video diary enqueue failed: \(error.localizedDescription)")
+                                    }
+                                }
+                            }
+                        }
+                    )
+                )
+                hostingController.modalPresentationStyle = .fullScreen
+                self.present(hostingController, animated: true)
+            }
         }
     }
 }
 
+extension HomeViewController: VideoDiaryUploadCoordinatorDelegate {
+    func videoDiaryUploadDidFinish(jobId: UUID, result: Swift.Result<VideoUploadCompleteResponse, Error>) {
+        handleVideoDiaryBackgroundUploadResult(result)
+    }
+}
+
+private extension HomeViewController {
+    /// Fires a DOM event the dashboard can listen for; adjust name/payload with your web contract.
+    func handleVideoDiaryBackgroundUploadResult(_ result: Swift.Result<VideoUploadCompleteResponse, Error>) {
+        let detail: [String: Any]
+        switch result {
+        case .success(let response):
+            detail = ["success": true, "status": response.status, "sha256": response.sha256]
+        case .failure(let error):
+            detail = ["success": false, "error": error.localizedDescription]
+        }
+        guard let data = try? JSONSerialization.data(withJSONObject: detail),
+              let jsonText = String(data: data, encoding: .utf8) else {
+            return
+        }
+        let script = "window.dispatchEvent(new CustomEvent('mindlampVideoDiaryUpload', { detail: \(jsonText) }));"
+        wkWebView.evaluateJavaScript(script, completionHandler: nil)
+    }
+}

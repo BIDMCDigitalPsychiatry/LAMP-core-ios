@@ -51,7 +51,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func application(_ application: UIApplication, handleEventsForBackgroundURLSession identifier: String, completionHandler: @escaping () -> Void) {
-        completionHandler()
+        VideoDiaryURLSessionBackgroundCompletionRegistry.shared.setBackgroundSessionCompletionHandler(completionHandler)
+        // When background `URLSession` tasks exist, finish reconnecting them then call `signalAllEventsProcessed()`.
+        VideoDiaryURLSessionBackgroundCompletionRegistry.shared.signalAllEventsProcessed()
     }
     
     func applicationDidBecomeActive(_ application: UIApplication) {
