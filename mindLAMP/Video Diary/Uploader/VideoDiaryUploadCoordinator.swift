@@ -76,20 +76,28 @@ actor VideoDiaryUploadCoordinator {
         var index = try jobStore.loadQueueIndex()
         index.orderedJobIds.append(id)
         try jobStore.saveQueueIndex(index)
+        videoDiaryUploadLog(
+            "enqueue: jobId=\(id) activityId=\(activityId) participantId=\(participantId) stagedFile=\(fileName) apiBase=\(apiBaseURL.absoluteString) queueDepth=\(index.orderedJobIds.count)"
+        )
         await scheduleDrainQueue()
     }
 
     /// Drops queued files/metadata and cancels in-memory drain (best-effort). Call on logout.
     func cancelAllDueToLogout() async {
+        videoDiaryUploadLog("cancelAllDueToLogout: clearing queue and uploads")
         try? jobStore.removeAllUploadData()
         isDraining = false
     }
 
     /// Entry point for path changes and post-login kicks.
     func scheduleDrainQueue() async {
-        guard !isDraining else { return }
+        guard !isDraining else {
+            videoDiaryUploadLog("scheduleDrain: already draining, skip")
+            return
+        }
         isDraining = true
         defer { isDraining = false }
+        videoDiaryUploadLog("scheduleDrain: starting drain loop")
         await drainQueueLoop()
     }
 
@@ -97,6 +105,9 @@ actor VideoDiaryUploadCoordinator {
 
     /// Checkpoint after **initiate** so we never lose the multipart session `id` if the app terminates before the first `PUT`.
     func persistInitiatedSnapshot(jobId: UUID, snapshot: VideoDiaryMultipartProgress) async throws {
+        videoDiaryUploadLog(
+            "persist: initiated checkpoint jobId=\(jobId) session=\(snapshot.id) parts=\(snapshot.partDescriptors.count)"
+        )
         var job = try jobStore.loadJob(id: jobId)
         job.multipart = snapshot
         try jobStore.saveJob(job)
@@ -104,6 +115,7 @@ actor VideoDiaryUploadCoordinator {
 
     /// Checkpoint each finished S3 part so retries skip completed byte ranges.
     func persistPartETag(jobId: UUID, partNumber: Int, etag: String) async throws {
+        videoDiaryUploadLog("persist: part ETag jobId=\(jobId) part=\(partNumber) etagLen=\(etag.count)")
         var job = try jobStore.loadJob(id: jobId)
         guard var multi = job.multipart else { return }
         multi.completedPartETags[partNumber] = etag
@@ -116,14 +128,21 @@ actor VideoDiaryUploadCoordinator {
     private func drainQueueLoop() async {
         while true {
             let index = (try? jobStore.loadQueueIndex()) ?? .empty
-            guard let headId = index.orderedJobIds.first else { return }
+            guard let headId = index.orderedJobIds.first else {
+                videoDiaryUploadLog("drain: queue empty, exit")
+                return
+            }
 
             guard var job = try? jobStore.loadJob(id: headId) else {
+                videoDiaryUploadLog("drain: missing job file for id=\(headId), removing head")
                 try? removeHeadInvalidJobId(headId)
                 continue
             }
 
-            guard pathMonitor.allowsUpload(with: job.policy) else { return }
+            guard pathMonitor.allowsUpload(with: job.policy) else {
+                videoDiaryUploadLog("drain: blocked by network policy jobId=\(job.id) state=\(job.state)")
+                return
+            }
 
             if job.state == .pending {
                 job.state = .uploading
@@ -133,6 +152,7 @@ actor VideoDiaryUploadCoordinator {
             guard let uploadConfiguration = job.makeUploadConfiguration(
                 authorizationHeaderValue: LampURL.videoUploadServiceAuthorizationHeader
             ) else {
+                videoDiaryUploadLog("drain: invalid API base URL jobId=\(job.id)")
                 await failJobTerminal(jobId: job.id, message: "Invalid video upload API base URL in job.")
                 continue
             }
@@ -141,10 +161,14 @@ actor VideoDiaryUploadCoordinator {
             do {
                 fileURL = try jobStore.videoFileURL(fileName: job.localVideoFileName)
             } catch {
+                videoDiaryUploadLog("drain: missing staged video jobId=\(job.id) file=\(job.localVideoFileName)")
                 try? removeHeadInvalidJobId(job.id)
                 continue
             }
 
+            videoDiaryUploadLog(
+                "drain: BEGIN upload jobId=\(job.id) activityId=\(job.activityId) resume=\(job.multipart != nil) file=\(job.localVideoFileName)"
+            )
             let service = VideoMultipartUploadService(configuration: uploadConfiguration)
             let captureJobId = job.id
 
@@ -166,8 +190,10 @@ actor VideoDiaryUploadCoordinator {
 
                 try jobStore.removeArtifacts(jobId: job.id, videoFileName: job.localVideoFileName)
                 try dequeueHead(jobId: job.id)
+                videoDiaryUploadLog("drain: SUCCESS jobId=\(job.id), notifying delegate")
                 await notifySuccess(jobId: job.id)
             } catch {
+                videoDiaryUploadLog("drain: FAILED jobId=\(captureJobId) \(error.localizedDescription) — will retry when drain runs again")
                 await handleUploadError(jobId: captureJobId, error: error)
                 return
             }
@@ -179,6 +205,7 @@ actor VideoDiaryUploadCoordinator {
         job.state = .pending
         job.lastErrorDescription = error.localizedDescription
         try? jobStore.saveJob(job)
+        videoDiaryUploadLog("handleUploadError: jobId=\(jobId) reset to pending lastError=\(error.localizedDescription)")
     }
 
     private func failJobTerminal(jobId: UUID, message: String) async {
@@ -191,6 +218,7 @@ actor VideoDiaryUploadCoordinator {
         try? jobStore.saveJob(job)
         try? jobStore.removeArtifacts(jobId: jobId, videoFileName: job.localVideoFileName)
         try? dequeueHead(jobId: jobId)
+        videoDiaryUploadLog("failJobTerminal: jobId=\(jobId) message=\(message)")
         let err = NSError(domain: "VideoDiaryUpload", code: -1, userInfo: [NSLocalizedDescriptionKey: message])
         await notifyFailure(jobId: jobId, error: err)
     }
@@ -212,6 +240,7 @@ actor VideoDiaryUploadCoordinator {
     }
 
     private func notifySuccess(jobId: UUID) async {
+        videoDiaryUploadLog("notifySuccess: jobId=\(jobId)")
         let result: Swift.Result<Void, Error> = .success(())
         // Snapshot delegate on the actor; `MainActor.run` must not touch actor-isolated storage directly.
         let callbackTarget = self.delegate
@@ -221,9 +250,16 @@ actor VideoDiaryUploadCoordinator {
     }
 
     private func notifyFailure(jobId: UUID, error: Error) async {
+        videoDiaryUploadLog("notifyFailure: jobId=\(jobId) \(error.localizedDescription)")
         let callbackTarget = self.delegate
         await MainActor.run {
             callbackTarget?.videoDiaryUploadDidFinish(jobId: jobId, result: .failure(error))
         }
     }
+}
+
+// MARK: - Logging
+
+private func videoDiaryUploadLog(_ message: String) {
+    printDebug("[VideoDiaryUpload] \(message)")
 }

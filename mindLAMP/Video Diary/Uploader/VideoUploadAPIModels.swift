@@ -4,9 +4,13 @@ import Foundation
 
 // MARK: - Initiate
 
+/// JSON body for `POST .../initiate` (the HTTP request itself is `application/json`).
+/// `contentType` is **not** the type of this request; it tells the server the MIME type of the **video object**
+/// that will be uploaded in the multipart PUT phase (e.g. S3 object `Content-Type`), alongside size and codec metadata.
 struct VideoUploadInitiateRequestBody: Encodable, Sendable {
     var activityId: String
     var fileSizeBytes: Int64
+    /// MIME type of the file bytes that follow in part uploads (e.g. `video/mp4`), not the initiate POST body.
     var contentType: String
     var metadata: VideoUploadMetadataPayload
 }

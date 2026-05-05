@@ -101,6 +101,9 @@ final class VideoMultipartUploadService: @unchecked Sendable {
         onInitiated: @escaping @Sendable (VideoDiaryMultipartProgress) async throws -> Void,
         onPartUploaded: @escaping @Sendable (Int, String) async throws -> Void
     ) async throws {
+        videoDiaryUploadLog(
+            "uploadResumable: START file=\(fileURL.lastPathComponent) activityId=\(activityId) resume=\(resume != nil) abortOnFailure=\(shouldAbortRemoteSessionOnFailure)"
+        )
         let sessionID: String
         let sortedParts: [VideoUploadPartDescriptor]
         let registry: UploadPartURLRegistry
@@ -109,9 +112,14 @@ final class VideoMultipartUploadService: @unchecked Sendable {
             sessionID = resume.id
             sortedParts = resume.partDescriptors.sorted { $0.partNumber < $1.partNumber }
             registry = UploadPartURLRegistry(parts: resume.partDescriptors, expiresAt: resume.expiresAt)
+            let done = resume.completedPartETags.count
+            videoDiaryUploadLog(
+                "uploadResumable: RESUME session=\(sessionID) partsTotal=\(sortedParts.count) alreadyUploaded=\(done) expiresAt=\(resume.expiresAt)"
+            )
         } else {
             let fileSize = try fileByteSize(at: fileURL)
-            let contentType = Self.mimeType(for: fileURL)
+            // MIME type of the file that will be PUT in parts (JSON field `contentType`); the initiate POST itself is `application/json`.
+            let objectContentType = Self.mimeTypeForUploadedVideoFile(at: fileURL)
             let durationSeconds = await loadDurationSeconds(fileURL: fileURL)
             let (width, height) = await loadVideoDimensions(
                 fileURL: fileURL,
@@ -121,7 +129,7 @@ final class VideoMultipartUploadService: @unchecked Sendable {
             let initiateBody = VideoUploadInitiateRequestBody(
                 activityId: activityId,
                 fileSizeBytes: fileSize,
-                contentType: contentType,
+                contentType: objectContentType,
                 metadata: VideoUploadMetadataPayload(
                     codec: "h264",
                     bitrate: recordingConfiguration.bitratePerSecond,
@@ -132,8 +140,12 @@ final class VideoMultipartUploadService: @unchecked Sendable {
                 )
             )
 
+            videoDiaryUploadLog(
+                "uploadResumable: initiating multipart fileSizeBytes=\(fileSize) objectContentType=\(objectContentType) duration=\(durationSeconds)s dimensions=\(width)x\(height)"
+            )
             let initiated = try await apiClient.initiate(body: initiateBody)
             guard !initiated.parts.isEmpty else {
+                videoDiaryUploadLog("uploadResumable: initiate returned zero parts")
                 throw VideoMultipartUploadError.initiateMissingParts
             }
 
@@ -154,6 +166,10 @@ final class VideoMultipartUploadService: @unchecked Sendable {
         let baselineComplete = sortedParts.filter { mergedETags[$0.partNumber] != nil }.count
 
         do {
+            let progressHook: @Sendable (Double) -> Void = { [sessionID] p in
+                videoDiaryUploadLog("uploadResumable: PROGRESS session=\(sessionID) \(Int((p * 100).rounded()))%")
+                progress(p)
+            }
             mergedETags = try await uploadAllPartsParallel(
                 fileURL: fileURL,
                 sessionID: sessionID,
@@ -161,7 +177,7 @@ final class VideoMultipartUploadService: @unchecked Sendable {
                 registry: registry,
                 existingPartETags: mergedETags,
                 baselineComplete: baselineComplete,
-                progress: progress,
+                progress: progressHook,
                 onPartUploaded: onPartUploaded
             )
 
@@ -171,10 +187,14 @@ final class VideoMultipartUploadService: @unchecked Sendable {
                 }
                 return VideoUploadCompletedPartPayload(partNumber: part.partNumber, etag: etag)
             }
+            videoDiaryUploadLog("uploadResumable: all parts uploaded, calling complete session=\(sessionID)")
             let completeBody = VideoUploadCompleteRequestBody(id: sessionID, parts: completeParts)
             try await apiClient.complete(body: completeBody)
+            videoDiaryUploadLog("uploadResumable: FINISH OK session=\(sessionID) file=\(fileURL.lastPathComponent)")
         } catch {
+            videoDiaryUploadLog("uploadResumable: ERROR session=\(sessionID) \(error.localizedDescription)")
             if shouldAbortRemoteSessionOnFailure {
+                videoDiaryUploadLog("uploadResumable: aborting remote session session=\(sessionID)")
                 try? await apiClient.abort(body: VideoUploadAbortRequestBody(id: sessionID))
             }
             throw error
@@ -195,7 +215,11 @@ final class VideoMultipartUploadService: @unchecked Sendable {
         let total = sortedParts.count
 
         let pendingParts = sortedParts.filter { mergedETags[$0.partNumber] == nil }
+        videoDiaryUploadLog(
+            "uploadParts: session=\(sessionID) total=\(sortedParts.count) pending=\(pendingParts.count) baselineComplete=\(baselineComplete) concurrency=\(min(maxConcurrentPartUploads, pendingParts.count))"
+        )
         guard !pendingParts.isEmpty else {
+            videoDiaryUploadLog("uploadParts: nothing pending (all parts already had ETags), skipping PUTs")
             progress(1)
             return mergedETags
         }
@@ -254,10 +278,12 @@ final class VideoMultipartUploadService: @unchecked Sendable {
 
             while let (num, etag) = try await group.next() {
                 mergedETags[num] = etag
+                videoDiaryUploadLog("uploadParts: finished part \(num)/\(total) session=\(sessionID)")
                 enqueueNext()
             }
         }
 
+        videoDiaryUploadLog("uploadParts: all PUTs done session=\(sessionID) parts=\(total)")
         return mergedETags
     }
 
@@ -271,29 +297,42 @@ final class VideoMultipartUploadService: @unchecked Sendable {
     ) async throws -> String {
         var refreshCount = 0
         let maxRefresh = 4
+        videoDiaryUploadLog(
+            "partUpload: START part=\(part.partNumber) bytes=\(part.endByte - part.startByte + 1) session=\(sessionID)"
+        )
 
         while true {
             guard let descriptor = await registry.descriptor(for: part.partNumber) else {
+                videoDiaryUploadLog("partUpload: missing descriptor part=\(part.partNumber) session=\(sessionID)")
                 throw VideoMultipartUploadError.uploadPartHTTP(status: -1, partNumber: part.partNumber)
             }
 
             let data = try readPartBytes(fileURL: fileURL, part: descriptor)
 
             do {
-                return try await putToPresignedURL(
+                let etag = try await putToPresignedURL(
                     urlString: descriptor.presignedUrl,
                     body: data,
                     partNumber: part.partNumber,
                     session: session
                 )
+                videoDiaryUploadLog("partUpload: PUT OK part=\(part.partNumber) etagLen=\(etag.count) session=\(sessionID)")
+                return etag
             } catch let VideoMultipartUploadError.uploadPartHTTP(status, _) where status == 403 || status == 401 {
-                guard refreshCount < maxRefresh else { throw VideoMultipartUploadError.uploadPartHTTP(status: status, partNumber: part.partNumber) }
+                guard refreshCount < maxRefresh else {
+                    videoDiaryUploadLog("partUpload: refresh exhausted part=\(part.partNumber) HTTP \(status) session=\(sessionID)")
+                    throw VideoMultipartUploadError.uploadPartHTTP(status: status, partNumber: part.partNumber)
+                }
+                videoDiaryUploadLog(
+                    "partUpload: presigned URL rejected HTTP \(status), refresh attempt \(refreshCount + 1)/\(maxRefresh) part=\(part.partNumber) session=\(sessionID)"
+                )
                 let refreshed = try await apiClient.refreshURLs(
                     body: VideoUploadRefreshURLsRequestBody(id: sessionID, partNumbers: [part.partNumber])
                 )
                 await registry.applyRefresh(refreshed)
                 refreshCount += 1
             } catch {
+                videoDiaryUploadLog("partUpload: FAILED part=\(part.partNumber) session=\(sessionID) \(error.localizedDescription)")
                 throw error
             }
         }
@@ -311,13 +350,18 @@ final class VideoMultipartUploadService: @unchecked Sendable {
         var request = URLRequest(url: url)
         request.httpMethod = "PUT"
         request.httpBody = body
-        let (_, response) = try await session.data(for: request)
+        let (bodyData, response) = try await session.data(for: request)
         guard let http = response as? HTTPURLResponse else {
+            videoDiaryUploadLog("presignedPUT: no HTTP response part=\(partNumber)")
             throw VideoMultipartUploadError.uploadPartHTTP(status: -1, partNumber: partNumber)
         }
         guard (200 ... 299).contains(http.statusCode) else {
+            videoDiaryUploadLog("presignedPUT: HTTP \(http.statusCode) part=\(partNumber) urlHost=\(url.host ?? "?")")
             throw VideoMultipartUploadError.uploadPartHTTP(status: http.statusCode, partNumber: partNumber)
         }
+        videoDiaryUploadLog(
+            "presignedPUT: HTTP \(http.statusCode) part=\(partNumber) uploadedBytes=\(bodyData.count) urlHost=\(url.host ?? "?")"
+        )
         let raw =
             http.value(forHTTPHeaderField: "ETag")
             ?? http.value(forHTTPHeaderField: "Etag")
@@ -372,7 +416,8 @@ final class VideoMultipartUploadService: @unchecked Sendable {
         return fallback
     }
 
-    private static func mimeType(for url: URL) -> String {
+    /// MIME type of the on-disk video file for the **stored object** (initiate JSON field `contentType`), not the initiate HTTP request.
+    private static func mimeTypeForUploadedVideoFile(at url: URL) -> String {
         switch url.pathExtension.lowercased() {
         case "mp4", "m4v":
             return "video/mp4"
@@ -402,4 +447,10 @@ extension VideoMultipartUploadService {
             authorizationHeaderValue: authorizationHeaderValue
         )
     }
+}
+
+// MARK: - Logging
+
+private func videoDiaryUploadLog(_ message: String) {
+    printDebug("[VideoDiaryUpload] \(message)")
 }

@@ -76,7 +76,7 @@ struct LampURL {
     static let videoUploadServiceBaseURLString = "https://video.dev.lamp.digital"
     /// Full `Authorization` header (`Bearer …`) for the video upload API.
     static let videoUploadServiceAuthorizationHeader =
-        "Bearer emNvLW1pY2hhZWw6YjU3NDJmNzgtM2ZlYy0xMWYxLWFiNzItZGZmZDA4Mzc1MTY3"
+        "Basic emNvLW1pY2hhZWw6YjU3NDJmNzgtM2ZlYy0xMWYxLWFiNzItZGZmZDA4Mzc1MTY3"
     
     static var baseURLString: String {
         if let url = UserDefaults.standard.serverAddress {

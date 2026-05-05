@@ -569,12 +569,14 @@ extension HomeViewController: WKScriptMessageHandler {
                     return
                 }
 
+                printDebug("[VideoDiaryUpload] beginVideoDiary: presenting recorder activityId=\(uploadConfig.activityId) participantId=\(uploadConfig.participantId)")
                 let helper = VideoDiaryHelper(configuration: recordingConfig)
                 let hostingController = UIHostingController(
                     rootView: VideoDiaryRecordingView(
                         videoHelper: helper,
                         onSubmitRecording: { [weak self, recordingConfig, apiBase, uploadConfig] fileURL in
                             guard let self else { return }
+                            printDebug("[VideoDiaryUpload] recording submitted path=\(fileURL.lastPathComponent)")
                             self.dismiss(animated: true) {
                                 Task {
                                     do {
@@ -613,8 +615,10 @@ private extension HomeViewController {
         let detail: [String: Any]
         switch result {
         case .success:
+            printDebug("[VideoDiaryUpload] background upload finished: success, dispatching mindlampVideoDiaryUpload to webview")
             detail = ["success": true]
         case .failure(let error):
+            printDebug("[VideoDiaryUpload] background upload finished: failure \(error.localizedDescription)")
             detail = ["success": false, "error": error.localizedDescription]
         }
         guard let data = try? JSONSerialization.data(withJSONObject: detail),
