@@ -604,28 +604,58 @@ extension HomeViewController: WKScriptMessageHandler {
 }
 
 extension HomeViewController: VideoDiaryUploadCoordinatorDelegate {
+    func videoDiaryUploadDidInitiate(jobId: UUID, videoKey: String, metadata: VideoUploadInitiatedMetadata) {
+        notifyWebOnVideoSubmit(videoKey: videoKey, metadata: metadata)
+    }
+
     func videoDiaryUploadDidFinish(jobId: UUID, result: Swift.Result<Void, Error>) {
-        handleVideoDiaryBackgroundUploadResult(result)
+        switch result {
+        case .success:
+            printDebug("[VideoDiaryUpload] background upload finished: success")
+        case .failure(let error):
+            printDebug("[VideoDiaryUpload] background upload finished: failure \(error.localizedDescription)")
+        }
     }
 }
 
 private extension HomeViewController {
-    /// Fires a DOM event the dashboard can listen for; adjust name/payload with your web contract.
-    func handleVideoDiaryBackgroundUploadResult(_ result: Swift.Result<Void, Error>) {
-        let detail: [String: Any]
-        switch result {
-        case .success:
-            printDebug("[VideoDiaryUpload] background upload finished: success, dispatching mindlampVideoDiaryUpload to webview")
-            detail = ["success": true]
-        case .failure(let error):
-            printDebug("[VideoDiaryUpload] background upload finished: failure \(error.localizedDescription)")
-            detail = ["success": false, "error": error.localizedDescription]
-        }
-        guard let data = try? JSONSerialization.data(withJSONObject: detail),
+    /// Calls a dashboard JS hook when multipart initiate returns the server-side video key.
+    func notifyWebOnVideoSubmit(videoKey: String, metadata: VideoUploadInitiatedMetadata) {
+        let now = Date().timeInMilliSeconds
+        let durationText = String(format: "%.2f", metadata.durationSeconds)
+        let resolutionText = "\(min(metadata.width, metadata.height))"
+        let payload: [String: Any] = [
+            "participantId": metadata.participantId,
+            "activityId": metadata.activityId,
+            "static_data": [
+                "videoKey": videoKey,
+                "metadata": [
+                    "duration": durationText,
+                    "resolution": resolutionText,
+                    "fileSize": "\(metadata.fileSizeBytes)",
+                    "timestamp": "\(now)",
+                    "mimeType": metadata.mimeType
+                ],
+            ],
+            "timestamp": now,
+            "done": true
+        ]
+
+        guard let data = try? JSONSerialization.data(withJSONObject: payload),
               let jsonText = String(data: data, encoding: .utf8) else {
             return
         }
-        let script = "window.dispatchEvent(new CustomEvent('mindlampVideoDiaryUpload', { detail: \(jsonText) }));"
+
+        let script = """
+        (function() {
+          var payload = \(jsonText);
+          if (typeof window.onVideoDiaryUploadSubmitted === 'function') {
+            window.onVideoDiaryUploadSubmitted(payload);
+          } else {
+            console.log('onVideoDiaryUploadSubmitted not found', payload);
+          }
+        })();
+        """
         wkWebView.evaluateJavaScript(script, completionHandler: nil)
     }
 }

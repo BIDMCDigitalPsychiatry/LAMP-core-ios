@@ -18,6 +18,8 @@ struct VideoDiaryRecordingView: View {
     @State private var isRecordingActive = false
     /// Latest finished clip; non-nil shows Submit (when upload configuration exists) until upload succeeds.
     @State private var pendingSubmitURL: URL?
+    /// Set to true once Submit is tapped so dismissal does not delete the clip before enqueue stages it.
+    @State private var didSubmitRecording = false
     /// After at least one successful recording, the primary control title becomes "Record Again".
     @State private var hasFinishedRecordingAtLeastOnce = false
     /// Elapsed time for the current clip (0 when idle; auto-stop uses maximum duration while recording).
@@ -125,6 +127,7 @@ struct VideoDiaryRecordingView: View {
                     if pendingSubmitURL != nil, onSubmitRecording != nil, !isRecordingActive {
                         Button {
                             guard let url = pendingSubmitURL else { return }
+                            didSubmitRecording = true
                             onSubmitRecording?(url)
                         } label: {
                             Text("Submit")
@@ -144,6 +147,10 @@ struct VideoDiaryRecordingView: View {
                             videoHelper.stopRecording()
                         } else {
                             guard previewReady, !isStartingRecording else { return }
+                            if let staleURL = pendingSubmitURL {
+                                removeLocalVideoIfPresent(staleURL)
+                                pendingSubmitURL = nil
+                            }
                             isStartingRecording = true
                             videoHelper.startRecording(
                                 onRecordingStarted: {
@@ -156,6 +163,10 @@ struct VideoDiaryRecordingView: View {
                                     isRecordingActive = false
                                     stopRecordingDurationTimer()
                                     if case let .success(url) = result {
+                                        didSubmitRecording = false
+                                        if let staleURL = pendingSubmitURL, staleURL.path != url.path {
+                                            removeLocalVideoIfPresent(staleURL)
+                                        }
                                         pendingSubmitURL = url
                                         hasFinishedRecordingAtLeastOnce = true
                                     }
@@ -226,6 +237,10 @@ struct VideoDiaryRecordingView: View {
         .onDisappear {
             stopRecordingDurationTimer()
             videoHelper.stopCameraPreview()
+            if !didSubmitRecording, let staleURL = pendingSubmitURL {
+                removeLocalVideoIfPresent(staleURL)
+                pendingSubmitURL = nil
+            }
         }
     }
 
@@ -260,6 +275,15 @@ struct VideoDiaryRecordingView: View {
         let m = secs / 60
         let s = secs % 60
         return String(format: "%d:%02d", m, s)
+    }
+
+    private func removeLocalVideoIfPresent(_ url: URL) {
+        guard FileManager.default.fileExists(atPath: url.path) else { return }
+        do {
+            try FileManager.default.removeItem(at: url)
+        } catch {
+            printDebug("[VideoDiaryUpload] failed to remove local temp video \(url.lastPathComponent): \(error.localizedDescription)")
+        }
     }
 }
 

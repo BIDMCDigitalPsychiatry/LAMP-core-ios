@@ -9,6 +9,7 @@ import Foundation
 /// Receives the **final** outcome of a job (after the file is removed from disk on success).
 @MainActor
 protocol VideoDiaryUploadCoordinatorDelegate: AnyObject {
+    func videoDiaryUploadDidInitiate(jobId: UUID, videoKey: String, metadata: VideoUploadInitiatedMetadata)
     func videoDiaryUploadDidFinish(jobId: UUID, result: Swift.Result<Void, Error>)
 }
 
@@ -180,8 +181,16 @@ actor VideoDiaryUploadCoordinator {
                     resume: job.multipart,
                     shouldAbortRemoteSessionOnFailure: false,
                     progress: { _ in },
-                    onInitiated: { snapshot in
+                    onInitiated: { snapshot, metadata in
                         try await VideoDiaryUploadCoordinator.shared.persistInitiatedSnapshot(jobId: captureJobId, snapshot: snapshot)
+                        videoDiaryUploadLog(
+                            "initiate: jobId=\(captureJobId) videoKey=\(snapshot.id) expiryTimestamp=\(snapshot.expiresAt)"
+                        )
+                        await VideoDiaryUploadCoordinator.shared.notifyInitiated(
+                            jobId: captureJobId,
+                            videoKey: snapshot.id,
+                            metadata: metadata
+                        )
                     },
                     onPartUploaded: { partNumber, etag in
                         try await VideoDiaryUploadCoordinator.shared.persistPartETag(jobId: captureJobId, partNumber: partNumber, etag: etag)
@@ -246,6 +255,14 @@ actor VideoDiaryUploadCoordinator {
         let callbackTarget = self.delegate
         await MainActor.run {
             callbackTarget?.videoDiaryUploadDidFinish(jobId: jobId, result: result)
+        }
+    }
+
+    private func notifyInitiated(jobId: UUID, videoKey: String, metadata: VideoUploadInitiatedMetadata) async {
+        videoDiaryUploadLog("notifyInitiated: jobId=\(jobId) videoKey=\(videoKey)")
+        let callbackTarget = self.delegate
+        await MainActor.run {
+            callbackTarget?.videoDiaryUploadDidInitiate(jobId: jobId, videoKey: videoKey, metadata: metadata)
         }
     }
 

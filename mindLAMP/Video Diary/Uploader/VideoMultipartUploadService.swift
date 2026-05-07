@@ -53,11 +53,12 @@ final class VideoMultipartUploadService: @unchecked Sendable {
     private let apiClient: VideoUploadAPIClient
     private let uploadSession: URLSession
     private let maxConcurrentPartUploads: Int
-
+    private var participantId: String
     init(
         configuration: VideoDiary.VideoUploadConfiguration,
         uploadSession: URLSession? = nil
     ) {
+        self.participantId = configuration.participantId
         self.apiClient = VideoUploadAPIClient(configuration: configuration)
         let config = URLSessionConfiguration.default
         config.timeoutIntervalForRequest = 600
@@ -81,7 +82,7 @@ final class VideoMultipartUploadService: @unchecked Sendable {
             resume: nil,
             shouldAbortRemoteSessionOnFailure: true,
             progress: progress,
-            onInitiated: { _ in
+            onInitiated: { _, _ in
                 await Task.yield()
             },
             onPartUploaded: { _, _ in
@@ -98,7 +99,7 @@ final class VideoMultipartUploadService: @unchecked Sendable {
         resume: VideoDiaryMultipartProgress?,
         shouldAbortRemoteSessionOnFailure: Bool,
         progress: @escaping @Sendable (Double) -> Void,
-        onInitiated: @escaping @Sendable (VideoDiaryMultipartProgress) async throws -> Void,
+        onInitiated: @escaping @Sendable (VideoDiaryMultipartProgress, VideoUploadInitiatedMetadata) async throws -> Void,
         onPartUploaded: @escaping @Sendable (Int, String) async throws -> Void
     ) async throws {
         videoDiaryUploadLog(
@@ -127,13 +128,14 @@ final class VideoMultipartUploadService: @unchecked Sendable {
             )
 
             let initiateBody = VideoUploadInitiateRequestBody(
-                activityId: activityId,
-                fileSizeBytes: fileSize,
-                contentType: objectContentType,
+//                activityId: activityId,
+//                contentType: objectContentType,
+                participantId: participantId,
                 metadata: VideoUploadMetadataPayload(
+                    size: fileSize,
                     codec: "h264",
                     bitrate: recordingConfiguration.bitratePerSecond,
-                    durationSeconds: durationSeconds,
+                    duration: durationSeconds,
                     frameRate: recordingConfiguration.frameRate,
                     height: height,
                     width: width
@@ -153,13 +155,22 @@ final class VideoMultipartUploadService: @unchecked Sendable {
             sortedParts = initiated.parts.sorted { $0.partNumber < $1.partNumber }
             registry = UploadPartURLRegistry(parts: initiated.parts, expiresAt: initiated.expiresAt)
 
+            let initiateMetadata = VideoUploadInitiatedMetadata(
+                participantId: participantId,
+                activityId: activityId,
+                durationSeconds: durationSeconds,
+                width: width,
+                height: height,
+                fileSizeBytes: fileSize,
+                mimeType: objectContentType
+            )
             let snapshot = VideoDiaryMultipartProgress(
                 id: sessionID,
                 expiresAt: initiated.expiresAt,
                 partDescriptors: initiated.parts,
                 completedPartETags: [:]
             )
-            try await onInitiated(snapshot)
+            try await onInitiated(snapshot, initiateMetadata)
         }
 
         var mergedETags = resume?.completedPartETags ?? [:]
