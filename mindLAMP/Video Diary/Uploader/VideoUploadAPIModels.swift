@@ -69,6 +69,23 @@ struct VideoUploadPartDescriptor: Codable, Sendable, Hashable {
     var presignedUrl: String
     var presignedUrlExpiration: TimeInterval
 
+    /// Used when merging refresh-url responses that omit byte ranges (see `UploadPartURLRegistry.applyRefresh`).
+    init(
+        partNumber: Int,
+        startByte: Int64,
+        endByte: Int64,
+        method: String?,
+        presignedUrl: String,
+        presignedUrlExpiration: TimeInterval
+    ) {
+        self.partNumber = partNumber
+        self.startByte = startByte
+        self.endByte = endByte
+        self.method = method
+        self.presignedUrl = presignedUrl
+        self.presignedUrlExpiration = presignedUrlExpiration
+    }
+
     enum CodingKeys: String, CodingKey {
         case partNumber
         case startByte
@@ -136,9 +153,38 @@ struct VideoUploadRefreshURLsRequestBody: Encodable, Sendable {
     var partNumbers: [Int]
 }
 
+/// `POST .../refresh-urls` body — may omit `byteRange` / `startByte`/`endByte`; merge with
+/// the existing `VideoUploadPartDescriptor` from initiate for each `partNumber`.
+struct VideoUploadRefreshURLPart: Decodable, Sendable {
+    var partNumber: Int
+    var method: String?
+    var presignedUrl: String
+    var presignedUrlExpiration: TimeInterval
+}
+
 struct VideoUploadRefreshURLsResponse: Decodable, Sendable {
-    var parts: [VideoUploadPartDescriptor]
-    var expiresAt: TimeInterval
+    var id: String
+    var parts: [VideoUploadRefreshURLPart]
+    var expiresAt: TimeInterval?
+
+    enum CodingKeys: String, CodingKey {
+        case id
+        case parts
+        case expiresAt
+    }
+
+    init(from decoder: any Decoder) throws {
+        let c = try decoder.container(keyedBy: CodingKeys.self)
+        id = try c.decode(String.self, forKey: .id)
+        parts = try c.decode([VideoUploadRefreshURLPart].self, forKey: .parts)
+        expiresAt = try c.decodeIfPresent(TimeInterval.self, forKey: .expiresAt)
+    }
+
+    /// Registry refresh deadline: top-level `expiresAt` if the server sends it, else max part URL expiry.
+    var resolvedExpiresAt: TimeInterval {
+        if let expiresAt { return expiresAt }
+        return parts.map(\.presignedUrlExpiration).max() ?? 0
+    }
 }
 
 // MARK: - Abort

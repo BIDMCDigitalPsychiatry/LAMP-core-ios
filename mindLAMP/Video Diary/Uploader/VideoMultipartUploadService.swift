@@ -40,9 +40,17 @@ private actor UploadPartURLRegistry {
     }
 
     func applyRefresh(_ response: VideoUploadRefreshURLsResponse) {
-        expiresAt = response.expiresAt
+        expiresAt = response.resolvedExpiresAt
         for p in response.parts {
-            partsByNumber[p.partNumber] = p
+            guard let existing = partsByNumber[p.partNumber] else { continue }
+            partsByNumber[p.partNumber] = VideoUploadPartDescriptor(
+                partNumber: p.partNumber,
+                startByte: existing.startByte,
+                endByte: existing.endByte,
+                method: p.method ?? existing.method,
+                presignedUrl: p.presignedUrl,
+                presignedUrlExpiration: p.presignedUrlExpiration
+            )
         }
     }
 }
