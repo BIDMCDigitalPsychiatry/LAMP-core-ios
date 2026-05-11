@@ -1842,7 +1842,7 @@
 				CODE_SIGN_ENTITLEMENTS = CustomNotification/CustomNotification.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 484;
+				CURRENT_PROJECT_VERSION = 491;
 				DEVELOPMENT_TEAM = S2Y2D4239K;
 				INFOPLIST_FILE = CustomNotification/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.6;
@@ -1907,7 +1907,7 @@
 				CODE_SIGN_ENTITLEMENTS = "watchkitapp Extension/watchkitapp Extension.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 484;
+				CURRENT_PROJECT_VERSION = 491;
 				DEVELOPMENT_TEAM = S2Y2D4239K;
 				INFOPLIST_FILE = watchkitapp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -2034,7 +2034,7 @@
 				CODE_SIGN_ENTITLEMENTS = CustomNotification/CustomNotification.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 484;
+				CURRENT_PROJECT_VERSION = 491;
 				DEVELOPMENT_TEAM = S2Y2D4239K;
 				INFOPLIST_FILE = CustomNotification/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.6;
@@ -2099,7 +2099,7 @@
 				CODE_SIGN_ENTITLEMENTS = "watchkitapp Extension/watchkitapp Extension.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 484;
+				CURRENT_PROJECT_VERSION = 491;
 				DEVELOPMENT_TEAM = S2Y2D4239K;
 				INFOPLIST_FILE = watchkitapp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -2395,7 +2395,7 @@
 				CODE_SIGN_ENTITLEMENTS = "watchkitapp Extension/watchkitapp Extension.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 484;
+				CURRENT_PROJECT_VERSION = 491;
 				DEVELOPMENT_TEAM = S2Y2D4239K;
 				INFOPLIST_FILE = watchkitapp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -2425,7 +2425,7 @@
 				CODE_SIGN_ENTITLEMENTS = "watchkitapp Extension/watchkitapp Extension.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 484;
+				CURRENT_PROJECT_VERSION = 491;
 				DEVELOPMENT_TEAM = S2Y2D4239K;
 				INFOPLIST_FILE = watchkitapp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -2821,7 +2821,7 @@
 				CODE_SIGN_ENTITLEMENTS = CustomNotification/CustomNotification.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 484;
+				CURRENT_PROJECT_VERSION = 491;
 				DEVELOPMENT_TEAM = S2Y2D4239K;
 				INFOPLIST_FILE = CustomNotification/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.6;
@@ -2886,7 +2886,7 @@
 				CODE_SIGN_ENTITLEMENTS = "watchkitapp Extension/watchkitapp Extension.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 484;
+				CURRENT_PROJECT_VERSION = 491;
 				DEVELOPMENT_TEAM = S2Y2D4239K;
 				INFOPLIST_FILE = watchkitapp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -2986,7 +2986,7 @@
 				CODE_SIGN_ENTITLEMENTS = CustomNotification/CustomNotification.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 484;
+				CURRENT_PROJECT_VERSION = 491;
 				DEVELOPMENT_TEAM = S2Y2D4239K;
 				INFOPLIST_FILE = CustomNotification/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.6;
@@ -3017,7 +3017,7 @@
 				CODE_SIGN_ENTITLEMENTS = CustomNotification/CustomNotification.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 484;
+				CURRENT_PROJECT_VERSION = 491;
 				DEVELOPMENT_TEAM = S2Y2D4239K;
 				INFOPLIST_FILE = CustomNotification/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.6;

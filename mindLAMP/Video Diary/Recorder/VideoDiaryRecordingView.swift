@@ -128,6 +128,7 @@ struct VideoDiaryRecordingView: View {
                         Button {
                             guard let url = pendingSubmitURL else { return }
                             didSubmitRecording = true
+                            recordingElapsed = 0
                             onSubmitRecording?(url)
                         } label: {
                             Text("Submit")
@@ -147,6 +148,7 @@ struct VideoDiaryRecordingView: View {
                             videoHelper.stopRecording()
                         } else {
                             guard previewReady, !isStartingRecording else { return }
+                            recordingElapsed = 0
                             if let staleURL = pendingSubmitURL {
                                 removeLocalVideoIfPresent(staleURL)
                                 pendingSubmitURL = nil
@@ -263,10 +265,10 @@ struct VideoDiaryRecordingView: View {
             }
     }
 
+    /// Stops updates only; leaves `recordingElapsed` so the UI still shows the clip length until Record Again / Submit.
     private func stopRecordingDurationTimer() {
         durationTimerCancellable?.cancel()
         durationTimerCancellable = nil
-        recordingElapsed = 0
     }
 
     /// Whole seconds elapsed since recording started.
@@ -288,24 +290,18 @@ struct VideoDiaryRecordingView: View {
 }
 
 /// Thin horizontal fill for recording progress (0…1).
-/// Gradient along the track: ~0–80% soft blue-green, ~81–90% yellow, ~91–100% soft red.
+/// Two-color gradient along the track: calm green → red as recording approaches the limit.
 private struct ThinRecordingProgressBar: View {
     var progress: Double
 
-    private static let comfortable = Color(red: 0.38, green: 0.66, blue: 0.74)
-    private static let cautionYellow = Color(red: 0.95, green: 0.78, blue: 0.30)
-    private static let softRed = Color(red: 0.90, green: 0.44, blue: 0.46)
+    private static let phaseStart = Color(red: 0.28, green: 0.76, blue: 0.52)
+    private static let phaseEnd = Color(red: 0.95, green: 0.30, blue: 0.34)
 
     private static var trackGradient: LinearGradient {
         LinearGradient(
             stops: [
-                .init(color: comfortable, location: 0),
-                .init(color: comfortable, location: 0.78),
-                .init(color: comfortable, location: 0.805),
-                .init(color: cautionYellow, location: 0.806),
-                .init(color: cautionYellow, location: 0.895),
-                .init(color: softRed, location: 0.915),
-                .init(color: softRed, location: 1.0),
+                .init(color: phaseStart, location: 0),
+                .init(color: phaseEnd, location: 1),
             ],
             startPoint: .leading,
             endPoint: .trailing
@@ -315,19 +311,21 @@ private struct ThinRecordingProgressBar: View {
     var body: some View {
         GeometryReader { geo in
             let totalW = geo.size.width
+            let h = geo.size.height
             let fillW = totalW * min(1, max(0, progress))
             ZStack(alignment: .leading) {
-                Rectangle()
+                Capsule()
                     .fill(Color.white.opacity(0.22))
                 Self.trackGradient
-                    .frame(width: totalW, height: 3)
+                    .frame(width: totalW, height: h)
                     .mask(alignment: .leading) {
-                        Rectangle()
+                        Capsule()
                             .frame(width: max(0, fillW))
+                            .frame(height: h)
                     }
             }
         }
-        .frame(height: 3)
+        .frame(height: 5)
         .accessibilityHidden(true)
     }
 }
