@@ -30,7 +30,7 @@ class WebViewController: UIViewController {
         super.viewDidLoad()
         navigationController?.setNavigationBarHidden(false, animated: false)
         //+20210119
-        if Environment.isDiigApp {
+        if MLEnvironment.isDiigApp {
             let infoButton = UIBarButtonItem(image: UIImage(named: "icn-info"), style: .plain, target: self, action: #selector(infoButtonTapped))
             self.navigationItem.rightBarButtonItem = infoButton
         }

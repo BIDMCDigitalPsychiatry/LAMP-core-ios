@@ -52,6 +52,11 @@ final class VideoDiaryHelper {
     func stopRecording() {
         recorder.stopRecording()
     }
+
+    /// Call when the app returns to the foreground / scene becomes active so preview and recording recover after interruptions (e.g. screenshots).
+    func ensureCaptureSessionRunning() {
+        recorder.ensureCaptureSessionRunning()
+    }
 }
 
 

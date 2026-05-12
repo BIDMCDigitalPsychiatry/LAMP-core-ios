@@ -78,7 +78,7 @@ public struct UserAgent {
 
 extension UserAgent {
     public func toString() -> String {
-        let appSource = Environment.appSource
+        let appSource = MLEnvironment.appSource
         return "\(appSource) \(app_version); iOS \(os_version); \(type) \(model)"
     }
 }

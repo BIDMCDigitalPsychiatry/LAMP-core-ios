@@ -3,7 +3,7 @@
 
 import Foundation
 
-public enum Environment {
+public enum MLEnvironment {
     
     // MARK: - Keys
     enum Keys {
@@ -15,7 +15,7 @@ public enum Environment {
     }
     
     static var isDiigApp: Bool {
-        guard let appname = Environment.infoDictionary[Keys.Plist.branding] as? String else {
+        guard let appname = MLEnvironment.infoDictionary[Keys.Plist.branding] as? String else {
             return false
         }
         return appname == "DiiG"
@@ -31,28 +31,28 @@ public enum Environment {
     
     // MARK: - Plist values
     static let dashboardURL: String = {
-        guard let dasgboardURLstring = Environment.infoDictionary[Keys.Plist.dashboardURL] as? String else {
+        guard let dasgboardURLstring = MLEnvironment.infoDictionary[Keys.Plist.dashboardURL] as? String else {
             fatalError("Root URL not set in plist for this environment")
         }
         return dasgboardURLstring
     }()
     
 //    static let dashboardAPI: String = {
-//        guard let endPoint = Environment.infoDictionary[Keys.Plist.dashboardAPI] as? String else {
+//        guard let endPoint = MLEnvironment.infoDictionary[Keys.Plist.dashboardAPI] as? String else {
 //            fatalError("API Key not set in plist for this environment")
 //        }
 //        return endPoint
 //    }()
     
     static let OpenAPIClientAPI: String = {
-        guard let endPoint = Environment.infoDictionary[Keys.Plist.OpenAPIClientAPI] as? String else {
+        guard let endPoint = MLEnvironment.infoDictionary[Keys.Plist.OpenAPIClientAPI] as? String else {
             fatalError("API Key not set in plist for this environment")
         }
         return endPoint
     }()
     
     static let appSource: String = {
-        guard let source = Environment.infoDictionary[Keys.Plist.branding] as? String else {
+        guard let source = MLEnvironment.infoDictionary[Keys.Plist.branding] as? String else {
             fatalError("API Key not set in plist for this environment")
         }
         return source
@@ -61,16 +61,16 @@ public enum Environment {
 
 struct LampURL {
     // static let test = "http://127.0.0.1:5000/login"
-    // static let dashboardlive = Environment.dashboardURL
+    // static let dashboardlive = MLEnvironment.dashboardURL
     static var groupname = "group.digital.lamp.mindlamp"
     static var dashboardDigital: URL {
         return URL(string: dashboardDigitalURLText)!
     }
-    static let dashboardDigitalURLText = Environment.dashboardURL //(UserDefaults.standard.launchURL ?? Environment.dashboardURL)// + "?a="
+    static let dashboardDigitalURLText = MLEnvironment.dashboardURL //(UserDefaults.standard.launchURL ?? MLEnvironment.dashboardURL)// + "?a="
     //static let loginLocalHost = "http://127.0.0.1:5000/login"
     static let logsDigital = "https://logs.lamp.digital"
-    //static let dashboardURL = Environment.dashboardAPI
-    static let OpenAPIClientAPI = Environment.OpenAPIClientAPI
+    //static let dashboardURL = MLEnvironment.dashboardAPI
+    static let OpenAPIClientAPI = MLEnvironment.OpenAPIClientAPI
 
     /// Multipart video upload control plane (`globalThis.VIDEO_UPLOAD_SERVICE_CONFIG` on web).
     static let videoUploadServiceBaseURLString = "https://video.dev.lamp.digital"

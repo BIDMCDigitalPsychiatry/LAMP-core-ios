@@ -34,6 +34,7 @@ final class VideoDiaryAVRecorder: NSObject {
     private let sessionQueue = DispatchQueue(label: "org.digital.lamp.mindlamp.videodiary.recorder")
 
     private var isSessionConfigured = false
+    private var sessionNotificationsRegistered = false
     private var recordingCompletion: ((Swift.Result<URL, Error>) -> Void)?
     private var recordingDidStartHandler: (() -> Void)?
 
@@ -41,6 +42,10 @@ final class VideoDiaryAVRecorder: NSObject {
         self.configuration = configuration
         super.init()
         movieOutput.movieFragmentInterval = .invalid
+    }
+
+    deinit {
+        NotificationCenter.default.removeObserver(self)
     }
 
     func startRecording(
@@ -117,6 +122,50 @@ final class VideoDiaryAVRecorder: NSObject {
         sessionQueue.async { [weak self] in
             guard let self, !self.movieOutput.isRecording, self.session.isRunning else { return }
             self.session.stopRunning()
+        }
+    }
+
+    /// Restarts the capture session if the system stopped it (e.g. screenshot overlay, phone call, brief inactive → active).
+    func ensureCaptureSessionRunning() {
+        sessionQueue.async { [weak self] in
+            self?.startSessionIfNeeded()
+        }
+    }
+
+    private func startSessionIfNeeded() {
+        guard isSessionConfigured else { return }
+        if !session.isRunning {
+            session.startRunning()
+        }
+    }
+
+    private func registerSessionNotificationsIfNeeded() {
+        guard !sessionNotificationsRegistered else { return }
+        sessionNotificationsRegistered = true
+        let nc = NotificationCenter.default
+        nc.addObserver(
+            self,
+            selector: #selector(sessionInterruptionEnded(_:)),
+            name: AVCaptureSession.interruptionEndedNotification,
+            object: session
+        )
+        nc.addObserver(
+            self,
+            selector: #selector(sessionRuntimeError(_:)),
+            name: AVCaptureSession.runtimeErrorNotification,
+            object: session
+        )
+    }
+
+    @objc private func sessionInterruptionEnded(_ notification: Notification) {
+        sessionQueue.async { [weak self] in
+            self?.startSessionIfNeeded()
+        }
+    }
+
+    @objc private func sessionRuntimeError(_ notification: Notification) {
+        sessionQueue.async { [weak self] in
+            self?.startSessionIfNeeded()
         }
     }
 
@@ -213,6 +262,7 @@ final class VideoDiaryAVRecorder: NSObject {
 
         session.commitConfiguration()
         isSessionConfigured = true
+        registerSessionNotificationsIfNeeded()
     }
 
     private func configureFrameRate(for device: AVCaptureDevice) throws {

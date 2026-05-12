@@ -9,7 +9,11 @@ struct VideoDiaryRecordingView: View {
     let videoHelper: VideoDiaryHelper
     /// Called when the user taps Submit; the owner should dismiss this UI and start a background upload. When `nil`, Submit is hidden after recording.
     var onSubmitRecording: ((URL) -> Void)? = nil
+    /// Called when the user closes the recorder from the top bar; the owner should dismiss this UI (e.g. modal hosting controller).
+    var onDismiss: (() -> Void)? = nil
 
+    @Environment(\.dismiss) private var environmentDismiss
+    @Environment(\.scenePhase) private var scenePhase
     @State private var previewReady = false
     @State private var errorMessage: String?
     /// True while starting a recording (before capture actually begins).
@@ -24,7 +28,18 @@ struct VideoDiaryRecordingView: View {
     @State private var hasFinishedRecordingAtLeastOnce = false
     /// Elapsed time for the current clip (0 when idle; auto-stop uses maximum duration while recording).
     @State private var recordingElapsed: TimeInterval = 0
+    /// Bumped whenever the duration timer is invalidated so in-flight Combine callbacks cannot overwrite `recordingElapsed` after reset (e.g. app background).
+    @State private var recordingTimerGeneration = 0
     @State private var durationTimerCancellable: AnyCancellable?
+    @State private var showLeaveActivityAlert = false
+    @State private var leaveActivityAlertMessage = ""
+    /// True while stopping recording because the app moved to background — completion discards the partial file instead of offering Submit.
+    @State private var abortRecordingDueToBackground = false
+
+    private enum LeaveActivityCopy {
+        static let recordingInProgress = "Video recording is in progress. If you leave now, the recorded data might be lost."
+        static let recordingNotSubmitted = "You have a recording that hasn't been submitted. If you leave now, the recorded data might be lost."
+    }
 
     private var recordingProgressFraction: Double {
         let maxD = videoHelper.maximumDuration
@@ -52,6 +67,11 @@ struct VideoDiaryRecordingView: View {
 
     private var submitButtonBlue: Color {
         Color(red: 0.18, green: 0.42, blue: 0.92)
+    }
+
+    /// Submit recording pill — text and outline (#7599FF).
+    private var submitRecordingButtonColor: Color {
+        Color(red: 117 / 255, green: 153 / 255, blue: 255 / 255)
     }
 
     /// Same width for Submit and record control; fits longest title + icon without shrinking when the title changes.
@@ -121,7 +141,7 @@ struct VideoDiaryRecordingView: View {
                 }
                 .frame(maxWidth: .infinity)
                 .padding(.horizontal, 20)
-                .padding(.top, 10)
+                .padding(.top, 20)
                 Spacer(minLength: 0)
                 VStack(spacing: 12) {
                     if pendingSubmitURL != nil, onSubmitRecording != nil, !isRecordingActive {
@@ -133,10 +153,10 @@ struct VideoDiaryRecordingView: View {
                         } label: {
                             Text("Submit")
                                 .font(.headline.weight(.semibold))
-                                .foregroundStyle(submitButtonBlue)
+                                .foregroundStyle(submitRecordingButtonColor)
                                 .frame(width: primaryActionButtonWidth, height: primaryActionButtonHeight)
                                 .background(Capsule().fill(Color.white))
-                                .overlay(Capsule().stroke(submitButtonBlue, lineWidth: 2))
+                                .overlay(Capsule().stroke(submitRecordingButtonColor, lineWidth: 2))
                                 .contentShape(Capsule())
                         }
                         .buttonStyle(.plain)
@@ -156,6 +176,10 @@ struct VideoDiaryRecordingView: View {
                             isStartingRecording = true
                             videoHelper.startRecording(
                                 onRecordingStarted: {
+                                    if abortRecordingDueToBackground {
+                                        videoHelper.stopRecording()
+                                        return
+                                    }
                                     isStartingRecording = false
                                     isRecordingActive = true
                                     startRecordingDurationTimer()
@@ -163,14 +187,26 @@ struct VideoDiaryRecordingView: View {
                                 completion: { result in
                                     isStartingRecording = false
                                     isRecordingActive = false
-                                    stopRecordingDurationTimer()
-                                    if case let .success(url) = result {
+                                    if abortRecordingDueToBackground {
+                                        abortRecordingDueToBackground = false
+                                        stopRecordingDurationTimer(resetElapsed: true)
+                                        if case let .success(url) = result {
+                                            removeLocalVideoIfPresent(url)
+                                        }
+                                        return
+                                    }
+                                    switch result {
+                                    case .success(let url):
+                                        stopRecordingDurationTimer()
                                         didSubmitRecording = false
                                         if let staleURL = pendingSubmitURL, staleURL.path != url.path {
                                             removeLocalVideoIfPresent(staleURL)
                                         }
                                         pendingSubmitURL = url
                                         hasFinishedRecordingAtLeastOnce = true
+                                    case .failure:
+                                        // e.g. session interrupted before `didEnterBackground` / scene `.background` runs
+                                        stopRecordingDurationTimer(resetElapsed: true)
                                     }
                                 }
                             )
@@ -226,6 +262,57 @@ struct VideoDiaryRecordingView: View {
             }
         }
         .background(Color.black)
+        .safeAreaInset(edge: .top, spacing: 0) {
+            HStack {
+                Button {
+                    handleBackButtonTap()
+                } label: {
+                    Image(systemName: "arrow.left")
+                        .font(.body.weight(.semibold))
+                        .foregroundStyle(.white)
+                        .frame(width: 44, height: 44)
+                        .contentShape(Rectangle())
+                }
+                .buttonStyle(.plain)
+                .accessibilityLabel("Back")
+                Spacer(minLength: 0)
+            }
+            .padding(.horizontal, 8)
+            .frame(maxWidth: .infinity)
+            .background(submitButtonBlue)
+        }
+        .alert(
+            "Leave Activity?",
+            isPresented: $showLeaveActivityAlert,
+            actions: {
+                Button("Stay", role: .cancel) {
+                    showLeaveActivityAlert = false
+                }
+                Button("Leave", role: .destructive) {
+                    // Defer past alert teardown so UIKit + hosting controller don’t fight the same transition frame.
+                    DispatchQueue.main.async {
+                        dismissRecordingView()
+                    }
+                }
+            },
+            message: {
+                Text(leaveActivityAlertMessage)
+            }
+        )
+        .onChange(of: scenePhase) { newPhase in
+            switch newPhase {
+            case .active:
+                videoHelper.ensureCaptureSessionRunning()
+                reconcileRecordingElapsedAfterForeground()
+            case .background:
+                handleRecordingInterruptedByBackground()
+            default:
+                break
+            }
+        }
+        .onReceive(NotificationCenter.default.publisher(for: UIApplication.didEnterBackgroundNotification)) { _ in
+            handleRecordingInterruptedByBackground()
+        }
         .onAppear {
             videoHelper.prepareCameraPreview { result in
                 switch result {
@@ -246,29 +333,78 @@ struct VideoDiaryRecordingView: View {
         }
     }
 
+    /// If we are idle with no clip waiting to submit, force the duration label back to `0:00` (fixes stuck UI when iOS ends the take before our scene reports `.background`).
+    private func reconcileRecordingElapsedAfterForeground() {
+        guard !isRecordingActive, !isStartingRecording, pendingSubmitURL == nil else { return }
+        stopRecordingDurationTimer(resetElapsed: true)
+    }
+
+    /// `AVCaptureMovieFileOutput` cannot pause/resume a single file. When the user leaves the app we stop the take, delete any partial file, and reset controls (brief `.inactive` from screenshots is ignored).
+    private func handleRecordingInterruptedByBackground() {
+        guard isRecordingActive || isStartingRecording else { return }
+        abortRecordingDueToBackground = true
+        stopRecordingDurationTimer(resetElapsed: true)
+        isRecordingActive = false
+        isStartingRecording = false
+        videoHelper.stopRecording()
+    }
+
+    private func handleBackButtonTap() {
+        if isRecordingActive || isStartingRecording {
+            leaveActivityAlertMessage = LeaveActivityCopy.recordingInProgress
+            showLeaveActivityAlert = true
+            return
+        }
+        if pendingSubmitURL != nil, !didSubmitRecording {
+            leaveActivityAlertMessage = LeaveActivityCopy.recordingNotSubmitted
+            showLeaveActivityAlert = true
+            return
+        }
+        dismissRecordingView()
+    }
+
+    private func dismissRecordingView() {
+        if isRecordingActive {
+            videoHelper.stopRecording()
+        }
+        stopRecordingDurationTimer()
+        if let onDismiss {
+            onDismiss()
+        } else {
+            environmentDismiss()
+        }
+    }
+
     private func startRecordingDurationTimer() {
+        recordingTimerGeneration += 1
+        let generation = recordingTimerGeneration
         durationTimerCancellable?.cancel()
+        durationTimerCancellable = nil
         recordingElapsed = 0
         let beganAt = Date()
         let limit = videoHelper.maximumDuration
         durationTimerCancellable = Timer.publish(every: 0.1, tolerance: 0.03, on: .main, in: .common)
             .autoconnect()
             .sink { _ in
+                guard generation == recordingTimerGeneration else { return }
                 let elapsed = Date().timeIntervalSince(beganAt)
                 recordingElapsed = elapsed
                 let remaining = max(0, limit - elapsed)
                 if remaining <= 0 {
-                    durationTimerCancellable?.cancel()
-                    durationTimerCancellable = nil
+                    stopRecordingDurationTimer()
                     videoHelper.stopRecording()
                 }
             }
     }
 
-    /// Stops updates only; leaves `recordingElapsed` so the UI still shows the clip length until Record Again / Submit.
-    private func stopRecordingDurationTimer() {
+    /// Stops duration updates. Use `resetElapsed: true` when abandoning a take so the label returns to `0:00 / max`.
+    private func stopRecordingDurationTimer(resetElapsed: Bool = false) {
+        recordingTimerGeneration += 1
         durationTimerCancellable?.cancel()
         durationTimerCancellable = nil
+        if resetElapsed {
+            recordingElapsed = 0
+        }
     }
 
     /// Whole seconds elapsed since recording started.

@@ -593,6 +593,9 @@ extension HomeViewController: WKScriptMessageHandler {
                                     }
                                 }
                             }
+                        },
+                        onDismiss: { [weak self] in
+                            self?.dismiss(animated: true)
                         }
                     )
                 )

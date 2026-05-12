@@ -583,7 +583,7 @@ private extension LMSensorManager {
                 config.sensorTimerDelegate = self
                 config.sensorTimerDataStoreInterval = storeSensorDataIntervalInMinutes * 60.0
                 
-                if Environment.isDiigApp {
+                if MLEnvironment.isDiigApp {
                     config.pausePeriod = 3
                     config.collectionPeriod = 1
                 }
@@ -665,7 +665,7 @@ private extension LMSensorManager {
             if let frquency = frquencySettings[SensorType.lamp_gps.lampIdentifier] {
                 config.frequency = frquency
             } else {
-                if Environment.isDiigApp {
+                if MLEnvironment.isDiigApp {
                     config.frequency = 1.0 / 600.0
                 }
             }
