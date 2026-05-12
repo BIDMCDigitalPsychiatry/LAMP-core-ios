@@ -153,13 +153,11 @@ struct VideoDiaryRecordingView: View {
                         } label: {
                             Text("Submit")
                                 .font(.headline.weight(.semibold))
-                                .foregroundStyle(submitRecordingButtonColor)
                                 .frame(width: primaryActionButtonWidth, height: primaryActionButtonHeight)
-                                .background(Capsule().fill(Color.white))
-                                .overlay(Capsule().stroke(submitRecordingButtonColor, lineWidth: 2))
-                                .contentShape(Capsule())
                         }
-                        .buttonStyle(.plain)
+                        .buttonStyle(
+                            SubmitRecordingButtonStyle(accent: submitRecordingButtonColor)
+                        )
                         .accessibilityLabel("Submit recording")
                     }
 
@@ -218,15 +216,12 @@ struct VideoDiaryRecordingView: View {
                                 if isStartingRecording {
                                     ProgressView()
                                         .progressViewStyle(.circular)
-                                        .tint(recordButtonRed)
                                         .scaleEffect(1.05)
                                 } else if isRecordingActive {
                                     RoundedRectangle(cornerRadius: 4, style: .continuous)
-                                        .fill(Color.white)
                                         .frame(width: 22, height: 22)
                                 } else {
                                     Circle()
-                                        .fill(recordButtonRed)
                                         .frame(width: 18, height: 18)
                                 }
                             }
@@ -234,7 +229,6 @@ struct VideoDiaryRecordingView: View {
 
                             Text(primaryRecordButtonTitle)
                                 .font(.headline.weight(.semibold))
-                                .foregroundStyle(isRecordingActive ? Color.white : recordButtonRed)
                                 .multilineTextAlignment(.center)
                                 .lineLimit(1)
                                 .minimumScaleFactor(0.86)
@@ -242,11 +236,10 @@ struct VideoDiaryRecordingView: View {
                         }
                         .padding(.horizontal, 12)
                         .frame(width: primaryActionButtonWidth, height: primaryActionButtonHeight)
-                        .background(Capsule().fill(isRecordingActive ? recordButtonRed : Color.white))
-                        .overlay(Capsule().stroke(recordButtonRed, lineWidth: isRecordingActive ? 0 : 2))
-                        .contentShape(Capsule())
                     }
-                    .buttonStyle(.plain)
+                    .buttonStyle(
+                        PrimaryRecordButtonStyle(accent: recordButtonRed, isRecording: isRecordingActive)
+                    )
                     .disabled(isStartingRecording || (!previewReady && !isRecordingActive))
                     .opacity((!previewReady && !isRecordingActive) ? 0.45 : 1)
                     .accessibilityLabel(
@@ -422,6 +415,41 @@ struct VideoDiaryRecordingView: View {
         } catch {
             printDebug("[VideoDiaryUpload] failed to remove local temp video \(url.lastPathComponent): \(error.localizedDescription)")
         }
+    }
+}
+
+/// Submit pill: white background + accent text/border at rest, accent background + white text while pressed.
+private struct SubmitRecordingButtonStyle: ButtonStyle {
+    let accent: Color
+
+    func makeBody(configuration: Configuration) -> some View {
+        let pressed = configuration.isPressed
+        configuration.label
+            .foregroundStyle(pressed ? Color.white : accent)
+            .background(Capsule().fill(pressed ? accent : Color.white))
+            .overlay(Capsule().stroke(accent, lineWidth: 2))
+            .contentShape(Capsule())
+            .animation(.easeOut(duration: 0.12), value: pressed)
+    }
+}
+
+/// Primary record pill: white background + accent text/icon/border at rest; flips to accent background + white content while pressed (Start / Record Again). Stays accent-filled with white content during an active recording.
+private struct PrimaryRecordButtonStyle: ButtonStyle {
+    let accent: Color
+    let isRecording: Bool
+
+    func makeBody(configuration: Configuration) -> some View {
+        let pressed = configuration.isPressed
+        let inverted = isRecording || pressed
+        let contentColor = inverted ? Color.white : accent
+        let backgroundColor = inverted ? accent : Color.white
+        configuration.label
+            .foregroundStyle(contentColor)
+            .tint(contentColor)
+            .background(Capsule().fill(backgroundColor))
+            .overlay(Capsule().stroke(accent, lineWidth: isRecording ? 0 : 2))
+            .contentShape(Capsule())
+            .animation(.easeOut(duration: 0.12), value: inverted)
     }
 }
 
