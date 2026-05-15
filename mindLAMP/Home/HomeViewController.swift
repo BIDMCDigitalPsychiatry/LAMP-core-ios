@@ -572,7 +572,7 @@ extension HomeViewController: WKScriptMessageHandler {
                 let activityTitle = VideoDiaryMessageParsing.string(from: dictBody["activityName"])
                 printDebug("[VideoDiaryUpload] beginVideoDiary: presenting recorder activityId=\(uploadConfig.activityId) participantId=\(uploadConfig.participantId)")
                 let helper = VideoDiaryHelper(configuration: recordingConfig)
-                let hostingController = UIHostingController(
+                let hostingController = VideoDiaryRecordingHostingController(
                     rootView: VideoDiaryRecordingView(
                         videoHelper: helper,
                         activityTitle: activityTitle,
@@ -620,6 +620,18 @@ extension HomeViewController: VideoDiaryUploadCoordinatorDelegate {
         case .failure(let error):
             printDebug("[VideoDiaryUpload] background upload finished: failure \(error.localizedDescription)")
         }
+    }
+}
+
+/// Full-screen video diary can rotate into landscape alongside the rest of the app (capture orientation is updated to match).
+final class VideoDiaryRecordingHostingController: UIHostingController<VideoDiaryRecordingView> {
+
+    override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
+        [.portrait, .landscapeLeft, .landscapeRight]
+    }
+
+    override var shouldAutorotate: Bool {
+        true
     }
 }
 

@@ -2,6 +2,7 @@
 
 import AVFoundation
 import Foundation
+import UIKit
 
 final class VideoDiaryHelper {
 
@@ -36,10 +37,11 @@ final class VideoDiaryHelper {
 
     /// Begins writing a movie file. Call `stopRecording()` when finished. `completion` runs after the file is finalized.
     func startRecording(
+        interfaceOrientation: UIInterfaceOrientation,
         onRecordingStarted: (() -> Void)? = nil,
         completion: ((Swift.Result<URL, Error>) -> Void)? = nil
     ) {
-        recorder.startRecording(onRecordingStarted: onRecordingStarted) { result in
+        recorder.startRecording(interfaceOrientation: interfaceOrientation, onRecordingStarted: onRecordingStarted) { result in
             completion?(result)
             if case let .success(url) = result {
                 print("VideoDiaryHelper: recording finished at \(url.path)")
@@ -51,6 +53,11 @@ final class VideoDiaryHelper {
 
     func stopRecording() {
         recorder.stopRecording()
+    }
+
+    /// Updates movie-output orientation for the current interface rotation (call during preview / while recording).
+    func updateCaptureVideoOrientation(matching uiOrientation: UIInterfaceOrientation) {
+        recorder.updateVideoOrientation(matching: uiOrientation)
     }
 
     /// Call when the app returns to the foreground / scene becomes active so preview and recording recover after interruptions (e.g. screenshots).

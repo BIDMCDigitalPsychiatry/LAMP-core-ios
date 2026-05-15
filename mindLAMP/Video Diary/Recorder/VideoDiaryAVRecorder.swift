@@ -1,6 +1,7 @@
 // mindLAMP
 
 import AVFoundation
+import UIKit
 
 enum VideoDiaryRecorderError: Error, LocalizedError, Equatable {
     case permissionDenied
@@ -49,6 +50,7 @@ final class VideoDiaryAVRecorder: NSObject {
     }
 
     func startRecording(
+        interfaceOrientation: UIInterfaceOrientation,
         onRecordingStarted: (() -> Void)? = nil,
         completion: @escaping (Swift.Result<URL, Error>) -> Void
     ) {
@@ -74,6 +76,7 @@ final class VideoDiaryAVRecorder: NSObject {
                     if !self.session.isRunning {
                         self.session.startRunning()
                     }
+                    self.applyVideoOrientationLocked(interfaceOrientation)
                     let url = FileManager.default.temporaryDirectory
                         .appendingPathComponent("VideoDiary-\(UUID().uuidString).mov")
                     self.recordingCompletion = completion
@@ -265,6 +268,20 @@ final class VideoDiaryAVRecorder: NSObject {
         registerSessionNotificationsIfNeeded()
     }
 
+    func updateVideoOrientation(matching uiOrientation: UIInterfaceOrientation) {
+        sessionQueue.async { [weak self] in
+            self?.applyVideoOrientationLocked(uiOrientation)
+        }
+    }
+
+    private func applyVideoOrientationLocked(_ uiOrientation: UIInterfaceOrientation) {
+        guard isSessionConfigured else { return }
+        guard let avOrientation = AVCaptureVideoOrientation(interfaceOrientation: uiOrientation) else { return }
+        if let conn = movieOutput.connection(with: .video), conn.isVideoOrientationSupported {
+            conn.videoOrientation = avOrientation
+        }
+    }
+
     private func configureFrameRate(for device: AVCaptureDevice) throws {
         try device.lockForConfiguration()
         defer { device.unlockForConfiguration() }
@@ -295,6 +312,23 @@ final class VideoDiaryAVRecorder: NSObject {
         description.value = "VideoRecordingTestApp capture" as NSString
 
         return [software, description]
+    }
+}
+
+extension AVCaptureVideoOrientation {
+    init?(interfaceOrientation: UIInterfaceOrientation) {
+        switch interfaceOrientation {
+        case .portrait:
+            self = .portrait
+        case .portraitUpsideDown:
+            self = .portraitUpsideDown
+        case .landscapeLeft:
+            self = .landscapeLeft
+        case .landscapeRight:
+            self = .landscapeRight
+        default:
+            return nil
+        }
     }
 }
 

@@ -16,6 +16,7 @@ struct VideoDiaryRecordingView: View {
 
     @Environment(\.dismiss) private var environmentDismiss
     @Environment(\.scenePhase) private var scenePhase
+    @State private var captureInterfaceOrientation: UIInterfaceOrientation = .portrait
     @State private var previewReady = false
     /// System alert for camera preview failures (same presentation as Leave Activity).
     @State private var showRecorderBlockingErrorAlert = false
@@ -93,7 +94,7 @@ struct VideoDiaryRecordingView: View {
 
     var body: some View {
         ZStack {
-            CameraPreviewView(session: videoHelper.captureSession)
+            CameraPreviewView(session: videoHelper.captureSession, interfaceOrientation: captureInterfaceOrientation)
                 .ignoresSafeArea()
 
             VStack(spacing: 16) {
@@ -142,7 +143,9 @@ struct VideoDiaryRecordingView: View {
                                 pendingSubmitURL = nil
                             }
                             isStartingRecording = true
+                            let uiOrientation = Self.foregroundInterfaceOrientationBestEffort()
                             videoHelper.startRecording(
+                                interfaceOrientation: uiOrientation,
                                 onRecordingStarted: {
                                     if abortRecordingDueToBackground {
                                         videoHelper.stopRecording()
@@ -297,6 +300,7 @@ struct VideoDiaryRecordingView: View {
             case .active:
                 videoHelper.ensureCaptureSessionRunning()
                 reconcileRecordingElapsedAfterForeground()
+                refreshCaptureOrientation()
             case .background:
                 handleRecordingInterruptedByBackground()
             default:
@@ -306,11 +310,17 @@ struct VideoDiaryRecordingView: View {
         .onReceive(NotificationCenter.default.publisher(for: UIApplication.didEnterBackgroundNotification)) { _ in
             handleRecordingInterruptedByBackground()
         }
+        .onReceive(NotificationCenter.default.publisher(for: UIDevice.orientationDidChangeNotification)) { _ in
+            refreshCaptureOrientation()
+        }
         .onAppear {
+            UIDevice.current.beginGeneratingDeviceOrientationNotifications()
+            refreshCaptureOrientation()
             videoHelper.prepareCameraPreview { result in
                 switch result {
                 case .success:
                     previewReady = true
+                    refreshCaptureOrientation()
                 case .failure(let error):
                     let permissionDenied = (error as? VideoDiaryRecorderError) == .permissionDenied
                     recorderBlockingErrorTitle = permissionDenied ? "Permission Required" : "Error"
@@ -321,6 +331,7 @@ struct VideoDiaryRecordingView: View {
             }
         }
         .onDisappear {
+            UIDevice.current.endGeneratingDeviceOrientationNotifications()
             stopRecordingDurationTimer()
             videoHelper.stopCameraPreview()
             if !didSubmitRecording, let staleURL = pendingSubmitURL {
@@ -328,6 +339,27 @@ struct VideoDiaryRecordingView: View {
                 pendingSubmitURL = nil
             }
         }
+    }
+
+    /// Aligns AVCaptureMovieFileOutput and preview-layer orientation with interface rotation (landscape + portrait).
+    private func refreshCaptureOrientation() {
+        let o = Self.foregroundInterfaceOrientationBestEffort()
+        captureInterfaceOrientation = o
+        videoHelper.updateCaptureVideoOrientation(matching: o)
+    }
+
+    /// Foreground scene orientation (preferred for fullscreen recorder).
+    private static func foregroundInterfaceOrientationBestEffort() -> UIInterfaceOrientation {
+        for scene in UIApplication.shared.connectedScenes {
+            guard let windowScene = scene as? UIWindowScene else { continue }
+            if windowScene.activationState == .foregroundActive {
+                return windowScene.interfaceOrientation
+            }
+        }
+        if let fallback = UIApplication.shared.connectedScenes.compactMap({ $0 as? UIWindowScene }).first {
+            return fallback.interfaceOrientation
+        }
+        return .portrait
     }
 
     /// If we are idle with no clip waiting to submit, force the duration label back to `0:00` (fixes stuck UI when iOS ends the take before our scene reports `.background`).
@@ -505,6 +537,7 @@ private struct ThinRecordingProgressBar: View {
 
 private struct CameraPreviewView: UIViewRepresentable {
     let session: AVCaptureSession
+    let interfaceOrientation: UIInterfaceOrientation
 
     func makeUIView(context: Context) -> PreviewContainerView {
         let v = PreviewContainerView()
@@ -517,6 +550,7 @@ private struct CameraPreviewView: UIViewRepresentable {
         if uiView.previewLayer.session !== session {
             uiView.previewLayer.session = session
         }
+        uiView.applyPreviewVideoOrientation(interfaceOrientation)
         uiView.applyFrontCameraPreviewMirroring()
     }
 }
@@ -531,7 +565,12 @@ private final class PreviewContainerView: UIView {
     override func layoutSubviews() {
         super.layoutSubviews()
         previewLayer.frame = bounds
-        applyFrontCameraPreviewMirroring()
+    }
+
+    fileprivate func applyPreviewVideoOrientation(_ uiOrientation: UIInterfaceOrientation) {
+        guard let connection = previewLayer.connection, connection.isVideoOrientationSupported else { return }
+        guard let orientation = AVCaptureVideoOrientation(interfaceOrientation: uiOrientation) else { return }
+        connection.videoOrientation = orientation
     }
 
     /// Front-camera preview matches the mirror people expect when framing a selfie.
