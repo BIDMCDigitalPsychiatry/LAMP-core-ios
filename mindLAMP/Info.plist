@@ -49,7 +49,7 @@
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>491</string>
+	<string>495</string>
 	<key>DASHBOARD_URL</key>
 	<string>$(DASHBOARD_URL)</string>
 	<key>ITSAppUsesNonExemptEncryption</key>
@@ -70,7 +70,7 @@
 	<key>NSBluetoothPeripheralUsageDescription</key>
 	<string>Your bluetooth data is required for clinical study.</string>
 	<key>NSCameraUsageDescription</key>
-	<string></string>
+	<string>Video recording with front camera is required for Video Diary activity.</string>
 	<key>NSHealthClinicalHealthRecordsShareUsageDescription</key>
 	<string>Your Health data is required for clinical study.</string>
 	<key>NSHealthShareUsageDescription</key>

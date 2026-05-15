@@ -7,6 +7,8 @@ import UIKit
 
 struct VideoDiaryRecordingView: View {
     let videoHelper: VideoDiaryHelper
+    /// Activity name shown centered in the top bar (from web `activityName`). Hidden when nil or empty.
+    var activityTitle: String? = nil
     /// Called when the user taps Submit; the owner should dismiss this UI and start a background upload. When `nil`, Submit is hidden after recording.
     var onSubmitRecording: ((URL) -> Void)? = nil
     /// Called when the user closes the recorder from the top bar; the owner should dismiss this UI (e.g. modal hosting controller).
@@ -15,7 +17,11 @@ struct VideoDiaryRecordingView: View {
     @Environment(\.dismiss) private var environmentDismiss
     @Environment(\.scenePhase) private var scenePhase
     @State private var previewReady = false
-    @State private var errorMessage: String?
+    /// System alert for camera preview failures (same presentation as Leave Activity).
+    @State private var showRecorderBlockingErrorAlert = false
+    @State private var recorderBlockingErrorTitle = ""
+    @State private var recorderBlockingErrorMessage = ""
+    @State private var recorderBlockingErrorShowsSettings = false
     /// True while starting a recording (before capture actually begins).
     @State private var isStartingRecording = false
     /// True after capture has started until the file is finalized.
@@ -90,45 +96,6 @@ struct VideoDiaryRecordingView: View {
             CameraPreviewView(session: videoHelper.captureSession)
                 .ignoresSafeArea()
 
-            if let errorText = errorMessage {
-                ZStack {
-                    Color.black.opacity(0.75)
-                        .ignoresSafeArea()
-                        .contentShape(Rectangle())
-                        .onTapGesture {
-                            errorMessage = nil
-                        }
-
-                    VStack(spacing: 20) {
-                        Text(errorText)
-                            .multilineTextAlignment(.center)
-                            .foregroundStyle(.white)
-                            .font(.body)
-
-                        Button {
-                            errorMessage = nil
-                        } label: {
-                            Text("OK")
-                                .font(.headline.weight(.semibold))
-                                .foregroundStyle(.black)
-                                .frame(minWidth: 120)
-                                .padding(.vertical, 12)
-                                .padding(.horizontal, 8)
-                                .background(Capsule().fill(Color.white))
-                        }
-                        .buttonStyle(.plain)
-                        .accessibilityLabel("Dismiss error")
-                    }
-                    .padding(28)
-                    .background(
-                        RoundedRectangle(cornerRadius: 16, style: .continuous)
-                            .fill(Color.white.opacity(0.12))
-                    )
-                    .padding(.horizontal, 32)
-                }
-                .transition(.opacity)
-            }
-
             VStack(spacing: 16) {
                 VStack(spacing: 8) {
                     ThinRecordingProgressBar(progress: recordingProgressFraction)
@@ -151,14 +118,17 @@ struct VideoDiaryRecordingView: View {
                             recordingElapsed = 0
                             onSubmitRecording?(url)
                         } label: {
-                            Text("Submit")
+                            Text("Upload and Submit")
                                 .font(.headline.weight(.semibold))
+                                .lineLimit(1)
+                                .minimumScaleFactor(0.7)
+                                .multilineTextAlignment(.center)
                                 .frame(width: primaryActionButtonWidth, height: primaryActionButtonHeight)
                         }
                         .buttonStyle(
                             SubmitRecordingButtonStyle(accent: submitRecordingButtonColor)
                         )
-                        .accessibilityLabel("Submit recording")
+                        .accessibilityLabel("Upload and submit recording")
                     }
 
                     Button {
@@ -256,24 +226,54 @@ struct VideoDiaryRecordingView: View {
         }
         .background(Color.black)
         .safeAreaInset(edge: .top, spacing: 0) {
-            HStack {
-                Button {
-                    handleBackButtonTap()
-                } label: {
-                    Image(systemName: "arrow.left")
-                        .font(.body.weight(.semibold))
+            ZStack {
+                if let title = activityTitle, !title.isEmpty {
+                    Text(title)
+                        .font(.headline.weight(.semibold))
                         .foregroundStyle(.white)
-                        .frame(width: 44, height: 44)
-                        .contentShape(Rectangle())
+                        .lineLimit(1)
+                        .minimumScaleFactor(0.7)
+                        .padding(.horizontal, 52)
+                        .accessibilityAddTraits(.isHeader)
                 }
-                .buttonStyle(.plain)
-                .accessibilityLabel("Back")
-                Spacer(minLength: 0)
+                HStack {
+                    Button {
+                        handleBackButtonTap()
+                    } label: {
+                        Image(systemName: "arrow.left")
+                            .font(.body.weight(.semibold))
+                            .foregroundStyle(.white)
+                            .frame(width: 44, height: 44)
+                            .contentShape(Rectangle())
+                    }
+                    .buttonStyle(.plain)
+                    .accessibilityLabel("Back")
+                    Spacer(minLength: 0)
+                }
             }
             .padding(.horizontal, 8)
-            .frame(maxWidth: .infinity)
+            .frame(maxWidth: .infinity, minHeight: 44)
             .background(submitButtonBlue)
         }
+        .alert(
+            recorderBlockingErrorTitle,
+            isPresented: $showRecorderBlockingErrorAlert,
+            actions: {
+                if recorderBlockingErrorShowsSettings {
+                    Button("OK") {
+                        openAppSettingsForPermissions()
+                    }
+                }
+                Button("CANCEL", role: .cancel) {
+                    DispatchQueue.main.async {
+                        dismissRecordingView()
+                    }
+                }
+            },
+            message: {
+                Text(recorderBlockingErrorMessage)
+            }
+        )
         .alert(
             "Leave Activity?",
             isPresented: $showLeaveActivityAlert,
@@ -312,7 +312,11 @@ struct VideoDiaryRecordingView: View {
                 case .success:
                     previewReady = true
                 case .failure(let error):
-                    errorMessage = error.localizedDescription
+                    let permissionDenied = (error as? VideoDiaryRecorderError) == .permissionDenied
+                    recorderBlockingErrorTitle = permissionDenied ? "Permission Required" : "Error"
+                    recorderBlockingErrorMessage = "Camera and microphone access are required to record a video diary. Please grant both permissions to continue."
+                    recorderBlockingErrorShowsSettings = permissionDenied
+                    showRecorderBlockingErrorAlert = true
                 }
             }
         }
@@ -330,6 +334,11 @@ struct VideoDiaryRecordingView: View {
     private func reconcileRecordingElapsedAfterForeground() {
         guard !isRecordingActive, !isStartingRecording, pendingSubmitURL == nil else { return }
         stopRecordingDurationTimer(resetElapsed: true)
+    }
+
+    private func openAppSettingsForPermissions() {
+        guard let url = URL(string: UIApplication.openSettingsURLString) else { return }
+        UIApplication.shared.open(url)
     }
 
     /// `AVCaptureMovieFileOutput` cannot pause/resume a single file. When the user leaves the app we stop the take, delete any partial file, and reset controls (brief `.inactive` from screenshots is ignored).

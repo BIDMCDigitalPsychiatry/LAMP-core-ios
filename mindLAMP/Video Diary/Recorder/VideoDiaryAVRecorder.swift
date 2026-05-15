@@ -2,7 +2,7 @@
 
 import AVFoundation
 
-enum VideoDiaryRecorderError: Error, LocalizedError {
+enum VideoDiaryRecorderError: Error, LocalizedError, Equatable {
     case permissionDenied
     case noVideoDevice
     case cannotAddOutput

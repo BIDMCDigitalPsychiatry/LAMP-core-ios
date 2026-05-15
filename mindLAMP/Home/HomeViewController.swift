@@ -569,11 +569,13 @@ extension HomeViewController: WKScriptMessageHandler {
                     return
                 }
 
+                let activityTitle = VideoDiaryMessageParsing.string(from: dictBody["activityName"])
                 printDebug("[VideoDiaryUpload] beginVideoDiary: presenting recorder activityId=\(uploadConfig.activityId) participantId=\(uploadConfig.participantId)")
                 let helper = VideoDiaryHelper(configuration: recordingConfig)
                 let hostingController = UIHostingController(
                     rootView: VideoDiaryRecordingView(
                         videoHelper: helper,
+                        activityTitle: activityTitle,
                         onSubmitRecording: { [weak self, recordingConfig, apiBase, uploadConfig] fileURL in
                             guard let self else { return }
                             printDebug("[VideoDiaryUpload] recording submitted path=\(fileURL.lastPathComponent)")
