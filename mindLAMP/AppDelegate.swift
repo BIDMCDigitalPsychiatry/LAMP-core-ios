@@ -18,6 +18,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     private var widgetHelper = StreakWidgetHelper()
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+        
+        UserDefaults.standard.activityAPILastAccessedDate = Date.init(timeIntervalSince1970: 0)// to fetch activity when ever launch app.
+        UserDefaults.standard.activityAPILastScheduledDate = Date.init(timeIntervalSince1970: 0)
         // Logging.isLogToFile = true
         // Override point for customization after application launch.
         WatchSessionManager.shared.startSession()
@@ -29,8 +32,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //        let documentsURL = try! FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: false)
 //        print("Launched documentsURL = \(documentsURL) \(Date())")
 
-        UserDefaults.standard.activityAPILastAccessedDate = Date.init(timeIntervalSince1970: 0)// to fetch activity when ever launch app.
-        UserDefaults.standard.activityAPILastScheduledDate = Date.init(timeIntervalSince1970: 0)
         LMSensorManager.shared.checkIsRunning()
 
         //Version 1.1.3 Build 70. backward compatibility for already logined users

@@ -25,7 +25,9 @@ class ActivityLocalNotification {
     let intervalToScheduleActivity = 12.0 * 60.0 * 60.0 //for 12 hour
     
     func refreshActivities() {
-        if Date().timeIntervalSince(UserDefaults.standard.activityAPILastAccessedDate) > intervalToFetchActivity {
+        let diff = Date().timeIntervalSince(UserDefaults.standard.activityAPILastAccessedDate)
+        if diff > intervalToFetchActivity {
+            UserDefaults.standard.activityAPILastAccessedDate = Date()
             fetchActivities()
         }
     }
@@ -47,11 +49,6 @@ class ActivityLocalNotification {
     
     private func fetchActivities() {
         
-//        struct Params: Encodable {
-//            var ignore_binary = true
-//        }
-        
-        //todo execute once per day
         guard let participantId = User.shared.userId else {
             printError("Auth header missing")
             return
@@ -80,9 +77,10 @@ class ActivityLocalNotification {
                 guard let self = self else { return }
                 if self.allActivitiesScheduled != allActivity || Date().timeIntervalSince(UserDefaults.standard.activityAPILastScheduledDate) > self.intervalToScheduleActivity {
                     self.scheduleActivities(allActivity)
+                } else {
+                    print("allActivity are same or less than x minutes")
                 }
             }
-            UserDefaults.standard.activityAPILastAccessedDate = Date()
         }
     }
     
@@ -96,7 +94,7 @@ class ActivityLocalNotification {
         let localActivities: [Activity] = allActivity.map { activity in
             let schedules: [DurationIntervalLegacy]? = activity.schedule?.map { interval in
                 let cudtomTimes: [Date]? = interval.customTimes?.compactMap({$0.toLocal})
-                return DurationIntervalLegacy(repeatType: interval.repeatType, startDate: interval.startDate?.toLocal, time: interval.time?.toLocal, customTimes: cudtomTimes, notificationId: interval.notificationId)
+                return DurationIntervalLegacy(repeatType: interval.repeatType, startDate: interval.startDate?.toLocal, time: interval.time?.toLocal, customTimes: cudtomTimes, notificationId: interval.notificationId, notificationMessage: interval.notificationMessage)
             }
             return Activity(id: activity.id, spec: activity.spec, name: activity.name, schedule: schedules)
         }
@@ -108,13 +106,13 @@ class ActivityLocalNotification {
             let title = activity.name
             let activityId = activity.id
             activity.schedule?.forEach({ (durationIntervalLegacy) in
-                makeLocalNotification(activitySchedule: durationIntervalLegacy, activityId: activityId, title: title)
+                makeLocalNotification(activitySchedule: durationIntervalLegacy, activityId: activityId, title: title, notificationMessage: durationIntervalLegacy.notificationMessage)
             })
         }
     }
     
     let queue = DispatchQueue(label: "NotificationTimer", qos: .background, attributes: .concurrent)
-    private func makeLocalNotification(activitySchedule: DurationIntervalLegacy, activityId: String?, title: String?) {
+    private func makeLocalNotification(activitySchedule: DurationIntervalLegacy, activityId: String?, title: String?, notificationMessage: String?) {
 
         guard let participantid = User.shared.userId, let activityid = activityId else {return}
         guard let deliveryTime = activitySchedule.time, let scheduleStartDate = activitySchedule.startDate,
@@ -129,7 +127,7 @@ class ActivityLocalNotification {
         //Create content for your notification
         let content = UNMutableNotificationContent()
         //content.title = title
-        content.body = String(format: "notification.activity.alert".localized, arguments: ["\(title)"])
+        content.body = notificationMessage ?? String(format: "notification.activity.alert".localized, arguments: ["\(title)"])
         content.sound = UNNotificationSound.default
         //"expiry": 21600000
         let actionObj = ["name":"Open App", "page":pageURL]
@@ -289,7 +287,8 @@ class ActivityLocalNotification {
         let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponent, repeats: repeats)
         let req = UNNotificationRequest(identifier: identifier, content: content, trigger: trigger)
         let notificationCenter = UNUserNotificationCenter.current()
-        notificationCenter.add(req) { (_) in
+        notificationCenter.add(req) { (error) in
+            print("addNoticiationOn err = \(error)")
         }
     }
     
