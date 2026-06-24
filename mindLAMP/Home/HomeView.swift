@@ -45,9 +45,12 @@ struct HomeView: View {
                 //self.isNavigationBarHidden = true
                 NotificationCenter.default.addObserver(self.viewModel, selector: #selector(self.viewModel.updateWatchOS(_:)),
                                                    name: UIApplication.didBecomeActiveNotification, object: nil)
+                NotificationCenter.default.addObserver(self.viewModel, selector: #selector(self.viewModel.handleSessionExpired(_:)),
+                                                   name: .lampSessionExpired, object: nil)
 
             }.onDisappear {
                 NotificationCenter.default.removeObserver(self.viewModel, name: UIApplication.didBecomeActiveNotification, object: nil)
+                NotificationCenter.default.removeObserver(self.viewModel, name: .lampSessionExpired, object: nil)
             }
     }
 }

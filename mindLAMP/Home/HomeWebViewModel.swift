@@ -71,7 +71,19 @@ class HomeWebViewModel: NSObject, ObservableObject {
             WatchSessionManager.shared.updateApplicationContext(applicationContext: messageInfo)
         }
     }
-    
+
+    /// Called when the session can no longer be renewed (TokenManager posted
+    /// .lampSessionExpired): clear login state and reload, so the web view
+    /// resolves to the login page.
+    @objc
+    func handleSessionExpired(_ notification: Notification) {
+        DispatchQueue.main.async { [weak self] in
+            guard let self = self else { return }
+            User.shared.logout()
+            self.shouldReload.toggle()
+        }
+    }
+
 //    deinit {
 //        wkWebView.stopLoading()
 //        wkWebView.configuration.userContentController.removeScriptMessageHandler(forName: ScriptMessageHandler.login.rawValue)
@@ -86,8 +98,7 @@ extension HomeWebViewModel: WKScriptMessageHandler {
                 printError("Message body not in expected format.")
                 return
             }
-            print("dictBody = \(dictBody)\n")
-            //read token. it will be inthe format of UserName:Password
+            //read token. it will be in the format of UserName:Password
             guard
                 let idObjectDict = dictBody[ScriptMessageKey.identityObject.rawValue] as? [String: Any],
                 let userID = idObjectDict["id"] as? String  else { return }
@@ -128,13 +139,7 @@ extension HomeWebViewModel: WKScriptMessageHandler {
                 WatchSessionManager.shared.updateApplicationContext(applicationContext: messageInfo)
             }
             performOnLogin()
-        } else if message.name == ScriptMessageHandler.renewToken.rawValue {
-            guard let dictBody = message.body as? [String: Any] else {
-                printError("Message body not in expected format.")
-                return
-            }
-            print("dictBody renewToken = \(dictBody)\n")
-        }  else if message.name == ScriptMessageHandler.logout.rawValue {
+        } else if message.name == ScriptMessageHandler.logout.rawValue {
             let messageInfo: [String: Any] = [IOSCommands.logout: true, "timestamp" : Date().timeInMilliSeconds]
             WatchSessionManager.shared.updateApplicationContext(applicationContext: messageInfo)
             performOnLogout()
@@ -162,9 +167,7 @@ extension HomeWebViewModel: WKScriptMessageHandler {
             case .finished:
                 break
             }
-        } receiveValue: { (stringValue) in
-            print("login receiveValue = \(stringValue)")
-        }
+        } receiveValue: { _ in }
     }
     
     func performOnLogout() {
@@ -183,8 +186,6 @@ extension HomeWebViewModel: WKScriptMessageHandler {
         subscriber = publisher.sink { _ in
             NotificationHelper.shared.removeAllNotifications()
             User.shared.logout()
-        } receiveValue: { (stringValue) in
-            print("login receiveValue = \(stringValue)")
-        }
+        } receiveValue: { _ in }
     }
 }
