@@ -138,4 +138,40 @@ actor TokenManager {
             cb(result)
         }
     }
+
+    // MARK: - Proactive freshness for non-Networking (OpenAPIClient) calls
+
+    /// Ensures a usable bearer access token before a request that does NOT pass
+    /// through Networking's 401 retry — e.g. the generated OpenAPIClient calls
+    /// used for analytics and push. Refreshes if the access token has expired.
+    /// No-op for non-bearer (Basic / external JWT) users. After this returns,
+    /// Endpoint.getAuthHeader() holds the header to use.
+    func ensureFreshAccessToken(baseURL: URL, session: URLSession = .shared) async {
+        guard refreshToken != nil else { return }            // not bearer mode
+        if let access = accessToken, !Self.isExpired(access) { return }
+        _ = await refreshAccessTokenAsync(baseURL: baseURL, session: session)
+    }
+
+    private func refreshAccessTokenAsync(baseURL: URL, session: URLSession) async -> Result<String> {
+        await withCheckedContinuation { continuation in
+            refreshAccessToken(baseURL: baseURL, session: session) { result in
+                continuation.resume(returning: result)
+            }
+        }
+    }
+
+    /// True if the JWT is expired (or unparseable, in which case we err toward
+    /// refreshing). `leeway` refreshes slightly early to avoid expiry races.
+    private static func isExpired(_ jwt: String, leeway: TimeInterval = 60) -> Bool {
+        let segments = jwt.split(separator: ".")
+        guard segments.count >= 2 else { return true }
+        var base64 = String(segments[1])
+            .replacingOccurrences(of: "-", with: "+")
+            .replacingOccurrences(of: "_", with: "/")
+        while base64.count % 4 != 0 { base64 += "=" }
+        guard let data = Data(base64Encoded: base64),
+              let json = try? JSONSerialization.jsonObject(with: data) as? [String: Any],
+              let exp = json["exp"] as? Double else { return true }
+        return Date().timeIntervalSince1970 >= (exp - leeway)
+    }
 }

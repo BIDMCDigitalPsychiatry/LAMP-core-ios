@@ -148,44 +148,51 @@ extension HomeWebViewModel: WKScriptMessageHandler {
     
     func performOnLogin() {
         LMSensorManager.shared.checkIsRunning()
-        
+
         //call lamp.analytics for login
         let deviceToken = UserDefaults.standard.deviceToken
-        guard let authheader = Endpoint.getAuthHeader(), let participantId = User.shared.userId else {
-            return
-        }
-        OpenAPIClientAPI.basePath = LampURL.baseURLString
-        OpenAPIClientAPI.customHeaders = ["Authorization": authheader, "Content-Type": "application/json"]
-        let tokenInfo = DeviceInfoWithToken(deviceToken: deviceToken, userAgent: UserAgent.defaultAgent, action: SensorType.AnalyticAction.login.rawValue)
-       
-        let event = SensorEvent(timestamp: Date().timeInMilliSeconds, sensor: SensorType.lamp_analytics.lampIdentifier, data: tokenInfo)
-        let publisher = SensorEventAPI.sensorEventCreate(participantId: participantId, sensorEvent: event, apiResponseQueue: DispatchQueue.global())
-        subscriber = publisher.sink { value in
-            switch value {
-            case .failure(let error):
-                printError("loginSensorEventCreate error \(error.localizedDescription)")
-            case .finished:
-                break
+        Task {
+            // OpenAPIClient calls bypass Networking's 401 retry, so refresh the
+            // bearer access token up front (no-op for Basic/JWT users).
+            await TokenManager.shared.ensureFreshAccessToken(baseURL: URL(string: LampURL.baseURLString)!)
+            guard let authheader = Endpoint.getAuthHeader(), let participantId = User.shared.userId else {
+                return
             }
-        } receiveValue: { _ in }
-    }
-    
-    func performOnLogout() {
-        
-        //send lamp.analytics for logout
-        guard let authheader = Endpoint.getAuthHeader(), let participantId = User.shared.userId else {
-            NotificationHelper.shared.removeAllNotifications()
-            User.shared.logout()
-            return
+            OpenAPIClientAPI.basePath = LampURL.baseURLString
+            OpenAPIClientAPI.customHeaders = ["Authorization": authheader, "Content-Type": "application/json"]
+            let tokenInfo = DeviceInfoWithToken(deviceToken: deviceToken, userAgent: UserAgent.defaultAgent, action: SensorType.AnalyticAction.login.rawValue)
+
+            let event = SensorEvent(timestamp: Date().timeInMilliSeconds, sensor: SensorType.lamp_analytics.lampIdentifier, data: tokenInfo)
+            let publisher = SensorEventAPI.sensorEventCreate(participantId: participantId, sensorEvent: event, apiResponseQueue: DispatchQueue.global())
+            self.subscriber = publisher.sink { value in
+                switch value {
+                case .failure(let error):
+                    printError("loginSensorEventCreate error \(error.localizedDescription)")
+                case .finished:
+                    break
+                }
+            } receiveValue: { _ in }
         }
-        OpenAPIClientAPI.basePath = LampURL.baseURLString
-        OpenAPIClientAPI.customHeaders = ["Authorization": authheader, "Content-Type": "application/json"]
-        let tokenInfo = DeviceInfoWithToken(deviceToken: nil, userAgent: UserAgent.defaultAgent, action: SensorType.AnalyticAction.logout.rawValue)
-        let event = SensorEvent(timestamp: Date().timeInMilliSeconds, sensor: SensorType.lamp_analytics.lampIdentifier, data: tokenInfo)
-        let publisher = SensorEventAPI.sensorEventCreate(participantId: participantId, sensorEvent: event, apiResponseQueue: DispatchQueue.global())
-        subscriber = publisher.sink { _ in
-            NotificationHelper.shared.removeAllNotifications()
-            User.shared.logout()
-        } receiveValue: { _ in }
+    }
+
+    func performOnLogout() {
+        //send lamp.analytics for logout
+        Task {
+            await TokenManager.shared.ensureFreshAccessToken(baseURL: URL(string: LampURL.baseURLString)!)
+            guard let authheader = Endpoint.getAuthHeader(), let participantId = User.shared.userId else {
+                NotificationHelper.shared.removeAllNotifications()
+                User.shared.logout()
+                return
+            }
+            OpenAPIClientAPI.basePath = LampURL.baseURLString
+            OpenAPIClientAPI.customHeaders = ["Authorization": authheader, "Content-Type": "application/json"]
+            let tokenInfo = DeviceInfoWithToken(deviceToken: nil, userAgent: UserAgent.defaultAgent, action: SensorType.AnalyticAction.logout.rawValue)
+            let event = SensorEvent(timestamp: Date().timeInMilliSeconds, sensor: SensorType.lamp_analytics.lampIdentifier, data: tokenInfo)
+            let publisher = SensorEventAPI.sensorEventCreate(participantId: participantId, sensorEvent: event, apiResponseQueue: DispatchQueue.global())
+            self.subscriber = publisher.sink { _ in
+                NotificationHelper.shared.removeAllNotifications()
+                User.shared.logout()
+            } receiveValue: { _ in }
+        }
     }
 }
