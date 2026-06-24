@@ -441,8 +441,7 @@ extension HomeViewController: WKScriptMessageHandler {
                 printError("Message body not in expected format.")
                 return
             }
-            print("dictBody = \(dictBody)\n")
-            //read token. it will be inthe format of UserName:Password
+            //read token. it will be in the format of UserName:Password
             guard
                 let idObjectDict = dictBody[ScriptMessageKey.identityObject.rawValue] as? [String: Any],
                 let userID = idObjectDict["id"] as? String  else { return }
@@ -513,7 +512,6 @@ extension HomeViewController: WKScriptMessageHandler {
                 printError("Message body not in expected format.")
                 return
             }
-            print("dictBody renewToken  ctrlr= \(dictBody)\n")
             let bearerAccessToken = (dictBody[ScriptMessageKey.accessToken.rawValue] as? String)
             let bearerRefreshToken = (dictBody[ScriptMessageKey.refreshToken.rawValue] as? String)
             if let bearerAccessToken {
