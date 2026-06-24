@@ -87,13 +87,14 @@ public class Networking: NSObject, NetworkingAPI {
                     return
                 }
 
-                // Check HTTP status
+                // Bearer/session mode only: a 401 means the short-lived access
+                // token expired, so refresh and retry. Basic and external-JWT
+                // users have no refresh token; for them a 401 must fall through
+                // to normal handling and leave their (non-expiring) auth intact.
                 if let httpResponse = response as? HTTPURLResponse,
-                   httpResponse.statusCode == 401 {
-                    
-                    print(" 401 → refresh token")
+                   httpResponse.statusCode == 401,
+                   Endpoint.getBearerRefreshToken() != nil {
 
-                    // ⬇️ FIX: You must wrap async call in Task
                     Task {
                         await self.handle401AndRetry(
                             originalRequest: req,
