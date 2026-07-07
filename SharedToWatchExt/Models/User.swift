@@ -48,11 +48,19 @@ struct User {
     func logout() {
         //Stop all sensors
         LMSensorManager.shared.stopSensors(islogout: true)
-        
+
         SensorLogs.shared.clearLogsDirectory()
         LMLogsManager.shared.clearLogsDirectory()
-        
+
         Endpoint.setAuthHeader(nil)
+        // clearAll() does not cover the token keys; a surviving refresh token
+        // would wrongly arm the 401-refresh path for the next (Basic) login.
+        Endpoint.clearBearerTokens()
+        Endpoint.setBase64BasicAuth(nil)
+        Endpoint.setURLToken(nil)
+        Task {
+            await TokenManager.shared.updateTokens(access: nil, refresh: nil)
+        }
         UserDefaults.standard.clearAll()
     }
     

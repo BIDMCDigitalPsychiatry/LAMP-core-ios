@@ -96,6 +96,20 @@ class HomeViewController: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(appDidActive(_:)),
                                                name: UIApplication.didBecomeActiveNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(reachabilityChanged(note:)), name: NSNotification.Name(rawValue: "Reachability"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(handleSessionExpired(_:)),
+                                               name: .lampSessionExpired, object: nil)
+    }
+
+    /// The session can no longer be renewed (TokenManager posted
+    /// .lampSessionExpired after the refresh token was rejected): clear login
+    /// state and reload, so the web view returns to the login page instead of
+    /// sitting on a dead session with unauthenticated uploads.
+    @objc
+    func handleSessionExpired(_ notification: Notification) {
+        DispatchQueue.main.async { [weak self] in
+            User.shared.logout()
+            self?.loadWebPage()
+        }
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -449,8 +463,18 @@ extension HomeViewController: WKScriptMessageHandler {
             let basicAuthToken = (dictBody[ScriptMessageKey.authorizationToken.rawValue] as? String)
             let bearerAccessToken = (dictBody[ScriptMessageKey.accessToken.rawValue] as? String)
             let bearerRefreshToken = (dictBody[ScriptMessageKey.refreshToken.rawValue] as? String)
-            Task {
-                await TokenManager.shared.updateTokens(access: bearerAccessToken, refresh: bearerRefreshToken)
+            // Only arm bearer/refresh mode for a complete mobile-token PAIR.
+            // A payload with a stray refreshToken key (e.g. an external-JWT
+            // dashboard) must not enable the 401-refresh path for that user.
+            // Otherwise clear any stale pair left by a previous session.
+            if let bearerAccessToken, let bearerRefreshToken {
+                Task {
+                    await TokenManager.shared.updateTokens(access: bearerAccessToken, refresh: bearerRefreshToken)
+                }
+            } else {
+                Task {
+                    await TokenManager.shared.updateTokens(access: nil, refresh: nil)
+                }
             }
             //read langiuage
 //            let script = "localStorage.getItem(\"\(key)\")"
@@ -516,6 +540,10 @@ extension HomeViewController: WKScriptMessageHandler {
             let bearerRefreshToken = (dictBody[ScriptMessageKey.refreshToken.rawValue] as? String)
             if let bearerAccessToken {
                 Endpoint.setToken(bearerAccessToken, for: .bearer)
+            }
+            // Store the rotation even if only a refreshToken arrived — the old
+            // one is single-use, so dropping this message strands the session.
+            if bearerAccessToken != nil || bearerRefreshToken != nil {
                 Task {
                     await TokenManager.shared.updateTokens(access: bearerAccessToken, refresh: bearerRefreshToken)
                 }

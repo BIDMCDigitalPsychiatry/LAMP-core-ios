@@ -105,8 +105,16 @@ extension HomeWebViewModel: WKScriptMessageHandler {
             let basicAuthToken = (dictBody[ScriptMessageKey.authorizationToken.rawValue] as? String)
             let bearerAccessToken = (dictBody[ScriptMessageKey.accessToken.rawValue] as? String)
             let bearerRefreshToken = (dictBody[ScriptMessageKey.refreshToken.rawValue] as? String)
-            Task {
-                await TokenManager.shared.updateTokens(access: bearerAccessToken, refresh: bearerRefreshToken)
+            // Only arm bearer/refresh mode for a complete mobile-token PAIR
+            // (see HomeViewController's login handler for rationale).
+            if let bearerAccessToken, let bearerRefreshToken {
+                Task {
+                    await TokenManager.shared.updateTokens(access: bearerAccessToken, refresh: bearerRefreshToken)
+                }
+            } else {
+                Task {
+                    await TokenManager.shared.updateTokens(access: nil, refresh: nil)
+                }
             }
             let serverAddress = dictBody[ScriptMessageKey.serverAddress.rawValue] as? String
             

@@ -67,13 +67,14 @@ actor TokenManager {
         let body = ["refreshToken": refreshToken]
         request.httpBody = try? JSONSerialization.data(withJSONObject: body)
 
+        let usedRefreshToken = refreshToken
         let task = session.dataTask(with: request) { [weak self] data, response, error in
-            Task { await self?.handleRefreshResponse(data: data, response: response, error: error) }
+            Task { await self?.handleRefreshResponse(data: data, response: response, error: error, usedRefreshToken: usedRefreshToken) }
         }
         task.resume()
     }
 
-    private func handleRefreshResponse(data: Data?, response: URLResponse?, error: Error?) {
+    private func handleRefreshResponse(data: Data?, response: URLResponse?, error: Error?, usedRefreshToken: String) {
         // Transient network error → keep tokens so the next attempt can retry.
         if let error {
             finishAll(.failure(error))
@@ -84,8 +85,13 @@ actor TokenManager {
 
         // Server returns 400 {"error":"400.invalid-refresh-token"} when the
         // refresh token is no longer valid → the session is dead, force re-login.
+        // Guard: only expire if the token that failed is STILL the stored one —
+        // a stale in-flight refresh from a previous session must not kill a
+        // session that was re-established meanwhile.
         if statusCode == 400 || statusCode == 401 {
-            sessionDidExpire()
+            if usedRefreshToken == refreshToken {
+                sessionDidExpire()
+            }
             finishAll(.failure(NSError(domain: "InvalidRefreshToken", code: statusCode)))
             return
         }
@@ -124,8 +130,8 @@ actor TokenManager {
     private func sessionDidExpire() {
         accessToken = nil
         refreshToken = nil
-        Endpoint.setBearerRefreshToken(nil)
-        Endpoint.setToken(nil, for: .bearer)
+        Endpoint.clearBearerTokens()
+        Endpoint.setToken(nil, for: .bearer)  // removes the stored auth header
         NotificationCenter.default.post(name: .lampSessionExpired, object: nil)
     }
 

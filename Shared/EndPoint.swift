@@ -48,6 +48,14 @@ enum Endpoint: String {
         UserDefaults.standard.string(forKey: "BearerRefreshToken")
     }
     
+    /// Remove both bearer tokens from storage (session expired, or a non-bearer
+    /// login replaced a bearer session). setToken(nil,...) only removes the
+    /// authHeader, so the access token needs explicit removal here.
+    static func clearBearerTokens() {
+        UserDefaults.standard.removeObject(forKey: "BearerAccessToken")
+        UserDefaults.standard.removeObject(forKey: "BearerRefreshToken")
+    }
+
     static func setBase64BasicAuth(_ authToken: String?) {
         UserDefaults.standard.set(authToken, forKey: "authToken")
     }
