@@ -106,12 +106,15 @@ extension HomeWebViewModel: WKScriptMessageHandler {
             let bearerAccessToken = (dictBody[ScriptMessageKey.accessToken.rawValue] as? String)
             let bearerRefreshToken = (dictBody[ScriptMessageKey.refreshToken.rawValue] as? String)
             // Only arm bearer/refresh mode for a complete mobile-token PAIR
-            // (see HomeViewController's login handler for rationale).
+            // (see HomeViewController's login handler for rationale). Persist
+            // synchronously; the actor Task only syncs the in-memory copy.
             if let bearerAccessToken, let bearerRefreshToken {
+                Endpoint.setBearerRefreshToken(bearerRefreshToken)
                 Task {
                     await TokenManager.shared.updateTokens(access: bearerAccessToken, refresh: bearerRefreshToken)
                 }
             } else {
+                Endpoint.clearBearerTokens()
                 Task {
                     await TokenManager.shared.updateTokens(access: nil, refresh: nil)
                 }
@@ -136,9 +139,13 @@ extension HomeWebViewModel: WKScriptMessageHandler {
                 let uRLToken = "\(basicAuthToken):\(withOutHttp)"//UserName:Password:ServerAddress
                 let base64URLToken = uRLToken.data(using: .utf8)?.base64EncodedString()
                 Endpoint.setURLToken(base64URLToken)
-                
+
                 let (username, password) = basicAuthToken.makeTwoPiecesUsing(seperator: ":")
                 User.shared.login(userID: userID, username: username, password: password, serverAddress: serverAddress)
+            } else if bearerAccessToken != nil {
+                // Session login: establish the native user session (see
+                // HomeViewController's login handler for rationale).
+                User.shared.login(userID: userID, username: nil, password: nil, serverAddress: serverAddress)
             }
 
             //Inform watch the login info

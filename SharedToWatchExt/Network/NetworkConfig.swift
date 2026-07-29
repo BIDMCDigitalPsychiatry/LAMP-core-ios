@@ -15,7 +15,8 @@ class NetworkConfig {
     }
 
     static func logsNetworkingAPI() -> NetworkingAPI {
-        return Networking(baseURL: URL(string: NetworkConfig.logsURL)!, isBackgroundSession: false)
+        // Logs host: never run the 401->token-refresh path against it.
+        return Networking(baseURL: URL(string: NetworkConfig.logsURL)!, isBackgroundSession: false, allowsTokenRefresh: false)
     }
     
     static func networkingAPI(isBackgroundSession: Bool = false) -> NetworkingAPI {

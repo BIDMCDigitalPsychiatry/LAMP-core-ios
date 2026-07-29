@@ -24,7 +24,27 @@ actor TokenManager {
     func updateTokens(access: String?, refresh: String?) {
         self.accessToken = access
         self.refreshToken = refresh
-        Endpoint.setBearerRefreshToken(refresh)
+        if access == nil && refresh == nil {
+            // Clearing (logout / non-bearer login): remove BOTH disk keys, so
+            // no stale access token survives a bearer→basic transition.
+            Endpoint.clearBearerTokens()
+        } else {
+            Endpoint.setBearerRefreshToken(refresh)
+        }
+    }
+
+    /// Merge a token rotation from the web bridge (renewToken message): a nil
+    /// field leaves the existing value in place. Never wipes the single-use
+    /// refresh token just because a message omitted it.
+    func applyRotation(access: String?, refresh: String?) {
+        if let access {
+            self.accessToken = access
+            Endpoint.setToken(access, for: .bearer)
+        }
+        if let refresh {
+            self.refreshToken = refresh
+            Endpoint.setBearerRefreshToken(refresh)
+        }
     }
 
     /// Ensures only one refresh runs at a time. Concurrent callers (e.g. several
@@ -112,6 +132,14 @@ actor TokenManager {
 
         do {
             let decoded = try JSONDecoder().decode(Response.self, from: data)
+
+            // Same guard as the failure path: if the session changed while
+            // this refresh was in flight (logout, or a new login), discard the
+            // result rather than resurrecting tokens for a dead session.
+            guard usedRefreshToken == refreshToken else {
+                finishAll(.failure(NSError(domain: "StaleRefresh", code: 0)))
+                return
+            }
 
             accessToken = decoded.accessToken
             refreshToken = decoded.refreshToken

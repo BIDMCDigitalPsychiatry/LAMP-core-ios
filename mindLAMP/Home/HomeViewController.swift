@@ -467,11 +467,15 @@ extension HomeViewController: WKScriptMessageHandler {
             // A payload with a stray refreshToken key (e.g. an external-JWT
             // dashboard) must not enable the 401-refresh path for that user.
             // Otherwise clear any stale pair left by a previous session.
+            // Persist to disk SYNCHRONOUSLY (the Networking gate reads disk);
+            // the actor Task only syncs TokenManager's in-memory copy.
             if let bearerAccessToken, let bearerRefreshToken {
+                Endpoint.setBearerRefreshToken(bearerRefreshToken)
                 Task {
                     await TokenManager.shared.updateTokens(access: bearerAccessToken, refresh: bearerRefreshToken)
                 }
             } else {
+                Endpoint.clearBearerTokens()
                 Task {
                     await TokenManager.shared.updateTokens(access: nil, refresh: nil)
                 }
@@ -512,8 +516,14 @@ extension HomeViewController: WKScriptMessageHandler {
 
                 let (username, password) = basicAuthToken.makeTwoPiecesUsing(seperator: ":")
                 User.shared.login(userID: userID, username: username, password: password, serverAddress: serverAddress)
+            } else if bearerAccessToken != nil {
+                // Session login: no basic credentials, but the native user
+                // session must still be established — without userID and
+                // serverAddress, sensors never start, uploads have no
+                // participant, and relaunch lands on the login page.
+                User.shared.login(userID: userID, username: nil, password: nil, serverAddress: serverAddress)
             }
-            
+
             //Inform watch the login info
             if let dictInfo = User.shared.loginInfo {
                 let messageInfo: [String: Any] = [IOSCommands.login: dictInfo, "timestamp" : Date().timeInMilliSeconds]
@@ -538,14 +548,12 @@ extension HomeViewController: WKScriptMessageHandler {
             }
             let bearerAccessToken = (dictBody[ScriptMessageKey.accessToken.rawValue] as? String)
             let bearerRefreshToken = (dictBody[ScriptMessageKey.refreshToken.rawValue] as? String)
-            if let bearerAccessToken {
-                Endpoint.setToken(bearerAccessToken, for: .bearer)
-            }
-            // Store the rotation even if only a refreshToken arrived — the old
-            // one is single-use, so dropping this message strands the session.
+            // Merge whatever arrived: a missing field must NOT wipe the stored
+            // value (the refresh token is single-use — wiping it disarms
+            // refresh permanently; see TokenManager.applyRotation).
             if bearerAccessToken != nil || bearerRefreshToken != nil {
                 Task {
-                    await TokenManager.shared.updateTokens(access: bearerAccessToken, refresh: bearerRefreshToken)
+                    await TokenManager.shared.applyRotation(access: bearerAccessToken, refresh: bearerRefreshToken)
                 }
             }
         } else if message.name == ScriptMessageHandler.allowSpeech.rawValue {

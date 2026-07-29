@@ -7,11 +7,15 @@ public class Networking: NSObject, NetworkingAPI {
     
     let session: URLSession
     let baseURL: URL
+    /// Only the API-host client may run the 401->token-refresh path; the logs
+    /// client (logs.lamp.digital) must never POST the refresh token there.
+    let allowsTokenRefresh: Bool
     var currentTask: URLSessionTask?
-    
+
     //https://developer.apple.com/documentation/watchkit/keeping_your_watchos_content_up_to_date
-    public init(baseURL: URL, isBackgroundSession: Bool) {
+    public init(baseURL: URL, isBackgroundSession: Bool, allowsTokenRefresh: Bool = true) {
         self.baseURL = baseURL
+        self.allowsTokenRefresh = allowsTokenRefresh
         if isBackgroundSession {
             let config = URLSessionConfiguration.background(withIdentifier: "MySession")
             self.session = URLSession(configuration: config, delegate: nil, delegateQueue: nil)
@@ -88,8 +92,12 @@ public class Networking: NSObject, NetworkingAPI {
                 // token expired, so refresh and retry. Basic and external-JWT
                 // users have no refresh token; for them a 401 must fall through
                 // to normal handling and leave their (non-expiring) auth intact.
+                // allowsTokenRefresh: only the API-host client may refresh —
+                // a 401 from the logs host must never send the refresh token
+                // to logs.lamp.digital (wrong host + kills the session on 400).
                 if let httpResponse = response as? HTTPURLResponse,
                    httpResponse.statusCode == 401,
+                   self.allowsTokenRefresh,
                    Endpoint.getBearerRefreshToken() != nil {
 
                     Task {
