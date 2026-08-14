@@ -191,14 +191,24 @@ public class Networking: NSObject, NetworkingAPI {
         print("httpResponse = \(String(describing: response))")
         print("error = \(String(describing: error))")
         
-        do {
-            if let dataResp = data {
-                let jsonResult: AnyObject = try JSONSerialization.jsonObject(with: dataResp, options:
-                    JSONSerialization.ReadingOptions.mutableContainers) as AnyObject
-                print("response=\(jsonResult)")
+        // Never print the body of an auth response: POST /mobile-token/refresh,
+        // login, and renewToken responses carry the access token AND the
+        // single-use rotating refresh token, which must not leak to the console.
+        let path = (response?.url?.path ?? "").lowercased()
+        let isAuthResponse = ["mobile-token", "refresh", "login", "renewtoken"]
+            .contains { path.contains($0) }
+        if isAuthResponse {
+            print("response=[redacted auth response]")
+        } else {
+            do {
+                if let dataResp = data {
+                    let jsonResult: AnyObject = try JSONSerialization.jsonObject(with: dataResp, options:
+                        JSONSerialization.ReadingOptions.mutableContainers) as AnyObject
+                    print("response=\(jsonResult)")
+                }
+            } catch {
+
             }
-        } catch {
-            
         }
         #endif
     }
