@@ -507,8 +507,11 @@ class LMSensorManager {
 //        }
         
         sensorAPITimer = RepeatingTimer(timeInterval: storeSensorDataIntervalInMinutes * 60)
-        sensorAPITimer?.eventHandler = {
-            self.timeToStore()
+        // Capture self weakly: a strong capture here creates a retain cycle (self -> sensorAPITimer -> eventHandler -> self),
+        // so RepeatingTimer.deinit never runs and setting sensorAPITimer = nil in stopSensors() would NOT cancel the
+        // DispatchSourceTimer, leaving sensor collection/battery drain running after logout.
+        sensorAPITimer?.eventHandler = { [weak self] in
+            self?.timeToStore()
         }
         sensorAPITimer?.resume()
     }
