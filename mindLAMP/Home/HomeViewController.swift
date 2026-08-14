@@ -428,16 +428,6 @@ extension HomeViewController: WKNavigationDelegate {
         }))
         self.present(alert, animated: true, completion: nil)
     }
-    
-    func webView(_ webView: WKWebView, didReceive challenge: URLAuthenticationChallenge, completionHandler: @escaping (URLSession.AuthChallengeDisposition, URLCredential?) -> Void) {
-        
-        if let serverTrust = challenge.protectionSpace.serverTrust {
-            let credential = URLCredential(trust: serverTrust)
-            completionHandler(.useCredential, credential)
-        } else{
-            completionHandler(.useCredential, nil)
-        }
-    }
 }
 
 // MARK: - WKScriptMessageHandler
