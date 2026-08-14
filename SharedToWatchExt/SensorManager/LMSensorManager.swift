@@ -461,13 +461,16 @@ class LMSensorManager {
         deinitSensors()
         
         //clear the bufffers
-        activityDataBuffer.removeAll()
-        accelerometerDataBufffer.removeAll()
-        callsDataBuffer.removeAll()
-        motionDataBuffer.removeAll()
-        pedometerDataBuffer.removeAll()
-        locationsDataBuffer.removeAll()
-        screenStateDataBuffer.removeAll()
+        //Route each clear through the SAME barrier on the SAME concurrent queue used to append (see LMSensorManager+SensorObservers),
+        //so the clear is serialized against concurrent sensor callbacks. A bare removeAll() here would mutate the array while a
+        //callback is appending on its queue -> exclusive-access violation / heap corruption.
+        queueActivityData.async(flags: .barrier) { self.activityDataBuffer.removeAll() }
+        queueAccelerometerData.async(flags: .barrier) { self.accelerometerDataBufffer.removeAll() }
+        queueCallsData.async(flags: .barrier) { self.callsDataBuffer.removeAll() }
+        queueMotionData.async(flags: .barrier) { self.motionDataBuffer.removeAll() }
+        queuePedometerData.async(flags: .barrier) { self.pedometerDataBuffer.removeAll() }
+        queueLocationsData.async(flags: .barrier) { self.locationsDataBuffer.removeAll() }
+        queueScreenStateData.async(flags: .barrier) { self.screenStateDataBuffer.removeAll() }
         // sensorKitDataBuffer
     }
     
@@ -763,12 +766,10 @@ private extension LMSensorManager {
     func fetchSensorData() -> [SensorKitEvent] {
         // read
         var dataArray: [SensorKitEvent]!
-        queueSensorKitBufferData.sync {
-            // perform read and assign value
+        // Atomically snapshot and clear within a single barrier so no append can slip in between the read and the clear (data loss).
+        queueSensorKitBufferData.sync(flags: .barrier) {
             dataArray = sensorKitDataBuffer
-        }
-        queueSensorKitBufferData.async(flags: .barrier) {
-            self.sensorKitDataBuffer.removeAll(keepingCapacity: true)
+            sensorKitDataBuffer.removeAll(keepingCapacity: true)
         }
         return dataArray
     }
@@ -780,14 +781,12 @@ private extension LMSensorManager {
     func fetchAccelerometerData() -> [SensorEvent<SensorDataModel>] {
         // read
         var dataArray: [AccelerometerData]!
-        queueAccelerometerData.sync {
-            // perform read and assign value
+        // Atomically snapshot and clear within a single barrier so no append can slip in between the read and the clear (data loss).
+        queueAccelerometerData.sync(flags: .barrier) {
             dataArray = accelerometerDataBufffer
+            accelerometerDataBufffer.removeAll(keepingCapacity: true)
         }
         printToFile("accelerometer count \(dataArray.count)")
-        queueAccelerometerData.async(flags: .barrier) {
-            self.accelerometerDataBufffer.removeAll(keepingCapacity: true)
-        }
 
         let sensorArray = dataArray.map { SensorEvent(timestamp: $0.timestamp, sensor: SensorType.lamp_accelerometer.lampIdentifier, data: SensorDataModel(accelerationRate: $0.acceleration)) }
         return sensorArray
@@ -797,15 +796,12 @@ private extension LMSensorManager {
         
         // read
         var dataArray: [MotionData]!
-        queueMotionData.sync {
-            // perform read and assign value
+        // Atomically snapshot and clear within a single barrier so no append can slip in between the read and the clear (data loss).
+        queueMotionData.sync(flags: .barrier) {
             dataArray = motionDataBuffer
+            motionDataBuffer.removeAll(keepingCapacity: true)
         }
-        
-        queueMotionData.async(flags: .barrier) {
-            self.motionDataBuffer.removeAll(keepingCapacity: true)
-        }
-        
+
         let sensorArray = dataArray.map {
             SensorEvent(timestamp: $0.timestamp, sensor: SensorType.lamp_device_motion.lampIdentifier, data: SensorDataModel(motionData: $0))
         }
@@ -821,15 +817,12 @@ private extension LMSensorManager {
         
         // read
         var dataArray: [ActivityData]!
-        queueActivityData.sync {
-            // perform read and assign value
+        // Atomically snapshot and clear within a single barrier so no append can slip in between the read and the clear (data loss).
+        queueActivityData.sync(flags: .barrier) {
             dataArray = activityDataBuffer
+            activityDataBuffer.removeAll(keepingCapacity: true)
         }
-        
-        queueActivityData.async(flags: .barrier) {
-            self.activityDataBuffer.removeAll(keepingCapacity: true)
-        }
-        
+
         let sensorArray = dataArray.map { SensorEvent(timestamp: $0.timestamp, sensor: SensorType.lamp_Activity.lampIdentifier, data: SensorDataModel(activityData: $0.activity)) }
         return sensorArray
     }
@@ -837,15 +830,12 @@ private extension LMSensorManager {
     func fetchGPSData() -> [SensorEvent<SensorDataModel>] {
         // read
         var dataArray: [LocationsData]!
-        queueLocationsData.sync {
-            // perform read and assign value
+        // Atomically snapshot and clear within a single barrier so no append can slip in between the read and the clear (data loss).
+        queueLocationsData.sync(flags: .barrier) {
             dataArray = locationsDataBuffer
+            locationsDataBuffer.removeAll(keepingCapacity: true)
         }
-        
-        queueLocationsData.async(flags: .barrier) {
-            self.locationsDataBuffer.removeAll(keepingCapacity: true)
-        }
-        
+
         let sensorArray = dataArray.map { SensorEvent(timestamp: $0.timestamp, sensor: SensorType.lamp_gps.lampIdentifier, data: SensorDataModel(locationData: $0)) }
         
         return sensorArray
@@ -854,15 +844,12 @@ private extension LMSensorManager {
     func fetchCallsData() -> [SensorEvent<SensorDataModel>] {
         // read
         var dataArray: [CallsData]!
-        queueCallsData.sync {
-            // perform read and assign value
+        // Atomically snapshot and clear within a single barrier so no append can slip in between the read and the clear (data loss).
+        queueCallsData.sync(flags: .barrier) {
             dataArray = callsDataBuffer
+            callsDataBuffer.removeAll(keepingCapacity: true)
         }
-        
-        queueCallsData.async(flags: .barrier) {
-            self.callsDataBuffer.removeAll(keepingCapacity: true)
-        }
-        
+
         let sensorArray = dataArray.map { SensorEvent(timestamp: $0.timestamp, sensor: SensorType.lamp_telephony.lampIdentifier, data: SensorDataModel(callsData: $0)) }
         return sensorArray
     }
@@ -871,15 +858,12 @@ private extension LMSensorManager {
         
         // read
         var dataArray: [ScreenStateData]!
-        queueScreenStateData.sync {
-            // perform read and assign value
+        // Atomically snapshot and clear within a single barrier so no append can slip in between the read and the clear (data loss).
+        queueScreenStateData.sync(flags: .barrier) {
             dataArray = screenStateDataBuffer
+            screenStateDataBuffer.removeAll(keepingCapacity: true)
         }
-        
-        queueScreenStateData.async(flags: .barrier) {
-            self.screenStateDataBuffer.removeAll(keepingCapacity: true)
-        }
-        
+
         let sensorArray = dataArray.map { SensorEvent(timestamp: $0.timestamp, sensor: SensorType.lamp_device_state.lampIdentifier, data: SensorDataModel(screenData: $0)) }
         return sensorArray
     }
@@ -887,14 +871,12 @@ private extension LMSensorManager {
     func fetchPedometerData() -> [SensorEvent<SensorDataModel>]? {
         // read
         var dataArray: [PedometerData]!
-        queuePedometerData.sync {
-            // perform read and assign value
+        // Atomically snapshot and clear within a single barrier so no append can slip in between the read and the clear (data loss).
+        queuePedometerData.sync(flags: .barrier) {
             dataArray = pedometerDataBuffer
+            pedometerDataBuffer.removeAll(keepingCapacity: true)
         }
-        queuePedometerData.async(flags: .barrier) {
-            self.pedometerDataBuffer.removeAll(keepingCapacity: true)
-        }
-        
+
         let sensorArray = dataArray.map { SensorEvent(timestamp: $0.timestamp, sensor: SensorType.lamp_steps.lampIdentifier, data: SensorDataModel(pedometerData: $0)) }
         return sensorArray
     }
