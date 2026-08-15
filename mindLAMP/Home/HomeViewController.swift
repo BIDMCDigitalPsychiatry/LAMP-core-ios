@@ -453,13 +453,15 @@ extension HomeViewController: WKScriptMessageHandler {
             let basicAuthToken = (dictBody[ScriptMessageKey.authorizationToken.rawValue] as? String)
             let bearerAccessToken = (dictBody[ScriptMessageKey.accessToken.rawValue] as? String)
             let bearerRefreshToken = (dictBody[ScriptMessageKey.refreshToken.rawValue] as? String)
-            // Only arm bearer/refresh mode for a complete mobile-token PAIR.
-            // A payload with a stray refreshToken key (e.g. an external-JWT
-            // dashboard) must not enable the 401-refresh path for that user.
+            // Only arm bearer/refresh mode for a complete mobile-token PAIR that
+            // is a PURE session login (no Basic authorizationToken present). A
+            // payload that also carries username:password (e.g. an external-JWT
+            // dashboard) stays on Basic and must NOT enable the 401-refresh path,
+            // which would force a logout if that server has no refresh endpoint.
             // Otherwise clear any stale pair left by a previous session.
             // Persist to disk SYNCHRONOUSLY (the Networking gate reads disk);
             // the actor Task only syncs TokenManager's in-memory copy.
-            if let bearerAccessToken, let bearerRefreshToken {
+            if let bearerAccessToken, let bearerRefreshToken, (basicAuthToken ?? "").isEmpty {
                 Endpoint.setBearerRefreshToken(bearerRefreshToken)
                 Task {
                     await TokenManager.shared.updateTokens(access: bearerAccessToken, refresh: bearerRefreshToken)
@@ -488,7 +490,7 @@ extension HomeViewController: WKScriptMessageHandler {
             let base64BasicToken = basicAuthToken?.data(using: .utf8)?.base64EncodedString()
             Endpoint.setBase64BasicAuth(base64BasicToken)
             
-            if let bearerAccessToken {
+            if let bearerAccessToken, (basicAuthToken ?? "").isEmpty {
                 Endpoint.setToken(bearerAccessToken, for: .bearer)
             } else if let base64BasicToken {
                 Endpoint.setToken(base64BasicToken, for: .basic)
