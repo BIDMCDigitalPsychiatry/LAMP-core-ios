@@ -76,6 +76,23 @@ enum Endpoint: String {
     static func getURLToken() -> String? {
         return UserDefaults.standard.object(forKey: "URLToken") as? String
     }
+
+    /// Same gate Networking uses for 401 refresh
+    static var isBearerSession: Bool {
+        return getBearerRefreshToken() != nil
+    }
+
+    /// Adds the one-time login query before the `#/…` hash, where the dashboard reads it
+    static func dashboardURL(_ url: URL, finishLoginToken token: String) -> URL {
+        guard var components = URLComponents(url: url, resolvingAgainstBaseURL: false),
+              let api = URLComponents(string: LampURL.baseURLString), let host = api.host else { return url }
+        let serverAddress = host + (api.port.map { ":\($0)" } ?? "")
+        components.queryItems = [
+            URLQueryItem(name: "finishLoginToken", value: token),
+            URLQueryItem(name: "serverAddress", value: serverAddress),
+        ]
+        return components.url ?? url
+    }
     
     static func getAPIKey() -> String? {
         return nil

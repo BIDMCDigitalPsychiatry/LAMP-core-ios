@@ -20,6 +20,13 @@ actor TokenManager {
     private var refreshToken: String?
     private var isRefreshing = false
     private var waiters: [(Result<String>) -> Void] = []
+    private var lastUpgradeAttempt = Date.distantPast
+    private var upgradeInFlight: Task<Void, Never>?
+
+    private struct MobileTokens: Decodable {
+        var accessToken: String
+        var refreshToken: String
+    }
 
     func updateTokens(access: String?, refresh: String?) {
         self.accessToken = access
@@ -125,13 +132,8 @@ actor TokenManager {
         // (LAMP-server auth.ts createMobileTokens → res.json(newTokens)). The
         // refresh token ROTATES on every call, so the new one MUST be persisted
         // or the next refresh will 400.
-        struct Response: Decodable {
-            var accessToken: String
-            var refreshToken: String
-        }
-
         do {
-            let decoded = try JSONDecoder().decode(Response.self, from: data)
+            let decoded = try JSONDecoder().decode(MobileTokens.self, from: data)
 
             // Same guard as the failure path: if the session changed while
             // this refresh was in flight (logout, or a new login), discard the
@@ -191,6 +193,109 @@ actor TokenManager {
             refreshAccessToken(baseURL: baseURL, session: session) { result in
                 continuation.resume(returning: result)
             }
+        }
+    }
+
+    // MARK: - Session-server integration
+
+    /// If a Basic user's server now advertises session auth, swap the stored
+    /// password for mobile tokens via POST /login. Runs on launch and foreground
+    /// rather than on failure, since the server's legacy flag keeps Basic
+    /// requests succeeding. Any failure leaves the Basic login untouched
+    /// (retried at most hourly).
+    func upgradeBasicToBearerIfNeeded(baseURL: URL, session: URLSession = .shared) async {
+        // Concurrent callers wait for the in-flight upgrade
+        if let inFlight = upgradeInFlight {
+            await inFlight.value
+            return
+        }
+        guard refreshToken == nil,
+              let basic = Endpoint.getBase64BasicAuth(),
+              let data = Data(base64Encoded: basic),
+              let credential = String(data: data, encoding: .utf8),
+              let separator = credential.firstIndex(of: ":") else { return }
+        guard Date().timeIntervalSince(lastUpgradeAttempt) > 3600 else { return }
+        lastUpgradeAttempt = Date()
+
+        let task = Task {
+            await self.upgrade(basic: basic, credential: credential, separator: separator, baseURL: baseURL, session: session)
+        }
+        upgradeInFlight = task
+        await task.value
+        upgradeInFlight = nil
+    }
+
+    private func upgrade(basic: String, credential: String, separator: String.Index, baseURL: URL, session: URLSession) async {
+        let info = await Self.perform(URLRequest(url: baseURL.appendingPathComponent("server-info")), session: session)
+        guard info.status == 200, let infoData = info.data,
+              let json = try? JSONSerialization.jsonObject(with: infoData) as? [String: Any],
+              json["authScheme"] as? String == "session" else { return }
+
+        var request = URLRequest(url: baseURL.appendingPathComponent("login"))
+        request.httpMethod = "POST"
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.httpBody = try? JSONSerialization.data(withJSONObject: [
+            "accessKey": String(credential[..<separator]),
+            "secretKey": String(credential[credential.index(after: separator)...]),
+        ])
+        struct LoginResponse: Decodable { var mobileAuth: MobileTokens }
+        let login = await Self.perform(request, session: session)
+        guard login.status == 200, let loginData = login.data,
+              let tokens = try? JSONDecoder().decode(LoginResponse.self, from: loginData) else { return }
+        // A logout or new login while the request was in flight: discard.
+        guard refreshToken == nil, Endpoint.getBase64BasicAuth() == basic else { return }
+
+        store(tokens)
+        // The app-group username/password stay: the streak widget and
+        // notification extension still authenticate with them
+        Endpoint.setBase64BasicAuth(nil)
+        Endpoint.setURLToken(nil)
+    }
+
+    /// A single-use token that logs the dashboard web view in (`?finishLoginToken=`).
+    /// Refreshes once on 401. `mobileKeys` is present when the server rotated
+    /// the session and must be saved. Nil on any failure.
+    func oneTimeLoginToken(baseURL: URL, session: URLSession = .shared) async -> String? {
+        guard refreshToken != nil, let access = accessToken else { return nil }
+        let url = baseURL.appendingPathComponent("mobile-token").appendingPathComponent("one-time-login")
+
+        func fetch(_ token: String) async -> (status: Int, data: Data?) {
+            var request = URLRequest(url: url)
+            request.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
+            return await Self.perform(request, session: session)
+        }
+
+        var result = await fetch(access)
+        if result.status == 401 {
+            guard case .success(let fresh) = await refreshAccessTokenAsync(baseURL: baseURL, session: session) else { return nil }
+            result = await fetch(fresh)
+        }
+        struct Response: Decodable {
+            var webViewRefreshToken: String
+            var mobileKeys: MobileTokens?
+        }
+        guard result.status == 200, let data = result.data,
+              let body = try? JSONDecoder().decode(Response.self, from: data) else { return nil }
+        if let rotated = body.mobileKeys {
+            store(rotated)
+        }
+        return body.webViewRefreshToken
+    }
+
+    /// Refresh token first, as in handleRefreshResponse
+    private func store(_ tokens: MobileTokens) {
+        refreshToken = tokens.refreshToken
+        accessToken = tokens.accessToken
+        Endpoint.setBearerRefreshToken(tokens.refreshToken)
+        Endpoint.setToken(tokens.accessToken, for: .bearer)
+    }
+
+    /// iOS 14 has no URLSession.data(for:). Transport errors return status 0.
+    private static func perform(_ request: URLRequest, session: URLSession) async -> (status: Int, data: Data?) {
+        await withCheckedContinuation { (continuation: CheckedContinuation<(status: Int, data: Data?), Never>) in
+            session.dataTask(with: request) { data, response, _ in
+                continuation.resume(returning: ((response as? HTTPURLResponse)?.statusCode ?? 0, data))
+            }.resume()
         }
     }
 
