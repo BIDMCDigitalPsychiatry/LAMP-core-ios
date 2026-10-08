@@ -178,6 +178,8 @@ private extension HomeViewController {
         NotificationHelper.shared.removeAllExpiredNotifications()
         if isWebpageLoaded == false && !indicator.isAnimating {
             loadWebPage()
+        } else {
+            Task { await DashboardLogin.upgradeIfNeeded() }
         }
         
         if User.shared.isLogin() == true, let loginInfo = User.shared.loginInfo {
