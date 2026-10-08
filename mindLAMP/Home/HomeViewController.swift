@@ -10,6 +10,24 @@ import WebKit
 import LAMP
 //import Combine
 
+/// Logs dashboard web views in for the current native session. Bearer users get
+/// a fresh single-use token on every open; if none can be fetched (offline),
+/// the plain URL falls back to the web view cookie. Basic users are unchanged.
+enum DashboardLogin {
+    private static var apiBase: URL { URL(string: LampURL.baseURLString)! }
+
+    static func upgradeIfNeeded() async {
+        guard User.shared.isLogin() else { return }
+        await TokenManager.shared.upgradeBasicToBearerIfNeeded(baseURL: apiBase)
+    }
+
+    static func url(for url: URL) async -> URL {
+        guard Endpoint.isBearerSession,
+              let token = await TokenManager.shared.oneTimeLoginToken(baseURL: apiBase) else { return url }
+        return Endpoint.dashboardURL(url, finishLoginToken: token)
+    }
+}
+
 class HomeViewController: UIViewController {
     
     private var wkWebView: WKWebView!
@@ -36,7 +54,8 @@ class HomeViewController: UIViewController {
     
     private var lampDashboardURLwithToken: URL {
         let urlString = LampURL.dashboardDigitalURLText
-        if let base64token = Endpoint.getURLToken() {
+        // Bearer users log in with a one-time token instead (DashboardLogin)
+        if !Endpoint.isBearerSession, let base64token = Endpoint.getURLToken() {
             return URL(string: urlString + "?a=" + base64token)!
         }
         return LampURL.dashboardDigital
@@ -51,8 +70,8 @@ class HomeViewController: UIViewController {
             wkWebView.endEditing(true)
             indicator.startAnimating()
             view.bringSubviewToFront(indicator)
-            DispatchQueue.main.async {
-                self.wkWebView.load(URLRequest(url: pageURL))
+            Task { @MainActor in
+                self.wkWebView.load(URLRequest(url: await DashboardLogin.url(for: pageURL)))
             }
             
         }
@@ -233,15 +252,16 @@ private extension HomeViewController {
 //        }
 //    }
     func loadWebPage() {
-        if User.shared.isLogin() == true {
-            if let feedURL = feedURLToLoad {
-                wkWebView.load(URLRequest(url: feedURL))
-                feedURLToLoad = nil
-            } else {
-                wkWebView.load(URLRequest(url: self.lampDashboardURLwithToken))
-            }
-        } else {
+        guard User.shared.isLogin() == true else {
             wkWebView.load(URLRequest(url: LampURL.dashboardDigital))
+            return
+        }
+        let feedURL = feedURLToLoad
+        feedURLToLoad = nil
+        Task { @MainActor in
+            // Upgrade first so the URL matches the resulting login type
+            await DashboardLogin.upgradeIfNeeded()
+            wkWebView.load(URLRequest(url: await DashboardLogin.url(for: feedURL ?? lampDashboardURLwithToken)))
         }
     }
     
