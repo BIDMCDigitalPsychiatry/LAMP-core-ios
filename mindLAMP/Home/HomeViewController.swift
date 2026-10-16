@@ -68,6 +68,11 @@ class HomeViewController: UIViewController {
     var tappedActivityURL: URL? {
         didSet {
             guard let pageURL = tappedActivityURL else {return}
+            // Not loaded yet on launch from a notification; loadWebPage opens it
+            guard isViewLoaded else {
+                feedURLToLoad = pageURL
+                return
+            }
             wkWebView.endEditing(true)
             indicator.startAnimating()
             view.bringSubviewToFront(indicator)
