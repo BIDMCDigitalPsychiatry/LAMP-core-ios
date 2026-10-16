@@ -21,7 +21,7 @@ actor TokenManager {
     private var isRefreshing = false
     private var waiters: [(Result<String>) -> Void] = []
     private var lastUpgradeAttempt = Date.distantPast
-    private var upgradeInFlight: Task<Void, Never>?
+    private var upgradeInFlight: Task<Bool, Never>?
 
     private struct MobileTokens: Decodable {
         var accessToken: String
@@ -203,33 +203,34 @@ actor TokenManager {
     /// rather than on failure, since the server's legacy flag keeps Basic
     /// requests succeeding. Any failure leaves the Basic login untouched
     /// (retried at most hourly).
-    func upgradeBasicToBearerIfNeeded(baseURL: URL, session: URLSession = .shared) async {
+    @discardableResult
+    func upgradeBasicToBearerIfNeeded(baseURL: URL, session: URLSession = .shared) async -> Bool {
         // Concurrent callers wait for the in-flight upgrade
         if let inFlight = upgradeInFlight {
-            await inFlight.value
-            return
+            return await inFlight.value
         }
         guard refreshToken == nil,
               let basic = Endpoint.getBase64BasicAuth(),
               let data = Data(base64Encoded: basic),
               let credential = String(data: data, encoding: .utf8),
-              let separator = credential.firstIndex(of: ":") else { return }
-        guard Date().timeIntervalSince(lastUpgradeAttempt) > 3600 else { return }
+              let separator = credential.firstIndex(of: ":") else { return false }
+        guard Date().timeIntervalSince(lastUpgradeAttempt) > 3600 else { return false }
         lastUpgradeAttempt = Date()
 
         let task = Task {
             await self.upgrade(basic: basic, credential: credential, separator: separator, baseURL: baseURL, session: session)
         }
         upgradeInFlight = task
-        await task.value
+        let upgraded = await task.value
         upgradeInFlight = nil
+        return upgraded
     }
 
-    private func upgrade(basic: String, credential: String, separator: String.Index, baseURL: URL, session: URLSession) async {
+    private func upgrade(basic: String, credential: String, separator: String.Index, baseURL: URL, session: URLSession) async -> Bool {
         let info = await Self.perform(URLRequest(url: baseURL.appendingPathComponent("server-info")), session: session)
         guard info.status == 200, let infoData = info.data,
               let json = try? JSONSerialization.jsonObject(with: infoData) as? [String: Any],
-              json["authScheme"] as? String == "session" else { return }
+              json["authScheme"] as? String == "session" else { return false }
 
         var request = URLRequest(url: baseURL.appendingPathComponent("login"))
         request.httpMethod = "POST"
@@ -241,15 +242,16 @@ actor TokenManager {
         struct LoginResponse: Decodable { var mobileAuth: MobileTokens }
         let login = await Self.perform(request, session: session)
         guard login.status == 200, let loginData = login.data,
-              let tokens = try? JSONDecoder().decode(LoginResponse.self, from: loginData) else { return }
+              let tokens = try? JSONDecoder().decode(LoginResponse.self, from: loginData) else { return false }
         // A logout or new login while the request was in flight: discard.
-        guard refreshToken == nil, Endpoint.getBase64BasicAuth() == basic else { return }
+        guard refreshToken == nil, Endpoint.getBase64BasicAuth() == basic else { return false }
 
         store(tokens)
         // The app-group username/password stay: the streak widget and
         // notification extension still authenticate with them
         Endpoint.setBase64BasicAuth(nil)
         Endpoint.setURLToken(nil)
+        return true
     }
 
     /// A single-use token that logs the dashboard web view in (`?finishLoginToken=`).

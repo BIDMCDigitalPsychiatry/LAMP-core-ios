@@ -16,9 +16,10 @@ import LAMP
 enum DashboardLogin {
     private static var apiBase: URL { URL(string: LampURL.baseURLString)! }
 
-    static func upgradeIfNeeded() async {
-        guard User.shared.isLogin() else { return }
-        await TokenManager.shared.upgradeBasicToBearerIfNeeded(baseURL: apiBase)
+    @discardableResult
+    static func upgradeIfNeeded() async -> Bool {
+        guard User.shared.isLogin() else { return false }
+        return await TokenManager.shared.upgradeBasicToBearerIfNeeded(baseURL: apiBase)
     }
 
     static func url(for url: URL) async -> URL {
@@ -179,7 +180,12 @@ private extension HomeViewController {
         if isWebpageLoaded == false && !indicator.isAnimating {
             loadWebPage()
         } else {
-            Task { await DashboardLogin.upgradeIfNeeded() }
+            Task { @MainActor in
+                // The open dashboard is still logged in the old way: reload it
+                if await DashboardLogin.upgradeIfNeeded() {
+                    loadWebPage()
+                }
+            }
         }
         
         if User.shared.isLogin() == true, let loginInfo = User.shared.loginInfo {
