@@ -143,4 +143,16 @@ final class FramePartitionerTests: XCTestCase {
             XCTAssertEqual(frame.records, AccelRecordPacker.stableSorted(frame.records))
         }
     }
+
+    func testNewSessionStartsAnOpenFrameForAnEarlierWindow() {
+        // After a backward clock jump, records for an already closed window open a frame
+        // (one per window) instead of becoming a late frame per batch.
+        let partitioner = FramePartitioner()
+        XCTAssertEqual(partitioner.append([record(1_790_000_100_001), record(1_790_000_400_001)]).count, 1)
+        XCTAssertEqual(partitioner.startNewSession()?.window, 5_966_668)
+        XCTAssertEqual(partitioner.append([record(1_790_000_100_002)]), [])
+        XCTAssertEqual(partitioner.append([record(1_790_000_100_003)]), [])
+        XCTAssertEqual(partitioner.openFrame?.window, 5_966_667)
+        XCTAssertEqual(partitioner.openFrame?.records.count, 2)
+    }
 }

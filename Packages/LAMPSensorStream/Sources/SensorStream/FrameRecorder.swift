@@ -35,6 +35,13 @@ public final class FrameRecorder {
         return try seal([frame])
     }
 
+    /// Seals the open frame because the clock session restarted.
+    @discardableResult
+    public func startNewSession() throws -> [SealedFrame] {
+        guard let frame = partitioner.startNewSession() else { return [] }
+        return try seal([frame])
+    }
+
     private func seal(_ frames: [PartitionedFrame]) throws -> [SealedFrame] {
         try frames.map { frame in
             if persisted?.id == frame.id { persisted = nil }

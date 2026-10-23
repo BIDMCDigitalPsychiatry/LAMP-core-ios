@@ -26,8 +26,9 @@ public struct PartitionedFrame: Equatable {
 ///
 /// - A record from a later window closes the open frame.
 /// - The wall clock reaching `(k + 1) * 300000 + 15000` closes window `k`.
-/// - `closeOpenFrame()` closes the frame when the collector stops or the
-///   clock session restarts; later records for that window open a new frame.
+/// - `closeOpenFrame()` closes the frame when the collector stops, and
+///   `startNewSession()` when the clock session restarts; later records for
+///   that window open a new frame.
 /// - A record for a window that's already closed becomes part of a late
 ///   partial frame, which is returned (closed) at the end of its batch.
 /// - A frame that reaches 66,000 records closes, and the window continues in
@@ -106,6 +107,15 @@ public final class FramePartitioner {
         guard let open = openFrame else { return nil }
         openFrame = nil
         return close(open, late: false)
+    }
+
+    /// Closes the open frame because the clock session restarted, and forgets
+    /// which windows were closed. After a backward clock jump, the new
+    /// session's records then open one frame per window again, instead of a
+    /// late frame per batch until the clock passes the old high-water mark.
+    public func startNewSession() -> PartitionedFrame? {
+        highestClosedWindow = nil
+        return closeOpenFrame()
     }
 
     private func appendToOpen(_ record: AccelRecord, closed: inout [PartitionedFrame]) {

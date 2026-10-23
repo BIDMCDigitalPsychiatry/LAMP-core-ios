@@ -9,28 +9,21 @@ import SensorStream
 /// sensor-stream frames under `Documents/SensorStream`.
 ///
 /// CoreMotion pushes samples into an in-memory buffer; every
-/// `SensorTier.drainInterval` (5 s) the buffer is converted to records
-/// (epoch ms, m/s², Android axes) and handed to a `FrameRecorder`, which
-/// appends the open frame to disk and seals closed frames for upload. In the
-/// background, updates keep arriving only while the app's continuous location
-/// updates keep it running.
+/// `SensorTier.drainInterval` (5 s) an `AccelerometerSession` converts the
+/// buffer to records (epoch ms, m/s², Android axes) and hands them to a
+/// `FrameRecorder`, which appends the open frame to disk and seals closed
+/// frames for upload. In the background, updates keep arriving only while the
+/// app's continuous location updates keep it running.
 final class HighRateAccelerometer {
 
     /// The app's only `CMMotionManager` for sensor-stream tiers. Apple recommends
     /// one instance per app; only one tier runs at a time.
     static let motionManager = CMMotionManager()
 
-    private struct Sample {
-        let uptime: TimeInterval
-        let x: Double
-        let y: Double
-        let z: Double
-    }
-
     let tier: SensorTier
     private let store: FrameStore
-    private let recorder: FrameRecorder
-    /// Serializes the clock, the recorder, and the store.
+    private let session: AccelerometerSession
+    /// Serializes the session (its clock and recorder) and the store.
     private let queue = DispatchQueue(label: "digital.lamp.sensorstream.accelerometer", qos: .utility)
     private let motionQueue: OperationQueue = {
         let queue = OperationQueue()
@@ -39,15 +32,14 @@ final class HighRateAccelerometer {
         return queue
     }()
     private let bufferLock = NSLock()
-    private var buffer: [Sample] = []
-    private var clock = SensorClock()
+    private var buffer: [MotionSample] = []
     private var drainTimer: DispatchSourceTimer?
     private(set) var isRunning = false
 
     init(tier: SensorTier, store: FrameStore) {
         self.tier = tier
         self.store = store
-        self.recorder = FrameRecorder(spec: tier.spec, store: store)
+        self.session = AccelerometerSession(recorder: FrameRecorder(spec: tier.spec, store: store))
     }
 
     /// Seals frames left open by an earlier process, then starts sampling.
@@ -62,8 +54,12 @@ final class HighRateAccelerometer {
             } catch {
                 printToFile("sensor-stream recovery failed: \(error)")
             }
-            self.clock.startSession(wallEpochSeconds: Date().timeIntervalSince1970,
-                                    uptimeSeconds: ProcessInfo.processInfo.systemUptime)
+            do {
+                try self.session.start(wallEpochSeconds: Date().timeIntervalSince1970,
+                                       uptimeSeconds: ProcessInfo.processInfo.systemUptime)
+            } catch {
+                printToFile("sensor-stream session start failed: \(error)")
+            }
         }
         bufferLock.lock()
         buffer.reserveCapacity(tier.nominalHz * Int(SensorTier.drainInterval) * 2)
@@ -72,8 +68,11 @@ final class HighRateAccelerometer {
         manager.accelerometerUpdateInterval = tier.accelerometerUpdateInterval
         manager.startAccelerometerUpdates(to: motionQueue) { [weak self] data, _ in
             guard let self = self, let data = data else { return }
-            let sample = Sample(uptime: data.timestamp, x: data.acceleration.x,
-                                y: data.acceleration.y, z: data.acceleration.z)
+            // Read both clocks on arrival, so a drain can tell which clock session each sample belongs to.
+            let sample = MotionSample(uptime: data.timestamp, xG: data.acceleration.x,
+                                      yG: data.acceleration.y, zG: data.acceleration.z,
+                                      receivedWallEpochSeconds: Date().timeIntervalSince1970,
+                                      receivedUptimeSeconds: ProcessInfo.processInfo.systemUptime)
             self.bufferLock.lock()
             self.buffer.append(sample)
             self.bufferLock.unlock()
@@ -96,35 +95,30 @@ final class HighRateAccelerometer {
         // Let any in-flight motion callback finish before the final drain.
         motionQueue.waitUntilAllOperationsAreFinished()
         queue.sync {
-            drain()
             do {
-                try recorder.closeOpenFrame()
+                try session.stop(takeBuffer(), wallEpochSeconds: Date().timeIntervalSince1970,
+                                 uptimeSeconds: ProcessInfo.processInfo.systemUptime)
             } catch {
                 printToFile("sensor-stream close failed: \(error)")
             }
         }
     }
 
-    /// Runs on `queue`.
-    private func drain() {
+    private func takeBuffer() -> [MotionSample] {
         bufferLock.lock()
+        defer { bufferLock.unlock() }
         let samples = buffer
         buffer.removeAll(keepingCapacity: true)
-        bufferLock.unlock()
+        return samples
+    }
 
-        let wall = Date().timeIntervalSince1970
-        let uptime = ProcessInfo.processInfo.systemUptime
+    /// Runs on `queue`.
+    private func drain() {
         do {
-            // A clock change or deep sleep moves the boot-to-epoch offset: close the
-            // open frame and convert this batch with the new session's offset.
-            if clock.restartIfDrifted(wallEpochSeconds: wall, uptimeSeconds: uptime) {
-                try recorder.closeOpenFrame()
-            }
-            let records = samples.compactMap { sample -> AccelRecord? in
-                guard let timestamp = clock.epochMs(uptimeSeconds: sample.uptime) else { return nil }
-                return UnitConversion.record(timestamp: timestamp, xG: sample.x, yG: sample.y, zG: sample.z)
-            }
-            try recorder.ingest(records, nowMs: Int64((wall * 1_000).rounded(.down)))
+            // The session checks clock drift per sample, so samples captured before a
+            // clock change or a deep sleep keep their own session's offset.
+            try session.drain(takeBuffer(), wallEpochSeconds: Date().timeIntervalSince1970,
+                              uptimeSeconds: ProcessInfo.processInfo.systemUptime)
         } catch {
             printToFile("sensor-stream drain failed: \(error)")
         }
