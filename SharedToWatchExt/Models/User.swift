@@ -51,6 +51,9 @@ struct User {
         
         SensorLogs.shared.clearLogsDirectory()
         LMLogsManager.shared.clearLogsDirectory()
+        #if os(iOS)
+        SensorStreamFiles.clearAll()
+        #endif
         
         Endpoint.setAuthHeader(nil)
         UserDefaults.standard.clearAll()
