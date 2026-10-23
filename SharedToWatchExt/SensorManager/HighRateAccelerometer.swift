@@ -50,7 +50,7 @@ final class HighRateAccelerometer {
         self.recorder = FrameRecorder(spec: tier.spec, store: store)
     }
 
-    /// Seals frames left open by an earlier run, then starts sampling.
+    /// Seals frames left open by an earlier process, then starts sampling.
     func start() {
         let manager = Self.motionManager
         guard !isRunning, manager.isAccelerometerAvailable else { return }
@@ -58,7 +58,7 @@ final class HighRateAccelerometer {
         queue.async { [weak self] in
             guard let self = self else { return }
             do {
-                try self.store.recoverOpenFrames()
+                try self.store.recoverOpenFramesOncePerProcess()
             } catch {
                 printToFile("sensor-stream recovery failed: \(error)")
             }

@@ -142,4 +142,31 @@ final class FrameStoreTests: XCTestCase {
         XCTAssertEqual(store.sealedFrames(), [])
         XCTAssertEqual(try store.recoverOpenFrames(), [])
     }
+
+    func testRecoveryOncePerProcessSealsAnEarlierRunButNotALiveRecorder() throws {
+        let records = try Fixtures.records()
+        // An earlier process died with an open frame on disk.
+        try store.appendOpen(spec: spec, frameID: "earlier-run", records: Array(records[0..<100]))
+        let recovered = try FrameStore(root: store.root).recoverOpenFramesOncePerProcess()
+        XCTAssertEqual(recovered.map(\.id), ["earlier-run"])
+        XCTAssertEqual(recovered.first?.metadata.sampleCount, 100)
+
+        // A recorder in this process now has an open frame; a later caller (the uploader) must leave it alone.
+        let recorder = FrameRecorder(spec: spec, store: store)
+        try recorder.ingest(Array(records[100..<200]), nowMs: records[0].timestamp)
+        XCTAssertEqual(try FrameStore(root: store.root).recoverOpenFramesOncePerProcess(), [])
+        XCTAssertEqual(store.sealedFrames().map(\.id), ["earlier-run"])
+        let live = try recorder.closeOpenFrame()
+        XCTAssertEqual(live.first?.metadata.sampleCount, 100)
+    }
+
+    func testRecoveryOncePerProcessIsPerRoot() throws {
+        let other = FrameStore(root: try Fixtures.temporaryDirectory().appendingPathComponent(FrameStore.directoryName))
+        defer { try? FileManager.default.removeItem(at: other.root.deletingLastPathComponent()) }
+        let records = try Fixtures.records()
+        try store.appendOpen(spec: spec, frameID: "a", records: records)
+        try other.appendOpen(spec: spec, frameID: "b", records: records)
+        XCTAssertEqual(try store.recoverOpenFramesOncePerProcess().map(\.id), ["a"])
+        XCTAssertEqual(try other.recoverOpenFramesOncePerProcess().map(\.id), ["b"])
+    }
 }

@@ -40,6 +40,9 @@ public final class FrameStore {
 
     private let fileManager = FileManager.default
     private let lock = NSLock()
+    /// Roots that this process already recovered, guarded by `recoveryLock`.
+    private static var recoveredRoots: Set<String> = []
+    private static let recoveryLock = NSLock()
 
     public init(root: URL, platform: String = "ios") {
         self.root = root
@@ -102,6 +105,25 @@ public final class FrameStore {
             }
         }
         return recovered.sorted(by: Self.oldestFirst)
+    }
+
+    /// Runs `recoverOpenFrames()` the first time any caller in this process
+    /// asks for this root, and returns `[]` on every later call.
+    ///
+    /// Call it before you list sealed frames and before a recorder appends
+    /// its first record. Open files from an earlier process are recovered
+    /// whether or not an accelerometer tier is configured now, and open
+    /// files that a running recorder owns are never sealed under it.
+    @discardableResult
+    public func recoverOpenFramesOncePerProcess() throws -> [SealedFrame] {
+        // Held for the whole recovery, so a second caller waits for the first to finish.
+        Self.recoveryLock.lock(); defer { Self.recoveryLock.unlock() }
+        let key = root.standardizedFileURL.path
+        guard !Self.recoveredRoots.contains(key) else { return [] }
+        // Mark the root first: a retry after a partial failure could seal a live recorder's frame.
+        // Whatever a failed attempt leaves open is recovered by the next process.
+        Self.recoveredRoots.insert(key)
+        return try recoverOpenFrames()
     }
 
     /// Returns the sealed frames, oldest `start_timestamp` first.

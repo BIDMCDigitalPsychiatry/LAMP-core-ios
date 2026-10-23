@@ -43,6 +43,13 @@ final class SensorStreamUploader {
         } catch {
             return finish(completion)
         }
+        // Seal frames that an earlier process left open, even when no accelerometer
+        // tier is configured now. This runs once per process, before any recorder appends.
+        do {
+            try store.recoverOpenFramesOncePerProcess()
+        } catch {
+            printToFile("sensor-stream recovery failed: \(error)")
+        }
         let frames = Array(store.sealedFrames().prefix(Self.maxFramesPerRun))
         guard !frames.isEmpty else { return finish(completion) }
 
