@@ -48,8 +48,8 @@ public enum MultipartBodyWriter {
             append("\(field.value)\r\n")
         }
         append("--\(boundary)\r\n")
-        append("Content-Disposition: form-data; name=\"\(filePartName)\"; "
-               + "filename=\"\(metadata.startTimestamp).\(metadata.codec)\"\r\n")
+        // The contract names the file part `frame.<codec>`.
+        append("Content-Disposition: form-data; name=\"\(filePartName)\"; filename=\"frame.\(metadata.codec)\"\r\n")
         append("Content-Type: application/octet-stream\r\n\r\n")
         body.append(frame)
         append("\r\n--\(boundary)--\r\n")

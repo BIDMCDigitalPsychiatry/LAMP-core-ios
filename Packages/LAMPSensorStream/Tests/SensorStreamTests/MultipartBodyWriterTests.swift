@@ -43,7 +43,7 @@ final class MultipartBodyWriterTests: XCTestCase {
         }
         let filePart = try XCTUnwrap(parts.last)
         XCTAssertEqual(filePart.body, frame)
-        XCTAssertNotNil(filePart.filename)
+        XCTAssertEqual(filePart.filename, "frame.openzl", "the contract names the file part frame.<codec>")
         XCTAssertEqual(filePart.contentType, "application/octet-stream")
         let closing = Data("\r\n--lamp-test-boundary--\r\n".utf8)
         XCTAssertEqual(bytes.suffix(closing.count), closing)
