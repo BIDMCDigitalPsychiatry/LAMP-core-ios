@@ -25,7 +25,6 @@ final class SensorStreamUploader {
     private var isUploading = false
     private var consecutiveFailures = 0
     private var nextAttempt = Date.distantPast
-    private var currentTask: URLSessionTask?
 
     /// Uploads pending frames, oldest first, and then calls `completion`.
     func uploadPending(participantID: String, completion: @escaping () -> Void) {
@@ -54,20 +53,20 @@ final class SensorStreamUploader {
         guard !frames.isEmpty else { return finish(completion) }
 
         var backgroundTask = UIBackgroundTaskIdentifier.invalid
-        let endBackgroundTask = {
+        // The guard ends the background task exactly once: when the run is done,
+        // or right away when the task expires.
+        let run = UploadRunGuard {
             if backgroundTask != .invalid {
                 UIApplication.shared.endBackgroundTask(backgroundTask)
                 backgroundTask = .invalid
             }
         }
-        backgroundTask = UIApplication.shared.beginBackgroundTask(withName: "SensorStreamUpload") { [weak self] in
-            // Out of time: cancel the request. The frame stays on disk for the next run.
-            self?.stateLock.lock()
-            self?.currentTask?.cancel()
-            self?.stateLock.unlock()
+        backgroundTask = UIApplication.shared.beginBackgroundTask(withName: "SensorStreamUpload") {
+            // Out of time: cancel the request and stop the run. The frame stays on disk for the next run.
+            run.expire()
         }
-        upload(frames[...], store: store, participantID: participantID) { [weak self] in
-            endBackgroundTask()
+        upload(frames[...], store: store, participantID: participantID, run: run) { [weak self] in
+            run.finish()
             self?.finish(completion)
         }
     }
@@ -75,15 +74,14 @@ final class SensorStreamUploader {
     private func finish(_ completion: () -> Void) {
         stateLock.lock()
         isUploading = false
-        currentTask = nil
         stateLock.unlock()
         completion()
     }
 
     private func upload(_ frames: ArraySlice<SealedFrame>, store: FrameStore, participantID: String,
-                        done: @escaping () -> Void) {
-        guard let frame = frames.first else { return done() }
-        let next = { self.upload(frames.dropFirst(), store: store, participantID: participantID, done: done) }
+                        run: UploadRunGuard, done: @escaping () -> Void) {
+        guard !run.isExpired, let frame = frames.first else { return done() }
+        let next = { self.upload(frames.dropFirst(), store: store, participantID: participantID, run: run, done: done) }
 
         guard frame.metadata.byteLength <= UploadPolicy.maxFrameBytes else {
             // The server would answer 413, which is never retried.
@@ -105,28 +103,34 @@ final class SensorStreamUploader {
             try? FileManager.default.removeItem(at: bodyURL)
             guard let self = self else { return done() }
             let statusCode = error == nil ? (response as? HTTPURLResponse)?.statusCode : nil
-            switch UploadPolicy.action(forStatusCode: statusCode) {
+            let step = UploadPolicy.step(forStatusCode: statusCode)
+            switch step.action {
             case .delete:
                 try? store.delete(frame)
                 self.recordSuccess()
-                next()
             case .quarantine:
                 printToFile("sensor-stream frame \(frame.id) quarantined after HTTP \(statusCode ?? 0)")
                 try? store.quarantine(frame)
-                next()
-            case .retryAfterAuthRefresh:
-                if statusCode == 401 {
-                    self.refreshToken()
-                }
-                done()
-            case .retryWithBackoff:
+            case .retryAfterAuthRefresh, .retryWithBackoff:
+                break
+            }
+            if step.refreshesSession {
+                self.refreshToken()
+            }
+            if step.backsOff {
                 self.recordFailure()
+            }
+            if step.continuesRun {
+                next()  // Checks for expiry before it starts another frame.
+            } else {
                 done()
             }
         }
-        stateLock.lock()
-        currentTask = task
-        stateLock.unlock()
+        guard run.begin(cancel: { task.cancel() }) else {
+            // The background task expired while the previous response was handled.
+            try? FileManager.default.removeItem(at: bodyURL)
+            return done()
+        }
         task.resume()
     }
 

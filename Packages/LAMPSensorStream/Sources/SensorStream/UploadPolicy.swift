@@ -12,6 +12,25 @@ public enum UploadAction: Equatable {
     case retryWithBackoff
 }
 
+/// Everything the uploader does after one response.
+public struct UploadStep: Equatable {
+    /// What happens to the frame.
+    public let action: UploadAction
+    /// Refresh the access token so the next run can retry.
+    public let refreshesSession: Bool
+    /// Count a failure and wait `UploadPolicy.backoffDelay(afterFailures:)` before the next run.
+    public let backsOff: Bool
+    /// Upload the next frame in this run.
+    public let continuesRun: Bool
+
+    public init(action: UploadAction, refreshesSession: Bool, backsOff: Bool, continuesRun: Bool) {
+        self.action = action
+        self.refreshesSession = refreshesSession
+        self.backsOff = backsOff
+        self.continuesRun = continuesRun
+    }
+}
+
 /// Maps upload responses to client actions (contract table "Responses and client actions").
 public enum UploadPolicy {
     /// The largest frame the server accepts, in bytes (4 MiB).
@@ -36,6 +55,18 @@ public enum UploadPolicy {
         default:
             return .retryWithBackoff
         }
+    }
+
+    /// Returns the uploader's full response to an HTTP status code, or to a
+    /// network error when `statusCode` is `nil`.
+    public static func step(forStatusCode statusCode: Int?) -> UploadStep {
+        let action = action(forStatusCode: statusCode)
+        return UploadStep(action: action,
+                          // The server answers 403, not 401, for an expired mobile token, so both refresh.
+                          refreshesSession: action == .retryAfterAuthRefresh,
+                          // Back off on auth failures too, so a run doesn't re-hit the server every cycle.
+                          backsOff: action == .retryAfterAuthRefresh || action == .retryWithBackoff,
+                          continuesRun: action == .delete || action == .quarantine)
     }
 
     /// Returns the delay before the next attempt after `failures` consecutive failures.

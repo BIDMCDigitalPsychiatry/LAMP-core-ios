@@ -44,4 +44,28 @@ final class UploadPolicyTests: XCTestCase {
     func testMaxFrameBytesIsFourMebibytes() {
         XCTAssertEqual(UploadPolicy.maxFrameBytes, 4 * 1_024 * 1_024)
     }
+
+    func testAuthFailuresRefreshTheSessionAndBackOff() {
+        // LAMP-server answers 403 (not 401) for an expired or invalid mobile token.
+        for code in [401, 403] {
+            let step = UploadPolicy.step(forStatusCode: code)
+            XCTAssertEqual(step.action, .retryAfterAuthRefresh, "\(code)")
+            XCTAssertTrue(step.refreshesSession, "\(code)")
+            XCTAssertTrue(step.backsOff, "\(code): don't re-hit the server every cycle")
+            XCTAssertFalse(step.continuesRun, "\(code)")
+        }
+    }
+
+    func testStepsForOtherResponses() {
+        XCTAssertEqual(UploadPolicy.step(forStatusCode: 200),
+                       UploadStep(action: .delete, refreshesSession: false, backsOff: false, continuesRun: true))
+        for code in [400, 409, 413] {
+            XCTAssertEqual(UploadPolicy.step(forStatusCode: code),
+                           UploadStep(action: .quarantine, refreshesSession: false, backsOff: false, continuesRun: true))
+        }
+        for code in [nil, 404, 429, 500, 503] as [Int?] {
+            XCTAssertEqual(UploadPolicy.step(forStatusCode: code),
+                           UploadStep(action: .retryWithBackoff, refreshesSession: false, backsOff: true, continuesRun: false))
+        }
+    }
 }
