@@ -16,9 +16,10 @@ public struct SealedFrame: Equatable {
 /// - `quarantine/`: frames the server rejected for good, kept for inspection.
 ///
 /// Sealing writes the compressed file, then the sidecar JSON (the commit
-/// marker), then deletes the open file. A crash at any step loses nothing:
-/// `recoverOpenFrames()` reseals whatever is still open, and compression is
-/// deterministic, so a reseal overwrites the same frame with the same bytes.
+/// marker), then deletes the open file. `recoverOpenFrames()` reseals an open
+/// file only when its frame has no sidecar yet. If the sidecar exists, the
+/// sealed frame is complete (it can hold records that never reached the open
+/// file), so recovery deletes the stale open file instead of overwriting it.
 public final class FrameStore {
     /// The directory name under `Documents`.
     public static let directoryName = "SensorStream"
@@ -86,6 +87,12 @@ public final class FrameStore {
             let spec = specDirectory.lastPathComponent
             for file in contents(of: specDirectory) where file.pathExtension == "bin" {
                 let frameID = file.deletingPathExtension().lastPathComponent
+                if let committed = loadFrame(id: frameID, in: sealedDirectory) {
+                    // The process died between the sidecar write and the open-file delete.
+                    try fileManager.removeItem(at: file)
+                    recovered.append(committed)
+                    continue
+                }
                 let records = AccelRecordPacker.unpack(try Data(contentsOf: file))
                 if records.isEmpty {
                     try fileManager.removeItem(at: file)
@@ -164,17 +171,19 @@ public final class FrameStore {
     private func listFrames(in directory: URL) -> [SealedFrame] {
         contents(of: directory)
             .filter { $0.pathExtension == "json" }
-            .compactMap { listed -> SealedFrame? in
-                // Rebuild the URLs from `directory`; listings can resolve symlinks (/var -> /private/var).
-                let frameID = listed.deletingPathExtension().lastPathComponent
-                let metadataURL = directory.appendingPathComponent(frameID).appendingPathExtension("json")
-                let frameURL = directory.appendingPathComponent(frameID).appendingPathExtension(Self.frameExtension)
-                guard fileManager.fileExists(atPath: frameURL.path),
-                      let data = try? Data(contentsOf: metadataURL),
-                      let metadata = try? JSONDecoder().decode(FrameMetadata.self, from: data) else { return nil }
-                return SealedFrame(id: frameID, frameURL: frameURL, metadataURL: metadataURL, metadata: metadata)
-            }
+            // Rebuild the URLs from `directory`; listings can resolve symlinks (/var -> /private/var).
+            .compactMap { loadFrame(id: $0.deletingPathExtension().lastPathComponent, in: directory) }
             .sorted(by: Self.oldestFirst)
+    }
+
+    /// Returns frame `frameID` in `directory` if both its sidecar and its compressed file exist.
+    private func loadFrame(id frameID: String, in directory: URL) -> SealedFrame? {
+        let metadataURL = directory.appendingPathComponent(frameID).appendingPathExtension("json")
+        let frameURL = directory.appendingPathComponent(frameID).appendingPathExtension(Self.frameExtension)
+        guard fileManager.fileExists(atPath: frameURL.path),
+              let data = try? Data(contentsOf: metadataURL),
+              let metadata = try? JSONDecoder().decode(FrameMetadata.self, from: data) else { return nil }
+        return SealedFrame(id: frameID, frameURL: frameURL, metadataURL: metadataURL, metadata: metadata)
     }
 
     private func contents(of directory: URL) -> [URL] {

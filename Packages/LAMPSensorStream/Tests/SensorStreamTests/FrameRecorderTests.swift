@@ -61,4 +61,33 @@ final class FrameRecorderTests: XCTestCase {
         XCTAssertEqual(try store.data(for: sealed[0]), try Fixtures.data("frame.openzl"))
         XCTAssertEqual(try FrameStore(root: root).recoverOpenFrames(), [], "no open file is left behind")
     }
+
+    func testCrashBetweenSidecarAndOpenDeleteKeepsTheFullSealedFrame() throws {
+        let records = try Fixtures.records()  // 500 records in one window
+        let store = FrameStore(root: root)
+        let recorder = FrameRecorder(spec: spec, store: store)
+        let now = records[0].timestamp
+        XCTAssertEqual(try recorder.ingest(Array(records[0..<250]), nowMs: now), [])
+        let openDirectory = store.openDirectory.appendingPathComponent(spec, isDirectory: true)
+        let openFile = try XCTUnwrap(try FileManager.default.contentsOfDirectory(at: openDirectory,
+                                                                                includingPropertiesForKeys: nil).first)
+        let onDiskBeforeSeal = try Data(contentsOf: openFile)
+
+        // The next drain finishes the window and starts the next one, which seals all 500 records.
+        let nextWindow = AccelRecord(timestamp: 1_790_000_400_000, x: 0, y: 0, z: 9.80665)
+        let sealed = try recorder.ingest(Array(records[250..<500]) + [nextWindow], nowMs: now)
+        XCTAssertEqual(sealed.map(\.metadata.sampleCount), [500])
+        let sealedBytes = try store.data(for: sealed[0])
+
+        // The process dies after the sidecar is written but before the open file is deleted.
+        try onDiskBeforeSeal.write(to: openFile)
+        let recovered = try FrameStore(root: root).recoverOpenFrames()
+        let reported = try XCTUnwrap(recovered.first { $0.id == sealed[0].id })
+        XCTAssertEqual(reported.metadata, sealed[0].metadata, "a committed frame isn't resealed from the open file")
+
+        let frame = try XCTUnwrap(FrameStore(root: root).sealedFrames().first { $0.id == sealed[0].id })
+        XCTAssertEqual(frame.metadata, sealed[0].metadata)
+        XCTAssertEqual(try store.data(for: frame), sealedBytes)
+        XCTAssertFalse(FileManager.default.fileExists(atPath: openFile.path), "the stale open file is removed")
+    }
 }
