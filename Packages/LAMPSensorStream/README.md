@@ -21,13 +21,15 @@ vectors in `Tests/SensorStreamTests/Fixtures` are copied unchanged from
 | `SensorStreamKey`, `SensorTier` | The five specs; per tier, `accelerometerUpdateInterval` (0.1, 0.05, 0.02, 0.01 s), nominal rate, and the 5 s drain interval. |
 | `Gps1mGate` | Keeps at most one `lamp.gps1m` fix per 60 s. |
 | `SensorClock` | Converts `CMLogItem.timestamp` (seconds since boot) to epoch ms with one offset per session; a drift over 1,000 ms starts a new session. |
+| `AccelerometerSession` | The collector's drain logic: checks drift at each sample's arrival, so samples before a clock change or a deep sleep keep their own session's offset, then hands records to a `FrameRecorder`. |
 | `UnitConversion` | Converts g to m/s² in Android axes: `value * -9.80665`, as `Float`. |
 | `AccelRecordPacker` | Packs 20-byte little-endian records after a stable sort. |
 | `FramePartitioner` | Splits batches into 5-minute windows and applies the close rules; late records become new partial frames and are never dropped. |
 | `OpenZLCodec` | Compresses at format version 24 and decodes with the contract's five checks. |
-| `FrameStore`, `FrameRecorder` | Keep frames under `Documents/SensorStream/{open,sealed,quarantine}`, appending open frames as records arrive and sealing them crash-safely. |
+| `FrameStore`, `FrameRecorder` | Keep frames under `Documents/SensorStream/{open,sealed,quarantine}`, appending open frames as records arrive and sealing them crash-safely. `recoverOpenFramesOncePerProcess()` seals frames that an earlier process left open. |
 | `MultipartBodyWriter` | Writes the upload body to a file, with the text fields before the `frame` part. |
-| `UploadPolicy` | Maps each response status to delete, quarantine, or retry. |
+| `UploadPolicy` | Maps each response status to delete, quarantine, or retry, and to whether the uploader refreshes the session (401 and 403) and backs off. |
+| `UploadRunGuard` | Ends an upload run's background task exactly once, and on expiry cancels the request and stops the run. |
 
 ## Run the tests
 
