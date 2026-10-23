@@ -15,11 +15,11 @@ public enum SensorStreamKey: String, CaseIterable {
 
     /// `true` for the four binary accelerometer tiers.
     public var isAccelerometerTier: Bool {
-        false
+        self != .gps1m
     }
 
     /// The four accelerometer tiers, slowest first.
     public static var accelerometerTiers: [SensorStreamKey] {
-        []
+        allCases.filter(\.isAccelerometerTier)
     }
 }

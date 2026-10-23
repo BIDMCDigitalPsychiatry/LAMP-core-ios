@@ -22,13 +22,28 @@ public enum UploadPolicy {
     public static let maxBackoff: TimeInterval = 3_600
 
     /// Returns the action for an HTTP status code, or for a network error when `statusCode` is `nil`.
+    ///
+    /// Codes that the contract doesn't list keep the frame for a later retry,
+    /// so an unexpected response never loses data.
     public static func action(forStatusCode statusCode: Int?) -> UploadAction {
-        .delete
+        switch statusCode {
+        case .some(200...299):
+            return .delete
+        case .some(400), .some(409), .some(413):
+            return .quarantine
+        case .some(401), .some(403):
+            return .retryAfterAuthRefresh
+        default:
+            return .retryWithBackoff
+        }
     }
 
     /// Returns the delay before the next attempt after `failures` consecutive failures.
     public static func backoffDelay(afterFailures failures: Int) -> TimeInterval {
-        0
+        guard failures > 0 else { return 0 }
+        // 30 s doubled per failure; the exponent is capped so the power can't overflow.
+        let delay = baseBackoff * pow(2, Double(min(failures - 1, 16)))
+        return min(delay, maxBackoff)
     }
 }
 

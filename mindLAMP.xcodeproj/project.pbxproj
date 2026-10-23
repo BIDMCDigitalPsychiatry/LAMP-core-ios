@@ -156,6 +156,9 @@
 		5E554E7BBF0A93997BF519D3 /* SensorStream in Frameworks */ = {isa = PBXBuildFile; productRef = 5E5529ECA2D3343E465CCE81 /* SensorStream */; };
 		5E55EA479E703BC98C74D750 /* SensorStreamRouting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E55AD47EEA4F741CAAD9736 /* SensorStreamRouting.swift */; };
 		5E5525F7E62F2716EF374F7A /* SensorStreamRoutingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E55EF2972200C7805F78328 /* SensorStreamRoutingTests.swift */; };
+		5E55901F473E2A390A0832FD /* HighRateAccelerometer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E558A9763A7F35EBB240F94 /* HighRateAccelerometer.swift */; };
+		5E55E24257F1FAC633E5907D /* Gps1mCollector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E554A3C44802EE40262A836 /* Gps1mCollector.swift */; };
+		5E55C7EFCD15C1AB667710F7 /* SensorStreamUploader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E559C97E393C5802998E6B6 /* SensorStreamUploader.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXBuildRule section */
@@ -404,6 +407,9 @@
 		5E55B6F87567634DDBD43C1B /* LAMPSensorStream */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = LAMPSensorStream; path = Packages/LAMPSensorStream; sourceTree = "<group>"; };
 		5E55AD47EEA4F741CAAD9736 /* SensorStreamRouting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SensorStreamRouting.swift; sourceTree = "<group>"; };
 		5E55EF2972200C7805F78328 /* SensorStreamRoutingTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SensorStreamRoutingTests.swift; sourceTree = "<group>"; };
+		5E558A9763A7F35EBB240F94 /* HighRateAccelerometer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HighRateAccelerometer.swift; sourceTree = "<group>"; };
+		5E554A3C44802EE40262A836 /* Gps1mCollector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Gps1mCollector.swift; sourceTree = "<group>"; };
+		5E559C97E393C5802998E6B6 /* SensorStreamUploader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SensorStreamUploader.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -804,6 +810,8 @@
 				B2A15BC52567A8BE00222717 /* LMSensorManager+SensorObservers.swift */,
 				B2A15BC62567A8BE00222717 /* LMSensorManager.swift */,
 				5E55AD47EEA4F741CAAD9736 /* SensorStreamRouting.swift */,
+				5E558A9763A7F35EBB240F94 /* HighRateAccelerometer.swift */,
+				5E554A3C44802EE40262A836 /* Gps1mCollector.swift */,
 			);
 			path = SensorManager;
 			sourceTree = "<group>";
@@ -845,6 +853,7 @@
 				B2A15BD92567A8BE00222717 /* BackgroundServices.swift */,
 				B2A15BDA2567A8BE00222717 /* AsynchronousOperation.swift */,
 				B24CD25E25E8FAD2007E14ED /* RepeatingTimer.swift */,
+				5E559C97E393C5802998E6B6 /* SensorStreamUploader.swift */,
 			);
 			path = OperationQueue;
 			sourceTree = "<group>";
@@ -1322,6 +1331,9 @@
 				B2A15C122567A8BE00222717 /* LMConstants.swift in Sources */,
 				B2A15C102567A8BE00222717 /* LMLogsManager.swift in Sources */,
 				5E55EA479E703BC98C74D750 /* SensorStreamRouting.swift in Sources */,
+				5E55901F473E2A390A0832FD /* HighRateAccelerometer.swift in Sources */,
+				5E55E24257F1FAC633E5907D /* Gps1mCollector.swift in Sources */,
+				5E55C7EFCD15C1AB667710F7 /* SensorStreamUploader.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

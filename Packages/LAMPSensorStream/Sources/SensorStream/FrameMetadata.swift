@@ -46,15 +46,22 @@ public struct FrameMetadata: Codable, Equatable {
         self.byteLength = byteLength
     }
 
-    /// Builds the metadata for sorted records and their compressed bytes.
+    /// Builds the OpenZL metadata for stable-sorted records and their compressed bytes.
     public static func make(sensorSpec: String, records: [AccelRecord], compressed: Data,
                             platform: String) -> FrameMetadata {
-        FrameMetadata(sensorSpec: sensorSpec, startTimestamp: 0, endTimestamp: 0, sampleCount: 0,
-                      codec: "", codecFormatVersion: 0, platform: platform, sha256: "", byteLength: 0)
+        FrameMetadata(sensorSpec: sensorSpec,
+                      startTimestamp: records.first?.timestamp ?? 0,
+                      endTimestamp: records.last?.timestamp ?? 0,
+                      sampleCount: records.count,
+                      codec: OpenZLCodec.codecName,
+                      codecFormatVersion: OpenZLCodec.formatVersion,
+                      platform: platform,
+                      sha256: sha256Hex(compressed),
+                      byteLength: compressed.count)
     }
 
     /// Returns the lowercase hex SHA-256 digest of `data`.
     public static func sha256Hex(_ data: Data) -> String {
-        ""
+        SHA256.hash(data: data).map { String(format: "%02x", $0) }.joined()
     }
 }

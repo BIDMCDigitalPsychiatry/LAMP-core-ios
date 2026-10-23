@@ -1,6 +1,10 @@
 import Foundation
 
 /// Keeps at most one `lamp.gps1m` fix per interval (60 s by default).
+///
+/// A fix is accepted when it's at least `intervalMs` away from the last
+/// accepted fix in either direction, so a backward wall-clock jump of more
+/// than one interval doesn't block fixes until the clock catches up.
 public struct Gps1mGate {
     /// The default minimum gap between accepted fixes, in milliseconds.
     public static let defaultIntervalMs: Int64 = 60_000
@@ -17,7 +21,11 @@ public struct Gps1mGate {
     /// Returns `true` and records the fix when it's at least `intervalMs` away
     /// from the last accepted fix.
     public mutating func accept(timestampMs: Int64) -> Bool {
-        false
+        if let last = lastAcceptedMs, abs(timestampMs - last) < intervalMs {
+            return false
+        }
+        lastAcceptedMs = timestampMs
+        return true
     }
 
     /// Forgets the last accepted fix.

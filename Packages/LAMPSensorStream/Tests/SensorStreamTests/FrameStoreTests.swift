@@ -20,9 +20,9 @@ final class FrameStoreTests: XCTestCase {
     }
 
     func testDirectoryLayout() {
-        XCTAssertEqual(store.openDirectory, root.appendingPathComponent("open"))
-        XCTAssertEqual(store.sealedDirectory, root.appendingPathComponent("sealed"))
-        XCTAssertEqual(store.quarantineDirectory, root.appendingPathComponent("quarantine"))
+        XCTAssertEqual(store.openDirectory.path, root.appendingPathComponent("open").path)
+        XCTAssertEqual(store.sealedDirectory.path, root.appendingPathComponent("sealed").path)
+        XCTAssertEqual(store.quarantineDirectory.path, root.appendingPathComponent("quarantine").path)
         XCTAssertEqual(store.platform, "ios")
     }
 

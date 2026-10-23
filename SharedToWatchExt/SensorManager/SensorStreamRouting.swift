@@ -28,11 +28,14 @@ struct SensorStreamRouting: Equatable {
     var accelerometerSpec: String? { accelerometerTier?.spec }
 
     init(specs: [String]) {
-        accelerometerTier = nil
-        ignoredAccelerometerSpecs = []
-        runsLegacyAccelerometer = false
-        collectsLegacyGPS = false
-        runsGps1m = false
+        let winner = SensorTier.highestConfigured(in: specs)
+        accelerometerTier = winner
+        ignoredAccelerometerSpecs = SensorTier.all
+            .filter { $0 != winner && specs.contains($0.spec) }
+            .map(\.spec)
+        runsLegacyAccelerometer = winner == nil && specs.contains(SensorStreamKey.legacyAccelerometer)
+        collectsLegacyGPS = specs.contains(SensorStreamKey.legacyGPS)
+        runsGps1m = specs.contains(SensorStreamKey.gps1m.rawValue)
     }
 }
 #endif
