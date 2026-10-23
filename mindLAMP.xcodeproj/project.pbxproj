@@ -153,6 +153,9 @@
 		B2E6A568256F195000E2CBC8 /* WebViewConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2E6A566256F195000E2CBC8 /* WebViewConfiguration.swift */; };
 		B2F160DB2D48DD87009259C1 /* SpeechRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2F160DA2D48DD87009259C1 /* SpeechRecognizer.swift */; };
 		B2FDA83224BF744D000316EE /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2FDA83124BF744D000316EE /* ContentView.swift */; };
+		5E554E7BBF0A93997BF519D3 /* SensorStream in Frameworks */ = {isa = PBXBuildFile; productRef = 5E5529ECA2D3343E465CCE81 /* SensorStream */; };
+		5E55EA479E703BC98C74D750 /* SensorStreamRouting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E55AD47EEA4F741CAAD9736 /* SensorStreamRouting.swift */; };
+		5E5525F7E62F2716EF374F7A /* SensorStreamRoutingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E55EF2972200C7805F78328 /* SensorStreamRoutingTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXBuildRule section */
@@ -398,6 +401,9 @@
 		B2F0F14F296EB9A6008A8A7B /* da */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = da; path = da.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		B2F160DA2D48DD87009259C1 /* SpeechRecognizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeechRecognizer.swift; sourceTree = "<group>"; };
 		B2FDA83124BF744D000316EE /* ContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		5E55B6F87567634DDBD43C1B /* LAMPSensorStream */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = LAMPSensorStream; path = Packages/LAMPSensorStream; sourceTree = "<group>"; };
+		5E55AD47EEA4F741CAAD9736 /* SensorStreamRouting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SensorStreamRouting.swift; sourceTree = "<group>"; };
+		5E55EF2972200C7805F78328 /* SensorStreamRoutingTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SensorStreamRoutingTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -440,6 +446,7 @@
 				B2C5EEDB28B61D0100EF90AA /* SensorKit.framework in Frameworks */,
 				B24EEA0C26CA9CEA003A294D /* LAMP in Frameworks */,
 				B2B8979823D0ADBA00321C3E /* HealthKit.framework in Frameworks */,
+				5E554E7BBF0A93997BF519D3 /* SensorStream in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -459,6 +466,7 @@
 			isa = PBXGroup;
 			children = (
 				B20B62612C0CE540000B3899 /* mindLAMP2Tests.swift */,
+				5E55EF2972200C7805F78328 /* SensorStreamRoutingTests.swift */,
 			);
 			path = mindLAMP2Tests;
 			sourceTree = "<group>";
@@ -691,6 +699,7 @@
 				B2657AA42C11A22E009AFC3B /* StreakWidget */,
 				B29639CE23BDC28100626E1A /* Products */,
 				B2B8979623D0ADBA00321C3E /* Frameworks */,
+				5E55B6F87567634DDBD43C1B /* LAMPSensorStream */,
 			);
 			sourceTree = "<group>";
 		};
@@ -794,6 +803,7 @@
 			children = (
 				B2A15BC52567A8BE00222717 /* LMSensorManager+SensorObservers.swift */,
 				B2A15BC62567A8BE00222717 /* LMSensorManager.swift */,
+				5E55AD47EEA4F741CAAD9736 /* SensorStreamRouting.swift */,
 			);
 			path = SensorManager;
 			sourceTree = "<group>";
@@ -1012,6 +1022,7 @@
 			name = mindLAMP;
 			packageProductDependencies = (
 				B24EEA0B26CA9CEA003A294D /* LAMP */,
+				5E5529ECA2D3343E465CCE81 /* SensorStream */,
 			);
 			productName = lampv2;
 			productReference = B29639CD23BDC28100626E1A /* mindLAMP 2.app */;
@@ -1165,6 +1176,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B20B62622C0CE540000B3899 /* mindLAMP2Tests.swift in Sources */,
+				5E5525F7E62F2716EF374F7A /* SensorStreamRoutingTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1309,6 +1321,7 @@
 				B29827BD2635D38300FC78E6 /* Result.swift in Sources */,
 				B2A15C122567A8BE00222717 /* LMConstants.swift in Sources */,
 				B2A15C102567A8BE00222717 /* LMLogsManager.swift in Sources */,
+				5E55EA479E703BC98C74D750 /* SensorStreamRouting.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3084,6 +3097,10 @@
 			isa = XCSwiftPackageProductDependency;
 			package = B24AAD59259462D700E3692D /* XCRemoteSwiftPackageReference "LAMP-swift" */;
 			productName = LAMP;
+		};
+		5E5529ECA2D3343E465CCE81 /* SensorStream */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = SensorStream;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
