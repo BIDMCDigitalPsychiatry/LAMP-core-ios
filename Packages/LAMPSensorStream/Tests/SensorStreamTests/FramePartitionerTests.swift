@@ -125,11 +125,17 @@ final class FramePartitionerTests: XCTestCase {
     func testFramesNeverSpanWindows() {
         let partitioner = FramePartitioner()
         var frames: [PartitionedFrame] = []
+        var delivered: [AccelRecord] = []
         for i in 0..<100 {
             let batch = (0..<60).map { record(1_790_000_000_000 + Int64(i * 60 + $0) * 211) }
+            delivered += batch
             frames += partitioner.append(batch.shuffled())
         }
         if let last = partitioner.closeOpenFrame() { frames.append(last) }
+        // Every record comes back, and every window it touched has a frame.
+        XCTAssertEqual(frames.reduce(0) { $0 + $1.records.count }, 6_000)
+        XCTAssertEqual(Set(frames.map(\.window)), Set(delivered.map { FramePartitioner.window(of: $0.timestamp) }))
+        XCTAssertGreaterThan(frames.count, 1)
         for frame in frames {
             XCTAssertFalse(frame.records.isEmpty)
             XCTAssertEqual(FramePartitioner.window(of: frame.startTimestamp), frame.window)

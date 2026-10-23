@@ -82,10 +82,17 @@ final class OpenZLCodecTests: XCTestCase {
 
     func testDecoderRejectsTruncatedAndGarbageFrames() throws {
         let blob = try Fixtures.data("frame.openzl")
+        // Each input fails inside the decoder itself, not on some unrelated error.
         XCTAssertThrowsError(try OpenZLCodec.decode(blob.prefix(blob.count / 2), sampleCount: 500,
-                                                    codecFormatVersion: 24, startTimestamp: 0, endTimestamp: 0))
-        XCTAssertThrowsError(try OpenZLCodec.decompress(Data(repeating: 0xAB, count: 64)))
-        XCTAssertThrowsError(try OpenZLCodec.decompress(Data()))
+                                                    codecFormatVersion: 24, startTimestamp: 0, endTimestamp: 0)) { error in
+            guard case SensorStreamError.openZL(let code) = error, code < 0 else { return XCTFail("\(error)") }
+        }
+        XCTAssertThrowsError(try OpenZLCodec.decompress(Data(repeating: 0xAB, count: 64))) { error in
+            guard case SensorStreamError.openZL(let code) = error, code < 0 else { return XCTFail("\(error)") }
+        }
+        XCTAssertThrowsError(try OpenZLCodec.decompress(Data())) { error in
+            guard case SensorStreamError.invalidInput = error else { return XCTFail("\(error)") }
+        }
     }
 
     func testLargestFrameRoundTrips() throws {
