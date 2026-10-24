@@ -88,7 +88,7 @@ class HomeViewController: UIViewController {
         guard let participantId = User.shared.userId else {
             return
         }
-        let urlstring = String(format: "https://dashboard-staging.lamp.digital/#/participant/%@/feed", participantId)
+        let urlstring = LampURL.dashboardDigitalURLText + "participant/\(participantId)/feed"
         
         guard isWebpageLoaded == true else {
             feedURLToLoad = URL(string: urlstring)
