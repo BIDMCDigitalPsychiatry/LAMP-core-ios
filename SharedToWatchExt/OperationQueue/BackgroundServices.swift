@@ -27,6 +27,9 @@ class BackgroundServices {
             dispatchQueue.maxConcurrentOperationCount = 2
             self.postSensorData(dispatchQueue)
             self.putLogsData(dispatchQueue)
+            #if os(iOS)
+            self.postSensorStream(dispatchQueue)
+            #endif
 
             dispatchQueue.waitUntilAllOperationsAreFinished()
             
@@ -87,4 +90,13 @@ extension BackgroundServices {
         }
          
     }
+
+    #if os(iOS)
+    /// Uploads sealed accelerometer frames (`Documents/SensorStream`) to the
+    /// sensor-stream endpoint, inside a background task.
+    func postSensorStream(_ dispatchQueue: OperationQueue) {
+        guard let userID = User.shared.userId else { return }
+        dispatchQueue.addOperation(SensorStreamUploadOperation(participantID: userID))
+    }
+    #endif
 }

@@ -15,6 +15,7 @@ enum Endpoint: String {
     case getParticipant = "/participant/me"
     case activity = "/participant/%@/activity?ignore_binary=true"
     case activityEvent = "/participant/%@/activity_event"//?ignore_binary=true
+    case sensorStream = "/participant/%@/sensor-stream"
     
     case getLatestDashboard = "/version/get"
     

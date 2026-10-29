@@ -14,6 +14,7 @@ import CoreLocation
 import UIKit
 import HealthKit
 import SensorKit
+import SensorStream
 #endif
 
 #if os(watchOS)
@@ -73,6 +74,10 @@ class LMSensorManager {
     var sensor_calls: CallsSensor?
     var lampScreenSensor: ScreenSensor?
     //var sensor_wifi: WiFiSensor?
+    
+    // Sensor-stream collectors (lamp.accelerometer{10,20,50,100}hz and lamp.gps1m).
+    var highRateAccelerometer: HighRateAccelerometer?
+    var gps1mCollector: Gps1mCollector?
     #endif
     
     #if os(iOS)
@@ -266,7 +271,19 @@ class LMSensorManager {
         print("sensorIdentifiers = \(sensorIdentifiers)")
         setupLocationSensor(isNeedData: sensorIdentifiers.contains(SensorType.lamp_gps.lampIdentifier))
         
-        let isExist = setUpSensorMotionManager(sensorIdentifiers)
+        #if os(iOS)
+        // An accelerometer tier replaces the legacy 5 Hz lamp.accelerometer stream
+        // (see SensorStreamRouting for the precedence rules).
+        let routing = SensorStreamRouting(specs: sensorIdentifiers)
+        var motionSpecs = sensorIdentifiers
+        if !routing.runsLegacyAccelerometer {
+            motionSpecs.removeAll { $0 == SensorType.lamp_accelerometer.lampIdentifier }
+        }
+        setupSensorStreamCollectors(routing)
+        #else
+        let motionSpecs = sensorIdentifiers
+        #endif
+        let isExist = setUpSensorMotionManager(motionSpecs)
         
         sensorAPITimer = nil
         if isExist {
@@ -313,6 +330,10 @@ class LMSensorManager {
         #if os(iOS)
         sensor_calls = nil
         lampScreenSensor = nil
+        highRateAccelerometer?.stop()
+        highRateAccelerometer = nil
+        gps1mCollector?.stop()
+        gps1mCollector = nil
         #endif
     }
     
@@ -704,6 +725,29 @@ private extension LMSensorManager {
         }))
         sensorManager.addSensor(lampScreenSensor!)
     }
+    
+    /// Starts the sensor-stream collectors that `routing` selects. The
+    /// accelerometer writes frames to Documents/SensorStream, which
+    /// BackgroundServices uploads; gps1m fixes join the JSON sensor events.
+    func setupSensorStreamCollectors(_ routing: SensorStreamRouting) {
+        if !routing.ignoredAccelerometerSpecs.isEmpty {
+            printToFile("sensor-stream: \(routing.accelerometerSpec ?? "") overrides \(routing.ignoredAccelerometerSpecs)")
+        }
+        if let tier = routing.accelerometerTier {
+            do {
+                let accelerometer = HighRateAccelerometer(tier: tier, store: FrameStore(root: try FrameStore.defaultRoot()))
+                accelerometer.start()
+                highRateAccelerometer = accelerometer
+            } catch {
+                printToFile("sensor-stream: no Documents directory: \(error)")
+            }
+        }
+        if routing.runsGps1m {
+            let collector = Gps1mCollector()
+            collector.start()
+            gps1mCollector = collector
+        }
+    }
     #endif
 }
 
@@ -726,6 +770,7 @@ private extension LMSensorManager {
         #if os(iOS)
         arraySensorData.append(contentsOf: fetchActivityData())
         arraySensorData.append(contentsOf: fetchGPSData())
+        arraySensorData.append(contentsOf: gps1mCollector?.drainEvents() ?? [])
         arraySensorData.append(contentsOf: fetchCallsData())
         arraySensorData.append(contentsOf: fetchScreenStateData())
         

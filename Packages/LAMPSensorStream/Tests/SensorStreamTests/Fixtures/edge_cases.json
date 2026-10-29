@@ -1,0 +1,193 @@
+{
+  "duplicate_ms": {
+    "description": "Records with equal timestamps are kept and stably sorted by timestamp.",
+    "input": [
+      [
+        1790000100010,
+        1.0,
+        0.0,
+        0.0
+      ],
+      [
+        1790000100000,
+        2.0,
+        0.0,
+        0.0
+      ],
+      [
+        1790000100010,
+        3.0,
+        0.0,
+        0.0
+      ],
+      [
+        1790000100020,
+        4.0,
+        0.0,
+        0.0
+      ]
+    ],
+    "expected_sorted": [
+      [
+        1790000100000,
+        2.0,
+        0.0,
+        0.0
+      ],
+      [
+        1790000100010,
+        1.0,
+        0.0,
+        0.0
+      ],
+      [
+        1790000100010,
+        3.0,
+        0.0,
+        0.0
+      ],
+      [
+        1790000100020,
+        4.0,
+        0.0,
+        0.0
+      ]
+    ],
+    "expected_packed_hex": "a0f251c4a0010000000000400000000000000000aaf251c4a00100000000803f0000000000000000aaf251c4a0010000000040400000000000000000b4f251c4a0010000000080400000000000000000"
+  },
+  "window_split": {
+    "description": "Two delivered batches. The first spans a window boundary and is split into two frames. The second holds a late record for the closed window (a new partial frame) and a record for the open window.",
+    "window_ms": 300000,
+    "arrivals": [
+      [
+        [
+          1790000399960,
+          0.0,
+          0.0,
+          9.80665
+        ],
+        [
+          1790000399980,
+          0.0,
+          0.0,
+          9.80665
+        ],
+        [
+          1790000400000,
+          0.0,
+          0.0,
+          9.80665
+        ],
+        [
+          1790000400020,
+          0.0,
+          0.0,
+          9.80665
+        ]
+      ],
+      [
+        [
+          1790000399990,
+          0.0,
+          0.0,
+          9.80665
+        ],
+        [
+          1790000400040,
+          0.0,
+          0.0,
+          9.80665
+        ]
+      ]
+    ],
+    "expected_frames": [
+      {
+        "window": 5966667,
+        "start_timestamp": 1790000399960,
+        "end_timestamp": 1790000399980,
+        "timestamps": [
+          1790000399960,
+          1790000399980
+        ]
+      },
+      {
+        "window": 5966667,
+        "start_timestamp": 1790000399990,
+        "end_timestamp": 1790000399990,
+        "timestamps": [
+          1790000399990
+        ],
+        "late": true
+      },
+      {
+        "window": 5966668,
+        "start_timestamp": 1790000400000,
+        "end_timestamp": 1790000400040,
+        "timestamps": [
+          1790000400000,
+          1790000400020,
+          1790000400040
+        ]
+      }
+    ]
+  },
+  "units_at_rest": {
+    "description": "iOS acceleration in g converts to Android-convention m/s^2 with value * -9.80665, as float32. Compare numerically: -0.0 equals 0.0 (a zero g axis converts to -0.0).",
+    "gravity": 9.80665,
+    "cases": [
+      {
+        "ios_g": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "expected_ms2": [
+          -0.0,
+          -0.0,
+          9.806650161743164
+        ]
+      },
+      {
+        "ios_g": [
+          0.5,
+          -0.25,
+          -1.0
+        ],
+        "expected_ms2": [
+          -4.903325080871582,
+          2.451662540435791,
+          9.806650161743164
+        ]
+      },
+      {
+        "ios_g": [
+          1.0,
+          0.0,
+          0.0
+        ],
+        "expected_ms2": [
+          -9.806650161743164,
+          -0.0,
+          -0.0
+        ]
+      }
+    ],
+    "android_at_rest_face_up_ms2": [
+      0.0,
+      0.0,
+      9.806650161743164
+    ]
+  },
+  "sample_count_limits": {
+    "description": "Server-side sample_count bounds; every tier shares them.",
+    "min": 1,
+    "max": 66000,
+    "max_frame_bytes": 4194304,
+    "nominal_per_window": {
+      "lamp.accelerometer10hz": 3000,
+      "lamp.accelerometer20hz": 6000,
+      "lamp.accelerometer50hz": 15000,
+      "lamp.accelerometer100hz": 30000
+    }
+  }
+}
