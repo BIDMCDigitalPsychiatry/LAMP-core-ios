@@ -50,7 +50,7 @@ to `$TMPDIR/lamp-ios-produced/` for cross-language checks.
 
 2. Copy `lamp_ozl.c` and `lamp_ozl.h` unchanged from `LAMP-protocol/tools/openzl/`.
 3. Keep `LAMP_OZL_FORMAT_VERSION` at 24 until every decoder (LAMP-cortex,
-   LAMP-raphe, and server tooling) reads the newer format.
+   Cortex-2.0, and server tooling) reads the newer format.
 4. Run the tests; `OpenZLCodecTests` checks that compression still matches the
    golden `frame.openzl` byte for byte.
 

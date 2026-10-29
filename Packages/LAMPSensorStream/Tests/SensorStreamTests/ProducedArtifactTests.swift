@@ -2,7 +2,7 @@ import XCTest
 @testable import SensorStream
 
 /// Writes one produced frame, its multipart body, and its metadata for the
-/// Phase D cross-language check (server upload, cortex and raphe decode).
+/// Phase D cross-language check (server upload, LAMP-cortex and Cortex-2.0 decode).
 final class ProducedArtifactTests: XCTestCase {
     func testWritesProducedFrameForCrossLanguageCheck() throws {
         let out = FileManager.default.temporaryDirectory.appendingPathComponent("lamp-ios-produced", isDirectory: true)
