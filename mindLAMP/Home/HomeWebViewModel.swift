@@ -18,6 +18,7 @@ enum ScriptMessageKey: String {
     case serverAddress = "serverAddress"
     case accessToken = "accessToken"
     case refreshToken = "refreshToken"
+    case authScheme = "authScheme"
 }
 
 class WebViewStorage {

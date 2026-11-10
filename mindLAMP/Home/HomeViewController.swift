@@ -483,9 +483,12 @@ extension HomeViewController: WKScriptMessageHandler {
                 let idObjectDict = dictBody[ScriptMessageKey.identityObject.rawValue] as? [String: Any],
                 let userID = idObjectDict["id"] as? String  else { return }
             
-            let basicAuthToken = (dictBody[ScriptMessageKey.authorizationToken.rawValue] as? String)
             let bearerAccessToken = (dictBody[ScriptMessageKey.accessToken.rawValue] as? String)
             let bearerRefreshToken = (dictBody[ScriptMessageKey.refreshToken.rawValue] as? String)
+            // Session logins also carry the password for old store apps; this app uses the tokens instead
+            let isSessionLogin = (dictBody[ScriptMessageKey.authScheme.rawValue] as? String) == "session" &&
+                bearerAccessToken != nil && bearerRefreshToken != nil
+            let basicAuthToken = isSessionLogin ? nil : (dictBody[ScriptMessageKey.authorizationToken.rawValue] as? String)
             // Only arm bearer/refresh mode for a complete mobile-token PAIR that
             // is a PURE session login (no Basic authorizationToken present). A
             // payload that also carries username:password (e.g. an external-JWT
