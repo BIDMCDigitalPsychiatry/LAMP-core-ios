@@ -23,14 +23,17 @@ public class StreakWidgetHelper {
         }
     }
     
+    // New key, so the longest streak is recounted once in local days (the old count could be too long)
+    private static let longestStreakKey = "longestActivityStreakLocalDays"
+    
     func longestStreakFor(participantId: String) -> Int {
-        let dict: [String: Int]? = UserDefaults.standard.object(forKey: "longestActivityStreak") as? [String: Int]
+        let dict: [String: Int]? = UserDefaults.standard.object(forKey: Self.longestStreakKey) as? [String: Int]
         return dict?[participantId] ?? 0
     }
     
     func setLongestStreak(streak: Int, participantId: String) {
         let dict: [String: Int] = [participantId: streak]
-        UserDefaults.standard.setValue(dict, forKey: "longestActivityStreak")
+        UserDefaults.standard.setValue(dict, forKey: Self.longestStreakKey)
     }
     
     /// A year of activity events the first time, then 3 months
@@ -44,10 +47,12 @@ public class StreakWidgetHelper {
     /// Called by the app after it fetches activity events
     func saveStreak(dates: [Date], participantId: String) {
         let streak = findCurentAndLongestStreak(dates: dates)
+        // The fetch only covers recent months, so keep a longer streak seen before
+        let longest = max(streak.1, longestStreakFor(participantId: participantId))
         UserDefaults.standard.streakDataCurrentShared = streak.0
-        UserDefaults.standard.streakDataMaxShared = streak.1
+        UserDefaults.standard.streakDataMaxShared = longest
         UserDefaults.standard.streakLastActiveDayShared = uniqueDays(from: dates).max()
-        setLongestStreak(streak: streak.1, participantId: participantId)
+        setLongestStreak(streak: longest, participantId: participantId)
     }
     
     /// The saved streak as it stands on `date`: the current streak has ended
@@ -76,23 +81,10 @@ public class StreakWidgetHelper {
     
     // Function to extract unique days from an array of dates
     func uniqueDays(from dates: [Date]) -> [Date] {
-        var uniqueDaysSet = Set<String>()
-        var uniqueDaysArray = [Date]()
-        
-        let dateFormatter = DateFormatter()
-        dateFormatter.timeZone = TimeZone(secondsFromGMT: 0)
-        dateFormatter.locale = Locale(identifier: "en_US_POSIX")
-        dateFormatter.dateFormat = "yyyy-MM-dd"
-        
-        for date in dates {
-            let dayString = dateFormatter.string(from: date)
-            if !uniqueDaysSet.contains(dayString) {
-                uniqueDaysSet.insert(dayString)
-                uniqueDaysArray.append(dateFormatter.date(from: dayString)!)
-            }
-        }
-        
-        return uniqueDaysArray
+        // Local days, since "today" and "yesterday" are checked in local time (with UTC
+        // days, a Boston activity after 7pm counted toward the next day)
+        let calendar = Calendar.current
+        return Array(Set(dates.map { calendar.startOfDay(for: $0) }))
     }
 
     public func findCurrentStreak(from dates: [Date]) -> Int {
