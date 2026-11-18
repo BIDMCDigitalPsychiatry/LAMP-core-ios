@@ -383,28 +383,6 @@ window.onload = captureDivs;
             }
             self.scheduleHandler.refreshActivities()
         }
-  
-        /* let deviceToken = UserDefaults.standard.deviceToken
-        guard let authheader = Endpoint.getSessionKey(), let participantId = User.shared.userId else {
-            return
-        }
-        OpenAPIClientAPI.basePath = LampURL.baseURLString
-        OpenAPIClientAPI.customHeaders = ["Authorization": "Basic \(authheader)", "Content-Type": "application/json"]
-        let tokenInfo = DeviceInfoWithToken(deviceToken: deviceToken, userAgent: UserAgent.defaultAgent, action: SensorType.AnalyticAction.login.rawValue)
-       
-        let event = SensorEvent(timestamp: Date().timeInMilliSeconds, sensor: SensorType.lamp_analytics.lampIdentifier, data: tokenInfo)
-        let publisher = SensorEventAPI.sensorEventCreate(participantId: participantId, sensorEvent: event, apiResponseQueue: DispatchQueue.global())
-        loginSubscriber = publisher.sink { value in
-            switch value {
-            case .failure(let error):
-                printError("loginSensorEventCreate error \(error.localizedDescription)")
-            case .finished:
-                break
-            }
-            self.scheduleHandler.refreshActivities()
-        } receiveValue: { (stringValue) in
-            print("login receiveValue = \(stringValue)")
-        }*/
     }
     
     func performOnLogout() {
@@ -424,23 +402,6 @@ window.onload = captureDivs;
             NotificationHelper.shared.removeAllNotifications()
             User.shared.logout()
         }
-/*
-        guard let authheader = Endpoint.getSessionKey(), let participantId = User.shared.userId else {
-            NotificationHelper.shared.removeAllNotifications()
-            User.shared.logout()
-            return
-        }
-        OpenAPIClientAPI.basePath = LampURL.baseURLString
-        OpenAPIClientAPI.customHeaders = ["Authorization": "Basic \(authheader)", "Content-Type": "application/json"]
-        let tokenInfo = DeviceInfoWithToken(deviceToken: nil, userAgent: UserAgent.defaultAgent, action: SensorType.AnalyticAction.logout.rawValue)
-        let event = SensorEvent(timestamp: Date().timeInMilliSeconds, sensor: SensorType.lamp_analytics.lampIdentifier, data: tokenInfo)
-        let publisher = SensorEventAPI.sensorEventCreate(participantId: participantId, sensorEvent: event, apiResponseQueue: DispatchQueue.global())
-        loginSubscriber = publisher.sink { _ in
-            NotificationHelper.shared.removeAllNotifications()
-            User.shared.logout()
-        } receiveValue: { (stringValue) in
-            print("login receiveValue = \(stringValue)")
-        }*/
     }
     
 }

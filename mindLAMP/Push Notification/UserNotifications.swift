@@ -144,25 +144,6 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
                         UserDefaults.standard.deviceToken = deviceTokenStr
                     }
                 }
-              
-                /*
-                guard let authheader = Endpoint.getSessionKey(), let participantId = User.shared.userId else {
-                    return
-                }
-                OpenAPIClientAPI.basePath = LampURL.baseURLString
-                OpenAPIClientAPI.customHeaders = ["Authorization": "Basic \(authheader)", "Content-Type": "application/json"]
-                
-                let publisher = SensorEventAPI.sensorEventCreate(participantId: participantId, sensorEvent: event, apiResponseQueue: DispatchQueue.global())
-                subscriber = publisher.sink { value in
-                    switch value {
-                    case .failure(let error):
-                        printError("loginSensorEventCreate error \(error.localizedDescription)")
-                    case .finished:
-                        UserDefaults.standard.deviceToken = deviceTokenStr
-                    }
-                } receiveValue: { (stringValue) in
-                    print("APNS register = \(stringValue)")
-                }*/
             } else {
                 UserDefaults.standard.deviceToken = deviceTokenStr
             }
@@ -209,22 +190,6 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
         lampAPI.makeWebserviceCall(with: data) { (response: Result<EmptyResponse>) in
             completionHandler(UIBackgroundFetchResult.noData)
         }
-        
-        
-        /*
-        let payLoadInfo = PayLoadInfo(action: SensorType.AnalyticAction.notification.rawValue, userInfo: userInfo, userAgent: UserAgent.defaultAgent)
-        let acknoledgeRequest = UpdateReadRequest(timeInterval: Date().timeIntervalSince1970, sensor: SensorType.lamp_analytics.lampIdentifier, payLoadInfo: payLoadInfo)
-        guard let authheader = Endpoint.getSessionKey(), let participantId = User.shared.userId else {
-            return
-        }
-        OpenAPIClientAPI.basePath = LampURL.baseURLString
-        OpenAPIClientAPI.customHeaders = ["Authorization": "Basic \(authheader)", "Content-Type": "application/json"]
-        let publisher = SensorEventAPI.pushReceiptEventCreate(participantId: participantId, sensorEvent: acknoledgeRequest.toJSON(), apiResponseQueue: DispatchQueue.global())
-        subscriber = publisher.sink { _ in
-            completionHandler(UIBackgroundFetchResult.noData)
-        } receiveValue: { (stringValue) in
-            print("login receiveValue = \(stringValue)")
-        }*/
         
         calculateBadgeCount()
         LMSensorManager.shared.checkIsRunning()

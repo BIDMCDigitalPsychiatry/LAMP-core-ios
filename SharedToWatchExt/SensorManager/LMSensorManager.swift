@@ -351,54 +351,6 @@ class LMSensorManager {
                 self.loadSensorSpecs()
             }
         }
-        
-        
-        /*var sensorSpecs: [Sensor] = []
-        guard let authheader = Endpoint.getSessionKey(), let participantId = User.shared.userId else {
-            printError("Auth header missing")
-            return
-        }
-        OpenAPIClientAPI.basePath = LampURL.baseURLString
-        OpenAPIClientAPI.customHeaders = ["Authorization": "Basic \(authheader)", "Content-Type": "application/json"]
-        let publisher = SensorAPI.sensorAllByParticipant(participantId: participantId)
-        
-        subscriber = publisher.sink(receiveCompletion: { [weak self] value in
-            guard let self = self else { return }
-            print("value3 = \(value)")
-            switch value {
-            case .failure(let ErrorResponse.error(code, data, error)):
-                printError("sensor names error code\(code), \(error.localizedDescription)")
-                if let data = data {
-                    let decoder = JSONDecoder()
-                    do {
-                        let errResponse = try decoder.decode(ErrResponse.self, from: data)
-                        printError("\nerrResponse \(String(describing: errResponse.error))")
-                    } catch let err {
-                        printError("err = \(err.localizedDescription)")
-                    }
-                }
-            case .failure(let error):
-                printError("postSensorData error \(error.localizedDescription)")
-                if let nsError = error as NSError? {
-                    let errorCode = nsError.code
-                    /// -1009 is the offline error code
-                    /// so log errors other than connection issue
-                    if errorCode == -1009 {
-                        LMLogsManager.shared.addLogs(level: .warning, logs: Logs.Messages.network_error + " " + nsError.localizedDescription)
-                    } else {
-                        LMLogsManager.shared.addLogs(level: .error, logs: Logs.Messages.network_error + " " + nsError.localizedDescription)
-                    }
-                }
-            case .finished:
-                SensorLogs.shared.storeSensorSpecs(specs: sensorSpecs)
-            }
-            //load sensorspec after api call.
-            self.loadSensorSpecs()
-            
-        }, receiveValue: { response in
-            sensorSpecs.append(contentsOf: response.data)
-        })
-        */
     }
 
     private func loadSensorSpecs() {
