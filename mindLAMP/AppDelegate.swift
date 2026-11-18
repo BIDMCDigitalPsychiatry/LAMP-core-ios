@@ -66,9 +66,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         calculateBadgeCount()
     }
     func applicationWillResignActive(_ application: UIApplication) {
-        widgetHelper.fetchActivityEvents(participantId: UserDefaults.standard.participantIdShared) { _ in
-            WidgetCenter.shared.reloadAllTimelines()
-        }
+        refreshStreakWidget()
     }
     
     func application(_ application: UIApplication, willContinueUserActivityWithType userActivityType: String) -> Bool {
@@ -87,6 +85,40 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 }
 
 private extension AppDelegate {
+    /// Saves the streak for the widget, fetched with the app's own login (the
+    /// widget never calls the server). On any failure the saved streak stays
+    func refreshStreakWidget() {
+        guard User.shared.isLogin(), let participantId = User.shared.userId else {
+            // Logged out: logout already cleared the saved streak
+            WidgetCenter.shared.reloadAllTimelines()
+            return
+        }
+        // Lets the request finish while the app goes to the background
+        let application = UIApplication.shared
+        var backgroundTask = UIBackgroundTaskIdentifier.invalid
+        let endBackgroundTask = {
+            guard backgroundTask != .invalid else { return }
+            application.endBackgroundTask(backgroundTask)
+            backgroundTask = .invalid
+        }
+        backgroundTask = application.beginBackgroundTask(expirationHandler: endBackgroundTask)
+
+        let helper = widgetHelper
+        let from = Int64(helper.fetchStartDate(participantId: participantId).timeInMilliSeconds)
+        let request = RequestData(endpoint: String(format: Endpoint.activityEvent.rawValue, participantId),
+                                  requestType: .get, endpointDetails: "?from=\(from)")
+        NetworkConfig.networkingAPI().makeWebserviceCall(with: request) { (response: Result<StreakWidgetHelper.ActivityEventResponse>) in
+            DispatchQueue.main.async {
+                // Skip if the participant logged out while the request was out
+                if case .success(let events) = response, let dates = events.dates, User.shared.userId == participantId {
+                    helper.saveStreak(dates: dates, participantId: participantId)
+                    WidgetCenter.shared.reloadAllTimelines()
+                }
+                endBackgroundTask()
+            }
+        }
+    }
+
     func shareCredentialsToNotificationExtension() {
         if let base64Auth = Endpoint.getBase64BasicAuth(), UserDefaults.standard.userIDShared == nil {
             

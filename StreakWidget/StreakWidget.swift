@@ -2,52 +2,31 @@
 
 import WidgetKit
 import SwiftUI
-//https://swiftsenpai.com/development/widget-load-remote-data/
+/// Shows the streak the app saved (see StreakWidgetHelper); never calls the server
 struct Provider: TimelineProvider {
     
     let helper = StreakWidgetHelper()
-    //var lastEntry = SimpleEntry(date: Date(), currentStreak: 0, longestStreak: 0)
     
     func placeholder(in context: Context) -> SimpleEntry {
-        SimpleEntry(date: Date(), currentStreak: StreakWidgetHelper.cachedEntry.0, longestStreak: StreakWidgetHelper.cachedEntry.1)
+        entry(on: Date())
     }
 
     func getSnapshot(in context: Context, completion: @escaping (SimpleEntry) -> ()) {
-//        guard let reslut = UserDefaults.standard.streakDataCurrentAndMaxShared else {
-//            return
-//        }
-        let entry = SimpleEntry(date: Date(), currentStreak: StreakWidgetHelper.cachedEntry.0, longestStreak: StreakWidgetHelper.cachedEntry.1)
-        completion(entry)
+        completion(entry(on: Date()))
     }
 
     func getTimeline(in context: Context, completion: @escaping (Timeline<Entry>) -> ()) {
-
-        helper.fetchActivityEvents(participantId: UserDefaults.standard.participantIdShared) { dates in
-            
-            //Next fetch happens 15 minutes later
-            let nextUpdate = Calendar.current.date(
-                byAdding: DateComponents(hour: 4),
-                to: Date()
-            )!
-            guard dates != nil else {
-                let entry = SimpleEntry(date: Date(), currentStreak: 0, longestStreak: 0)
-                let timeline = Timeline(
-                    entries: [entry],
-                    policy: .after(nextUpdate)
-                )
-                completion(timeline)
-                return
-            }
-            let reslut = (UserDefaults.standard.streakDataCurrentShared, UserDefaults.standard.streakDataMaxShared)
-            
-            let entry = SimpleEntry(date: Date(), currentStreak: reslut.0, longestStreak: reslut.1)
-            
-            let timeline = Timeline(
-                entries: [entry],
-                policy: .after(nextUpdate)
-            )
-            completion(timeline)
-        }
+        // The app reloads the widget after it saves a new streak. Midnight gets
+        // its own entry, so a missed day shows as a broken streak
+        let now = Date()
+        let calendar = Calendar.current
+        let midnight = calendar.startOfDay(for: calendar.date(byAdding: .day, value: 1, to: now)!)
+        completion(Timeline(entries: [entry(on: now), entry(on: midnight)], policy: .atEnd))
+    }
+    
+    private func entry(on date: Date) -> SimpleEntry {
+        let streak = helper.savedStreak(on: date)
+        return SimpleEntry(date: date, currentStreak: streak.current, longestStreak: streak.longest)
     }
 }
 

@@ -3,12 +3,13 @@
 import Foundation
 //import LAMP
 
+/// Streak numbers for the widget. The app fetches activity events with its own
+/// login and saves the streak here; the widget only reads what was saved, so it
+/// never calls the server or holds credentials
 public class StreakWidgetHelper {
     
-    public init(){
-        
-        StreakWidgetHelper.cachedEntry = (UserDefaults.standard.streakDataCurrentShared, UserDefaults.standard.streakDataMaxShared)
-    }
+    public init() {}
+
     struct ActivityEvent: Decodable {
         let activity: String
         let timestamp: TimeInterval
@@ -21,7 +22,6 @@ public class StreakWidgetHelper {
             data?.map({ Date(timeIntervalSince1970: $0.timestamp/1000.0) })
         }
     }
-    static var cachedEntry:(Int, Int) = (0, 0)
     
     func longestStreakFor(participantId: String) -> Int {
         let dict: [String: Int]? = UserDefaults.standard.object(forKey: "longestActivityStreak") as? [String: Int]
@@ -33,106 +33,35 @@ public class StreakWidgetHelper {
         UserDefaults.standard.setValue(dict, forKey: "longestActivityStreak")
     }
     
-    public func fetchActivityEvents(participantId: String?, completion: (([Date]?) -> Void)?) {
-        
-        guard let participantId else {
-            completion?(nil)
-            return
-        }
-        
-        let fromDate: Date
+    /// A year of activity events the first time, then 3 months
+    func fetchStartDate(participantId: String) -> Date {
         if longestStreakFor(participantId: participantId) <= 0 {
-            fromDate = Calendar.current.date(byAdding: .year, value: -1, to: Date())!
-        } else {
-            fromDate = Calendar.current.date(byAdding: .month, value: -3, to: Date())!
+            return Calendar.current.date(byAdding: .year, value: -1, to: Date())!
         }
-        
-        let task = URLSession.shared.dataTask(with: urlRequest(participantId: participantId, fromDate: fromDate)) { [weak self] data, response, error in
-
-            if let data, let _ = response as? HTTPURLResponse {
-
-                
-                let decoder = JSONDecoder()
-                let formatter = ISO8601DateFormatter()
-                decoder.dateDecodingStrategy = .formatted(formatter)
-                do {
-                    let responseData = try decoder.decode(ActivityEventResponse.self, from: data)
-                    let reslut = self?.findCurentAndLongestStreak(dates: responseData.dates ?? [])
-                    
-                    
-                    UserDefaults.standard.streakDataCurrentShared = reslut?.0 ?? 0
-                    UserDefaults.standard.streakDataMaxShared = reslut?.1 ?? 0
-                    
-                    self?.setLongestStreak(streak: reslut?.1 ?? 0, participantId: participantId)
-
-                    if let reslut {
-                        StreakWidgetHelper.cachedEntry = reslut
-                    }
-                    completion?(responseData.dates)
-                    
-                } catch {
-                    completion?(nil)
-                }
-            } else {
-                completion?(nil)
-            }
-        }
-        task.resume()
-        
-//        let lampAPI = NetworkConfig.networkingAPI()
-//        let endPoint = String(format: Endpoint.activityEvent.rawValue, participantId)
-//        let data = RequestData(endpoint: endPoint, requestTye: HTTPMethodType.get)
-//        lampAPI.makeWebserviceCall(with: data) { (response: Result<ActivityEventResponse>) in
-//            
-//            switch response {
-//            case .failure(let error):
-//                if let nsError = error as NSError? {
-//                    let errorCode = nsError.code
-//                    /// -1009 is the offline error code
-//                    /// so log errors other than connection issue
-//                    if errorCode == -1009 {
-//                        LMLogsManager.shared.addLogs(level: .warning, logs: Logs.Messages.network_error + " " + nsError.localizedDescription)
-//                    } else {
-//                        LMLogsManager.shared.addLogs(level: .error, logs: Logs.Messages.network_error + " " + nsError.localizedDescription)
-//                    }
-//                    print("ActivityAPI error = \( nsError.localizedDescription)")
-//                    completion?(nil)
-//                }
-//            case .success(let response):
-//                //let allActivityEvents = response.data
-//                //guard let self = self else { return }
-//                completion?(response.dates)
-//            }
-//        }
+        return Calendar.current.date(byAdding: .month, value: -3, to: Date())!
     }
     
-    func urlRequest(participantId: String, fromDate: Date) -> URLRequest {
-        //from to timestamp
-        let endPoint = String(format: Endpoint.activityEvent.rawValue, participantId)
-        let baseURL = URL(string: LampURL.baseURLString)!
-        let fullurl = baseURL.appendingPathComponent(endPoint)
-        //https://api-staging.lamp.digital/participant/U2604494105/activity_event?from=1719945000516&to=1720031400516
-        var components = URLComponents(string: fullurl.absoluteString)!
-        
-        components.queryItems = [
-            URLQueryItem(name: "from", value: String(fromDate.timeInMilliSeconds)),
-            //URLQueryItem(name: "to", value: String(Date().timeInMilliSeconds)),
-        ]
-        let url = components.url!
-        
-        var request = URLRequest(url: url)
-        request.httpMethod = "GET"
-        var requestHeaders = [String: String]()
-        requestHeaders["Content-Type"] = "application/json"
-        
-        if let userId = UserDefaults.standard.userIDShared, 
-            let pass = UserDefaults.standard.passwordShared {
-            
-            let base64token = Data("\(userId):\(pass)".utf8).base64EncodedString()
-            requestHeaders["Authorization"] = "Basic \(base64token)"
+    /// Called by the app after it fetches activity events
+    func saveStreak(dates: [Date], participantId: String) {
+        let streak = findCurentAndLongestStreak(dates: dates)
+        UserDefaults.standard.streakDataCurrentShared = streak.0
+        UserDefaults.standard.streakDataMaxShared = streak.1
+        UserDefaults.standard.streakLastActiveDayShared = uniqueDays(from: dates).max()
+        setLongestStreak(streak: streak.1, participantId: participantId)
+    }
+    
+    /// The saved streak as it stands on `date`: the current streak has ended
+    /// if the last active day was before yesterday
+    func savedStreak(on date: Date) -> (current: Int, longest: Int) {
+        let defaults = UserDefaults.standard
+        // Saved by an older app version: show it as saved until the app refreshes it
+        guard let lastActiveDay = defaults.streakLastActiveDayShared else {
+            return (defaults.streakDataCurrentShared, defaults.streakDataMaxShared)
         }
-        request.allHTTPHeaderFields = requestHeaders
-        return request
+        let calendar = Calendar.current
+        let yesterday = calendar.date(byAdding: .day, value: -1, to: date)!
+        let ongoing = calendar.isDate(lastActiveDay, inSameDayAs: date) || calendar.isDate(lastActiveDay, inSameDayAs: yesterday)
+        return (ongoing ? defaults.streakDataCurrentShared : 0, defaults.streakDataMaxShared)
     }
     
     // Helper function to check if two dates are consecutive
@@ -232,40 +161,5 @@ public class StreakWidgetHelper {
         }
         
         return (currentStreak, maxStreak)
-    }
-}
-
-class ISO8601DateFormatter: DateFormatter {
-    static let withoutSeconds: DateFormatter = {
-        let formatter = DateFormatter()
-        formatter.calendar = Calendar(identifier: .iso8601)
-        formatter.locale = Locale(identifier: "en_US_POSIX")
-        formatter.timeZone = TimeZone(secondsFromGMT: 0)
-        formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZZZZZ"
-        return formatter
-    }()
-
-    private func setup() {
-        calendar = Calendar(identifier: .iso8601)
-        locale = Locale(identifier: "en_US_POSIX")
-        timeZone = TimeZone(secondsFromGMT: 0)
-        dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZZZZZ"
-    }
-
-    public override init() {
-        super.init()
-        setup()
-    }
-
-    required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-        setup()
-    }
-
-    override public func date(from string: String) -> Date? {
-        if let result = super.date(from: string) {
-            return result
-        }
-        return ISO8601DateFormatter.withoutSeconds.date(from: string)
     }
 }

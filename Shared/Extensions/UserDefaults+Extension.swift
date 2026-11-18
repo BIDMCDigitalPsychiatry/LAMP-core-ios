@@ -173,6 +173,15 @@ extension UserDefaults {
             }
         }
     }
+    /// Day of the latest activity in the saved streak (nil if none)
+    var streakLastActiveDayShared: Date? {
+        get {
+            return UserDefaults(suiteName: suiteName)?.object(forKey: "streakLastActiveDayShared") as? Date
+        }
+        set {
+            UserDefaults(suiteName: suiteName)?.set(newValue, forKey: "streakLastActiveDayShared")
+        }
+    }
     ///this is user name
     var userIDShared: String? {
         get {
@@ -286,6 +295,10 @@ extension UserDefaults {
         UserDefaults.standard.userIDShared = nil
         UserDefaults.standard.passwordShared = nil
         UserDefaults.standard.serverAddressShared = nil
+        // The streak widget shows these
+        UserDefaults.standard.streakDataCurrentShared = 0
+        UserDefaults.standard.streakDataMaxShared = 0
+        UserDefaults.standard.streakLastActiveDayShared = nil
         UserDefaults.standard.activityAPILastAccessedDate = Date.init(timeIntervalSince1970: 0)
         UserDefaults.standard.activityAPILastScheduledDate = Date.init(timeIntervalSince1970: 0)
         
