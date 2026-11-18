@@ -263,6 +263,8 @@ actor TokenManager {
 
         func fetch(_ token: String) async -> (status: Int, data: Data?) {
             var request = URLRequest(url: url)
+            // Short, since DashboardLogin retries on a weak connection (the default waits 60 s)
+            request.timeoutInterval = 8
             request.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
             return await Self.perform(request, session: session)
         }

@@ -11,10 +11,12 @@ import LAMP
 //import Combine
 
 /// Logs dashboard web views in for the current native session. Bearer users get
-/// a fresh single-use token on every open; if none can be fetched (offline),
-/// the plain URL falls back to the web view cookie. Basic users are unchanged.
+/// a fresh single-use token on every open, retried a few times on a weak
+/// connection. Basic users are unchanged.
 enum DashboardLogin {
     private static var apiBase: URL { URL(string: LampURL.baseURLString)! }
+    // Login link: 3 tries of up to 8 s each (TokenManager), 1 s then 3 s apart
+    private static let retryDelaysNs: [UInt64] = [1_000_000_000, 3_000_000_000]
 
     @discardableResult
     static func upgradeIfNeeded() async -> Bool {
@@ -22,10 +24,19 @@ enum DashboardLogin {
         return await TokenManager.shared.upgradeBasicToBearerIfNeeded(baseURL: apiBase)
     }
 
-    static func url(for url: URL) async -> URL {
-        guard Endpoint.isBearerSession,
-              let token = await TokenManager.shared.oneTimeLoginToken(baseURL: apiBase) else { return url }
-        return Endpoint.dashboardURL(url, finishLoginToken: token)
+    /// Nil if the login link still can't be fetched, so the caller offers a
+    /// retry instead of opening the dashboard logged out
+    static func url(for url: URL) async -> URL? {
+        guard Endpoint.isBearerSession else { return url }
+        for attempt in 0...retryDelaysNs.count {
+            if attempt > 0 { try? await Task.sleep(nanoseconds: retryDelaysNs[attempt - 1]) }
+            if let token = await TokenManager.shared.oneTimeLoginToken(baseURL: apiBase) {
+                return Endpoint.dashboardURL(url, finishLoginToken: token)
+            }
+            // The refresh token was rejected and the session cleared, so open the login page
+            if !Endpoint.isBearerSession { return url }
+        }
+        return nil
     }
 }
 
@@ -34,6 +45,8 @@ class HomeViewController: UIViewController {
     private var wkWebView: WKWebView!
     private var loadingObservation: NSKeyValueObservation?
     private var isWebpageLoaded = false
+    // Weak, so it clears itself once the alert closes (or if it never appeared)
+    private weak var loginRetryAlert: UIAlertController?
     private lazy var lampAPI: NetworkingAPI = {
         return NetworkConfig.networkingAPI()
     }()
@@ -77,7 +90,7 @@ class HomeViewController: UIViewController {
             indicator.startAnimating()
             view.bringSubviewToFront(indicator)
             Task { @MainActor in
-                self.wkWebView.load(URLRequest(url: await DashboardLogin.url(for: pageURL)))
+                await self.loadDashboard(pageURL)
             }
             
         }
@@ -274,8 +287,36 @@ private extension HomeViewController {
         Task { @MainActor in
             // Upgrade first so the URL matches the resulting login type
             await DashboardLogin.upgradeIfNeeded()
-            wkWebView.load(URLRequest(url: await DashboardLogin.url(for: feedURL ?? lampDashboardURLwithToken)))
+            await loadDashboard(feedURL ?? lampDashboardURLwithToken)
         }
+    }
+
+    /// Opens the dashboard logged in. If the login link can't be fetched, offers a retry.
+    /// The spinner runs during the fetch, so foreground and reachability reloads wait for it.
+    @MainActor
+    func loadDashboard(_ pageURL: URL) async {
+        indicator.startAnimating()
+        view.bringSubviewToFront(indicator)
+        guard let url = await DashboardLogin.url(for: pageURL) else {
+            indicator.stopAnimating()
+            showLoginRetryAlert(for: pageURL)
+            return
+        }
+        // A foreground or reachability reload got through while the alert was up
+        loginRetryAlert?.dismiss(animated: true)
+        wkWebView.load(URLRequest(url: url))
+    }
+
+    func showLoginRetryAlert(for pageURL: URL) {
+        // Launch and foreground can both get here right after an upgrade: show one alert
+        guard loginRetryAlert == nil else { return }
+        let alert = UIAlertController(title: "alert.lamp.title".localized, message: "error.network.generic".localized, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "alert.button.cancel".localized, style: .cancel, handler: nil))
+        alert.addAction(UIAlertAction(title: "alert.button.retry".localized, style: .default, handler: { _ in
+            Task { @MainActor in await self.loadDashboard(pageURL) }
+        }))
+        loginRetryAlert = alert
+        present(alert, animated: true, completion: nil)
     }
     
     func makeWebView() -> WKWebView {
