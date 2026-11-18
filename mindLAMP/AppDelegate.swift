@@ -120,6 +120,12 @@ private extension AppDelegate {
     }
 
     func shareCredentialsToNotificationExtension() {
+        // Token users: remove a password copy kept by an earlier test build's upgrade
+        if Endpoint.isBearerSession {
+            UserDefaults.standard.userIDShared = nil
+            UserDefaults.standard.passwordShared = nil
+            return
+        }
         if let base64Auth = Endpoint.getBase64BasicAuth(), UserDefaults.standard.userIDShared == nil {
             
             guard let decodedData = Data(base64Encoded: base64Auth), let decodedString = String(data: decodedData, encoding: .utf8) else {

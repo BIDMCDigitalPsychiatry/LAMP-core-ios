@@ -247,10 +247,11 @@ actor TokenManager {
         guard refreshToken == nil, Endpoint.getBase64BasicAuth() == basic else { return false }
 
         store(tokens)
-        // The app-group username/password stay: the streak widget and
-        // notification extension still authenticate with them
         Endpoint.setBase64BasicAuth(nil)
         Endpoint.setURLToken(nil)
+        // Also the copy shared with the extensions: token users don't need it
+        UserDefaults.standard.userIDShared = nil
+        UserDefaults.standard.passwordShared = nil
         return true
     }
 
