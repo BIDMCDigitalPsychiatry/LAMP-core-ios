@@ -74,7 +74,7 @@
 	<key>NSHealthClinicalHealthRecordsShareUsageDescription</key>
 	<string>Your Health data is required for clinical study.</string>
 	<key>NSHealthShareUsageDescription</key>
-	<string>Your Health data is required for clinical study.</string>
+	<string>Your study uses some of your Health data. mindLAMP reads only the types your study turns on, starting from when you set up the app. It doesn't read your past Health history.</string>
 	<key>NSHealthUpdateUsageDescription</key>
 	<string>Your Health data is required for clinical study.</string>
 	<key>NSHumanReadableCopyright</key>

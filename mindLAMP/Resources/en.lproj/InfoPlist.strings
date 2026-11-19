@@ -16,7 +16,7 @@
 /* Privacy - Health Records Usage Description */
 "NSHealthClinicalHealthRecordsShareUsageDescription" = "Your Health data is required for clinical study.";
 /* Privacy - Health Share Usage Description */
-"NSHealthShareUsageDescription" = "Your Health data is required for clinical study.";
+"NSHealthShareUsageDescription" = "Your study uses some of your Health data. mindLAMP reads only the types your study turns on, starting from when you set up the app. It doesn't read your past Health history.";
 /* Privacy - Health Update Usage Description */
 "NSHealthUpdateUsageDescription" = "Your Health data is required for clinical study.";
 /* Copyright (human-readable) */
