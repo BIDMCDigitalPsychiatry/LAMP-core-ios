@@ -16,7 +16,7 @@
 /* Privacy - Health Records Usage Description */
 "NSHealthClinicalHealthRecordsShareUsageDescription" = "Dine sundhedsdata er nødvendige til klinisk undersøgelse.";
 /* Privacy - Health Share Usage Description */
-"NSHealthShareUsageDescription" = "Dine sundhedsdata er nødvendige til klinisk undersøgelse.";
+"NSHealthShareUsageDescription" = "Din undersøgelse bruger nogle af dine sundhedsdata. mindLAMP læser kun de datatyper, som din undersøgelse har slået til, fra det tidspunkt, hvor du konfigurerede appen. Den læser ikke dine tidligere sundhedsdata.";
 /* Privacy - Health Update Usage Description */
 "NSHealthUpdateUsageDescription" = "Dine sundhedsdata er nødvendige til klinisk undersøgelse.";
 /* Copyright (human-readable) */

@@ -16,7 +16,7 @@
 /* Privacy - Health Records Usage Description */
 "NSHealthClinicalHealthRecordsShareUsageDescription" = "आपका स्वास्थ्य डेटा नैदानिक अध्ययन के लिए आवश्यक है।";
 /* Privacy - Health Share Usage Description */
-"NSHealthShareUsageDescription" = "आपका स्वास्थ्य डेटा नैदानिक अध्ययन के लिए आवश्यक है।";
+"NSHealthShareUsageDescription" = "आपका अध्ययन आपके कुछ स्वास्थ्य डेटा का उपयोग करता है। mindLAMP केवल वही डेटा प्रकार पढ़ता है जिन्हें आपके अध्ययन ने चालू किया है, और केवल उस समय से जब आपने ऐप सेट अप किया था। यह आपके पिछले स्वास्थ्य डेटा को नहीं पढ़ता।";
 /* Privacy - Health Update Usage Description */
 "NSHealthUpdateUsageDescription" = "आपका स्वास्थ्य डेटा नैदानिक अध्ययन के लिए आवश्यक है।";
 /* Copyright (human-readable) */

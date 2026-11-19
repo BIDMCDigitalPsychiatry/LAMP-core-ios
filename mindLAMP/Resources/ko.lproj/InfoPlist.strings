@@ -16,7 +16,7 @@
 /* Privacy - Health Records Usage Description */
 "NSHealthClinicalHealthRecordsShareUsageDescription" = "연구를 위해 건강데이터가 파악합니다.";
 /* Privacy - Health Share Usage Description */
-"NSHealthShareUsageDescription" = "연구를 위해 건강데이터가 파악합니다.";
+"NSHealthShareUsageDescription" = "참여 중인 연구에서 건강 데이터의 일부를 사용합니다. mindLAMP는 연구에서 선택한 데이터 유형만 앱을 설정한 시점부터 읽으며, 과거의 건강 기록은 읽지 않습니다.";
 /* Privacy - Health Update Usage Description */
 "NSHealthUpdateUsageDescription" = "연구를 위해 건강데이터가 파악합니다.";
 /* Copyright (human-readable) */

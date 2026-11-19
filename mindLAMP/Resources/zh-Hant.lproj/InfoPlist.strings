@@ -16,7 +16,7 @@
 /* Privacy - Health Records Usage Description */
 "NSHealthClinicalHealthRecordsShareUsageDescription" = "此臨床研究需要您的健康數據";
 /* Privacy - Health Share Usage Description */
-"NSHealthShareUsageDescription" = "此臨床研究需要您的健康數據";
+"NSHealthShareUsageDescription" = "您的研究會使用您的部分健康資料。mindLAMP 僅讀取您的研究所啟用的資料類型，且只從您設定本 App 時開始讀取，不會讀取您過去的健康紀錄。";
 /* Privacy - Health Update Usage Description */
 "NSHealthUpdateUsageDescription" = "此臨床研究需要您的健康數據";
 /* Copyright (human-readable) */
